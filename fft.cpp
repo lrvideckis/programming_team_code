@@ -21,12 +21,12 @@ const ll mod = powl(10, 9) + 7;
 //maxLength is the maximum length of a hole
 int maxDist = 0, maxLength = 0;
 
-void mult(vector<int> &a, vector<int> &c) {
+void mult(vector<int> &a, vector<int> &b, vector<int> &c) {
     c.clear();
     for(int degree = 0; degree <= maxLength; ++degree) {
         int sum = 0;
         for(int i = 0; i <= degree; ++i) {
-            sum += a[degree-i] * a[i];
+            sum += a[degree-i] * b[i];
         }
         c.push_back(sum);
     }
