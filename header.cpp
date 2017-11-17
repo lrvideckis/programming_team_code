@@ -6,7 +6,6 @@ using namespace std;
 #define ld long double
 #define pb push_back
 #define mp make_pair
-#define endl '\n'
 #define D(x) cout<<#x<<" -> "<<x<<'\n'
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
