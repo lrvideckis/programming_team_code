@@ -55,14 +55,14 @@ vector<factor> getFactors(ll number, vector<bool> &prime) {
 }
 
 int main() {
-    const ll max = 46350;//sqrt(2^31 - 1)
-    ll rot = (ll)sqrt(max + 1);
-    vector<bool> isPrime(max + 1, true);
+    const ll upper = 46350;//sqrt(2^31 - 1)
+    ll rot = (ll)sqrt(upper + 1);
+    vector<bool> isPrime(upper + 1, true);
     isPrime[0] = isPrime[1] = false;
-    for (ll i = 4; i <= max; i += 2) isPrime[i] = false;
+    for (ll i = 4; i <= upper; i += 2) isPrime[i] = false;
     for (ll i = 3; i <= rot; i += 2) {
         if (isPrime[i]) {
-            for (int j = 2 * i; j <= max; j += i) isPrime[j] = false;
+            for (int j = 2 * i; j <= upper; j += i) isPrime[j] = false;
         }
     }
     //example usage
