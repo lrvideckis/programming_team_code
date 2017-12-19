@@ -17,15 +17,21 @@ const ll infll = powl(2, 62)-1;
 const ld pi = 4.0*atanl(1.0);
 const int mod = powl(10, 9) + 7;
 
-const int upper = (int)1e6 + 1;
-int p[upper];
-int find(int x) {return p[x] == x ? x : p[x] = find(p[x]);}
-void unite(int x, int y) {p[find(x)] = find(y);}
+vector<int> p(1000001,-1);//change size here if needed
+int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
+void merge(int x, int y) {
+    if((x=find(x)) == (y=find(y))) return;
+    if(p[x] < p[y]) {//set x has larger size, sizes stored as negative ints
+        p[x] += p[y];
+        p[y] = x;
+    } else {
+        p[y] += p[x];
+        p[x] = y;
+    }
+}
 
 int32_t main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-    int n;
-    cin >> n;
-    rep(i,n) p[i] = i;
+    
     return 0;
 }
 
