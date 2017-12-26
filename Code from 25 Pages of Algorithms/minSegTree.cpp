@@ -89,43 +89,9 @@ int32_t main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     arr.resize(n);
     rep(i,n) cin >> arr[i];
     build();
-    int l, r;
-    string line;
-    int m;
-    cin >> m;
-    cin.ignore();
-    while(m--) {
-        getline(cin,line);
-        vector<string> q = seperate(line);
-        int l = stoi(q[0]);
-        int r = stoi(q[1]);
-        if(q.size() == 3) {
-            int diff = stoi(q[2]);
-            if(l > r) {
-                update(l,n-1,diff);
-                update(0,r,diff);
-            } else {
-                update(l,r,diff);
-            }
-        } else {
-            if(l > r) {
-                cout << min(query(l,n-1), query(0,r)) << '\n';
-            } else {
-                cout << query(l,r) << '\n';
-            }
-        }
-    }
+    
     return 0;
 }
-
-
-
-
-
-
-
-
-
 
 
 
