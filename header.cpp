@@ -9,10 +9,10 @@ using namespace std;
 #define D(x) cout<<#x<<" -> "<<x<<'\n'
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
-#define uni(x) (x).erase(unique(all(x)), (x).end());
+#define uni(x) (x).erase(unique(all(x)), (x).end())
 #define rep(i, n) for (int i = 0; i < (int)(n); ++i)
 #define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
-const ll infll = powl(2, 62)-1;
+#define infll 0x7fffffffffffffff
 const ld pi = 4.0*atanl(1.0);
 const ll mod = powl(10, 9) + 7;
 
