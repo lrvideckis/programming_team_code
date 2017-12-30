@@ -21,13 +21,9 @@ vector<int> p(1000001,-1);//change size here if needed
 int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
 void merge(int x, int y) {
     if((x=find(x)) == (y=find(y))) return;
-    if(p[x] < p[y]) {//set x has larger size, sizes stored as negative ints
-        p[x] += p[y];
-        p[y] = x;
-    } else {
-        p[y] += p[x];
-        p[x] = y;
-    }
+    if(p[y] < p[x]) swap(x,y);
+    p[x] += p[y];
+    p[y] = x;
 }
 
 int32_t main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
