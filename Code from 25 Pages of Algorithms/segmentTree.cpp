@@ -8,7 +8,6 @@ typedef long double ld;
 struct SegmentTree {
 private:
     //change this to max(a, b) for max segment trees
-    ll function(ll a, ll b) { return a+b; }
     vector<ll> tree, lazy;
     ll n, root, size;
 public:
@@ -25,7 +24,7 @@ public:
             ll mid = (start+end)/2;
             build(arr, 2*node, start, mid);
             build(arr, 2*node+1, mid+1, end);
-            tree[node] = function(tree[2*node], tree[2*node+1]);
+            tree[node] = tree[2*node] + tree[2*node+1];
         }
     }
     void pendingUpdate(ll node, ll start, ll end) {
@@ -46,7 +45,7 @@ public:
             if(start <= idx && idx <= mid)
                 update(2*node, start, mid, idx, diff);
             else update(2*node+1, mid+1, end, idx, diff);
-            tree[node] = function(tree[2*node], tree[2*node+1]);
+            tree[node] = tree[2*node] + tree[2*node+1];
         }
     }
     void updateRange(ll l, ll r, ll diff) { updateRange(root, 0, n-1, l, r, diff);}
@@ -64,7 +63,7 @@ public:
         ll mid = (start + end) / 2;
         updateRange(2*node, start, mid, l, r, diff);
         updateRange(2*node+1, mid+1, end, l, r, diff);
-        tree[node] = function(tree[2*node], tree[2*node+1]);
+        tree[node] = tree[2*node] + tree[2*node+1];
     }
     ll query(ll l, ll r) { return query(root, 0, n-1, l, r);}
     ll query(ll node, ll start, ll end, ll l, ll r) {
@@ -72,7 +71,7 @@ public:
         pendingUpdate(node, start, end);
         if(l <= start && end <= r) return tree[node];
         ll mid = (start+end)/2;
-        return function(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
+        return query(2*node, start, mid, l, r) + query(2*node+1, mid+1, end, l, r);
     }
 };
 
