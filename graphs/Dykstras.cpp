@@ -17,48 +17,28 @@ const ll infll = powl(2, 62)-1;
 const ld pi = 4.0*atanl(1.0);
 const ll mod = powl(10, 9) + 7;
 
-int row, col;
+vector<vector<pair<ll, ll> > > adj;
+vector<ll> length;
+vector<bool> visited;
 
-struct Graph {
-    int V;
-    list< pair<int, int> > *adj;
-    vector<int> dist;
-public:
-    int getDist(int V) {
-        return dist[V];
-    }
-    Graph(int V) {
-        this->V = V;
-        adj = new list<pair<int, int> >[V];
-    }
-    void addEdge(int u, int v, int w) {
-        adj[u].push_back(make_pair(v, w));
-        adj[v].push_back(make_pair(u, w));//comment this out for undirected graph
-    }
-    void shortestPath(int start) {
-        set< pair<int, int> > setds;
-        dist.resize(V, infll);
-        setds.insert(mp(0, start));
-        dist[start] = 0;
-        while (!setds.empty()) {
-            pair<int, int> tmp = *(setds.begin());
-            setds.erase(setds.begin());
-            int u = tmp.second;
-            list< pair<int, int> >::iterator i;
-            for (i = adj[u].begin(); i != adj[u].end(); ++i) {
-                int v = (*i).first;
-                int weight = (*i).second;
-                if (dist[v] > dist[u] + weight)
-                {
-                    if (dist[v] != infll)
-                        setds.erase(setds.find(make_pair(dist[v], v)));
-                    dist[v] = dist[u] + weight;
-                    setds.insert(make_pair(dist[v], v));
-                }
+void dijkstra(ll node) {
+    length[node] = 0;
+    priority_queue<pair<ll, ll> > q;//-weight, node
+    q.push(mp(0, node));
+    while(!q.empty()) {
+        node = q.top().second;
+        q.pop();
+        visited[node] = true;
+        for(auto &p : adj[node]) {
+            ll to = p.first;
+            ll weight = p.second;
+            if(!visited[to] && length[to] > weight + length[node]) {
+                length[to] = weight + length[node];
+                q.push(mp(-length[to], to));
             }
         }
     }
-};
+}
 
 int32_t main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     
