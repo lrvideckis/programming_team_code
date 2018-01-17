@@ -45,6 +45,10 @@ struct NchooseK {
         y = x1;
         return d;
     }
+    //returns a^-1 mod b
+    ll inv(ll a, ll b){
+        return 1<a ? b - inv(b%a,a)*b/a : 1;
+    }
     ll divide(ll a, ll b) {
         ll m = (this->mod);
         ll x, y;
