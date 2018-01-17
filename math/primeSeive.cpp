@@ -24,8 +24,8 @@ const int upper = 2*1e6;
 vector<int> seive, memo;
 
 //returns 0 iff there exists a prime p s.t. n%(p^2)=0
-//returns 1 iff n has an odd number of distinct prime factors
-//returns -1 iff n has an even number of distinct prime factors
+//returns -1 iff n has an odd number of distinct prime factors
+//returns 1 iff n has an even number of distinct prime factors
 int mobius(int n) {
     int &temp = memo[n];
     if(temp != -2) return temp;
