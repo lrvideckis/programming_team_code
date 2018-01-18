@@ -4,8 +4,9 @@
 using namespace std;
 typedef long long ll;
 typedef long double ld;
+const ll mod = powl(10, 9) + 7;
 
-ll power(ll a, ll b, ll &c) {//returns a^b mod c
+ll power(ll a, ll b, ll c = mod) {//returns a^b mod c
     if (b <= 0) return 1;
     ll temp = power(a, b / 2, c) % c;
     if (b % 2 == 0) {
