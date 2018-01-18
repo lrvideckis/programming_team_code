@@ -48,7 +48,6 @@ int mobius(int n) {
 
 void doSeive() {
     seive.resize(upper+1);
-    memo.resize(upper+1, -2);
     seive[0] = seive[1] = 1;
     for (int i = 2; i <= upper; ++i) seive[i] = i;//O(n)
     int root = ceil(sqrt(upper));
@@ -61,6 +60,7 @@ void doSeive() {
 
 int main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     doSeive();
+    memo.resize(upper+1, -2);
     rep1(i,20) {
         cout << i << (seive[i]==i?" prime ":" not prime ") << seive[i] << '\n';
     }
