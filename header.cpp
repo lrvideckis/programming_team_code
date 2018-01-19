@@ -23,7 +23,10 @@ const ll mod = powl(10, 9) + 7;
 int main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     //freopen("e.in", "r", stdin);
     //freopen("e.out", "w", stdout);
-
+    int n;
+    cin >> n;
+    vector<ll> arr(n);
+    for(ll &x : arr) cin >> x;
     return 0;
 }
 
