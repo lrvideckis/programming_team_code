@@ -22,10 +22,13 @@ const ll mod = powl(10, 9) + 7;
 
 struct sparseTable {
     vector<vector<ll> > memo;
+    vector<int> logTwo;
     int maxPow;
     sparseTable(vector<ll> &arr) {
         int n = arr.size();
-        maxPow = floor(log2(n))+1;
+        logTwo.resize(n+1,0);
+        for(int i = 2; i <= n; ++i) logTwo[i] = 1 + logTwo[i/2];
+        maxPow = floor(logTwo[n])+1;
         memo.resize(n, vector<ll>(maxPow));
         rep(j,maxPow) {
             rep(i,n) {
@@ -36,7 +39,7 @@ struct sparseTable {
         }
     }
     ll query(int l, int r) {
-        int j = floor(log2(r-l+1));
+        int j = logTwo[r-l+1];
         return min(memo[l][j], memo[r-(1<<j)+1][j]);
     }
 };
@@ -51,6 +54,7 @@ int main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     sparseTable st(arr);
     rep(i,n) {
         for(int j = i; j < n; ++j) {
+            cout << i << ' ' << j << ' ';
             cout << "query: [i,j]: " << st.query(i,j) << '\n';
         }
     }
