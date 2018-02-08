@@ -1,68 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
+const int mod = pow(10, 9)+7;
+
+ll power(ll a, ll b) {
+    if (b <= 0) return 1;
+    ll temp = power(a, b / 2) % mod;
+    if (b % 2 == 0) {
+        return (temp * temp) % mod;
+    }
+    else {
+        return (((a * temp) % mod) * temp) % mod;
+    }
+}
 
 struct NchooseK {
-    ll mod;
-    ll range;
-    vector<ll> fact,ifact;
+    int range;
+    vector<int> fact,ifact;
     NchooseK() {
-        (this->mod) = (ll)1e9+7;
-        this->range = 1000000;
-        fact.resize(this->range);
-        ifact.resize(this->range);
+        range = (int)1e6;
+        fact.resize(range+1);
+        ifact.resize(range+1);
         calcFacts();
-    }
-    ll power(ll a, ll b) {
-        if (b <= 0) return 1;
-        ll temp = power(a, b / 2) % this->mod;
-        if (b % 2 == 0) {
-            return (temp * temp) % this->mod;
-        }
-        else {
-            return (((a * temp) % this->mod) * temp) % this->mod;
-        }
     }
     void calcFacts() {
         fact[0] = 1;
-        for(ll i = 1; i < this->range; ++i) {
-            fact[i] = (fact[i-1]*i)%(this->mod);
+        for(ll i = 1; i <= range; ++i) {
+            fact[i] = (1LL*fact[i-1]*i)%mod;
         }
-	    ifact[this->range-1] = power(fact[this->range-1], this->mod-2);
-	    for(int i = this->range-2; i >= 0; --i) {
-	        ifact[i] = (ifact[i+1] * (i+1)) % this->mod;
+        ifact[range] = power(fact[range], mod-2);
+        for(int i = range-1; i >= 0; --i) {
+            ifact[i] = (1LL*ifact[i+1]*(i+1))%mod;
         }
     }
-    ll gcd(ll a, ll b, ll &x, ll &y) { 
-        if (a == 0) {
-            x = 0;
-            y = 1;
-            return b;
-        }
-        ll x1, y1;
-        ll d = gcd(b % a, a, x1, y1);
-        x = y1 - (b / a) * x1;
-        y = x1;
-        return d;
-    }
-    //returns a^-1 mod b
-    ll inv(ll a, ll b){
-        return 1<a ? b - inv(b%a,a)*b/a : 1;
-    }
-    ll divide(ll a, ll b) {
-        ll m = (this->mod);
-        ll x, y;
-        ll g = gcd(b, m, x, y);
-        if (g != 1) {
-            cerr << "Bad gcd!" << endl;
-            for(;;);
-        }
-        x = (x % m + m) % m;
-        return ((ll)a*(ll)x)%m;
-    }
-    ll choose(ll n, ll k) {
+    int choose(int n, int k) {
         if(k < 0 || k > n || n < 0) return 0;
-        return ((fact[n]*ifact[k])%this->mod * ifact[n-k])%this->mod;
+        return ((1LL*fact[n]*ifact[k])%mod * 1LL*ifact[n-k])%mod;
     }
 };
 
