@@ -1,21 +1,5 @@
 #include <bits/stdc++.h>
-#include <unordered_map>
 using namespace std;
-#define int long long
-#define ll long long
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define endl '\n'
-#define D(x) cout<<#x<<" -> "<<x<<'\n'
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
-#define uni(x) (x).erase(unique(all(x)), (x).end());
-#define rep(i, n) for (int i = 0; i < (int)(n); ++i)
-#define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
-const ll infll = powl(2, 62)-1;
-const ld pi = 4.0*atanl(1.0);
-const int mod = powl(10, 9) + 7;
 
 /*inspired by problem "Nine Packs" on Kattis, this code is my solution to the problem
 
@@ -38,12 +22,12 @@ struct subsetSum {
     subsetSum(vector<int> &arr) {
         this->arr = arr;
         sum = 0;
-        rep(i,arr.size()) sum += arr[i];
+        for(int i = 0; i < (int)arr.size(); ++i) sum += arr[i];
         vector<bool> tempRow(sum+1,false);
         vector<int> tempMinRow(sum+1,0);
         table.resize(arr.size()+1,tempRow);
         minSizeSet.resize(arr.size()+1,tempMinRow);
-        rep(i,table.size()) table[i][0] = true;
+        for(int i = 0; i < (int)table.size(); ++i) table[i][0] = true;
         for(int i = 1; i <= arr.size(); i++) {
             for (int j = 1; j <= sum; j++) {
                 if (j - arr[i-1] >= 0) {
@@ -81,7 +65,7 @@ struct subsetSum {
         int row = arr.size(), col = tgt;
         while(col > 0 && row > 0) {
             if(col-arr[row-1] >= 0 && table[row-1][col-arr[row-1]]) {
-                subset.pb(arr[row-1]);
+                subset.push_back(arr[row-1]);
                 col -= arr[row-1];
             }
             row--;
@@ -95,25 +79,28 @@ struct subsetSum {
     }
 };
 
-int32_t main() {//ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     vector<int> a, b;
     int temp;
     cin >> temp;
     a.resize(temp);
-    rep(i,temp) cin >> a[i];
+    for(int i = 0; i < temp; ++i) cin >> a[i];
     cin >> temp;
     b.resize(temp);
-    rep(i,temp) cin >> b[i];
-    sort(all(a));
-    sort(all(b));
+    for(int i = 0; i < temp; ++i) cin >> b[i];
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
     subsetSum subA(a), subB(b);
-    int ans = infll, upper = min(subA.sum,subB.sum);
-    rep1(i,upper) {
+    int ans = 1e9, upper = min(subA.sum,subB.sum);
+    for(int i = 1; i <= upper; ++i) {
         if(subA.query(i) && subB.query(i)) {
             ans = min(ans, (int)subA.minSize(i) + (int)subB.minSize(i));
         }
     }
-    if(ans == infll) {
+    if(ans == (int)1e9) {
         cout << "impossible\n";
     } else {
         cout << ans << endl;

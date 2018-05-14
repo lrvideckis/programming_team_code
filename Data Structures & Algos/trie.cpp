@@ -1,21 +1,5 @@
 #include <bits/stdc++.h>
-#include <unordered_map>
 using namespace std;
-#define int long long
-#define ll long long
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define endl '\n'
-#define D(x) cout<<#x<<" -> "<<x<<'\n'
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
-#define uni(x) (x).erase(unique(all(x)), (x).end());
-#define rep(i, n) for (int i = 0; i < (int)(n); ++i)
-#define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
-const ll infll = powl(2, 62)-1;
-const ld pi = 4.0*atanl(1.0);
-const int mod = powl(10, 9) + 7;
 
 struct trie {//only lowercase letters for all words
 private:
@@ -33,11 +17,11 @@ private:
 public:
     trie() {
         root = new node();
-        allNodes.pb(root);
+        allNodes.push_back(root);
     }
     trie(vector<string> &arr) {//initialize a trie and insert all words in arr
         root = new node();
-        allNodes.pb(root);
+        allNodes.push_back(root);
         for(string x : arr) insert(x);
     }
     ~trie() {
@@ -48,7 +32,7 @@ public:
         for(char x : word) {
             if(curr->children[x-'a'] == nullptr) {
                 curr->children[x-'a'] = new node();
-                allNodes.pb(curr->children[x-'a']);
+                allNodes.push_back(curr->children[x-'a']);
             }
             curr = curr->children[x-'a'];
         }
@@ -71,8 +55,8 @@ public:
         curr->isWord = false;
     }
     void preorder(node* curr, vector<string> &arr, string &word) {
-        if(curr->isWord) arr.pb(word);
-        rep(i,26) {
+        if(curr->isWord) arr.push_back(word);
+        for(int i = 0; i < 26; ++i) {
             if(curr->children[i] != nullptr) {
                 word += i+'a';
                 preorder(curr->children[i], arr, word);
