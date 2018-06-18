@@ -17,7 +17,7 @@ constexpr int CW = 2, CCW = 3;
 constexpr int Inside = 4, Outside = 5, OnEdge = 6;
 
 //Epsilon for all double comparisons
-const double EPSILON = 0.0001;
+const double EPSILON = 0.000001;
 
 struct point
 {
@@ -35,27 +35,27 @@ struct point
     {
         return abs(other.x - x) < EPSILON && abs(other.y - y) < EPSILON;
     }
-    
-    point operator - (const point& other) const
-    {
-        return point(other.x - x, other.y - y);
-    }
-    
-    point operator * (double val) const
-    {
-        return point(x * val, y * val);
-    }
-    
-    point operator / (double val) const
-    {
-        return point(x / val, y / val);
-    }
 
+    //Add other operators as needed
     point operator + (const point& other) const
     {
-        return point(x + other.x, y + other.y);
+        return point(this->x + other.x, this->y + other.y);
     }
-    //Add other operators as needed
+
+    point operator - (const point& other) const
+    {
+        return point(this->x - other.x, this->y - other.y);
+    }
+
+    point operator * (long double other) const
+    {
+        return point(this->x * other, this->y * other);
+    }
+    
+    point operator / (long double other) const
+    {
+        return point(this->x / other, this->y / other);
+    }
 };
 
 //Container for line segment
