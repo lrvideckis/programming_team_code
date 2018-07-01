@@ -43,7 +43,7 @@ void mult(int* a, int* b, ll* ans) {
     }
 }
 
-void pre_proc() {
+void preCalc() {
     int hb = -1;
     root[0] = 1;
     double angle = 2 * pi / Max;
@@ -61,7 +61,7 @@ int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    pre_proc();
+    preCalc();
     int sizeA;
     cin >> sizeA;
     cin >> sizeA;
