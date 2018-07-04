@@ -39,7 +39,7 @@ void mult(int* a, int* b, ll* ans) {
     reverse(arrA + 1, arrA + Max);
     for(int i = 0; i < Max; i++) {
         arrA[i] /= Max;
-        ans[i] = (ll)(round(arrA[i].real()));
+        ans[i] = (ll)(round(arrA[i].real()));///////////change this////////////
     }
 }
 
