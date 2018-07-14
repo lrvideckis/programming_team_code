@@ -16,9 +16,9 @@ ll power(ll a, ll b) {
 
 struct NchooseK {
     int range;
-    vector<int> fact,ifact;
+    vector<ll> fact,ifact;
     NchooseK() {
-        range = (int)1e6;
+        range = (int)1e6+3;
         fact.resize(range+1);
         ifact.resize(range+1);
         calcFacts();
@@ -33,11 +33,11 @@ struct NchooseK {
             ifact[i] = (1LL*ifact[i+1]*(i+1))%mod;
         }
     }
-    int choose(int n, int k) {
+    ll choose(int n, int k) {
         if(k < 0 || k > n || n < 0) return 0;
         return ((1LL*fact[n]*ifact[k])%mod * 1LL*ifact[n-k])%mod;
     }
-};
+}nk;
 
 int main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
     NchooseK nk;
