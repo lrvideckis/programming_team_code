@@ -2,6 +2,14 @@
 using namespace std;
 typedef long long ll;
 
+vector<int> p(1000001,-1);//change size here if needed
+int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
+void merge(int x, int y) {
+    if((x=find(x)) == (y=find(y))) return;
+    if(p[y] < p[x]) swap(x,y);
+    p[x] += p[y];
+    p[y] = x;
+}
 
 //Disjoint Set class with move function added (move element a to set b)
 //time complexities: move O(ack-1(n)), union O(ack-1(n)), sameSet O(ack-1(n))
@@ -82,15 +90,6 @@ public:
     bool sameSet(ll a, ll b) {return find(a) == find(b);}
     int numGroups() {return this->numOfGroups;}
 };
-
-vector<int> p(1000001,-1);//change size here if needed
-int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
-void merge(int x, int y) {
-    if((x=find(x)) == (y=find(y))) return;
-    if(p[y] < p[x]) swap(x,y);
-    p[x] += p[y];
-    p[y] = x;
-}
 
 int main() {
     ll n, k;
