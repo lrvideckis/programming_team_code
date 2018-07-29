@@ -7,6 +7,7 @@ my $i = 1;
 while ( $i < @ARGV ) {
     print ( '-' x 70 . "\n" );
     print ( "\t\t\t\tTEST $i \n" );
+    print ( '-' x 70 . "\n" );
     system ( "./a.out < $ARGV[$i]" );
     $i ++;
 }
