@@ -8,7 +8,12 @@ private:
     vector<ll> tree, lazy;
     ll n, root, size;
 public:
-    SegmentTree(){}
+    SegmentTree(int currSize) : n(currSize), root(1) {
+        ll x = (ll)(ceil(log2(currSize)));
+        size = 2*(ll)pow(2, x);
+        tree.resize(size, 0);
+        lazy.resize(size, 0);
+    }
     SegmentTree(vector<ll> &arr) : n(arr.size()), root(1) {
         ll x = (ll)(ceil(log2(n)));
         size = 2*(ll)pow(2, x);
