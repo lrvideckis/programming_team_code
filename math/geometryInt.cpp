@@ -50,6 +50,16 @@ double linePointDist(pair<int, int> p1, pair<int, int> p2, pair<int, int> p) {
     return abs(ccw(p1, p2, p) / sqrt(dist(p1, p2)));
 }
 
+ll polyArea(const vector<pair<int, int> > &points) {
+    ll result = 0;
+    for(int i=0, j=1; i<points.size(); i++, j=(j+1)%points.size())
+    {
+        result += points[i].first * points[j].second;
+        result -= points[i].second * points[j].first;
+    }
+    return result;//twice the area
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
