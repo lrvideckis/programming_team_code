@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 system ( "rm a.out" );
-system ( "g++ -std=c++11 $ARGV[0]" );
+system ( "g++ -std=c++11 -Wall $ARGV[0]" );
 my $i = 1;
 while ( $i < @ARGV ) {
     print ( '-' x 70 . "\n" );
