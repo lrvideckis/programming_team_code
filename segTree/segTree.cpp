@@ -40,17 +40,6 @@ public:
             lazy[node] = 0;
         }
     }
-    void update(int idx, ll diff) {update(root, 0, n-1, idx, diff);}
-    void update(int node, int start, int end, int idx, ll diff) {
-        if(start == end) tree[node] += diff;
-        else {
-            ll mid = (start + end) / 2;
-            if(start <= idx && idx <= mid)
-                update(2*node, start, mid, idx, diff);
-            else update(2*node+1, mid+1, end, idx, diff);
-            tree[node] = tree[2*node] + tree[2*node+1];
-        }
-    }
     void updateRange(int l, int r, ll diff) {updateRange(root, 0, n-1, l, r, diff);}
     void updateRange(int node, int start, int end, int l, int r, ll diff) {
         pendingUpdate(node, start, end);
@@ -82,8 +71,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    
-    int n = 1e2;
+    srand(time(NULL));
+    int n = 1e4;
     vector<ll> arr(n);
     for(int i = 0; i < n; ++i) {
         arr[i] = rand()%1000000;
