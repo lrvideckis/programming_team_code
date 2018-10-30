@@ -31,20 +31,20 @@ struct NchooseK {
             ifact[i] = (1LL*ifact[i+1]*(i+1))%this->mod;
         }
     }
-    ll modFact(ll n, ll p, ll &e) {
+    ll modFact(ll n, ll &e) {
         if(n <= 1) return 1;
-        ll res = modFact(n/p, p, e);
-        e += n/p;
-        if ((n/p)%2 == 1) return res*(fact[n%p]*(p-1)%p)%p;
-        return res*fact[n%p]%p;
+        ll res = modFact(n/this->mod, e);
+        e += n/this->mod;
+        if ((n/this->mod)%2 == 1) return res*(fact[n%this->mod]*(this->mod-1)%this->mod)%this->mod;
+        return res*fact[n%this->mod]%this->mod;
     }
-    ll calcChoose(ll n, ll k, ll p) {
+    ll calcChoose(ll n, ll k) {
         ll e1 = 0, e2 = 0, e3 = 0;
-        ll a1 = modFact(n, p, e1);
-        ll a2 = modFact(k, p, e2);
-        ll a3 = modFact(n-k, p, e3);
+        ll a1 = modFact(n, e1);
+        ll a2 = modFact(k, e2);
+        ll a3 = modFact(n-k, e3);
         if (e1-e2-e3 > 0) return 0;
-        return (a1*power(a2*a3%p, p-2, p)%p);
+        return (a1*power(a2*a3%this->mod, this->mod-2, this->mod)%this->mod);
     }
     ll choose(int n, int k) {
         if(k < 0 || k > n || n < 0) return 0;
