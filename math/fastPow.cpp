@@ -9,9 +9,7 @@ ll power(ll a, ll b, ll c = mod) {//returns a^b mod c
     if (b % 2 == 0) {
         return (temp * temp) % c;
     }
-    else {
-        return (((a * temp) % c) * temp) % c;
-    }
+    return (((a * temp) % c) * temp) % c;
 }
 
 //this function returns base^exp in log(exp) time
