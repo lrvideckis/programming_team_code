@@ -4,7 +4,6 @@ typedef long long ll;
 
 struct SegmentTree {
 private:
-    //change this to max(a, b) for max segment trees
     vector<ll> tree, lazy;
     ll n, root, size;
 public:

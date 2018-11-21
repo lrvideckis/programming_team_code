@@ -72,7 +72,39 @@ public:
     }
 };
 
+
+const int Max = 1e5+100;
+const int root = 1;
+set<int> adj[Max];
+vector<int> children[Max];
+int cnt[Max];
+
 int32_t main() {
+    int n;
+    cin >> n;
+    string s;
+    int nextID = 2;
+    for(int i = 0; i < n; ++i) {
+        cin >> s;
+        int curr = root;
+        for(int j = 0; j < (int)s.size(); ++j) {
+            if(children[curr].empty()) children[curr].resize(26,-1);
+            if(children[curr][s[j]-'a'] == -1) {
+                children[curr][s[j]-'a'] = nextID++;
+            }
+            int next = children[curr][s[j]-'a'];
+            adj[curr].insert(next);
+            adj[next].insert(curr);
+            if(j+1 == (int)s.size()) {
+                cnt[next]++;
+            }
+            curr = next;
+        }
+    }
+
+
+
+
     vector<string> words = {"mom", "dad", "aj", "luke", "luck"};
     trie t(words);
     
