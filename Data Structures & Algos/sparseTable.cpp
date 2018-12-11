@@ -10,7 +10,7 @@ struct sparseTable {
         int n = arr.size();
         logTwo.resize(n+1,0);
         for(int i = 2; i <= n; ++i) logTwo[i] = 1 + logTwo[i/2];
-        maxPow = floor(logTwo[n])+1;
+        maxPow = logTwo[n]+1;
         memo.resize(maxPow, vector<ll>(n));
         for(int j = 0; j < maxPow; ++j) {
             for(int i = 0; i < n; ++i) {
