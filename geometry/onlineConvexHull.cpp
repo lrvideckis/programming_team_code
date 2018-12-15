@@ -26,8 +26,7 @@ struct HullDynamic : public multiset<Line> { // will maintain upper hull for max
         }
         auto x = prev(y);
         if (z == end()) return y->m == x->m && y->b <= x->b;
-        return (x->b - y->b)/(double)(y->m - x->m) >= (y->b - z->b)/(double)(z->m - y->m);
-        //return (x->b - y->b)*(z->m - y->m) >= (y->b - z->b)*(y->m - x->m);
+        return (x->b - y->b) * (long double)(z->m - y->m) >= (y->b - z->b) * (long double)(y->m - x->m);
     }
     void insert_line(ll m, ll b) {
         auto y = insert({ m, b });
