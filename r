@@ -1,3 +1,6 @@
+#Author credits: Gabe Hofer
+#https://github.com/gabrielhofer560/potpourri/blob/master/run_code
+
 #!/usr/bin/perl
 use strict;
 use warnings;
