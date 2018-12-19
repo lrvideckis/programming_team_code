@@ -17,7 +17,6 @@ void dfs2(int node, int par) {
             sizes[node] += sizes[to];
         }
     }
-
 }
 
 int findCentroid(int node) {
