@@ -7,7 +7,6 @@ vector<int> adj[Max];
 int sizes[Max], parent[Max];
 bool removed[Max];
 
-
 void dfs2(int node, int par) {
     sizes[node] = 1;
     for(int to : adj[node]) {
