@@ -59,7 +59,7 @@ ll dfs(ll v, ll flow) {
 	return 0;
 }
 
-ll dinic() {
+ll dinic() {//O(V^2*E)
 	ll flow = 0;
 	for(;;) {
 		if(!bfs())  break;
