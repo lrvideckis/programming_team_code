@@ -5,9 +5,7 @@ typedef long long ll;
 const int Max = 2e5+2;
 vector<int> adj[Max];
 int sizes[Max], parent[Max];
-char Rank[Max];
-bool removed[Max], leaf[Max];
-
+bool removed[Max];
 
 void dfs2(int node, int par) {
     sizes[node] = 1;
@@ -17,7 +15,6 @@ void dfs2(int node, int par) {
             sizes[node] += sizes[to];
         }
     }
-
 }
 
 int findCentroid(int node) {

@@ -3,7 +3,7 @@ using namespace std;
 #define int long long
 typedef long long ll;
 
-int cntPals(string &s) {
+string cntPals(string &s) {
     string T = "";
     for(int i = 0; i < s.size(); ++i) {
         T += "#" + s.substr(i,1);
@@ -20,34 +20,50 @@ int cntPals(string &s) {
             center = i;
             boundary = i+P[i];
         }
+        if(P[i] > maxLen) {
+            maxLen = P[i];
+            resCenter = i;
+        }
         cnt += (P[i]+1)/2;
     }
-    return cnt;
+    return s.substr((resCenter - maxLen)/2, maxLen);
+    //return cnt;//number of palindromes
 }
 
 int32_t main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    string s = "fncksoaidnossssssssssofnadf";
+    string s = "fncksoaidnossssessssssofnadf";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
     
-    int naive = 0;
-    for(int i = 0; i < s.size(); ++i) {
-        string temp = "";
-        for(int j = i; j < s.size(); ++j) {
-            temp += s[j];
-            bool good = true;
-            for(int k = 0; k < temp.size(); ++k) {
-                if(temp[k] != temp[temp.size()-k-1]) {
-                    good = false;
-                    break;
-                }
-            }
-            naive += good;
-        }
-    }
-    cout << "naive: " << naive << '\n';
-    cout << "fast: " << cntPals(s) << '\n';
+    s = "babcbabcbaccba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+    
+    s = "abaaba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+    
+    s = "abababa";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+
+    s = "abcbabcbabcba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+
+    s = "forgeeksskeegfor";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+
+    s = "caba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+
+    s = "abacdfgdcaba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+
+    s = "abacdfgdcabba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+
+    s = "abacdedcaba";
+    cout << "longest palindrome: " << cntPals(s) << '\n';
+  
     return 0;
 }
 
