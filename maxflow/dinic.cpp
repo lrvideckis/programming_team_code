@@ -3,7 +3,7 @@ using namespace std;
 #define int long long
 typedef long long ll;
 
-const ll MAXN = 300*300+2;
+const ll MAXN = 1e6+10;
 const ll INF = (ll)1e9;
 
 struct edge {
@@ -59,7 +59,7 @@ ll dfs(ll v, ll flow) {
 	return 0;
 }
 
-ll dinic() {//O(V^2*E)
+ll dinic() {//O(min(V^2*E, V*E^2, E*flow))
 	ll flow = 0;
 	for(;;) {
 		if(!bfs())  break;
