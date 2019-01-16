@@ -17,9 +17,9 @@ void dijkstra(int node) {
             int to = p.first;
             ll weight = p.second;
             if(length[to] > weight + length[node]) {
-                q.erase({-length[to], to});
+                q.erase({length[to], to});
                 length[to] = weight + length[node];
-                q.insert({-length[to], to});
+                q.insert({length[to], to});
             }
         }
     }

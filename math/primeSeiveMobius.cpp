@@ -39,6 +39,12 @@ void doSeive() {
         seive[i] = i;
         prime[i] = true;
     }
+    seive[0] = seive[1] = -1;
+    for (int i = 2; i*i < Max; ++i) {
+        if (seive[i] == i) {
+            for (int j = 2 * i; j < Max; j += i) seive[j] = min(seive[j], i);
+        }
+    }
     for(int i = 6; i < Max; i += 6) {
         if(prime[shift(i-1)]) {
             for(int j = 2*(i-1); j < Max; j += (i-1)) {
@@ -53,12 +59,6 @@ void doSeive() {
                     prime[shift(j)] = false;
                 }
             }
-        }
-    }
-    seive[0] = seive[1] = -1;
-    for (int i = 2; i*i < Max; ++i) {
-        if (seive[i] == i) {
-            for (int j = 2 * i; j < Max; j += i) seive[j] = min(seive[j], i);
         }
     }
 }
