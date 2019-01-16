@@ -7,7 +7,7 @@ vector<ll> length;
 
 void dijkstra(int node) {
     length[node] = 0;
-    set<pair<ll, int> > q;//-weight, node
+    set<pair<ll, int> > q;//weight, node
     q.insert({0, node});
     while(!q.empty()) {
         auto it = q.begin();
