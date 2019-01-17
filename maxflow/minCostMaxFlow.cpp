@@ -14,6 +14,12 @@ struct edge {
 int n, k = INF, s, t;
 vector<edge> g[MAXN];
 
+void reset() {
+    for(int i = 0; i < n; ++i) {
+        g[i].clear();
+    }
+}
+
 void add_edge(int a, int b, int cap, int cost) {
     edge r1 = {b, cap, cost, 0, g[b].size()};
     edge r2 = {a, 0, -cost, 0, g[a].size()};
