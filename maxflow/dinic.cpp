@@ -14,6 +14,13 @@ ll n, s, t, d[MAXN], ptr[MAXN], q[MAXN];
 vector<edge> e;
 vector<ll> g[MAXN];
 
+void reset() {
+    e.clear();
+    for(int i = 0; i < n; ++i) {
+        g[i].clear();
+    }
+}
+
 void addedge(ll a, ll b, ll cap) {
 	edge e1 = { a, b, cap, 0 };
 	edge e2 = { b, a, 0, 0 };
