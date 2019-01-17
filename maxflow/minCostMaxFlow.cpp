@@ -20,7 +20,7 @@ void reset() {
     }
 }
 
-void add_edge(int a, int b, int cap, int cost) {
+void addedge(int a, int b, int cap, int cost) {
     edge r1 = {b, cap, cost, 0, g[b].size()};
     edge r2 = {a, 0, -cost, 0, g[a].size()};
     g[a].push_back(r1);
@@ -85,7 +85,7 @@ int32_t main() {
     for(int i = 0; i < m; ++i) {
         int u, v, c, w;
         cin >> u >> v >> c >> w;
-        add_edge(u, v, c, w);
+        addedge(u, v, c, w);
     }
     pair<ll, ll> res = flow();
     cout << res.first << ' ' << res.second << '\n';
