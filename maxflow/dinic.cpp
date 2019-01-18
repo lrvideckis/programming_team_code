@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
-using namespace std;
-#define int long long
-typedef long long ll;
 
-const ll MAXN = 1e6+10;
-const ll INF = (ll)1e9;
+using namespace std;
+typedef long long ll;
+const ll inf = (ll)1 << 60;
+const ll MAXN = 100000 + 10;
 
 struct edge {
 	ll a, b, cap, flow;
@@ -13,13 +12,6 @@ struct edge {
 ll n, s, t, d[MAXN], ptr[MAXN], q[MAXN];
 vector<edge> e;
 vector<ll> g[MAXN];
-
-void reset() {
-    e.clear();
-    for(int i = 0; i < n; ++i) {
-        g[i].clear();
-    }
-}
 
 void addedge(ll a, ll b, ll cap) {
 	edge e1 = { a, b, cap, 0 };
@@ -50,8 +42,8 @@ bool bfs() {
 }
 
 ll dfs(ll v, ll flow) {
-	if(!flow)  return 0;
-	if(v == t)  return flow;
+	if(!flow) return 0;
+	if(v == t) return flow;
 	for(; ptr[v]<(ll)g[v].size(); ++ptr[v]) {
 		ll id = g[v][ptr[v]];
         ll to = e[id].b;
@@ -66,66 +58,45 @@ ll dfs(ll v, ll flow) {
 	return 0;
 }
 
-ll dinic() {//O(min(V^2*E, V*E^2, E*flow))
+ll getflow() {
 	ll flow = 0;
 	for(;;) {
 		if(!bfs())  break;
 		memset(ptr, 0, n * sizeof ptr[0]);
-		while(ll pushed = dfs(s,INF)) {
+		while(ll pushed = dfs(s,inf)) {
 			flow += pushed;
         }
 	}
 	return flow;
 }
 
-int32_t main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int m;
-    cin >> n >> m >> s >> t;
-    int u, v, c;
-    for(int i = 0; i < m; ++i) {
-        cin >> u >> v >> c;
-        addedge(u,v,c);
+// This requres 'n' to be set to
+// its value from the previous run
+// This removes all edges from the graph
+void reset() {
+    e.clear();
+    for(int i = 0; i < n; i++) {
+        g[i].clear();
     }
-    int flow = dinic();
-    vector<pair<int, pair<int, int>>> edgesUsed;
-    for(auto &currEdge : e) {
-        if(currEdge.flow > 0) {
-            edgesUsed.push_back({currEdge.a, {currEdge.b, currEdge.flow}});
-        }
-    }
-    cout << n << ' ' << flow << ' ' << edgesUsed.size() << '\n';
-    for(auto &p : edgesUsed) {
-        cout << p.first << ' ' << p.second.first << ' ' << p.second.second << '\n';
-    }
-    return 0;
 }
 
+int main() {
+    // You need to set the global number of nodes up front
+    n = 3;
 
+    // You need to set the global source and sink up front
+    s = 0;
+    t = 2;
 
+    // Add an edge from source to node 1 with weight 7
+    addedge(s,1,7);
 
+    // Add an edge from node 1 to sink with weight 4
+    addedge(1,t,4);
 
+    // Calculate max flow from s to t
+    // Dinic's runs in E * V^2
+    cout << getflow() << endl;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    reset();
+}
