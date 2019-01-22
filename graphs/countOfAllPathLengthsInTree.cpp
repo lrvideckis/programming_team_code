@@ -4,7 +4,7 @@ typedef long long ll;
 typedef complex<double> cd;
 
 const int Max = 1e6+10;
-int n, logBound, bound, a[Max] = {0}, b[Max] = {0}, sizes[Max], perm[Max];
+int n, logBound = 1, bound = 1, a[Max] = {0}, b[Max] = {0}, sizes[Max], perm[Max];
 const double pi = 4*atan(1.0);
 cd root[Max], arrA[Max], arrB[Max];
 vector<int> adj[Max], cntPathLength[Max];
@@ -133,7 +133,7 @@ void dfs1(int node, int par) {
     }
     
     for(int to : adj[node]) {
-        if(to != par && !removed[to]) {
+        if(!removed[to]) {
             dfs1(findCentroid(to), node);
         }
     }
@@ -166,7 +166,7 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    preCalc();
+    //preCalc();
     cin >> n;
     int u, v;
     for(int i = 0; i < n-1; ++i) {
