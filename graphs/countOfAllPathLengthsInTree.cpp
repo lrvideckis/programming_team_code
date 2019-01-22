@@ -41,17 +41,17 @@ void preCalc() {
 
 void mult(vector<int> &a, vector<int> &b, vector<ll> &c) {
     logBound = 0;
-    while((1<<logBound) < a.size() || (1<<logBound) < b.size()) logBound++;
+    while((1<<logBound) < (int)a.size() || (1<<logBound) < (int)b.size()) logBound++;
     logBound++;
     bound = (1<<logBound);
     preCalc();
-    for(int i = 0; i < a.size(); i++) {
+    for(int i = 0; i < (int)a.size(); i++) {
         arrA[i] = cd(a[i], 0);
     }
-    for(int i = a.size(); i < bound; i++) {
+    for(int i = (int)a.size(); i < bound; i++) {
         arrA[i] = cd(0, 0);
     }
-    for(int i = 0; i < b.size(); i++) {
+    for(int i = 0; i < (int)b.size(); i++) {
         arrB[i] = cd(b[i], 0);
     }
     for(int i = b.size(); i < bound; i++) {
@@ -74,7 +74,7 @@ void mult(vector<int> &a, vector<int> &b, vector<ll> &c) {
 }
 
 void dfs2(int node, int par, int root, int currDist) {
-    if(cntPathLength[root].size() <= currDist) {
+    while((int)cntPathLength[root].size() <= currDist) {
         cntPathLength[root].push_back(0);
     }
     cntPathLength[root][currDist]++;
@@ -110,7 +110,7 @@ void dfs1(int node, int par) {
     removed[node] = true;
     int maxLength = 1;
     for(int to : adj[node]) {
-        if(to != par && !removed[to]) {
+        if(!removed[to]) {
             cntPathLength[to].clear();
             cntPathLength[to].push_back(0);
             dfs2(to, to, to, 1);
@@ -123,10 +123,10 @@ void dfs1(int node, int par) {
         if(to != par && !removed[to]) {
             vector<ll> prod;
             mult(temp, cntPathLength[to], prod);
-            for(int i = 0; i < prod.size(); ++i) {
+            for(int i = 0; i < (int)prod.size(); ++i) {
                 cntTotalPathLengths[i] += prod[i];
             }
-            for(int i = 0; i < cntPathLength[to].size(); ++i) {
+            for(int i = 0; i < (int)cntPathLength[to].size(); ++i) {
                 temp[i] += cntPathLength[to][i];
             }
         }
@@ -166,7 +166,6 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    //preCalc();
     cin >> n;
     int u, v;
     for(int i = 0; i < n-1; ++i) {
