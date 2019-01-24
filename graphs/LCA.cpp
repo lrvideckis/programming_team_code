@@ -3,14 +3,14 @@ using namespace std;
 
 const int Max = 1e5+3, Log = 20+1;
 vector<int> adj[Max];
-int memo[Log][Max];
+int memo[Max][Log];
 int depth[Max];
 
 void dfs(int node, int prev, int Depth = 0) {
     depth[node] = Depth;
-    memo[0][node] = prev;
+    memo[node][0] = prev;
     for(int i = 1; i < Log; ++i) {
-        memo[i][node] = memo[i-1][memo[i-1][node]];
+        memo[node][i] = memo[memo[node][i-1]][i-1];
     }
     for(int to : adj[node]) {
         if(to == prev) continue;
@@ -23,16 +23,16 @@ int LCA(int x, int y) {
     int diff = depth[x] - depth[y];
     for(int k = Log-1; k >= 0; --k) {
         if(diff&(1<<k)) {
-            x = memo[k][x];
+            x = memo[x][k];
         }
     }
     for(int k = Log-1; k >= 0; --k) {
-        if(memo[k][x] != memo[k][y]) {
-            x = memo[k][x];
-            y = memo[k][y];
+        if(memo[x][k] != memo[y][k]) {
+            x = memo[x][k];
+            y = memo[y][k];
         }
     }
-    if(x != y) x = memo[0][x];
+    if(x != y) x = memo[x][0];
     return x;
 }
 
@@ -51,19 +51,6 @@ int main() {
     dfs(1,1);
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
