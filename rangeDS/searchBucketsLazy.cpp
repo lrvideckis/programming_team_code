@@ -24,8 +24,7 @@ struct search_buckets {
     void init(const vector<T> &initial) {
         values = buckets = initial;
         N = values.size();
-        //BUCKET_SIZE = sqrt(N * log(N + 1)) + 1;//TODO: optimize this val
-        BUCKET_SIZE = sqrt(N) + 1;//TODO: optimize this val
+        BUCKET_SIZE = 0.5*sqrt(N) + 1;
         lazy.resize((N+BUCKET_SIZE-1)/BUCKET_SIZE, 0);
         for (int start = 0; start < N; start += BUCKET_SIZE)
             sort(buckets.begin() + start, buckets.begin() + get_bucket_end(start));
