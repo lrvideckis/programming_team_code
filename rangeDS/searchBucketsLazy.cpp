@@ -5,7 +5,7 @@ typedef long long ll;
 
 
 // search_buckets provides two operations on an array:
-// 1) set array[i] = x for i in range: [start, end)
+// 1) do array[i] += x for i in range: [start, end)
 // 2) count how many i in [start, end) satisfy array[i] < value
 template<typename T>
 struct search_buckets {
@@ -114,7 +114,7 @@ int32_t main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    const int n = 10000, maxn = 10000;
+    const int n = 10000, maxn = 1000000;
     srand(time(NULL));
     vector<int> arr(n);
     for(int i = 0; i < n; ++i) {
@@ -126,7 +126,7 @@ int32_t main() {
         int l = rand()%n;
         int r = rand()%n;
         if(l > r) swap(l,r);
-        int value = rand()%maxn;
+        int value = rand()%maxn-maxn/2;
         if(type == 0) {//query
             int naive = 0;
             for(int j = l; j < r; ++j) {
@@ -136,6 +136,7 @@ int32_t main() {
             if(naive != sb.less_than(l, r, value)) {
                 cout << "incorrect\t" << naive << ' ' << sb.less_than(l,r,value) << '\n';
             }
+            sb.less_than(l,r,value);
         } else {//update
             for(int j = l; j < r; ++j) {
                 arr[j] += value;
