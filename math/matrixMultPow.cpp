@@ -24,7 +24,7 @@ vector<vector<ll> > mult(vector<vector<ll> > a, vector<vector<ll> > b) {
 }
 
 vector<vector<ll> > power(vector<vector<ll> > matrix, ll b) {
-    if (b <= 0) return {{1,0,0},{0,1,0},{0,0,1}};
+    if (b <= 1) return matrix;
     vector<vector<ll> > temp = power(matrix, b/2);
     if (b % 2 == 0) return mult(temp, temp);
     return mult(mult(temp, temp), matrix);
