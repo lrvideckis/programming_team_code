@@ -25,7 +25,7 @@ struct search_buckets {
         values = buckets = initial;
         N = values.size();
         BUCKET_SIZE = 0.5*sqrt(N) + 1;
-        lazy.resize((N+BUCKET_SIZE-1)/BUCKET_SIZE, 0);
+        lazy.resize(N/BUCKET_SIZE+2, 0);
         for (int start = 0; start < N; start += BUCKET_SIZE)
             sort(buckets.begin() + start, buckets.begin() + get_bucket_end(start));
     }
@@ -114,7 +114,7 @@ int32_t main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    const int n = 10000, maxn = 1000000;
+    const int n = 100000, maxn = 1000000;
     srand(time(NULL));
     vector<int> arr(n);
     for(int i = 0; i < n; ++i) {
