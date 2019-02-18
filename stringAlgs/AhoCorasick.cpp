@@ -1,76 +1,101 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-
-const int MAXCHAR = 26;
-const int MAXN = 2e5+10;
-
-struct AhoCorasick {
-    struct Vertex {
-        int next[MAXCHAR], go[MAXCHAR];
-        int leaf = -1;
-        int p = -1;
-        char pch;
-        int link = -1, leaflink = -1;
-
-        Vertex(int p = -1, char ch = '$') : p(p), pch(ch) {
-            fill(begin(next), end(next), -1);
-            fill(begin(go), end(go), -1);
-        }
-    };
-    vector<Vertex> trie;
-    vector<int> results[MAXN];
-    AhoCorasick() : trie(1) {}
-
-    void add_string(string const &s, int idx) {
-        int v = 0;
-        for (char ch : s) {
-            int c = ch - 'a';
-            if (trie[v].next[c] == -1) {
-                trie[v].next[c] = trie.size();
-                trie.emplace_back(v, ch);
-            }
-            v = trie[v].next[c];
-        }
-        trie[v].leaf = idx;
-    }
-
-    int get_link(int v) {
-        if (trie[v].link == -1) {
-            if (v == 0 || trie[v].p == 0)
-                trie[v].link = 0;
-            else
-                trie[v].link = go(get_link(trie[v].p), trie[v].pch);
-            get_link(trie[v].link);
-            trie[v].leaflink = (trie[trie[v].link].leaf != -1) ? trie[v].link : trie[trie[v].link].leaflink;
-        }
-        return trie[v].link;
-    }
-
-    int go(int v, char ch) {
-        int c = ch - 'a';
-        if (trie[v].go[c] == -1) {
-            if (trie[v].next[c] != -1)
-                trie[v].go[c] = trie[v].next[c];
-            else
-                trie[v].go[c] = v == 0 ? 0 : go(get_link(v), ch);
-        }
-        return trie[v].go[c];
-    }
-
-    void findString(string s) {
-        int v = 0;
-        for (int i = 0; i < s.size(); i++) {
-            v = go(v, s[i]);
-            get_link(v);
-            int cur = trie[v].leaf == -1 ? trie[v].leaflink : v;
-            while (cur != -1) {
-                results[trie[cur].leaf].push_back(i);
-                cur = trie[cur].leaflink;
-            }
-        }
+typedef long long int ll;
+ 
+const int K = 26;//character size
+struct node{
+    int next[K],go[K],link = -1,e_link = -1;
+    bool leaf = 0;
+    char pch;
+    int p = -1;
+    int id;
+    node(int p = -1,char ch = '#'):p(p),pch(ch){
+        fill(next,next+K,-1);
+        fill(go,go+K,-1);
     }
 };
+vector<node> t(1);//adj list
+void add_string(string s,int id){
+    int c = 0;
+    for(char ch: s){
+        int v = ch-'a';
+        if(t[c].next[v]==-1){
+            t[c].next[v] = t.size();
+            t.emplace_back(c,ch);
+        }
+        c = t[c].next[v];
+    }
+    t[c].leaf = 1;
+    t[c].id = id;
+}
+int go(int c,char ch);
+int get_link(int c){
+    if(t[c].link==-1){
+        if(c==0 || t[c].p==0)
+            t[c].link = 0;
+        else
+            t[c].link = go(get_link(t[c].p),t[c].pch);
+        if(t[t[c].link].leaf)
+            t[c].e_link = t[c].link;
+        else
+            t[c].e_link = t[t[c].link].e_link;
+    }
+    return t[c].link;
+}
+int go(int c,char ch){
+    int v = ch-'a';
+    if(t[c].go[v]==-1){
+        if(t[c].next[v]!=-1)
+            t[c].go[v] = t[c].next[v];
+        else
+            t[c].go[v] = (c==0)? 0: go(get_link(c),ch);
+    }
+    return t[c].go[v];
+}
+void search(string s){
+    int n = s.size();
+    int c = 0;
+    for(int i=0;i<n;i++){
+        c = go(c,s[i]);
+        int cc = c;
+        while(cc!=-1 && t[cc].leaf){
+            cout<<i<<" "<<t[cc].id<<endl; // end position and string id
+            cc = t[cc].e_link;
+        }
+    }
+}
+
 
 int main() {
-    
+    string arr[3] = {"his","her","she"};
+    for(int i=0;i<3;i++)
+        add_string(arr[i],i);
+    string s = "hishershe";
+    search(s);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
