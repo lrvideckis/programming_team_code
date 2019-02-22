@@ -57,6 +57,8 @@ int find_string(string s) {
 }
 
 int32_t main() {
+    t.reserve(100000);//for speed
+
 
     vector<string> words = {"mom", "dad", "aj", "luke", "luck"};
     for(int i = 0; i < words.size(); ++i) {
