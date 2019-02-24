@@ -2,14 +2,14 @@
 using namespace std;
 typedef long long ll;
 
-struct TWOSAT {
+struct twosat {
     int n;
     vector<set<int> > adj, adjInv;
     vector<int> scc;
     int sccID;
     vector<bool> visited, assignment;
 
-    TWOSAT(int nodes) {
+    twosat(int nodes) {
         n = 2*nodes;
         adj.resize(n);
         adjInv.resize(n);
@@ -79,7 +79,7 @@ struct TWOSAT {
 
 signed main() {
     const int n = 4;
-    TWOSAT ts(n);
+    twosat ts(n);
     ts.add(0,true,0,true);
     ts.add(0,false,1,false);
     ts.add(1,true,2,true);
