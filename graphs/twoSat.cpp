@@ -7,22 +7,24 @@ struct TWOSAT {
     vector<set<int> > adj, adjInv;
     vector<int> scc;
     int sccID;
-    vector<bool> visited;
+    vector<bool> visited, assignment;
 
     TWOSAT(int nodes) {
         n = 2*nodes;
         adj.resize(n);
         adjInv.resize(n);
         scc.resize(n);
+        assignment.resize(n/2);
     }
     
+    //X XOR Y = (X OR Y) AND (!X OR !Y)
     void add(int i, bool statusI, int j, bool statusJ) {
-        int from1 = i+(!statusI)*(n/2);
-        int to1 = j+statusJ*(n/2);
+        const int from1 = i+(!statusI)*(n/2);
+        const int to1 = j+statusJ*(n/2);
         adj[from1].insert(to1);
         adjInv[to1].insert(from1);
-        int from2 = j+(!statusJ)*(n/2);
-        int to2 = i+statusI*(n/2);
+        const int from2 = j+(!statusJ)*(n/2);
+        const int to2 = i+statusI*(n/2);
         adj[from2].insert(to2);
         adjInv[to2].insert(from2);
     }
@@ -69,13 +71,30 @@ struct TWOSAT {
             if(scc[i] == scc[i+n/2]) {
                 return false;
             }
+            assignment[i] = scc[i] < scc[i+n/2];
         }
         return true;
     }
 };
 
 signed main() {
+    const int n = 4;
+    TWOSAT ts(n);
+    ts.add(0,true,0,true);
+    ts.add(0,false,1,false);
+    ts.add(1,true,2,true);
+    ts.add(2,false,3,false);
     
+    //ts.add(0,false,2,false);
+    
+    if(ts.solve()) {
+        cout << "solvable:\n";
+        for(int i = 0; i < n; ++i) {
+            cout << i << ' ' << ts.assignment[i] << '\n';
+        }
+    } else {
+        cout << "not solvable\n";
+    }
 }
 
 
