@@ -17,7 +17,14 @@ struct twosat {
         assignment.resize(n/2);
     }
     
+    
+    //X AND Y = (X OR X) AND (Y OR Y)
+    //X NAND Y = (!X OR !Y)
+    
+    //X NOR Y = (!X OR !X) AND (!Y OR !Y)
+    
     //X XOR Y = (X OR Y) AND (!X OR !Y)
+    //X XNOR Y = (!Y OR X) AND (!X OR Y)
     void add(int i, bool statusI, int j, bool statusJ) {
         const int from1 = i+(!statusI)*(n/2);
         const int to1 = j+statusJ*(n/2);
