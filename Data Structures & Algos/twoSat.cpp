@@ -4,7 +4,7 @@ typedef long long ll;
 
 struct twosat {
     int n;
-    vector<set<int> > adj, adjInv;
+    vector<vector<int> > adj, adjInv;
     vector<int> scc;
     int sccID;
     vector<bool> visited, assignment;
@@ -28,12 +28,12 @@ struct twosat {
     void add(int i, bool statusI, int j, bool statusJ) {
         const int from1 = i+(!statusI)*(n/2);
         const int to1 = j+statusJ*(n/2);
-        adj[from1].insert(to1);
-        adjInv[to1].insert(from1);
+        adj[from1].push_back(to1);
+        adjInv[to1].push_back(from1);
         const int from2 = j+(!statusJ)*(n/2);
         const int to2 = i+statusI*(n/2);
-        adj[from2].insert(to2);
-        adjInv[to2].insert(from2);
+        adj[from2].push_back(to2);
+        adjInv[to2].push_back(from2);
     }
     
     void dfs1(int curr, stack<int> &seen) {
