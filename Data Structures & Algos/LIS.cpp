@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 // Returns an array with the indexes of the LIS
 template <class T>
 vector<int> LIS(vector<T>& v) {
+    if(v.size() == 0) return {};
     vector<int> p(v.size(), -1);
     vector<int> t(v.size(), 0);
 
@@ -65,5 +65,4 @@ vector<int> LSIS(vector<int> &arr) {//longest strictly increasing sequence
 }
 
 int main() {
-    return 0;
 }
