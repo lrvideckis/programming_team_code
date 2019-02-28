@@ -3,10 +3,8 @@ using namespace std;
 typedef long long ll;
 
 struct SegmentTree {
-private:
     vector<ll> tree, lazy;
     ll n, root, size;
-public:
     SegmentTree(int currSize) : n(currSize), root(1) {
         ll x = (ll)(ceil(log2(currSize)));
         size = 2*(ll)pow(2, x);
