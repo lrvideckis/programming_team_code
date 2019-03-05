@@ -9,6 +9,7 @@ struct SegmentTree {
         ll x = (ll)(ceil(log2(currSize)));
         size = 2*(ll)pow(2, x);
         treeSum.resize(size, 0);
+        treeMax.resize(size, 0);
         lazy.resize(size, 0);
     }
     SegmentTree(vector<ll> &arr) : n(arr.size()), root(1) {
@@ -83,11 +84,12 @@ int main() {
     cout.tie(0);
     srand(time(NULL));
     int n = 1e4;
-    vector<ll> arr(n);
+    vector<ll> arr(n,0);
     for(int i = 0; i < n; ++i) {
         arr[i] = rand()%1000000;
     }
     SegmentTree st(arr);
+    //SegmentTree st(n);
     for(int i = 0; i < n; ++i) {
         int L = rand()%n;
         int R = rand()%n;
