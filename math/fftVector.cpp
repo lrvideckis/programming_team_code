@@ -38,7 +38,7 @@ void preCalc() {
     }
 }
 
-void mult(vector<int> &a, vector<int> &b, vector<ll> &c) {
+void mult(const vector<int> &a, const vector<int> &b, vector<ll> &c) {
     logBound = 0;
     while((1<<logBound) < a.size() || (1<<logBound) < b.size()) logBound++;
     logBound++;
