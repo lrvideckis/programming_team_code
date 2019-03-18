@@ -7,7 +7,7 @@ ll modInverse(ll a, ll b){
 //returns a^pw % mod
 ll fastPow(ll a, ll pw, ll mod) {
 	ll res = 1;
-	while(pw) {
+	while(pw > 0) {
 		if(pw & 1) res = (res*a)%mod;
 		a = (a*a)%mod;
 		pw >>= 1;
