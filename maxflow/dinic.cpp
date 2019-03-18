@@ -1,10 +1,3 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-typedef long long ll;
-const ll inf = (ll)1 << 60;
-
 struct maxflow {
 
     struct edge {
@@ -81,22 +74,3 @@ struct maxflow {
     }
 
 };
-
-int main() {
-    // You need to set the global number of nodes up front
-    // You need to set the global source and sink up front
-    // You need to set the max number of nodes up front
-    maxflow mf(3,0,2);
-
-
-    // Add an edge from source to node 1 with weight 7
-    mf.addedge(mf.s,1,7);
-
-    // Add an edge from node 1 to sink with weight 4
-    mf.addedge(1,mf.t,4);
-
-    // Calculate max flow from s to t
-    // Dinic's runs in E * V^2
-    cout << mf.getflow() << endl;
-
-}

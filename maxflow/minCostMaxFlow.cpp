@@ -1,12 +1,4 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-typedef long long ll;
-const ll inf = (ll)1 << 60;
-
 struct mincostmaxflow {
-
     struct edge {
 	    ll a, b, cap, cost, flow;
 	    size_t back;
@@ -29,7 +21,6 @@ struct mincostmaxflow {
 	    g[b].push_back((ll) e.size());
         e.push_back(e2);
     }
-
 
     // Returns {flow,cost}
     pair<ll,ll> getflow() {
@@ -83,22 +74,3 @@ struct mincostmaxflow {
     }
 
 };
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n,m,s,t;
-    cin >> n >> m >> s >> t;
-    mincostmaxflow mf(n,s,t);
-    for(int i = 0; i < m; ++i) {
-        int u, v, c, w;
-        cin >> u >> v >> c >> w;
-        mf.addedge(u, v, c, w);
-    }
-    pair<ll, ll> res = mf.getflow();
-    cout << res.first << ' ' << res.second << '\n';
-    
-}
-
-
-
