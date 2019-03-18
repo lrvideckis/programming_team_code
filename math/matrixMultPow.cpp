@@ -1,8 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
 const ll mod = 1e9+7;
-
 vector<vector<ll> > mult(vector<vector<ll> > a, vector<vector<ll> > b) {
     if(a.size() == 0) return {};
     if(a[0].size() == 0) return {};
@@ -29,17 +25,3 @@ vector<vector<ll> > power(vector<vector<ll> > matrix, ll b) {
     if (b % 2 == 0) return mult(temp, temp);
     return mult(mult(temp, temp), matrix);
 }
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    return 0;
-}
-
-
-
-
-
-
-

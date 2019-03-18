@@ -59,7 +59,8 @@ int main() {
         adjInv[b].push_back(a);
     }
     calcSCC();
-    //now sccID = number of SCC's
+    // Now sccID = number of SCC's
+    // These SCCs are already in topological order (or maybe reverse)
     for(int i = 1; i <= n; ++i) cout << i << ' ' << scc[i] << '\n';
     return 0;
 }
