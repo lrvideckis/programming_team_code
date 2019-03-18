@@ -1,7 +1,19 @@
+
+/*
+ *
+ * THIS BROKE
+ *
+ *
+ */
+
+
+
+
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long int ll;
- 
+
 const int K = 26;//character size
 struct node{
     int next[K],go[K],link = -1,e_link = -1;
