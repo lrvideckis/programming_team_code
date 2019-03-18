@@ -13,7 +13,6 @@ struct twosat {
         assignment.resize(n/2);
     }
     
-    
     //X AND Y = (X OR X) AND (Y OR Y)
     //X NAND Y = (!X OR !Y)
     //X NOR Y = (!X OR !X) AND (!Y OR !Y)
