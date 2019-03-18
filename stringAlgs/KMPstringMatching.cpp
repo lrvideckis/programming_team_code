@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 struct KMP_Match {
     vector<int> T;
     string pat;
@@ -10,7 +6,7 @@ struct KMP_Match {
     void buildTable(string pattern) {
         pat = pattern;
         T.clear();
-        T.resize(pat.length()+1);       
+        T.resize(pat.length()+1);
         int i = 0, j = -1;
         T[i] = j;
         while(i < pat.size()) {
@@ -29,7 +25,7 @@ struct KMP_Match {
                     if(!all) return matches;
                     m = m + i - T[i];
                     i = T[i];
-                }   
+                }
                 i++;
             } else {
                 if(T[i] != -1) {
@@ -47,6 +43,7 @@ struct KMP_Match {
 
 int fail[1000005];
 
+// Checks if two arrays are rotationally equvalent
 bool KMPints(vector<ll> a, vector<ll> b){
 	for(int i = 0; i < a.size(); i++) {
 	    b.push_back(b[i]);
@@ -65,19 +62,3 @@ bool KMPints(vector<ll> a, vector<ll> b){
 	}
 	return false;
 }
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    string a, b;
-    KMP_Match kmp(a);
-    vector<int> matches = kmp.find(b);
-    return 0;
-}
-
-
-
-
-
-

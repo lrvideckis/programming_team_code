@@ -57,7 +57,7 @@ struct NchooseKLucas {
     ll multiChoose(ll n, ll k) {
         return chooseLucas(n+k-1, n-1);
     }
-    
+
 };
 
 ll modInverse(ll a, ll b){
@@ -81,67 +81,34 @@ int32_t main() {
     for(int i = 0;; ++i) {
         int remaining = k-(m+1)*i;
         if(remaining < 0) break;
-        
+
         if(i%2 == 0) {
-        
+
             sum1 += (nk1.chooseLucas(n, i)*nk1.multiChoose(n, remaining))%mod1;
-            
+
             sum2 += (nk2.chooseLucas(n, i)*nk2.multiChoose(n, remaining))%mod2;
-            
+
         } else {
-        
+
             sum1 -= (nk1.chooseLucas(n, i)*nk1.multiChoose(n, remaining))%mod1;
-            
+
             sum2 -= (nk2.chooseLucas(n, i)*nk2.multiChoose(n, remaining))%mod2;
-        
+
         }
-        
+
         sum1 = (sum1%mod1+mod1)%mod1;
         sum2 = (sum2%mod2+mod2)%mod2;
     }
-    
+
     int actualMod = mod1*mod2;
-    
+
     int res = (sum1*mod2%actualMod*modInverse(mod2, mod1))%actualMod + (sum2*mod1%actualMod*modInverse(mod1, mod2))%actualMod;
-    
+
     res %= actualMod;
     res += actualMod;
     res %= actualMod;
-    
+
     cout << res << '\n';
-    
+
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
