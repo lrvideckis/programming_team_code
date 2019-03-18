@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 struct sparseTable {
     vector<vector<ll> > memo;
     vector<int> logTwo;
@@ -25,66 +21,3 @@ struct sparseTable {
         return min(memo[j][l], memo[j][r-(1<<j)+1]);
     }
 };
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n;
-    cin >> n;
-    vector<ll> arr(n);
-    for(ll &x : arr) cin >> x;
-    cout << "arr:\n";
-    for(ll &x : arr) cout << x << ' ';cout << '\n';
-    sparseTable st(arr);
-    for(int i = 0; i < n; ++i) {
-        for(int j = i; j < n; ++j) {
-            cout << i << ' ' << j << ' ';
-            cout << "query: [i,j]: " << st.query(i,j) << '\n';
-        }
-    }
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

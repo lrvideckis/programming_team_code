@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 struct fenwickTree {
     vector<ll> bit;
     int n;
@@ -23,40 +19,3 @@ struct fenwickTree {
         return sum(r) - sum(l-1);
     }
 }ft;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    ft.add(3,2000000000000000LL);
-    ft.add(1,3);
-    cout << ft.sum(5) << '\n';
-    cout << ft.sum(3, 4) << '\n';
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

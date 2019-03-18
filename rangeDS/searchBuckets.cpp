@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define int long long
-typedef long long ll;
-
-
 // Author: Neal Wu
 // search_buckets provides two operations on an array:
 // 1) set array[i] = x
@@ -98,65 +92,3 @@ struct search_buckets {
         values[index] = value;
     }
 };
-
-int32_t main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    const int n = 10000, maxn = 100000000;
-    srand(time(NULL));
-    vector<int> arr(n);
-    for(int i = 0; i < n; ++i) {
-        arr[i] = rand()%maxn;
-    }
-    search_buckets<int> sb(arr);
-    for(int i = 0; i < n; ++i) {
-        int type = rand()%2;
-        if(type == 0) {//query
-            int l = rand()%n;
-            int r = rand()%n;
-            if(l > r) swap(l,r);
-            int value = rand()%maxn;
-            int naive = 0;
-            for(int j = l; j < r; ++j) {
-                if(arr[j] < value) naive++;
-            }
-            //cout << naive << ' ' << sb.less_than(l,r,value) << '\n';
-            if(naive != sb.less_than(l,r,value)) {
-                cout << "incorrect\n";
-            }
-        } else {//update
-            int pos = rand()%n;
-            int value = rand()%maxn;
-            arr[pos] = value;
-            sb.modify(pos, value);
-        }
-    }
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

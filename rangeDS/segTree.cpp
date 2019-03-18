@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 struct SegmentTree {
     vector<ll> treeSum, treeMax, lazy;
     ll n, root, size;
@@ -77,66 +73,3 @@ struct SegmentTree {
         return max(queryMax(2*node, start, mid, l, r), queryMax(2*node+1, mid+1, end, l, r));
     }
 };
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    srand(time(NULL));
-    int n = 1e4;
-    vector<ll> arr(n,0);
-    for(int i = 0; i < n; ++i) {
-        arr[i] = rand()%1000000;
-    }
-    SegmentTree st(arr);
-    //SegmentTree st(n);
-    for(int i = 0; i < n; ++i) {
-        int L = rand()%n;
-        int R = rand()%n;
-        if(L > R) swap(L, R);
-        int type = rand()%3;
-        if(type == 0) {
-            int diff = rand()%1000000-500000;
-            for(int j = L; j <= R; ++j) {
-                arr[j] += (ll)diff;
-            }
-            st.updateRange(L, R, diff);
-        } else if(type == 1) {
-            ll sum = 0;
-            for(int j = L; j <= R; ++j) {
-                sum += arr[j];
-            }
-            if(sum != st.querySum(L, R)) {
-                cout << "incorrect sum: " << sum << ' ' << st.querySum(L, R) << '\n';
-            } //else cout << "correct1\n";
-        } else {
-            ll mx = arr[L];
-            for(int j = L; j <= R; ++j) {
-                mx = max(mx, arr[j]);
-            }
-            if(mx != st.queryMax(L, R)) {
-                cout << "incorrect max: " << mx << ' ' << st.queryMax(L, R) << '\n';
-            } //else cout << "correct2\n";
-        }
-    }
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
