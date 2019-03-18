@@ -1,3 +1,10 @@
+/*
+
+FIND A BETTER VERSION OF THIS
+
+*/
+
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
