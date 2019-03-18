@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 const int K = 26;//character size
 
 struct node {
@@ -55,65 +51,3 @@ int find_string(string s) {
     if(!t[c].leaf) return -1;
     return t[c].id;
 }
-
-int32_t main() {
-    t.reserve(100000);//for speed
-
-
-    vector<string> words = {"mom", "dad", "aj", "luke", "luck"};
-    for(int i = 0; i < words.size(); ++i) {
-        add_string(words[i], i);
-    }
-    
-    cout<<"searching for words in/not in trie:\n";
-    cout << "mom: " << find_string("mom") << '\n';
-    cout << "mo: " << find_string("mo") << '\n';
-    cout << "momo: " << find_string("momo") << '\n';
-    cout << "lucky: " << find_string("lucky") << '\n';
-    cout << "luck: " << find_string("luck") << '\n';
-    cout << "luke: " << find_string("luke") << "\n\n";
-    
-    cout<<"erasing luke\n";
-    remove_string("luke");
-    cout << "luke: " << find_string("luke") << "\n\n";
-    
-    cout<<"inserting luke back\n";
-    add_string("luke", 123);
-    cout << "luke: " << find_string("luke") << '\n';
-    cout << "lukey: " << find_string("lukey") << "\n\n";
-     
-    cout<<"trying to erase word not in list:\n";
-    remove_string("lukey");
-    cout << "lukey: " << find_string("lukey") << "\n\n";
-    
-    /*
-    cout<<"printing all names in sorted order:\n";
-    
-    vector<string> temp = t.sort();
-    for(string x : temp)cout<<x<<'\n';
-    
-    */
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
