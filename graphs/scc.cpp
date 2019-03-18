@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 int n,m;
 vector<vector<int> > adj, adjInv;
 vector<int> scc;
@@ -66,17 +63,3 @@ int main() {
     for(int i = 1; i <= n; ++i) cout << i << ' ' << scc[i] << '\n';
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

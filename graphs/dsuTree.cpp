@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 const int Max = 1e5+3;
 int color[Max], Time = 1, timeIn[Max], timeOut[Max], ver[Max], size[Max], cnt[Max], heavyChild[Max], Depth[Max] = {0}, answer[Max];
 vector<int> adj[Max];
@@ -61,8 +57,3 @@ int main() {
     cout << '\n';
     return 0;
 }
-
-
-
-
-

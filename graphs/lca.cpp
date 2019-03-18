@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 const int Max = 1e5+3, Log = 20+1;
 vector<int> adj[Max];
 int memo[Max][Log];
@@ -51,6 +48,3 @@ int main() {
     dfs(1,1);
     return 0;
 }
-
-
-

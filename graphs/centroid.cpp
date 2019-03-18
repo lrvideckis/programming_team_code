@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 const int Max = 2e5+2;
 vector<int> adj[Max];
 int sizes[Max], parent[Max];
@@ -62,32 +58,3 @@ int main() {
     dfs1(findCentroid(1), 0);
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
