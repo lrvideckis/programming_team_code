@@ -1,8 +1,4 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define int long long
-typedef long long ll;
-
+// Returns the longest palindrome
 string cntPals(string &s) {
     string T = "";
     for(int i = 0; i < s.size(); ++i) {
@@ -29,67 +25,3 @@ string cntPals(string &s) {
     return s.substr((resCenter - maxLen)/2, maxLen);
     //return cnt;//number of palindromes
 }
-
-int32_t main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    string s = "fncksoaidnossssessssssofnadf";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-    
-    s = "babcbabcbaccba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-    
-    s = "abaaba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-    
-    s = "abababa";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-
-    s = "abcbabcbabcba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-
-    s = "forgeeksskeegfor";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-
-    s = "caba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-
-    s = "abacdfgdcaba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-
-    s = "abacdfgdcabba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-
-    s = "abacdedcaba";
-    cout << "longest palindrome: " << cntPals(s) << '\n';
-  
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
