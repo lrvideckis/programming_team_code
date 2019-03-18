@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 //returns x such that x*a == 1 (mod b)
 //x only exists if gcd(a, b) == 1
 ll modInverse(ll a, ll b){
@@ -87,19 +83,3 @@ struct NchooseK {
         return chooseLucas(n+k-1, n-1);
     }
 };
-
-int main() {
-    NchooseK nk(1000000009);
-    cout << nk.choose(4,2) << '\n';
-    cout << nk.choose(10,5) << '\n';
-    
-    cout << nk.calcChoose(4,2) << '\n';
-    cout << nk.calcChoose(10,5) << '\n';
-    
-    cout << nk.chooseLucas(4,2) << '\n';
-    cout << nk.chooseLucas(10,5) << '\n';
-    return 0;
-}
-
-
-
