@@ -1,113 +1,95 @@
+typedef pair<int,int> PII;
 
-/*
- *
- * THIS BROKE
- *
- *
- */
+int n;  // n is the number of dictionary word
+string s,p;  // dictionary words are inputted in p, s is the traversed text
 
 
+#define MAX_NODE 250004
 
+map<char,int> node[MAX_NODE];
+int root,nnode,link[MAX_NODE],endof[504],travis[MAX_NODE];
+PII level[MAX_NODE];
 
+void init()
+{
+    root=0;
+    nnode=0;
+    travis[root]=0;  // number of time a node is traversed by s
+    level[root]=MP(0,root);  // level, node
+    node[root].clear();
+}
 
-#include<bits/stdc++.h>
-using namespace std;
-typedef long long int ll;
-
-const int K = 26;//character size
-struct node{
-    int next[K],go[K],link = -1,e_link = -1;
-    bool leaf = 0;
-    char pch;
-    int p = -1;
-    int id;
-    node(int p = -1,char ch = '#'):p(p),pch(ch){
-        fill(next,next+K,-1);
-        fill(go,go+K,-1);
-    }
-};
-vector<node> t(1);//adj list
-void add_string(string s,int id){
-    int c = 0;
-    for(char ch: s){
-        int v = ch-'a';
-        if(t[c].next[v]==-1){
-            t[c].next[v] = t.size();
-            t.emplace_back(c,ch);
+void insertword(int ind)
+{
+    int len=p.size();
+    int now=root;
+    for(int i=0;i<len;i++)
+    {
+        if(!node[now][p[i]])
+        {
+            node[now][p[i]]=++nnode;
+            node[nnode].clear();
+            travis[nnode]=0;
+            level[nnode]=MP(level[now].first+1,nnode);
         }
-        c = t[c].next[v];
+        now=node[now][p[i]];
     }
-    t[c].leaf = 1;
-    t[c].id = id;
+    endof[ind]=now;  // end of dictionary word ind
 }
-int go(int c,char ch);
-int get_link(int c){
-    if(t[c].link==-1){
-        if(c==0 || t[c].p==0)
-            t[c].link = 0;
-        else
-            t[c].link = go(get_link(t[c].p),t[c].pch);
-        if(t[t[c].link].leaf)
-            t[c].e_link = t[c].link;
-        else
-            t[c].e_link = t[t[c].link].e_link;
-    }
-    return t[c].link;
-}
-int go(int c,char ch){
-    int v = ch-'a';
-    if(t[c].go[v]==-1){
-        if(t[c].next[v]!=-1)
-            t[c].go[v] = t[c].next[v];
-        else
-            t[c].go[v] = (c==0)? 0: go(get_link(c),ch);
-    }
-    return t[c].go[v];
-}
-void search(string s){
-    int n = s.size();
-    int c = 0;
-    for(int i=0;i<n;i++){
-        c = go(c,s[i]);
-        int cc = c;
-        while(cc!=-1 && t[cc].leaf){
-            cout<<i<<" "<<t[cc].id<<endl; // end position and string id
-            cc = t[cc].e_link;
+
+void push_links()
+{
+    queue<int>q;
+    link[0]=-1;
+    q.push(0);
+    while(!q.empty())
+    {
+        int u=q.front();
+        q.pop();
+        for(auto it: node[u])
+        {
+            char ch=it.first;
+            int v=it.second;
+            int j=link[u];
+            while(j!=-1 && !node[j][ch])j=link[j];
+            if(j!=-1)link[v]=node[j][ch];
+            else link[v]=0;
+            q.push(v);
         }
     }
 }
 
-
-int main() {
-    string arr[3] = {"his","her","she"};
-    for(int i=0;i<3;i++)
-        add_string(arr[i],i);
-    string s = "hishershe";
-    search(s);
+void traverse()
+{
+    int len=s.size();
+    int now=root;
+    travis[root]++;
+    for(int i=0;i<len;i++)
+    {
+        while(now!=-1 && !node[now][s[i]])now=link[now];
+        if(now!=-1)now=node[now][s[i]];
+        else now=0;
+        travis[now]++;
+    }
+    sort(level,level+nnode+1,greater<PII>());
+    for(int i=0;i<=nnode;i++)
+    {
+        now=level[i].second;
+        travis[link[now]]+=travis[now];
+    }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void driver()
+{
+    init();
+    for(int i=1;i<=n;i++)
+    {
+        // input p
+        insertword(i);
+    }
+    // input s
+    push_links();
+    traverse();
+    // number of occurence of word i in s is travis[endof[i]]
+}
