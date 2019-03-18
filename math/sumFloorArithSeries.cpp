@@ -1,11 +1,7 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 // code taken from:
 // http://mathforum.org/library/drmath/view/73120.html
 
-//computes: 
+//computes:
 //[p/q] + [2p/q] + [3p/q] + ... + [np/q]
 //(p, q, n are natural numbers)
 //[x] = floor(x)
@@ -34,34 +30,3 @@ ll cnt(ll p, ll q, ll n) {
     }
     return s;
 }
-
-signed main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
