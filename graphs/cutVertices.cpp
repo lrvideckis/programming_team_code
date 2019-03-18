@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 const int Max = 1e5+2;
 vector<int> adj[Max];
 bool visited[Max], cutNode[Max];
@@ -52,19 +48,8 @@ int main() {
     }
     for(int i = 0; i < n; ++i) {
         if(cutNode[i]) {
-        
+
         }
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-

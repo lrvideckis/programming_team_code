@@ -131,7 +131,7 @@ void dfs1(int node, int par) {
             }
         }
     }
-    
+
     for(int to : adj[node]) {
         if(!removed[to]) {
             dfs1(findCentroid(to), node);
@@ -187,5 +187,3 @@ int main() {
     }
     return 0;
 }
-
-

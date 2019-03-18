@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 const int Max = 3e5+2;
 vector<int> adj[Max], bridgeTree[Max];
 bool visited[Max];
@@ -61,14 +57,3 @@ int main() {
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
