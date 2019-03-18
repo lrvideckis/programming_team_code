@@ -39,14 +39,14 @@ struct NchooseK {
             ifact[i] = (1LL*ifact[i+1]*(i+1))%this->mod;
         }
     }
-    ll modFact(ll n, ll &e) {
+    ll modFact(ll n, ll &e) const {
         if(n <= 1) return 1;
         ll res = modFact(n/this->mod, e);
         e += n/this->mod;
         if ((n/this->mod)%2 == 1) return res*(fact[n%this->mod]*(this->mod-1)%this->mod)%this->mod;
         return res*fact[n%this->mod]%this->mod;
     }
-    ll calcChoose(ll n, ll k) {
+    ll calcChoose(ll n, ll k) const {
         ll e1 = 0, e2 = 0, e3 = 0;
         ll a1 = modFact(n, e1);
         ll a2 = modFact(k, e2);
@@ -55,7 +55,7 @@ struct NchooseK {
         return (a1*fastPow (a2*a3%this->mod, this->mod-2, this->mod)%this->mod);
     }
     //classic n choose k
-    ll choose(int n, int k) {
+    ll choose(int n, int k) const {
         if(k < 0 || k > n || n < 0) return 0;
         return ((1LL*fact[n]*ifact[k])%this->mod * 1LL*ifact[n-k])%this->mod;
     }
@@ -65,28 +65,32 @@ struct NchooseK {
     //***can only use with: prime moduli < 1e6***
     
     //n choose k, using the lucas theorem
-    ll chooseLucas(ll n, ll k) {
+    ll chooseLucas(ll n, ll k) const {
         if(k < 0 || k > n || n < 0) return 0;
         if(k == 0) {
             return 1;
         }
-
         int ni = n % this->mod;
         int ki = k % this->mod;
-
         return (this->chooseLucas(n/this->mod, k/this->mod) * this->choose(ni,ki)) % this->mod;
     }
-    //bars and stars problem: given n objects, each with an endless supply this returns
-    //the number of ways to choose k of them.
-    ll multiChoose(ll n, ll k) {
+    //bars and stars problem: given n objects, each with an endless supply,
+    //this returns the number of ways to choose k of them.
+    ll multiChoose(ll n, ll k) const {
         return chooseLucas(n+k-1, n-1);
     }
 };
 
-int main() {ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
+int main() {
     NchooseK nk(1000000009);
     cout << nk.choose(4,2) << '\n';
     cout << nk.choose(10,5) << '\n';
+    
+    cout << nk.calcChoose(4,2) << '\n';
+    cout << nk.calcChoose(10,5) << '\n';
+    
+    cout << nk.chooseLucas(4,2) << '\n';
+    cout << nk.chooseLucas(10,5) << '\n';
     return 0;
 }
 
