@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 vector<int> p(1000001,-1);//change size here if needed
 int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
 void merge(int x, int y) {
@@ -90,29 +86,3 @@ public:
     bool sameSet(ll a, ll b) {return find(a) == find(b);}
     int numGroups() {return this->numOfGroups;}
 };
-
-int main() {
-    ll n, k;
-    while(cin >> n >> k) {
-        DisjointSet ds(n);
-        while(k--) {
-            ll opp, a, b;
-            cin >> opp;
-            switch(opp) {
-            case 1://union
-                cin >> a >> b;
-                ds.merge(a, b);
-                break;
-            case 2://move
-                cin >> a >> b;
-                ds.move(a, b);
-                break;
-            case 3://print
-                cin >> a;
-                ds.print(a);
-                break;
-            }
-        }
-    }
-    return 0;
-}

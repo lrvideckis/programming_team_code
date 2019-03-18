@@ -1,8 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define int long long
-typedef long long ll;
-
 struct queueMax {
     stack<pair<ll, ll>> s1, s2;
     int size() {
@@ -52,35 +47,3 @@ struct queueMax {
         s1.pop();
     }
 };
-
-int32_t main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

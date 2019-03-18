@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 struct twosat {
     int n;
     vector<vector<int> > adj, adjInv;
@@ -20,9 +16,7 @@ struct twosat {
     
     //X AND Y = (X OR X) AND (Y OR Y)
     //X NAND Y = (!X OR !Y)
-    
     //X NOR Y = (!X OR !X) AND (!Y OR !Y)
-    
     //X XOR Y = (X OR Y) AND (!X OR !Y)
     //X XNOR Y = (!Y OR X) AND (!X OR Y)
     void add(int i, bool statusI, int j, bool statusJ) {
@@ -83,54 +77,3 @@ struct twosat {
         return true;
     }
 };
-
-signed main() {
-    const int n = 4;
-    twosat ts(n);
-    ts.add(0,true,0,true);
-    ts.add(0,false,1,false);
-    ts.add(1,true,2,true);
-    ts.add(2,false,3,false);
-    
-    //ts.add(0,false,2,false);
-    
-    if(ts.solve()) {
-        cout << "solvable:\n";
-        for(int i = 0; i < n; ++i) {
-            cout << i << ' ' << ts.assignment[i] << '\n';
-        }
-    } else {
-        cout << "not solvable\n";
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
