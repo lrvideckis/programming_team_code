@@ -45,6 +45,13 @@ void fft (vector<base> & a, bool invert) {
 // a[0], b[0], res[0] = coef x^0
 // Doesnt work with negative coefs
 void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {
+    if(a.size() * b.size() <= 256) {
+		res.resize(a.size() + b.size(), 0);
+		for(int i = 0; i < (int)a.size(); i++)
+			for(int j = 0; j < (int)b.size(); j++)
+				res[i + j] += 1LL * a[i] * b[j];
+		return;
+	}
 	vector<base> fa (a.begin(), a.end()),  fb (b.begin(), b.end());
 	size_t n=1;
 	while (n<max(a.size(),b.size())) n<<=1;
@@ -57,5 +64,5 @@ void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) 
 	res.resize (n);
 	// avoid precision errors, mess up with negative values of coefs
 	for(size_t i=0; i<n; ++i)
-		res[i]=int(fa[i].real() + 0.5);
+		res[i]=(int)(fa[i].real()>0 ? fa[i].real()+0.5 : fa[i].real()-0.5);
 }
