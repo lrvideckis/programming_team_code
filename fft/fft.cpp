@@ -10,10 +10,8 @@
  * */
 
 const double PI=acos(-1);
-
 typedef complex<double> base;
-
-void fft (vector<base> & a, bool invert) {
+inline void fft (vector<base> & a, bool invert) {
 	int n=(int) a.size();
 	for (int i=1, j=0; i<n; ++i) {
 		int bit=n>>1;
@@ -43,7 +41,7 @@ void fft (vector<base> & a, bool invert) {
 
 // a, b => coefs to multiply,  res => resulting coefs
 // a[0], b[0], res[0] = coef x^0
-void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {
+inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {
     if(a.size() * b.size() <= 256) {
 		res.resize(a.size() + b.size(), 0);
 		for(int i = 0; i < (int)a.size(); i++)
