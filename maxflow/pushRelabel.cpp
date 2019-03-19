@@ -1,137 +1,63 @@
-// Adjacency list implementation of FIFO push relabel maximum flow
-// with the gap relabeling heuristic.  This implementation is
-// significantly faster than straight Ford-Fulkerson.  It solves
-// random problems with 10000 vertices and 1000000 edges in a few
-// seconds, though it is possible to construct test cases that
-// achieve the worst-case.
-//
-// Running time:
-//     O(|V|^3)
-//
-// INPUT: 
-//     - graph, constructed using AddEdge()
-//     - source
-//     - sink
-//
-// OUTPUT:
-//     - maximum flow value
-//     - To obtain the actual flow values, look at all edges with
-//       capacity > 0 (zero capacity edges are residual edges).
-
-#include <cmath>
-#include <vector>
-#include <iostream>
-#include <queue>
-
-using namespace std;
-
-typedef long long LL;
-
-struct Edge {
-  int from, to, cap, flow, index;
-  Edge(int from, int to, int cap, int flow, int index) :
-    from(from), to(to), cap(cap), flow(flow), index(index) {}
-};
-
+// Push relabel in O(V^2 E^0.5) with gap heuristic
+// It's quite fast
+template<typename flow_t = long long>
 struct PushRelabel {
-  int N;
-  vector<vector<Edge> > G;
-  vector<LL> excess;
-  vector<int> dist, active, count;
-  queue<int> Q;
-
-  PushRelabel(int N) : N(N), G(N), excess(N), dist(N), active(N), count(2*N) {}
-
-  void AddEdge(int from, int to, int cap) {
-    G[from].push_back(Edge(from, to, cap, 0, G[to].size()));
-    if (from == to) G[from].back().index++;
-    G[to].push_back(Edge(to, from, 0, 0, G[from].size() - 1));
-  }
-
-  void Enqueue(int v) { 
-    if (!active[v] && excess[v] > 0) { active[v] = true; Q.push(v); } 
-  }
-
-  void Push(Edge &e) {
-    int amt = int(min(excess[e.from], LL(e.cap - e.flow)));
-    if (dist[e.from] <= dist[e.to] || amt == 0) return;
-    e.flow += amt;
-    G[e.to][e.index].flow -= amt;
-    excess[e.to] += amt;    
-    excess[e.from] -= amt;
-    Enqueue(e.to);
-  }
-  
-  void Gap(int k) {
-    for (int v = 0; v < N; v++) {
-      if (dist[v] < k) continue;
-      count[dist[v]]--;
-      dist[v] = max(dist[v], N+1);
-      count[dist[v]]++;
-      Enqueue(v);
+    struct Edge {
+        int to, rev;
+        flow_t f, c;
+    };
+    vector<vector<Edge> > g;
+    vector<flow_t> ec;
+    vector<Edge*> cur;
+    vector<vector<int> > hs;
+    vector<int> H;
+    PushRelabel(int n) : g(n), ec(n), cur(n), hs(2*n), H(n) {}
+    void add_edge(int s, int t, flow_t cap, flow_t rcap=0) {
+        if (s == t) return;
+        Edge a = {t, (int)g[t].size(), 0, cap};
+        Edge b = {s, (int)g[s].size(), 0, rcap};
+        g[s].push_back(a);
+        g[t].push_back(b);
     }
-  }
-
-  void Relabel(int v) {
-    count[dist[v]]--;
-    dist[v] = 2*N;
-    for (int i = 0; i < G[v].size(); i++) 
-      if (G[v][i].cap - G[v][i].flow > 0)
-	dist[v] = min(dist[v], dist[G[v][i].to] + 1);
-    count[dist[v]]++;
-    Enqueue(v);
-  }
-
-  void Discharge(int v) {
-    for (int i = 0; excess[v] > 0 && i < G[v].size(); i++) Push(G[v][i]);
-    if (excess[v] > 0) {
-      if (count[dist[v]] == 1) 
-	Gap(dist[v]); 
-      else
-	Relabel(v);
+    void add_flow(Edge& e, flow_t f) {
+        Edge &back = g[e.to][e.rev];
+        if (!ec[e.to] && f)
+            hs[H[e.to]].push_back(e.to);
+        e.f += f; e.c -= f;
+        ec[e.to] += f;
+        back.f -= f; back.c += f;
+        ec[back.to] -= f;
     }
-  }
-
-  LL GetMaxFlow(int s, int t) {
-    count[0] = N-1;
-    count[N] = 1;
-    dist[s] = N;
-    active[s] = active[t] = true;
-    for (int i = 0; i < G[s].size(); i++) {
-      excess[s] += G[s][i].cap;
-      Push(G[s][i]);
+    flow_t max_flow(int s, int t) {
+        int v = g.size();
+        H[s] = v;
+        ec[t] = 1;
+        vector<int> co(2*v);
+        co[0] = v-1;
+        for(int i=0;i<v;++i) cur[i] = g[i].data();
+        for(auto &e:g[s]) add_flow(e, e.c);
+        if(hs[0].size())
+        for (int hi = 0;hi>=0;) {
+            int u = hs[hi].back();
+            hs[hi].pop_back();
+            while (ec[u] > 0) // discharge u
+                if (cur[u] == g[u].data() + g[u].size()) {
+                    H[u] = 1e9;
+                    for(auto &e:g[u])
+                        if (e.c && H[u] > H[e.to]+1)
+                            H[u] = H[e.to]+1, cur[u] = &e;
+                    if (++co[H[u]], !--co[hi] && hi < v)
+                        for(int i=0;i<v;++i)
+                            if (hi < H[i] && H[i] < v){
+                                --co[H[i]];
+                                H[i] = v + 1;
+                            }
+                    hi = H[u];
+                } else if (cur[u]->c && H[u] == H[cur[u]->to]+1)
+                    add_flow(*cur[u], min(ec[u], cur[u]->c));
+                else ++cur[u];
+            while (hi>=0 && hs[hi].empty()) --hi;
+        }
+        return -ec[s];
     }
-    
-    while (!Q.empty()) {
-      int v = Q.front();
-      Q.pop();
-      active[v] = false;
-      Discharge(v);
-    }
-    
-    LL totflow = 0;
-    for (int i = 0; i < G[s].size(); i++) totflow += G[s][i].flow;
-    return totflow;
-  }
 };
-
-// BEGIN CUT
-// The following code solves SPOJ problem #4110: Fast Maximum Flow (FASTFLOW)
-
-int main() {
-  int n, m;
-  scanf("%d%d", &n, &m);
-
-  PushRelabel pr(n);
-  for (int i = 0; i < m; i++) { 
-   int a, b, c;
-    scanf("%d%d%d", &a, &b, &c);
-    if (a == b) continue;
-    pr.AddEdge(a-1, b-1, c);
-    pr.AddEdge(b-1, a-1, c);
-  }
-  printf("%Ld\n", pr.GetMaxFlow(0, n-1));
-  return 0;
-}
-
-// END CUT
