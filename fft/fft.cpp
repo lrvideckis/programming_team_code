@@ -61,7 +61,6 @@ void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) 
 		fa[i]*=fb[i];
 	fft (fa, true);
 	res.resize (n);
-	// avoid precision errors, mess up with negative values of coefs
 	for(size_t i=0; i<n; ++i)
 		res[i]=(int)(fa[i].real()>0 ? fa[i].real()+0.5 : fa[i].real()-0.5);
 }
