@@ -35,6 +35,9 @@ int faulhaber(long long n, int k){
         if((k-i+2)&1)t1=-t1;
         ans+=sum[i]*t%mod*t1%mod*t2%mod;
         if(ans >= mod) ans -= mod;
+        //if(ans < 0) ans += mod;
+        //assert(0 <= ans && ans < mod);
     }
-    return (ans+mod)%mod;
+    if(ans < 0) ans += mod;
+    return ans;
 }
