@@ -3,78 +3,68 @@ using namespace std;
 typedef long long ll;
 typedef complex<double> cd;
 
+const double PI=acos(-1);
+typedef complex<double> base;
+inline void fft (vector<base> & a, bool invert) {
+	int n=(int) a.size();
+	for (int i=1, j=0; i<n; ++i) {
+		int bit=n>>1;
+		for (;j>=bit;bit>>=1)
+			j-=bit;
+		j+=bit;
+		if(i<j)
+			swap(a[i],a[j]);
+	}
+	for (int len=2; len<=n; len<<=1) {
+		double ang = 2*PI/len * (invert ? -1 : 1);
+		base wlen(cos(ang), sin(ang));
+		for (int i=0; i<n; i+=len) {
+			base w(1);
+			for (int j=0; j<len/2; ++j) {
+				base u=a[i+j], v=a[i+j+len/2]*w;
+				a[i+j]=u+v;
+				a[i+j+len/2]=u-v;
+				w*=wlen;
+			}
+		}
+	}
+	if (invert)
+		for(int i=0;i<n;++i)
+			a[i]/=n;
+}
+
+// a, b => coefs to multiply,  res => resulting coefs
+// a[0], b[0], res[0] = coef x^0
+inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {
+    if(a.size() * b.size() <= 256) {
+		res.resize(a.size() + b.size(), 0);
+		for(int i = 0; i < (int)a.size(); i++)
+			for(int j = 0; j < (int)b.size(); j++)
+				res[i + j] += 1LL * a[i] * b[j];
+		return;
+	}
+	vector<base> fa (a.begin(), a.end()),  fb (b.begin(), b.end());
+	size_t n=1;
+	while (n<max(a.size(),b.size())) n<<=1;
+	n<<=1;
+	fa.resize(n),fb.resize(n);
+	fft (fa,false);  fft(fb,false);
+	for (size_t i=0; i<n; ++i)
+		fa[i]*=fb[i];
+	fft (fa, true);
+	res.resize (n);
+	for(size_t i=0; i<n; ++i)
+		res[i]=(int)(fa[i].real()>0 ? fa[i].real()+0.5 : fa[i].real()-0.5);
+}
+
 const int Max = 1e6+10;
-int n, logBound = 1, bound = 1, a[Max] = {0}, b[Max] = {0}, sizes[Max], perm[Max];
-const double pi = 4*atan(1.0);
-cd root[Max], arrA[Max], arrB[Max];
+int n, sizes[Max];
 vector<int> adj[Max], cntPathLength[Max];
 ll prod[Max], cntTotalPathLengths[Max] = {0}, cntTotalPathLengthsNaive[Max] = {0};
 bool removed[Max];
 
-void fft(cd* arr) {
-    for(int i = 0; i < bound; i++) {
-        if(i < perm[i]) {
-            swap(arr[i], arr[perm[i]]);
-        }
-    }
-    for(int len = 1; len < bound; len *= 2) {
-        for(int pos = 0; pos < bound; pos += 2 * len) {
-            for(int i = 0; i < len; i++) {
-                cd x = arr[pos + i], y = arr[pos + i + len] * root[bound / len / 2 * i];
-                arr[pos + i] = x + y;
-                arr[pos + i + len] = x - y;
-            }
-        }
-    }
-}
-
-void preCalc() {
-    int hb = -1;
-    root[0] = 1;
-    double angle = 2 * pi / bound;
-    for(int i = 1; i < bound; i++) {
-        if((i & (i - 1)) == 0) hb++;
-        root[i] = cd(cos(angle * i), sin(angle * i));
-        perm[i] = perm[i ^ (1 << hb)] + (1 << (logBound - hb - 1));
-    }
-}
-
-void mult(vector<int> &a, vector<int> &b, vector<ll> &c) {
-    logBound = 0;
-    while((1<<logBound) < (int)a.size() || (1<<logBound) < (int)b.size()) logBound++;
-    logBound++;
-    bound = (1<<logBound);
-    preCalc();
-    for(int i = 0; i < (int)a.size(); i++) {
-        arrA[i] = cd(a[i], 0);
-    }
-    for(int i = (int)a.size(); i < bound; i++) {
-        arrA[i] = cd(0, 0);
-    }
-    for(int i = 0; i < (int)b.size(); i++) {
-        arrB[i] = cd(b[i], 0);
-    }
-    for(int i = b.size(); i < bound; i++) {
-        arrB[i] = cd(0, 0);
-    }
-    fft(arrA);
-    fft(arrB);
-    for(int i = 0; i < bound; i++) {
-        arrA[i] *= arrB[i];
-    }
-    fft(arrA);
-    reverse(arrA + 1, arrA + bound);
-    c.resize(bound);
-    for(int i = 0; i < bound; i++) {
-        arrA[i] /= bound;
-        ll temp = (arrA[i].real() > 0 ? arrA[i].real()+.5 : arrA[i].real() - .5);
-        c[i] = temp;
-    }
-    while(c.size() && c.back() == 0) c.pop_back();
-}
-
 void dfs2(int node, int par, int root, int currDist) {
-    while((int)cntPathLength[root].size() <= currDist) {
+    if(cntPathLength[root].size() <= currDist) {
         cntPathLength[root].push_back(0);
     }
     cntPathLength[root][currDist]++;
@@ -110,7 +100,7 @@ void dfs1(int node, int par) {
     removed[node] = true;
     int maxLength = 1;
     for(int to : adj[node]) {
-        if(!removed[to]) {
+        if(to != par && !removed[to]) {
             cntPathLength[to].clear();
             cntPathLength[to].push_back(0);
             dfs2(to, to, to, 1);
@@ -121,19 +111,19 @@ void dfs1(int node, int par) {
     temp[0]++;
     for(int to : adj[node]) {
         if(to != par && !removed[to]) {
-            vector<ll> prod;
-            mult(temp, cntPathLength[to], prod);
-            for(int i = 0; i < (int)prod.size(); ++i) {
+            vector<int> prod;
+            multiply(temp, cntPathLength[to], prod);
+            for(int i = 0; i < prod.size(); ++i) {
                 cntTotalPathLengths[i] += prod[i];
             }
-            for(int i = 0; i < (int)cntPathLength[to].size(); ++i) {
+            for(int i = 0; i < cntPathLength[to].size(); ++i) {
                 temp[i] += cntPathLength[to][i];
             }
         }
     }
-
+    
     for(int to : adj[node]) {
-        if(!removed[to]) {
+        if(to != par && !removed[to]) {
             dfs1(findCentroid(to), node);
         }
     }
@@ -161,6 +151,7 @@ sample:
 3 4
 
 */
+
 
 int main() {
     ios::sync_with_stdio(false);
