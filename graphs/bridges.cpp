@@ -14,7 +14,7 @@ void merge(int x, int y) {
     p[y] = x;
 }
 
-void dfs(int node, int prev, int currID = 1) {//TODO: remove currID
+void dfs(int node, int prev) {
     visited[node] = true;
     timeIn[node] = minTime[node] = ++currTime;
     for(int to : adj[node]) {
