@@ -1,3 +1,4 @@
+//Doesn't handle multiple edges
 const int Max = 3e5+2;
 vector<int> adj[Max], bridgeTree[Max];
 bool visited[Max];
@@ -13,7 +14,7 @@ void merge(int x, int y) {
     p[y] = x;
 }
 
-void dfs(int node, int prev, int currID = 1) {
+void dfs(int node, int prev, int currID = 1) {//TODO: remove currID
     visited[node] = true;
     timeIn[node] = minTime[node] = ++currTime;
     for(int to : adj[node]) {
