@@ -1,55 +1,40 @@
-#include <iostream>
-using namespace std;
+const ll mod = 1e9+7;
 
-#define MAX 2510
-#define MOD 1000000007
-
-int S[MAX][MAX], inv[MAX];
-
-int expo(long long x, int n){
-    x %= MOD;
-    long long res = 1;
-
-    while (n > 0){
-        if (n & 1) res = (res * x) % MOD;
-        x = (x * x) % MOD;
-        n >>= 1;
-    }
-
-    return (res % MOD);
+//returns a^pw % mod
+ll fastPow(ll a, ll pw, ll mod) {
+	ll res = 1;
+	a %= mod;
+	while(pw > 0) {
+		if(pw & 1) res = (res*a)%mod;
+		a = (a*a)%mod;
+		pw >>= 1;
+	}
+	return res;
 }
 
-void Generate(){
-    int i, j;
-    for (i = 0; i < MAX; i++) inv[i] = expo(i, MOD - 2);
-
-    S[0][0] = 1;
-    for (i = 1; i < MAX; i++){
-        S[i][0] = 0;
-        for (j = 1; j <= i; j++){
-            S[i][j] = ( ((long long)S[i - 1][j] * j) + S[i - 1][j - 1]) % MOD;
-        }
-    }
-}
-
-//Faulhaber's formula expresses the sum of the k-th powers of the first n positive integers
+//Faulhaber'the sum of the k-th powers of the first n positive integers
+//1^k + 2^k + 3^k + 4^k + ... + n^k
+//O(k)
 int faulhaber(long long n, int k){
-    n %= MOD;
-    if (!k) return n;
-
-    int j;
-    long long res = 0, p = 1;
-    for (j = 0; j <= k; j++){
-        p = (p * (n + 1 - j)) % MOD;
-        res = (res + (((S[k][j] * p) % MOD) * inv[j + 1])) % MOD;
-    }
-
-    return (res % MOD);
+    vector<ll> sum(k+5, 0);
+	for(ll i=1;i<=k+2;i++)
+		sum[i]=(sum[i-1]+fastPow(i,k, mod))%mod;
+	if(n<=k+2)
+		return sum[n];
+	ll t = 1;
+    vector<ll> fac(k+5, 1);
+	for(ll i=1;i<=k+2;i++)
+	{
+		t=(n-i)*t%mod;
+		fac[i]=fac[i-1]*i%mod;
+	}
+	ll ans = 0;
+	for(ll i=1;i<=k+2;i++)
+	{
+		ll t1=fastPow(fac[i-1]*fac[k-i+2]%mod,mod-2, mod);
+		ll t2=fastPow(n-i,mod-2, mod);
+		if((k-i+2)&1)t1=-t1;
+		ans=(ans+sum[i]*t%mod*t1%mod*t2%mod)%mod;
+	}
+	return (ans+mod)%mod;
 }
-
-int main(){
-    Generate();
-    cout << faulhaber(3, 2) << '\n';
-    return 0;
-}
-
