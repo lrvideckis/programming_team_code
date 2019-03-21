@@ -22,8 +22,6 @@ struct search_buckets {
         values = buckets = initial;
         N = values.size();
         BUCKET_SIZE = 3 * sqrt(N * log(N + 1)) + 1;
-        //cerr << "Bucket size: " << BUCKET_SIZE << endl;
-
         for (int start = 0; start < N; start += BUCKET_SIZE)
             sort(buckets.begin() + start, buckets.begin() + get_bucket_end(start));
     }
@@ -38,7 +36,6 @@ struct search_buckets {
         int count = 0;
         int bucket_start = start - start % BUCKET_SIZE;
         int bucket_end = min(get_bucket_end(bucket_start), end);
-
         if (start - bucket_start < bucket_end - start) {
             while (start > bucket_start)
                 count -= values[--start] < value;
@@ -46,13 +43,9 @@ struct search_buckets {
             while (start < bucket_end)
                 count += values[start++] < value;
         }
-
-        if (start == end)
-            return count;
-
+        if (start == end) return count;
         bucket_start = end - end % BUCKET_SIZE;
         bucket_end = get_bucket_end(bucket_start);
-
         if (end - bucket_start < bucket_end - end) {
             while (end > bucket_start)
                 count += values[--end] < value;
@@ -60,13 +53,10 @@ struct search_buckets {
             while (end < bucket_end)
                 count -= values[end++] < value;
         }
-
         while (start < end && get_bucket_end(start) <= end) {
             count += bucket_less_than(start, value);
             start = get_bucket_end(start);
         }
-
-        assert(start == end);
         return count;
     }
 
@@ -78,16 +68,12 @@ struct search_buckets {
         int bucket_start = index - index % BUCKET_SIZE;
         int old_pos = bucket_start + bucket_less_than(bucket_start, values[index]);
         int new_pos = bucket_start + bucket_less_than(bucket_start, value);
-
         if (old_pos < new_pos) {
             copy(buckets.begin() + old_pos + 1, buckets.begin() + new_pos, buckets.begin() + old_pos);
             new_pos--;
-            // memmove(&buckets[old_pos], &buckets[old_pos + 1], (new_pos - old_pos) * sizeof(T));
         } else {
             copy_backward(buckets.begin() + new_pos, buckets.begin() + old_pos, buckets.begin() + old_pos + 1);
-            // memmove(&buckets[new_pos + 1], &buckets[new_pos], (old_pos - new_pos) * sizeof(T));
         }
-
         buckets[new_pos] = value;
         values[index] = value;
     }
