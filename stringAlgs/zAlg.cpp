@@ -1,12 +1,7 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 string s;
-
 //z[i] is the length of the longest substring
 //starting from s[i] which is also a prefix of s
 int z[100010];//change size here
-
 void zAlg() {
     int n = s.size();
     int L = 0, R = 0;
@@ -25,13 +20,4 @@ void zAlg() {
             }
         }
     }
-}
-
-int main() {
-    s = "banbanas";
-    zAlg();
-    for(int i = 0; i < s.size(); ++i) {
-        cout << z[i] << ' ';
-    }
-    cout << '\n';
 }
