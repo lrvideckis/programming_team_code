@@ -1,6 +1,6 @@
 //given a 2D boolean matrix, calculate cnt[i][j]
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix
-//such that all cells in the rectangle are true
+//such that all cells in the rectangle are false
 //O(R*C)
 vector<vector<int>> getNumRectangles(vector<vector<bool>> &grid) {
     vector<vector<int>> cnt;
