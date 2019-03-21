@@ -8,7 +8,7 @@ struct SegmentTree {
         treeMax.resize(size, 0);
         lazy.resize(size, 0);
     }
-    SegmentTree(vector<ll> &arr) : n(arr.size()), root(1) {
+    SegmentTree(const vector<ll> &arr) : n(arr.size()), root(1) {
         ll x = (ll)(ceil(log2(n)));
         size = 2*(ll)pow(2, x);
         treeSum.resize(size);
@@ -16,7 +16,7 @@ struct SegmentTree {
         lazy.resize(size, 0);
         build(arr, root, 0, n-1);
     }
-    void build(vector<ll> &arr, int node, int start, int end) {
+    void build(const vector<ll> &arr, int node, int start, int end) {
         if(start == end) treeMax[node] = treeSum[node] = arr[start];
         else {
             ll mid = (start+end)/2;

@@ -2,7 +2,7 @@ struct sparseTable {
     vector<vector<ll> > memo;
     vector<int> logTwo;
     int maxPow;
-    sparseTable(vector<ll> &arr) {
+    sparseTable(const vector<ll> &arr) {
         int n = arr.size();
         logTwo.resize(n+1,0);
         for(int i = 2; i <= n; ++i) logTwo[i] = 1 + logTwo[i/2];
