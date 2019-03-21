@@ -2,7 +2,6 @@
 int table[11][1010][11][1010],logTwo[1010];
 struct sparseTable2D {
     int n, m;
-    //vector<vector<vector<vector<int>>>> table;
     sparseTable2D(const vector<vector<int>> &Matrix) {
         n = Matrix.size();
         m = Matrix[0].size();
