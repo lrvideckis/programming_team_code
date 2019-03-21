@@ -49,8 +49,8 @@ struct BipartiteMatcher {
     }
     //returns all the nodes in the min vertex cover
     //O(time to find max matching) + O(n)
-    //first vector: all nodes of left side
-    //second vector: all nodes of right side
+    //first vector: all nodes in the cover on the left side
+    //second vector: all nodes in the cover on the right side
     pair<vector<int>, vector<int>> getMinVertexCover() {
         Solve();
         for(int i = 0; i < L.size(); ++i) {
