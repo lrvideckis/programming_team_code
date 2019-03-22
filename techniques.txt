@@ -1,0 +1,38 @@
+Strategies
+Take a break after 2 hours.
+
+Techniques
+• Bruteforce: meet-in-the-middle, backtracking, memoization
+• DP (write full draft, include ALL loop bounds), easy direction
+• Precomputation
+• Divide and Conquer
+• Binary search
+• lg(n) datastructures
+• Mathematical insight
+• Randomisation
+• Look at it backwards
+• Common subproblems? Memoization
+• Compute modulo primes and use CRT
+
+WA
+• Beware of typos
+• Test sample input; make custom testcases
+• Read carefully
+• Check bounds (use long long or long double)
+• EDGE CASES: n ∈ {−1, 0, 1, 2}. Empty list/graph?
+• Off by one error (in indices or loop bounds)
+• Not enough precision
+• Assertions
+• Missing modulo operators
+• Cases that need a (completely) different approach
+
+TLE
+• Infinite loop
+• Use scanf or fastIO instead of cin
+• Wrong algorithm (is it theoretically fast enough)
+• Micro optimizations (but probably the approach just isn’t right)
+
+RTE
+• Typos
+• Off by one error (in array index of loop bound)
+• return 0 at end of program
