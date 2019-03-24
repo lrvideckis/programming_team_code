@@ -28,4 +28,3 @@ pair<int, int> closestPair(vector<pair<ll, ll>> &pts) {
     }
     return pos;
 }
-
