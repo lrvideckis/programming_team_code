@@ -1,5 +1,3 @@
-typedef long long ll;
-
 ll expo(ll x, ll n, ll m){
     ll res = 1;
     while (n){
