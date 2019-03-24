@@ -72,5 +72,4 @@ struct mincostmaxflow {
         }
         return {flow,cost};
     }
-
 };

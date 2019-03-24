@@ -45,20 +45,20 @@ int fail[1000005];
 
 // Checks if two arrays are rotationally equvalent
 bool KMPints(vector<ll> a, vector<ll> b){
-	for(int i = 0; i < a.size(); i++) {
-	    b.push_back(b[i]);
+    for(int i = 0; i < a.size(); i++) {
+        b.push_back(b[i]);
     }
-	int p = 0;
-	for(int i = 1; i < a.size(); i++) {
-		while(p && a[i] != a[p]) p = fail[p];
-		if(a[i] == a[p]) p++;
-		fail[i + 1] = p;
-	}
-	p = 0;
-	for(auto &i : b) {
-		while(p && i != a[p]) p = fail[p];
-		if(i == a[p]) p++;
-		if(p == a.size()) return true;
-	}
-	return false;
+    int p = 0;
+    for(int i = 1; i < a.size(); i++) {
+        while(p && a[i] != a[p]) p = fail[p];
+        if(a[i] == a[p]) p++;
+        fail[i + 1] = p;
+    }
+    p = 0;
+    for(auto &i : b) {
+        while(p && i != a[p]) p = fail[p];
+        if(i == a[p]) p++;
+        if(p == a.size()) return true;
+    }
+    return false;
 }

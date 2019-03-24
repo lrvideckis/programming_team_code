@@ -1,5 +1,4 @@
 struct maxflow {
-
     struct edge {
         ll a, b, cap, flow;
     };
@@ -72,5 +71,4 @@ struct maxflow {
         }
         return flow;
     }
-
 };

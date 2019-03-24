@@ -24,8 +24,8 @@ pair<int, int> closestPair(vector<pair<ll, ll>> &pts) {
                 pos.first = it->second;
                 pos.second = i;
             }
-        } 
-        s.insert({{pts[i].second, pts[i].first}, i}); 
+        }
+        s.insert({{pts[i].second, pts[i].first}, i});
     }
     return pos;
 }
