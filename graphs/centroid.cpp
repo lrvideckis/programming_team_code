@@ -41,20 +41,4 @@ void dfs1(int node, int par) {
         }
     }
 }
-
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n;
-    cin >> n;
-    int a,b;
-    for(int i = 0; i < n-1; ++i) {
-        cin >> a >> b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
-    }
-    dfs1(findCentroid(1), 0);
-    return 0;
-}
+//dfs1(findCentroid(1), 0);

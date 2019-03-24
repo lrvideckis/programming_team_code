@@ -32,16 +32,4 @@ int LCA(int x, int y) {
     if(x != y) x = memo[x][0];
     return x;
 }
-
-int main() {
-    int n;
-    cin >> n;
-    int a,b;
-    for(int i = 0; i < n-1; ++i) {
-        cin >> a >> b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
-    }
-    dfs(1,1);
-    return 0;
-}
+//dfs(1,1);

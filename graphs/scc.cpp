@@ -43,24 +43,3 @@ void calcSCC() {
         }
     }
 }
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    cin >> n >> m;
-    scc.resize(n+1);
-    adj.resize(n+1);
-    adjInv.resize(n+1);
-    int a,b;
-    for(int i = 0; i < m; ++i) {
-        cin >> a >> b;
-        adj[a].push_back(b);
-        adjInv[b].push_back(a);
-    }
-    calcSCC();
-    // Now sccID = number of SCC's
-    // These SCCs are already in topological order (or maybe reverse)
-    for(int i = 1; i <= n; ++i) cout << i << ' ' << scc[i] << '\n';
-    return 0;
-}

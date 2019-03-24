@@ -1,5 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 typedef complex<double> cd;
 
@@ -127,54 +125,4 @@ void dfs1(int node, int par) {
             dfs1(findCentroid(to), node);
         }
     }
-}
-
-void dfsNaive(int node, int par, int Dist) {
-    cntTotalPathLengthsNaive[Dist]++;
-    for(int to : adj[node]) {
-        if(to == par) continue;
-        dfsNaive(to, node, Dist+1);
-    }
-}
-
-/*
-input format:
-n = number of nodes
-n-1 lines follow: each containing an edge between node u, and node v
-forming a tree:
-1 <= u, v <= n
-
-sample:
-4
-1 2
-2 3
-3 4
-
-*/
-
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    cin >> n;
-    int u, v;
-    for(int i = 0; i < n-1; ++i) {
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-    /*naive version: dfs from every node, and count the number of
-    paths of each distance from that starting node*/
-    for(int i = 1; i <= n; ++i) {
-        dfsNaive(i,i,0);
-    }
-    int start = findCentroid(1);
-    cntPathLength[1].clear();
-    dfs1(start, 0);
-    for(int i = 1; i < n; ++i) {
-        if(cntTotalPathLengthsNaive[i]/2 == 0) break;
-        cout << i << ' ' << cntTotalPathLengthsNaive[i]/2 << ' ' << cntTotalPathLengths[i] << '\n';
-    }
-    return 0;
 }
