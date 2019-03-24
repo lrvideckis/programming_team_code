@@ -1,5 +1,3 @@
-typedef long long ll;
-
 inline ll LCM(ll a, ll b) {
     return a / __gcd(a, b) * b;
 }

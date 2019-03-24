@@ -1,6 +1,3 @@
-// code taken from:
-// http://mathforum.org/library/drmath/view/73120.html
-
 //computes:
 //[p/q] + [2p/q] + [3p/q] + ... + [np/q]
 //(p, q, n are natural numbers)

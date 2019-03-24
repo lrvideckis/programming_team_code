@@ -10,10 +10,6 @@ ll phi(ll n) {
             result -= result / i;
         }
     }
-
-    if(n > 1) {
-        result -= result / n;
-    }
-
+    if(n > 1) result -= result / n;
     return result;
 }

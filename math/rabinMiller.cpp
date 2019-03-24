@@ -1,8 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-
 ll power(ll x, ll y, ll p) {
     ll res = 1;
     x = x % p;
@@ -39,12 +34,4 @@ bool isPrime(ll n, ll k) {
          if (!miillerTest(d, n))
               return false;
     return true;
-}
-
-int main() {
-    int numPrimes = 0;
-    for(int i = 1; i < 100; ++i) {
-        if(isPrime(i,50)) cout << i << '\n', ++numPrimes;
-    }
-    cout << "number of primes: " << numPrimes << '\n';
 }

@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 const int Max = 1e6;
 int seive[Max], mob[Max];
 
@@ -38,22 +35,4 @@ void doSeive() {
             for (int j = 2 * i; j < Max; j += i) seive[j] = min(seive[j], i);
         }
     }
-}
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    doSeive();
-    for(int i = 0; i < 20; ++i) {
-        if(seive[i] == i) {
-            cout << i << ' ';
-        }
-    }
-    cout << '\n';
-    for(int i = 1; i < 20; ++i) {
-        cout << mobius(i) << ' ';
-    }
-    cout << '\n';
-    return 0;
 }
