@@ -1,0 +1,250 @@
+% a4 paper gives us over 2000 more square mm per page, for a total of
+% almost 5/6 of a page extra space
+\newif\ifuseletter
+
+%\useletterfalse
+\uselettertrue
+
+% if you need extra room to staple, adjust textheight and topmargin.
+
+\ifuseletter
+\documentclass[12pt,letterpaper,twocolumn,landscape]{article}
+\textheight 8.25in
+\textwidth 10.75in
+\evensidemargin -0.875in
+\oddsidemargin -0.875in
+\topmargin -0.875in
+\else
+\documentclass[12pt,a4paper,twocolumn]{article}
+\textwidth 200mm  % a4 paper is 210mm wide
+\textheight 287mm % a4 paper is 297mm high
+\evensidemargin -1in
+\oddsidemargin -1in
+\topmargin -1in
+\addtolength{\evensidemargin}{5mm}
+\addtolength{\oddsidemargin}{5mm}
+\addtolength{\topmargin}{5mm}
+\fi
+
+
+\headheight 15pt
+\headsep 4pt
+\addtolength{\textheight}{-14pt}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{South Dakota School of Mines and Technology}
+\rhead{Page \thepage}
+
+
+\newlength{\lstlinewidth}
+\setlength{\lstlinewidth}{0.5\textwidth}
+\addtolength{\lstlinewidth}{-6pt}
+
+% used to make sure that lstlisting aligns every character in a column
+\newlength{\normalbasewidth}
+\settowidth{\normalbasewidth}{\ttfamily m}
+\newlength{\smallbasewidth}
+\settowidth{\smallbasewidth}{\ttfamily\small m}
+\newlength{\footnotebasewidth}
+\settowidth{\footnotebasewidth}{\ttfamily\footnotesize m}
+\newlength{\scriptbasewidth}
+\settowidth{\scriptbasewidth}{\ttfamily\scriptsize m}
+
+%% \makeatletter
+%% \lstdefinestyle{mystyle}{
+%%   basewidth=\footnotebasewidth,
+%%   basicstyle=\ttfamily\lst@ifdisplaystyle\ttfamily\footnotesize\fi
+%% }
+%% \makeatother
+
+
+\makeatletter
+\lstdefinestyle{mystyle}{
+  basewidth=\scriptbasewidth,
+  basicstyle=\ttfamily\lst@ifdisplaystyle\ttfamily\scriptsize\fi
+}
+\makeatother
+
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+
+% choose the colors you like below.
+
+\lstset{
+	language=C++,
+  linewidth=\lstlinewidth,
+  style=mystyle,           % set basic font and spacing
+  captionpos=t,            % sets the caption position to top
+  columns=fixed,
+  mathescape=false,
+  breaklines=true,         % sets automatic line breaking
+  breakatwhitespace=true,  % automatic breaks should only happen at whitespace
+  extendedchars=false,     % ASCII printing characters only
+  % escapechar={`},          % Anything between backtics is escaped
+  % escapeinside={{(*}{*)}},
+  % frame=single,          % adds a frame around the code
+  frame=tlrb,              % adds a frame around the code
+  rulecolor=\color{black},
+  xleftmargin=1pt,
+  xrightmargin=1pt,
+  % frameround=fttf,
+  % framesep=3pt,
+  % rulesep=3pt,
+  framerule=0.5pt,
+  % framexleftmargin=10pt,
+  % framexrightmargin=10pt,
+  % framextopmargin=10pt,
+  % framexbottommargin=10pt,
+  %%   %fillcolor=\color{SkyBlue},
+  %%   %rulesepcolor=\color{SkyBlue},
+  %keywordstyle=[1]\color{blue},      % keyword style
+  %keywordstyle=[2]\color{cyan},      % keyword style
+  %keywordstyle=[3]\color{orange},
+  keywordstyle=\color{blue},      % keyword style
+  stringstyle=\color{magenta},     % string literal style
+  commentstyle=\color{gray}\itshape,
+  morecomment=[l][\color{orange}]{\#},
+  identifierstyle=\color{purple},
+  %numberbychapter=true,
+  numbers=none, % where to put the line-numbers; (none, left, right)
+  %numbersep=15pt,                 % how far the line-numbers are from the code
+  %numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  postbreak={\mbox{$\hookrightarrow\space$}},
+  showspaces=false, % show spaces everywhere adding particular underscores
+  showstringspaces=false,         % underline spaces within strings only
+  showtabs=false,  % show tabs within strings adding particular underscores
+  stepnumber=1,    % the step between printed line-numbers.
+  tabsize=4        % sets default tab character size to 8 spaces
+}
+
+
+
+\begin{document}
+
+\lstlistoflistings
+\newpage
+
+
+\lstinputlisting[caption={\textbf{GEOMETRY}}]{null}
+
+\lstinputlisting[language=C++, firstline=14, lastline=302, caption={Geometry}]{geometry/geometry.cpp}
+\lstinputlisting[language=C++, firstline=10, lastline=207, caption={Geometry}]{geometry/geometry1.cpp}
+\lstinputlisting[language=C++, firstline=5,  lastline=57,  caption={Convex Hull}]{geometry/convexHullInt.cpp}
+\lstinputlisting[language=C++, firstline=5,  lastline=46,  caption={Pick's Theorem}]{geometry/picksTheorem.cpp}
+\lstinputlisting[language=C++, firstline=7,  lastline=126, caption={Rectangle Union}]{geometry/rectangle_union.cpp}
+
+
+\lstinputlisting[caption={\textbf{GRAPHS}}]{null}
+
+\lstinputlisting[language=C++, firstline=0, lastline=70,  caption={Bipartite Matching}]{graphs/bipartite.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=60,  caption={Bridges}]{graphs/bridges.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=60,  caption={Centroid Decomposition}]{graphs/centroid.cpp}
+\lstinputlisting[language=C++, firstline=4, lastline=180, caption={Count Paths of Each Length}]{graphs/countPathLengths.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=55,  caption={Cut Vertices}]{graphs/cutVertices.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=22,  caption={Dijkstra's Algorithm}]{graphs/dijkstra.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=59,  caption={DSU on Tree}]{graphs/dsuTree.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=10,  caption={Floyd Warshall}]{graphs/floydWarshall.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=47,  caption={Lowest Common Ancestor (LCA)}]{graphs/lca.cpp}
+\lstinputlisting[language=C++, firstline=0, lastline=66,  caption={Strongly Connected Components (SCC)}]{graphs/scc.cpp}
+
+
+%\lstinputlisting[caption={\textbf{SETS AND UNIONFIND}}]{null}
+%
+%\lstinputlisting[language=C++, firstline=65, lastline=74, caption={Indexed Set}]{indexedSet/indexedSet.cpp}
+%\lstinputlisting[language=C++, firstline=4, lastline=11, caption={Union Short Imp}]{unionShortImp/unionShortImp.cpp}
+%\lstinputlisting[language=C++, firstline=3, caption={Disjoint Find With Moves}]{disjointFindWithMove/disjointFindWithMove.cpp}
+%\pagebreak
+%
+%
+%\lstinputlisting[caption={\textbf{GRAPHS}}]{null}
+%
+%\lstinputlisting[language=C++, firstline=138, lastline=195, caption={Ford-Fulkerson}]{fordFulkerson/ford_fulkerson.cpp}
+%\lstinputlisting[language=C++, firstline=4, caption={Centroid Decomposition}]{centroidDecomposition/centroidDecomposition.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=172, lastline=268, caption={Hopcroft-Karp}]{hopcroftKarp/hopcroft_karp.cpp}
+%\lstinputlisting[language=C++, firstline=44, lastline=56, caption={Floyd-Warshall}]{floydWarshall/FloydWarshall.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Min Vertex Cover}]{misc/minimumVertexCover.cpp}
+%\lstinputlisting[language=C++, caption={Kosaraju SSC}]{kosarajuSSC/KosarajuSSC.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Topological Sort}]{toposort/toposort.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={MST}]{mst/mst.cpp}
+%\lstinputlisting[language=C++, firstline=9, caption={Hungarian Algorithm}]{hungarian/hungarian.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=7, caption={Bipartite Match}]{bipartiteMatcher/BipartiteMatcher.cpp}
+%\lstinputlisting[language=C++, caption={Least Common Ancestor}]{leastCommonAncestor/LCA.cpp}
+%\pagebreak
+%
+%
+%\lstinputlisting[caption={\textbf{STRINGS}}]{null}
+%
+%\lstinputlisting[language=C++, caption={String Edit Distance}]{edit/editDistance.cpp}
+%\lstinputlisting[language=C++, caption={Manaker's}]{misc/manaker.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={KMP String Matching}]{kmp/kmp.hpp}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=4, lastline=40, caption={Suffix Array}]{suffixArray/suffixArray.cpp}
+%
+%
+%\lstinputlisting[caption={\textbf{MATH}}]{null}
+%
+%% \lstinputlisting[language=C++, caption={Primes}]{primes/primes.cpp}
+%\lstinputlisting[caption={Trig Formulas}]{math/trig}
+%\pagebreak
+%\lstinputlisting[caption={Summation Formulas}]{math/summations}
+%\lstinputlisting[caption={Area Formulas}]{math/areas}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=4, lastline=61, caption={Matrix Row Reduce}]{rowReduce/rowReduce.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Prime Sieve Mobius}]{misc/primeSeiveMobius.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=5, lastline=33, caption={Modular Inverse}]{modInverse/modInverse.cpp}
+%%\pagebreak
+%\lstinputlisting[language=C++, firstline=4, lastline=30, caption={Modular N Choose K}]{modChooseNK/modChoose.cpp}
+%\pagebreak
+%
+%\lstinputlisting[caption={\textbf{OTHER}}]{null}
+%
+%\lstinputlisting[language=C++, caption={Mos Algorithm}]{mos/mosAlgorithm.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Segment Tree}]{segmentTree/segment.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=14, lastline=124, caption={Lazy Segment Tree}]{lazySegmentTree/segmentlazy.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, firstline=24, lastline=108, caption={Fast Fourier Transform}]{fourier/fft.cpp}
+%\lstinputlisting[language=C++, caption={Largest range per min element}]{largestMinElementRange/largestMinElementRange.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Sqrt Decomposition}]{misc/sqrtDecomposition.cpp}
+%
+%
+%\lstinputlisting[caption={\textbf{PROBLEMS}}]{null}
+%
+%\lstinputlisting[language=C++, caption={Invasion}]{invasion/solutionToInvasion.cpp}
+%\lstinputlisting[language=C++, caption={Table Problem and Histogram Rectangles}]{table/table.cpp}
+%\lstinputlisting[language=C++, firstline=4, lastline=27, caption={Longest Increasing Subsequence}]{longestIncreasingSubsequence/longestIncreasingSubsequence.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Kabobs DFA}]{misc/kabobs_dfa.cpp}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Joining Networks}]{misc/joiningNetworks.cpp}
+%
+%
+%\lstinputlisting[caption={\textbf{MISC}}]{null}
+%
+%\lstinputlisting[language=python, caption={Python Random Testcases}]{pythonTestcases/testcases.py}
+%\pagebreak
+%\lstinputlisting[language=C++, caption={Misc}]{misc/misc.cpp}
+%\lstinputlisting[language=C++, caption={Ukkonen}]{misc/ukkonen.cpp}
+
+
+\pagebreak
+\end{document}
