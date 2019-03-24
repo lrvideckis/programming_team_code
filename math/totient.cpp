@@ -17,4 +17,3 @@ ll phi(ll n) {
 
     return result;
 }
-
