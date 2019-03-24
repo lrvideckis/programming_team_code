@@ -1,7 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
 ll dist(pair<int, int> a, pair<int, int> b) {
     int dx1 = b.first - a.first;
     int dy1 = b.second - a.second;
@@ -41,31 +37,3 @@ vector<pair<int, int>> getPoly(vector<pair<int, int> > &poly) {
     }
     return hull;
 }
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    int n;
-    cin >> n;
-    vector<pair<int, int> > poly(n);
-    for(int i = 0; i < n; i++) {
-        cin >> poly[i].first >> poly[i].second;
-    }
-    n = poly.size();
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
