@@ -1,7 +1,3 @@
-//pick's theorem
-#include <bits/stdtr1c++.h>
-using namespace std;
-
 struct Point{
     long long x, y;
     Point(){}
@@ -30,17 +26,4 @@ long long on_border(Point poly[], int n){
 long long interior(Point poly[], int n){
     long long res = 2 + double_area(poly, n) - on_border(poly, n);
     return res / 2;
-}
-
-int main(){
-    Point ar[10];
-    ar[0] = Point(0, 0);
-    ar[1] = Point(3, 0);
-    ar[2] = Point(3, 3);
-    ar[3] = Point(0, 3);
-
-    cout << on_border(ar, 4) << '\n'; // 12
-    cout << interior(ar, 4) << '\n'; // 4
-
-    return 0;
 }
