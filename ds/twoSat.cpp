@@ -12,7 +12,7 @@ struct twosat {
         scc.resize(n);
         assignment.resize(n/2);
     }
-    
+
     //X AND Y = (X OR X) AND (Y OR Y)
     //X NAND Y = (!X OR !Y)
     //X NOR Y = (!X OR !X) AND (!Y OR !Y)
@@ -28,7 +28,7 @@ struct twosat {
         adj[from2].push_back(to2);
         adjInv[to2].push_back(from2);
     }
-    
+
     void dfs1(int curr, stack<int> &seen) {
         visited[curr] = true;
         for(int x : adj[curr]) {
