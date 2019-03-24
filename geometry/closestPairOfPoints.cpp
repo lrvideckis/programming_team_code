@@ -1,4 +1,5 @@
 typedef long long ll;
+//returns pair of indexes into sorted array of points
 pair<int, int> closestPair(vector<pair<ll, ll>> &pts) {
     int n = pts.size();
     sort(pts.begin(), pts.end());
