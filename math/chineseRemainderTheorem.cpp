@@ -18,7 +18,7 @@ gcd_type ex_gcd(ll a, ll b) {
 
 // Chinese remainder theorem: find z such that
 // z % mods[i] = vals[i] for all i.  Note that the solution is
-// unique modulo M = lcm_i (mods[i]).  Return (z, M). On 
+// unique modulo M = lcm_i (mods[i]).  Return (z, M). On
 // failure, M = -1. Note that we do not require the a[i]'s
 // to be relatively prime.
 pair<ll, ll> crt(const vector<int> &vals, const vector<int> &mods) {

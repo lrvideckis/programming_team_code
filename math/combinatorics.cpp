@@ -6,20 +6,20 @@ ll modInverse(ll a, ll b){
 
 //returns a^pw % mod
 ll fastPow(ll a, ll pw, ll mod) {
-	ll res = 1;
-	a %= mod;
-	while(pw > 0) {
-		if(pw & 1) res = (res*a)%mod;
-		a = (a*a)%mod;
-		pw >>= 1;
-	}
-	return res;
+    ll res = 1;
+    a %= mod;
+    while(pw > 0) {
+        if(pw & 1) res = (res*a)%mod;
+        a = (a*a)%mod;
+        pw >>= 1;
+    }
+    return res;
 }
 
 struct NchooseK {
     int range, mod;
     vector<ll> fact,ifact;
-    
+
     NchooseK(int currMod) {
         this->mod = currMod;
         range = (int)1e6+3;
@@ -28,7 +28,7 @@ struct NchooseK {
         ifact.resize(range+1);
         calcFacts();
     }
-    
+
     void calcFacts() {
         fact[0] = 1;
         for(ll i = 1; i <= range; ++i) {
@@ -39,7 +39,7 @@ struct NchooseK {
             ifact[i] = (1LL*ifact[i+1]*(i+1))%this->mod;
         }
     }
-    
+
     //helper function for calcChoose
     ll modFact(ll n, ll &e) const {
         if(n <= 1) return 1;
@@ -48,7 +48,7 @@ struct NchooseK {
         if ((n/this->mod)%2 == 1) return res*(fact[n%this->mod]*(this->mod-1)%this->mod)%this->mod;
         return res*fact[n%this->mod]%this->mod;
     }
-    
+
     //n choose k with n >= mod
     //***use prime moduli***
     ll calcChoose(ll n, ll k) const {
@@ -59,14 +59,14 @@ struct NchooseK {
         if (e1-e2-e3 > 0) return 0;
         return (a1*fastPow (a2*a3%this->mod, this->mod-2, this->mod)%this->mod);
     }
-    
+
     //classic n choose k
     //***use prime moduli***
     ll choose(int n, int k) const {
         if(k < 0 || k > n || n < 0) return 0;
         return ((1LL*fact[n]*ifact[k])%this->mod * 1LL*ifact[n-k])%this->mod;
     }
-    
+
     //lucas theorem to calculate n choose k in O(log(k))
     //***use prime moduli***
     //***can only use with: prime moduli < 1e6***
@@ -77,7 +77,7 @@ struct NchooseK {
         int ki = k % this->mod;
         return (this->chooseLucas(n/this->mod, k/this->mod) * this->choose(ni,ki)) % this->mod;
     }
-    
+
     //bars and stars problem: given n objects, each with an endless supply,
     //this returns the number of ways to choose k of them.
     ll multiChoose(ll n, ll k) const {

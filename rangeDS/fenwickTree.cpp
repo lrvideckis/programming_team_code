@@ -12,7 +12,7 @@ struct fenwickTree {
         return ret;
     }
     void add(int idx, ll d) {
-        for(; idx < n; idx = idx | (idx+1)) 
+        for(; idx < n; idx = idx | (idx+1))
             bit[idx] += d;
     }
     ll sum(int l, int r) {
