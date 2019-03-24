@@ -51,7 +51,7 @@ struct point
     {
         return point(this->x * other, this->y * other);
     }
-    
+
     point operator / (long double other) const
     {
         return point(this->x / other, this->y / other);
@@ -124,7 +124,7 @@ vector<point> intersect(const segment& s1, const segment& s2)
         point start = max(min_s1, min_s2), end = min(max_s1, max_s2);
         if(start == end)
             return {start};
-        else 
+        else
             return {min(start, end), max(start, end)};
     }
 
@@ -173,13 +173,13 @@ bool straddle(const segment& s1, const segment& s2)
     long double cross1 = cross(s1.p1, s1.p2, s2.p1);
     long double cross2 = cross(s1.p1, s1.p2, s2.p2);
 
-    if((cross1 > 0 && cross2 > 0) || 
+    if((cross1 > 0 && cross2 > 0) ||
        (cross1 < 0 && cross2 < 0)) return false;
 
     if(abs(cross1) < EPSILON && abs(cross2) < EPSILON &&
        orientation(s1.p2, s2.p1, s2.p2) != Colinear)
        return false;
-    
+
     return true;
 }
 
@@ -230,7 +230,7 @@ int pointInPoly(const vector<point>& poly, const point& p)
     vector<point> intersection;
 
     for(int i=0, j = poly.size()-1; i < poly.size(); i++, j=i-1)
-    { 
+    {
         if(p == poly[i] || p == poly[j]) return OnEdge;
         if(orientation(p, poly[i], poly[j]) == Colinear &&
            onSegment(p, segment{poly[i], poly[j]})) return OnEdge;
@@ -244,10 +244,10 @@ int pointInPoly(const vector<point>& poly, const point& p)
             //cout << intersection[0].x << " " << intersection[0].y << endl;
             inside = !inside;
         }
-    }   
+    }
 
     //cout << "Is inside? " << inside << endl;
-    return (inside ? Inside : Outside);    
+    return (inside ? Inside : Outside);
 }
 
 //Computes the convex hull of a set of points
@@ -259,7 +259,7 @@ vector<point> convexHull(vector<point> points) {
     //Don't just use point < operator because that checks
     //x then y; we need y then x
     for(int i=0; i<points.size(); i++)
-        if(points[i].y < lowestPoint.y || 
+        if(points[i].y < lowestPoint.y ||
           (abs(points[i].y - lowestPoint.y) < EPSILON && points[i].x < lowestPoint.x))
             lowestPoint = points[i];
 
@@ -271,7 +271,7 @@ vector<point> convexHull(vector<point> points) {
 
         long double scoreL = dot(horiz, lowestPoint, l) / (mag(horiz-lowestPoint)*mag(l-lowestPoint));
         long double scoreR = dot(horiz, lowestPoint, r) / (mag(horiz-lowestPoint)*mag(r-lowestPoint));
-        
+
         return scoreL < scoreR;
     });
 

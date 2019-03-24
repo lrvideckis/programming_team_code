@@ -10,8 +10,8 @@ using namespace std;
 double INF = 1e100;
 double EPS = 1e-12;
 
-struct PT { 
-  double x, y; 
+struct PT {
+  double x, y;
   PT() {}
   PT(double x, double y) : x(x), y(y) {}
   PT(const PT &p) : x(p.x), y(p.y)    {}
@@ -25,14 +25,14 @@ double dot(PT p, PT q)     { return p.x*q.x+p.y*q.y; }
 double dist2(PT p, PT q)   { return dot(p-q,p-q); }
 double cross(PT p, PT q)   { return p.x*q.y-p.y*q.x; }
 ostream &operator<<(ostream &os, const PT &p) {
-  return os << "(" << p.x << "," << p.y << ")"; 
+  return os << "(" << p.x << "," << p.y << ")";
 }
 
 // rotate a point CCW or CW around the origin
 PT RotateCCW90(PT p)   { return PT(-p.y,p.x); }
 PT RotateCW90(PT p)    { return PT(p.y,-p.x); }
-PT RotateCCW(PT p, double t) { 
-  return PT(p.x*cos(t)-p.y*sin(t), p.x*sin(t)+p.y*cos(t)); 
+PT RotateCCW(PT p, double t) {
+  return PT(p.x*cos(t)-p.y*sin(t), p.x*sin(t)+p.y*cos(t));
 }
 
 // project point c onto line through a and b
@@ -64,17 +64,17 @@ double DistancePointPlane(double x, double y, double z,
 }
 
 // determine if lines from a to b and c to d are parallel or collinear
-bool LinesParallel(PT a, PT b, PT c, PT d) { 
-  return fabs(cross(b-a, c-d)) < EPS; 
+bool LinesParallel(PT a, PT b, PT c, PT d) {
+  return fabs(cross(b-a, c-d)) < EPS;
 }
 
-bool LinesCollinear(PT a, PT b, PT c, PT d) { 
+bool LinesCollinear(PT a, PT b, PT c, PT d) {
   return LinesParallel(a, b, c, d)
       && fabs(cross(a-b, a-c)) < EPS
-      && fabs(cross(c-d, c-a)) < EPS; 
+      && fabs(cross(c-d, c-a)) < EPS;
 }
 
-// determine if line segment from a to b intersects with 
+// determine if line segment from a to b intersects with
 // line segment from c to d
 bool SegmentsIntersect(PT a, PT b, PT c, PT d) {
   if (LinesCollinear(a, b, c, d)) {
@@ -117,7 +117,7 @@ bool PointInPolygon(const vector<PT> &p, PT q) {
   bool c = 0;
   for (int i = 0; i < p.size(); i++){
     int j = (i+1)%p.size();
-    if ((p[i].y <= q.y && q.y < p[j].y || 
+    if ((p[i].y <= q.y && q.y < p[j].y ||
       p[j].y <= q.y && q.y < p[i].y) &&
       q.x < p[i].x + (p[j].x - p[i].x) * (q.y - p[i].y) / (p[j].y - p[i].y))
       c = !c;
@@ -199,7 +199,7 @@ bool IsSimple(const vector<PT> &p) {
       int j = (i+1) % p.size();
       int l = (k+1) % p.size();
       if (i == l || j == k) continue;
-      if (SegmentsIntersect(p[i], p[j], p[k], p[l])) 
+      if (SegmentsIntersect(p[i], p[j], p[k], p[l]))
         return false;
     }
   }
@@ -207,69 +207,69 @@ bool IsSimple(const vector<PT> &p) {
 }
 
 int main() {
-  
+
   // expected: (-5,2)
   cerr << RotateCCW90(PT(2,5)) << endl;
-  
+
   // expected: (5,-2)
   cerr << RotateCW90(PT(2,5)) << endl;
-  
+
   // expected: (-5,2)
   cerr << RotateCCW(PT(2,5),M_PI/2) << endl;
-  
+
   // expected: (5,2)
   cerr << ProjectPointLine(PT(-5,-2), PT(10,4), PT(3,7)) << endl;
-  
+
   // expected: (5,2) (7.5,3) (2.5,1)
   cerr << ProjectPointSegment(PT(-5,-2), PT(10,4), PT(3,7)) << " "
        << ProjectPointSegment(PT(7.5,3), PT(10,4), PT(3,7)) << " "
        << ProjectPointSegment(PT(-5,-2), PT(2.5,1), PT(3,7)) << endl;
-  
+
   // expected: 6.78903
   cerr << DistancePointPlane(4,-4,3,2,-2,5,-8) << endl;
-  
+
   // expected: 1 0 1
   cerr << LinesParallel(PT(1,1), PT(3,5), PT(2,1), PT(4,5)) << " "
        << LinesParallel(PT(1,1), PT(3,5), PT(2,0), PT(4,5)) << " "
        << LinesParallel(PT(1,1), PT(3,5), PT(5,9), PT(7,13)) << endl;
-  
+
   // expected: 0 0 1
   cerr << LinesCollinear(PT(1,1), PT(3,5), PT(2,1), PT(4,5)) << " "
        << LinesCollinear(PT(1,1), PT(3,5), PT(2,0), PT(4,5)) << " "
        << LinesCollinear(PT(1,1), PT(3,5), PT(5,9), PT(7,13)) << endl;
-  
+
   // expected: 1 1 1 0
   cerr << SegmentsIntersect(PT(0,0), PT(2,4), PT(3,1), PT(-1,3)) << " "
        << SegmentsIntersect(PT(0,0), PT(2,4), PT(4,3), PT(0,5)) << " "
        << SegmentsIntersect(PT(0,0), PT(2,4), PT(2,-1), PT(-2,1)) << " "
        << SegmentsIntersect(PT(0,0), PT(2,4), PT(5,5), PT(1,7)) << endl;
-  
+
   // expected: (1,2)
   cerr << ComputeLineIntersection(PT(0,0), PT(2,4), PT(3,1), PT(-1,3)) << endl;
-  
+
   // expected: (1,1)
   cerr << ComputeCircleCenter(PT(-3,4), PT(6,1), PT(4,5)) << endl;
-  
-  vector<PT> v; 
+
+  vector<PT> v;
   v.push_back(PT(0,0));
   v.push_back(PT(5,0));
   v.push_back(PT(5,5));
   v.push_back(PT(0,5));
-  
+
   // expected: 1 1 1 0 0
   cerr << PointInPolygon(v, PT(2,2)) << " "
        << PointInPolygon(v, PT(2,0)) << " "
        << PointInPolygon(v, PT(0,2)) << " "
        << PointInPolygon(v, PT(5,2)) << " "
        << PointInPolygon(v, PT(2,5)) << endl;
-  
+
   // expected: 0 1 1 1 1
   cerr << PointOnPolygon(v, PT(2,2)) << " "
        << PointOnPolygon(v, PT(2,0)) << " "
        << PointOnPolygon(v, PT(0,2)) << " "
        << PointOnPolygon(v, PT(5,2)) << " "
        << PointOnPolygon(v, PT(2,5)) << endl;
-  
+
   // expected: (1,6)
   //           (5,4) (4,5)
   //           blank line
@@ -288,7 +288,7 @@ int main() {
   for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
   u = CircleCircleIntersection(PT(1,1), PT(4.5,4.5), 5, sqrt(2.0)/2.0);
   for (int i = 0; i < u.size(); i++) cerr << u[i] << " "; cerr << endl;
-  
+
   // area should be 5.0
   // centroid should be (1.1666666, 1.166666)
   PT pa[] = { PT(0,0), PT(5,0), PT(1,1), PT(0,5) };
@@ -296,6 +296,6 @@ int main() {
   PT c = ComputeCentroid(p);
   cerr << "Area: " << ComputeArea(p) << endl;
   cerr << "Centroid: " << c << endl;
-  
+
   return 0;
 }
