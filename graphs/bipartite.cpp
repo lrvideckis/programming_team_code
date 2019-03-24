@@ -11,7 +11,7 @@ struct BipartiteMatcher {
     }
 
     bool Match(int node) {
-        if(Viz[node]) 
+        if(Viz[node])
             return false;
         Viz[node] = true;
         for(auto vec : G[node]) {
@@ -32,7 +32,7 @@ struct BipartiteMatcher {
                 if(L[i] == -1)
                     ok |= Match(i);
         }
-        
+
         int ret = 0;
         for(int i = 0; i < L.size(); ++i)
             ret += (L[i] != -1);
