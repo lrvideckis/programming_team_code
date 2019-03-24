@@ -1,5 +1,3 @@
-//fraction class
-
 struct Fraction {
     int a, b;
 
@@ -32,15 +30,29 @@ struct Fraction {
         assert(other.a != 0);
         return Fraction(a * other.b, b * other.a);
     }
-
-    int cmp(Fraction other) const {
-        return ::cmp(a * other.b, b * other.a);
+    
+    bool operator < (const Fraction& other) const {
+        return a*other.b < b*other.a;
     }
-
-#define Comp(x) bool operator x (Fraction q) const { return cmp(q) x 0; }
-    Comp(>) Comp(<) Comp(==) Comp(>=) Comp(<=) Comp(!=)
-#undef Comp
-
+    bool operator <= (const int& other) const {
+        return (*this < other || *this == other);
+    }
+    bool operator > (const Fraction& other) const {
+        return a*other.b > b*other.a;
+    }
+    bool operator == (const Fraction& other) const {
+        return a*other.b == b*other.a;
+    }
+    bool operator != (const Fraction& other) const {
+        return !(*this == other);
+    }
+    bool operator == (int& other) const {
+        return a == b*other;
+    }
+    bool operator != (int& other) const {
+        return !(*this == other);
+    }
+    
     void norm() {
         if (b < 0) {
             a = -a;
@@ -63,4 +75,10 @@ istream& operator >> (istream& cin, Fraction& p) {
 ostream& operator << (ostream& cout, Fraction& p) {
     cout << p.a << '/' << p.b;
     return cout;
+}
+
+Fraction abs(Fraction f) {
+    f.a = abs(f.a);
+    f.b = abs(f.b);
+    return f;
 }
