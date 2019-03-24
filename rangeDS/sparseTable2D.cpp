@@ -14,13 +14,13 @@ struct sparseTable2D {
                 table[0][ir][0][ic] = Matrix[ir][ic];
             for(int jc=1; jc<=logTwo[m]; ++jc)
                 for(int ic=0; ic+(1<<(jc-1))<m; ++ic)
-                    table[0][ir][jc][ic] = min(table[0][ir][jc-1][ic],table[0][ir][jc-1][ic+(1<<(jc-1))]);
+                    table[0][ir][jc][ic] = min(table[0][ir][jc-1][ic], table[0][ir][jc-1][ic+(1<<(jc-1))]);
         }
         for(int jr=1; jr<=logTwo[n]; ++jr)
             for(int ir=0; ir<n; ++ir)
                 for(int jc=0; jc<=logTwo[m]; ++jc)
                     for(int ic=0; ic<m; ++ic)
-                        table[jr][ir][jc][ic] = min(table[jr-1][ir][jc][ic],table[jr-1][ir+(1<<(jr-1))][jc][ic]);
+                        table[jr][ir][jc][ic] = min(table[jr-1][ir][jc][ic], table[jr-1][ir+(1<<(jr-1))][jc][ic]);
     }
     int queryMin(int x1, int y1, int x2, int y2){
         int kx = logTwo[x2-x1+1];

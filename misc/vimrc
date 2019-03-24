@@ -1,0 +1,4 @@
+inoremap kj <esc>
+set ts=4 sw=4 sts=0
+set expandtab
+syntax on
