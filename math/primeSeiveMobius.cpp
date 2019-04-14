@@ -32,7 +32,7 @@ void doSeive() {
     seive[0] = seive[1] = -1;
     for (int i = 2; i*i < Max; ++i) {
         if (seive[i] == i) {
-            for (int j = 2 * i; j < Max; j += i) seive[j] = min(seive[j], i);
+            for (int j = i * i; j < Max; j += i) seive[j] = min(seive[j], i);
         }
     }
 }
