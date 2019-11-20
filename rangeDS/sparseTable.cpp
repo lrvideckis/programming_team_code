@@ -1,23 +1,36 @@
+template <class T>
 struct sparseTable {
-    vector<vector<ll> > memo;
+    vector<vector<T> > dp;
+    vector<vector<int> > index;
     vector<int> logTwo;
-    int maxPow;
-    sparseTable(const vector<ll> &arr) {
+    sparseTable(const vector<T> &arr) {
         int n = arr.size();
         logTwo.resize(n+1,0);
         for(int i = 2; i <= n; ++i) logTwo[i] = 1 + logTwo[i/2];
-        maxPow = logTwo[n]+1;
-        memo.resize(maxPow, vector<ll>(n));
-        for(int j = 0; j < maxPow; ++j) {
-            for(int i = 0; i < n; ++i) {
-                if(i+(1<<j)-1<n) {
-                    memo[j][i] = (j?min(memo[j-1][i], memo[j-1][i+(1<<(j-1))]):arr[i]);
-                } else break;
+        int maxPow = logTwo[n]+1;
+        dp.resize(maxPow, vector<T>(n));
+        index.resize(maxPow, vector<int>(n));
+        for(int j = 0; j < n; ++j) {
+            dp[0][j] = arr[j];
+            index[0][j] = j;
+        }
+        for(int i = 1; i < maxPow; ++i) {
+            for(int j = 0; j+(1<<i)-1<n; ++j) {
+                if(dp[i-1][j] > dp[i-1][j+(1<<(i-1))]) {
+                    dp[i][j] = dp[i-1][j+(1<<(i-1))];
+                    index[i][j] = index[i-1][j+(1<<(i-1))];
+                } else {
+                    dp[i][j] = dp[i-1][j];
+                    index[i][j] = index[i-1][j];
+                }
             }
         }
     }
-    ll query(int l, int r) {
-        int j = logTwo[r-l+1];
-        return min(memo[j][l], memo[j][r-(1<<j)+1]);
+    int query(int l, int r) {//returns index in array of min element
+        const int x = logTwo[r-l+1];
+        if(dp[x][l] > dp[x][r-(1<<x)+1]) {
+            return index[x][r-(1<<x)+1];
+        }
+        return index[x][l];
     }
 };
