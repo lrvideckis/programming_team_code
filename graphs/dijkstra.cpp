@@ -1,5 +1,6 @@
-vector<vector<pair<ll, ll> > > adj;
-vector<ll> length;
+const int N = 5e5+5;//change here
+vector<pair<ll, ll>> adj[N];
+ll length[N];
 
 void dijkstra(int node) {
     length[node] = 0;
