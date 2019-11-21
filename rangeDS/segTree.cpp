@@ -1,50 +1,58 @@
+struct Node {
+    ll sum = 0;
+    ll mx = 0;
+    ll mn = 0;
+};
+
 struct SegmentTree {
-    vector<ll> treeSum;
-    vector<ll> treeMax;
-    vector<ll> treeMin;
+    vector<Node> tree;
     vector<ll> lazy;
-    ll n, root, size;
-    SegmentTree(int currSize) : n(currSize), root(1) {
+    int n, root, size;
+    const ll inf = 1e18;
+    const Node zero = {0, -inf, inf};
+    SegmentTree(int currSize) : n((int)currSize), root(1) {
         ll x = (ll)(ceil(log2(currSize)));
-        size = 2*(ll)pow(2, x);
-        treeSum.resize(size, 0);
-        treeMax.resize(size, 0);
-        treeMin.resize(size, 0);
+        size = (int)(2*(ll)pow(2, x));
+        tree.resize(size);
         lazy.resize(size, 0);
     }
-    SegmentTree(const vector<ll> &arr) : n(arr.size()), root(1) {
+    SegmentTree(const vector<ll> &arr) : n((int)arr.size()), root(1) {
         ll x = (ll)(ceil(log2(n)));
-        size = 2*(ll)pow(2, x);
-        treeSum.resize(size);
-        treeMax.resize(size);
-        treeMin.resize(size);
+        size = (int)(2*(ll)pow(2, x));
+        tree.resize(size);
         lazy.resize(size, 0);
         build(arr, root, 0, n-1);
     }
+    Node combine(const Node &L, const Node &R) {
+        Node par;
+        par.sum = L.sum + R.sum;
+        par.mx = max(L.mx, R.mx);
+        par.mn = min(L.mn, R.mn);
+        return par;
+    }
     void build(const vector<ll> &arr, int node, int start, int end) {
         if(start == end) {
-            treeMin[node] = arr[start];
-            treeMax[node] = arr[start];
-            treeSum[node] = arr[start];
+            tree[node].sum = arr[start];
+            tree[node].mx = arr[start];
+            tree[node].mn = arr[start];
         } else {
-            ll mid = (start+end)/2;
+            int mid = (start+end)/2;
             build(arr, 2*node, start, mid);
             build(arr, 2*node+1, mid+1, end);
-            treeSum[node] = treeSum[2*node] + treeSum[2*node+1];
-            treeMax[node] = max(treeMax[2*node], treeMax[2*node+1]);
-            treeMin[node] = min(treeMin[2*node], treeMin[2*node+1]);
+            tree[node] = combine(tree[2*node], tree[2*node+1]);
         }
     }
     void pendingUpdate(int node, int start, int end) {
-        if(lazy[node]) {
-            treeSum[node] += (end-start+1) * lazy[node];
-            treeMax[node] += lazy[node];
-            treeMin[node] += lazy[node];
+        ll &currLazy = lazy[node];
+        if(currLazy) {
+            tree[node].sum += (end-start+1) * currLazy;
+            tree[node].mx += currLazy;
+            tree[node].mn += currLazy;
             if(start != end) {
-                lazy[2*node] += lazy[node];
-                lazy[2*node+1] += lazy[node];
+                lazy[2*node] += currLazy;
+                lazy[2*node+1] += currLazy;
             }
-            lazy[node] = 0;
+            currLazy = 0;
         }
     }
     void updateRange(int l, int r, ll diff) {updateRange(root, 0, n-1, l, r, diff);}
@@ -52,44 +60,26 @@ struct SegmentTree {
         pendingUpdate(node, start, end);
         if(start > end || start > r || end < l) return;
         if(start >= l && end <= r) {
-            treeSum[node] += (end-start+1) * diff;
-            treeMax[node] += diff;
-            treeMin[node] += diff;
+            tree[node].sum += (end-start+1) * diff;
+            tree[node].mx += diff;
+            tree[node].mn += diff;
             if(start != end) {
                 lazy[2*node] += diff;
                 lazy[2*node+1] += diff;
             }
             return;
         }
-        ll mid = (start + end) / 2;
+        int mid = (start + end) / 2;
         updateRange(2*node, start, mid, l, r, diff);
         updateRange(2*node+1, mid+1, end, l, r, diff);
-        treeSum[node] = treeSum[2*node] + treeSum[2*node+1];
-        treeMax[node] = max(treeMax[2*node], treeMax[2*node+1]);
-        treeMin[node] = min(treeMin[2*node], treeMin[2*node+1]);
+        tree[node] = combine(tree[2*node], tree[2*node+1]);
     }
-    ll querySum(int l, int r) {return querySum(root, 0, n-1, l, r);}
-    ll querySum(int node, int start, int end, int l, int r) {
-        if(r < start || end < l) return 0;
+    Node query(int l, int r) {return query(root, 0, n-1, l, r);}
+    Node query(int node, int start, int end, int l, int r) {
+        if(r < start || end < l) return zero;
         pendingUpdate(node, start, end);
-        if(l <= start && end <= r) return treeSum[node];
-        ll mid = (start+end)/2;
-        return querySum(2*node, start, mid, l, r) + querySum(2*node+1, mid+1, end, l, r);
-    }
-    ll queryMax(int l, int r) {return queryMax(root, 0, n-1, l, r);}
-    ll queryMax(int node, int start, int end, int l, int r) {
-        if(r < start || end < l) return -1e18;
-        pendingUpdate(node, start, end);
-        if(l <= start && end <= r) return treeMax[node];
-        ll mid = (start+end)/2;
-        return max(queryMax(2*node, start, mid, l, r), queryMax(2*node+1, mid+1, end, l, r));
-    }
-    ll queryMin(int l, int r) {return queryMin(root, 0, n-1, l, r);}
-    ll queryMin(int node, int start, int end, int l, int r) {
-        if(r < start || end < l) return 1e18;
-        pendingUpdate(node, start, end);
-        if(l <= start && end <= r) return treeMin[node];
-        ll mid = (start+end)/2;
-        return min(queryMin(2*node, start, mid, l, r), queryMin(2*node+1, mid+1, end, l, r));
+        if(l <= start && end <= r) return tree[node];
+        int mid = (start+end)/2;
+        return combine(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
     }
 };
