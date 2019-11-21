@@ -3,7 +3,7 @@ vector<int> adj[Max];
 int memo[Max][Log];
 int depth[Max];
 
-void dfs(int node, int prev, int Depth = 0) {
+void dfs(int node, int prev, int Depth) {
     depth[node] = Depth;
     memo[node][0] = prev;
     for(int i = 1; i < Log; ++i) {
@@ -32,4 +32,4 @@ int LCA(int x, int y) {
     if(x != y) x = memo[x][0];
     return x;
 }
-//dfs(1,1);
+//dfs(1,1,0);
