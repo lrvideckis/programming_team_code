@@ -30,14 +30,16 @@ struct SegmentTree {
     }
 
     SegmentTree(int currSize) : n((int)currSize), root(1) {
-        ll x = (ll)(ceil(log2(currSize)));
-        size = (int)(2*(ll)pow(2, x));
+        size = 1;
+        while(size < n) size<<=1;
+        size<<=1;
         tree.resize(size);
         lazy.resize(size, 0);
     }
     SegmentTree(const vector<ll> &arr) : n((int)arr.size()), root(1) {
-        ll x = (ll)(ceil(log2(n)));
-        size = (int)(2*(ll)pow(2, x));
+        size = 1;
+        while(size < n) size<<=1;
+        size<<=1;
         tree.resize(size);
         lazy.resize(size, 0);
         build(arr, root, 0, n-1);
