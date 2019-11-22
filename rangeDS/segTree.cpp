@@ -9,7 +9,26 @@ struct SegmentTree {
     vector<ll> lazy;
     int n, root, size;
     const ll inf = 1e18;
+
+    /*implement these*/
     const Node zero = {0, -inf, inf};
+    Node combine(const Node &L, const Node &R) {
+        Node par;
+        par.sum = L.sum + R.sum;
+        par.mx = max(L.mx, R.mx);
+        par.mn = min(L.mn, R.mn);
+        return par;
+    }
+    void combineRange(int node, int start, int end, ll delta) {
+        tree[node].sum += (end-start+1) * delta;
+        tree[node].mx += delta;
+        tree[node].mn += delta;
+        if(start != end) {
+            lazy[2*node] += delta;
+            lazy[2*node+1] += delta;
+        }
+    }
+
     SegmentTree(int currSize) : n((int)currSize), root(1) {
         ll x = (ll)(ceil(log2(currSize)));
         size = (int)(2*(ll)pow(2, x));
@@ -22,13 +41,6 @@ struct SegmentTree {
         tree.resize(size);
         lazy.resize(size, 0);
         build(arr, root, 0, n-1);
-    }
-    Node combine(const Node &L, const Node &R) {
-        Node par;
-        par.sum = L.sum + R.sum;
-        par.mx = max(L.mx, R.mx);
-        par.mn = min(L.mn, R.mn);
-        return par;
     }
     void build(const vector<ll> &arr, int node, int start, int end) {
         if(start == end) {
@@ -45,33 +57,21 @@ struct SegmentTree {
     void pendingUpdate(int node, int start, int end) {
         ll &currLazy = lazy[node];
         if(currLazy) {
-            tree[node].sum += (end-start+1) * currLazy;
-            tree[node].mx += currLazy;
-            tree[node].mn += currLazy;
-            if(start != end) {
-                lazy[2*node] += currLazy;
-                lazy[2*node+1] += currLazy;
-            }
+            combineRange(node, start, end, currLazy);
             currLazy = 0;
         }
     }
-    void updateRange(int l, int r, ll diff) {updateRange(root, 0, n-1, l, r, diff);}
-    void updateRange(int node, int start, int end, int l, int r, ll diff) {
+    void update(int l, int r, ll diff) {update(root, 0, n-1, l, r, diff);}
+    void update(int node, int start, int end, int l, int r, ll diff) {
         pendingUpdate(node, start, end);
         if(start > end || start > r || end < l) return;
         if(start >= l && end <= r) {
-            tree[node].sum += (end-start+1) * diff;
-            tree[node].mx += diff;
-            tree[node].mn += diff;
-            if(start != end) {
-                lazy[2*node] += diff;
-                lazy[2*node+1] += diff;
-            }
+            combineRange(node, start, end, diff);
             return;
         }
         int mid = (start + end) / 2;
-        updateRange(2*node, start, mid, l, r, diff);
-        updateRange(2*node+1, mid+1, end, l, r, diff);
+        update(2*node, start, mid, l, r, diff);
+        update(2*node+1, mid+1, end, l, r, diff);
         tree[node] = combine(tree[2*node], tree[2*node+1]);
     }
     Node query(int l, int r) {return query(root, 0, n-1, l, r);}
@@ -80,6 +80,7 @@ struct SegmentTree {
         pendingUpdate(node, start, end);
         if(l <= start && end <= r) return tree[node];
         int mid = (start+end)/2;
-        return combine(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
+        return combine(query(2*node, start, mid, l, r),
+                       query(2*node+1, mid+1, end, l, r));
     }
 };
