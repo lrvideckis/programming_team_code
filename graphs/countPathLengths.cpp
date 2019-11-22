@@ -5,7 +5,7 @@ ll prod[Max], cntTotalPathLengths[Max] = {0}, cntTotalPathLengthsNaive[Max] = {0
 bool removed[Max];
 
 void dfs2(int node, int par, int root, int currDist) {
-    if(cntPathLength[root].size() <= currDist) {
+    while(cntPathLength[root].size() <= currDist) {
         cntPathLength[root].push_back(0);
     }
     cntPathLength[root][currDist]++;
