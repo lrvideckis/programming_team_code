@@ -47,6 +47,7 @@ inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> 
         for(int i = 0; i < (int)a.size(); i++)
             for(int j = 0; j < (int)b.size(); j++)
                 res[i + j] += 1LL * a[i] * b[j];
+        while(res.size() && res.back() == 0) res.pop_back();
         return;
     }
     vector<base> fa (a.begin(), a.end()),  fb (b.begin(), b.end());
@@ -61,4 +62,5 @@ inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> 
     res.resize (n);
     for(size_t i=0; i<n; ++i)
         res[i]=(int)(fa[i].real()>0 ? fa[i].real()+0.5 : fa[i].real()-0.5);
+    while(res.size() && res.back() == 0) res.pop_back();
 }
