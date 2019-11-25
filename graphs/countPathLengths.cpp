@@ -1,7 +1,7 @@
 const int Max = 1e6+10;
 int n, sizes[Max];
 vector<int> adj[Max], cntPathLength[Max];
-ll prod[Max], cntTotalPathLengths[Max] = {0}, cntTotalPathLengthsNaive[Max] = {0};
+ll cntTotalPathLengths[Max];
 bool removed[Max];
 
 void dfs2(int node, int par, int root, int currDist) {
