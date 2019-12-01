@@ -43,11 +43,11 @@ inline void fft (vector<base> & a, bool invert) {
 // a[0], b[0], res[0] = coef x^0
 inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {//change res to ll if needed
     if(a.size() * b.size() <= 256) {
-        res.resize(a.size() + b.size(), 0);
+        res.resize(a.size() + b.size()+1, 0);
         for(int i = 0; i < (int)a.size(); i++)
             for(int j = 0; j < (int)b.size(); j++)
                 res[i + j] += 1LL * a[i] * b[j];
-        while(res.size() && res.back() == 0) res.pop_back();
+        while(res.size()>1 && res.back() == 0) res.pop_back();
         return;
     }
     vector<base> fa (a.begin(), a.end()),  fb (b.begin(), b.end());
@@ -62,5 +62,5 @@ inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> 
     res.resize (n);
     for(size_t i=0; i<n; ++i)
         res[i]=(int)(fa[i].real()>0 ? fa[i].real()+0.5 : fa[i].real()-0.5);
-    while(res.size() && res.back() == 0) res.pop_back();
+    while(res.size()>1 && res.back() == 0) res.pop_back();
 }
