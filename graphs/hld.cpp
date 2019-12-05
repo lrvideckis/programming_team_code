@@ -13,7 +13,7 @@ struct hld {
             par[to] = node;
             dfs1(to, adj);
             Size[node] += Size[to];
-            if(Size[to] > Size[adj[node][0]]) {
+            if(Size[to] > Size[adj[node][0]] || adj[node][0] == par[node]) {
                 swap(to, adj[node][0]);
             }
         }
