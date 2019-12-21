@@ -13,6 +13,7 @@ struct Hash {
         for(int i=1;i<powB.size();++i){
             powB[i] = (powB[i-1] * 1LL * base) % mod;
         }
+        int sum = 0;
         for(int i=0;i<(int)s.size();++i){
             sum = (base*1LL*sum + s[i]-'0') % mod;
             prefix[i] = sum;
