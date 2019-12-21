@@ -5,7 +5,6 @@ struct Hash {
     vector<int> powB;
     vector<int> prefix;
     int mod;
-    Hash() {}
     Hash(const string &s, const int m) {
         mod = m;
         prefix.resize(s.size());
