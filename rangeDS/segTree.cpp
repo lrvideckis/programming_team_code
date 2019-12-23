@@ -7,7 +7,7 @@ struct Node {
 struct SegmentTree {
     vector<Node> tree;
     vector<ll> lazy;
-    int n, root, size;
+    int n, size;
     const ll inf = 1e18;
 
     /*implement these*/
@@ -29,20 +29,20 @@ struct SegmentTree {
         }
     }
 
-    SegmentTree(int currSize) : n((int)currSize), root(1) {
+    SegmentTree(int currSize) : n((int)currSize) {
         size = 1;
         while(size < n) size<<=1;
         size<<=1;
         tree.resize(size);
         lazy.resize(size, 0);
     }
-    SegmentTree(const vector<ll> &arr) : n((int)arr.size()), root(1) {
+    SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
         size = 1;
         while(size < n) size<<=1;
         size<<=1;
         tree.resize(size);
         lazy.resize(size, 0);
-        build(arr, root, 0, n-1);
+        build(arr, 1, 0, n-1);
     }
     void build(const vector<ll> &arr, int node, int start, int end) {
         if(start == end) {
@@ -63,7 +63,7 @@ struct SegmentTree {
             currLazy = 0;
         }
     }
-    void update(int l, int r, ll diff) {update(root, 0, n-1, l, r, diff);}
+    void update(int l, int r, ll diff) {update(1, 0, n-1, l, r, diff);}
     void update(int node, int start, int end, int l, int r, ll diff) {
         pendingUpdate(node, start, end);
         if(start > end || start > r || end < l) return;
@@ -76,7 +76,7 @@ struct SegmentTree {
         update(2*node+1, mid+1, end, l, r, diff);
         tree[node] = combine(tree[2*node], tree[2*node+1]);
     }
-    Node query(int l, int r) {return query(root, 0, n-1, l, r);}
+    Node query(int l, int r) {return query(1, 0, n-1, l, r);}
     Node query(int node, int start, int end, int l, int r) {
         if(r < start || end < l) return zero;
         pendingUpdate(node, start, end);
