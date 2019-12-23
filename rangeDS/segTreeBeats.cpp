@@ -43,13 +43,6 @@ struct SegTreeBeats {
         }
     }
 
-    SegTreeBeats(int currSize) : n(currSize) {
-        size = 1;
-        while(size < n) size<<=1;
-        size<<=1;
-        tree.resize(size, zero);
-        lazy.resize(size, inf);
-    }
     SegTreeBeats(const vector<int> &arr) : n((int)arr.size()) {
         size = 1;
         while(size < n) size<<=1;
