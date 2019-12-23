@@ -81,7 +81,7 @@ struct SegTreeBeats {
         update(2*node+1, mid+1, end, l, r, newMn);
         tree[node] = combine(tree[2*node], tree[2*node+1]);
     }
-    //query for sum in range [l,r]
+    //query for sum/max in range [l,r]
     Node query(int l, int r) {return query(1, 0, n-1, l, r);}
     Node query(int node, int start, int end, int l, int r) {
         if(r < start || end < l) return zero;
