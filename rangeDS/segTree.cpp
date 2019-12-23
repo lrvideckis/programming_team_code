@@ -56,7 +56,7 @@ struct SegmentTree {
             tree[node] = combine(tree[2*node], tree[2*node+1]);
         }
     }
-    void pendingUpdate(int node, int start, int end) {
+    void push(int node, int start, int end) {
         ll &currLazy = lazy[node];
         if(currLazy) {
             combineRange(node, start, end, currLazy);
@@ -65,7 +65,7 @@ struct SegmentTree {
     }
     void update(int l, int r, ll diff) {update(1, 0, n-1, l, r, diff);}
     void update(int node, int start, int end, int l, int r, ll diff) {
-        pendingUpdate(node, start, end);
+        push(node, start, end);
         if(start > end || start > r || end < l) return;
         if(start >= l && end <= r) {
             combineRange(node, start, end, diff);
@@ -79,7 +79,7 @@ struct SegmentTree {
     Node query(int l, int r) {return query(1, 0, n-1, l, r);}
     Node query(int node, int start, int end, int l, int r) {
         if(r < start || end < l) return zero;
-        pendingUpdate(node, start, end);
+        push(node, start, end);
         if(l <= start && end <= r) return tree[node];
         int mid = (start+end)/2;
         return combine(query(2*node, start, mid, l, r),
