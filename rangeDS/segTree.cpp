@@ -29,7 +29,7 @@ struct SegmentTree {
         }
     }
 
-    SegmentTree(int currSize) : n((int)currSize) {
+    SegmentTree(int currSize) : n(currSize) {
         size = 1;
         while(size < n) size<<=1;
         size<<=1;
