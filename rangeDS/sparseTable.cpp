@@ -1,13 +1,10 @@
 template <class T>
 struct sparseTable {
-    vector<vector<T> > dp;
-    vector<vector<int> > index;
-    vector<int> logTwo;
+    vector<vector<T>> dp;
+    vector<vector<int>> index;
     sparseTable(const vector<T> &arr) {
-        int n = arr.size();
-        logTwo.resize(n+1,0);
-        for(int i = 2; i <= n; ++i) logTwo[i] = 1 + logTwo[i/2];
-        int maxPow = logTwo[n]+1;
+        const int n = arr.size();
+        const int maxPow = __lg(n)+1;
         dp.resize(maxPow, vector<T>(n));
         index.resize(maxPow, vector<int>(n));
         for(int j = 0; j < n; ++j) {
@@ -27,7 +24,7 @@ struct sparseTable {
         }
     }
     int query(int l, int r) {//returns index in array of min element
-        const int x = logTwo[r-l+1];
+        const int x = __lg(r-l+1);
         if(dp[x][l] > dp[x][r-(1<<x)+1]) {
             return index[x][r-(1<<x)+1];
         }
