@@ -7,32 +7,32 @@ vector<int> circuit;
 
 void eularcircuit(int src)
 {
-    stack<int> curr_path;
+	stack<int> curr_path;
 
-    circuit.clear();
-    if(gset[src].empty())return;
-    curr_path.push(src);
-    int curr_v = src;
+	circuit.clear();
+	if(gset[src].empty())return;
+	curr_path.push(src);
+	int curr_v = src;
 
-    while (!curr_path.empty())
-    {
-        if (!gset[curr_v].empty())
-        {
-            curr_path.push(curr_v);
-            auto it=gset[curr_v].begin();
-            int next_v = *it;
-            gset[curr_v].erase(next_v);
-            gset[next_v].erase(curr_v);
-            curr_v = next_v;
-        }
+	while (!curr_path.empty())
+	{
+		if (!gset[curr_v].empty())
+		{
+			curr_path.push(curr_v);
+			auto it=gset[curr_v].begin();
+			int next_v = *it;
+			gset[curr_v].erase(next_v);
+			gset[next_v].erase(curr_v);
+			curr_v = next_v;
+		}
 
-        else
-        {
-            circuit.push_back(curr_v);
-            curr_v = curr_path.top();
-            curr_path.pop();
-        }
-    }
+		else
+		{
+			circuit.push_back(curr_v);
+			curr_v = curr_path.top();
+			curr_path.pop();
+		}
+	}
 
-    reverse(circuit.begin(),circuit.end());
+	reverse(circuit.begin(),circuit.end());
 }

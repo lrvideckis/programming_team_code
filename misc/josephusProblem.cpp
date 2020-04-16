@@ -6,27 +6,27 @@
 
 /// O(n)
 int josephus(int n, int k, int m){
-    int i;
-    for (m = n - m, i = m + 1; i <= n; i++){
-        m += k;
-        if (m >= i) m %= i;
-    }
-    return m + 1;
+	int i;
+	for (m = n - m, i = m + 1; i <= n; i++){
+		m += k;
+		if (m >= i) m %= i;
+	}
+	return m + 1;
 }
 
 /// O(k log(n))
 long long josephus2(long long n, long long k, long long m){ /// hash = 583016
-    m = n - m;
-    if (k <= 1) return n - m;
+	m = n - m;
+	if (k <= 1) return n - m;
 
-    long long i = m;
-    while (i < n){
-        long long r = (i - m + k - 2) / (k - 1);
-        if ((i + r) > n) r = n - i;
-        else if (!r) r = 1;
-        i += r;
-        m = (m + (r * k)) % i;
-    }
-    return m + 1;
+	long long i = m;
+	while (i < n){
+		long long r = (i - m + k - 2) / (k - 1);
+		if ((i + r) > n) r = n - i;
+		else if (!r) r = 1;
+		i += r;
+		m = (m + (r * k)) % i;
+	}
+	return m + 1;
 }
 

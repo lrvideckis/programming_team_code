@@ -8,12 +8,3 @@
 // Time complexity: O(N)
 
 int min_rotation(int *s, int N) {
-  for(int i=0;i<N;i++) s[N+i] = s[i];
-
-  int a = 0;
-  for(int b=0;b<N;b++) for(int i=0;i<N;i++) {
-    if (a+i == b || s[a+i] < s[b+i]) { b += max(0, i-1); break; }
-    if (s[a+i] > s[b+i]) { a = b; break; }
-  }
-  return a;
-}
