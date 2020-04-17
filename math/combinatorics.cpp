@@ -22,8 +22,7 @@ struct NchooseK {
 
 	NchooseK(int currMod) {
 		this->mod = currMod;
-		range = (int)1e6+3;
-		//range = currMod-1;//TODO: uncomment this to use chooseLucas
+		range = min((int)1e6+3,currMod);
 		fact.resize(range+1);
 		ifact.resize(range+1);
 		calcFacts();

@@ -31,3 +31,7 @@ bool isPrime(ll n, ll k) {
 	ll d = n - 1;
 	while (d % 2 == 0) d /= 2;
 	for (ll i = 0; i < k; i++)
+		if (!miillerTest(d, n))
+			return false;
+	return true;
+}

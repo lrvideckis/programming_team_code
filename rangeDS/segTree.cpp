@@ -82,4 +82,6 @@ struct SegmentTree {
 		push(node, start, end);
 		if(l <= start && end <= r) return tree[node];
 		int mid = (start+end)/2;
-		return combine(query(2*node, start, mid, l, r),
+		return combine(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
+    }
+};

@@ -1,35 +1,44 @@
-const int Max = 1e5+3, Log = 20+1;
-vector<int> adj[Max];
-int memo[Max][Log];
-int depth[Max];
+struct lca {
+	int Log;
+	vector<vector<int>> memo;
+	vector<int> depth;
 
-void dfs(int node, int prev, int Depth) {
-	depth[node] = Depth;
-	memo[node][0] = prev;
-	for(int i = 1; i < Log; ++i) {
-		memo[node][i] = memo[memo[node][i-1]][i-1];
+	lca(const vector<vector<int>> &graph, int root) {//0 - based nodes
+		int n = graph.size();
+		Log = 1;
+		while((1<<Log) < n) ++Log;
+		depth.resize(n,0);
+		memo.resize(n,vector<int>(Log));
+		dfs(root,root,graph);
 	}
-	for(int to : adj[node]) {
-		if(to == prev) continue;
-		dfs(to, node, Depth+1);
-	}
-}
 
-int LCA(int x, int y) {
-	if(depth[x] < depth[y]) swap(x,y);
-	int diff = depth[x] - depth[y];
-	for(int k = Log-1; k >= 0; --k) {
-		if(diff&(1<<k)) {
-			x = memo[x][k];
+	void dfs(int node, int par, const vector<vector<int>> &graph) {
+		memo[node][0] = par;
+		for(int i = 1; i < Log; ++i) {
+			memo[node][i] = memo[memo[node][i-1]][i-1];
+		}
+		for(int to : graph[node]) {
+			if(to == par) continue;
+			depth[to] = 1 + depth[node];
+			dfs(to, node, graph);
 		}
 	}
-	for(int k = Log-1; k >= 0; --k) {
-		if(memo[x][k] != memo[y][k]) {
-			x = memo[x][k];
-			y = memo[y][k];
+
+	int getLca(int x, int y) {
+		if(depth[x] < depth[y]) swap(x,y);
+		int diff = depth[x] - depth[y];
+		for(int bit = 0; bit < Log; ++bit) {
+			if(diff&(1<<bit)) {
+				x = memo[x][bit];
+			}
 		}
+		for(int bit = Log-1; bit >= 0; --bit) {
+			if(memo[x][bit] != memo[y][bit]) {
+				x = memo[x][bit];
+				y = memo[y][bit];
+			}
+		}
+		if(x != y) x = memo[x][0];
+		return x;
 	}
-	if(x != y) x = memo[x][0];
-	return x;
-}
-//dfs(1,1,0);
+};
