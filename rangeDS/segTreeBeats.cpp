@@ -89,5 +89,5 @@ struct SegTreeBeats {
 		if(l <= start && end <= r) return tree[node];
 		const int mid = (start+end)/2;
 		return combine(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
-    }
+	}
 };
