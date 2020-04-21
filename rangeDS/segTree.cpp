@@ -7,7 +7,8 @@ struct Node {
 struct SegmentTree {
 	vector<Node> tree;
 	vector<ll> lazy;
-	int n,size,l,r,diff;
+	int n,size,l,r;
+	ll diff;
 	const ll inf = 1e18;
 
 	/*implement these*/
