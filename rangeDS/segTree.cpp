@@ -7,7 +7,7 @@ struct Node {
 struct SegmentTree {
 	vector<Node> tree;
 	vector<ll> lazy;
-	int n, size;
+	int n,size,l,r,diff;
 	const ll inf = 1e18;
 
 	/*implement these*/
@@ -63,8 +63,8 @@ struct SegmentTree {
 			currLazy = 0;
 		}
 	}
-	void update(int l, int r, ll diff) {update(1, 0, n-1, l, r, diff);}
-	void update(int node, int start, int end, int l, int r, ll diff) {
+	void update(int L, int R, ll Diff) {l=L,r=R,diff=Diff;update(1,0,n-1);}
+	void update(int node, int start, int end) {
 		push(node, start, end);
 		if(start > end || start > r || end < l) return;
 		if(start >= l && end <= r) {
@@ -72,16 +72,16 @@ struct SegmentTree {
 			return;
 		}
 		int mid = (start + end) / 2;
-		update(2*node, start, mid, l, r, diff);
-		update(2*node+1, mid+1, end, l, r, diff);
+		update(2*node,start,mid);
+		update(2*node+1,mid+1,end);
 		tree[node] = combine(tree[2*node], tree[2*node+1]);
 	}
-	Node query(int l, int r) {return query(1, 0, n-1, l, r);}
-	Node query(int node, int start, int end, int l, int r) {
+	Node query(int L, int R) {l=L,r=R;return query(1, 0, n-1);}
+	Node query(int node, int start, int end) {
 		if(r < start || end < l) return zero;
 		push(node, start, end);
 		if(l <= start && end <= r) return tree[node];
 		int mid = (start+end)/2;
-		return combine(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
+		return combine(query(2*node,start,mid), query(2*node+1,mid+1,end));
 	}
 };
