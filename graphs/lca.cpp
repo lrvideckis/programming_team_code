@@ -41,4 +41,8 @@ struct lca {
 		if(x != y) x = memo[x][0];
 		return x;
 	}
+
+	int distEdges(int x, int y) {
+		return depth[x] + depth[y] - 2 * depth[getLca(x,y)];
+	}
 };
