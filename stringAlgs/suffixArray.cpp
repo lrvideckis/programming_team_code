@@ -1,37 +1,108 @@
-const int MAXN = 1 << 21;
-string s;
-int N, gap;
-int sa[MAXN], pos[MAXN], lcp[MAXN], tmp[MAXN];
-
-bool sufCmp(int i, int j) {
-	if(pos[i] != pos[j]) return pos[i] < pos[j];
-	i += gap;
-	j += gap;
-	return (i < N && j < N) ? pos[i] < pos[j] : i > j;
+namespace SAIS {
+    enum type { L, S, LMS };
+    const int maxn = 1e6 + 5;
+    int bkt[maxn], cnt[maxn], lptr[maxn], rptr[maxn], tptr[maxn];
+    int rev[maxn];
+    void pre(const vector<int> &s, int sigma) {
+        fill(bkt, bkt + s.size(), -1);
+        fill(cnt, cnt + sigma, 0);
+        for (int i = 0; i < s.size(); ++i) ++cnt[s[i]];
+        int last = 0;
+        for (int i = 0; i < sigma; ++i) {
+            lptr[i] = last;
+            last += cnt[i];
+            rptr[i] = tptr[i] = last - 1;
+        }
+    }
+    void induce(const vector<int> &s, const vector<type> &v) {
+        for (int i = 0; i < s.size(); ++i) if (bkt[i] > 0) {
+            if (v[bkt[i] - 1] == L) bkt[lptr[s[bkt[i] - 1]]++] = bkt[i] - 1;
+        }
+        for (int i = s.size() - 1; i >= 0; --i) if (bkt[i] > 0) {
+            if (v[bkt[i] - 1] != L) bkt[rptr[s[bkt[i] - 1]]--] = bkt[i] - 1;
+        }
+    }
+    bool equal(int l, int r, const vector<int> &s, const vector<type> &v) {
+        do { if (s[l] != s[r]) return false; ++l, ++r; } while (v[l] != LMS && v[r] != LMS);
+        return s[l] == s[r];
+    }
+    vector<int> radix_sort(const vector<int> &lms, const vector<int> &s, const vector<type> &v, int sigma) {
+        pre(s, sigma);
+        for (int i = 0; i < lms.size(); ++i) bkt[tptr[s[lms[i]]]--] = lms[i];
+        induce(s, v);
+        vector<int> rt(lms.size());
+        for (int i = 0; i < lms.size(); ++i) rev[lms[i]] = i;
+        int prv = -1, rnk = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            int x = bkt[i];
+            if (v[x] != LMS) continue;
+            if (prv == -1) {
+                rt[rev[x]] = rnk;
+                prv = x;
+                continue;
+            }
+            if (!equal(prv, x, s, v)) ++rnk;
+            rt[rev[x]] = rnk;
+            prv = x;
+        }
+        return rt;
+    }
+    vector<int> counting_sort(const vector<int> &s) {
+        vector<int> o(s.size());
+        for (int i = 0; i < s.size(); ++i) o[s[i]] = i;
+        return o;
+    }
+    vector<int> reconstruct(const vector<int> &sa, const vector<int> &s, const vector<type> &v) {
+        vector<int> pos;
+        for (int i = 0; i < s.size(); ++i) if (v[i] == LMS) pos.push_back(i);
+        vector<int> rev(sa.size());
+        for (int i = 0; i < sa.size(); ++i) rev[i] = pos[sa[i]];
+        return rev;
+    }
+    vector<int> sais(const vector<int> &s, int sigma) {
+        vector<type> v(s.size());
+        v[s.size() - 1] = S;
+        for (int i = s.size() - 2; i >= 0; --i) {
+            if (s[i] < s[i + 1] || s[i] == s[i + 1] && v[i + 1] == S) v[i] = S;
+            else v[i] = L;
+        }
+        for (int i = s.size() - 1; i >= 1; --i) {
+            if (v[i] == S && v[i - 1] == L) v[i] = LMS;
+        }
+        vector<int> lms;
+        for (int i = 0; i < s.size(); ++i) if (v[i] == LMS) lms.push_back(i);
+        vector<int> r = radix_sort(lms, s, v, sigma);
+        vector<int> sa;
+        if (*max_element(r.begin(), r.end()) == r.size() - 1) sa = counting_sort(r);
+        else sa = sais(r, *max_element(r.begin(), r.end()) + 1);
+        sa = reconstruct(sa, s, v);
+        pre(s, sigma);
+        for (int i = sa.size() - 1; i >= 0; --i) bkt[tptr[s[sa[i]]]--] = sa[i];
+        induce(s, v);
+        return vector<int>(bkt, bkt + s.size());
+    }
+    vector<int> build(const string &s) {
+        vector<int> v(s.size() + 1);
+        for (int i = 0; i < s.size(); ++i) v[i] = s[i];
+        v[v.size() - 1] = 0;
+        vector<int> sa = sais(v, 256);
+        return vector<int>(sa.begin() + 1, sa.end());
+    }
 }
 
-void buildSA() {
-	N = s.length();
-	for(int i = 0; i < N; ++i) {
-		sa[i] = i;
-		pos[i] = s[i];
-	}
-	for(gap = 1;; gap *= 2) {
-		sort(sa, sa + N, sufCmp);
-		for(int i = 0; i < N-1; ++i)
-			tmp[i+1] = tmp[i] + sufCmp(sa[i], sa[i+1]);
-		for(int i = 0; i < N; ++i) pos[sa[i]] = tmp[i];
-		if(tmp[N-1] == N-1) break;
-	}
-}
-
-void buildLCP() {
-	N = s.size();
-	for(int i = 0, k = 0; i < N; ++i) {
-		if(pos[i] != 0 ) {
-			for(int j = sa[pos[i]-1]; s[i+k] == s[j+k];) k++;
-			lcp[pos[i]] = k;
-			if(k) k--;
-		}
-	}
+vector<int> getLcpFromSuffixArray(const string &s, const vector<int> &sa) {
+    int n=s.size(),k=0;
+    vector<int> lcp(n,0);
+    vector<int> rank(n,0);
+    for(int i=0; i<n; i++) rank[sa[i]]=i;
+    for(int i=0; i<n; i++, k?k--:0) {
+        if(rank[i]==n-1) {
+            k=0;
+            continue;
+        }
+        int j=sa[rank[i]+1];
+        while(i+k<n && j+k<n && s[i+k]==s[j+k]) k++;
+        lcp[rank[i]]=k;
+    }
+    return lcp;
 }
