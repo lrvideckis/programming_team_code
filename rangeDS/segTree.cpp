@@ -1,17 +1,19 @@
+const ll inf = 1e18;
+
 struct Node {
 	ll sum = 0;
 	ll mx = 0;
 	ll mn = 0;
+
+	ll lazy = 0;
 };
 
 struct SegmentTree {
 	vector<Node> tree;
-	vector<ll> lazy;
 	int n, size;
-	const ll inf = 1e18;
 
 	/*implement these*/
-	const Node zero = {0, -inf, inf};
+	const Node zero = {0, -inf, inf, 0};
 	Node combine(const Node &L, const Node &R) {
 		Node par;
 		par.sum = L.sum + R.sum;
@@ -24,8 +26,8 @@ struct SegmentTree {
 		tree[node].mx += delta;
 		tree[node].mn += delta;
 		if(start != end) {
-			lazy[2*node] += delta;
-			lazy[2*node+1] += delta;
+			tree[2*node].lazy += delta;
+			tree[2*node+1].lazy += delta;
 		}
 	}
 
@@ -34,14 +36,12 @@ struct SegmentTree {
 		while(size < n) size<<=1;
 		size<<=1;
 		tree.resize(size);
-		lazy.resize(size, 0);
 	}
 	SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
 		size = 1;
 		while(size < n) size<<=1;
 		size<<=1;
 		tree.resize(size);
-		lazy.resize(size, 0);
 		build(arr, 1, 0, n-1);
 	}
 	void build(const vector<ll> &arr, int node, int start, int end) {
@@ -57,7 +57,7 @@ struct SegmentTree {
 		}
 	}
 	void push(int node, int start, int end) {
-		ll &currLazy = lazy[node];
+		ll &currLazy = tree[node].lazy;
 		if(currLazy) {
 			combineRange(node, start, end, currLazy);
 			currLazy = 0;
@@ -66,8 +66,8 @@ struct SegmentTree {
 	void update(int l, int r, ll diff) {update(1, 0, n-1, l, r, diff);}
 	void update(int node, int start, int end, int l, int r, ll diff) {
 		push(node, start, end);
-		if(start > end || start > r || end < l) return;
-		if(start >= l && end <= r) {
+		if(r < start || end < l) return;
+		if(l <= start && end <= r) {
 			combineRange(node, start, end, diff);
 			return;
 		}
