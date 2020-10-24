@@ -12,15 +12,10 @@ void calcMobius() {
 	}
 }
 
-int minPrime[N], maxPrime[N];
+int minPrime[N];
 void calcSeive() {
 	fill(minPrime, minPrime+N, N);
 	for (int i = N-1; i >= 2; --i) {
-		for(int j = i; j < N; j += i) {
-			minPrime[j] = i;
-		}
-	}
-	for (int i = 2; i < N; ++i) {
 		for(int j = i; j < N; j += i) {
 			minPrime[j] = i;
 		}
