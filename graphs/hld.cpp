@@ -2,7 +2,7 @@ struct hld {
 	int Time=0;
 	vector<int> Size, par, timeIn, Next, Depth;
 	hld(vector<vector<int>> &adj, int root) :
-		Size(adj.size(),1), par(adj.size()), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size()) {
+		Size(adj.size(),1), par(adj.size(),root), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),root) {
 		dfs1(root,adj);
 		dfs2(root,adj);
 	}

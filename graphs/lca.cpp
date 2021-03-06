@@ -24,6 +24,15 @@ struct lca {
 		}
 	}
 
+	int kthPar(int node, int k) {
+		for(int bit = 0; bit < Log; ++bit) {
+			if(k&(1<<bit)) {
+				node = memo[node][bit];
+			}
+		}
+		return node;
+	}
+
 	int getLca(int x, int y) {
 		if(depth[x] < depth[y]) swap(x,y);
 		int diff = depth[x] - depth[y];
