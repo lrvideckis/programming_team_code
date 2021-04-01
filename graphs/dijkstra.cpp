@@ -1,14 +1,12 @@
-const int N = 5e5+5;//change here
-vector<pair<ll, ll>> adj[N];
-ll length[N];
-
-void dijkstra(int node) {
-	length[node] = 0;
+vector<ll> dijkstra(const vector<vector<pair<int,ll>>> &adj, int startNode) {
+	const int n = adj.size();
+	vector<ll> length(n, 1e18);
+	length[startNode] = 0;
 	set<pair<ll, int> > q;//weight, node
-	q.insert({0, node});
+	q.insert({0, startNode});
 	while(!q.empty()) {
 		auto it = q.begin();
-		node = it->second;
+		const int node = it->second;
 		q.erase(it);
 		for(auto &p : adj[node]) {
 			int to = p.first;
@@ -20,4 +18,5 @@ void dijkstra(int node) {
 			}
 		}
 	}
+	return length;
 }
