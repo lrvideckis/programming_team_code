@@ -1,5 +1,11 @@
 struct persistentSegTree {
 	public:
+
+		/* Persistent seg tree to find kth largest number in a range
+		 * - no updates
+		 * - arr has to have distinct values
+		 * O(nlogn) time and space
+		 */
 		persistentSegTree(const vector<int> &arr) {
 			doCompression(arr);
 			tl = 0, tr = (int)arr.size()+1;
@@ -8,6 +14,9 @@ struct persistentSegTree {
 				roots.push_back(update(roots.back(), tl, tr, compress[i]));
 			}
 		}
+		/* find kth largest number among arr[L], arr[L+1], ..., arr[R]
+		 * O(logn)
+		 */
 		int find_kth(int L, int R, int k) {
 			return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
 		}
@@ -18,6 +27,7 @@ struct persistentSegTree {
 			sorted = arr;
 			sort(sorted.begin(), sorted.end());
 			sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
+			assert((int)sorted.size() == n);
 			compress.resize(n);
 			for(int i = 0; i < n; ++i) {
 				compress[i] = lower_bound(sorted.begin(), sorted.end(), arr[i]) - sorted.begin();
