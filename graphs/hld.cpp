@@ -1,6 +1,6 @@
 struct hld {
 	int Time=0;
-	vector<int> Size, par, timeIn, Next, Depth;
+	vector<int> Size, par, Depth, timeIn, Next;
 	hld(vector<vector<int>> &adj, int root) :
 		Size(adj.size(),1), par(adj.size(),root), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),root) {
 		dfs1(root,adj);
