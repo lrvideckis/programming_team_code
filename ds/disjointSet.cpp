@@ -10,4 +10,7 @@ struct disjointSet {
 		parent[x] += parent[y];
 		parent[y] = x;
 	}
+	int sizeOfSet(int x) {
+		return -parent[find(x)];
+	}
 };
