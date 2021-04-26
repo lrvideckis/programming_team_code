@@ -2,12 +2,11 @@ struct persistentSegTree {
 	public:
 		/* Persistent seg tree to find kth smallest number in a range
 		 * - no updates
-		 * - arr has to have distinct values
-		 * O(nlogn) time and space
+		 * O(nlogn) time and space to build tree
 		 */
 		persistentSegTree(const vector<int> &arr) {
 			doCompression(arr);
-			tl = 0, tr = (int)arr.size()+1;
+			tl = 0, tr = (int)arr.size();
 			roots.push_back(build(tl, tr));
 			for (int i = 0; i < (int)arr.size(); i++) {
 				roots.push_back(update(roots.back(), tl, tr, compress[i]));
@@ -26,7 +25,6 @@ struct persistentSegTree {
 			sorted = arr;
 			sort(sorted.begin(), sorted.end());
 			sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
-			assert((int)sorted.size() == n);
 			compress.resize(n);
 			for(int i = 0; i < n; ++i) {
 				compress[i] = lower_bound(sorted.begin(), sorted.end(), arr[i]) - sorted.begin();
