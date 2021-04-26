@@ -1,7 +1,6 @@
 struct persistentSegTree {
 	public:
-
-		/* Persistent seg tree to find kth largest number in a range
+		/* Persistent seg tree to find kth smallest number in a range
 		 * - no updates
 		 * - arr has to have distinct values
 		 * O(nlogn) time and space
@@ -14,7 +13,7 @@ struct persistentSegTree {
 				roots.push_back(update(roots.back(), tl, tr, compress[i]));
 			}
 		}
-		/* find kth largest number among arr[L], arr[L+1], ..., arr[R]
+		/* find kth smallest number among arr[L], arr[L+1], ..., arr[R]
 		 * O(logn)
 		 */
 		int find_kth(int L, int R, int k) {
@@ -63,8 +62,7 @@ struct persistentSegTree {
 			if (l == r)
 				return l;
 			int m = (l + r) / 2, left_count = vr->l->sum - vl->l->sum;
-			if (left_count >= k)
-				return find_kth(vl->l, vr->l, l, m, k);
+			if (left_count >= k) return find_kth(vl->l, vr->l, l, m, k);
 			return find_kth(vl->r, vr->r, m+1, r, k-left_count);
 		}
 };
