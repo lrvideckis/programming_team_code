@@ -1,8 +1,13 @@
-vector<int> p(1000001,-1);//change size here if needed
-int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
-void merge(int x, int y) {
-	if((x=find(x)) == (y=find(y))) return;
-	if(p[y] < p[x]) swap(x,y);
-	p[x] += p[y];
-	p[y] = x;
-}
+struct disjointSet {
+	vector<int> parent;
+	disjointSet(int n) {
+		parent.resize(n,-1);
+	}
+	int find(int x) {return parent[x] < 0 ? x : parent[x] = find(parent[x]);}
+	void merge(int x, int y) {
+		if((x=find(x)) == (y=find(y))) return;
+		if(parent[y] < parent[x]) swap(x,y);
+		parent[x] += parent[y];
+		parent[y] = x;
+	}
+};
