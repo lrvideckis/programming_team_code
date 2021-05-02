@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <vector>
+#include <list>
 #include <set>
 #include <map>
 #include <unordered_set>
