@@ -3,7 +3,7 @@
 //0-based nodes
 struct bridges {
 	public:
-		bridges(const vector<vector<int>> &adj) : currTime(0), ds(adj.size()), timeIn(adj.size()), low(adj.size()) {
+		bridges(const vector<vector<int>> &adj) : n(adj.size()), currTime(0), ds(adj.size()), timeIn(adj.size()), low(adj.size()) {
 			for(int i = 0; i < (int)adj.size(); ++i) {
 				if(!timeIn[i]) {
 					dfs(adj, i, -1);
@@ -16,9 +16,23 @@ struct bridges {
 		vector<pair<int, int>> getBridges() {
 			return bridgeList;
 		}
+		int sizeOfBCC(int node) {
+			return ds.sizeOfSet(node);
+		}
+		vector<vector<int>> getBridgeAdj() {
+			vector<vector<int>> bridgeTree(n);
+			for(const pair<int,int> &p : getBridges()) {
+				int u = ds.find(p.first);
+				int v = ds.find(p.second);
+				if(u == v) continue;
+				bridgeTree[u].push_back(v);
+				bridgeTree[v].push_back(u);
+			}
+			return bridgeTree;
+		}
 
 	private:
-		int currTime;
+		int n, currTime;
 		disjointSet ds;
 		vector<int> timeIn, low;
 		vector<pair<int, int>> bridgeList;
