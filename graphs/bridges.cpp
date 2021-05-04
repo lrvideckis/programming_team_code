@@ -1,60 +1,44 @@
-//Doesn't handle multiple edges
-const int Max = 3e5+2;
-vector<int> adj[Max], bridgeTree[Max];
-bool visited[Max];
-int timeIn[Max], currTime = 0, minTime[Max];
-vector<pair<int, int> > bridges;
-
-vector<int> p(Max,-1);
-int find(int x) {return p[x] < 0 ? x : p[x] = find(p[x]);}
-void merge(int x, int y) {
-	if((x=find(x)) == (y=find(y))) return;
-	if(p[y] < p[x]) swap(x,y);
-	p[x] += p[y];
-	p[y] = x;
-}
-
-void dfs(int node, int prev) {
-	visited[node] = true;
-	timeIn[node] = minTime[node] = ++currTime;
-	for(int to : adj[node]) {
-		if(to != prev) {
-			minTime[node] = min(minTime[node], timeIn[to]);
+//requires disjoint set struct
+//handles multiple components, multiple edges between the same pair of nodes
+//0-based nodes
+struct bridges {
+	public:
+		bridges(const vector<vector<int>> &adj) : currTime(0), ds(adj.size()), timeIn(adj.size()), low(adj.size()) {
+			for(int i = 0; i < (int)adj.size(); ++i) {
+				if(!timeIn[i]) {
+					dfs(adj, i, -1);
+				}
+			}
 		}
-		if(visited[to]) continue;
-		dfs(to, node);
-		minTime[node] = min(minTime[node], minTime[to]);
-		if(minTime[to] > timeIn[node]) {
-			bridges.push_back({node, to});
-		} else {
-			merge(node, to);
+		int getNodeId(int node) {
+			return ds.find(node);
 		}
-	}
-}
+		vector<pair<int, int>> getBridges() {
+			return bridgeList;
+		}
 
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-	int n, m;
-	cin >> n >> m;
-	for(int i = 1; i <= n; ++i) {
-		minTime[i] = timeIn[i] = Max;
-		visited[i] = false;
-	}
-	int u, v;
-	for(int i = 0; i < m; ++i) {
-		cin >> u >> v;
-		adj[u].push_back(v);
-		adj[v].push_back(u);
-	}
-	currTime = 0;
-	dfs(1,1);
-	for(auto &p : bridges) {
-		u = find(p.first);
-		v = find(p.second);
-		bridgeTree[u].push_back(v);
-		bridgeTree[v].push_back(u);
-	}
-	return 0;
-}
+	private:
+		int currTime;
+		disjointSet ds;
+		vector<int> timeIn, low;
+		vector<pair<int, int>> bridgeList;
+		void dfs(const vector<vector<int>> &adj, int node, int prev) {
+			timeIn[node] = low[node] = ++currTime;
+			bool dup = false;
+			for(int to : adj[node]) {
+				if(to == prev && !dup) {
+					dup = true;
+					continue;
+				}
+				if(!timeIn[to]) {
+					dfs(adj, to, node);
+					if(low[to] > timeIn[node]) {
+						bridgeList.push_back({to,node});
+					} else {
+						ds.merge(to,node);
+					}
+				}
+				low[node] = min(low[node], low[to]);
+			}
+		}
+};
