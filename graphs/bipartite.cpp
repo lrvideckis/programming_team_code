@@ -28,13 +28,13 @@ struct BipartiteMatcher {
 		while(ok) {
 			ok = false;
 			fill(Viz.begin(), Viz.end(), 0);
-			for(int i = 0; i < L.size(); ++i)
+			for(int i = 0; i < (int)L.size(); ++i)
 				if(L[i] == -1)
 					ok |= Match(i);
 		}
 
 		int ret = 0;
-		for(int i = 0; i < L.size(); ++i)
+		for(int i = 0; i < (int)L.size(); ++i)
 			ret += (L[i] != -1);
 		return ret;
 	}
@@ -53,16 +53,16 @@ struct BipartiteMatcher {
 	//second vector: all nodes in the cover on the right side
 	pair<vector<int>, vector<int>> getMinVertexCover() {
 		Solve();
-		for(int i = 0; i < L.size(); ++i) {
+		for(int i = 0; i < (int)L.size(); ++i) {
 			if(L[i] == -1) {
 				dfs(i);
 			}
 		}
 		pair<vector<int>, vector<int>> cover;
-		for(int i = 0; i < L.size(); ++i) {
+		for(int i = 0; i < (int)L.size(); ++i) {
 			if(!visitedA[i]) cover.first.push_back(i);
 		}
-		for(int i = 0; i < R.size(); ++i) {
+		for(int i = 0; i < (int)R.size(); ++i) {
 			if(visitedB[i]) cover.second.push_back(i);
 		}
 		return cover;
