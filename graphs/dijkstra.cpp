@@ -1,6 +1,6 @@
 vector<int> dijkstra(const vector<vector<pair<int,int>>> &adj, int startNode) {
 	const int n = adj.size();
-	vector<int> length(n, 1e9);
+	vector<int> length(n, 1e18);
 	length[startNode] = 0;
 	set<pair<int, int> > q;//weight, node
 	q.insert({0, startNode});
