@@ -1,8 +1,8 @@
-vector<int> dijkstra(const vector<vector<pair<int,int>>> &adj, int startNode) {
+vector<ll> dijkstra(const vector<vector<pair<int,ll>>> &adj, int startNode) {
 	const int n = adj.size();
-	vector<int> length(n, 1e18);
+	vector<ll> length(n, 1e18);
 	length[startNode] = 0;
-	set<pair<int, int> > q;//weight, node
+	set<pair<ll, int> > q;//weight, node
 	q.insert({0, startNode});
 	while(!q.empty()) {
 		auto it = q.begin();
@@ -10,7 +10,7 @@ vector<int> dijkstra(const vector<vector<pair<int,int>>> &adj, int startNode) {
 		q.erase(it);
 		for(auto &p : adj[node]) {
 			int to = p.first;
-			int weight = p.second;
+			ll weight = p.second;
 			if(length[to] > weight + length[node]) {
 				q.erase({length[to], to});
 				length[to] = weight + length[node];
