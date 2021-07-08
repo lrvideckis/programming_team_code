@@ -35,20 +35,16 @@ struct lca {
 
 	int getLca(int x, int y) {
 		if(depth[x] < depth[y]) swap(x,y);
-		int diff = depth[x] - depth[y];
-		for(int bit = 0; bit < Log; ++bit) {
-			if(diff&(1<<bit)) {
-				x = memo[x][bit];
-			}
-		}
+		x = kthPar(x, depth[x] - depth[y]);
+		if(x == y) return x;
 		for(int bit = Log-1; bit >= 0; --bit) {
 			if(memo[x][bit] != memo[y][bit]) {
 				x = memo[x][bit];
 				y = memo[y][bit];
 			}
 		}
-		if(x != y) x = memo[x][0];
-		return x;
+		assert(x != y && memo[x][0] == memo[y][0]);
+		return memo[x][0];
 	}
 
 	int distEdges(int x, int y) {
