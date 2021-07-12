@@ -2,7 +2,6 @@ struct maxflow {
 	public:
 		ll n, s, t;
 		maxflow(int _n, int _s, int _t) : n(_n), s(_s), t(_t), d(n), ptr(n), q(n), g(n) {}
-		//don't add multiple edges
 		void addedge(ll a, ll b, ll cap) {
 			edgeMap[a*n+b] = e.size();
 			edge e1 = { a, b, cap, 0 };
