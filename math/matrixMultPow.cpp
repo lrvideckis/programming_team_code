@@ -1,27 +1,34 @@
-const ll mod = 1e9+7;
-vector<vector<ll> > mult(vector<vector<ll> > a, vector<vector<ll> > b) {
+const int mod = 1e9 + 7;
+
+vector<vector<int>> mult(const vector<vector<int>> &a, const vector<vector<int>> &b) {
 	if(a.size() == 0) return {};
 	if(a[0].size() == 0) return {};
 	if(b.size() == 0) return {};
 	if(b[0].size() == 0) return {};
 	if(a[0].size() != b.size()) return {};
 	int resultRow = a.size(), resultCol = b[0].size(), n = a[0].size();
-	vector<vector<ll> > product(resultRow, vector<ll>(resultCol));
+	vector<vector<int>> product(resultRow, vector<int>(resultCol,0));
 	for(int i = 0; i < resultRow; ++i) {
-		for(int j = 0; j < resultCol; ++j) {
-			product[i][j] = 0;
-			for(int k = 0; k < n; ++k) {
-				product[i][j] += a[i][k] * b[k][j];
-				product[i][j] %= mod;
+		for(int k = 0; k < n; ++k) {
+			for(int j = 0; j < resultCol; ++j) {
+				product[i][j] = (product[i][j] + 1LL * a[i][k] * b[k][j]) % mod;
 			}
 		}
 	}
 	return product;
 }
 
-vector<vector<ll> > power(vector<vector<ll> > matrix, ll b) {
-	if (b <= 1) return matrix;
-	vector<vector<ll> > temp = power(matrix, b/2);
-	if (b % 2 == 0) return mult(temp, temp);
-	return mult(mult(temp, temp), matrix);
+vector<vector<int>> power(vector<vector<int>> matrix, int b) {
+	vector<vector<int>> res(matrix.size(),vector<int>(matrix.size(),0));
+	for(int i = 0; i < (int)matrix.size(); i++) {
+		res[i][i] = 1;
+	}
+	while(b > 0) {
+		if(b%2 == 1) {
+			res = mult(res,matrix);
+		}
+		matrix = mult(matrix, matrix);
+		b /= 2;
+	}
+	return res;
 }
