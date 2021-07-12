@@ -1,11 +1,11 @@
-const ll inf = 1e18;
+const int inf = 1e18;
 
 struct Node {
-	ll sum = 0;
-	ll mx = 0;
-	ll mn = 0;
+ int sum = 0;
+ int mx = 0;
+ int mn = 0;
 
-	ll lazy = 0;
+ int lazy = 0;
 };
 
 struct SegmentTree {
@@ -21,7 +21,7 @@ struct SegmentTree {
 		par.mn = min(L.mn, R.mn);
 		return par;
 	}
-	void combineRange(int node, int start, int end, ll delta) {
+	void combineRange(int node, int start, int end, int delta) {
 		tree[node].sum += (end-start+1) * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
@@ -57,14 +57,14 @@ struct SegmentTree {
 		}
 	}
 	void push(int node, int start, int end) {
-		ll &currLazy = tree[node].lazy;
+	 int &currLazy = tree[node].lazy;
 		if(currLazy) {
 			combineRange(node, start, end, currLazy);
 			currLazy = 0;
 		}
 	}
-	void update(int l, int r, ll diff) {update(1, 0, n-1, l, r, diff);}
-	void update(int node, int start, int end, int l, int r, ll diff) {
+	void update(int l, int r, int diff) {update(1, 0, n-1, l, r, diff);}
+	void update(int node, int start, int end, int l, int r, int diff) {
 		push(node, start, end);
 		if(r < start || end < l) return;
 		if(l <= start && end <= r) {

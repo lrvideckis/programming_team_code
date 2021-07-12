@@ -30,7 +30,7 @@ inline void fft (vector<base> & a, bool invert) {
 
 // a, b => coefs to multiply,  res => resulting coefs
 // a[0], b[0], res[0] = coef x^0
-inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {//change res to ll if needed
+inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {//change res to int if needed
 	if(a.size() * b.size() <= 256) {
 		res.resize(a.size() + b.size()+1, 0);
 		for(int i = 0; i < (int)a.size(); i++)

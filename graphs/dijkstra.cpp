@@ -10,7 +10,7 @@ vector<ll> dijkstra(const vector<vector<pair<int,ll>>> &adj, int startNode) {
 		q.erase(it);
 		for(auto &p : adj[node]) {
 			int to = p.first;
-			ll weight = p.second;
+		 int weight = p.second;
 			if(length[to] > weight + length[node]) {
 				q.erase({length[to], to});
 				length[to] = weight + length[node];

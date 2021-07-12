@@ -3,12 +3,12 @@
 //(p, q, n are natural numbers)
 //[x] = floor(x)
 
-ll cnt(ll p, ll q, ll n) {
-	ll t = __gcd(p, q);
+ll cnt(int p, int q, int n) {
+ int t = __gcd(p, q);
 	p = p/t;
 	q = q/t;
-	ll s = 0;
-	ll z = 1;
+ int s = 0;
+ int z = 1;
 	while((q > 0) && (n > 0)) {
 		//(point A)
 		t = p/q;
