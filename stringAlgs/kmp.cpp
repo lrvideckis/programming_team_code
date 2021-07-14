@@ -1,30 +1,47 @@
 struct KMP_Match {
 	public:
-		KMP_Match(string pattern) : T(pattern.size()+1), pat(pattern) {
+		KMP_Match(const string &needle_) : prefixFunction(needle_.size()+1), needle(needle_) {
 			int i = 0, j = -1;
-			T[i] = j;
-			while(i < (int)pat.size()) {
-				while(j >= 0 && pat[i] != pat[j]) j = T[j];
+			prefixFunction[i] = j;
+			while(i < (int)needle.size()) {
+				while(j >= 0 && needle[i] != needle[j]) j = prefixFunction[j];
 				i++, j++;
-				T[i] = j;
+				prefixFunction[i] = j;
 			}
 		};
-		vector<int> find(string txt, bool all = true) {
+
+		// if haystack = "bananas"
+		// needle = "ana"
+		//
+		// then we find 2 matches (note they can overlap):
+		// bananas
+		// _ana___
+		// ___ana_
+		// 0123456 (indexes)
+		// and KMP_Match::find returns {1,3} - the indexes in kaystack where
+		// each match starts.
+		//
+		// You can also pass in false for "all" and KMP_Match::find will only
+		// return the first match: {1}. Useful for checking if there exists
+		// some match:
+		//
+		// KMP_Match::find(<haystack>,false).size() > 0
+		vector<int> find(const string &haystack, bool all = true) {
 			int m = 0, i = 0;
 			vector<int> matches;
-			while(m + i < (int)txt.size()) {
-				if(pat[i] == txt[m+i]) {
-					if(i+1 == (int)pat.size()) {
+			while(m + i < (int)haystack.size()) {
+				if(needle[i] == haystack[m+i]) {
+					if(i+1 == (int)needle.size()) {
 						matches.push_back(m);
 						if(!all) return matches;
-						m = m + i - T[i];
-						i = T[i];
+						m = m + i - prefixFunction[i];
+						i = prefixFunction[i];
 					}
 					i++;
 				} else {
-					if(T[i] != -1) {
-						m = m + i - T[i];
-						i = T[i];
+					if(prefixFunction[i] != -1) {
+						m = m + i - prefixFunction[i];
+						i = prefixFunction[i];
 					} else {
 						i = 0;
 						m++;
@@ -34,8 +51,8 @@ struct KMP_Match {
 			return matches;
 		}
 	private:
-		vector<int> T;
-		string pat;
+		vector<int> prefixFunction;
+		string needle;
 };
 
 int fail[1000005];
