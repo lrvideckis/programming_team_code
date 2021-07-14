@@ -18,7 +18,7 @@ struct KMP_Match {
 		// _ana___
 		// ___ana_
 		// 0123456 (indexes)
-		// and KMP_Match::find returns {1,3} - the indexes in kaystack where
+		// and KMP_Match::find returns {1,3} - the indexes in haystack where
 		// each match starts.
 		//
 		// You can also pass in false for "all" and KMP_Match::find will only
