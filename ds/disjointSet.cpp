@@ -2,6 +2,7 @@ struct disjointSet {
 	int numberOfSets;
 	vector<int> parent;
 	disjointSet(int n) : numberOfSets(n), parent(n,-1) {}
+	disjointSet(const disjointSet &rhs) : numberOfSets(rhs.numberOfSets), parent(rhs.parent) {}
 	int find(int x) {return parent[x] < 0 ? x : parent[x] = find(parent[x]);}
 	int sizeOfSet(int x) {return -parent[find(x)];}
 	bool merge(int x, int y) {
