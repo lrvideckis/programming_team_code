@@ -1,35 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
 struct lca {
+	using pii = pair<int, int>;
 	int Log;
 	vector<vector<int>> memo;
-	vector<int> depth;
+	vector<int> depth, dist;
 
-	lca(const vector<vector<int>> &graph, int root) {//0 - based nodes
+	// use weights of 1 for unweighted tree
+	lca(const vector<vector<pii>> &graph, int root = 0) {//0 - based nodes
 		int n = graph.size();
 		Log = 1;
 		while((1<<Log) < n) ++Log;
 		depth.resize(n,0);
+		dist.resize(n,0);
 		memo.resize(n,vector<int>(Log));
 		dfs(root,root,graph);
 	}
 
-	void dfs(int node, int par, const vector<vector<int>> &graph) {
+	void dfs(int node, int par, const vector<vector<pii>> &graph) {
 		memo[node][0] = par;
 		for(int i = 1; i < Log; ++i) {
 			memo[node][i] = memo[memo[node][i-1]][i-1];
 		}
-		for(int to : graph[node]) {
+		for(auto [to, w] : graph[node]) {
 			if(to == par) continue;
 			depth[to] = 1 + depth[node];
+			dist[to] = w + dist[node];
 			dfs(to, node, graph);
 		}
 	}
 
 	int kthPar(int node, int k) {
-		for(int bit = 0; bit < Log; ++bit) {
-			if(k&(1<<bit)) {
+		for(int bit = 0; bit < Log; ++bit)
+			if(k&(1<<bit))
 				node = memo[node][bit];
-			}
-		}
 		return node;
 	}
 
@@ -48,6 +52,8 @@ struct lca {
 	}
 
 	int distEdges(int x, int y) {
-		return depth[x] + depth[y] - 2 * depth[getLca(x,y)];
+		return dist[x] + dist[y] - 2 * dist[getLca(x,y)];
 	}
 };
+
+int main() {}
