@@ -75,18 +75,13 @@ struct max_flow_graph {
 			dfs2(v);
 		}
 	}
-	void print(int s, int e) {
-		cout << dinic(s, e) << endl;
+	vector<pair<int, int>> mincut_edges(int s = 0) {
 		vis.assign(n, 0);
 		dfs2(s);
-		set<pair<int, int>> used;
-		for (auto [u, v, cap, flow] : el) {
-			if (vis[u] != vis[v] && cap == flow) {
-				if (!used.count({u, v})) {
-					cout << u << ' ' << v << endl;
-					used.emplace(u, v);
-				}
-			}
-		}
+		vector<pair<int, int>> mincut_edges;
+		for (auto [u, v, cap, flow] : el)
+			if (vis[u] != vis[v] && cap == flow)
+				mincut_edges.emplace_back(u, v);
+		return mincut_edges;
 	}
 };
