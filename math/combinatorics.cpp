@@ -1,7 +1,7 @@
-//returns x such that x*a == 1 (mod b)
-//x only exists if gcd(a, b) == 1
-ll modInverse(ll a, ll b){
-	return 1<a ? b - modInverse(b%a,a)*b/a : 1;
+//returns x such that x*val == 1 (% mod)
+//x only exists if gcd(val, mod) == 1
+ll modInverse(ll val, ll mod){
+	return 1<val ? mod - modInverse(mod%val,val)*mod/val : 1;
 }
 
 //returns a^pw % mod
