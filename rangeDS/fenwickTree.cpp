@@ -1,7 +1,7 @@
 struct fenwickTree {
 	vector<ll> bit;
 	fenwickTree(int n) : bit(n,0) {}
-	void add(int idx, ll d) {
+	void update(int idx, ll d) {
 		for(; idx < (int)bit.size(); idx = idx | (idx+1))
 			bit[idx] += d;
 	}
