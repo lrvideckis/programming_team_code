@@ -15,9 +15,8 @@ struct lca {
 
 	// use weights of 1 for unweighted tree
 	lca(const vector<vector<pair<int, ll>>> &graph, int root) :
-		depth(graph.size()), dist(graph.size()) {//0 - based nodes
+		depth(graph.size()), dist(graph.size()), Log(1) {//0 - based nodes
 			int n = graph.size();
-			Log = 1;
 			while((1<<Log) < n) ++Log;
 			memo.resize(n,vector<int>(Log));
 			dfs(root,root,graph);
@@ -27,7 +26,7 @@ struct lca {
 		memo[node][0] = par;
 		for(int i = 1; i < Log; ++i)
 			memo[node][i] = memo[memo[node][i-1]][i-1];
-		for(auto [to, w] : graph[node]) {
+		for(const auto [to, w] : graph[node]) {
 			if(to == par) continue;
 			depth[to] = 1 + depth[node];
 			dist[to] = w + dist[node];
