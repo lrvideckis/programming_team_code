@@ -20,6 +20,7 @@ struct NchooseK {
 	// maxFact is the largest factorial we calculate, so don't call choose() with n > maxFact
 	// set maxFact = (currMod-1) to use chooseWithLucasTheorem
 	NchooseK(int maxFact, int currMod) : mod(currMod), fact(maxFact+1, 1), invFact(maxFact+1) {
+		assert(maxFact < currMod);
 		//assert mod is prime
 		assert(currMod >= 2);
 		for(int i = 2; i * i <= currMod; i++) {
