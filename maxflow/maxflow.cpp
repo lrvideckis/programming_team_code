@@ -1,3 +1,15 @@
+/*
+ * Description: Maximium flow algorithm supporting Dinic and Edmonds-Karp.
+ * offers functionality like sending flow across single edges and finding the
+ * edges in the minimum cut.
+ * Supports general flow graphs.
+ * Time: Dinic O(|V|^2 * |E|) Edmonds-Karp O(|V| * |E|^2)
+ * Note: Edmonds-Karp can be modified for specific applications using DFS to
+ * run in O(EF) where F is the network flow.
+ */
+
+
+const long long INF = 1e18;
 struct max_flow_graph {
 	typedef long long ll;
 	struct edge {
@@ -7,12 +19,17 @@ struct max_flow_graph {
 	vector<edge> el;
 	vector<vector<int>> adj;
 	vector<int> dist, par, vis;
-	max_flow_graph(int n) : n(n), adj(n + 1) {}
+	unordered_map<int, ll> edge_flow;
+	max_flow_graph(int n) : n(n), adj(n) {}
 	void add_edge(int u, int v, int w) {
+		edge_flow[u * n + v] = el.size();
 		adj[u].push_back(el.size());
 		el.push_back({u, v, w, 0});
 		adj[v].push_back(el.size());
-		el.push_back({v, u, w, 0});
+		el.push_back({v, u, 0, 0});
+	}
+	int flow_for_edge(int u, int v) {
+		return el[edge_flow[u * n + v]].flow;
 	}
 	int send_one_flow(int s, int e) {
 		int nf = INF;
@@ -26,8 +43,8 @@ struct max_flow_graph {
 		return nf;
 	}
 	bool bfs(int s, int e) {
-		dist.assign(n + 1, INF);
-		par.assign(n + 1, 0);
+		dist.assign(n, INF);
+		par.assign(n, 0);
 		queue<int> q;
 		q.push(s); dist[s] = 0;
 		while (q.size()) {
