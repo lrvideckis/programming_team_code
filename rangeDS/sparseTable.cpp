@@ -26,7 +26,7 @@ struct sparseTable {
 			}
 		}
 	}
-	int query(int l, int r) {//returns index in array of min element
+	int query(int l, int r) const {//returns index in array of min element
 		const int x = log2[r-l+1];
 		if(dp[x][l] > dp[x][r-(1<<x)+1]) {
 			return index[x][r-(1<<x)+1];
