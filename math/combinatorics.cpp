@@ -25,11 +25,11 @@ struct NchooseK {
 		for(int i = 2; i * i <= currMod; i++) {
 			assert(currMod % i);
 		}
-		for(int i = 1; i <= maxFact; ++i) {
+		for(int i = 1; i <= maxFact; i++) {
 			fact[i] = 1LL * fact[i-1] * i % mod;
 		}
 		invFact[maxFact] = modInverse(fact[maxFact], mod);
-		for(int i = maxFact-1; i >= 0; --i) {
+		for(int i = maxFact-1; i >= 0; i--) {
 			invFact[i] = 1LL * invFact[i+1] * (i+1) % mod;
 		}
 	}
