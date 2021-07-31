@@ -1,6 +1,6 @@
-//returns x such that x*val == 1 (% mod)
+//returns x such that x*val%mod == 1
 //x only exists if gcd(val, mod) == 1
-ll modInverse(ll val, ll mod){
+ll modInverse(ll val, ll mod) {
 	return 1<val ? mod - modInverse(mod%val,val)*mod/val : 1;
 }
 
@@ -17,69 +17,47 @@ ll fastPow(ll a, ll pw, ll mod) {
 }
 
 struct NchooseK {
-	int range, mod;
-	vector<ll> fact,ifact;
-
-	NchooseK(int currMod) {
-		this->mod = currMod;
-		range = min((int)1e6+3,currMod);
-		fact.resize(range+1);
-		ifact.resize(range+1);
-		calcFacts();
-	}
-
-	void calcFacts() {
-		fact[0] = 1;
-		for(ll i = 1; i <= range; ++i) {
-			fact[i] = (1LL*fact[i-1]*i)%this->mod;
+	// maxFact is the largest factorial we calculate, so don't call choose() with n > maxFact
+	// set maxFact = (currMod-1) to use chooseWithLucasTheorem
+	NchooseK(int maxFact, int currMod) : mod(currMod), fact(maxFact+1, 1), invFact(maxFact+1) {
+		//assert mod is prime
+		assert(currMod >= 2);
+		for(int i = 2; i * i <= currMod; i++) {
+			assert(currMod % i);
 		}
-		ifact[range] = fastPow(fact[range], this->mod-2, this->mod);
-		for(int i = range-1; i >= 0; --i) {
-			ifact[i] = (1LL*ifact[i+1]*(i+1))%this->mod;
+		for(int i = 1; i <= maxFact; ++i) {
+			fact[i] = 1LL * fact[i-1] * i % mod;
 		}
-	}
-
-	//helper function for calcChoose
-	ll modFact(ll n, ll &e) const {
-		if(n <= 1) return 1;
-		ll res = modFact(n/this->mod, e);
-		e += n/this->mod;
-		if ((n/this->mod)%2 == 1) return res*(fact[n%this->mod]*(this->mod-1)%this->mod)%this->mod;
-		return res*fact[n%this->mod]%this->mod;
-	}
-
-	//n choose k with n >= mod
-	//***use prime moduli***
-	ll calcChoose(ll n, ll k) const {
-		ll e1 = 0, e2 = 0, e3 = 0;
-		ll a1 = modFact(n, e1);
-		ll a2 = modFact(k, e2);
-		ll a3 = modFact(n-k, e3);
-		if (e1-e2-e3 > 0) return 0;
-		return (a1*fastPow (a2*a3%this->mod, this->mod-2, this->mod)%this->mod);
+		invFact[maxFact] = modInverse(fact[maxFact], mod);
+		for(int i = maxFact-1; i >= 0; --i) {
+			invFact[i] = 1LL * invFact[i+1] * (i+1) % mod;
+		}
 	}
 
 	//classic n choose k
-	//***use prime moduli***
-	ll choose(int n, int k) const {
-		if(k < 0 || k > n || n < 0) return 0;
-		return ((1LL*fact[n]*ifact[k])%this->mod * 1LL*ifact[n-k])%this->mod;
+	//doesn't work with n >= mod
+	int choose(int n, int k) const {
+		if(k < 0 || k > n) return 0;
+		return 1LL * fact[n] * invFact[k] % mod * invFact[n-k] % mod;
 	}
 
 	//lucas theorem to calculate n choose k in O(log(k))
-	//***use prime moduli***
-	//***can only use with: prime moduli < 1e6***
-	ll chooseLucas(ll n, ll k) const {
-		if(k < 0 || k > n || n < 0) return 0;
+	//needs O(mod) memory, so need smallish mod (< 1e6 maybe)
+	//handles n >= mod correctly
+	int chooseWithLucasTheorem(ll n, ll k) const {
+		if(k < 0 || k > n) return 0;
 		if(k == 0) return 1;
-		int ni = n % this->mod;
-		int ki = k % this->mod;
-		return (this->chooseLucas(n/this->mod, k/this->mod) * this->choose(ni,ki)) % this->mod;
+		int ni = n % mod;
+		int ki = k % mod;
+		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(ni,ki) % mod;
 	}
 
 	//bars and stars problem: given n objects, each with an endless supply,
 	//this returns the number of ways to choose k of them.
-	ll multiChoose(ll n, ll k) const {
-		return chooseLucas(n+k-1, n-1);
+	int multiChoose(ll n, ll k) const {
+		return chooseWithLucasTheorem(n+k-1, n-1);
 	}
+
+	int mod;
+	vector<int> fact, invFact;
 };
