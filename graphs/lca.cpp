@@ -27,7 +27,7 @@ struct lca {
 		memo[node][0] = par;
 		for(int i = 1; i < Log; ++i)
 			memo[node][i] = memo[memo[node][i-1]][i-1];
-		for(const auto &[to, w] : graph[node]) {
+		for(auto [to, w] : graph[node]) {
 			if(to == par) continue;
 			depth[to] = 1 + depth[node];
 			dist[to] = w + dist[node];
