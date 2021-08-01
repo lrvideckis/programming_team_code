@@ -48,9 +48,7 @@ struct NchooseK {
 	int chooseWithLucasTheorem(ll n, ll k) const {
 		if(k < 0 || k > n) return 0;
 		if(k == 0) return 1;
-		int ni = n % mod;
-		int ki = k % mod;
-		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(ni,ki) % mod;
+		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(n % mod, k % mod) % mod;
 	}
 
 	//bars and stars problem: given n objects, each with an endless supply,
