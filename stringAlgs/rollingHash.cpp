@@ -1,6 +1,5 @@
 struct Hash {
-	//for least collisions, base should be a prime > the alphabet size
-	const int base = 33;
+	const int base = 257;
 	int mod;
 	vector<int> prefix, powB;
 	Hash(const string &s, int currMod) : mod(currMod), prefix(s.size()), powB(s.size(), 1) {
@@ -9,7 +8,7 @@ struct Hash {
 		}
 		int sum = 0;
 		for(int i = 0; i < (int)s.size(); i++) {
-			sum = (1LL * base * sum + s[i]-'0') % mod;
+			sum = (1LL * base * sum + s[i]) % mod;
 			prefix[i] = sum;
 		}
 	}
