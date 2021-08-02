@@ -35,14 +35,14 @@ struct lca {
 		}
 	}
 
-	int kthPar(int node, int k) {
+	int kthPar(int node, int k) const {
 		for(int bit = 0; bit < Log; ++bit)
 			if(k&(1<<bit))
 				node = memo[node][bit];
 		return node;
 	}
 
-	int getLca(int x, int y) {
+	int getLca(int x, int y) const {
 		if(depth[x] < depth[y]) swap(x,y);
 		x = kthPar(x, depth[x] - depth[y]);
 		if(x == y) return x;
@@ -55,11 +55,11 @@ struct lca {
 		return memo[x][0];
 	}
 
-	int distEdges(int x, int y) {
+	int distEdges(int x, int y) const {
 		return depth[x] + depth[y] - 2 * depth[getLca(x,y)];
 	}
 
-	ll distWeight(int x, int y) {
+	ll distWeight(int x, int y) const {
 		return dist[x] + dist[y] - 2 * dist[getLca(x,y)];
 	}
 };
