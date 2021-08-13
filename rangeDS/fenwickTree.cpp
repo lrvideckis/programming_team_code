@@ -1,14 +1,16 @@
 struct fenwickTree {
 	vector<ll> bit;
 	fenwickTree(int n) : bit(n,0) {}
-	fenwickTree(const vector<int> & a) : bit(a.size()) {
-		bit[0] = a[0];
-		for (int i = 1; i < (int)a.size(); i++)
-			bit[i] = bit[i-1] + a[i];
-		for (int i = a.size() - 1; i > 0; i--) {
-			int lower_i = (i & (i+1)) - 1;
-			if (lower_i >= 0)
-				bit[i] -= bit[lower_i];
+	fenwickTree(const vector<ll> & a) : bit(a.size()) {
+		if (!a.empty()) {
+			bit[0] = a[0];
+			for (int i = 1; i < (int)a.size(); i++)
+				bit[i] = bit[i-1] + a[i];
+			for (int i = (int)a.size() - 1; i > 0; i--) {
+				int lower_i = (i & (i+1)) - 1;
+				if (lower_i >= 0)
+					bit[i] -= bit[lower_i];
+			}
 		}
 	}
 	void update(int idx, ll d) {
