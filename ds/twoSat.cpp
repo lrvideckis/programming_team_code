@@ -1,17 +1,11 @@
 struct twosat {
-	int n;
-	vector<vector<int> > adj, adjInv;
+	int n, sccID;
+	vector<vector<int>> adj, adjInv;
 	vector<int> scc;
-	int sccID;
 	vector<bool> visited, assignment;
+	stack<int> seen;
 
-	twosat(int nodes) {
-		n = 2*nodes;
-		adj.resize(n);
-		adjInv.resize(n);
-		scc.resize(n);
-		assignment.resize(n/2);
-	}
+	twosat(int variables) : n(2*variables), adj(n), adjInv(n), scc(n), assignment(variables) {}
 
 	//X AND Y = (X OR X) AND (Y OR Y)
 	//X NAND Y = (!X OR !Y)
@@ -19,21 +13,21 @@ struct twosat {
 	//X XOR Y = (X OR Y) AND (!X OR !Y)
 	//X XNOR Y = (!Y OR X) AND (!X OR Y)
 	void add(int i, bool statusI, int j, bool statusJ) {
-		const int from1 = i+(!statusI)*(n/2);
-		const int to1 = j+statusJ*(n/2);
+		int from1 = i+(!statusI)*(n/2);
+		int to1 = j+statusJ*(n/2);
 		adj[from1].push_back(to1);
 		adjInv[to1].push_back(from1);
-		const int from2 = j+(!statusJ)*(n/2);
-		const int to2 = i+statusI*(n/2);
+		int from2 = j+(!statusJ)*(n/2);
+		int to2 = i+statusI*(n/2);
 		adj[from2].push_back(to2);
 		adjInv[to2].push_back(from2);
 	}
 
-	void dfs1(int curr, stack<int> &seen) {
+	void dfs1(int curr) {
 		visited[curr] = true;
 		for(int x : adj[curr]) {
 			if(!visited[x]) {
-				dfs1(x, seen);
+				dfs1(x);
 			}
 		}
 		seen.push(curr);
@@ -50,20 +44,19 @@ struct twosat {
 	}
 
 	bool solve() {
-		visited.resize(n+1,false);
-		stack<int> seen;
+		visited.resize(n, false);
 		for(int i = 0; i < n; ++i) {
 			if(!visited[i]) {
-				dfs1(i, seen);
+				dfs1(i);
 			}
 		}
-		visited.clear();
-		visited.resize(n+1,false);
 		sccID = 0;
+		visited.assign(n, false);
 		while(!seen.empty()) {
-			while(!seen.empty() && visited[seen.top()]) seen.pop();
-			if(!seen.empty()) {
-				dfs2(seen.top());
+			int node = seen.top();
+			seen.pop();
+			if(!visited[node]) {
+				dfs2(node);
 				sccID++;
 			}
 		}
