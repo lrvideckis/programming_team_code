@@ -1,6 +1,10 @@
 struct fenwickTree {
 	vector<ll> bit;
 	fenwickTree(int n) : bit(n,0) {}
+	fenwickTree(vector<int> a) : fenwickTree(a.size()) {
+		for (int i = 0; i < (int)a.size(); i++)
+			add(i, a[i]);
+	}
 	void add(int idx, ll d) {
 		for(; idx < (int)bit.size(); idx = idx | (idx+1))
 			bit[idx] += d;
