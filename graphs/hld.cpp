@@ -1,10 +1,15 @@
 struct hld {
 	int Time=0;
 	vector<int> Size, par, Depth, timeIn, Next;
-	hld(vector<vector<int>> &adj, int root) :
-		Size(adj.size(),1), par(adj.size(),root), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),root) {
-		dfs1(root,adj);
-		dfs2(root,adj);
+	hld(vector<vector<int>> &adj) :
+		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1) {
+		for(int i = 0; i < (int)adj.size(); i++) {
+			if(par[i] == -1) {
+				Next[i] = par[i] = i;
+				dfs1(i,adj);
+				dfs2(i,adj);
+			}
+		}
 	}
 	void dfs1(int node, vector<vector<int>> &adj) {
 		for(auto &to: adj[node]) {
@@ -18,7 +23,7 @@ struct hld {
 			}
 		}
 	}
-	void dfs2(int node, vector<vector<int>> &adj) {
+	void dfs2(int node, const vector<vector<int>> &adj) {
 		timeIn[node] = Time++;
 		for(auto to: adj[node]) {
 			if(to == par[node]) continue;
