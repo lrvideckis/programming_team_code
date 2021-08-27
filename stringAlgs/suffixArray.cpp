@@ -1,109 +1,203 @@
-namespace suffixArray {
-	namespace {
-		enum type { L, S, LMS };
-		const int maxn = 1e6 + 5;
-		int bkt[maxn], cnt[maxn], lptr[maxn], rptr[maxn], tptr[maxn];
-		int rev[maxn];
-		void pre(const vector<int> &s, int sigma) {
-			fill(bkt, bkt + s.size(), -1);
-			fill(cnt, cnt + sigma, 0);
-			for (int i = 0; i < (int)s.size(); ++i) ++cnt[s[i]];
-			int last = 0;
-			for (int i = 0; i < sigma; ++i) {
-				lptr[i] = last;
-				last += cnt[i];
-				rptr[i] = tptr[i] = last - 1;
+class suffix_array {
+	public:
+		//computes suffix array, lcp array, and then sparse table over lcp array
+		//O(n log n)
+		suffix_array(const string &s) {
+			int n = (int)s.size();
+			vector<int> arr(n);
+			for(int i = 0; i < n; i++) {
+				arr[i] = s[i];
 			}
-		}
-		void induce(const vector<int> &s, const vector<type> &v) {
-			for (int i = 0; i < (int)s.size(); ++i) if (bkt[i] > 0) {
-				if (v[bkt[i] - 1] == L) bkt[lptr[s[bkt[i] - 1]]++] = bkt[i] - 1;
+			sa_ = sa_is(arr, 255);
+			inv_sa_.resize(n);
+			for(int i = 0; i < n; i++) {
+				inv_sa_[sa_[i]] = i;
 			}
-			for (int i = (int)s.size() - 1; i >= 0; --i) if (bkt[i] > 0) {
-				if (v[bkt[i] - 1] != L) bkt[rptr[s[bkt[i] - 1]]--] = bkt[i] - 1;
-			}
+			lcp_ = lcp_array(arr, sa_);
+			init_min_sparse_table(lcp_);
 		}
-		bool equal(int l, int r, const vector<int> &s, const vector<type> &v) {
-			do { if (s[l] != s[r]) return false; ++l, ++r; } while (v[l] != LMS && v[r] != LMS);
-			return s[l] == s[r];
+
+		//length of longest common prefix of suffixes s[idx1..n], s[idx2..n], 0-based indexing
+		//O(1)
+		int longest_common_prefix(int idx1, int idx2) const {
+			idx1 = inv_sa_[idx1];
+			idx2 = inv_sa_[idx2];
+			if(idx1 > idx2) swap(idx1, idx2);
+			idx2--;
+			const int x = log2[idx2-idx1+1];
+			return min(dp[x][idx1], dp[x][idx2-(1<<x)+1]);
 		}
-		vector<int> radix_sort(const vector<int> &lms, const vector<int> &s, const vector<type> &v, int sigma) {
-			pre(s, sigma);
-			for (int i = 0; i < (int)lms.size(); ++i) bkt[tptr[s[lms[i]]]--] = lms[i];
-			induce(s, v);
-			vector<int> rt(lms.size());
-			for (int i = 0; i < (int)lms.size(); ++i) rev[lms[i]] = i;
-			int prv = -1, rnk = 0;
-			for (int i = 0; i < (int)s.size(); ++i) {
-				int x = bkt[i];
-				if (v[x] != LMS) continue;
-				if (prv == -1) {
-					rt[rev[x]] = rnk;
-					prv = x;
-					continue;
+
+		//returns true if suffix s[idx1..n] < s[idx2..n]
+		//(so false if idx1 == idx2)
+		//O(1)
+		bool less(int idx1, int idx2) const {
+			return inv_sa_[idx1] < inv_sa_[idx2];
+		}
+
+		vector<int> get_suffix_array() const {
+			return sa_;
+		}
+
+		vector<int> get_lcp_array() const {
+			return lcp_;
+		}
+	private:
+		vector<int> sa_, lcp_, inv_sa_, log2;
+		vector<vector<int>> dp;
+
+		// SA-IS, linear-time suffix array construction
+		// Reference:
+		// G. Nong, S. Zhang, and W. H. Chan,
+		// Two Efficient Algorithms for Linear Time Suffix Array Construction
+		vector<int> sa_is(const vector<int>& s, int upper) {
+			int n = int(s.size());
+			if (n == 0) return {};
+			if (n == 1) return {0};
+			if (n == 2) {
+				if (s[0] < s[1]) {
+					return {0, 1};
+				} else {
+					return {1, 0};
 				}
-				if (!equal(prv, x, s, v)) ++rnk;
-				rt[rev[x]] = rnk;
-				prv = x;
 			}
-			return rt;
-		}
-		vector<int> counting_sort(const vector<int> &s) {
-			vector<int> o(s.size());
-			for (int i = 0; i < (int)s.size(); ++i) o[s[i]] = i;
-			return o;
-		}
-		vector<int> reconstruct(const vector<int> &sa, const vector<int> &s, const vector<type> &v) {
-			vector<int> pos;
-			for (int i = 0; i < (int)s.size(); ++i) if (v[i] == LMS) pos.push_back(i);
-			vector<int> ret(sa.size());
-			for (int i = 0; i < (int)sa.size(); ++i) ret[i] = pos[sa[i]];
-			return ret;
-		}
-		vector<int> sais(const vector<int> &s, int sigma) {
-			vector<type> v(s.size());
-			v[s.size() - 1] = S;
-			for (int i = s.size() - 2; i >= 0; --i) {
-				if (s[i] < s[i + 1] || (s[i] == s[i + 1] && v[i + 1] == S)) v[i] = S;
-				else v[i] = L;
+
+			vector<int> sa(n);
+			vector<bool> ls(n);
+			for (int i = n - 2; i >= 0; i--) {
+				ls[i] = (s[i] == s[i + 1]) ? ls[i + 1] : (s[i] < s[i + 1]);
 			}
-			for (int i = s.size() - 1; i >= 1; --i) {
-				if (v[i] == S && v[i - 1] == L) v[i] = LMS;
+			vector<int> sum_l(upper + 1), sum_s(upper + 1);
+			for (int i = 0; i < n; i++) {
+				if (!ls[i]) {
+					sum_s[s[i]]++;
+				} else {
+					sum_l[s[i] + 1]++;
+				}
+			}
+			for (int i = 0; i <= upper; i++) {
+				sum_s[i] += sum_l[i];
+				if (i < upper) sum_l[i + 1] += sum_s[i];
+			}
+
+			vector<int> buf(upper + 1);
+			auto induce = [&](const vector<int>& lms) {
+				fill(sa.begin(), sa.end(), -1);
+				fill(buf.begin(), buf.end(), 0);
+				copy(sum_s.begin(), sum_s.end(), buf.begin());
+				for (auto d : lms) {
+					if (d == n) continue;
+					sa[buf[s[d]]++] = d;
+				}
+				copy(sum_l.begin(), sum_l.end(), buf.begin());
+				sa[buf[s[n - 1]]++] = n - 1;
+				for (int i = 0; i < n; i++) {
+					int v = sa[i];
+					if (v >= 1 && !ls[v - 1]) {
+						sa[buf[s[v - 1]]++] = v - 1;
+					}
+				}
+				copy(sum_l.begin(), sum_l.end(), buf.begin());
+				for (int i = n - 1; i >= 0; i--) {
+					int v = sa[i];
+					if (v >= 1 && ls[v - 1]) {
+						sa[--buf[s[v - 1] + 1]] = v - 1;
+					}
+				}
+			};
+
+			vector<int> lms_map(n + 1, -1);
+			int m = 0;
+			for (int i = 1; i < n; i++) {
+				if (!ls[i - 1] && ls[i]) {
+					lms_map[i] = m++;
+				}
 			}
 			vector<int> lms;
-			for (int i = 0; i < (int)s.size(); ++i) if (v[i] == LMS) lms.push_back(i);
-			vector<int> r = radix_sort(lms, s, v, sigma);
-			vector<int> sa;
-			if (*max_element(r.begin(), r.end()) == (int)r.size() - 1) sa = counting_sort(r);
-			else sa = sais(r, *max_element(r.begin(), r.end()) + 1);
-			sa = reconstruct(sa, s, v);
-			pre(s, sigma);
-			for (int i = sa.size() - 1; i >= 0; --i) bkt[tptr[s[sa[i]]]--] = sa[i];
-			induce(s, v);
-			return vector<int>(bkt, bkt + s.size());
-		}
-	}
-	vector<int> build(const string &s) {
-		vector<int> v(s.size() + 1);
-		for (int i = 0; i < (int)s.size(); ++i) v[i] = s[i];
-		v[v.size() - 1] = 0;
-		vector<int> sa = sais(v, 256);
-		return vector<int>(sa.begin() + 1, sa.end());
-	}
-	vector<int> getLcp(const string &s, const vector<int> &sa) {
-		int n=s.size(),k=0;
-		vector<int> lcp(n,0);
-		vector<int> rank(n,0);
-		for(int i=0; i<n; i++) rank[sa[i]]=i;
-		for(int i=0; i<n; i++, k?k--:0) {
-			if(rank[i]==n-1) {
-				k=0;
-				continue;
+			lms.reserve(m);
+			for (int i = 1; i < n; i++) {
+				if (!ls[i - 1] && ls[i]) {
+					lms.push_back(i);
+				}
 			}
-			int j=sa[rank[i]+1];
-			while(i+k<n && j+k<n && s[i+k]==s[j+k]) k++;
-			lcp[rank[i]]=k;
+
+			induce(lms);
+
+			if (m) {
+				vector<int> sorted_lms;
+				sorted_lms.reserve(m);
+				for (int v : sa) {
+					if (lms_map[v] != -1) sorted_lms.push_back(v);
+				}
+				vector<int> rec_s(m);
+				int rec_upper = 0;
+				rec_s[lms_map[sorted_lms[0]]] = 0;
+				for (int i = 1; i < m; i++) {
+					int l = sorted_lms[i - 1], r = sorted_lms[i];
+					int end_l = (lms_map[l] + 1 < m) ? lms[lms_map[l] + 1] : n;
+					int end_r = (lms_map[r] + 1 < m) ? lms[lms_map[r] + 1] : n;
+					bool same = true;
+					if (end_l - l != end_r - r) {
+						same = false;
+					} else {
+						while (l < end_l) {
+							if (s[l] != s[r]) {
+								break;
+							}
+							l++;
+							r++;
+						}
+						if (l == n || s[l] != s[r]) same = false;
+					}
+					if (!same) rec_upper++;
+					rec_s[lms_map[sorted_lms[i]]] = rec_upper;
+				}
+
+				auto rec_sa =
+					sa_is(rec_s, rec_upper);
+
+				for (int i = 0; i < m; i++) {
+					sorted_lms[i] = lms[rec_sa[i]];
+				}
+				induce(sorted_lms);
+			}
+			return sa;
 		}
-		return lcp;
-	}
-}
+
+		// Reference:
+		// T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
+		// Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
+		// Applications
+		vector<int> lcp_array(const vector<int> &s, const vector<int> &sa) {
+			int n=s.size(),k=0;
+			vector<int> lcp(n,0);
+			vector<int> rank(n,0);
+			for(int i=0; i<n; i++) rank[sa[i]]=i;
+			for(int i=0; i<n; i++, k?k--:0) {
+				if(rank[i]==n-1) {
+					k=0;
+					continue;
+				}
+				int j=sa[rank[i]+1];
+				while(i+k<n && j+k<n && s[i+k]==s[j+k]) k++;
+				lcp[rank[i]]=k;
+			}
+			return lcp;
+		}
+
+		void init_min_sparse_table(const vector<int> &arr) {
+			const int n = arr.size();
+			log2.resize(n+1,-1);
+			for(int i = 1; i <= n; ++i) log2[i] = 1 + log2[i/2];
+			const int maxPow = log2[n]+1;
+			dp.resize(maxPow, vector<int>(n));
+			for(int j = 0; j < n; ++j) {
+				dp[0][j] = arr[j];
+			}
+			for(int i = 1; i < maxPow; ++i) {
+				for(int j = 0; j+(1<<i)-1<n; ++j) {
+					dp[i][j] = min(dp[i-1][j], dp[i-1][j+(1<<(i-1))]);
+				}
+			}
+		}
+};
