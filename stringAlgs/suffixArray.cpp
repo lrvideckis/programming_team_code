@@ -24,8 +24,8 @@ class suffix_array {
 			idx2 = inv_sa_[idx2];
 			if(idx1 > idx2) swap(idx1, idx2);
 			idx2--;
-			const int x = log2[idx2-idx1+1];
-			return min(dp[x][idx1], dp[x][idx2-(1<<x)+1]);
+			const int x = log2_[idx2-idx1+1];
+			return min(dp_[x][idx1], dp_[x][idx2-(1<<x)+1]);
 		}
 
 		//returns true if suffix s[idx1..n] < s[idx2..n]
@@ -43,8 +43,8 @@ class suffix_array {
 			return lcp_;
 		}
 	private:
-		vector<int> sa_, lcp_, inv_sa_, log2;
-		vector<vector<int>> dp;
+		vector<int> sa_, lcp_, inv_sa_, log2_;
+		vector<vector<int>> dp_;
 
 		// SA-IS, linear-time suffix array construction
 		// Reference:
@@ -187,16 +187,16 @@ class suffix_array {
 
 		void init_min_sparse_table(const vector<int> &arr) {
 			const int n = arr.size();
-			log2.resize(n+1,-1);
-			for(int i = 1; i <= n; ++i) log2[i] = 1 + log2[i/2];
-			const int maxPow = log2[n]+1;
-			dp.resize(maxPow, vector<int>(n));
+			log2_.resize(n+1,-1);
+			for(int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i/2];
+			const int maxPow = log2_[n]+1;
+			dp_.resize(maxPow, vector<int>(n));
 			for(int j = 0; j < n; ++j) {
-				dp[0][j] = arr[j];
+				dp_[0][j] = arr[j];
 			}
 			for(int i = 1; i < maxPow; ++i) {
 				for(int j = 0; j+(1<<i)-1<n; ++j) {
-					dp[i][j] = min(dp[i-1][j], dp[i-1][j+(1<<(i-1))]);
+					dp_[i][j] = min(dp_[i-1][j], dp_[i-1][j+(1<<(i-1))]);
 				}
 			}
 		}
