@@ -1,3 +1,4 @@
+//modified from here: https://judge.yosupo.jp/submission/37410
 class suffix_array {
 	public:
 		//computes suffix array, lcp array, and then sparse table over lcp array
@@ -18,7 +19,9 @@ class suffix_array {
 		}
 
 		//length of longest common prefix of suffixes s[idx1..n], s[idx2..n], 0-based indexing
-		//O(1)
+		//You can check if two substrings s[L1..R1], s[L2..R2] are equal in O(1) by:
+		//
+		//R2-L2 == R1-L1 && suffix_array::longest_common_prefix(L1, L2) >= R2-L2+1
 		int longest_common_prefix(int idx1, int idx2) const {
 			idx1 = inv_sa_[idx1];
 			idx2 = inv_sa_[idx2];
