@@ -1,24 +1,36 @@
 struct Hash {
 	const int base = 257;
-	int mod;
-	vector<int> prefix, powB;
-	Hash(const string &s, int currMod) : mod(currMod), prefix(s.size()), powB(s.size(), 1) {
-		for(int i = 1; i < (int)s.size(); i++) {
-			powB[i] = 1LL * powB[i-1] * base % mod;
+	vector<int> mods;
+	vector<vector<int>> prefix, powB;
+
+	Hash(const string &s, const vector<int> &currMods) :
+		mods(currMods),
+		prefix(currMods.size(), vector<int>(s.size())),
+		powB(currMods.size(), vector<int>(s.size(), 1)) {
+			for(int i = 0; i < (int)mods.size(); i++) {
+				for(int j = 1; j < (int)s.size(); j++) {
+					powB[i][j] = 1LL * powB[i][j-1] * base % mods[i];
+				}
+				int sum = 0;
+				for(int j = 0; j < (int)s.size(); j++) {
+					sum = (1LL * base * sum + s[j]) % mods[i];
+					prefix[i][j] = sum;
+				}
+			}
 		}
-		int sum = 0;
-		for(int i = 0; i < (int)s.size(); i++) {
-			sum = (1LL * base * sum + s[i]) % mod;
-			prefix[i] = sum;
+
+
+	//returns hashes of substring [L,R] inclusive
+	vector<int> getHashes(int L, int R) const {
+		vector<int> allHashes;
+		for(int i = 0; i < (int)mods.size(); i++) {
+			int currHash = prefix[i][R];
+			if(L) {
+				currHash -= 1LL * prefix[i][L-1] * powB[i][R-L+1] % mods[i];
+				if(currHash < 0) currHash += mods[i];
+			}
+			allHashes.push_back(currHash);
 		}
-	}
-	//returns hash of substring [i,j] inclusive
-	int getHash(int i, int j) {
-		int res = prefix[j];
-		if(i-1 >= 0) {
-			res -= 1LL * prefix[i-1] * powB[j-i+1] % mod;
-			if(res < 0) res += mod;
-		}
-		return res;
+		return allHashes;
 	}
 };
