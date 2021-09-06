@@ -22,6 +22,7 @@ struct Hash {
 
 	//returns hashes of substring [L,R] inclusive
 	vector<int> getHashes(int L, int R) const {
+		assert(L <= R);
 		vector<int> allHashes;
 		for(int i = 0; i < (int)mods.size(); i++) {
 			int currHash = prefix[i][R];
