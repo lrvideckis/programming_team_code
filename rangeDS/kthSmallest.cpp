@@ -1,3 +1,4 @@
+//modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
 struct persistentSegTree {
 	public:
 		/* Persistent seg tree to find kth smallest number in a range
@@ -15,7 +16,7 @@ struct persistentSegTree {
 		/* find kth smallest number among arr[L], arr[L+1], ..., arr[R]
 		 * O(logn)
 		 */
-		int find_kth(int L, int R, int k) {
+		int find_kth(int L, int R, int k) const {
 			return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
 		}
 	private:
@@ -56,7 +57,7 @@ struct persistentSegTree {
 			else
 				return new Vertex(v->l, update(v->r, m+1, r, pos));
 		}
-		int find_kth(Vertex* vl, Vertex *vr, int l, int r, int k) {
+		int find_kth(Vertex* vl, Vertex *vr, int l, int r, int k) const {
 			if (l == r)
 				return l;
 			int m = (l + r) / 2, left_count = vr->l->sum - vl->l->sum;
