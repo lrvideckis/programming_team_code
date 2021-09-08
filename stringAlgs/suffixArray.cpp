@@ -26,9 +26,8 @@ class suffix_array {
 			idx1 = inv_sa_[idx1];
 			idx2 = inv_sa_[idx2];
 			if(idx1 > idx2) swap(idx1, idx2);
-			idx2--;
-			const int x = log2_[idx2-idx1+1];
-			return min(dp_[x][idx1], dp_[x][idx2-(1<<x)+1]);
+			int lg = log2_[idx2-idx1];
+			return min(dp_[lg][idx1], dp_[lg][idx2-(1<<lg)]);
 		}
 
 		//returns true if suffix s[idx1..n] < s[idx2..n]
@@ -192,12 +191,8 @@ class suffix_array {
 			const int n = arr.size();
 			log2_.resize(n+1,-1);
 			for(int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i/2];
-			const int maxPow = log2_[n]+1;
-			dp_.resize(maxPow, vector<int>(n));
-			for(int j = 0; j < n; ++j) {
-				dp_[0][j] = arr[j];
-			}
-			for(int i = 1; i < maxPow; ++i) {
+			dp_.resize(log2_[n] + 1, arr);
+			for(int i = 1; i <= log2_[n]; ++i) {
 				for(int j = 0; j+(1<<i)-1<n; ++j) {
 					dp_[i][j] = min(dp_[i-1][j], dp_[i-1][j+(1<<(i-1))]);
 				}
