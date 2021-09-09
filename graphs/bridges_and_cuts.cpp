@@ -70,7 +70,10 @@ struct biconnected_components {
 				} else if (low_link[next] == tour_start[node]) {
 					// This is the root of a biconnected component.
 					stack.push_back(node);
-					components.push_back(vector<int>(stack.begin() + size, stack.end()));
+					vector<int> component(stack.begin() + size, stack.end());
+					sort(component.begin(), component.end());
+					component.erase(unique(component.begin(), component.end()), component.end());
+					components.push_back(component);
 					stack.resize(size);
 				} else {
 					stack.push_back(node);
