@@ -1,4 +1,5 @@
 //modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
+//this leaks memory
 struct persistentSegTree {
 	public:
 		/* Persistent seg tree to find kth smallest number in a range
