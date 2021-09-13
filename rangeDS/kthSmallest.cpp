@@ -14,9 +14,11 @@ struct persistentSegTree {
 			}
 		}
 		/* find kth smallest number among arr[L], arr[L+1], ..., arr[R]
+		 * k is 1-based, so find_kth(L,R,1) returns the min
 		 * O(logn)
 		 */
 		int find_kth(int L, int R, int k) const {
+			assert(1 <= k && k <= R-L+1);
 			return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
 		}
 	private:
