@@ -10,7 +10,7 @@ struct Node {
 
 struct SegmentTree {
 	vector<Node> tree;
-	int n, size;
+	int n;
 
 	/*implement these*/
 	const Node zero = {0, -inf, inf, 0};
@@ -32,13 +32,13 @@ struct SegmentTree {
 	}
 
 	SegmentTree(int currSize) : n(currSize) {
-		size = 1;
+		int size = 1;
 		while(size < n) size<<=1;
 		size<<=1;
 		tree.resize(size);
 	}
 	SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
-		size = 1;
+		int size = 1;
 		while(size < n) size<<=1;
 		size<<=1;
 		tree.resize(size);
