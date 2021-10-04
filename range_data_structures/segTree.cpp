@@ -9,6 +9,7 @@ struct Node {
 };
 
 struct SegmentTree {
+	//change to unordered_map<int, Node> for implicit seg tree
 	vector<Node> tree;
 	int n;
 
