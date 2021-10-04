@@ -2,8 +2,8 @@ const ll inf = 1e18;
 
 struct Node {
 	ll sum = 0;
-	ll mx = 0;
-	ll mn = 0;
+	ll mx = -inf;
+	ll mn = inf;
 
 	ll lazy = 0;
 };
@@ -13,7 +13,6 @@ struct SegmentTree {
 	int n;
 
 	/*implement these*/
-	const Node zero = {0, -inf, inf, 0};
 	Node combine(const Node &L, const Node &R) {
 		Node par;
 		par.sum = L.sum + R.sum;
@@ -78,7 +77,7 @@ struct SegmentTree {
 	}
 	Node query(int l, int r) {return query(1, 0, n-1, l, r);}
 	Node query(int node, int start, int end, int l, int r) {
-		if(r < start || end < l) return zero;
+		if(r < start || end < l) return Node();
 		push(node, start, end);
 		if(l <= start && end <= r) return tree[node];
 		int mid = (start+end)/2;
