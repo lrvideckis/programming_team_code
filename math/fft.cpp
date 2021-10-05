@@ -1,3 +1,4 @@
+//taken from https://cp-algorithms.com/algebra/fft.html
 const double PI=acos(-1);
 typedef complex<double> base;
 inline void fft (vector<base> & a, bool invert) {
@@ -30,26 +31,26 @@ inline void fft (vector<base> & a, bool invert) {
 
 // a, b => coefs to multiply,  res => resulting coefs
 // a[0], b[0], res[0] = coef x^0
-inline void multiply (const vector<int> & a, const vector<int> & b, vector<int> & res) {//change res to ll if needed
+vector<ll> multiply (const vector<int> & a, const vector<int> & b) {//change res to ll if needed
 	if(a.size() * b.size() <= 256) {
-		res.resize(a.size() + b.size()+1, 0);
+		vector<ll> res(a.size() + b.size(), 0);
 		for(int i = 0; i < (int)a.size(); i++)
 			for(int j = 0; j < (int)b.size(); j++)
 				res[i + j] += 1LL * a[i] * b[j];
-		while(res.size()>1 && res.back() == 0) res.pop_back();
-		return;
+		return res;
 	}
 	vector<base> fa (a.begin(), a.end()),  fb (b.begin(), b.end());
 	size_t n=1;
-	while (n<max(a.size(),b.size())) n<<=1;
-	n<<=1;
+	while (n<a.size() + b.size()) n<<=1;
 	fa.resize(n),fb.resize(n);
 	fft (fa,false);  fft(fb,false);
 	for (size_t i=0; i<n; ++i)
 		fa[i]*=fb[i];
 	fft (fa, true);
-	res.resize (n);
-	for(size_t i=0; i<n; ++i)
-		res[i]=(int)(fa[i].real()>0 ? fa[i].real()+0.5 : fa[i].real()-0.5);
-	while(res.size()>1 && res.back() == 0) res.pop_back();
+	vector<ll> res(n);
+	for(size_t i=0; i<n; ++i) {
+		double realVal = fa[i].real();
+		res[i] = realVal > 0 ? realVal + 0.5 : realVal - 0.5;
+	}
+	return res;
 }
