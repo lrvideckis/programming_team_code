@@ -1,4 +1,5 @@
 // Checks if two arrays are rotationally equvalent
+// uses KMP with doubling trick
 bool rot_eq(const vector<int> &a, const vector<int> &b) {
 	if(a.size() != b.size()) return false;
 	vector<int> fail(a.size()+1, 0);
