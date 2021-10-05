@@ -29,9 +29,9 @@ inline void fft (vector<base> & a, bool invert) {
 			a[i]/=n;
 }
 
-// a, b => coefs to multiply,  res => resulting coefs
-// a[0], b[0], res[0] = coef x^0
-vector<ll> multiply (const vector<int> & a, const vector<int> & b) {//change res to ll if needed
+// a, b => coefficients of polynomials to multiply
+// a[i], b[i] = coefficient x^i
+vector<ll> multiply (const vector<int> & a, const vector<int> & b) {
 	if(a.size() * b.size() <= 256) {
 		vector<ll> res(a.size() + b.size(), 0);
 		for(int i = 0; i < (int)a.size(); i++)
