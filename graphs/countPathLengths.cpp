@@ -5,7 +5,7 @@ ll cntTotalPathLengths[Max];
 bool removed[Max];
 
 void dfs2(int node, int par, int root, int currDist) {
-	while(cntPathLength[root].size() <= currDist) {
+	while((int)cntPathLength[root].size() <= currDist) {
 		cntPathLength[root].push_back(0);
 	}
 	cntPathLength[root][currDist]++;
@@ -52,12 +52,11 @@ void dfs1(int node, int par) {
 	temp[0]++;
 	for(int to : adj[node]) {
 		if(to != par && !removed[to]) {
-			vector<int> prod;
-			multiply(temp, cntPathLength[to], prod);
-			for(int i = 0; i < prod.size(); ++i) {
+			vector<ll> prod = multiply(temp, cntPathLength[to]);
+			for(int i = 0; i < (int)prod.size(); ++i) {
 				cntTotalPathLengths[i] += prod[i];
 			}
-			for(int i = 0; i < cntPathLength[to].size(); ++i) {
+			for(int i = 0; i < (int)cntPathLength[to].size(); ++i) {
 				temp[i] += cntPathLength[to][i];
 			}
 		}
