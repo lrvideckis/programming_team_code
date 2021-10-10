@@ -4,18 +4,6 @@ ll modInverse(ll val, ll mod) {
 	return 1<val ? mod - modInverse(mod%val,val)*mod/val : 1;
 }
 
-//returns a^pw % mod
-ll fastPow(ll a, ll pw, ll mod) {
-	ll res = 1;
-	a %= mod;
-	while(pw > 0) {
-		if(pw & 1) res = (res*a)%mod;
-		a = (a*a)%mod;
-		pw >>= 1;
-	}
-	return res;
-}
-
 struct NchooseK {
 	// maxFact is the largest factorial we calculate, so don't call choose() with n > maxFact
 	// set maxFact = (currMod-1) to use chooseWithLucasTheorem
