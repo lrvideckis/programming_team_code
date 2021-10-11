@@ -1,5 +1,6 @@
 //returns x such that x*val%mod == 1
 //x only exists if gcd(val, mod) == 1
+//source: https://codeforces.com/blog/entry/23365
 ll modInverse(ll val, ll mod) {
 	return 1<val ? mod - modInverse(mod%val,val)*mod/val : 1;
 }
@@ -32,12 +33,12 @@ struct NchooseK {
 	}
 
 	//lucas theorem to calculate n choose k in O(log(k))
-	//needs O(mod) memory, so need smallish mod (< 1e6 maybe)
+	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish mod (< 1e6 maybe)
 	//handles n >= mod correctly
 	int chooseWithLucasTheorem(ll n, ll k) const {
 		if(k < 0 || k > n) return 0;
 		if(k == 0) return 1;
-		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(n % mod, k % mod) % mod;
+		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(n%mod, k%mod) % mod;
 	}
 
 	//bars and stars problem: given n objects, each with an endless supply,
