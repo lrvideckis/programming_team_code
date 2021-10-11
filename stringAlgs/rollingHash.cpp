@@ -3,6 +3,7 @@ struct Hash {
 	vector<int> mods;
 	vector<vector<int>> prefix, powB;
 
+	//primes: 10^9 + {7,9,21,33,87}
 	Hash(const string &s, const vector<int> &currMods) :
 		mods(currMods),
 		prefix(currMods.size(), vector<int>(s.size())),
