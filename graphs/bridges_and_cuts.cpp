@@ -3,14 +3,15 @@ struct biconnected_components {
 	biconnected_components(const vector<vector<int>> &adj) :
 		is_cut(adj.size(), false),
 		n(adj.size()),
-		tour(0),
 		tour_start(n),
-		low_link(n),
-		visited(n, false)
+		low_link(n)
 	{
+		int tour = 0;
+		vector<bool> visited(n, false);
+		vector<int> stack;
 		for (int i = 0; i < n; i++)
 			if (!visited[i])
-				dfs(i, -1, adj);
+				dfs(i, -1, adj, visited, stack, tour);
 	}
 
 	bool is_bridge_edge(int u, int v) const {
@@ -29,9 +30,8 @@ struct biconnected_components {
 
 
 	//use anything below this at your own risk :)
-	int n, tour;
-	vector<int> tour_start, low_link, stack;
-	vector<bool> visited;
+	int n;
+	vector<int> tour_start, low_link;
 	unordered_set<ll> is_bridge;
 
 	void add_bridge(int u, int v) {
@@ -39,7 +39,7 @@ struct biconnected_components {
 		is_bridge.insert(1LL * u * n + v);
 	}
 
-	void dfs(int node, int parent, const vector<vector<int>> &adj) {
+	void dfs(int node, int parent, const vector<vector<int>> &adj, vector<bool> &visited, vector<int> &stack, int &tour) {
 		assert(!visited[node]);
 		visited[node] = true;
 		tour_start[node] = tour++;
@@ -58,7 +58,7 @@ struct biconnected_components {
 					stack.push_back(node);
 			} else {
 				int size = (int)stack.size();
-				dfs(next, node, adj);
+				dfs(next, node, adj, visited, stack, tour);
 				children++;
 				// next is part of our subtree.
 				low_link[node] = min(low_link[node], low_link[next]);
