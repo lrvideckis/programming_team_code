@@ -2,7 +2,7 @@
 // jobs X workers cost matrix
 // cost[i][j] is cost of job i done by worker j
 // #jobs must be <= #workers
-// Default finds min cost; to find max cost set all costs[i][j] to -costs[i][j]
+// Default finds min cost; to find max cost set all costs[i][j] to -costs[i][j], set all unused to positive inf, ***set main diagonal (self edges) to 0***
 ll HungarianMatch(const vector<vector<ll>>& a) {
 	ll n = a.size()-1;
 	ll m = a[0].size()-1;
