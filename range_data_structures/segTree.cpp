@@ -15,11 +15,11 @@ struct SegmentTree {
 
 	/*implement these*/
 	Node combine(const Node &L, const Node &R) {
-		Node par;
-		par.sum = L.sum + R.sum;
-		par.mx = max(L.mx, R.mx);
-		par.mn = min(L.mn, R.mn);
-		return par;
+		return Node {
+			L.sum + R.sum,
+			max(L.mx, R.mx),
+			min(L.mn, R.mn)
+		};
 	}
 	void combineRange(int node, int start, int end, ll delta) {
 		tree[node].sum += (end-start+1) * delta;
