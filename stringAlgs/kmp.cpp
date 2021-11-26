@@ -30,6 +30,7 @@ public:
 			if(p == (int)needle.size()) {
 				matches.push_back(i - (int)needle.size() + 1);
 				if(!all) return matches;
+				p = prefixFunction[p];
 			}
 		}
 		return matches;
