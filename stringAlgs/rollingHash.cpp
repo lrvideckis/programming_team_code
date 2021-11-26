@@ -20,7 +20,7 @@ struct Hash {
 		}
 	}
 
-	//returns hashes of substring [L,R] inclusive
+	//returns hashes of substring [L,R] inclusive, one hash per mod in the order mods were given in the constructor
 	vector<int> getHashes(int L, int R) const {
 		assert(L <= R);
 		vector<int> allHashes;
