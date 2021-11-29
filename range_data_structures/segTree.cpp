@@ -46,9 +46,11 @@ struct SegmentTree {
 	}
 	void build(const vector<ll> &arr, int node, int start, int end) {
 		if(start == end) {
-			tree[node].sum = arr[start];
-			tree[node].mx = arr[start];
-			tree[node].mn = arr[start];
+			tree[node] = Node {
+				arr[start],
+				arr[start],
+				arr[start]
+			};
 		} else {
 			int mid = (start+end)/2;
 			build(arr, 2*node, start, mid);
