@@ -26,3 +26,17 @@ struct fenwickTree {
 		return sum(r) - sum(l-1);
 	}
 };
+
+struct rangeUpdatesAndPointQueries {
+	fenwickTree ft;
+	rangeUpdatesAndPointQueries(int n) : ft(n) {}
+	rangeUpdatesAndPointQueries(const vector<int> &arr) : ft(arr) {}
+	void updateRange(int l, int r, int diff) {
+		ft.update(l, diff);
+		if(r+1 < (int)ft.bit.size())
+			ft.update(r+1, -diff);
+	}
+	int queryIdx(int idx) const {
+		return ft.sum(idx);
+	}
+};
