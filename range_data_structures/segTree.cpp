@@ -1,14 +1,14 @@
 const ll inf = 1e18;
 
-struct Node {
-	ll sum = 0;
-	ll mx = -inf;
-	ll mn = inf;
-
-	ll lazy = 0;
-};
-
 struct SegmentTree {
+	struct Node {
+		ll sum = 0;
+		ll mx = -inf;
+		ll mn = inf;
+
+		ll lazy = 0;
+	};
+
 	//change to unordered_map<int, Node> for implicit seg tree
 	vector<Node> tree;
 	int n;
