@@ -8,7 +8,7 @@ public:
 	kthSmallest(const vector<int> &arr) {
 		doCompression(arr);
 		tl = 0, tr = (int)arr.size();
-		roots.push_back(build(tl, tr));
+		roots.push_back(shared_ptr<Vertex>(new Vertex(0)));
 		for (int i = 0; i < (int)arr.size(); i++) {
 			roots.push_back(update(roots.back(), tl, tr, compress[i]));
 		}
@@ -41,29 +41,32 @@ private:
 			if (l) sum += l->sum;
 			if (r) sum += r->sum;
 		}
+		static int getSum(shared_ptr<Vertex> v) {
+			return v ? v->sum : 0;
+		}
+		static shared_ptr<Vertex> getL(shared_ptr<Vertex> v) {
+			return v ? v->l : nullptr;
+		}
+		static shared_ptr<Vertex> getR(shared_ptr<Vertex> v) {
+			return v ? v->r : nullptr;
+		}
 	};
 	vector<shared_ptr<Vertex>> roots;
 	int tl,tr;
-	shared_ptr<Vertex> build(int l, int r) {
-		if (l == r)
-			return shared_ptr<Vertex>(new Vertex(0));
-		int m = (l + r) / 2;
-		return shared_ptr<Vertex>(new Vertex(build(l, m), build(m+1, r)));
-	}
 	shared_ptr<Vertex> update(shared_ptr<Vertex> v, int l, int r, int pos) {
 		if (l == r)
-			return shared_ptr<Vertex>(new Vertex(v->sum+1));
+			return shared_ptr<Vertex>(new Vertex(Vertex::getSum(v)+1));
 		int m = (l + r) / 2;
 		if (pos <= m)
-			return shared_ptr<Vertex>(new Vertex(update(v->l, l, m, pos), v->r));
+			return shared_ptr<Vertex>(new Vertex(update(Vertex::getL(v), l, m, pos), Vertex::getR(v)));
 		else
-			return shared_ptr<Vertex>(new Vertex(v->l, update(v->r, m+1, r, pos)));
+			return shared_ptr<Vertex>(new Vertex(Vertex::getL(v), update(Vertex::getR(v), m+1, r, pos)));
 	}
 	int find_kth(shared_ptr<Vertex> vl, shared_ptr<Vertex> vr, int l, int r, int k) const {
 		if (l == r)
 			return l;
-		int m = (l + r) / 2, left_count = vr->l->sum - vl->l->sum;
-		if (left_count >= k) return find_kth(vl->l, vr->l, l, m, k);
-		return find_kth(vl->r, vr->r, m+1, r, k-left_count);
+		int m = (l + r) / 2, left_count = Vertex::getSum(Vertex::getL(vr)) - Vertex::getSum(Vertex::getL(vl));
+		if (left_count >= k) return find_kth(Vertex::getL(vl), Vertex::getL(vr), l, m, k);
+		return find_kth(Vertex::getR(vl), Vertex::getR(vr), m+1, r, k-left_count);
 	}
 };
