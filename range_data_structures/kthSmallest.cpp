@@ -6,11 +6,11 @@ public:
 	 * O(nlogn) time and space to build tree
 	 */
 	kthSmallest(const vector<int> &arr) {
-		doCompression(arr);
-		tl = 0, tr = (int)arr.size();
+		tl = *min_element(arr.begin(), arr.end());
+		tr = *max_element(arr.begin(), arr.end());
 		roots.push_back(shared_ptr<Vertex>(new Vertex(0)));
-		for (int i = 0; i < (int)arr.size(); i++) {
-			roots.push_back(update(roots.back(), tl, tr, compress[i]));
+		for (int val : arr) {
+			roots.push_back(update(roots.back(), tl, tr, val));
 		}
 	}
 	/* find kth smallest number among arr[L], arr[L+1], ..., arr[R]
@@ -19,20 +19,15 @@ public:
 	 */
 	int find_kth(int L, int R, int k) const {
 		assert(1 <= k && k <= R-L+1);
-		return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
+		return find_kth(roots[L], roots[R+1], tl, tr, k);
+	}
+	/* does: arr[idx] = newValue
+	 *
+	 */
+	void update(int idx, int newValue) {
+
 	}
 private:
-	vector<int> compress, sorted;
-	void doCompression(const vector<int> &arr) {
-		int n = arr.size();
-		sorted = arr;
-		sort(sorted.begin(), sorted.end());
-		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
-		compress.resize(n);
-		for(int i = 0; i < n; ++i) {
-			compress[i] = lower_bound(sorted.begin(), sorted.end(), arr[i]) - sorted.begin();
-		}
-	}
 	struct Vertex {
 		shared_ptr<Vertex> l, r;
 		int sum;
@@ -53,10 +48,15 @@ private:
 	};
 	vector<shared_ptr<Vertex>> roots;
 	int tl,tr;
+	int getMid(int l, int r) const {
+		int mid = l + (r - l)/2;
+		if(mid > l) mid--;
+		return mid;
+	}
 	shared_ptr<Vertex> update(shared_ptr<Vertex> v, int l, int r, int pos) {
 		if (l == r)
 			return shared_ptr<Vertex>(new Vertex(Vertex::getSum(v)+1));
-		int m = (l + r) / 2;
+		int m = getMid(l, r);
 		if (pos <= m)
 			return shared_ptr<Vertex>(new Vertex(update(Vertex::getL(v), l, m, pos), Vertex::getR(v)));
 		else
@@ -65,7 +65,7 @@ private:
 	int find_kth(shared_ptr<Vertex> vl, shared_ptr<Vertex> vr, int l, int r, int k) const {
 		if (l == r)
 			return l;
-		int m = (l + r) / 2, left_count = Vertex::getSum(Vertex::getL(vr)) - Vertex::getSum(Vertex::getL(vl));
+		int m = getMid(l, r), left_count = Vertex::getSum(Vertex::getL(vr)) - Vertex::getSum(Vertex::getL(vl));
 		if (left_count >= k) return find_kth(Vertex::getL(vl), Vertex::getL(vr), l, m, k);
 		return find_kth(Vertex::getR(vl), Vertex::getR(vr), m+1, r, k-left_count);
 	}
