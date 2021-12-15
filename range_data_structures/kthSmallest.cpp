@@ -56,8 +56,7 @@ private:
 		int m = (l + r) / 2;
 		if (pos <= m)
 			return shared_ptr<Vertex>(new Vertex(update(Vertex::getL(v), l, m, pos), Vertex::getR(v)));
-		else
-			return shared_ptr<Vertex>(new Vertex(Vertex::getL(v), update(Vertex::getR(v), m+1, r, pos)));
+		return shared_ptr<Vertex>(new Vertex(Vertex::getL(v), update(Vertex::getR(v), m+1, r, pos)));
 	}
 	int find_kth(shared_ptr<Vertex> vl, shared_ptr<Vertex> vr, int l, int r, int k) const {
 		if (l == r)
