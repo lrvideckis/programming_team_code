@@ -19,6 +19,7 @@
 #include <random>
 #include <bitset>
 #include <climits>
+#include <memory>
 using namespace std;
 #define int long long
 #define endl '\n'
