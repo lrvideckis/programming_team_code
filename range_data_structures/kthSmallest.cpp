@@ -10,7 +10,7 @@ public:
 		sort(sorted.begin(), sorted.end());
 		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
 		tl = 0, tr = (int)sorted.size()-1, n = arr.size();
-		roots.push_back(allocateNode(Node(0)));
+		roots.push_back(0);
 		for (int val : arr) {
 			int idx = lower_bound(sorted.begin(), sorted.end(), val) - sorted.begin();
 			roots.push_back(update(roots.back(), tl, tr, idx));
