@@ -37,9 +37,8 @@ private:
 	vector<Node> nodes;
 	vector<int> roots, sorted;
 	int allocateNode(const Node& v) {
-		int idx = nodes.size();
 		nodes.push_back(v);
-		return idx;
+		return nodes.size()-1;
 	}
 	int tl, tr, n;
 	int update(int v, int l, int r, int pos) {
