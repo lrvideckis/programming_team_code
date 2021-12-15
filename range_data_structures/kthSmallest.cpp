@@ -7,11 +7,11 @@ public:
 	 */
 	kthSmallest(const vector<int> &arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
+		roots.reserve(n+1);
 		nodes.push_back(Node(0));//acts as nullptr
 		sort(sorted.begin(), sorted.end());
 		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
 		tl = 0, tr = (int)sorted.size()-1;
-		roots.reserve(n+1);
 		roots.push_back(0);
 		for (int val : arr) {
 			int idx = lower_bound(sorted.begin(), sorted.end(), val) - sorted.begin();
