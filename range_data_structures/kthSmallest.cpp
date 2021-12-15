@@ -8,7 +8,7 @@ public:
 	kthSmallest(const vector<int> &arr) {
 		doCompression(arr);
 		tl = 0, tr = (int)sorted.size()-1, n = arr.size();
-		roots.push_back(shared_ptr<Vertex>(new Vertex(0)));
+		roots.push_back(allocateNode(Vertex(0)));
 		for (int val : arr) {
 			int idx = lower_bound(sorted.begin(), sorted.end(), val) - sorted.begin();
 			roots.push_back(update(roots.back(), tl, tr, idx));
@@ -31,38 +31,45 @@ private:
 		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
 	}
 	struct Vertex {
-		shared_ptr<Vertex> l, r;
+		int l, r;
 		int sum;
-		Vertex(int val) : l(nullptr), r(nullptr), sum(val) {}
-		Vertex(shared_ptr<Vertex> _l, shared_ptr<Vertex> _r) : l(_l), r(_r), sum(0) {
-			if (l) sum += l->sum;
-			if (r) sum += r->sum;
+		Vertex(int val) : l(-1), r(-1), sum(val) {}
+		Vertex(int _l, int _r, const vector<Vertex>& nodes) : l(_l), r(_r), sum(0) {
+			if (l != -1) sum += nodes[l].sum;
+			if (r != -1) sum += nodes[r].sum;
 		}
-		static int getSum(shared_ptr<Vertex> v) {
-			return v ? v->sum : 0;
+		static int getSum(int v, const vector<Vertex>& nodes) {
+			return v != -1 ? nodes[v].sum : 0;
 		}
-		static shared_ptr<Vertex> getL(shared_ptr<Vertex> v) {
-			return v ? v->l : nullptr;
+		static int getL(int v, const vector<Vertex>& nodes) {
+			return v != -1 ? nodes[v].l : -1;
 		}
-		static shared_ptr<Vertex> getR(shared_ptr<Vertex> v) {
-			return v ? v->r : nullptr;
+		static int getR(int v, const vector<Vertex>& nodes) {
+			return v != -1 ? nodes[v].r : -1;
 		}
 	};
-	vector<shared_ptr<Vertex>> roots;
+	vector<Vertex> nodes;
+	vector<int> roots;
+	int allocateNode(Vertex v) {
+		int idx = nodes.size();
+		nodes.push_back(v);
+		return idx;
+	}
 	int tl, tr, n;
-	shared_ptr<Vertex> update(shared_ptr<Vertex> v, int l, int r, int pos) {
-		if (l == r)
-			return shared_ptr<Vertex>(new Vertex(Vertex::getSum(v)+1));
+	int update(int v, int l, int r, int pos) {
+		if (l == r) {
+			return allocateNode(Vertex(Vertex::getSum(v, nodes)+1));
+		}
 		int m = (l + r) / 2;
 		if (pos <= m)
-			return shared_ptr<Vertex>(new Vertex(update(Vertex::getL(v), l, m, pos), Vertex::getR(v)));
-		return shared_ptr<Vertex>(new Vertex(Vertex::getL(v), update(Vertex::getR(v), m+1, r, pos)));
+			return allocateNode(Vertex(update(Vertex::getL(v, nodes), l, m, pos), Vertex::getR(v, nodes), nodes));
+		return allocateNode(Vertex(Vertex::getL(v, nodes), update(Vertex::getR(v, nodes), m+1, r, pos), nodes));
 	}
-	int find_kth(shared_ptr<Vertex> vl, shared_ptr<Vertex> vr, int l, int r, int k) const {
+	int find_kth(int vl, int vr, int l, int r, int k) const {
 		if (l == r)
 			return l;
-		int m = (l + r) / 2, left_count = Vertex::getSum(Vertex::getL(vr)) - Vertex::getSum(Vertex::getL(vl));
-		if (left_count >= k) return find_kth(Vertex::getL(vl), Vertex::getL(vr), l, m, k);
-		return find_kth(Vertex::getR(vl), Vertex::getR(vr), m+1, r, k-left_count);
+		int m = (l + r) / 2, left_count = Vertex::getSum(Vertex::getL(vr, nodes), nodes) - Vertex::getSum(Vertex::getL(vl, nodes), nodes);
+		if (left_count >= k) return find_kth(Vertex::getL(vl, nodes), Vertex::getL(vr, nodes), l, m, k);
+		return find_kth(Vertex::getR(vl, nodes), Vertex::getR(vr, nodes), m+1, r, k-left_count);
 	}
 };
