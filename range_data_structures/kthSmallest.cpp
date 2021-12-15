@@ -21,7 +21,7 @@ public:
 	 * O(logn)
 	 */
 	int find_kth(int L, int R, int k) const {
-		assert(1 <= k && k <= R-L+1);
+		assert(1 <= k && k <= R-L+1);//note this condition implies L <= R
 		assert(0 <= L && R < n);
 		return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
 	}
