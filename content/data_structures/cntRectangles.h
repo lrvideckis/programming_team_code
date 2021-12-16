@@ -1,13 +1,13 @@
+#pragma once
+
 //given a 2D boolean matrix, calculate cnt[i][j]
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix
 //such that all cells in the rectangle are false
 //O(R*C)
-vector<vector<int>> getNumRectangles(vector<vector<bool>> &grid) {
+vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 	vector<vector<int>> cnt;
-	const int rows = grid.size();
-	if(rows == 0) return cnt;
-	const int cols = grid[0].size();
-	if(cols == 0) return cnt;
+	const int rows = grid.size(), cols = grid[0].size();
+	if(rows == 0 || cols == 0) return cnt;
 	cnt.resize(rows+1, vector<int>(cols+1, 0));
 	vector<vector<int>> arr(rows+2, vector<int>(cols+1, 0));
 	for(int i = 1; i <= rows; ++i) {
@@ -18,7 +18,7 @@ vector<vector<int>> getNumRectangles(vector<vector<bool>> &grid) {
 	}
 	for(int j = 1; j <= cols; ++j) {
 		arr[rows+1][j] = 0;
-		stack<pair<int, int> > st;
+		stack<pair<int, int>> st;
 		st.push({0,0});
 		for(int i = 1; i <= rows+1; ++i) {
 			pair<int, int> curr = {i, arr[i][j]};
