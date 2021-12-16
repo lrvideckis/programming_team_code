@@ -1,3 +1,5 @@
+#pragma once
+
 struct Hash {
 	const int base = 257;
 	vector<int> mods;
