@@ -2,13 +2,11 @@
 DIR=${1:-.}
 
 # use a precompiled header for the template to improve perf
-g++ -Wall -Wextra -Wfatal-errors -Wconversion -std=c++20 -x c++-header $DIR/template.cpp
+g++ -Wall -Wextra -Wfatal-errors -Wconversion -std=c++2a -x c++-header $DIR/template.cpp
 trap "rm -f $DIR/template.cpp.gch" EXIT
 
 SCRIPT_DIR=$DIR/scripts
 tests="$(find $DIR/content -name '*.h')"
-echo "hi there, tests are"
-echo $tests
 declare -i pass=0
 declare -i fail=0
 failHeaders=""
