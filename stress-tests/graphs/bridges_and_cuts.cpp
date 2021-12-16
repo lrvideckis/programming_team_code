@@ -9,6 +9,7 @@ int main() {
 		int n = getRand(1, 1000);//nodes
 		int m = getRand(1, 5000);//edges
 		m = min(m, n * (n-1) / 2);
+		if(getRand(1,3) != 1) m /= 5;
 		vector<pair<int,int>> edges;
 		{
 			vector<pair<int,int>> allEdges;
@@ -32,6 +33,7 @@ int main() {
 		}
 
 		biconnected_components bcc(adj);
+		block_cut_tree bct(bcc);
 
 		disjointSet ds(n);
 		for(auto [u,v] : edges) {
@@ -69,6 +71,25 @@ int main() {
 			assert(isCutNaive == bcc.is_cut[i]);
 		}
 		cout << "cut nodes passed" << endl;
+
+		for(int iter = 100; iter--;) {
+			int node1 = getRand(0,n-1), node2 = getRand(0,n-1);
+			bool sameBCCNaive = true;
+			for(int i = 0; i < n; i++) {
+				if(i == node1 || i == node2) continue;
+				disjointSet curr(n);
+				for(auto [u,v] : edges) {
+					if(u == i || v == i) continue;
+					curr.merge(u,v);
+				}
+				if(curr.find(node1) != curr.find(node2)) {
+					sameBCCNaive = false;
+					break;
+				}
+			}
+			assert(sameBCCNaive == bct.same_biconnected_component(node1, node2));
+		}
+		cout << "bct same bcc test passed" << endl;
 
 	}
 
