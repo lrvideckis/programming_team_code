@@ -1,3 +1,5 @@
+#pragma once
+
 //modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
 struct kthSmallest {
 public:
