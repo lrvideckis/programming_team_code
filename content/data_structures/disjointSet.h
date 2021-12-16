@@ -1,3 +1,5 @@
+#pragma once
+
 struct disjointSet {
 	int numberOfSets;
 	vector<int> parent;
