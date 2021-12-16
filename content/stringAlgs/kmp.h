@@ -1,3 +1,5 @@
+#pragma once
+
 struct KMP_Match {
 public:
 	KMP_Match(const string &needle_) : prefixFunction(needle_.size()+1, 0), needle(needle_) {
