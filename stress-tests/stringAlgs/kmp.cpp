@@ -4,7 +4,7 @@
 #include "../../content/stringAlgs/kmp.h"
 
 int main() {
-	int n = getRand(1, 10);
+	int n = getRand(1, 5);
 	string needle(n, 'a');
 	for(int i = 0; i < n; i++) {
 		needle[i] = getRand(0, 3) + 'a';
@@ -22,15 +22,13 @@ int main() {
 			matchesNaive.push_back(i);
 		}
 	}
+	cout << "number of matches: " << matchesNaive.size() << endl;
 	KMP_Match kmp(needle);
 	assert(matchesNaive == kmp.find(haystack));
 
 	vector<int> firstMatch = kmp.find(haystack, false);
 	while(matchesNaive.size() > 1) matchesNaive.pop_back();
 	assert(matchesNaive == firstMatch);
-
-
-
 
 	cout << "Tests passed!" << endl;
 	return 0;
