@@ -1,3 +1,5 @@
+#pragma once
+
 //modified from https://github.com/nealwu/competitive-programming/blob/master/graph_theory/biconnected_components.cc
 struct biconnected_components {
 	biconnected_components(const vector<vector<int>> &adj) :
