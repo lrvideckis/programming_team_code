@@ -16,7 +16,6 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 			if(grid[i-1][j-1]) arr[i][j] = 0;
 		}
 	}
-	a
 	for(int j = 1; j <= cols; ++j) {
 		arr[rows+1][j] = 0;
 		stack<pair<int, int>> st;
