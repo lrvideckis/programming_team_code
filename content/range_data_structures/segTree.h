@@ -1,3 +1,5 @@
+#pragma once
+
 const ll inf = 1e18;
 
 struct SegmentTree {
