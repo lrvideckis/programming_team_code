@@ -4,4 +4,5 @@ echo "
 #include \"../template.cpp\"
 #include \"../$FILE\"
 " >build/temp.cpp
-g++ -Wall -Wextra -pedantic -Wno-unused-result -Wfatal-errors -DLOCAL -std=c++2a -Wshadow -Wformat=2 -Wfloat-equal -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fstack-protector build/temp.cpp && rm a.out build/temp.cpp
+# Catching silly mistakes with GCC: https://codeforces.com/blog/entry/15547
+g++ -Wall -Wextra -O2 -Wfatal-errors -std=c++2a -pedantic -Wno-unused-result -Wshadow -Wformat=2 -Wfloat-equal -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align build/temp.cpp && rm a.out build/temp.cpp

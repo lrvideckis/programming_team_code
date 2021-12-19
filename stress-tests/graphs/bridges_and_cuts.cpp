@@ -97,6 +97,7 @@ int main() {
 		for(int iter = 100; iter--;) {
 			int node1 = getRand(0,n-1), node2 = getRand(0,n-1);
 			bool sameBCCNaive = true;
+			if(n == 2 && node1 != node2) sameBCCNaive = false;
 			for(int i = 0; i < n; i++) {
 				if(i == node1 || i == node2) continue;
 				disjointSet curr(n);
@@ -119,6 +120,21 @@ int main() {
 				}
 			}
 			bool res = bct.same_biconnected_component(node1, node2);
+			if(!(sameBCCNaive == res && res == sameBBCMiddle)) {
+				cout << "n: " << n << endl;
+				cout << "edges: " << endl;
+				for(auto [u,v] : edges) cout << u << " " << v << endl;
+				cout << endl;
+				cout << "components: " << endl;
+				for(auto v : bcc.components) {
+					for(auto e : v) cout << e << " ";
+					cout << endl;
+				}
+				cout << endl;
+
+				cout << "query nodes: " << node1 << " " << node2 << endl;
+				cout << "naive, middle, fast: " << sameBCCNaive << " " << sameBBCMiddle << " " << res << endl;
+			}
 			assert(sameBCCNaive == res && res == sameBBCMiddle);
 		}
 		cout << "bct same bcc test passed" << endl;
