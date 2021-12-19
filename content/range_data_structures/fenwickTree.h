@@ -32,13 +32,18 @@ struct fenwickTree {
 struct rangeUpdatesAndPointQueries {
 	fenwickTree ft;
 	rangeUpdatesAndPointQueries(int n) : ft(n) {}
-	rangeUpdatesAndPointQueries(const vector<int> &arr) : ft(arr) {}
-	void updateRange(int l, int r, int diff) {
+	rangeUpdatesAndPointQueries(vector<ll> arr) : ft(arr.size()) {
+		for(int i = (int)arr.size()-1; i >= 1; i--) {
+			arr[i] -= arr[i-1];
+		}
+		ft = fenwickTree(arr);
+	}
+	void updateRange(int l, int r, ll diff) {
 		ft.update(l, diff);
 		if(r+1 < (int)ft.bit.size())
 			ft.update(r+1, -diff);
 	}
-	int queryIdx(int idx) const {
+	ll queryIdx(int idx) const {
 		return ft.sum(idx);
 	}
 };
