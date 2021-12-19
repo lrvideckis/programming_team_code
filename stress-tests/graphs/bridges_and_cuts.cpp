@@ -8,7 +8,9 @@ int main() {
 	for(int tests = 1000; tests--;) {
 		int n, m;
 		set<pair<int,int>> edges;
+		bool graphGenType1 = false;
 		if(getRand(1,2) == 1) {//TODO: put back
+			graphGenType1 = true;
 			n = getRand(1, 1000);//nodes
 			m = getRand(1, 5000);//edges
 			m = min(m, n * (n-1) / 2);
@@ -121,6 +123,7 @@ int main() {
 			}
 			bool res = bct.same_biconnected_component(node1, node2);
 			if(!(sameBCCNaive == res && res == sameBBCMiddle)) {
+				count << "graph gen type: " << graphGenType1 << endl;
 				cout << "n: " << n << endl;
 				cout << "edges: " << endl;
 				for(auto [u,v] : edges) cout << u << " " << v << endl;
