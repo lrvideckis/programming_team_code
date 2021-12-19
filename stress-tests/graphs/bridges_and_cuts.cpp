@@ -99,7 +99,11 @@ int main() {
 		for(int iter = 100; iter--;) {
 			int node1 = getRand(0,n-1), node2 = getRand(0,n-1);
 			bool sameBCCNaive = true;
-			if(n == 2 && node1 != node2) sameBCCNaive = false;
+			if(n == 2) {
+				sameBCCNaive = (node1 == node2 || edges.size() == 1);
+				assert(edges.size() <= 1);
+				if(edges.size() == 1) assert(edges.count({0,1}));
+			}
 			for(int i = 0; i < n; i++) {
 				if(i == node1 || i == node2) continue;
 				disjointSet curr(n);
