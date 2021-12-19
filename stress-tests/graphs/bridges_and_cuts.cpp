@@ -123,7 +123,7 @@ int main() {
 			}
 			bool res = bct.same_biconnected_component(node1, node2);
 			if(!(sameBCCNaive == res && res == sameBBCMiddle)) {
-				count << "graph gen type: " << graphGenType1 << endl;
+				cout << "graph gen type: " << graphGenType1 << endl;
 				cout << "n: " << n << endl;
 				cout << "edges: " << endl;
 				for(auto [u,v] : edges) cout << u << " " << v << endl;
