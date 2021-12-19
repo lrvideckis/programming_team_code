@@ -5,25 +5,47 @@
 #include "../../content/data_structures/disjointSet.h"
 
 int main() {
-	for(int tests = 20; tests--;) {
-		int n = getRand(1, 1000);//nodes
-		int m = getRand(1, 5000);//edges
-		m = min(m, n * (n-1) / 2);
-		if(getRand(1,3) != 1) m /= 5;
-		vector<pair<int,int>> edges;
-		{
-			vector<pair<int,int>> allEdges;
-			for(int i = 0; i < n; i++) {
-				for(int j = i+1; j < n; j++) {
-					allEdges.push_back({i,j});
+	for(int tests = 1000; tests--;) {
+		int n, m;
+		set<pair<int,int>> edges;
+		if(getRand(1,2) == 1) {//TODO: put back
+			n = getRand(1, 1000);//nodes
+			m = getRand(1, 5000);//edges
+			m = min(m, n * (n-1) / 2);
+			if(getRand(1,3) != 1) m /= 5;
+			{
+				vector<pair<int,int>> allEdges;
+				for(int i = 0; i < n; i++) {
+					for(int j = i+1; j < n; j++) {
+						allEdges.push_back({i,j});
+					}
+				}
+				for(int i = 0, sz = (int)allEdges.size(); i < sz; i++) {
+					swap(allEdges[i], allEdges[getRand(i, sz-1)]);
+				}
+				for(int i = 0; i < m; i++) {
+					edges.insert(allEdges[i]);
 				}
 			}
-			for(int i = 0, sz = (int)allEdges.size(); i < sz; i++) {
-				swap(allEdges[i], allEdges[getRand(i, sz-1)]);
+		} else {//half the time, generate
+			n = getRand(1, 1000);//nodes
+			m = n-1;
+			int extraEdges = getRand(0,30);
+			extraEdges = min(extraEdges, n*(n-1)/2 - m);
+			for(int i = 1; i < n; i++) {
+				edges.insert({getRand(0, i-1), i});
 			}
-			for(int i = 0; i < m; i++) {
-				edges.push_back(allEdges[i]);
+			for(int i = 0; i < extraEdges; i++) {
+				pair<int, int> currEdge;
+				while(true) {
+					currEdge = {getRand(0, n-1), getRand(0, n-1)};
+					if(currEdge.first == currEdge.second) continue;
+					if(currEdge.first > currEdge.second) swap(currEdge.first, currEdge.second);
+					if(!edges.count(currEdge)) break;
+				}
+				edges.insert(currEdge);
 			}
+			assert((int)edges.size() == m + extraEdges);
 		}
 
 		vector<vector<int>> adj(n);
@@ -41,17 +63,17 @@ int main() {
 		}
 		int numComponents = ds.numberOfSets;
 
-		for(int i = 0; i < m; i++) {
+		for(auto &eTest : edges) {
 			disjointSet curr(n);
-			for(int j = 0; j < m; j++) {
-				if(j == i) continue;
-				auto [u,v] = edges[j];
-				curr.merge(u,v);
+			for(auto &e : edges) {
+				if(e == eTest) continue;
+				curr.merge(e.first,e.second);
 			}
 			//sanity check
 			assert(curr.numberOfSets >= numComponents);
 			bool isBridgeNaive = (curr.numberOfSets > numComponents);
-			auto [u,v] = edges[i];
+			auto [u,v] = eTest;
+			//cout << "bridge naive, fast: " << isBridgeNaive << " " << bcc.is_bridge_edge(u,v) << endl;
 			assert(isBridgeNaive == bcc.is_bridge_edge(u,v));
 		}
 		cout << "is_bridge_edge passed" << endl;
@@ -87,10 +109,19 @@ int main() {
 					break;
 				}
 			}
-			assert(sameBCCNaive == bct.same_biconnected_component(node1, node2));
+			bool sameBBCMiddle = false;
+			for(const vector<int>& currBcc : bcc.components) {
+				if(find(currBcc.begin(), currBcc.end(), node1) != currBcc.end()) {
+					if(find(currBcc.begin(), currBcc.end(), node2) != currBcc.end()) {
+						sameBBCMiddle = true;
+						break;
+					}
+				}
+			}
+			bool res = bct.same_biconnected_component(node1, node2);
+			assert(sameBCCNaive == res && res == sameBBCMiddle);
 		}
 		cout << "bct same bcc test passed" << endl;
-
 	}
 
 	cout << "Tests passed!" << endl;

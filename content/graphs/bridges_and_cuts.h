@@ -1,7 +1,10 @@
 #pragma once
 
+#include "../data_structures/disjointSet.h"
+
 //modified from https://github.com/nealwu/competitive-programming/blob/master/graph_theory/biconnected_components.cc
 struct biconnected_components {
+	//don't pass in a graph with multiple edges between the same pair of nodes - it breaks bridge finding
 	biconnected_components(const vector<vector<int>> &adj) :
 		is_cut(adj.size(), false),
 		n(adj.size()),
@@ -88,6 +91,9 @@ struct biconnected_components {
 		// The root of the tree is a cut vertex iff it has more than one child.
 		if (parent < 0) {
 			is_cut[node] = children > 1;
+			if(children == 0) {
+				components.push_back({node});
+			}
 		}
 	}
 };
@@ -106,14 +112,15 @@ struct block_cut_tree {
 		n(_bi_comps.n),
 		BC(_bi_comps.components.size()),
 		T(n + BC),
+		ds(T),
 		block_vertex_tree(T),
 		parent(T, -1),
-		depth(T)
-	{
+		depth(T) {
 		auto add_edge = [&](int a, int b) {
 			assert((a < n) ^ (b < n));
 			block_vertex_tree[a].push_back(b);
 			block_vertex_tree[b].push_back(a);
+			ds.merge(a, b);
 		};
 
 		for (int bc = 0; bc < BC; bc++)
@@ -126,6 +133,7 @@ struct block_cut_tree {
 	}
 
 	bool same_biconnected_component(int a, int b) const {
+		if(ds.find(a) != ds.find(b)) return false;
 		if (depth[a] > depth[b])
 			swap(a, b);
 		// Two different nodes are in the same biconnected component iff their distance = 2 in the block-cut tree.
@@ -134,6 +142,7 @@ struct block_cut_tree {
 
 	//use anything below this at your own risk :)
 	int n, BC, T;
+	mutable disjointSet ds;
 	vector<vector<int>> block_vertex_tree;//adjacency list of block vertex tree
 	vector<int> parent;
 	vector<int> depth;
