@@ -137,6 +137,8 @@ int main() {
 
 				cout << "query nodes: " << node1 << " " << node2 << endl;
 				cout << "naive, middle, fast: " << sameBCCNaive << " " << sameBBCMiddle << " " << res << endl;
+				cout << flush;
+				return 0;
 			}
 			assert(sameBCCNaive == res && res == sameBBCMiddle);
 		}
