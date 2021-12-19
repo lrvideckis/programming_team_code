@@ -6,7 +6,7 @@ struct partitionFunction {
 	ll getPartitionsModM(ll n, ll m) {
 		if(n < 0) return 0;
 		if(n == 0) return 1;
-		if(remember.size() <= n) remember.resize(n+1,-1);
+		if((int)remember.size() <= n) remember.resize(n+1,-1);
 		if(remember[n] != -1) return remember[n];
 		ll sum = 0;
 		ll val = 1;

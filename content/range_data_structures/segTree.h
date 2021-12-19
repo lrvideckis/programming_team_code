@@ -50,7 +50,7 @@ struct SegmentTree {
 		tree.resize(size);
 	}
 	SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
-		auto build = [&](auto &&build, const vector<ll> &arr, int node, int start, int end) -> void {
+		auto build = [&](auto &&buildPtr, int node, int start, int end) -> void {
 			if(start == end) {
 				tree[node] = Node {
 					arr[start],
@@ -59,8 +59,8 @@ struct SegmentTree {
 				};
 			} else {
 				int mid = (start+end)/2;
-				build(build, arr, 2*node, start, mid);
-				build(build, arr, 2*node+1, mid+1, end);
+				buildPtr(buildPtr, 2*node, start, mid);
+				buildPtr(buildPtr, 2*node+1, mid+1, end);
 				tree[node] = combineChildren(tree[2*node], tree[2*node+1]);
 			}
 		};
@@ -68,7 +68,7 @@ struct SegmentTree {
 		while(size < n) size<<=1;
 		size<<=1;
 		tree.resize(size);
-		build(build, arr, 1, 0, n-1);
+		build(build, 1, 0, n-1);
 	}
 	void update(int l, int r, ll diff) {update(1, 0, n-1, l, r, diff);}
 	void update(int node, int start, int end, int l, int r, ll diff) {

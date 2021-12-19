@@ -10,10 +10,10 @@
 
 struct lca {
 	typedef long long ll;
-	int Log;
 	vector<vector<int>> memo;
 	vector<int> depth;
 	vector<ll> dist;
+	int Log;
 
 	// use weights of 1 for unweighted tree
 	lca(const vector<vector<pair<int, ll>>> &graph, int root) :

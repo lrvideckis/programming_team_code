@@ -41,7 +41,7 @@ vector<int> LIS(vector<T>& v) {
 vector<int> LIS(vector<int> &arr) {//longest non-decreasing sequence
 	vector<int> longest(arr.size(),0);
 	multiset<int> seq;
-	for(int i = 0; i < arr.size(); ++i) {
+	for(int i = 0; i < (int)arr.size(); ++i) {
 		seq.insert(arr[i]);
 		auto it = seq.upper_bound(arr[i]);
 		if(it != seq.end()) seq.erase(it);
@@ -53,7 +53,7 @@ vector<int> LIS(vector<int> &arr) {//longest non-decreasing sequence
 vector<int> LSIS(vector<int> &arr) {//longest strictly increasing sequence
 	vector<int> longest(arr.size(),0);
 	multiset<int> seq;
-	for(int i = 0; i < arr.size(); ++i) {
+	for(int i = 0; i < (int)arr.size(); ++i) {
 		seq.insert(arr[i]);
 		auto it = seq.lower_bound(arr[i]);
 		it++;
