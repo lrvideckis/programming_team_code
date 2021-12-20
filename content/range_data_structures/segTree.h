@@ -47,7 +47,7 @@ struct SegmentTree {
 		int size = 1;
 		while(size < n) size<<=1;
 		size<<=1;
-		tree.resize(size);
+		tree.resize(size, Node{0,0,0});
 	}
 	SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
 		auto build = [&](auto &&buildPtr, int node, int start, int end) -> void {

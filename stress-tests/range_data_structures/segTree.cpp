@@ -11,7 +11,15 @@ int main() {
 		for(int i = 0; i < n; i++) {
 			arr[i] = getRand(-mx, mx);
 		}
-		SegmentTree st(arr);
+		SegmentTree st(0);
+		if(getRand(1,2) == 1) {
+			cout << "constructor 1" << endl;
+			st = SegmentTree(n);
+			arr = vector<ll>(n,0);
+		} else {
+			cout << "constructor 2" << endl;
+			st = SegmentTree(arr);
+		}
 		for(int iterations = 5000; iterations--;) {
 			int L = getRand(0,n-1), R = getRand(0,n-1);
 			if(L > R) swap(L,R);
