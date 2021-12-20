@@ -1,6 +1,6 @@
 #pragma once
 
-vector<ll> dijkstra(const vector<vector<pair<int,ll>>> &adj, int startNode) {
+vector<ll> dijkstra(const vector<vector<pair<int,ll>>> &adj /*directed or undirected, weighted graph*/, int startNode) {
 	vector<ll> length(adj.size(), 1e18);
 	length[startNode] = 0;
 	set<pair<ll, int>> q;//weight, node
