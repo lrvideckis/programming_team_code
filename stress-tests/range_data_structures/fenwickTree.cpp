@@ -12,7 +12,15 @@ int main() {
 			for(int i = 0; i < n; i++) {
 				arr[i] = getRand(-mx, mx);
 			}
-			fenwickTree ft(arr);
+			fenwickTree ft(0);
+			if(getRand(1,2) == 1) {
+				cout << "constructor 1" << endl;
+				ft = fenwickTree(arr);
+			} else {
+				cout << "constructor 2" << endl;
+				ft = fenwickTree(n);
+				arr = vector<ll>(n, 0);
+			}
 			for(int iterations = 5000; iterations--;) {
 				if(getRand(1,2) == 1) {//update
 					int idx = getRand(0, n-1);
