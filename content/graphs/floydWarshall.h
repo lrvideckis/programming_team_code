@@ -4,7 +4,7 @@ vector<vector<ll>> floydWarshall(const vector<vector<pair<int,ll>>>& adj /*direc
 	int n = adj.size();
 	vector<vector<ll>> len(n, vector<ll>(n, 1e18));
 	for (int i = 0; i < n; i++) {
-		len[i][i] = 0;//remove this line if you want shortest cycle - len[i][i] will = length of shortest cycle including node i
+		len[i][i] = 0;//remove this line if you want shortest cycle - len[i][i] will = length of shortest cycle including node i (only for directed graphs)
 		for(auto [neighbor, weight] : adj[i]) {
 			len[i][neighbor] = min(len[i][neighbor], weight);
 		}
