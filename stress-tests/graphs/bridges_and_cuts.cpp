@@ -13,7 +13,7 @@ int main() {
 			graphGenType1 = true;
 			n = getRand(1, 1000);//nodes
 			if(getRand(1,2) == 1) n = getRand(1, 6);
-			m = getRand(0, n * (n-1) / 2);//edges
+			m = getRand(0, min(5000, n * (n-1) / 2));//edges
 			if(getRand(1,3) != 1) m /= 5;
 			{
 				vector<pair<int,int>> allEdges;
