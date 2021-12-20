@@ -30,7 +30,7 @@ int main() {
 					edges.insert(allEdges[i]);
 				}
 			}
-		} else {//half the time, generate
+		} else {//half the time, generate a tree with extra edges
 			n = getRand(1, 1000);//nodes
 			int m = n-1;
 			int extraEdges = getRand(0,30);
@@ -39,6 +39,7 @@ int main() {
 				if(u > v) swap(u,v);
 				edges.insert({u,v});
 			}
+			assert(edges.size() == n-1);
 			for(int i = 0; i < extraEdges; i++) {
 				pair<int, int> currEdge;
 				while(true) {

@@ -1,5 +1,5 @@
 //stolen from https://github.com/kth-competitive-programming/kactl/blob/main/stress-tests/utilities/genTree.h
-vector<pair<int,int>> pruferCodeToTree(vector<int> &pruferCode) {
+vector<pair<int,int>> pruferCodeToTree(int n, const vector<int> &pruferCode) {
 	// Stores number count of nodes in the prufer code
 	unordered_map<int,int> nodeCount;
 
@@ -36,7 +36,8 @@ vector<pair<int,int>> pruferCodeToTree(vector<int> &pruferCode) {
 	}
 
 	// The final edge
-	edges.push_back({*leaves.begin(), *leaves.rbegin()});
+	if(n > 1)
+		edges.push_back({*leaves.begin(), *leaves.rbegin()});
 	return edges;
 }
 
@@ -45,7 +46,7 @@ vector<pair<int, int>> genRandomTreeViaPruferCode(int n) {
 	for (int i=0; i<n-2; i++) {
 		pruferCode.push_back(getRand(1, n-1));
 	}
-	auto edges = pruferCodeToTree(pruferCode);
+	auto edges = pruferCodeToTree(n, pruferCode);
 	for (auto &p: edges)
 		p.first--, p.second--;
 	return edges;
