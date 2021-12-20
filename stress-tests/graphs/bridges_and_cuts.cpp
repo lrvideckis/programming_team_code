@@ -6,15 +6,15 @@
 
 int main() {
 	for(int tests = 1000; tests--;) {
-		int n, m;
+		int n;
 		set<pair<int,int>> edges;
 		bool graphGenType1 = false;
 		if(getRand(1,2) == 1) {
 			graphGenType1 = true;
 			n = getRand(1, 1000);//nodes
 			if(getRand(1,2) == 1) n = getRand(1, 6);
-			m = getRand(0, min(5000, n * (n-1) / 2));//edges
-			if(getRand(1,3) != 1) m /= 5;
+			int m = getRand(0, min(5000, n * (n-1) / 2));//edges
+			if(n > 6 && getRand(1,3) != 1) m /= 5;
 			{
 				vector<pair<int,int>> allEdges;
 				for(int i = 0; i < n; i++) {
@@ -31,7 +31,7 @@ int main() {
 			}
 		} else {//half the time, generate
 			n = getRand(1, 1000);//nodes
-			m = n-1;
+			int m = n-1;
 			int extraEdges = getRand(0,30);
 			extraEdges = min(extraEdges, n*(n-1)/2 - m);
 			for(int i = 1; i < n; i++) {
@@ -49,6 +49,7 @@ int main() {
 			}
 			assert((int)edges.size() == m + extraEdges);
 		}
+		cout << "# nodes, edges: " << n << " " << edges.size() << "   " << flush;
 
 		vector<vector<int>> adj(n);
 		for(auto [u,v] : edges) {
@@ -75,10 +76,9 @@ int main() {
 			assert(curr.numberOfSets >= numComponents);
 			bool isBridgeNaive = (curr.numberOfSets > numComponents);
 			auto [u,v] = eTest;
-			//cout << "bridge naive, fast: " << isBridgeNaive << " " << bcc.is_bridge_edge(u,v) << endl;
 			assert(isBridgeNaive == bcc.is_bridge_edge(u,v));
 		}
-		cout << "is_bridge_edge passed" << endl;
+		cout << "is_bridge_edge passed " << flush;
 
 		for(int i = 0; i < n; i++) {
 			disjointSet curr(n);
@@ -94,7 +94,7 @@ int main() {
 			}
 			assert(isCutNaive == bcc.is_cut[i]);
 		}
-		cout << "cut nodes passed" << endl;
+		cout << "cut nodes passed " << flush;
 
 		for(int iter = 100; iter--;) {
 			int node1 = getRand(0,n-1), node2 = getRand(0,n-1);
@@ -142,11 +142,12 @@ int main() {
 				cout << "query nodes: " << node1 << " " << node2 << endl;
 				cout << "naive, middle, fast: " << sameBCCNaive << " " << sameBBCMiddle << " " << res << endl;
 				cout << flush;
-				return 0;
+				return 1;//test failed
 			}
+			//sanity check
 			assert(sameBCCNaive == res && res == sameBBCMiddle);
 		}
-		cout << "bct same bcc test passed" << endl;
+		cout << "bct same bcc test passed" << endl << flush;
 	}
 
 	cout << "Tests passed!" << endl;
