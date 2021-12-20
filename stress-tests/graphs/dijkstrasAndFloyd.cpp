@@ -9,9 +9,7 @@ int main() {
 	for(int tests = 1000; tests--;) {
 		int n;
 		set<pair<int,int>> edges;
-		bool graphGenType1 = false;
 		if(getRand(1,2) == 1) {
-			graphGenType1 = true;
 			n = getRand(1, 1000);//nodes
 			if(getRand(1,2) == 1) n = getRand(1, 6);
 			int m = getRand(0, min(5000, n * (n-1) / 2));//edges

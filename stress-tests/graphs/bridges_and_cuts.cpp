@@ -37,7 +37,7 @@ int main() {
 			extraEdges = min(extraEdges, n*(n-1)/2 - m);
 			for(auto [u,v] : genRandomTree(n)) {
 				if(u > v) swap(u,v);
-				edges.insert(u,v);
+				edges.insert({u,v});
 			}
 			for(int i = 0; i < extraEdges; i++) {
 				pair<int, int> currEdge;
