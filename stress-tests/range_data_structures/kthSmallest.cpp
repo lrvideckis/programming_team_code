@@ -1,6 +1,6 @@
-#include "../template.h"
+#include "../test_utilities/template.h"
+#include "../test_utilities/random.h"
 
-#include "../../random.h"
 #include "../../content/range_data_structures/kthSmallest.h"
 
 int main() {

@@ -1,6 +1,7 @@
-#include "../template.h"
+#include "../test_utilities/template.h"
+#include "../test_utilities/random.h"
+#include "../test_utilities/treeGen.h"
 
-#include "../../random.h"
 #include "../../content/graphs/dijkstra.h"
 #include "../../content/graphs/floydWarshall.h"
 
@@ -29,13 +30,15 @@ int main() {
 					edges.insert(allEdges[i]);
 				}
 			}
-		} else {//half the time, generate
+		} else {//half the time, generate trees with extra edges
 			n = getRand(1, 1000);//nodes
 			int m = n-1;
 			int extraEdges = getRand(0,30);
 			extraEdges = min(extraEdges, n*(n-1)/2 - m);
-			for(int i = 1; i < n; i++) {
-				edges.insert({getRand(0, i-1), i});
+
+			for(auto [u,v] : genRandomTree(n)) {
+				if(u > v) swap(u,v);
+				edges.insert({u,v});
 			}
 			for(int i = 0; i < extraEdges; i++) {
 				pair<int, int> currEdge;
