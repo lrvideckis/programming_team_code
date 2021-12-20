@@ -9,11 +9,11 @@ int main() {
 		int n, m;
 		set<pair<int,int>> edges;
 		bool graphGenType1 = false;
-		if(getRand(1,2) == 1) {//TODO: put back
+		if(getRand(1,2) == 1) {
 			graphGenType1 = true;
 			n = getRand(1, 1000);//nodes
-			m = getRand(1, 5000);//edges
-			m = min(m, n * (n-1) / 2);
+			if(getRand(1,2) == 1) n = getRand(1, 6);
+			m = getRand(0, n * (n-1) / 2);//edges
 			if(getRand(1,3) != 1) m /= 5;
 			{
 				vector<pair<int,int>> allEdges;
