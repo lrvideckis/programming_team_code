@@ -1,5 +1,3 @@
-#pragma once
-
 const ll inf = 1e18;
 
 struct SegmentTree {
@@ -7,6 +5,8 @@ struct SegmentTree {
 		ll sum = 0;
 		ll mx = -inf;
 		ll mn = inf;
+
+		int l, r;
 
 		ll lazy = 0;
 	};
@@ -20,11 +20,14 @@ struct SegmentTree {
 		return Node {
 			L.sum + R.sum,
 			max(L.mx, R.mx),
-			min(L.mn, R.mn)
+			min(L.mn, R.mn),
+			L.l,
+			R.r
 		};
 	}
 	//what happens when delta is applied to every index in range [start,end]?
-	void applyDeltaOnRange(int node, int start, int end, ll delta) {
+	void applyDeltaOnRange(int node, ll delta) {
+		int start = tree[node].l, end = tree[node].r;
 		tree[node].sum += (end-start+1) * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
@@ -34,28 +37,24 @@ struct SegmentTree {
 		}
 	}
 	//apply lazy value to range
-	void pushLazy(int node, int start, int end) {
+	void pushLazy(int node) {
 		ll &currLazy = tree[node].lazy;
 		if(currLazy) {
-			applyDeltaOnRange(node, start, end, currLazy);
+			applyDeltaOnRange(node, currLazy);
 			currLazy = 0;
 		}
 	}
 	/*********************/
 
-	SegmentTree(int currSize) : n(currSize) {
-		int size = 1;
-		while(size < n) size<<=1;
-		size<<=1;
-		tree.resize(size, Node{0,0,0});
-	}
 	SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
 		auto build = [&](auto&& buildPtr, int node, int start, int end) -> void {
 			if(start == end) {
 				tree[node] = Node {
 					arr[start],
 					arr[start],
-					arr[start]
+					arr[start],
+					start,
+					end
 				};
 			} else {
 				int mid = (start+end)/2;
@@ -71,31 +70,31 @@ struct SegmentTree {
 		build(build, 1, 0, n-1);
 	}
 	void update(int l, int r, ll diff) {
-		auto update = [&](auto&& updatePtr, int node, int start, int end) -> void {
-			pushLazy(node, start, end);
+		auto update = [&](auto&& updatePtr, int node) -> void {
+			pushLazy(node);
+			int start = tree[node].l, end = tree[node].r;
 			if(r < start || end < l) return;
 			if(l <= start && end <= r) {
-				applyDeltaOnRange(node, start, end, diff);
+				applyDeltaOnRange(node, diff);
 				return;
 			}
-			int mid = (start + end) / 2;
-			updatePtr(updatePtr, 2*node, start, mid);
-			updatePtr(updatePtr, 2*node+1, mid+1, end);
+			updatePtr(updatePtr, 2*node);
+			updatePtr(updatePtr, 2*node+1);
 			tree[node] = combineChildren(tree[2*node], tree[2*node+1]);
 		};
-		update(update, 1, 0, n-1);
+		update(update, 1);
 	}
 	Node query(int l, int r) {
-		auto query = [&](auto&& queryPtr, int node, int start, int end) -> Node {
+		auto query = [&](auto&& queryPtr, int node) -> Node {
+			int start = tree[node].l, end = tree[node].r;
 			if(r < start || end < l) return Node();
-			pushLazy(node, start, end);
+			pushLazy(node);
 			if(l <= start && end <= r) return tree[node];
-			int mid = (start+end)/2;
 			return combineChildren(
-				queryPtr(queryPtr, 2*node, start, mid),
-				queryPtr(queryPtr, 2*node+1, mid+1, end)
+				queryPtr(queryPtr, 2*node),
+				queryPtr(queryPtr, 2*node+1)
 			);
 		};
-		return query(query, 1, 0, n-1);
+		return query(query, 1);
 	}
 };
