@@ -13,7 +13,7 @@ struct SegmentTree {
 		ll lazy = 0;
 	};
 
-	//change to unordered_map<int, Node> for implicit seg tree
+	//change to unordered_map<int, Node> for implicit seg tree. Although I've TLE'd multiple times doing this
 	vector<Node> tree;
 	int n;
 
@@ -25,6 +25,7 @@ struct SegmentTree {
 			min(L.mn, R.mn),
 			L.l,
 			R.r
+			//Note lazy value initializes to 0 here which is ok since we always push lazy down&reset before combining back up
 		};
 	}
 	//what happens when delta is applied to every index in range [start,end]?
@@ -48,7 +49,7 @@ struct SegmentTree {
 	}
 	/*********************/
 
-	SegmentTree(const vector<ll> &arr) : n((int)arr.size()) {
+	SegmentTree(const vector<ll>& arr) : n((int)arr.size()) {
 		auto build = [&](auto&& buildPtr, int node, int start, int end) -> void {
 			if(start == end) {
 				tree[node] = Node {
@@ -71,6 +72,7 @@ struct SegmentTree {
 		tree.resize(size);
 		build(build, 1, 0, n-1);
 	}
+	//inclusive range: [l,r]
 	void update(int l, int r, ll diff) {
 		auto update = [&](auto&& updatePtr, int node) -> void {
 			pushLazy(node);
@@ -86,6 +88,7 @@ struct SegmentTree {
 		};
 		update(update, 1);
 	}
+	//inclusive range: [l,r]
 	Node query(int l, int r) {
 		auto query = [&](auto&& queryPtr, int node) -> Node {
 			int start = tree[node].l, end = tree[node].r;
