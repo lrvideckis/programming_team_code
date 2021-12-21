@@ -89,7 +89,7 @@ struct SegmentTree {
 	Node query(int l, int r) {
 		auto query = [&](auto&& queryPtr, int node) -> Node {
 			int start = tree[node].l, end = tree[node].r;
-			if(r < start || end < l) return Node();
+			if(r < start || end < l) return Node();//l,r is unitialized -> access means undefined behavior
 			pushLazy(node);
 			if(l <= start && end <= r) return tree[node];
 			return combineChildren(
