@@ -1,3 +1,5 @@
+#pragma once
+
 //stolen from https://github.com/kth-competitive-programming/kactl/blob/main/stress-tests/utilities/genTree.h
 vector<pair<int,int>> pruferCodeToTree(int n, const vector<int> &pruferCode) {
 	// Stores number count of nodes in the prufer code
