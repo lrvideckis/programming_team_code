@@ -14,12 +14,8 @@ int main() {
 
 		cout << "n: " << n << endl;
 		vector<vector<int>> adj = genRandomGraph(n, true /*isDirected*/, false/*isConnected*/, getRand(1, 2) == 1/*isSimple*/);
-		assert((int)adj.size() == n);
-
-		vector<vector<pair<int,ll>>> adjW(n);
-		for(int i = 0; i < n; i++) {
-			for(int next : adj[i]) adjW[i].push_back({next,1});
-		}
+		auto adjW = convertAdjToWeighted(adj);
+		assert((int)adj.size() == n && (int)adjW.size() == n);
 
 		vector<vector<ll>> lens = floydWarshall(adjW);
 
