@@ -15,7 +15,7 @@ vector<pair<int,int>> genRandomSimpleGraph(int n, double p, bool isDirected, int
 			if(!isDirected && j < i) continue;
 			if(getRandReal(0,1) < p) {
 				edges.push_back({i,j});
-				if(edges.size() >= maxEdges) return edges;
+				if((int)edges.size() >= maxEdges) return edges;
 			}
 		}
 	}
@@ -50,7 +50,7 @@ vector<vector<int>> genRandomGraph(
 		pEdge = 1/double(n);
 	} else if(probGenType == 3) {
 		//expected behavior: graph has isolated nodes, thus will be disconnected
-		pEdge = getRandReal(1, log(n)+1) / double(n);
+		pEdge = getRandReal(1, log(max(n,3))) / double(n);
 		pEdge = min(pEdge, 1.0);
 	} else {
 		assert(probGenType == 4);

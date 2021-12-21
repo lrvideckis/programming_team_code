@@ -22,7 +22,7 @@ int main() {
 			for(int next : adj[i]) {
 				assert(i != next);
 				if(next <= i)
-					edges.insert({i, next});
+					edges.insert({next, i});
 			}
 		}
 
