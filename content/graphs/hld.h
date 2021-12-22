@@ -42,6 +42,7 @@ struct hld {
 		}
 	}
 	// Returns intervals (of timeIn's) corresponding to the path between u and v, not necessarily in order
+	// This can answer queries for "is some node `x` on some path" by checking if the timeIn[x] is in any of these intervals
 	vector<pair<int, int>> path(int u, int v) const {
 		vector<pair<int, int>> res;
 		for (;; v = par[Next[v]]) {
@@ -54,6 +55,7 @@ struct hld {
 		}
 	}
 	// Returns interval (of timeIn's) corresponding to the subtree of node i
+	// This can answer queries for "is some node `x` in some other node's subtree" by checking if timeIn[x] is in this interval
 	pair<int,int> subtree(int i) const {
 		return {timeIn[i], timeIn[i] + Size[i] - 1};
 	}
