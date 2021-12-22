@@ -3,13 +3,19 @@
 struct hld {
 	int Time=0;
 	vector<int> Size, par, Depth, timeIn, Next;
-	hld(vector<vector<int>> &adj) :
+	hld(vector<vector<int>> &adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
 		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1) {
+		auto callDfss = [&](int node) -> void {
+			Next[node] = par[node] = node;
+			dfs1(node,adj);
+			dfs2(node,adj);
+		};
+		if(root != -1) {
+			callDfss(root);
+		}
 		for(int i = 0; i < (int)adj.size(); i++) {
-			if(par[i] == -1) {
-				Next[i] = par[i] = i;
-				dfs1(i,adj);
-				dfs2(i,adj);
+			if(par[i] == -1) {//roots each tree by node with min label
+				callDfss(i);
 			}
 		}
 	}
