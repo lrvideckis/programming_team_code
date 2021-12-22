@@ -1,14 +1,14 @@
 #pragma once
 
 struct hld {
-	int Time=0;
 	vector<int> Size, par, Depth, timeIn, Next;
 	hld(vector<vector<int>> &adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
 		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1) {
+		int Time=0;
 		auto callDfss = [&](int node) -> void {
 			Next[node] = par[node] = node;
 			dfs1(node,adj);
-			dfs2(node,adj);
+			dfs2(node,adj,Time);
 		};
 		if(root != -1) {
 			callDfss(root);
@@ -31,15 +31,15 @@ struct hld {
 			}
 		}
 	}
-	void dfs2(int node, const vector<vector<int>> &adj) {
+	void dfs2(int node, const vector<vector<int>>& adj, int& Time) {
 		timeIn[node] = Time++;
 		for(auto to: adj[node]) {
 			if(to == par[node]) continue;
 			Next[to] = (Time == timeIn[node]+1 ? Next[node] : to);
-			dfs2(to, adj);
+			dfs2(to, adj, Time);
 		}
 	}
-	// Returns intervals corresponding to the path between u and v, not necessarily in order
+	// Returns intervals (of timeIn's) corresponding to the path between u and v, not necessarily in order
 	vector<pair<int, int>> path(int u, int v) const {
 		vector<pair<int, int>> res;
 		for (;; v = par[Next[v]]) {
@@ -51,7 +51,7 @@ struct hld {
 			res.push_back({timeIn[Next[v]], timeIn[v]});
 		}
 	}
-	// Returns interval corresponding to the subtree of node i
+	// Returns interval (of timeIn's) corresponding to the subtree of node i
 	pair<int,int> subtree(int i) const {
 		return {timeIn[i], timeIn[i] + Size[i] - 1};
 	}
