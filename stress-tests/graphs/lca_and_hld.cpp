@@ -80,6 +80,24 @@ int main() {
 			dfs(x, x, adjweighted, parent, depth, pathWeight);
 			assert(lc.distEdges(x, y) == depth[y]);
 			assert(lc.distWeight(x, y) == pathWeight[y]);
+
+			set<int> nodesInPathFromHld;
+			for(auto [lTime, rTime] : hl.path(x,y)) {
+				for(int t = lTime; t <= rTime; t++) {
+					int node = hl.timeInToNode[t];
+					assert(!nodesInPathFromHld.count(node));
+					nodesInPathFromHld.insert(node);
+				}
+			}
+
+			set<int> nodesInPath;
+			nodesInPath.insert(y);
+			while(y != x) {
+				y = parent[y];
+				nodesInPath.insert(y);
+			}
+
+			assert(nodesInPathFromHld == nodesInPath);
 		}
 	}
 

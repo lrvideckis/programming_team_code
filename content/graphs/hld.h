@@ -1,9 +1,9 @@
 #pragma once
 
 struct hld {
-	vector<int> Size, par, Depth, timeIn, Next;
+	vector<int> Size, par, Depth, timeIn, Next, timeInToNode;
 	hld(vector<vector<int>> &adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
-		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1) {
+		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1), timeInToNode(adj.size()) {
 		int Time=0;
 		auto callDfss = [&](int node) -> void {
 			Next[node] = par[node] = node;
@@ -32,7 +32,9 @@ struct hld {
 		}
 	}
 	void dfs2(int node, const vector<vector<int>>& adj, int& Time) {
-		timeIn[node] = Time++;
+		timeIn[node] = Time;
+		timeInToNode[Time] = node;
+		Time++;
 		for(auto to: adj[node]) {
 			if(to == par[node]) continue;
 			Next[to] = (Time == timeIn[node]+1 ? Next[node] : to);
