@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
-
 # use a precompiled header for the template to improve perf
 g++ -Wall -Wfatal-errors -std=c++2a -O2 $DIR/stress-tests/test_utilities/template.h
 trap "rm -f $DIR/stress-tests/test_utilities/template.h.gch" EXIT
-
-tests="$(find $DIR/stress-tests -name '*.cpp')"
+if [[ $# -eq 1 ]] ; then
+	tests="$(find $DIR/stress-tests -name '*.cpp')"
+else
+	tests="$(find $DIR/stress-tests -name "*$2*")"
+fi
+echo "testing the following:" $tests
 declare -i pass=0
 declare -i fail=0
 failTests=""
-ulimit -s 524288 # For 2-sat test
 for test in $tests; do
     echo "$(basename $test): "
     start=`date +%s.%N`
