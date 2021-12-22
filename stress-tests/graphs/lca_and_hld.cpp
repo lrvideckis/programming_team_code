@@ -99,6 +99,23 @@ int main() {
 
 			assert(nodesInPathFromHld == nodesInPath);
 		}
+
+		for(int iter = 100; iter--;) {
+			int node = getRand(0, n-1);
+			set<int> subtreeNaive;
+			for(int i = 0; i < n; i++) {
+				if(lc.getLca(i, node) == node) {
+					subtreeNaive.insert(i);
+				}
+			}
+			set<int> subtreeHld;
+			auto [lTime, rTime] = hl.subtree(node);
+			for(int t = lTime; t <= rTime; t++) {
+				subtreeHld.insert(hl.timeInToNode[t]);
+			}
+
+			assert(subtreeNaive == subtreeHld);
+		}
 	}
 
 	cout << "Tests passed!" << endl;
