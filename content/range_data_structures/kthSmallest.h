@@ -51,10 +51,10 @@ public:
 
 private:
 	struct Node {
-		int l, r;
+		int lCh, rCh;
 		int cnt;
-		Node(int _cnt) : l(0), r(0), cnt(_cnt) {}
-		Node(int _l, int _r, const vector<Node>& nodes) : l(_l), r(_r), cnt(nodes[_l].cnt + nodes[_r].cnt) { }
+		Node(int _cnt) : lCh(0), rCh(0), cnt(_cnt) {}
+		Node(int _lCh, int _rCh, const vector<Node>& nodes) : lCh(_lCh), rCh(_rCh), cnt(nodes[_lCh].cnt + nodes[_rCh].cnt) { }
 	};
 	vector<Node> nodes;
 	vector<int> roots, sorted;
@@ -69,22 +69,22 @@ private:
 		}
 		int m = (l + r) / 2;
 		if (pos <= m)
-			return allocateNode(Node(update(nodes[v].l, l, m, pos), nodes[v].r, nodes));
-		return allocateNode(Node(nodes[v].l, update(nodes[v].r, m+1, r, pos), nodes));
+			return allocateNode(Node(update(nodes[v].lCh, l, m, pos), nodes[v].rCh, nodes));
+		return allocateNode(Node(nodes[v].lCh, update(nodes[v].rCh, m+1, r, pos), nodes));
 	}
 	int find_kth(int vl, int vr, int l, int r, int k) const {
 		if (l == r)
 			return l;
-		int m = (l + r) / 2, left_count = nodes[nodes[vr].l].cnt - nodes[nodes[vl].l].cnt;
-		if (left_count >= k) return find_kth(nodes[vl].l, nodes[vr].l, l, m, k);
-		return find_kth(nodes[vl].r, nodes[vr].r, m+1, r, k-left_count);
+		int m = (l + r) / 2, left_count = nodes[nodes[vr].lCh].cnt - nodes[nodes[vl].lCh].cnt;
+		if (left_count >= k) return find_kth(nodes[vl].lCh, nodes[vr].lCh, l, m, k);
+		return find_kth(nodes[vl].rCh, nodes[vr].rCh, m+1, r, k-left_count);
 	}
 	int cnt_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
 		if(valueR < l || r < valueL) return 0;
 		if(valueL <= l && r <= valueR) return nodes[vr].cnt - nodes[vl].cnt;
 		int m = (l + r) / 2;
 		return
-			cnt_in_range(nodes[vl].l, nodes[vr].l, l, m, valueL, valueR) +
-			cnt_in_range(nodes[vl].r, nodes[vr].r, m+1, r, valueL, valueR);
+			cnt_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR) +
+			cnt_in_range(nodes[vl].rCh, nodes[vr].rCh, m+1, r, valueL, valueR);
 	}
 };
