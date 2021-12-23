@@ -3,8 +3,8 @@
 //modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
 struct pst {
 public:
-	/* Persistent seg tree to find kth smallest number in a range
-	 * - no updates
+	/* Persistent seg tree handle a variety of queries
+	 * - no updates. For point updates, use either merge sort tree, wavelet tree or sqrt-decomp
 	 * O(nlogn) time and space to build tree
 	 */
 	pst(const vector<int> &arr) : sorted(arr), n(arr.size()) {
