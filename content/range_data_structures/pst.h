@@ -34,22 +34,14 @@ public:
 	 * the number of elements which is in range [valueL, valueR]
 	 * */
 	int cnt_in_range(int L, int R, int valueL, int valueR) const {
-		assert(L <= R && valueL <= valueR);
-		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
-		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
-		if(compL > compR) return 0;
-		return cnt_in_range(roots[L], roots[R+1], tl, tr, compL, compR).cnt;
+		return calc_in_range(L, R, valueL, valueR).cnt;
 	}
 
 	/* Among elements arr[L], arr[L+1], ..., arr[R], this returns:
 	 * the **sum** of elements which is in range [valueL, valueR]
 	 * */
 	ll sum_in_range(int L, int R, int valueL, int valueR) const {
-		assert(L <= R && valueL <= valueR);
-		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
-		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
-		if(compL > compR) return 0;
-		return cnt_in_range(roots[L], roots[R+1], tl, tr, compL, compR).sum;
+		return calc_in_range(L, R, valueL, valueR).sum;
 	}
 
 	/* Returns sum of min(arr[i], X) for i in range [L,R]
@@ -57,7 +49,7 @@ public:
 	 * assumes -1e9 <= arr[i] <= 1e9 for each i
 	 * */
 	ll sum_in_range_min(int L, int R, int X) const {
-		return sum_in_range(L, R, -1e9, X) + 1LL * cnt_in_range(L, R, X+1, 1e9) * X;
+		return calc_in_range(L, R, -1e9, X).sum + 1LL * calc_in_range(L, R, X+1, 1e9).cnt * X;
 	}
 
 	/* Returns sum of max(arr[i], X) for i in range [L,R]
@@ -65,7 +57,7 @@ public:
 	 * assumes -1e9 <= arr[i] <= 1e9 for each i
 	 * */
 	ll sum_in_range_max(int L, int R, int X) const {
-		return sum_in_range(L, R, X, 1e9) + 1LL * cnt_in_range(L, R, -1e9, X-1) * X;
+		return calc_in_range(L, R, X, 1e9).sum + 1LL * calc_in_range(L, R, -1e9, X-1).cnt * X;
 	}
 private:
 	struct Node {
@@ -106,13 +98,20 @@ private:
 		if (left_count >= k) return find_kth(nodes[vl].lCh, nodes[vr].lCh, l, m, k);
 		return find_kth(nodes[vl].rCh, nodes[vr].rCh, m+1, r, k-left_count);
 	}
-	Node::Data cnt_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
+	Node::Data calc_in_range(int L, int R, int valueL, int valueR) const {
+		assert(L <= R && valueL <= valueR);
+		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
+		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
+		if(compL > compR) return {0,0};
+		return calc_in_range(roots[L], roots[R+1], tl, tr, compL, compR);
+	}
+	Node::Data calc_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
 		if(valueR < l || r < valueL) return {0,0};
 		if(valueL <= l && r <= valueR) return {nodes[vr].data.cnt - nodes[vl].data.cnt, nodes[vr].data.sum - nodes[vl].data.sum};
 		int m = (l + r) / 2;
 		return combine(
-			cnt_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR),
-			cnt_in_range(nodes[vl].rCh, nodes[vr].rCh, m+1, r, valueL, valueR)
+			calc_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR),
+			calc_in_range(nodes[vl].rCh, nodes[vr].rCh, m+1, r, valueL, valueR)
 		);
 	}
 };
