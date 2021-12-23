@@ -20,6 +20,14 @@ int main() {
 			for(int k = 1; k <= R-L+1; k++) {
 				assert(st.find_kth(L,R,k) == subarr[k-1]);
 			}
+			for(int iter = R-L+1; iter--;) {
+				int valL = getRand(-1000, 1000), valR = getRand(-1000, 1000);
+				if(valL > valR) swap(valL, valR);
+
+				int naiveCnt = upper_bound(subarr.begin(), subarr.end(), valR) - lower_bound(subarr.begin(), subarr.end(), valL);
+				int fastCnt = st.cnt_in_range(L, R, valL, valR);
+				assert(fastCnt == naiveCnt);
+			}
 		}
 	}
 	cout << "Tests passed!" << endl;

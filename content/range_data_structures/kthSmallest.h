@@ -29,23 +29,43 @@ public:
 		assert(0 <= L && R < n);
 		return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
 	}
+
+	/* Among elements arr[L], arr[L+1], ..., arr[R], this returns:
+	 * the number of elements which is in range [valueL, valueR]
+	 * */
+	int cnt_in_range(int L, int R, int valueL, int valueR) const {
+		assert(L <= R && valueL <= valueR);
+		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
+		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
+		if(compL > compR) return 0;
+		return cnt_in_range(roots[L], roots[R+1], tl, tr, compL, compR);
+	}
+
+	/* Among elements arr[L], arr[L+1], ..., arr[R], this returns:
+	 * the **sum** of elements which is in range [valueL, valueR]
+	 * */
+	int sum_in_range(int L, int R, int valueL, int valueR) const {
+		//TODO
+		assert(false);
+	}
+
 private:
 	struct Node {
 		int l, r;
-		int sum;
-		Node(int val) : l(0), r(0), sum(val) {}
-		Node(int _l, int _r, const vector<Node>& nodes) : l(_l), r(_r), sum(nodes[_l].sum + nodes[_r].sum) { }
+		int cnt;
+		Node(int _cnt) : l(0), r(0), cnt(_cnt) {}
+		Node(int _l, int _r, const vector<Node>& nodes) : l(_l), r(_r), cnt(nodes[_l].cnt + nodes[_r].cnt) { }
 	};
 	vector<Node> nodes;
 	vector<int> roots, sorted;
 	int allocateNode(const Node& v) {
 		nodes.push_back(v);
-		return nodes.size()-1;
+		return (int)nodes.size()-1;
 	}
 	int tl, tr, n;
 	int update(int v, int l, int r, int pos) {
 		if (l == r) {
-			return allocateNode(Node(nodes[v].sum+1));
+			return allocateNode(Node(nodes[v].cnt+1));
 		}
 		int m = (l + r) / 2;
 		if (pos <= m)
@@ -55,8 +75,16 @@ private:
 	int find_kth(int vl, int vr, int l, int r, int k) const {
 		if (l == r)
 			return l;
-		int m = (l + r) / 2, left_count = nodes[nodes[vr].l].sum - nodes[nodes[vl].l].sum;
+		int m = (l + r) / 2, left_count = nodes[nodes[vr].l].cnt - nodes[nodes[vl].l].cnt;
 		if (left_count >= k) return find_kth(nodes[vl].l, nodes[vr].l, l, m, k);
 		return find_kth(nodes[vl].r, nodes[vr].r, m+1, r, k-left_count);
+	}
+	int cnt_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
+		if(valueR < l || r < valueL) return 0;
+		if(valueL <= l && r <= valueR) return nodes[vr].cnt - nodes[vl].cnt;
+		int m = (l + r) / 2;
+		return
+			cnt_in_range(nodes[vl].l, nodes[vr].l, l, m, valueL, valueR) +
+			cnt_in_range(nodes[vl].r, nodes[vr].r, m+1, r, valueL, valueR);
 	}
 };
