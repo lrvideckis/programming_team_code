@@ -26,8 +26,9 @@ I aim for a balance between best coding practices, speed (runtime), and ease of 
 I use KACTL's versions for the following:
 
 - [Geometry](https://github.com/kth-competitive-programming/kactl/tree/main/content/geometry)
-- [fft](https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h)
+- [Fast Fourier transform](https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h)
 - [2-sat](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/2sat.h)
 - [Chinese Remainder Theorem](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/CRT.h)
 - [Convex Hull Trick](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/LineContainer.h)
 - [Miller Rabin](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/MillerRabin.h)
+- [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
