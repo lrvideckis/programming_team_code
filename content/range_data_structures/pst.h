@@ -1,13 +1,13 @@
 #pragma once
 
 //modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
-struct kthSmallest {
+struct pst {
 public:
 	/* Persistent seg tree to find kth smallest number in a range
 	 * - no updates
 	 * O(nlogn) time and space to build tree
 	 */
-	kthSmallest(const vector<int> &arr) : sorted(arr), n(arr.size()) {
+	pst(const vector<int> &arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
 		roots.reserve(n+1);
 		nodes.push_back(Node(Node::Data{0,0}));//acts as nullptr

@@ -1,7 +1,7 @@
 #include "../test_utilities/template.h"
 #include "../test_utilities/random.h"
 
-#include "../../content/range_data_structures/kthSmallest.h"
+#include "../../content/range_data_structures/pst.h"
 
 
 int main() {
@@ -11,7 +11,7 @@ int main() {
 		for(int i = 0; i < n; i++) {
 			arr[i] = getRand(-1000, 1000);
 		}
-		kthSmallest st(arr);
+		pst st(arr);
 		for(int iterations = 1000; iterations--;) {
 			int L = getRand(0,n-1), R = getRand(0,n-1);
 			if(L > R) swap(L,R);
