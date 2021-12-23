@@ -34,6 +34,17 @@ int main() {
 				assert(st.cnt_in_range(L, R, valL, valR) == posR - posL + 1);
 				assert(st.sum_in_range(L, R, valL, valR) == prefix[posR+1] - prefix[posL]);
 			}
+
+			{
+				int X = getRand(-1000, 1000);
+				ll sumMin = 0, sumMax = 0;
+				for(int i = L; i <= R; i++) {
+					sumMin += min(arr[i], X);
+					sumMax += max(arr[i], X);
+				}
+				assert(sumMin == st.sum_in_range_min(L, R, X));
+				assert(sumMax == st.sum_in_range_max(L, R, X));
+			}
 		}
 	}
 	cout << "Tests passed!" << endl;

@@ -52,6 +52,21 @@ public:
 		return cnt_in_range(roots[L], roots[R+1], tl, tr, compL, compR).sum;
 	}
 
+	/* Returns sum of min(arr[i], X) for i in range [L,R]
+	 *
+	 * assumes -1e9 <= arr[i] <= 1e9 for each i
+	 * */
+	ll sum_in_range_min(int L, int R, int X) const {
+		return sum_in_range(L, R, -1e9, X) + 1LL * cnt_in_range(L, R, X+1, 1e9) * X;
+	}
+
+	/* Returns sum of max(arr[i], X) for i in range [L,R]
+	 *
+	 * assumes -1e9 <= arr[i] <= 1e9 for each i
+	 * */
+	ll sum_in_range_max(int L, int R, int X) const {
+		return sum_in_range(L, R, X, 1e9) + 1LL * cnt_in_range(L, R, -1e9, X-1) * X;
+	}
 private:
 	struct Node {
 		int lCh, rCh;
