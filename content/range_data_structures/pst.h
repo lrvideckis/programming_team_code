@@ -10,7 +10,7 @@ public:
 	pst(const vector<int> &arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
 		roots.reserve(n+1);
-		nodes.push_back(Node(Node::Data{0,0}));//acts as nullptr
+		nodes.push_back(Node(Node::Data()));//acts as nullptr
 		sort(sorted.begin(), sorted.end());
 		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
 		tl = 0, tr = (int)sorted.size()-1;
@@ -63,8 +63,8 @@ private:
 	struct Node {
 		int lCh, rCh;
 		struct Data {
-			int cnt;
-			ll sum;
+			int cnt = 0;
+			ll sum = 0;
 		} data;
 		Node(Data _data) : lCh(0), rCh(0), data(_data) {}
 		Node(int _lCh, int _rCh, const vector<Node>& nodes) : lCh(_lCh), rCh(_rCh), data(combine(nodes[_lCh].data, nodes[_rCh].data)) { }
@@ -102,11 +102,11 @@ private:
 		assert(L <= R && valueL <= valueR);
 		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
 		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
-		if(compL > compR) return {0,0};
+		if(compL > compR) return Node::Data();
 		return calc_in_range(roots[L], roots[R+1], tl, tr, compL, compR);
 	}
 	Node::Data calc_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
-		if(valueR < l || r < valueL) return {0,0};
+		if(valueR < l || r < valueL) return Node::Data();
 		if(valueL <= l && r <= valueR) return {nodes[vr].data.cnt - nodes[vl].data.cnt, nodes[vr].data.sum - nodes[vl].data.sum};
 		int m = (l + r) / 2;
 		return combine(
