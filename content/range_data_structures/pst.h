@@ -7,7 +7,7 @@ public:
 	 * - no updates. For point updates, use either merge sort tree, wavelet tree or sqrt-decomp
 	 * O(nlogn) time and space to build tree
 	 */
-	pst(const vector<int> &arr) : sorted(arr), n(arr.size()) {
+	pst(const vector<int>& arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
 		roots.reserve(n+1);
 		nodes.push_back(Node(Node::Data()));//acts as nullptr
