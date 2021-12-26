@@ -1,11 +1,6 @@
 #pragma once
 
-//returns x such that x*val%mod == 1
-//x only exists if gcd(val, mod) == 1
-//source: https://codeforces.com/blog/entry/23365
-ll modInverse(ll val, ll mod) {
-	return 1<val ? mod - modInverse(mod%val,val)*mod/val : 1;
-}
+#include "exp_mod.h"
 
 struct NchooseK {
 	// maxFact is the largest factorial we calculate, so don't call choose() with n > maxFact
@@ -21,7 +16,7 @@ struct NchooseK {
 		for(int i = 1; i <= maxFact; i++) {
 			fact[i] = 1LL * fact[i-1] * i % mod;
 		}
-		invFact[maxFact] = modInverse(fact[maxFact], mod);
+		invFact[maxFact] = fastPow(fact[maxFact], mod-2, mod);
 		for(int i = maxFact-1; i >= 0; i--) {
 			invFact[i] = 1LL * invFact[i+1] * (i+1) % mod;
 		}
