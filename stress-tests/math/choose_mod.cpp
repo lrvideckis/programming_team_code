@@ -38,6 +38,8 @@ int main() {
 		for(int i = 0; i <= n; i++) {
 			assert(nk.choose(i, -1) == 0);
 			assert(nk.choose(i, i+1) == 0);
+			assert(nk.chooseWithLucasTheorem(i, -1) == 0);
+			assert(nk.chooseWithLucasTheorem(i, i+1) == 0);
 			for(int j = 0; j <= i; j++) {
 				assert(nk.chooseWithLucasTheorem(i, j) == choose[i][j]);
 				if(i < mod)
