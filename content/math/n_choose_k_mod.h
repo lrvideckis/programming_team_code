@@ -12,7 +12,8 @@ struct NchooseK {
 		//this implimentation of doesn't work if maxFact >= mod because n! % mod = 0 when n >= mod. So `invFact` array will be all 0's
 		assert(maxFact < mod);
 		//assert mod is prime. mod is intended to fit inside an int so that
-		//multiplications fit in a longlong before being modded down.
+		//multiplications fit in a longlong before being modded down. So this
+		//will take sqrt(2^31) time
 		assert(mod >= 2);
 		for(int i = 2; i * i <= mod; i++) {
 			assert(mod % i);
