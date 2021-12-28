@@ -9,7 +9,7 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 ## Testing
 
 - All code compiled with flags: `g++ -Wall -Wextra -pedantic -Wno-unused-result -Wfatal-errors -DLOCAL -std=c++2a -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wcast-qual -Wcast-align -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fstack-protector` from [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547)
-  - TODO: add `-Wconversion` and fix all warnings
+  - note `-Wconversion` is missing
 - *Most* code submitted on various online judges (in particular [Library Checker](https://judge.yosupo.jp/))
 - [stress-tests](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares library code output to a naive version (or another alg) on random inputs (run with CI on every commit).
 
@@ -23,7 +23,7 @@ I aim for a balance between best coding practices, speed (runtime), and ease of 
 
 ## Out of scope
 
-I use KACTL's versions for the following:
+I use KACTL's versions of the following:
 
 - [Geometry](https://github.com/kth-competitive-programming/kactl/tree/main/content/geometry)
 - [Fast Fourier transform](https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h)
