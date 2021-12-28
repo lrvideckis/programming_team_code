@@ -2,16 +2,20 @@
 
 #include "exp_mod.h"
 
+// usage:
+//     NchooseK nk(n, 1e9+7) to use `choose`
+// or:
+//     NchooseK nk(mod-1, mod) to use `chooseWithLucasTheorem`
 struct NchooseK {
-	// maxFact is the largest factorial we calculate, so don't call choose() with n > maxFact
-	// set maxFact = (currMod-1) to use chooseWithLucasTheorem
+	// `maxFact` is the largest factorial we calculate, so don't call choose() with n > maxFact
 	NchooseK(int maxFact, int currMod) : mod(currMod), fact(maxFact+1, 1), invFact(maxFact+1) {
-		//inverse factorial calculation won't work if maxFact >= currMod
-		assert(maxFact < currMod);
-		//assert mod is prime
-		assert(currMod >= 2);
-		for(int i = 2; i * i <= currMod; i++) {
-			assert(currMod % i);
+		//this implimentation of doesn't work if maxFact >= mod because n! % mod = 0 when n >= mod. So `invFact` array will be all 0's
+		assert(maxFact < mod);
+		//assert mod is prime. mod is intended to fit inside an int so that
+		//multiplications fit in a longlong before being modded down.
+		assert(mod >= 2);
+		for(int i = 2; i * i <= mod; i++) {
+			assert(mod % i);
 		}
 		for(int i = 1; i <= maxFact; i++) {
 			fact[i] = 1LL * fact[i-1] * i % mod;
@@ -26,6 +30,7 @@ struct NchooseK {
 	//doesn't work with n >= mod
 	int choose(int n, int k) const {
 		if(k < 0 || k > n) return 0;
+		//now we know 0 <= k <= n so 0 <= n
 		return 1LL * fact[n] * invFact[k] % mod * invFact[n-k] % mod;
 	}
 
@@ -38,15 +43,9 @@ struct NchooseK {
 		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(n%mod, k%mod) % mod;
 	}
 
-	//bars and stars problem: given n objects, each with an endless supply,
-	//this returns the number of ways to choose k of them.
-	int multiChoose(ll n, ll k) const {
-		return chooseWithLucasTheorem(n+k-1, n-1);
-	}
-
 	//returns inverse of n in O(1)
 	int inv(int n) const {
-		assert(1 <= n);//0 has no inverse
+		assert(1 <= n);//don't divide by 0 :)
 		return 1LL * fact[n-1] * invFact[n] % mod;
 	}
 
