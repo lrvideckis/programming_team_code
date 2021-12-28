@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
 # use a precompiled header for the template to improve perf
-g++ -Wall -Wfatal-errors -std=c++2a -O2 $DIR/stress-tests/test_utilities/template.h
+g++ -Wall -Wfatal-errors -std=c++17 -O2 $DIR/stress-tests/test_utilities/template.h
 trap "rm -f $DIR/stress-tests/test_utilities/template.h.gch" EXIT
 if [[ $# -eq 1 ]] ; then
 	tests="$(find $DIR/stress-tests -name '*.cpp')"
@@ -15,7 +15,7 @@ failTests=""
 for test in $tests; do
     echo "$(basename $test): "
     start=`date +%s.%N`
-    g++ -Wall -Wfatal-errors -std=c++2a -O2 $test && ./a.out
+    g++ -Wall -Wfatal-errors -std=c++17 -O2 $test && ./a.out
     retCode=$?
     if (($retCode != 0)); then
         echo "Failed with $retCode"
