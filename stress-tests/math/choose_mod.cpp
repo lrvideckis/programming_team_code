@@ -35,6 +35,10 @@ int main() {
 
 		NchooseK nk(min(n,mod-1), mod);
 
+		for(int i = 1; i <= min(n,mod-1); i++) {
+			assert(nk.inv(i) == fastPow(i, mod-2, mod));
+		}
+
 		for(int i = 0; i <= n; i++) {
 			assert(nk.choose(i, -1) == 0);
 			assert(nk.choose(i, i+1) == 0);

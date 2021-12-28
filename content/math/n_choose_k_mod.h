@@ -44,6 +44,12 @@ struct NchooseK {
 		return chooseWithLucasTheorem(n+k-1, n-1);
 	}
 
+	//returns inverse of n in O(1)
+	int inv(int n) const {
+		assert(1 <= n);//0 has no inverse
+		return 1LL * fact[n-1] * invFact[n] % mod;
+	}
+
 	int mod;
 	vector<int> fact, invFact;
 };
