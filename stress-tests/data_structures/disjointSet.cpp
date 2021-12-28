@@ -17,7 +17,7 @@ void dfs(int node, const vector<vector<int>>& adj, vector<bool>& vis) {
 
 int main() {
 	for(int tests = 20; tests--;) {
-		int n = getRand(0,100);
+		int n = getRand(1,100);
 		disjointSet ds(n);
 		vector<vector<int>> adj(n);
 		for(int ops = 1000; ops--;) {
