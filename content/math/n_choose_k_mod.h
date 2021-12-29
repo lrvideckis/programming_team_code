@@ -40,7 +40,7 @@ struct NchooseK {
 	//handles n >= mod correctly
 	int chooseWithLucasTheorem(ll n, ll k) const {
 		if(k < 0 || k > n) return 0;
-		if(k == 0) return 1;
+		if(k == 0 || k == n) return 1;
 		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(n%mod, k%mod) % mod;
 	}
 
