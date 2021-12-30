@@ -3,7 +3,7 @@
 struct fenwickTree {
 	vector<ll> bit;
 	fenwickTree(int n) : bit(n,0) {}
-	fenwickTree(const vector<ll> & a) : bit(a.size()) {
+	fenwickTree(const vector<ll>& a) : bit(a.size()) {
 		if (a.empty()) return;
 		bit[0] = a[0];
 		for (int i = 1; i < (int)a.size(); i++)

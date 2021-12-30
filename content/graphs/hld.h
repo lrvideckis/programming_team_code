@@ -2,7 +2,7 @@
 
 struct hld {
 	vector<int> Size, par, Depth, timeIn, Next, timeInToNode;
-	hld(vector<vector<int>> &adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
+	hld(vector<vector<int>>& adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
 		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1), timeInToNode(adj.size()) {
 		int Time=0;
 		auto callDfss = [&](int node) -> void {
@@ -19,8 +19,8 @@ struct hld {
 			}
 		}
 	}
-	void dfs1(int node, vector<vector<int>> &adj) {
-		for(auto &to: adj[node]) {
+	void dfs1(int node, vector<vector<int>>& adj) {
+		for(auto& to: adj[node]) {
 			if(to == par[node]) continue;
 			Depth[to] = 1 + Depth[node];
 			par[to] = node;

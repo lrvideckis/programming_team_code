@@ -8,7 +8,7 @@ struct MergeSortTree {
 	int n, size;
 
 	/*implement these*/
-	Node combine(const Node &L, const Node &R) {
+	Node combine(const Node& L, const Node& R) {
 		Node par;
 		//merge from merge sort
 		int ptrL = 0, ptrR = 0;
@@ -36,14 +36,14 @@ struct MergeSortTree {
 		return par;
 	}
 
-	MergeSortTree(const vector<int> &arr) : n((int)arr.size()) {
+	MergeSortTree(const vector<int>& arr) : n((int)arr.size()) {
 		size = 1;
 		while(size < n) size<<=1;
 		size<<=1;
 		tree.resize(size);
 		build(arr, 1, 0, n-1);
 	}
-	void build(const vector<int> &arr, int node, int start, int end) {
+	void build(const vector<int>& arr, int node, int start, int end) {
 		if(start == end) {
 			tree[node].vals.push_back(arr[start]);
 		} else {
@@ -58,7 +58,7 @@ struct MergeSortTree {
 	int query(int node, int start, int end, int l, int r, int x) {
 		if(r < start || end < l) return 0;
 		if(l <= start && end <= r) {
-			auto &v = tree[node].vals;
+			auto& v = tree[node].vals;
 			return lower_bound(v.begin(), v.end(), x) - v.begin();
 		}
 		int mid = (start+end)/2;

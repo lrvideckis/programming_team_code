@@ -14,7 +14,7 @@ struct SegTreeBeats {
 
 	/*implement these*/
 	const Node zero = {0, -inf, -inf, 0};
-	Node combine(const Node &L, const Node &R) {
+	Node combine(const Node& L, const Node& R) {
 		Node par;
 		par.sum = L.sum + R.sum;
 		if(L.mx == R.mx) {
@@ -44,7 +44,7 @@ struct SegTreeBeats {
 		}
 	}
 
-	SegTreeBeats(const vector<int> &arr) : n((int)arr.size()) {
+	SegTreeBeats(const vector<int>& arr) : n((int)arr.size()) {
 		size = 1;
 		while(size < n) size<<=1;
 		size<<=1;
@@ -52,7 +52,7 @@ struct SegTreeBeats {
 		lazy.resize(size, 0);
 		build(arr, 1, 0, n-1);
 	}
-	void build(const vector<int> &arr, int node, int start, int end) {
+	void build(const vector<int>& arr, int node, int start, int end) {
 		if(start == end) {
 			tree[node].sum = arr[start];
 			tree[node].mx = arr[start];

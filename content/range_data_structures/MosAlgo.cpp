@@ -30,7 +30,7 @@ int main() {
 	int left = 0, right = 0;//store inclusive ranges, start at [0,0]
 	add(0);
 	answerToQuery = 0;
-	for(auto &q : queries) {
+	for(auto& q : queries) {
 		while(left > q.l) {
 			left--;
 			add(left);

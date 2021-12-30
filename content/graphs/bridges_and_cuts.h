@@ -3,7 +3,7 @@
 //modified from https://github.com/nealwu/competitive-programming/blob/master/graph_theory/biconnected_components.cc
 struct biconnected_components {
 	//don't pass in a graph with multiple edges between the same pair of nodes - it breaks bridge finding
-	biconnected_components(const vector<vector<int>> &adj) :
+	biconnected_components(const vector<vector<int>>& adj) :
 		is_cut(adj.size(), false),
 		n(adj.size()),
 		tour_start(n),
@@ -42,7 +42,7 @@ struct biconnected_components {
 		is_bridge.insert(1LL * u * n + v);
 	}
 
-	void dfs(int node, int parent, const vector<vector<int>> &adj, vector<bool> &visited, vector<int> &stack, int &tour) {
+	void dfs(int node, int parent, const vector<vector<int>>& adj, vector<bool>& visited, vector<int>& stack, int& tour) {
 		assert(!visited[node]);
 		visited[node] = true;
 		tour_start[node] = tour++;
@@ -106,7 +106,7 @@ struct biconnected_components {
 //     nodes for each BCC, and for each original node in graph
 //     edges between an original node and BCC if that node is inside that BCC
 struct block_cut_tree {
-	block_cut_tree(const biconnected_components &_bi_comps) :
+	block_cut_tree(const biconnected_components& _bi_comps) :
 		n(_bi_comps.n),
 		BC(_bi_comps.components.size()),
 		T(n + BC),

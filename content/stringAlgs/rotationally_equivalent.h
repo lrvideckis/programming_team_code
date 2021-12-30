@@ -2,12 +2,12 @@
 
 // Checks if two arrays are rotationally equvalent
 // uses KMP with doubling trick
-bool rot_eq(const vector<int> &a, const vector<int> &b) {
+bool rot_eq(const vector<int>& a, const vector<int>& b) {
 	if(a.size() != b.size()) return false;
 	if(a.empty()) return true;
 	int n = a.size();
 	vector<int> fail(n+1, 0);
-	auto update = [&](int val, int &p) -> void {
+	auto update = [&](int val, int& p) -> void {
 		while(p && val != a[p]) p = fail[p];
 		if(val == a[p]) p++;
 	};

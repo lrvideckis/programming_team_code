@@ -18,7 +18,7 @@ struct SegmentTree {
 	int n;
 
 	/***implement these***/
-	Node combineChildren(const Node &L, const Node &R) {
+	Node combineChildren(const Node& L, const Node& R) {
 		return Node {
 			L.sum + R.sum,
 			max(L.mx, R.mx),
@@ -41,7 +41,7 @@ struct SegmentTree {
 	}
 	//apply lazy value to range
 	void pushLazy(int node) {
-		ll &currLazy = tree[node].lazy;
+		ll& currLazy = tree[node].lazy;
 		if(currLazy) {
 			applyDeltaOnRange(node, currLazy);
 			currLazy = 0;

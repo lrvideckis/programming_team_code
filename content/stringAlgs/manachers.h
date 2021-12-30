@@ -1,7 +1,7 @@
 #pragma once
 
 // Returns the longest palindrome
-string cntPals(string &s) {
+string cntPals(const string& s) {
 	string T = "";
 	for(int i = 0; i < (int)s.size(); ++i) {
 		T += "#" + s.substr(i,1);

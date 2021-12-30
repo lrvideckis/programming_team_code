@@ -2,7 +2,7 @@
 
 struct scc {
 public:
-	scc(const vector<vector<int>> &adj) : sccId(adj.size()), numSccs(0) {
+	scc(const vector<vector<int>>& adj) : sccId(adj.size()), numSccs(0) {
 		int n = adj.size();
 		stack<int> seen;
 		{
@@ -39,7 +39,7 @@ public:
 private:
 	vector<int> sccId;
 	int numSccs;
-	void dfs1(int curr, stack<int> &seen, const vector<vector<int>> &adj, vector<bool> &vis) {
+	void dfs1(int curr, stack<int>& seen, const vector<vector<int>>& adj, vector<bool>& vis) {
 		vis[curr] = true;
 		for(int x : adj[curr]) {
 			if(!vis[x]) {
@@ -48,7 +48,7 @@ private:
 		}
 		seen.push(curr);
 	}
-	void dfs2(int curr, const vector<vector<int>> &adjInv, vector<bool> &vis) {
+	void dfs2(int curr, const vector<vector<int>>& adjInv, vector<bool>& vis) {
 		vis[curr] = true;
 		sccId[curr] = numSccs;
 		for(int x : adjInv[curr]) {

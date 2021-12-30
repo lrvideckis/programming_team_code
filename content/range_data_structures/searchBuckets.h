@@ -12,7 +12,7 @@ struct search_buckets {
 	int N, BUCKET_SIZE;
 	vector<T> values, buckets;
 
-	search_buckets(const vector<T> &initial = {}) {
+	search_buckets(const vector<T>& initial = {}) {
 		init(initial);
 	}
 
@@ -20,7 +20,7 @@ struct search_buckets {
 		return min(bucket_start + BUCKET_SIZE, N);
 	}
 
-	void init(const vector<T> &initial) {
+	void init(const vector<T>& initial) {
 		values = buckets = initial;
 		N = values.size();
 		BUCKET_SIZE = 3 * sqrt(N * log(N + 1)) + 1;

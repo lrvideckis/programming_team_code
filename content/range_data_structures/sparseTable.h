@@ -5,7 +5,7 @@ struct sparseTableIdx {
 	vector<int> log2;
 	vector<vector<T>> dp;
 	vector<vector<int>> index;
-	sparseTableIdx(const vector<T> &arr) {
+	sparseTableIdx(const vector<T>& arr) {
 		const int n = arr.size();
 		log2.resize(n+1,-1);
 		for(int i = 1; i <= n; ++i) log2[i] = 1 + log2[i/2];
@@ -41,7 +41,7 @@ struct sparseTableIdx {
 struct sparseTable {
 	vector<int> log2;
 	vector<vector<ll>> dp;
-	sparseTable(const vector<ll> &arr) {
+	sparseTable(const vector<ll>& arr) {
 		const int n = arr.size();
 		log2.resize(n+1,-1);
 		for(int i = 1; i <= n; ++i) log2[i] = 1 + log2[i/2];

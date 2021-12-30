@@ -2,7 +2,7 @@
 
 const int mod = 1e9 + 7;
 
-vector<vector<int>> mult(const vector<vector<int>> &a, const vector<vector<int>> &b) {
+vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>& b) {
 	if(a.size() == 0) return {};
 	if(a[0].size() == 0) return {};
 	if(b.size() == 0) return {};
