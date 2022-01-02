@@ -15,7 +15,7 @@ struct fenwickTree {
 				bit[i] -= bit[lower_i];
 		}
 	}
-	void update(int idx, T d) {
+	void update(int idx, const T& d) {
 		for(; idx < (int)bit.size(); idx = idx | (idx+1))
 			bit[idx] += d;
 	}
@@ -40,7 +40,7 @@ struct rangeUpdatesAndPointQueries {
 		}
 		ft = fenwickTree<T>(arr);
 	}
-	void updateRange(int l, int r, T diff) {
+	void updateRange(int l, int r, const T& diff) {
 		ft.update(l, diff);
 		if(r+1 < (int)ft.bit.size())
 			ft.update(r+1, -diff);
