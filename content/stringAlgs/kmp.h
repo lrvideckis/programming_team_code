@@ -1,8 +1,9 @@
 #pragma once
 
+template <class T>
 struct KMP_Match {
 public:
-	KMP_Match(const string& needle_) : prefixFunction(needle_.size()+1, 0), needle(needle_) {
+	KMP_Match(const T& needle_) : prefixFunction(needle_.size()+1, 0), needle(needle_) {
 		for(int i = 1, p = 0; i < (int)needle.size(); i++) {
 			update(needle[i], p);
 			prefixFunction[i + 1] = p;
@@ -25,7 +26,7 @@ public:
 	// some match:
 	//
 	// KMP_Match::find(<haystack>,false).size() > 0
-	vector<int> find(const string& haystack, bool all = true) const {
+	vector<int> find(const T& haystack, bool all = true) const {
 		vector<int> matches;
 		for(int i = 0, p = 0; i < (int)haystack.size(); i++) {
 			update(haystack[i], p);
@@ -43,5 +44,5 @@ private:
 		if(val == needle[p]) p++;
 	}
 	vector<int> prefixFunction;
-	string needle;
+	T needle;
 };

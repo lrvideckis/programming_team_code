@@ -7,14 +7,18 @@ int main() {
 	for(int tests = 20; tests--;) {
 		int n = getRand(1, 5);
 		string needle(n, 'a');
+		vector<int> needleArr(n);
 		for(int i = 0; i < n; i++) {
-			needle[i] = getRand(0, 3) + 'a';
+			needleArr[i] = getRand(0, 3);
+			needle[i] = needleArr[i] + 'a';
 		}
 
 		int m = getRand(n, 10000);
 		string haystack(m, 'a');
+		vector<int> haystackArr(m);
 		for(int i = 0; i < m; i++) {
-			haystack[i] = getRand(0, 3) + 'a';
+			haystackArr[i] = getRand(0,3);
+			haystack[i] = haystackArr[i] + 'a';
 		}
 
 		vector<int> matchesNaive;
@@ -24,12 +28,16 @@ int main() {
 			}
 		}
 		cout << "number of matches: " << matchesNaive.size() << endl;
-		KMP_Match kmp(needle);
+		KMP_Match<string> kmp(needle);
+		KMP_Match<vector<int>> kmpArr(needleArr);
 		assert(matchesNaive == kmp.find(haystack));
+		assert(matchesNaive == kmpArr.find(haystackArr));
 
 		vector<int> firstMatch = kmp.find(haystack, false);
+		vector<int> firstMatchArr = kmpArr.find(haystackArr, false);
 		while(matchesNaive.size() > 1) matchesNaive.pop_back();
 		assert(matchesNaive == firstMatch);
+		assert(matchesNaive == firstMatchArr);
 	}
 
 	cout << "Tests passed!" << endl;
