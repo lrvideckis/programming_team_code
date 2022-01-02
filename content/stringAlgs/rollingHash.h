@@ -1,15 +1,26 @@
 #pragma once
 
+//usage:
+//	Hash<string> h(s);
+//or
+//	Hash<vector<int>> h(arr);
+//	here, for negatives, compress values to {1,2,...,n} and make sure `base` is > n
+template <class T>
 struct Hash {
-	const int base = 257;
+	//`base` should be reletavely prime with all mods and *strictly* larger than max element
+	//ideally would be random to avoid getting hacked
+	const int base = 1e9+5;
 	vector<int> mods;
 	vector<vector<int>> prefix, powB;
 
 	//primes: 10^9 + {7,9,21,33,87}
-	Hash(const string& s, vector<int> currMods = {(int)1e9+7, (int)1e9+9, (int)1e9+21, (int)1e9+33, (int)1e9+87}) :
+	Hash(const T& s, vector<int> currMods = {(int)1e9+7, (int)1e9+9, (int)1e9+21, (int)1e9+33, (int)1e9+87}) :
 		mods(currMods),
 		prefix(currMods.size(), vector<int>(s.size())),
 		powB(currMods.size(), vector<int>(s.size(), 1)) {
+		//negatives may cause trivial collisions, when s[i]%mod = s[j]%mod, but s[i] != s[j]
+		//0's cause trivial collisions: "0" and "00" both hash to 0
+		for(auto val : s) assert(val > 0);
 		for(int i = 0; i < (int)mods.size(); i++) {
 			for(int j = 1; j < (int)s.size(); j++) {
 				powB[i][j] = 1LL * powB[i][j-1] * base % mods[i];
