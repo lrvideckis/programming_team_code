@@ -1,5 +1,9 @@
 #pragma once
 
+//usage:
+//	auto [sccId, numSccs] = getSCCs(adj);
+//where sccId[i] is the id of the scc containing node `i`
+//and `numSccs` is the number of sccs
 pair<vector<int>, int> getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 	int n = adj.size();
 	vector<int> sccId(n);
