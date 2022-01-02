@@ -12,13 +12,13 @@ int main() {
 			for(int i = 0; i < n; i++) {
 				arr[i] = getRand(-mx, mx);
 			}
-			fenwickTree ft(0);
+			fenwickTree<ll> ft(0);
 			if(getRand(1,2) == 1) {
 				cout << "constructor 1" << endl;
-				ft = fenwickTree(arr);
+				ft = fenwickTree<ll>(arr);
 			} else {
 				cout << "constructor 2" << endl;
-				ft = fenwickTree(n);
+				ft = fenwickTree<ll>(n);
 				arr = vector<ll>(n, 0);
 			}
 			for(int iterations = 5000; iterations--;) {
@@ -45,7 +45,7 @@ int main() {
 			for(int i = 0; i < n; i++) {
 				arr[i] = getRand(-mx, mx);
 			}
-			rangeUpdatesAndPointQueries ft(arr);
+			rangeUpdatesAndPointQueries<ll> ft(arr);
 			for(int iterations = 5000; iterations--;) {
 				if(getRand(1,2) == 1) {//update
 					int L = getRand(0,n-1), R = getRand(0,n-1);

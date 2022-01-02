@@ -1,9 +1,10 @@
 #pragma once
 
+template<class T>
 struct fenwickTree {
-	vector<ll> bit;
+	vector<T> bit;
 	fenwickTree(int n) : bit(n,0) {}
-	fenwickTree(const vector<ll>& a) : bit(a.size()) {
+	fenwickTree(const vector<T>& a) : bit(a.size()) {
 		if (a.empty()) return;
 		bit[0] = a[0];
 		for (int i = 1; i < (int)a.size(); i++)
@@ -14,36 +15,37 @@ struct fenwickTree {
 				bit[i] -= bit[lower_i];
 		}
 	}
-	void update(int idx, ll d) {
+	void update(int idx, T d) {
 		for(; idx < (int)bit.size(); idx = idx | (idx+1))
 			bit[idx] += d;
 	}
-	ll sum(int r) const {
-		ll ret = 0;
+	T sum(int r) const {
+		T ret = 0;
 		for(; r >= 0; r = (r&(r+1))-1)
 			ret += bit[r];
 		return ret;
 	}
-	ll sum(int l, int r) const {
+	T sum(int l, int r) const {
 		return sum(r) - sum(l-1);
 	}
 };
 
+template<class T>
 struct rangeUpdatesAndPointQueries {
-	fenwickTree ft;
+	fenwickTree<T> ft;
 	rangeUpdatesAndPointQueries(int n) : ft(n) {}
-	rangeUpdatesAndPointQueries(vector<ll> arr) : ft(0) {
+	rangeUpdatesAndPointQueries(vector<T> arr) : ft(0) {
 		for(int i = (int)arr.size()-1; i >= 1; i--) {
 			arr[i] -= arr[i-1];
 		}
-		ft = fenwickTree(arr);
+		ft = fenwickTree<T>(arr);
 	}
-	void updateRange(int l, int r, ll diff) {
+	void updateRange(int l, int r, T diff) {
 		ft.update(l, diff);
 		if(r+1 < (int)ft.bit.size())
 			ft.update(r+1, -diff);
 	}
-	ll queryIdx(int idx) const {
+	T queryIdx(int idx) const {
 		return ft.sum(idx);
 	}
 };
