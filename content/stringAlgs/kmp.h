@@ -1,5 +1,9 @@
 #pragma once
 
+//usage:
+//	KMP_Match<string> kmp(needle);
+//or
+//	KMP_Match<vector<int>> kmp(needle);
 template <class T>
 struct KMP_Match {
 public:
