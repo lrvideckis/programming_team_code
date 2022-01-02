@@ -23,7 +23,7 @@ int main() {
 		for(int i = 0; i < n; i++) {
 			for(int j = i; j < n; j++) {
 				bool sameSCCFloyd = (lens[i][j] != inf && lens[j][i] != inf);
-				bool sameSCC = (sc.getSccID(i) == sc.getSccID(j));
+				bool sameSCC = (sc.sccId[i] == sc.sccId[j]);
 				assert(sameSCCFloyd == sameSCC);
 			}
 		}

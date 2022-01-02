@@ -1,15 +1,23 @@
 #pragma once
 
 struct scc {
-public:
-	scc(const vector<vector<int>>& adj) : sccId(adj.size()), numSccs(0) {
+	scc(const vector<vector<int>>& adj /*directed, unweighted graph*/) : sccId(adj.size()), numberOfSCCs(0) {
 		int n = adj.size();
 		stack<int> seen;
 		{
 			vector<bool> vis(n,false);
+			auto dfs = [&](auto&& dfsPtr, int curr) -> void {
+				vis[curr] = true;
+				for(int x : adj[curr]) {
+					if(!vis[x]) {
+						dfsPtr(dfsPtr, x);
+					}
+				}
+				seen.push(curr);
+			};
 			for(int i = 0; i < n; ++i) {
 				if(!vis[i]) {
-					dfs1(i, seen, adj, vis);
+					dfs(dfs, i);
 				}
 			}
 		}
@@ -20,41 +28,25 @@ public:
 			}
 		}
 		vector<bool> vis(n,false);
+		auto dfs = [&](auto&& dfsPtr, int curr) -> void {
+			vis[curr] = true;
+			sccId[curr] = numberOfSCCs;
+			for(int x : adjInv[curr]) {
+				if(!vis[x]) {
+					dfsPtr(dfsPtr, x);
+				}
+			}
+		};
 		while(!seen.empty()) {
 			int node = seen.top();
 			seen.pop();
 			if(vis[node]) {
 				continue;
 			}
-			dfs2(node, adjInv, vis);
-			numSccs++;
+			dfs(dfs, node);
+			numberOfSCCs++;
 		}
 	}
-	int numberOfSCCs() const {
-		return numSccs;
-	}
-	int getSccID(int node) const {
-		return sccId[node];
-	}
-private:
 	vector<int> sccId;
-	int numSccs;
-	void dfs1(int curr, stack<int>& seen, const vector<vector<int>>& adj, vector<bool>& vis) {
-		vis[curr] = true;
-		for(int x : adj[curr]) {
-			if(!vis[x]) {
-				dfs1(x, seen, adj, vis);
-			}
-		}
-		seen.push(curr);
-	}
-	void dfs2(int curr, const vector<vector<int>>& adjInv, vector<bool>& vis) {
-		vis[curr] = true;
-		sccId[curr] = numSccs;
-		for(int x : adjInv[curr]) {
-			if(!vis[x]) {
-				dfs2(x, adjInv, vis);
-			}
-		}
-	}
+	int numberOfSCCs;
 };
