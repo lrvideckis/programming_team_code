@@ -4,7 +4,7 @@
 //	sparseTable<ll> st(arr, [](ll x, ll y) { return min(x,y); });
 //
 //to also get index of min element, do:
-//	sparseTable<pair<ll,int>> st(arr, [](pair<ll,int> x, pair<ll,int> y) { return min(x,y); });
+//	sparseTable<pair<ll,int>> st(arr, [](auto x, auto y) { return min(x,y); });
 //and initialize second to index. If there are multiple indexes of min element,
 //it'll return the smallest (left-most) one
 template <class T>
