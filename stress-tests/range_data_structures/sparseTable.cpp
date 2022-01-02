@@ -13,8 +13,8 @@ int main() {
 			arr[i] = getRand(-mx, mx);
 			arrIdx[i] = make_pair(arr[i], i);
 		}
-		sparseTable<pair<ll,int>> stIdx(arrIdx);
-		sparseTable<ll> st(arr);
+		sparseTable<pair<ll,int>> stIdx(arrIdx, [](pair<ll,int> x, pair<ll,int> y) { return min(x,y); });
+		sparseTable<ll> st(arr, [](ll x, ll y) { return min(x,y); });
 		for(int i = 0; i < n; i++) {
 			int mnIdx = i;
 			for(int j = i; j < n; j++) {
