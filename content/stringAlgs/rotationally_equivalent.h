@@ -2,7 +2,13 @@
 
 // Checks if two arrays are rotationally equvalent
 // uses KMP with doubling trick
-bool rot_eq(const vector<int>& a, const vector<int>& b) {
+// usage:
+//	rot_eq<string>(s1, s2)
+// or
+//	rot_eq<vector<int>>(arr1, arr2)
+
+template <class T>
+bool rot_eq(const T& a, const T& b) {
 	if(a.size() != b.size()) return false;
 	if(a.empty()) return true;
 	int n = a.size();
