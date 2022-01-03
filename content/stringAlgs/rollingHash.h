@@ -4,20 +4,22 @@
 //	Hash<string> h(s);
 //or
 //	Hash<vector<int>> h(arr);
-//	here, for negatives, compress values to {1,2,...,n} and make sure `base` is > n
+//	assumes 0 < arr[i] < 1e9+5 = `base`
+//	here, for negatives or longlongs, compress values to {1,2,...,n} and make sure `base` is > n
 template <class T>
 struct Hash {
-	//`base` should be reletavely prime with all mods and *strictly* larger than max element
-	//ideally would be random to avoid getting hacked
+	//`base` should be relatively prime with all mods and *strictly* larger than max element
+	//ideally `base` would be random to avoid getting hacked
 	const int base = 1e9+5;
-	vector<int> mods;
+	//From C.R.T, this is the same as having a single mod = product of `mods`
+	//probability of collision is p = 1/(product of `mods`)
+	//probability of >=1 collision after n compares is 1-((1-p)^n)
+	vector<int> mods = {(int)1e9+7, (int)1e9+9, (int)1e9+21, (int)1e9+33, (int)1e9+87};
 	vector<vector<int>> prefix, powB;
 
-	//primes: 10^9 + {7,9,21,33,87}
-	Hash(const T& s, vector<int> currMods = {(int)1e9+7, (int)1e9+9, (int)1e9+21, (int)1e9+33, (int)1e9+87}) :
-		mods(currMods),
-		prefix(currMods.size(), vector<int>(s.size())),
-		powB(currMods.size(), vector<int>(s.size(), 1)) {
+	Hash(const T& s) :
+		prefix(mods.size(), vector<int>(s.size())),
+		powB(mods.size(), vector<int>(s.size(), 1)) {
 		//negatives may cause trivial collisions, when s[i]%mod = s[j]%mod, but s[i] != s[j]
 		//0's cause trivial collisions: "0" and "00" both hash to 0
 		for(auto val : s) assert(val > 0);
