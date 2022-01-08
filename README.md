@@ -4,7 +4,7 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 
 - [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) for copy-pastable c++ code
 - [template.cpp](https://github.com/lrvideckis/Programming-Team-Code/blob/master/template.cpp), although all code *should* work with just `typedef long long ll;`
-  - Note the `#define int long long` -> WA from overflow too many times 😅. All existing tests are run [without](https://github.com/lrvideckis/Programming-Team-Code/blob/master/stress-tests/test_utilities/template.h) this `#define`, so feel free to remove it.
+  - Note the `#define int long long` -> WA from overflow too many times 😅. All existing tests are [compiled without](https://github.com/lrvideckis/Programming-Team-Code/blob/master/stress-tests/test_utilities/template.h) this `#define`, so feel free to remove it.
 
 ## Testing
 
