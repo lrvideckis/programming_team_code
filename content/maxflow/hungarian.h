@@ -18,7 +18,7 @@ ll HungarianMatch(const vector<vector<ll>>& a) {
 		vector<char> used(m+1, false);
 		do {
 			used[j0] = true;
-			ll i0 = p[j0], delta = inf, j1;
+			ll i0 = p[j0], delta = inf, j1 = 0;
 			for(ll j = 1; j <= m; ++j)
 				if(!used[j]) {
 					ll cur = a[i0][j] - u[i0] - v[j];
