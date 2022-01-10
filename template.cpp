@@ -24,7 +24,7 @@
 #include <climits>
 #include <memory>
 using namespace std;
-#define int long long
+//#define int long long
 #define endl '\n'
 typedef long long ll;
 
