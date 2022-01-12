@@ -19,11 +19,12 @@ int main() {
 
 		vector<vector<ll>> lens = floydWarshall(adjW);
 
-		auto [sccId, numSccs] = getSCCs(adj);
+		sccInfo scc = getSCCs(adj);
+		assert((int)scc.adj.size() == scc.numberOfSCCs);
 		for(int i = 0; i < n; i++) {
 			for(int j = i; j < n; j++) {
 				bool sameSCCFloyd = (lens[i][j] != inf && lens[j][i] != inf);
-				bool sameSCC = (sccId[i] == sccId[j]);
+				bool sameSCC = (scc.sccId[i] == scc.sccId[j]);
 				assert(sameSCCFloyd == sameSCC);
 			}
 		}
