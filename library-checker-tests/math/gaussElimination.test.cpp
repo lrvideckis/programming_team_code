@@ -57,6 +57,7 @@ int main() {
 		return 0;
 	}
 
+	cout << info.rank << endl;
 	for(int i = 0; i < min(info.rank, m); i++) {
 		cout << matrix[i].back() << " ";
 	}
