@@ -13,7 +13,7 @@ struct matrixInfo {
 //row reduce matrix to reduced row echelon form
 //assumes A is a n by m matrix where n,m >= 1
 //
-//Tested on https://judge.yosupo.jp/problem/system_of_linear_equations
+//Tested on https://judge.yosupo.jp/problem/system_of_linear_equations and https://judge.yosupo.jp/problem/matrix_det
 matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 	assert(A.size() == b.size());
 	int n = A.size(), m = A[0].size(), rank = 0, det = 1;
