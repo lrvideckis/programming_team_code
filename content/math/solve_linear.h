@@ -18,7 +18,6 @@ struct matrixInfo {
 matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 	assert(A.size() == b.size());
 	int n = A.size(), m = A[0].size(), rank = 0, det = 1;
-	vector<int> pivot;
 	for(int col = 0; col < m && rank < n; ++col) {
 		for(int i = rank; i < n; ++i) if(A[i][col] != 0) {
 			if(rank != i) det = det == 0 ? det : mod-det;
@@ -28,7 +27,6 @@ matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 		}
 		if(A[rank][col] == 0) { det = 0; continue; }
 		det = (1LL * det * A[rank][col]) % mod;
-		pivot.push_back(col);
 		const int aInv = fastPow(A[rank][col], mod-2, mod);
 		for(int j = 0; j < m; ++j) {
 			A[rank][j] = (1LL * A[rank][j] * aInv) % mod;
@@ -46,16 +44,16 @@ matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 		++rank;
 	}
 	assert(rank <= min(n,m));
-	assert(rank == (int)pivot.size());
 
 	matrixInfo info{rank, det, vector<int>()};
 	for(int i = rank; i < n; i++) {
 		if(b[i] != 0) return info;//no solution exists
 	}
 	info.x.resize(m, 0);
-	for(int i = 0; i < rank; i++) {
-		assert(A[i][pivot[i]] == 1 && (pivot[i] == 0 || A[i][pivot[i]-1] == 0));
-		info.x[pivot[i]] = b[i];
+	for(int i = 0, j = 0; i < rank; i++) {
+		while(A[i][j] == 0) j++;
+		assert(A[i][j] == 1);
+		info.x[j] = b[i];
 	}
 
 	return info;
