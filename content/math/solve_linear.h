@@ -4,11 +4,16 @@
 
 struct matrixInfo {
 	int rank, det;
-	vector<int> sol;
+	vector<int> x;
 };
 
+//Solves A * x = b under prime mod. If there are multiple solutions, an arbitrary one is returned.
+//Returns rank of A, determinant of A, and x (solution vector).
+//O(n * m * min(n,m))
 //row reduce matrix to reduced row echelon form
 //assumes A is a n by m matrix where n,m >= 1
+//
+//Tested on https://judge.yosupo.jp/problem/system_of_linear_equations
 matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 	assert(A.size() == b.size());
 	int n = A.size(), m = A[0].size(), rank = 0, det = 1;
@@ -23,13 +28,11 @@ matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 		if(A[rank][col] == 0) { det = 0; continue; }
 		det = (1LL * det * A[rank][col]) % mod;
 		pivot.push_back(col);
-		{
-			int aInv = fastPow(A[rank][col], mod-2, mod);
-			for(int j = 0; j < m; ++j) {
-				A[rank][j] = (1LL * A[rank][j] * aInv) % mod;
-			}
-			b[rank] = (1LL * b[rank] * aInv) % mod;
+		const int aInv = fastPow(A[rank][col], mod-2, mod);
+		for(int j = 0; j < m; ++j) {
+			A[rank][j] = (1LL * A[rank][j] * aInv) % mod;
 		}
+		b[rank] = (1LL * b[rank] * aInv) % mod;
 		for(int i = 0; i < n; ++i) if(i != rank && A[i][col] != 0) {
 			const int val = A[i][col];
 			for(int j = 0; j < m; ++j) {
@@ -48,10 +51,10 @@ matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 	for(int i = rank; i < n; i++) {
 		if(b[i] != 0) return info;
 	}
-	info.sol.resize(m, 0);
+	info.x.resize(m, 0);
 	for(int i = 0; i < rank; i++) {
 		assert(A[i][pivot[i]] == 1 && (pivot[i] == 0 || A[i][pivot[i]-1] == 0));
-		info.sol[pivot[i]] = b[i];
+		info.x[pivot[i]] = b[i];
 	}
 
 	return info;
