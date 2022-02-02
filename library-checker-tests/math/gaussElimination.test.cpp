@@ -36,42 +36,25 @@ int main() {
 	int n, m;
 	cin >> n >> m;
 
-	vector<vector<int>> matrix(n, vector<int>(m));
-	for(int i= 0; i < n; i++) {
-		for(int j= 0; j < m; j++) {
-			cin >> matrix[i][j];
+	vector<vector<int>> A(n, vector<int>(m));
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < m; j++) {
+			cin >> A[i][j];
 		}
 	}
 
-
-	for(int i= 0; i < n; i++) {
-		int rhs;
-		cin >> rhs;
-		matrix[i].push_back(rhs);
+	vector<int> b(n);
+	for(int i = 0; i < n; i++) {
+		cin >> b[i];
 	}
 
-	matrixInfo info = gauss(matrix, mod);
-
-	if(info.det == 0) {//no solution
-		cout << -1 << endl;
-		return 0;
-	}
-
-	cout << info.rank << endl;
-	for(int i = 0; i < min(info.rank, m); i++) {
-		cout << matrix[i].back() << " ";
-	}
-	for(int i = min(info.rank, m); i < m; i++) {
-		cout << 0 << " ";
-	}
-	cout << endl;
-
-	for(int i = 0; i < info.rank; i++) {
-		for(int j = 0; j < m; j++) {
-			cout << matrix[i][j] << " ";
+	vector<vector<int>> x = solve_linear(A, b, mod);
+	cout << (int)x.size() - 1 << endl;
+	for (vector<int>& v : x) {
+		for (int i = 0; i < m; ++i) {
+			cout << v[i] << " ";
 		}
 		cout << endl;
 	}
-
 	return 0;
 }
