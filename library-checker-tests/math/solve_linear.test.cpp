@@ -75,7 +75,7 @@ int main() {
 	vector<vector<int>> ker = kernel(A, info.rank, mod);
 	cout << (int)ker.size() << endl;
 
-	for(int val : info.sol) cout << val << " ";
+	for(int val : info.x) cout << val << " ";
 	cout << endl;
 
 	for (vector<int>& v : ker) {
