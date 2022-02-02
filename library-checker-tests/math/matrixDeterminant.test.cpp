@@ -25,7 +25,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../content/math/gaussElimination.h"
+#include "../../content/math/solve_linear.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -42,7 +42,8 @@ int main() {
 		}
 	}
 
-	matrixInfo info = gauss(matrix, mod);
+	vector<int> b(n);
+	matrixInfo info = solve_linear(matrix, b, mod);
 
 	cout << info.det << endl;
 	return 0;
