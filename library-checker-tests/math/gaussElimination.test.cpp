@@ -23,6 +23,7 @@
 #include <memory>
 using namespace std;
 #define endl '\n'
+typedef long long ll;
 
 #include "../../content/math/gaussElimination.h"
 
