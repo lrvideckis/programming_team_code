@@ -11,7 +11,7 @@ struct matrixInfo {
 //A is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m column vector.
 //assumes n,m >= 1, else RTE
 //Returns rank of A, determinant of A, and x (solution vector). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
-//Leaves A in reduced row echelon form. 
+//Leaves A in reduced row echelon form (unlike kactl). 
 //O(n * m * min(n,m))
 //
 //Tested on https://judge.yosupo.jp/problem/system_of_linear_equations and https://judge.yosupo.jp/problem/matrix_det
