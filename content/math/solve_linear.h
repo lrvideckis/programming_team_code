@@ -11,7 +11,6 @@ struct matrixInfo {
 //Returns rank of A, determinant of A, and x (solution vector). x is empty if no solution.
 //Leaves A in reduced row echelon form. 
 //O(n * m * min(n,m))
-//row reduce matrix to reduced row echelon form
 //assumes A is a n by m matrix where n,m >= 1
 //
 //Tested on https://judge.yosupo.jp/problem/system_of_linear_equations and https://judge.yosupo.jp/problem/matrix_det
