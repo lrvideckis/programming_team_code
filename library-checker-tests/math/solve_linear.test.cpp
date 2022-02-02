@@ -67,7 +67,7 @@ int main() {
 
 	matrixInfo info = solve_linear(A, b, mod);
 
-	if(info.sol.empty()) {
+	if(info.x.empty()) {
 		cout << -1 << endl;
 		return 0;
 	}
