@@ -49,7 +49,7 @@ matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
 
 	matrixInfo info{rank, det, vector<int>()};
 	for(int i = rank; i < n; i++) {
-		if(b[i] != 0) return info;
+		if(b[i] != 0) return info;//no solution exists
 	}
 	info.x.resize(m, 0);
 	for(int i = 0; i < rank; i++) {
