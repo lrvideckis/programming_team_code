@@ -9,7 +9,7 @@ struct matrixInfo {
 matrixInfo gauss(vector<vector<int>>& matrix, const int mod) {
 	int n = matrix.size();
 	int m = matrix[0].size();//possible RTE here
-	matrixInfo info{1, 0};
+	matrixInfo info{0, 1};
 	for(int col = 0, row = 0; col < m && row < n; ++col) {
 		int sel = row;
 		for(int i = row+1; i < n; ++i)
