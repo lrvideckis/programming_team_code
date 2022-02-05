@@ -1,5 +1,7 @@
 #pragma once
 
+//status: tested on https://judge.yosupo.jp/problem/unionfind
+
 struct disjointSet {
 	int numberOfSets;
 	vector<int> parent;

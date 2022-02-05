@@ -5,6 +5,8 @@
 //such that all cells in the rectangle are false
 //Note cnt[0][j] and cnt[i][0] will contain garbage values
 //O(R*C)
+//
+//status: tested on random inputs
 vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 	vector<vector<int>> cnt;
 	const int rows = grid.size(), cols = grid[0].size();

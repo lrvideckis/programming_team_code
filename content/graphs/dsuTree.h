@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested
+
 const int Max = 1e5+3;
 int color[Max], Time = 1, timeIn[Max], timeOut[Max], ver[Max], Size[Max], cnt[Max], heavyChild[Max], Depth[Max] = {0}, answer[Max];
 vector<int> adj[Max];

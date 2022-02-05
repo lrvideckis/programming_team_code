@@ -1,6 +1,7 @@
 #pragma once
 
-// Implementation of Hopcroft-Karp algorithm
+//Implementation of Hopcroft-Karp algorithm
+//status: tested on https://judge.yosupo.jp/problem/bipartitematching
 struct BipartiteMatcher {
 	vector<vector<int>> G;
 	vector<int> L, R, Viz;

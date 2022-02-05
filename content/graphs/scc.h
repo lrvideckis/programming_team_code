@@ -1,5 +1,7 @@
 #pragma once
 
+//status: tested against floyd warshals on random graphs. also tested on https://judge.yosupo.jp/problem/scc
+
 struct sccInfo {
 	//sccId[i] is the id of the scc containing node `i`
 	vector<int> sccId;

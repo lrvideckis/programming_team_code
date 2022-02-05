@@ -1,6 +1,8 @@
 #pragma once
 
 //modified from https://github.com/nealwu/competitive-programming/blob/master/graph_theory/biconnected_components.cc
+//
+//status: tested on random graphs
 struct biconnected_components {
 	//don't pass in a graph with multiple edges between the same pair of nodes - it breaks bridge finding
 	biconnected_components(const vector<vector<int>>& adj) :

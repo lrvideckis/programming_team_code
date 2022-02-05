@@ -1,5 +1,7 @@
 #pragma once
 
+//status: all functions tested on random trees; also `lca` tested on https://judge.yosupo.jp/problem/lca
+
 struct hld {
 	vector<int> Size, par, Depth, timeIn, Next, timeInToNode;
 	hld(vector<vector<int>>& adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
