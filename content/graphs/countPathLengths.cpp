@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested
+
 #include "../math/fft.h"
 
 const int Max = 1e6+10;

@@ -6,6 +6,8 @@
  * number of edges, and distance between pair of nodes in sum of edge weight.
  * Time: O(n * log(n)) for construction and all queries can be answered in
  * O(log(n))
+ *
+* status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
  */
 
 struct lca {

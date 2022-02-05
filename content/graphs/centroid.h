@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested
+
 const int Max = 2e5+2;
 vector<int> adj[Max];
 int sizes[Max], parent[Max];

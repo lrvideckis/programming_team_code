@@ -17,7 +17,7 @@ matrixInfo gauss(vector<vector<int>>& matrix, const int mod) {
 		if(matrix[sel][col] == 0) { info.det = 0; continue; }
 		for(int j = 0; j < m; ++j) swap(matrix[sel][j], matrix[row][j]);
 		if(row != sel) info.det = info.det == 0 ? info.det : mod-info.det;
-		info.det = (info.det * matrix[row][col]) % mod;
+		info.det = (1LL * info.det * matrix[row][col]) % mod;
 		int s = fastPow(matrix[row][col], mod-2, mod);
 		for(int j = 0; j < m; ++j) matrix[row][j] = (1LL * matrix[row][j] * s) % mod;
 		for(int i = 0; i < n; ++i) if (i != row && matrix[i][col] > 0) {
