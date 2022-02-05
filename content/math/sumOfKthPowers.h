@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested, but used on misc. problems
+
 #define MAX 1000010
 #define MOD 1000000007
 

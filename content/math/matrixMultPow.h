@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested, but used on misc. problems
+
 const int mod = 1e9 + 7;
 
 vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>& b) {

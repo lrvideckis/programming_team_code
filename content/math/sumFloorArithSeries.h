@@ -1,5 +1,7 @@
 #pragma once
 
+//status: used on https://open.kattis.com/problems/itsamodmodmodmodworld
+
 //computes:
 //[p/q] + [2p/q] + [3p/q] + ... + [np/q]
 //(p, q, n are natural numbers)

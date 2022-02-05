@@ -1,5 +1,7 @@
 #pragma once
 
+//not tested, but used in misc. problems
+
 //  Euler's totient function counts the positive integers
 //  up to a given integer n that are relatively prime to n.
 ll phi(ll n) {

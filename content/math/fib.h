@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested
+
 const int mod = 1e9+7;
 unordered_map<ll,ll> table;
 int fib(int n) {//**O(log(n))**

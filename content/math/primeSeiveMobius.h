@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested, but used on various problems
+
 //mobius[i] = 0 iff there exists a prime p s.t. i%(p^2)=0
 //mobius[i] = -1 iff i has an odd number of distinct prime factors
 //mobius[i] = 1 iff i has an even number of distinct prime factors

@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested
+
 const int MAX =1000005;
 bool prime[MAX];
 int prec[MAX];

@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested
+
 struct partitionFunction {
 	vector<ll> remember;
 	//The number of ways you can add to a number

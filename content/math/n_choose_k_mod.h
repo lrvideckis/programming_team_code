@@ -1,5 +1,7 @@
 #pragma once
 
+//status: tested on random inputs
+
 #include "exp_mod.h"
 
 // usage:
