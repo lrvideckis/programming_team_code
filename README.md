@@ -33,6 +33,5 @@ I use KACTL's versions of the following:
 - [Convex Hull Trick](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/LineContainer.h)
 - [Miller Rabin](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/MillerRabin.h)
 - [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
-- [Gaussian elimination](https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/SolveLinear.h)
 - [Z function](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Zfunc.h)
 - [Manacher's](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Manacher.h)
