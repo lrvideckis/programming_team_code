@@ -3,7 +3,7 @@
 //returns array `len` where `len[i]` = shortest path from node `startNode` to node i
 //For example len[startNode] will always = 0
 //
-//status: tested on https://judge.yosupo.jp/problem/shortest_path
+//status: tested on random graphs agains floyd warshals, and on https://judge.yosupo.jp/problem/shortest_path
 
 const ll INF = 1e18;
 
