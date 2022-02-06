@@ -2,6 +2,8 @@
 
 //this code isn't the best. It's meant as a rough start for sqrt-decomposition, and to be (heavily) modified
 //doesn't handle overflow
+
+//status: not tested, but used in various problems
 struct buckets {
 	const int BUCKET_SIZE = 50;//TODO: change - small value for testing
 

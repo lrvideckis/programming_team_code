@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested, but used in various problems
+
 const ll inf = 1e18;
 
 struct mincostmaxflow {

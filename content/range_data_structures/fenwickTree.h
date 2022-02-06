@@ -1,5 +1,7 @@
 #pragma once
 
+//status: tested on random inputs; also tested on https://judge.yosupo.jp/problem/point_add_range_sum
+
 template<class T>
 struct fenwickTree {
 	vector<T> bit;
@@ -29,6 +31,8 @@ struct fenwickTree {
 		return sum(r) - sum(l-1);
 	}
 };
+
+//status: tested on random inputs
 
 template<class T>
 struct rangeUpdatesAndPointQueries {
