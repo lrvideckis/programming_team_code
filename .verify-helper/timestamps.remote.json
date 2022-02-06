@@ -8,6 +8,7 @@
 "library-checker-tests/math/matrixDeterminant.test.cpp": "2022-02-05 16:02:08 -0800",
 "library-checker-tests/math/solve_linear.test.cpp": "2022-02-05 16:02:08 -0800",
 "library-checker-tests/maxflow/hungarian.test.cpp": "2022-02-05 16:20:28 -0800",
+"library-checker-tests/range_data_structures/fenwickTree.test.cpp": "2022-02-05 17:18:53 -0800",
 "library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-02-05 16:54:22 -0800",
 "library-checker-tests/stringAlgs/rollingHash.test.cpp": "2022-02-05 17:15:07 -0800"
 }
