@@ -27,7 +27,14 @@ match bipartiteMatcher(const vector<vector<int>>& adj /*bipartite graph*/, const
 		if(visL[node]) return false;
 		visL[node] = true;
 		for(int vec : adj[node]) {
-			if(R[vec] == -1 || Match(Match, R[vec])) {
+			if(R[vec] == -1) {
+				L[node] = vec;
+				R[vec] = node;
+				return true;
+			}
+		}
+		for(int vec : adj[node]) {
+			if(Match(Match, R[vec])) {
 				L[node] = vec;
 				R[vec] = node;
 				return true;
