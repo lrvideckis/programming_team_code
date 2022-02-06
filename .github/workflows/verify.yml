@@ -1,8 +1,6 @@
 name: test-all-code
 
-on:
-  push:
-    branches: [ master ]
+on: push
 
 jobs:
   verify:
