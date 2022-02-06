@@ -1,4 +1,5 @@
 /build/
+/.verify-helper/
 .gch
 *.aux
 *.pdf
