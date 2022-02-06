@@ -25,7 +25,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../content/math/solve_linear.h"
+#include "../../content/math/solve_linear_mod.h"
 
 //assumes A is row reduced already
 vector<vector<int>> kernel( vector<vector<int>> A, int rank, int mod ) {
@@ -65,7 +65,7 @@ int main() {
 		cin >> b[i];
 	}
 
-	matrixInfo info = solve_linear(A, b, mod);
+	matrixInfo info = solve_linear_mod(A, b, mod);
 
 	if(info.x.empty()) {
 		cout << -1 << endl;

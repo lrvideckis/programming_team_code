@@ -15,7 +15,7 @@ struct matrixInfo {
 //O(n * m * min(n,m))
 //
 //status: tested on https://judge.yosupo.jp/problem/system_of_linear_equations and https://judge.yosupo.jp/problem/matrix_det
-matrixInfo solve_linear(vector<vector<int>>& A, vector<int>& b, const int mod) {
+matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mod) {
 	assert(A.size() == b.size());
 	int n = A.size(), m = A[0].size(), rank = 0, det = 1;
 	//start of row reduce

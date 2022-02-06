@@ -25,7 +25,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../content/math/solve_linear.h"
+#include "../../content/math/solve_linear_mod.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -43,7 +43,7 @@ int main() {
 	}
 
 	vector<int> b(n);
-	matrixInfo info = solve_linear(matrix, b, mod);
+	matrixInfo info = solve_linear_mod(matrix, b, mod);
 
 	cout << info.det << endl;
 	return 0;
