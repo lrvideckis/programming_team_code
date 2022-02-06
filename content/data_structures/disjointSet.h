@@ -1,6 +1,6 @@
 #pragma once
 
-//status: tested on https://judge.yosupo.jp/problem/unionfind
+//status: tested on random inputs, and on https://judge.yosupo.jp/problem/unionfind
 
 struct disjointSet {
 	int numberOfSets;
