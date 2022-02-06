@@ -4,6 +4,8 @@
 //	KMP_Match<string> kmp(needle);
 //or
 //	KMP_Match<vector<int>> kmp(needle);
+//
+//status: tested on random inputs
 template <class T>
 struct KMP_Match {
 public:

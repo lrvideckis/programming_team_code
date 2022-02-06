@@ -1,6 +1,8 @@
 #pragma once
 
 //modified from here: https://judge.yosupo.jp/submission/37410
+//
+//status: tested on random inputs, and on https://open.kattis.com/problems/automatictrading
 class suffix_array {
 public:
 	//computes suffix array, lcp array, and then sparse table over lcp array

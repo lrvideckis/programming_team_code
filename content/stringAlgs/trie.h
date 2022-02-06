@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested, but used on various problems
+
 const int K = 26;//character size
 
 struct node {

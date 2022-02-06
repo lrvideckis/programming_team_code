@@ -6,6 +6,8 @@
 //	Hash<vector<int>> h(arr);
 //	assumes 0 < arr[i] < 1e9+5 = `base`
 //	here, for negatives or longlongs, compress values to {1,2,...,n} and make sure `base` is > n
+//
+//status: tested on random inputs, and on https://judge.yosupo.jp/problem/zalgorithm
 template <class T>
 struct Hash {
 	//`base` should be relatively prime with all mods and *strictly* larger than max element
