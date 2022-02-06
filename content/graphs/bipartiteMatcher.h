@@ -5,7 +5,7 @@
 //status: tested on https://judge.yosupo.jp/problem/bipartitematching with asserts checking correctness of min vertex cover
 
 struct match {
-	//edges in matching, given as: std::pair(leftNode, rightNode)
+	//edges in matching, given as array of std::pair(leftNode, rightNode)
 	//size of matching = size of min vertex cover by König's theorem
 	vector<pair<int,int>> matching;
 	//an arbitrary min vertex cover is found. For this MVC: leftMVC[`left node`] is true iff `left node` is in the min vertex cover (same for rightMVC)
