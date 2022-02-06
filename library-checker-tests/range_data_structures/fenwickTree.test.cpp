@@ -31,16 +31,16 @@ int main() {
 	cin.tie(0)->sync_with_stdio(false);
 	int n,q;
 	cin >> n >> q;
-	vector<int> arr(n);
+	vector<ll> arr(n);
 	for(int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	fenwickTree ft(arr);
+	fenwickTree<ll> ft(arr);
 	while(q--) {
 		int type;
 		cin >> type;
 		if(type == 0) {
-			int p,x;
+			int p, x;
 			cin >> p >> x;
 			ft.update(p,x);
 		} else {
