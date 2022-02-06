@@ -7,7 +7,7 @@
 // or
 //	rot_eq<vector<int>>(arr1, arr2)
 //
-//status: tested on https://open.kattis.com/problems/maze
+//status: tested on random inputs, also on https://open.kattis.com/problems/maze
 
 template <class T>
 bool rot_eq(const T& a, const T& b) {
