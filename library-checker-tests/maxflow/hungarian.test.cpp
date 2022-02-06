@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/lca"
+#define PROBLEM "https://judge.yosupo.jp/problem/assignment"
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -25,25 +25,22 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../content/graphs/lca.h"
+#include "../../content/maxflow/hungarian.h"
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-	int n,q;
-	cin >> n >> q;
-	vector<vector<pair<int,ll>>> adj(n);
-	for(int i = 1; i < n; ++i) {
-		int par;
-		cin >> par;
-		adj[par].push_back({i,1LL});
-		adj[i].push_back({par,1LL});
+	cin.tie(0)->sync_with_stdio(false);
+	int n;
+	cin >> n;
+	vector<vector<ll>> a(n+1, vector<ll>(n+1));
+	for(int i = 1; i <= n; i++) {
+		for(int j = 1; j <= n; j++) {
+			cin >> a[i][j];
+		}
 	}
-	lca h(adj,0);
-	while(q--) {
-		int u,v;
-		cin >> u >> v;
-		cout << h.getLca(u,v) << endl;
+	match res = HungarianMatch(a);
+	cout << res.cost << endl;
+	for(int i = 1; i <= n; i++) {
+		cout << res.matching[i]-1 << " ";
 	}
+	return 0;
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+//status: no tests, but used in various problems
+
 struct maxflow {
 public:
 	ll n, s, t;

@@ -7,9 +7,17 @@ const ll inf = 1e18;
 // cost[i][j] is cost of job i done by worker j
 // #jobs must be <= #workers
 // Default finds min cost; to find max cost set all costs[i][j] to -costs[i][j], set all unused to positive inf, ***set main diagonal (self edges) to 0***
-ll HungarianMatch(const vector<vector<ll>>& a) {
-	ll n = a.size()-1;
-	ll m = a[0].size()-1;
+
+//status: tested on https://judge.yosupo.jp/problem/assignment
+
+struct match {
+	ll cost;
+	vector<int> matching;
+};
+
+match HungarianMatch(const vector<vector<ll>>& cost) {
+	ll n = cost.size()-1;
+	ll m = cost[0].size()-1;
 	vector<ll> u(n+1), v(m+1), p(m+1), way(m+1);
 	for(ll i = 1; i <= n; ++i) {
 		p[0] = i;
@@ -21,7 +29,7 @@ ll HungarianMatch(const vector<vector<ll>>& a) {
 			ll i0 = p[j0], delta = inf, j1 = 0;
 			for(ll j = 1; j <= m; ++j)
 				if(!used[j]) {
-					ll cur = a[i0][j] - u[i0] - v[j];
+					ll cur = cost[i0][j] - u[i0] - v[j];
 					if(cur < minv[j])
 						minv[j] = cur, way[j] = j0;
 					if(minv[j] < delta)
@@ -41,12 +49,10 @@ ll HungarianMatch(const vector<vector<ll>>& a) {
 		} while(j0);
 	}
 
-	/*
 	// For each N, it contains the M it selected
-	vector<ll> ans(n+1);
+	vector<int> ans(n+1);
 	for(ll j = 1; j <= m ; ++j)
 		ans[p[j]] = j;
-	*/
 
-	return -v[0];
+	return {-v[0], ans};
 }
