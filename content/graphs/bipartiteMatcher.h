@@ -1,7 +1,7 @@
 #pragma once
 
-//Implementation of Hopcroft-Karp algorithm
-//O(m * sqrt(n)) where n = # nodes, m = # edges
+//Modified from https://codeforces.com/blog/entry/58048?#comment-417398
+//Worst case Ω(V^2) but fast in practice
 //status: tested on https://judge.yosupo.jp/problem/bipartitematching with asserts checking correctness of min vertex cover
 
 struct match {
