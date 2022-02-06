@@ -24,23 +24,33 @@
 using namespace std;
 #define endl '\n'
 
-#include "../../content/graphs/bipartite.h"
+#include "../../content/graphs/bipartiteMatcher.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
 	int l, r, m;
 	cin >> l >> r >> m;
-	BipartiteMatcher bm(l, r);
+	vector<vector<int>> adj(l);
+	vector<pair<int,int>> edges;
 	while(m--) {
 		int u, v;
 		cin >> u >> v;
-		bm.AddEdge(u, v);
+		adj[u].push_back(v);
+		edges.push_back({u,v});
 	}
-	cout << bm.Solve() << endl;
-	for(int i = 0; i < l; i++) {
-		if(bm.L[i] != -1) {
-			cout << i << " " << bm.L[i] << endl;
-		}
+	match res = bipartiteMatcher(adj, r);
+	cout << res.matching.size() << endl;
+	for(auto [u,v] : res.matching) {
+		cout << u << " " << v << endl;
+	}
+
+	//asserting found min vertex cover is correct
+	int cnt = 0;
+	for(int i = 0; i < l; i++) cnt += res.leftMVC[i];
+	for(int i = 0; i < r; i++) cnt += res.rightMVC[i];
+	assert(cnt == (int)res.matching.size());//size of min vertex cover == size of max matching
+	for(auto [u,v] : edges) {
+		assert(res.leftMVC[u] || res.rightMVC[v]);
 	}
 	return 0;
 }
