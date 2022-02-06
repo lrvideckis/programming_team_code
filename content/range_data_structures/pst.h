@@ -1,6 +1,8 @@
 #pragma once
 
 //modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
+//
+//status: not tested, but used in various problems
 struct pst {
 public:
 	/* Persistent seg tree handle a variety of queries

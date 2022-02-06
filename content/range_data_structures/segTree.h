@@ -1,5 +1,7 @@
 #pragma once
 
+//status: tested on random inputs
+
 const ll inf = 1e18;
 
 struct SegmentTree {

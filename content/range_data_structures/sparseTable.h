@@ -7,6 +7,8 @@
 //	sparseTable<pair<ll,int>> st(arr, [](auto x, auto y) { return min(x,y); });
 //and initialize second to index. If there are multiple indexes of min element,
 //it'll return the smallest (left-most) one
+//
+//status: tested on random inputs, also on https://judge.yosupo.jp/problem/staticrmq
 template <class T>
 struct sparseTable {
 	vector<int> log2;

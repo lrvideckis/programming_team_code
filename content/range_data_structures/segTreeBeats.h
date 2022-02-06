@@ -1,5 +1,7 @@
 #pragma once
 
+//status: not tested, used in various problems
+
 struct SegTreeBeats {
 	struct Node {
 		int sum;

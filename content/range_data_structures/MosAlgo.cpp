@@ -1,3 +1,5 @@
+//status: not tested, but used in various problems
+
 #include <bits/stdc++.h>
 using namespace std;
 
