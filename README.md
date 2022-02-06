@@ -32,4 +32,4 @@ I aim for a balance between best coding practices, speed (runtime), and ease of 
 - [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
 - [Z function](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Zfunc.h)
 - [Manacher's](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Manacher.h)
-- [Sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc)
+- [Sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc) (search buckets)
