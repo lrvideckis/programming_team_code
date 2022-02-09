@@ -3,7 +3,7 @@ name: test-all-code
 on: push
 
 jobs:
-  verify:
+  library_checker_tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,15 +36,15 @@ jobs:
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
-  
-  build_and_test:
+
+  lrvideckis_custom_tests:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Run compiles
       run: make test-compiles
-      
+
     - name: Run stress tests
       run: make test
