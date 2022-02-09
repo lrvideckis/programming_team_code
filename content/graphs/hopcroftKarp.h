@@ -1,7 +1,7 @@
 #pragma once
 
 //Modified from https://github.com/foreverbell/acm-icpc-cheat-sheet/blob/master/src/graph-algorithm/hopcroft-karp.cpp
-//Worst case Ω(V^2) but fast in practice
+//Worst case O(E*sqrt(V)) but faster in practice
 //status: tested on https://judge.yosupo.jp/problem/bipartitematching with asserts checking correctness of min vertex cover
 
 struct match {
