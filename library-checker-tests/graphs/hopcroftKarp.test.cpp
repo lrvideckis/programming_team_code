@@ -24,7 +24,7 @@
 using namespace std;
 #define endl '\n'
 
-#include "../../content/graphs/bipartiteMatcher.h"
+#include "../../content/graphs/hopcroftKarp.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -38,7 +38,7 @@ int main() {
 		adj[u].push_back(v);
 		edges.push_back({u,v});
 	}
-	match res = bipartiteMatcher(adj, r);
+	match res = hopcroftKarp(adj, r);
 	cout << res.matching.size() << endl;
 	for(auto [u,v] : res.matching) {
 		cout << u << " " << v << endl;
