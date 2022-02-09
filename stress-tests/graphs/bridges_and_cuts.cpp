@@ -64,6 +64,7 @@ int main() {
 
 		for(int iter = 100; iter--;) {
 			int node1 = getRand(0,n-1), node2 = getRand(0,n-1);
+			if(node1 == node2) continue;
 			bool sameBCCNaive = true;
 			if(n == 2) {
 				sameBCCNaive = (node1 == node2 || edges.size() == 1);
@@ -83,16 +84,19 @@ int main() {
 				}
 			}
 			bool sameBBCMiddle = false;
-			for(const vector<int>& currBcc : bcc.components) {
+			int whichBcc = -1;
+			for(int i = 0; i < (int)bcc.components.size(); i++) {
+				vector<int>& currBcc = bcc.components[i];
 				if(find(currBcc.begin(), currBcc.end(), node1) != currBcc.end()) {
 					if(find(currBcc.begin(), currBcc.end(), node2) != currBcc.end()) {
 						sameBBCMiddle = true;
-						break;
+						assert(whichBcc == -1);
+						whichBcc = i;
 					}
 				}
 			}
-			bool res = bct.same_biconnected_component(node1, node2);
-			if(!(sameBCCNaive == res && res == sameBBCMiddle)) {
+			int res = bct.which_bcc(node1, node2);
+			if(!(sameBCCNaive == sameBBCMiddle && (res != -1) == sameBBCMiddle && res == whichBcc)) {
 				cout << "n: " << n << endl;
 				cout << "edges: " << endl;
 				for(auto [u,v] : edges) cout << u << " " << v << endl;
@@ -105,12 +109,15 @@ int main() {
 				cout << endl;
 
 				cout << "query nodes: " << node1 << " " << node2 << endl;
-				cout << "naive, middle, fast: " << sameBCCNaive << " " << sameBBCMiddle << " " << res << endl;
+				cout << "naive, middle, fast, which_bcc_naive: " << sameBCCNaive << " " << sameBBCMiddle << " " << res << " " << whichBcc << endl;
 				cout << flush;
 				return 1;//test failed
 			}
+
 			//sanity check
-			assert(sameBCCNaive == res && res == sameBBCMiddle);
+			assert(sameBCCNaive == sameBBCMiddle);
+			assert((res != -1) == sameBBCMiddle);
+			assert(res == whichBcc);
 		}
 		cout << "bct same bcc test passed" << endl << flush;
 	}
