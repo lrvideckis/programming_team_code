@@ -51,8 +51,7 @@ struct mincostmaxflow {
 						if(id[r.b] == 0) {
 							q[qt++] = r.b;
 							if(qt == n) qt = 0;
-						}
-						else if(id[r.b] == 2) {
+						} else if(id[r.b] == 2) {
 							if(--qh == -1) qh = n-1;
 							q[qh] = r.b;
 						}
@@ -65,11 +64,13 @@ struct mincostmaxflow {
 			if(d[t] == inf) break;
 			ll addflow = k - flow;
 			for(ll v=t; v!=s; v=p[v]) {
-				ll pv = p[v]; size_t pr = p_edge[v];
+				ll pv = p[v];
+				size_t pr = p_edge[v];
 				addflow = min(addflow, e[g[pv][pr]].cap - e[g[pv][pr]].flow);
 			}
 			for(ll v=t; v!=s; v=p[v]) {
-				ll pv = p[v]; size_t pr = p_edge[v], r = e[g[pv][pr]].back;
+				ll pv = p[v];
+				size_t pr = p_edge[v], r = e[g[pv][pr]].back;
 				e[g[pv][pr]].flow += addflow;
 				e[g[v][r]].flow -= addflow;
 				cost += e[g[pv][pr]].cost * addflow;

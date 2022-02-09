@@ -17,16 +17,13 @@ struct NchooseK {
 		//multiplications fit in a longlong before being modded down. So this
 		//will take sqrt(2^31) time
 		assert(mod >= 2);
-		for(int i = 2; i * i <= mod; i++) {
+		for(int i = 2; i * i <= mod; i++)
 			assert(mod % i);
-		}
-		for(int i = 1; i <= maxFact; i++) {
+		for(int i = 1; i <= maxFact; i++)
 			fact[i] = 1LL * fact[i-1] * i % mod;
-		}
 		invFact[maxFact] = fastPow(fact[maxFact], mod-2, mod);
-		for(int i = maxFact-1; i >= 0; i--) {
+		for(int i = maxFact-1; i >= 0; i--)
 			invFact[i] = 1LL * invFact[i+1] * (i+1) % mod;
-		}
 	}
 
 	//classic n choose k

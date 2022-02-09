@@ -9,9 +9,8 @@ ll phi(ll n) {
 	ll result = n;
 	for(ll i = 2; i*i <= tempN; i++) {
 		if(n % i == 0) {
-			while(n % i == 0) {
+			while(n % i == 0)
 				n /= i;
-			}
 			result -= result / i;
 		}
 	}

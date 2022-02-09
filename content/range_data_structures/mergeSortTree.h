@@ -29,12 +29,10 @@ struct MergeSortTree {
 				ptrL++,ptrR++;
 			}
 		}
-		while(ptrL < (int)L.vals.size()) {
+		while(ptrL < (int)L.vals.size())
 			par.vals.push_back(L.vals[ptrL++]);
-		}
-		while(ptrR < (int)R.vals.size()) {
+		while(ptrR < (int)R.vals.size())
 			par.vals.push_back(R.vals[ptrR++]);
-		}
 		return par;
 	}
 
@@ -46,9 +44,9 @@ struct MergeSortTree {
 		build(arr, 1, 0, n-1);
 	}
 	void build(const vector<int>& arr, int node, int start, int end) {
-		if(start == end) {
+		if(start == end)
 			tree[node].vals.push_back(arr[start]);
-		} else {
+		else {
 			int mid = (start+end)/2;
 			build(arr, 2*node, start, mid);
 			build(arr, 2*node+1, mid+1, end);
@@ -56,7 +54,9 @@ struct MergeSortTree {
 		}
 	}
 	//returns how many values of arr[l], arr[l+1], ..., arr[r] which are < x
-	int query(int l, int r, int x) {return query(1, 0, n-1, l, r, x);}
+	int query(int l, int r, int x) {
+		return query(1, 0, n-1, l, r, x);
+	}
 	int query(int node, int start, int end, int l, int r, int x) {
 		if(r < start || end < l) return 0;
 		if(l <= start && end <= r) {

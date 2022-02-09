@@ -30,20 +30,17 @@ void dfs1(int node, int prev, bool keep = true) {
 		if(to == prev || to == heavyChild[node]) continue;
 		dfs1(to, node, false);
 	}
-	if(heavyChild[node] != -1) {
+	if(heavyChild[node] != -1)
 		dfs1(heavyChild[node], node, true);
-	}
 	cnt[color[node]]++;
 	for(int to : adj[node]) {
 		if(to == prev || to == heavyChild[node]) continue;
-		for(int i = timeIn[to]; i < timeOut[to]; ++i) {
+		for(int i = timeIn[to]; i < timeOut[to]; ++i)
 			cnt[color[ver[i]]]++;
-		}
 	}
 	if(!keep) {
-		for(int i = timeIn[node]; i < timeOut[node]; ++i) {
+		for(int i = timeIn[node]; i < timeOut[node]; ++i)
 			cnt[color[ver[i]]]--;
-		}
 	}
 }
 /*

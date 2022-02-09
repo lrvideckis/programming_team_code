@@ -39,9 +39,8 @@ struct rangeUpdatesAndPointQueries {
 	fenwickTree<T> ft;
 	rangeUpdatesAndPointQueries(int n) : ft(n) {}
 	rangeUpdatesAndPointQueries(vector<T> arr) : ft(0) {
-		for(int i = (int)arr.size()-1; i >= 1; i--) {
+		for(int i = (int)arr.size()-1; i >= 1; i--)
 			arr[i] -= arr[i-1];
-		}
 		ft = fenwickTree<T>(arr);
 	}
 	void updateRange(int l, int r, const T& diff) {

@@ -20,9 +20,8 @@ public:
 		for(;;) {
 			if(!bfs())  break;
 			ptr.assign(ptr.size(), 0);
-			while(ll pushed = dfs(s,inf)) {
+			while(ll pushed = dfs(s,inf))
 				flow += pushed;
-			}
 		}
 		return flow;
 	}
@@ -48,7 +47,7 @@ private:
 			ll v = q[qh++];
 			for(size_t i=0; i<g[v].size(); ++i) {
 				ll id = g[v][i],
-				to = e[id].b;
+				   to = e[id].b;
 				if(d[to] == -1 && e[id].flow < e[id].cap) {
 					q[qt++] = to;
 					d[to] = d[v] + 1;

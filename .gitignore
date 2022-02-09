@@ -1,8 +1,9 @@
 /build/
-.gch
+*.gch
 *.aux
 *.pdf
 *.log
 *.lol
 *.out
 *.tmp
+*.orig

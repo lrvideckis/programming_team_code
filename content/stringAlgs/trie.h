@@ -33,9 +33,8 @@ void remove_string(const string& s) {
 	int c = 0;
 	for(char ch : s) {
 		int v = ch-'a';
-		if(t[c].next[v] == -1) {
+		if(t[c].next[v] == -1)
 			return;
-		}
 		c = t[c].next[v];
 	}
 	t[c].leaf = 0;
@@ -45,9 +44,8 @@ int find_string(const string& s) {
 	int c = 0;
 	for(char ch : s) {
 		int v = ch-'a';
-		if(t[c].next[v] == -1) {
+		if(t[c].next[v] == -1)
 			return -1;
-		}
 		c = t[c].next[v];
 	}
 	if(!t[c].leaf) return -1;

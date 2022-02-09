@@ -11,7 +11,9 @@ struct buckets {
 		int sumLazy = 0;
 		int sumBucket = 0;
 		int l, r;//inclusive range of bucket
-		int len() const { return r - l + 1; }
+		int len() const {
+			return r - l + 1;
+		}
 	};
 
 	vector<int> values;
@@ -25,18 +27,16 @@ struct buckets {
 			_buckets[i].sumBucket = 0;
 			_buckets[i].l = i*BUCKET_SIZE;
 			_buckets[i].r = min((i+1)*BUCKET_SIZE, (int)values.size()) - 1;
-			for(int j = _buckets[i].l; j <= _buckets[i].r; j++) {
+			for(int j = _buckets[i].l; j <= _buckets[i].r; j++)
 				_buckets[i].sumBucket += values[j];
-			}
 		}
 	}
 
 	void pushLazy(int bIdx) {
 		bucket& b = _buckets[bIdx];
 		if(!b.sumLazy) return;
-		for(int i = b.l; i <= b.r; i++) {
+		for(int i = b.l; i <= b.r; i++)
 			values[i] += b.sumLazy;
-		}
 		b.sumLazy = 0;
 	}
 
@@ -51,7 +51,9 @@ struct buckets {
 			}
 			return;
 		}
-		for(int bIdx : {startBucket, endBucket}) {//handle "endpoint" buckets
+		for(int bIdx : {
+		            startBucket, endBucket
+		        }) {//handle "endpoint" buckets
 			bucket& b = _buckets[bIdx];
 			for(int i = max(b.l, L); i <= min(b.r, R); i++) {
 				values[i] += diff;
@@ -72,22 +74,21 @@ struct buckets {
 		if(startBucket == endBucket) {//range contained in same bucket case
 			pushLazy(startBucket);
 			int sum = 0;
-			for(int i = L; i <= R; i++) {
+			for(int i = L; i <= R; i++)
 				sum += values[i];
-			}
 			return sum;
 		}
 		int sum = 0;
-		for(int bIdx : {startBucket, endBucket}) {//handle "endpoint" buckets
+		for(int bIdx : {
+		            startBucket, endBucket
+		        }) {//handle "endpoint" buckets
 			bucket& b = _buckets[bIdx];
 			pushLazy(bIdx);
-			for(int i = max(b.l, L); i <= min(b.r, R); i++) {
+			for(int i = max(b.l, L); i <= min(b.r, R); i++)
 				sum += values[i];
-			}
 		}
-		for(int i = startBucket+1; i < endBucket; i++) {//handle all n/B buckets in middle
+		for(int i = startBucket+1; i < endBucket; i++)  //handle all n/B buckets in middle
 			sum += _buckets[i].sumBucket;
-		}
 		return sum;
 	}
 };

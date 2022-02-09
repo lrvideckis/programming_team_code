@@ -10,14 +10,12 @@ public:
 	suffix_array(const string& s) {
 		int n = (int)s.size();
 		vector<int> arr(n);
-		for(int i = 0; i < n; i++) {
+		for(int i = 0; i < n; i++)
 			arr[i] = s[i];
-		}
 		sa_ = sa_is(arr, 255);
 		inv_sa_.resize(n);
-		for(int i = 0; i < n; i++) {
+		for(int i = 0; i < n; i++)
 			inv_sa_[sa_[i]] = i;
-		}
 		lcp_ = lcp_array(arr, sa_);
 		init_min_sparse_table(lcp_);
 	}
@@ -68,25 +66,21 @@ private:
 				return {1, 0};
 			}
 		}
-
 		vector<int> sa(n);
 		vector<bool> ls(n);
-		for (int i = n - 2; i >= 0; i--) {
+		for (int i = n - 2; i >= 0; i--)
 			ls[i] = (s[i] == s[i + 1]) ? ls[i + 1] : (s[i] < s[i + 1]);
-		}
 		vector<int> sum_l(upper + 1), sum_s(upper + 1);
 		for (int i = 0; i < n; i++) {
-			if (!ls[i]) {
+			if (!ls[i])
 				sum_s[s[i]]++;
-			} else {
+			else
 				sum_l[s[i] + 1]++;
-			}
 		}
 		for (int i = 0; i <= upper; i++) {
 			sum_s[i] += sum_l[i];
 			if (i < upper) sum_l[i + 1] += sum_s[i];
 		}
-
 		vector<int> buf(upper + 1);
 		auto induce = [&](const vector<int>& lms) {
 			fill(sa.begin(), sa.end(), -1);
@@ -100,36 +94,29 @@ private:
 			sa[buf[s[n - 1]]++] = n - 1;
 			for (int i = 0; i < n; i++) {
 				int v = sa[i];
-				if (v >= 1 && !ls[v - 1]) {
+				if (v >= 1 && !ls[v - 1])
 					sa[buf[s[v - 1]]++] = v - 1;
-				}
 			}
 			copy(sum_l.begin(), sum_l.end(), buf.begin());
 			for (int i = n - 1; i >= 0; i--) {
 				int v = sa[i];
-				if (v >= 1 && ls[v - 1]) {
+				if (v >= 1 && ls[v - 1])
 					sa[--buf[s[v - 1] + 1]] = v - 1;
-				}
 			}
 		};
-
 		vector<int> lms_map(n + 1, -1);
 		int m = 0;
 		for (int i = 1; i < n; i++) {
-			if (!ls[i - 1] && ls[i]) {
+			if (!ls[i - 1] && ls[i])
 				lms_map[i] = m++;
-			}
 		}
 		vector<int> lms;
 		lms.reserve(m);
 		for (int i = 1; i < n; i++) {
-			if (!ls[i - 1] && ls[i]) {
+			if (!ls[i - 1] && ls[i])
 				lms.push_back(i);
-			}
 		}
-
 		induce(lms);
-
 		if (m) {
 			vector<int> sorted_lms;
 			sorted_lms.reserve(m);
@@ -144,13 +131,12 @@ private:
 				int end_l = (lms_map[l] + 1 < m) ? lms[lms_map[l] + 1] : n;
 				int end_r = (lms_map[r] + 1 < m) ? lms[lms_map[r] + 1] : n;
 				bool same = true;
-				if (end_l - l != end_r - r) {
+				if (end_l - l != end_r - r)
 					same = false;
-				} else {
+				else {
 					while (l < end_l) {
-						if (s[l] != s[r]) {
+						if (s[l] != s[r])
 							break;
-						}
 						l++;
 						r++;
 					}
@@ -159,13 +145,10 @@ private:
 				if (!same) rec_upper++;
 				rec_s[lms_map[sorted_lms[i]]] = rec_upper;
 			}
-
 			auto rec_sa =
-				sa_is(rec_s, rec_upper);
-
-			for (int i = 0; i < m; i++) {
+			    sa_is(rec_s, rec_upper);
+			for (int i = 0; i < m; i++)
 				sorted_lms[i] = lms[rec_sa[i]];
-			}
 			induce(sorted_lms);
 		}
 		return sa;
@@ -198,9 +181,8 @@ private:
 		for(int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i/2];
 		dp_.resize(log2_[n] + 1, arr);
 		for(int i = 1; i <= log2_[n]; ++i) {
-			for(int j = 0; j+(1<<i)-1<n; ++j) {
+			for(int j = 0; j+(1<<i)-1<n; ++j)
 				dp_[i][j] = min(dp_[i-1][j], dp_[i-1][j+(1<<(i-1))]);
-			}
 		}
 	}
 };

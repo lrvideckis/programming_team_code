@@ -20,9 +20,8 @@ struct sparseTable {
 		for(int i = 1; i <= n; ++i) log2[i] = 1 + log2[i/2];
 		dp.resize(log2[n]+1, arr);
 		for(int i = 1; i <= log2[n]; ++i) {
-			for(int j = 0; j+(1<<i)-1<n; ++j) {
+			for(int j = 0; j+(1<<i)-1<n; ++j)
 				dp[i][j] = func(dp[i-1][j], dp[i-1][j+(1<<(i-1))]);
-			}
 		}
 	}
 	//returns func of arr[l], arr[l+1], ..., arr[r]

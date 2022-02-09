@@ -35,17 +35,14 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 		}
 	}
 	for(int j = 1; j <= cols; ++j) {
-		for(int i = rows-1; i >= 1; --i) {
+		for(int i = rows-1; i >= 1; --i)
 			cnt[i][j] += cnt[i+1][j];
-		}
-		for(int i = rows-1; i >= 1; --i) {
+		for(int i = rows-1; i >= 1; --i)
 			cnt[i][j] += cnt[i+1][j];
-		}
 	}
 	for(int i = 1; i <= rows; ++i) {
-		for(int j = cols-1; j >= 1; --j) {
+		for(int j = cols-1; j >= 1; --j)
 			cnt[i][j] += cnt[i][j+1];
-		}
 	}
 	return cnt;
 }

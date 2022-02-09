@@ -40,9 +40,8 @@ void dfs1(int node, int par) {
 	removed[node] = true;
 	parent[node] = par;
 	for(int to : adj[node]) {
-		if(!removed[to]) {
+		if(!removed[to])
 			dfs1(findCentroid(to), node);
-		}
 	}
 }
 //dfs1(findCentroid(1), 0);

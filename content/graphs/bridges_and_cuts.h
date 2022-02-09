@@ -9,8 +9,7 @@ struct biconnected_components {
 		is_cut(adj.size(), false),
 		n(adj.size()),
 		tour_start(n),
-		low_link(n)
-	{
+		low_link(n) {
 		int tour = 0;
 		vector<bool> visited(n, false);
 		vector<int> stack;
@@ -51,7 +50,6 @@ struct biconnected_components {
 		low_link[node] = tour_start[node];
 		is_cut[node] = false;
 		int parent_count = 0, children = 0;
-
 		for (int next : adj[node]) {
 			// Skip the first edge to the parent, but allow multi-edges.
 			if (next == parent && parent_count++ == 0)
@@ -80,9 +78,8 @@ struct biconnected_components {
 					component.erase(unique(component.begin(), component.end()), component.end());
 					components.push_back(component);
 					stack.resize(size);
-				} else {
+				} else
 					stack.push_back(node);
-				}
 				// In general, `node` is a cut vertex iff it has a child whose subtree cannot reach above `node`.
 				if (low_link[next] >= tour_start[node])
 					is_cut[node] = true;
@@ -120,11 +117,9 @@ struct block_cut_tree {
 			block_vertex_tree[a].push_back(b);
 			block_vertex_tree[b].push_back(a);
 		};
-
 		for (int bc = 0; bc < BC; bc++)
 			for (int x : _bi_comps.components[bc])
 				add_edge(x, n + bc);
-
 		for (int root = 0; root < T; root++)
 			if (parent[root] < 0)
 				dfs(root, -1);
@@ -139,9 +134,8 @@ struct block_cut_tree {
 		if (depth[a] > depth[b])
 			swap(a, b);
 		// Two different nodes are in the same biconnected component iff their distance = 2 in the block-cut tree.
-		if((depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b])) {
+		if((depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b]))
 			return parent[b] - n;
-		}
 		return -1;
 	}
 

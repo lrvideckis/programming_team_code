@@ -112,8 +112,8 @@ private:
 		if(valueL <= l && r <= valueR) return {nodes[vr].data.cnt - nodes[vl].data.cnt, nodes[vr].data.sum - nodes[vl].data.sum};
 		int m = (l + r) / 2;
 		return combine(
-			calc_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR),
-			calc_in_range(nodes[vl].rCh, nodes[vr].rCh, m+1, r, valueL, valueR)
-		);
+		           calc_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR),
+		           calc_in_range(nodes[vl].rCh, nodes[vr].rCh, m+1, r, valueL, valueR)
+		       );
 	}
 };

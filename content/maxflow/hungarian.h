@@ -48,11 +48,9 @@ match HungarianMatch(const vector<vector<ll>>& cost) {
 			j0 = j1;
 		} while(j0);
 	}
-
 	// For each N, it contains the M it selected
 	vector<int> ans(n+1);
 	for(ll j = 1; j <= m ; ++j)
 		ans[p[j]] = j;
-
 	return {-v[0], ans};
 }

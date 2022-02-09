@@ -12,13 +12,11 @@ struct hld {
 			dfs1(node,adj);
 			dfs2(node,adj,Time);
 		};
-		if(root != -1) {
+		if(root != -1)
 			callDfss(root);
-		}
 		for(int i = 0; i < (int)adj.size(); i++) {
-			if(par[i] == -1) {//roots each tree by node with min label
+			if(par[i] == -1)  //roots each tree by node with min label
 				callDfss(i);
-			}
 		}
 	}
 	void dfs1(int node, vector<vector<int>>& adj) {
@@ -28,9 +26,8 @@ struct hld {
 			par[to] = node;
 			dfs1(to, adj);
 			Size[node] += Size[to];
-			if(Size[to] > Size[adj[node][0]] || adj[node][0] == par[node]) {
+			if(Size[to] > Size[adj[node][0]] || adj[node][0] == par[node])
 				swap(to, adj[node][0]);
-			}
 		}
 	}
 	void dfs2(int node, const vector<vector<int>>& adj, int& Time) {
