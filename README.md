@@ -14,6 +14,10 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 - [stress-tests](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares some library code output to a naive version (or another alg) on random inputs.
 
 ## Coding style
+Formatter:
+```
+astyle --indent=tab --remove-braces --style=attach --align-reference=type --delete-empty-lines
+```
 
 I aim for a balance between best coding practices, speed (runtime), and ease of modifiability.
 
