@@ -130,11 +130,19 @@ struct block_cut_tree {
 				dfs(root, -1);
 	}
 
-	bool same_biconnected_component(int a, int b) const {
+	//If a and b are in the same BCC, this returns the index into
+	//biconnected_components::components representing which bcc contains both a,b
+	//else returns -1
+	//assumes a != b
+	int which_bcc(int a, int b) const {
+		assert(a != b);
 		if (depth[a] > depth[b])
 			swap(a, b);
 		// Two different nodes are in the same biconnected component iff their distance = 2 in the block-cut tree.
-		return a == b || (depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b]);
+		if((depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b])) {
+			return parent[b] - n;
+		}
+		return -1;
 	}
 
 	//use anything below this at your own risk :)

@@ -1,5 +1,6 @@
 {
 "library-checker-tests/data_structures/disjointSet.test.cpp": "2022-02-05 17:20:45 -0800",
+"library-checker-tests/graphs/BiconnectedComponents.test.cpp": "2022-02-09 00:46:10 -0800",
 "library-checker-tests/graphs/bipartiteMatcher.test.cpp": "2022-02-06 12:55:00 -0800",
 "library-checker-tests/graphs/dijkstra.test.cpp": "2022-02-05 17:21:18 -0800",
 "library-checker-tests/graphs/hld.test.cpp": "2022-02-05 15:39:09 -0800",
