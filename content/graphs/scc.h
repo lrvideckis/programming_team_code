@@ -56,6 +56,7 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		dfs(dfs, node);
 		res.numberOfSCCs++;
 	}
+	// This condensation graph building part is not tested 
 	res.adj.resize(res.numberOfSCCs);
 	for(int i = 0; i < n; i++) {
 		for(int j : adj[i]) {
