@@ -13,17 +13,11 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 - [library-checker-tests](https://github.com/lrvideckis/Programming-Team-Code/tree/master/library-checker-tests) to see which code is tested on [Library Checker](https://judge.yosupo.jp/)
 - [stress-tests](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares some library code output to a naive version (or another alg) on random inputs.
 
-## Coding style
+## Formatting
 Run the following from [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html) (yes, I know I'm picky)
 ```
 astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates
 ```
-
-I aim for a balance between best coding practices, speed (runtime), and ease of modifiability.
-
-- minimal `#define`'s and `typedef`'s for ease of use & readability & modifiability
-- prefering structs & functions over globals to keep a clean scope
-- [tabs](https://youtu.be/SsoOG6ZeyUI) (fight me)
 
 ## Out of scope
 
