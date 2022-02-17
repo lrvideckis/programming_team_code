@@ -18,12 +18,12 @@ dij dijkstra(const vector<vector<pair<int, ll>>>& adj /*directed or undirected, 
 	len[startNode] = 0;
 	set<pair<ll, int>> q;//weight, node
 	q.insert({0, startNode});
-	while(!q.empty()) {
+	while (!q.empty()) {
 		auto it = q.begin();
 		const int node = it->second;
 		q.erase(it);
-		for(auto [to, weight] : adj[node]) {
-			if(len[to] > weight + len[node]) {
+		for (auto [to, weight] : adj[node]) {
+			if (len[to] > weight + len[node]) {
 				q.erase({len[to], to});
 				len[to] = weight + len[node];
 				par[to] = node;

@@ -17,19 +17,19 @@ struct NchooseK {
 		//multiplications fit in a longlong before being modded down. So this
 		//will take sqrt(2^31) time
 		assert(mod >= 2);
-		for(int i = 2; i * i <= mod; i++)
+		for (int i = 2; i * i <= mod; i++)
 			assert(mod % i);
-		for(int i = 1; i < factSz; i++)
+		for (int i = 1; i < factSz; i++)
 			fact[i] = 1LL * fact[i - 1] * i % mod;
 		invFact.back() = fastPow(fact.back(), mod - 2, mod);
-		for(int i = factSz - 2; i >= 0; i--)
+		for (int i = factSz - 2; i >= 0; i--)
 			invFact[i] = 1LL * invFact[i + 1] * (i + 1) % mod;
 	}
 
 	//classic n choose k
 	//fails when n >= mod
 	int choose(int n, int k) const {
-		if(k < 0 || k > n) return 0;
+		if (k < 0 || k > n) return 0;
 		//now we know 0 <= k <= n so 0 <= n
 		return 1LL * fact[n] * invFact[k] % mod * invFact[n - k] % mod;
 	}
@@ -38,14 +38,14 @@ struct NchooseK {
 	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish mod (< 1e6 maybe)
 	//handles n >= mod correctly
 	int chooseWithLucasTheorem(ll n, ll k) const {
-		if(k < 0 || k > n) return 0;
-		if(k == 0 || k == n) return 1;
+		if (k < 0 || k > n) return 0;
+		if (k == 0 || k == n) return 1;
 		return 1LL * chooseWithLucasTheorem(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
 
 	//returns inverse of n in O(1)
 	int inv(int n) const {
-		assert(1 <= n);//don't divide by 0 :)
+		assert(1 <= n);    //don't divide by 0 :)
 		return 1LL * fact[n - 1] * invFact[n] % mod;
 	}
 

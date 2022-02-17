@@ -23,51 +23,51 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		vector<bool> vis(n, false);
 		auto dfs = [&](auto&& dfsPtr, int curr) -> void {
 			vis[curr] = true;
-			for(int x : adj[curr]) {
-				if(!vis[x])
+			for (int x : adj[curr]) {
+				if (!vis[x])
 					dfsPtr(dfsPtr, x);
 			}
 			seen.push(curr);
 		};
-		for(int i = 0; i < n; ++i) {
-			if(!vis[i])
+		for (int i = 0; i < n; ++i) {
+			if (!vis[i])
 				dfs(dfs, i);
 		}
 	}
 	vector<vector<int>> adjInv(n);
-	for(int i = 0; i < n; ++i) {
-		for(int to : adj[i])
+	for (int i = 0; i < n; ++i) {
+		for (int to : adj[i])
 			adjInv[to].push_back(i);
 	}
 	vector<bool> vis(n, false);
 	auto dfs = [&](auto&& dfsPtr, int curr) -> void {
 		vis[curr] = true;
 		res.sccId[curr] = res.numberOfSCCs;
-		for(int x : adjInv[curr]) {
-			if(!vis[x])
+		for (int x : adjInv[curr]) {
+			if (!vis[x])
 				dfsPtr(dfsPtr, x);
 		}
 	};
-	while(!seen.empty()) {
+	while (!seen.empty()) {
 		int node = seen.top();
 		seen.pop();
-		if(vis[node])
+		if (vis[node])
 			continue;
 		dfs(dfs, node);
 		res.numberOfSCCs++;
 	}
 	// This condensation graph building part is not tested
 	res.adj.resize(res.numberOfSCCs);
-	for(int i = 0; i < n; i++) {
-		for(int j : adj[i]) {
+	for (int i = 0; i < n; i++) {
+		for (int j : adj[i]) {
 			int sccI = res.sccId[i], sccJ = res.sccId[j];
-			if(sccI != sccJ) {
-				assert(sccI < sccJ);//sanity check for topo order
+			if (sccI != sccJ) {
+				assert(sccI < sccJ);    //sanity check for topo order
 				res.adj[sccI].push_back(sccJ);
 			}
 		}
 	}
-	for(vector<int>& nexts : res.adj) {
+	for (vector<int>& nexts : res.adj) {
 		sort(nexts.begin(), nexts.end());
 		nexts.erase(unique(nexts.begin(), nexts.end()), nexts.end());
 	}

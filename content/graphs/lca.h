@@ -19,19 +19,19 @@ struct lca {
 
 	// use weights of 1 for unweighted tree
 	lca(const vector<vector<pair<int, ll>>>& adj /*connected, weighted tree*/, int root) :
-		depth(adj.size()), dist(adj.size()), Log(1) {//0 - based nodes
+		depth(adj.size()), dist(adj.size()), Log(1) {          //0 - based nodes
 		int n = adj.size();
-		while((1 << Log) < n) ++Log;
-		memo.resize(n, vector<int>(Log));
+		while ((1 << Log) < n) ++Log;
+		memo.resize(n, vector<int> (Log));
 		dfs(root, root, adj);
 	}
 
 	void dfs(int node, int par, const vector<vector<pair<int, ll>>>& adj) {
 		memo[node][0] = par;
-		for(int i = 1; i < Log; ++i)
+		for (int i = 1; i < Log; ++i)
 			memo[node][i] = memo[memo[node][i - 1]][i - 1];
-		for(auto [to, w] : adj[node]) {
-			if(to == par) continue;
+		for (auto [to, w] : adj[node]) {
+			if (to == par) continue;
 			depth[to] = 1 + depth[node];
 			dist[to] = w + dist[node];
 			dfs(to, node, adj);
@@ -40,18 +40,18 @@ struct lca {
 
 	//if k > depth of node, then this returns the root
 	int kthPar(int node, int k) const {
-		for(int bit = 0; bit < Log; ++bit)
-			if(k & (1 << bit))
+		for (int bit = 0; bit < Log; ++bit)
+			if (k & (1 << bit))
 				node = memo[node][bit];
 		return node;
 	}
 
 	int getLca(int x, int y) const {
-		if(depth[x] < depth[y]) swap(x, y);
+		if (depth[x] < depth[y]) swap(x, y);
 		x = kthPar(x, depth[x] - depth[y]);
-		if(x == y) return x;
-		for(int bit = Log - 1; bit >= 0; --bit)
-			if(memo[x][bit] != memo[y][bit]) {
+		if (x == y) return x;
+		for (int bit = Log - 1; bit >= 0; --bit)
+			if (memo[x][bit] != memo[y][bit]) {
 				x = memo[x][bit];
 				y = memo[y][bit];
 			}

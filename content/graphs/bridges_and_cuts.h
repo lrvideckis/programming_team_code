@@ -19,7 +19,7 @@ struct biconnected_components {
 	}
 
 	bool is_bridge_edge(int u, int v) const {
-		if(u > v) swap(u, v);
+		if (u > v) swap(u, v);
 		return is_bridge.count(1LL * u * n + v);
 	}
 
@@ -39,7 +39,7 @@ struct biconnected_components {
 	unordered_set<ll> is_bridge;
 
 	void add_bridge(int u, int v) {
-		if(u > v) swap(u, v);
+		if (u > v) swap(u, v);
 		is_bridge.insert(1LL * u * n + v);
 	}
 
@@ -60,7 +60,7 @@ struct biconnected_components {
 				if (tour_start[next] < tour_start[node])
 					stack.push_back(node);
 			} else {
-				int size = (int)stack.size();
+				int size = (int) stack.size();
 				dfs(next, node, adj, visited, stack, tour);
 				children++;
 				// next is part of our subtree.
@@ -88,7 +88,7 @@ struct biconnected_components {
 		// The root of the tree is a cut vertex iff it has more than one child.
 		if (parent < 0) {
 			is_cut[node] = children > 1;
-			if(children == 0) {
+			if (children == 0) {
 				components.push_back({node});
 			}
 		}
@@ -134,7 +134,7 @@ struct block_cut_tree {
 		if (depth[a] > depth[b])
 			swap(a, b);
 		// Two different nodes are in the same biconnected component iff their distance = 2 in the block-cut tree.
-		if((depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b]))
+		if ((depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b]))
 			return parent[b] - n;
 		return -1;
 	}

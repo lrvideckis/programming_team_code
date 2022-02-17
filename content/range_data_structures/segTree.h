@@ -36,7 +36,7 @@ struct SegmentTree {
 		tree[node].sum += (end - start + 1) * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
-		if(start != end) {
+		if (start != end) {
 			tree[2 * node].lazy += delta;
 			tree[2 * node + 1].lazy += delta;
 		}
@@ -44,16 +44,16 @@ struct SegmentTree {
 	//apply lazy value to range
 	void pushLazy(int node) {
 		ll& currLazy = tree[node].lazy;
-		if(currLazy) {
+		if (currLazy) {
 			applyDeltaOnRange(node, currLazy);
 			currLazy = 0;
 		}
 	}
 	/*********************/
 
-	SegmentTree(const vector<ll>& arr) : n((int)arr.size()) {
+	SegmentTree(const vector<ll>& arr) : n((int) arr.size()) {
 		auto build = [&](auto&& buildPtr, int node, int start, int end) -> void {
-			if(start == end) {
+			if (start == end) {
 				tree[node] = Node {
 					arr[start],
 					arr[start],
@@ -69,7 +69,7 @@ struct SegmentTree {
 			}
 		};
 		int size = 1;
-		while(size < n) size <<= 1;
+		while (size < n) size <<= 1;
 		size <<= 1;
 		tree.resize(size);
 		build(build, 1, 0, n - 1);
@@ -79,8 +79,8 @@ struct SegmentTree {
 		auto update = [&](auto&& updatePtr, int node) -> void {
 			pushLazy(node);
 			int start = tree[node].l, end = tree[node].r;
-			if(r < start || end < l) return;
-			if(l <= start && end <= r) {
+			if (r < start || end < l) return;
+			if (l <= start && end <= r) {
 				applyDeltaOnRange(node, diff);
 				return;
 			}
@@ -94,9 +94,9 @@ struct SegmentTree {
 	Node query(int l, int r) {
 		auto query = [&](auto&& queryPtr, int node) -> Node {
 			int start = tree[node].l, end = tree[node].r;
-			if(r < start || end < l) return Node();//l,r is uninitialized -> access means undefined behavior
+			if (r < start || end < l) return Node();   //l,r is uninitialized -> access means undefined behavior
 			pushLazy(node);
-			if(l <= start && end <= r) return tree[node];
+			if (l <= start && end <= r) return tree[node];
 			return combineChildren(
 			    queryPtr(queryPtr, 2 * node),
 			    queryPtr(queryPtr, 2 * node + 1)

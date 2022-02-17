@@ -14,8 +14,8 @@ struct disjointSet {
 		return -parent[find(x)];
 	}
 	bool merge(int x, int y) {
-		if((x = find(x)) == (y = find(y))) return false;
-		if(parent[y] < parent[x]) swap(x, y);
+		if ((x = find(x)) == (y = find(y))) return false;
+		if (parent[y] < parent[x]) swap(x, y);
 		parent[x] += parent[y];
 		parent[y] = x;
 		numberOfSets--;

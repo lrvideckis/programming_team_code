@@ -57,22 +57,22 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/, const int
 		if (!found) break;
 	}
 	vector<pair<int, int>> matching;
-	for(int i = 0; i < n; i++)
-		if(ml[i] != -1)
+	for (int i = 0; i < n; i++)
+		if (ml[i] != -1)
 			matching.push_back({i, ml[i]});
 	//find min vertex cover
 	vector<bool> visL(n, true), visR(m, false);
 	auto dfs = [&](auto&& dfs, int node) -> void {
 		visL[node] = false;
-		for(auto to : adj[node]) {
-			if(!visR[to] && mr[to] != -1) {
+		for (auto to : adj[node]) {
+			if (!visR[to] && mr[to] != -1) {
 				visR[to] = true;
 				dfs(dfs, mr[to]);
 			}
 		}
 	};
-	for(int i = 0; i < n; i++)
-		if(ml[i] == -1)
+	for (int i = 0; i < n; i++)
+		if (ml[i] == -1)
 			dfs(dfs, i);
 	return {matching, visL, visR};
 }

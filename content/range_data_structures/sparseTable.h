@@ -13,14 +13,14 @@ template <class T>
 struct sparseTable {
 	vector<int> log2;
 	vector<vector<T>> dp;
-	function<T(const T&, const T&)> func;
-	sparseTable(const vector<T>& arr, const function<T(const T&, const T&)>& _func) : func(_func) {
+	function<T(const T&, const T&) > func;
+	sparseTable(const vector<T>& arr, const function<T(const T&, const T&) >& _func) : func(_func) {
 		const int n = arr.size();
 		log2.resize(n + 1, -1);
-		for(int i = 1; i <= n; ++i) log2[i] = 1 + log2[i / 2];
+		for (int i = 1; i <= n; ++i) log2[i] = 1 + log2[i / 2];
 		dp.resize(log2[n] + 1, arr);
-		for(int i = 1; i <= log2[n]; ++i) {
-			for(int j = 0; j + (1 << i) - 1 < n; ++j)
+		for (int i = 1; i <= log2[n]; ++i) {
+			for (int j = 0; j + (1 << i) - 1 < n; ++j)
 				dp[i][j] = func(dp[i - 1][j], dp[i - 1][j + (1 << (i - 1))]);
 		}
 	}

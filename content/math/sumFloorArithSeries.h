@@ -13,7 +13,7 @@ ll cnt(ll p, ll q, ll n) {
 	q = q / t;
 	ll s = 0;
 	ll z = 1;
-	while((q > 0) && (n > 0)) {
+	while ((q > 0) && (n > 0)) {
 		//(point A)
 		t = p / q;
 		s += z * t * n * (n + 1) / 2;

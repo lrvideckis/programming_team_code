@@ -17,10 +17,10 @@ public:
 	}
 	ll getflow() {
 		ll flow = 0;
-		for(;;) {
-			if(!bfs())  break;
+		for (;;) {
+			if (!bfs())  break;
 			ptr.assign(ptr.size(), 0);
-			while(ll pushed = dfs(s, inf))
+			while (ll pushed = dfs(s, inf))
 				flow += pushed;
 		}
 		return flow;
@@ -43,12 +43,12 @@ private:
 		q[qt++] = s;
 		d.assign(d.size(), -1);
 		d[s] = 0;
-		while(qh < qt && d[t] == -1) {
+		while (qh < qt && d[t] == -1) {
 			ll v = q[qh++];
-			for(size_t i = 0; i < g[v].size(); ++i) {
+			for (size_t i = 0; i < g[v].size(); ++i) {
 				ll id = g[v][i],
 				   to = e[id].b;
-				if(d[to] == -1 && e[id].flow < e[id].cap) {
+				if (d[to] == -1 && e[id].flow < e[id].cap) {
 					q[qt++] = to;
 					d[to] = d[v] + 1;
 				}
@@ -57,14 +57,14 @@ private:
 		return d[t] != -1;
 	}
 	ll dfs(ll v, ll flow) {
-		if(!flow) return 0;
-		if(v == t) return flow;
-		for(; ptr[v] < (ll)g[v].size(); ++ptr[v]) {
+		if (!flow) return 0;
+		if (v == t) return flow;
+		for (; ptr[v] < (ll) g[v].size(); ++ptr[v]) {
 			ll id = g[v][ptr[v]];
 			ll to = e[id].b;
-			if(d[to] != d[v] + 1)  continue;
-			ll pushed = dfs(to, min (flow, e[id].cap - e[id].flow));
-			if(pushed) {
+			if (d[to] != d[v] + 1)  continue;
+			ll pushed = dfs(to, min(flow, e[id].cap - e[id].flow));
+			if (pushed) {
 				e[id].flow += pushed;
 				e[id ^ 1].flow -= pushed;
 				return pushed;

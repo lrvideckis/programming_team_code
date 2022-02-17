@@ -13,11 +13,11 @@ void dfs(int node, int prev) {
 	Size[node] = 1;
 	int largest = heavyChild[node] = -1;
 	Depth[node] = 1 + Depth[prev];
-	for(int to : adj[node]) {
-		if(to == prev) continue;
+	for (int to : adj[node]) {
+		if (to == prev) continue;
 		dfs(to, node);
 		Size[node] += Size[to];
-		if(Size[to] > largest) {
+		if (Size[to] > largest) {
 			largest = Size[to];
 			heavyChild[node] = to;
 		}
@@ -26,20 +26,20 @@ void dfs(int node, int prev) {
 }
 
 void dfs1(int node, int prev, bool keep = true) {
-	for(int to : adj[node]) {
-		if(to == prev || to == heavyChild[node]) continue;
+	for (int to : adj[node]) {
+		if (to == prev || to == heavyChild[node]) continue;
 		dfs1(to, node, false);
 	}
-	if(heavyChild[node] != -1)
+	if (heavyChild[node] != -1)
 		dfs1(heavyChild[node], node, true);
 	cnt[color[node]]++;
-	for(int to : adj[node]) {
-		if(to == prev || to == heavyChild[node]) continue;
-		for(int i = timeIn[to]; i < timeOut[to]; ++i)
+	for (int to : adj[node]) {
+		if (to == prev || to == heavyChild[node]) continue;
+		for (int i = timeIn[to]; i < timeOut[to]; ++i)
 			cnt[color[ver[i]]]++;
 	}
-	if(!keep) {
-		for(int i = timeIn[node]; i < timeOut[node]; ++i)
+	if (!keep) {
+		for (int i = timeIn[node]; i < timeOut[node]; ++i)
 			cnt[color[ver[i]]]--;
 	}
 }

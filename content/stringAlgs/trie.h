@@ -13,13 +13,13 @@ struct node {
 	}
 };
 
-vector<node> t(1);//adj list
+vector<node> t(1);    //adj list
 
 void add_string(const string& s, int id) {
 	int c = 0;
-	for(char ch : s) {
+	for (char ch : s) {
 		int v = ch - 'a';
-		if(t[c].next[v] == -1) {
+		if (t[c].next[v] == -1) {
 			t[c].next[v] = t.size();
 			t.emplace_back(c, ch);
 		}
@@ -31,9 +31,9 @@ void add_string(const string& s, int id) {
 
 void remove_string(const string& s) {
 	int c = 0;
-	for(char ch : s) {
+	for (char ch : s) {
 		int v = ch - 'a';
-		if(t[c].next[v] == -1)
+		if (t[c].next[v] == -1)
 			return;
 		c = t[c].next[v];
 	}
@@ -42,12 +42,12 @@ void remove_string(const string& s) {
 
 int find_string(const string& s) {
 	int c = 0;
-	for(char ch : s) {
+	for (char ch : s) {
 		int v = ch - 'a';
-		if(t[c].next[v] == -1)
+		if (t[c].next[v] == -1)
 			return -1;
 		c = t[c].next[v];
 	}
-	if(!t[c].leaf) return -1;
+	if (!t[c].leaf) return -1;
 	return t[c].id;
 }

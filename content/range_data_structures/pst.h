@@ -12,10 +12,10 @@ public:
 	pst(const vector<int>& arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
 		roots.reserve(n + 1);
-		nodes.push_back(Node(Node::Data()));//acts as nullptr
+		nodes.push_back(Node(Node::Data()));       //acts as nullptr
 		sort(sorted.begin(), sorted.end());
 		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
-		tl = 0, tr = (int)sorted.size() - 1;
+		tl = 0, tr = (int) sorted.size() - 1;
 		roots.push_back(0);
 		for (int val : arr) {
 			int idx = lower_bound(sorted.begin(), sorted.end(), val) - sorted.begin();
@@ -27,7 +27,7 @@ public:
 	 * O(logn)
 	 */
 	int find_kth(int L, int R, int k) const {
-		assert(1 <= k && k <= R - L + 1); //note this condition implies L <= R
+		assert(1 <= k && k <= R - L + 1);    //note this condition implies L <= R
 		assert(0 <= L && R < n);
 		return sorted[find_kth(roots[L], roots[R + 1], tl, tr, k)];
 	}
@@ -81,7 +81,7 @@ private:
 	vector<int> roots, sorted;
 	int allocateNode(const Node& v) {
 		nodes.push_back(v);
-		return (int)nodes.size() - 1;
+		return (int) nodes.size() - 1;
 	}
 	int tl, tr, n;
 	int update(int v, int l, int r, int pos, int val) {
@@ -104,12 +104,12 @@ private:
 		assert(L <= R && valueL <= valueR);
 		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
 		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
-		if(compL > compR) return Node::Data();
+		if (compL > compR) return Node::Data();
 		return calc_in_range(roots[L], roots[R + 1], tl, tr, compL, compR);
 	}
 	Node::Data calc_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
-		if(valueR < l || r < valueL) return Node::Data();
-		if(valueL <= l && r <= valueR) return {nodes[vr].data.cnt - nodes[vl].data.cnt, nodes[vr].data.sum - nodes[vl].data.sum};
+		if (valueR < l || r < valueL) return Node::Data();
+		if (valueL <= l && r <= valueR) return {nodes[vr].data.cnt - nodes[vl].data.cnt, nodes[vr].data.sum - nodes[vl].data.sum};
 		int m = (l + r) / 2;
 		return combine(
 		           calc_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR),

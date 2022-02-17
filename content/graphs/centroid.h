@@ -9,8 +9,8 @@ bool removed[Max];
 
 void dfs2(int node, int par) {
 	sizes[node] = 1;
-	for(int to : adj[node]) {
-		if(to != par && !removed[to]) {
+	for (int to : adj[node]) {
+		if (to != par && !removed[to]) {
 			dfs2(to, node);
 			sizes[node] += sizes[to];
 		}
@@ -22,10 +22,10 @@ int findCentroid(int node) {
 	bool found = true;
 	int sizeCap = sizes[node] / 2;
 	int par = node;
-	while(found) {
+	while (found) {
 		found = false;
-		for(int to : adj[node]) {
-			if(to != par && !removed[to] && sizes[to] > sizeCap) {
+		for (int to : adj[node]) {
+			if (to != par && !removed[to] && sizes[to] > sizeCap) {
 				found = true;
 				par = node;
 				node = to;
@@ -39,8 +39,8 @@ int findCentroid(int node) {
 void dfs1(int node, int par) {
 	removed[node] = true;
 	parent[node] = par;
-	for(int to : adj[node]) {
-		if(!removed[to])
+	for (int to : adj[node]) {
+		if (!removed[to])
 			dfs1(findCentroid(to), node);
 	}
 }

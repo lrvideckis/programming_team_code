@@ -8,13 +8,13 @@ public:
 	//computes suffix array, lcp array, and then sparse table over lcp array
 	//O(n log n)
 	suffix_array(const string& s) {
-		int n = (int)s.size();
+		int n = (int) s.size();
 		vector<int> arr(n);
-		for(int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)
 			arr[i] = s[i];
 		sa_ = sa_is(arr, 255);
 		inv_sa_.resize(n);
-		for(int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)
 			inv_sa_[sa_[i]] = i;
 		lcp_ = lcp_array(arr, sa_);
 		init_min_sparse_table(lcp_);
@@ -25,10 +25,10 @@ public:
 	//
 	//R2-L2 == R1-L1 && suffix_array::longest_common_prefix(L1, L2) >= R2-L2+1
 	int longest_common_prefix(int idx1, int idx2) const {
-		if(idx1 == idx2) return (int)sa_.size() - idx1;
+		if (idx1 == idx2) return (int) sa_.size() - idx1;
 		idx1 = inv_sa_[idx1];
 		idx2 = inv_sa_[idx2];
-		if(idx1 > idx2) swap(idx1, idx2);
+		if (idx1 > idx2) swap(idx1, idx2);
 		int lg = log2_[idx2 - idx1];
 		return min(dp_[lg][idx1], dp_[lg][idx2 - (1 << lg)]);
 	}
@@ -56,7 +56,7 @@ private:
 	// G. Nong, S. Zhang, and W. H. Chan,
 	// Two Efficient Algorithms for Linear Time Suffix Array Construction
 	vector<int> sa_is(const vector<int>& s, int upper) {
-		int n = (int)s.size();
+		int n = (int) s.size();
 		if (n == 0) return {};
 		if (n == 1) return {0};
 		if (n == 2) {
@@ -162,14 +162,14 @@ private:
 		int n = s.size(), k = 0;
 		vector<int> lcp(n, 0);
 		vector<int> rank(n, 0);
-		for(int i = 0; i < n; i++) rank[sa[i]] = i;
-		for(int i = 0; i < n; i++, k ? k-- : 0) {
-			if(rank[i] == n - 1) {
+		for (int i = 0; i < n; i++) rank[sa[i]] = i;
+		for (int i = 0; i < n; i++, k ? k-- : 0) {
+			if (rank[i] == n - 1) {
 				k = 0;
 				continue;
 			}
 			int j = sa[rank[i] + 1];
-			while(i + k < n && j + k < n && s[i + k] == s[j + k]) k++;
+			while (i + k < n && j + k < n && s[i + k] == s[j + k]) k++;
 			lcp[rank[i]] = k;
 		}
 		return lcp;
@@ -178,10 +178,10 @@ private:
 	void init_min_sparse_table(const vector<int>& arr) {
 		const int n = arr.size();
 		log2_.resize(n + 1, -1);
-		for(int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i / 2];
+		for (int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i / 2];
 		dp_.resize(log2_[n] + 1, arr);
-		for(int i = 1; i <= log2_[n]; ++i) {
-			for(int j = 0; j + (1 << i) - 1 < n; ++j)
+		for (int i = 1; i <= log2_[n]; ++i) {
+			for (int j = 0; j + (1 << i) - 1 < n; ++j)
 				dp_[i][j] = min(dp_[i - 1][j], dp_[i - 1][j + (1 << (i - 1))]);
 		}
 	}

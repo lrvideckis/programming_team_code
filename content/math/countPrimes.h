@@ -10,7 +10,7 @@ vector<int> P;
 ll rec(ll N, int K) {
 	if (N <= 1 || K < 0) return 0;
 	if (N <= P[K]) return N - 1;
-	if (N < MAX && ll(P[K])*P[K] > N) return N - 1 - prec[N] + prec[P[K]];
+	if (N < MAX && ll(P[K]) *P[K] > N) return N - 1 - prec[N] + prec[P[K]];
 	const int LIM = 250;
 	static int memo[LIM * LIM][LIM];
 	bool ok = N < LIM * LIM;
@@ -28,7 +28,7 @@ ll rec(ll N, int K) {
 // increase MAX to increase time efficiency
 ll count_primes(ll N) {
 	if (N < MAX) return prec[N];
-	int K = prec[(int)sqrt(N) + 1];
+	int K = prec[(int) sqrt(N) + 1];
 	return N - 1 - rec(N, K) + prec[P[K]];
 }
 
@@ -39,6 +39,6 @@ void init_count_primes() {
 		if (prime[i])
 			for (int j = i * i; j < MAX; j += i + i)
 				prime[j] = false;
-	for(int i = 0; i < MAX; ++i) if (prime[i]) P.push_back(i);
-	for(int i = 1; i < MAX; ++i) prec[i] = prec[i - 1] + prime[i];
+	for (int i = 0; i < MAX; ++i) if (prime[i]) P.push_back(i);
+	for (int i = 1; i < MAX; ++i) prec[i] = prec[i - 1] + prime[i];
 }
