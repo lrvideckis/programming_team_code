@@ -33,10 +33,11 @@ int main() {
 			}
 		}
 
-		NchooseK nk(min(n,mod-1), mod);
+		NchooseK nk(min(n+1,mod), mod);
 
-		for(int i = 1; i <= min(n,mod-1); i++) {
+		for(int i = 1; i < min(n+1,mod); i++) {
 			assert(nk.inv(i) == fastPow(i, mod-2, mod));
+			assert(1LL * nk.inv(i) * i % mod == 1);
 		}
 
 		for(int i = 0; i <= n; i++) {

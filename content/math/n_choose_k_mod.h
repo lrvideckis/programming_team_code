@@ -5,29 +5,29 @@
 #include "exp_mod.h"
 
 // usage:
-//     NchooseK nk(n, 1e9+7) to use `choose`
+//     NchooseK nk(n+1, 1e9+7) to use `choose`, `inv` with inputs <= n
 // or:
-//     NchooseK nk(mod-1, mod) to use `chooseWithLucasTheorem`
+//     NchooseK nk(mod, mod) to use `chooseWithLucasTheorem`
 struct NchooseK {
-	// `maxFact` is the largest factorial we calculate, so don't call choose() with n > maxFact
-	NchooseK(int maxFact, int currMod) : mod(currMod), fact(maxFact+1, 1), invFact(maxFact+1) {
-		//this implimentation of doesn't work if maxFact >= mod because n! % mod = 0 when n >= mod. So `invFact` array will be all 0's
-		assert(maxFact < mod);
+	// `factSz` is the size of the factorial array, so only call `choose`, `inv` with n < factSz
+	NchooseK(int factSz, int currMod) : mod(currMod), fact(factSz, 1), invFact(factSz) {
+		//this implimentation of doesn't work if factSz > mod because n! % mod = 0 when n >= mod. So `invFact` array will be all 0's
+		assert(factSz <= mod);
 		//assert mod is prime. mod is intended to fit inside an int so that
 		//multiplications fit in a longlong before being modded down. So this
 		//will take sqrt(2^31) time
 		assert(mod >= 2);
 		for(int i = 2; i * i <= mod; i++)
 			assert(mod % i);
-		for(int i = 1; i <= maxFact; i++)
+		for(int i = 1; i < factSz; i++)
 			fact[i] = 1LL * fact[i-1] * i % mod;
-		invFact[maxFact] = fastPow(fact[maxFact], mod-2, mod);
-		for(int i = maxFact-1; i >= 0; i--)
+		invFact.back() = fastPow(fact.back(), mod-2, mod);
+		for(int i = factSz-2; i >= 0; i--)
 			invFact[i] = 1LL * invFact[i+1] * (i+1) % mod;
 	}
 
 	//classic n choose k
-	//doesn't work with n >= mod
+	//fails when n >= mod
 	int choose(int n, int k) const {
 		if(k < 0 || k > n) return 0;
 		//now we know 0 <= k <= n so 0 <= n
