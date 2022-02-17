@@ -14,7 +14,7 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 - [stress-tests](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares some library code output to a naive version (or another alg) on random inputs.
 
 ## Coding style
-Run the following from [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) to format:
+Run the following from [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
 ```
 astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --delete-empty-lines --pad-oper
 ```
