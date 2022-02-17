@@ -5,12 +5,12 @@
 struct hld {
 	vector<int> Size, par, Depth, timeIn, Next, timeInToNode;
 	hld(vector<vector<int>>& adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
-		Size(adj.size(),1), par(adj.size(),-1), Depth(adj.size(),1), timeIn(adj.size()), Next(adj.size(),-1), timeInToNode(adj.size()) {
-		int Time=0;
+		Size(adj.size(), 1), par(adj.size(), -1), Depth(adj.size(), 1), timeIn(adj.size()), Next(adj.size(), -1), timeInToNode(adj.size()) {
+		int Time = 0;
 		auto callDfss = [&](int node) -> void {
 			Next[node] = par[node] = node;
-			dfs1(node,adj);
-			dfs2(node,adj,Time);
+			dfs1(node, adj);
+			dfs2(node, adj, Time);
 		};
 		if(root != -1)
 			callDfss(root);
@@ -20,7 +20,7 @@ struct hld {
 		}
 	}
 	void dfs1(int node, vector<vector<int>>& adj) {
-		for(auto& to: adj[node]) {
+		for(auto& to : adj[node]) {
 			if(to == par[node]) continue;
 			Depth[to] = 1 + Depth[node];
 			par[to] = node;
@@ -34,9 +34,9 @@ struct hld {
 		timeIn[node] = Time;
 		timeInToNode[Time] = node;
 		Time++;
-		for(auto to: adj[node]) {
+		for(auto to : adj[node]) {
 			if(to == par[node]) continue;
-			Next[to] = (Time == timeIn[node]+1 ? Next[node] : to);
+			Next[to] = (Time == timeIn[node] + 1 ? Next[node] : to);
 			dfs2(to, adj, Time);
 		}
 	}
@@ -55,7 +55,7 @@ struct hld {
 	}
 	// Returns interval (of timeIn's) corresponding to the subtree of node i
 	// This can answer queries for "is some node `x` in some other node's subtree" by checking if timeIn[x] is in this interval
-	pair<int,int> subtree(int i) const {
+	pair<int, int> subtree(int i) const {
 		return {timeIn[i], timeIn[i] + Size[i] - 1};
 	}
 	// Returns lca of nodes u and v

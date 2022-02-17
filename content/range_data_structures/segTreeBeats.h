@@ -41,7 +41,7 @@ struct SegTreeBeats {
 		if(start == end) return;
 		assert(start < end);
 		for(int child : {
-		            2*node, 2*node+1
+		            2 * node, 2 * node + 1
 		        }) {
 			if(tree[child].mx <= tree[node].mx) continue;
 			tree[child].sum -= (tree[child].mx - tree[node].mx) * tree[child].cntMx;
@@ -51,11 +51,11 @@ struct SegTreeBeats {
 
 	SegTreeBeats(const vector<int>& arr) : n((int)arr.size()) {
 		size = 1;
-		while(size < n) size<<=1;
-		size<<=1;
+		while(size < n) size <<= 1;
+		size <<= 1;
 		tree.resize(size);
 		lazy.resize(size, 0);
-		build(arr, 1, 0, n-1);
+		build(arr, 1, 0, n - 1);
 	}
 	void build(const vector<int>& arr, int node, int start, int end) {
 		if(start == end) {
@@ -64,15 +64,15 @@ struct SegTreeBeats {
 			tree[node].secondMx = -inf;
 			tree[node].cntMx = 1;
 		} else {
-			const int mid = (start+end)/2;
-			build(arr, 2*node, start, mid);
-			build(arr, 2*node+1, mid+1, end);
-			tree[node] = combine(tree[2*node], tree[2*node+1]);
+			const int mid = (start + end) / 2;
+			build(arr, 2 * node, start, mid);
+			build(arr, 2 * node + 1, mid + 1, end);
+			tree[node] = combine(tree[2 * node], tree[2 * node + 1]);
 		}
 	}
 	//set a[i] = min(a[i], newMn), for i in range: [l,r]
 	void update(int l, int r, int newMn) {
-		update(1, 0, n-1, l, r, newMn);
+		update(1, 0, n - 1, l, r, newMn);
 	}
 	void update(int node, int start, int end, int l, int r, int newMn) {
 		assert(start <= end);
@@ -85,19 +85,19 @@ struct SegTreeBeats {
 		}
 		assert(start < end);
 		const int mid = (start + end) / 2;
-		update(2*node, start, mid, l, r, newMn);
-		update(2*node+1, mid+1, end, l, r, newMn);
-		tree[node] = combine(tree[2*node], tree[2*node+1]);
+		update(2 * node, start, mid, l, r, newMn);
+		update(2 * node + 1, mid + 1, end, l, r, newMn);
+		tree[node] = combine(tree[2 * node], tree[2 * node + 1]);
 	}
 	//query for sum/max in range [l,r]
 	Node query(int l, int r) {
-		return query(1, 0, n-1, l, r);
+		return query(1, 0, n - 1, l, r);
 	}
 	Node query(int node, int start, int end, int l, int r) {
 		if(r < start || end < l) return zero;
 		push(node, start, end);
 		if(l <= start && end <= r) return tree[node];
-		const int mid = (start+end)/2;
-		return combine(query(2*node, start, mid, l, r), query(2*node+1, mid+1, end, l, r));
+		const int mid = (start + end) / 2;
+		return combine(query(2 * node, start, mid, l, r), query(2 * node + 1, mid + 1, end, l, r));
 	}
 };

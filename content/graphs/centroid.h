@@ -2,7 +2,7 @@
 
 //status: not tested
 
-const int Max = 2e5+2;
+const int Max = 2e5 + 2;
 vector<int> adj[Max];
 int sizes[Max], parent[Max];
 bool removed[Max];
@@ -20,7 +20,7 @@ void dfs2(int node, int par) {
 int findCentroid(int node) {
 	dfs2(node, node);
 	bool found = true;
-	int sizeCap = sizes[node]/2;
+	int sizeCap = sizes[node] / 2;
 	int par = node;
 	while(found) {
 		found = false;

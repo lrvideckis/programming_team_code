@@ -33,12 +33,12 @@ struct SegmentTree {
 	//what happens when delta is applied to every index in range [start,end]?
 	void applyDeltaOnRange(int node, ll delta) {
 		int start = tree[node].l, end = tree[node].r;
-		tree[node].sum += (end-start+1) * delta;
+		tree[node].sum += (end - start + 1) * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
 		if(start != end) {
-			tree[2*node].lazy += delta;
-			tree[2*node+1].lazy += delta;
+			tree[2 * node].lazy += delta;
+			tree[2 * node + 1].lazy += delta;
 		}
 	}
 	//apply lazy value to range
@@ -62,17 +62,17 @@ struct SegmentTree {
 					end
 				};
 			} else {
-				int mid = (start+end)/2;
-				buildPtr(buildPtr, 2*node, start, mid);
-				buildPtr(buildPtr, 2*node+1, mid+1, end);
-				tree[node] = combineChildren(tree[2*node], tree[2*node+1]);
+				int mid = (start + end) / 2;
+				buildPtr(buildPtr, 2 * node, start, mid);
+				buildPtr(buildPtr, 2 * node + 1, mid + 1, end);
+				tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
 			}
 		};
 		int size = 1;
-		while(size < n) size<<=1;
-		size<<=1;
+		while(size < n) size <<= 1;
+		size <<= 1;
 		tree.resize(size);
-		build(build, 1, 0, n-1);
+		build(build, 1, 0, n - 1);
 	}
 	//inclusive range: [l,r]
 	void update(int l, int r, ll diff) {
@@ -84,9 +84,9 @@ struct SegmentTree {
 				applyDeltaOnRange(node, diff);
 				return;
 			}
-			updatePtr(updatePtr, 2*node);
-			updatePtr(updatePtr, 2*node+1);
-			tree[node] = combineChildren(tree[2*node], tree[2*node+1]);
+			updatePtr(updatePtr, 2 * node);
+			updatePtr(updatePtr, 2 * node + 1);
+			tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
 		};
 		update(update, 1);
 	}
@@ -98,8 +98,8 @@ struct SegmentTree {
 			pushLazy(node);
 			if(l <= start && end <= r) return tree[node];
 			return combineChildren(
-			    queryPtr(queryPtr, 2*node),
-			    queryPtr(queryPtr, 2*node+1)
+			    queryPtr(queryPtr, 2 * node),
+			    queryPtr(queryPtr, 2 * node + 1)
 			);
 		};
 		return query(query, 1);

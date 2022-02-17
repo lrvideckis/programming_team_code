@@ -20,13 +20,13 @@ struct buckets {
 	vector<bucket> _buckets;
 
 	buckets(const vector<int>& initial) : values(initial) {
-		int numBuckets = ((int)values.size()+BUCKET_SIZE-1)/BUCKET_SIZE;
+		int numBuckets = ((int)values.size() + BUCKET_SIZE - 1) / BUCKET_SIZE;
 		_buckets.resize(numBuckets);
 		for(int i = 0; i < numBuckets; i++) {
 			_buckets[i].sumLazy = 0;
 			_buckets[i].sumBucket = 0;
-			_buckets[i].l = i*BUCKET_SIZE;
-			_buckets[i].r = min((i+1)*BUCKET_SIZE, (int)values.size()) - 1;
+			_buckets[i].l = i * BUCKET_SIZE;
+			_buckets[i].r = min((i + 1) * BUCKET_SIZE, (int)values.size()) - 1;
 			for(int j = _buckets[i].l; j <= _buckets[i].r; j++)
 				_buckets[i].sumBucket += values[j];
 		}
@@ -42,8 +42,8 @@ struct buckets {
 
 	//update range [L,R]
 	void update(int L, int R, int diff) {
-		int startBucket = L/BUCKET_SIZE;
-		int endBucket = R/BUCKET_SIZE;
+		int startBucket = L / BUCKET_SIZE;
+		int endBucket = R / BUCKET_SIZE;
 		if(startBucket == endBucket) {//range contained in same bucket case
 			for(int i = L; i <= R; i++) {
 				values[i] += diff;
@@ -60,7 +60,7 @@ struct buckets {
 				b.sumBucket += diff;
 			}
 		}
-		for(int i = startBucket+1; i < endBucket; i++) {//handle all n/B buckets in middle
+		for(int i = startBucket + 1; i < endBucket; i++) { //handle all n/B buckets in middle
 			bucket& b = _buckets[i];
 			b.sumLazy += diff;
 			b.sumBucket += b.len() * diff;
@@ -69,8 +69,8 @@ struct buckets {
 
 	//sum of range [L,R]
 	int query(int L, int R) {
-		int startBucket = L/BUCKET_SIZE;
-		int endBucket = R/BUCKET_SIZE;
+		int startBucket = L / BUCKET_SIZE;
+		int endBucket = R / BUCKET_SIZE;
 		if(startBucket == endBucket) {//range contained in same bucket case
 			pushLazy(startBucket);
 			int sum = 0;
@@ -87,7 +87,7 @@ struct buckets {
 			for(int i = max(b.l, L); i <= min(b.r, R); i++)
 				sum += values[i];
 		}
-		for(int i = startBucket+1; i < endBucket; i++)  //handle all n/B buckets in middle
+		for(int i = startBucket + 1; i < endBucket; i++) //handle all n/B buckets in middle
 			sum += _buckets[i].sumBucket;
 		return sum;
 	}

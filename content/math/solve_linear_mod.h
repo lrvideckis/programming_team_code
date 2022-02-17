@@ -22,7 +22,7 @@ matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mo
 	for(int col = 0; col < m && rank < n; ++col) {
 		//find arbitrary pivot and swap pivot to current row
 		for(int i = rank; i < n; ++i) if(A[i][col] != 0) {
-				if(rank != i) det = det == 0 ? det : mod-det;
+				if(rank != i) det = det == 0 ? det : mod - det;
 				swap(A[i], A[rank]);
 				swap(b[i], b[rank]);
 				break;
@@ -33,7 +33,7 @@ matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mo
 		}
 		det = (1LL * det * A[rank][col]) % mod;
 		//make pivot 1 by dividing row by inverse of pivot
-		const int aInv = fastPow(A[rank][col], mod-2, mod);
+		const int aInv = fastPow(A[rank][col], mod - 2, mod);
 		for(int j = 0; j < m; ++j)
 			A[rank][j] = (1LL * A[rank][j] * aInv) % mod;
 		b[rank] = (1LL * b[rank] * aInv) % mod;
@@ -50,7 +50,7 @@ matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mo
 		++rank;
 	}
 	//end of row reduce, start of extracting answer (`x`) from `A` and `b`
-	assert(rank <= min(n,m));
+	assert(rank <= min(n, m));
 	matrixInfo info{rank, det, vector<int>()};
 	//check if solution exists
 	for(int i = rank; i < n; i++) {

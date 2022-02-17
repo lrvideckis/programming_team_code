@@ -12,7 +12,7 @@ struct dij {
 	vector<int> par;
 };
 
-dij dijkstra(const vector<vector<pair<int,ll>>>& adj /*directed or undirected, weighted graph*/, int startNode) {
+dij dijkstra(const vector<vector<pair<int, ll>>>& adj /*directed or undirected, weighted graph*/, int startNode) {
 	vector<ll> len(adj.size(), INF);
 	vector<int> par(adj.size(), -1);
 	len[startNode] = 0;

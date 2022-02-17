@@ -20,10 +20,10 @@ struct NchooseK {
 		for(int i = 2; i * i <= mod; i++)
 			assert(mod % i);
 		for(int i = 1; i < factSz; i++)
-			fact[i] = 1LL * fact[i-1] * i % mod;
-		invFact.back() = fastPow(fact.back(), mod-2, mod);
-		for(int i = factSz-2; i >= 0; i--)
-			invFact[i] = 1LL * invFact[i+1] * (i+1) % mod;
+			fact[i] = 1LL * fact[i - 1] * i % mod;
+		invFact.back() = fastPow(fact.back(), mod - 2, mod);
+		for(int i = factSz - 2; i >= 0; i--)
+			invFact[i] = 1LL * invFact[i + 1] * (i + 1) % mod;
 	}
 
 	//classic n choose k
@@ -31,7 +31,7 @@ struct NchooseK {
 	int choose(int n, int k) const {
 		if(k < 0 || k > n) return 0;
 		//now we know 0 <= k <= n so 0 <= n
-		return 1LL * fact[n] * invFact[k] % mod * invFact[n-k] % mod;
+		return 1LL * fact[n] * invFact[k] % mod * invFact[n - k] % mod;
 	}
 
 	//lucas theorem to calculate n choose k in O(log(k))
@@ -40,13 +40,13 @@ struct NchooseK {
 	int chooseWithLucasTheorem(ll n, ll k) const {
 		if(k < 0 || k > n) return 0;
 		if(k == 0 || k == n) return 1;
-		return 1LL * chooseWithLucasTheorem(n/mod, k/mod) * choose(n%mod, k%mod) % mod;
+		return 1LL * chooseWithLucasTheorem(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
 
 	//returns inverse of n in O(1)
 	int inv(int n) const {
 		assert(1 <= n);//don't divide by 0 :)
-		return 1LL * fact[n-1] * invFact[n] % mod;
+		return 1LL * fact[n - 1] * invFact[n] % mod;
 	}
 
 	int mod;

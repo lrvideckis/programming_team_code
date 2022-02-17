@@ -29,8 +29,8 @@ public:
 		idx1 = inv_sa_[idx1];
 		idx2 = inv_sa_[idx2];
 		if(idx1 > idx2) swap(idx1, idx2);
-		int lg = log2_[idx2-idx1];
-		return min(dp_[lg][idx1], dp_[lg][idx2-(1<<lg)]);
+		int lg = log2_[idx2 - idx1];
+		return min(dp_[lg][idx1], dp_[lg][idx2 - (1 << lg)]);
 	}
 
 	//returns true if suffix s[idx1..n] < s[idx2..n]
@@ -159,30 +159,30 @@ private:
 	// Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
 	// Applications
 	vector<int> lcp_array(const vector<int>& s, const vector<int>& sa) {
-		int n=s.size(),k=0;
-		vector<int> lcp(n,0);
-		vector<int> rank(n,0);
-		for(int i=0; i<n; i++) rank[sa[i]]=i;
-		for(int i=0; i<n; i++, k?k--:0) {
-			if(rank[i]==n-1) {
-				k=0;
+		int n = s.size(), k = 0;
+		vector<int> lcp(n, 0);
+		vector<int> rank(n, 0);
+		for(int i = 0; i < n; i++) rank[sa[i]] = i;
+		for(int i = 0; i < n; i++, k ? k-- : 0) {
+			if(rank[i] == n - 1) {
+				k = 0;
 				continue;
 			}
-			int j=sa[rank[i]+1];
-			while(i+k<n && j+k<n && s[i+k]==s[j+k]) k++;
-			lcp[rank[i]]=k;
+			int j = sa[rank[i] + 1];
+			while(i + k < n && j + k < n && s[i + k] == s[j + k]) k++;
+			lcp[rank[i]] = k;
 		}
 		return lcp;
 	}
 
 	void init_min_sparse_table(const vector<int>& arr) {
 		const int n = arr.size();
-		log2_.resize(n+1,-1);
-		for(int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i/2];
+		log2_.resize(n + 1, -1);
+		for(int i = 1; i <= n; ++i) log2_[i] = 1 + log2_[i / 2];
 		dp_.resize(log2_[n] + 1, arr);
 		for(int i = 1; i <= log2_[n]; ++i) {
-			for(int j = 0; j+(1<<i)-1<n; ++j)
-				dp_[i][j] = min(dp_[i-1][j], dp_[i-1][j+(1<<(i-1))]);
+			for(int j = 0; j + (1 << i) - 1 < n; ++j)
+				dp_[i][j] = min(dp_[i - 1][j], dp_[i - 1][j + (1 << (i - 1))]);
 		}
 	}
 };

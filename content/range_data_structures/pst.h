@@ -11,11 +11,11 @@ public:
 	 */
 	pst(const vector<int>& arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
-		roots.reserve(n+1);
+		roots.reserve(n + 1);
 		nodes.push_back(Node(Node::Data()));//acts as nullptr
 		sort(sorted.begin(), sorted.end());
 		sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
-		tl = 0, tr = (int)sorted.size()-1;
+		tl = 0, tr = (int)sorted.size() - 1;
 		roots.push_back(0);
 		for (int val : arr) {
 			int idx = lower_bound(sorted.begin(), sorted.end(), val) - sorted.begin();
@@ -27,9 +27,9 @@ public:
 	 * O(logn)
 	 */
 	int find_kth(int L, int R, int k) const {
-		assert(1 <= k && k <= R-L+1);//note this condition implies L <= R
+		assert(1 <= k && k <= R - L + 1); //note this condition implies L <= R
 		assert(0 <= L && R < n);
-		return sorted[find_kth(roots[L], roots[R+1], tl, tr, k)];
+		return sorted[find_kth(roots[L], roots[R + 1], tl, tr, k)];
 	}
 
 	/* Among elements arr[L], arr[L+1], ..., arr[R], this returns:
@@ -51,7 +51,7 @@ public:
 	 * assumes -1e9 <= arr[i] <= 1e9 for each i
 	 * */
 	ll sum_in_range_min(int L, int R, int X) const {
-		return calc_in_range(L, R, -1e9, X).sum + 1LL * calc_in_range(L, R, X+1, 1e9).cnt * X;
+		return calc_in_range(L, R, -1e9, X).sum + 1LL * calc_in_range(L, R, X + 1, 1e9).cnt * X;
 	}
 
 	/* Returns sum of max(arr[i], X) for i in range [L,R]
@@ -59,7 +59,7 @@ public:
 	 * assumes -1e9 <= arr[i] <= 1e9 for each i
 	 * */
 	ll sum_in_range_max(int L, int R, int X) const {
-		return calc_in_range(L, R, X, 1e9).sum + 1LL * calc_in_range(L, R, -1e9, X-1).cnt * X;
+		return calc_in_range(L, R, X, 1e9).sum + 1LL * calc_in_range(L, R, -1e9, X - 1).cnt * X;
 	}
 private:
 	struct Node {
@@ -81,31 +81,31 @@ private:
 	vector<int> roots, sorted;
 	int allocateNode(const Node& v) {
 		nodes.push_back(v);
-		return (int)nodes.size()-1;
+		return (int)nodes.size() - 1;
 	}
 	int tl, tr, n;
 	int update(int v, int l, int r, int pos, int val) {
 		if (l == r) {
-			return allocateNode(Node({nodes[v].data.cnt+1, nodes[v].data.sum + val}));
+			return allocateNode(Node({nodes[v].data.cnt + 1, nodes[v].data.sum + val}));
 		}
 		int m = (l + r) / 2;
 		if (pos <= m)
 			return allocateNode(Node(update(nodes[v].lCh, l, m, pos, val), nodes[v].rCh, nodes));
-		return allocateNode(Node(nodes[v].lCh, update(nodes[v].rCh, m+1, r, pos, val), nodes));
+		return allocateNode(Node(nodes[v].lCh, update(nodes[v].rCh, m + 1, r, pos, val), nodes));
 	}
 	int find_kth(int vl, int vr, int l, int r, int k) const {
 		if (l == r)
 			return l;
 		int m = (l + r) / 2, left_count = nodes[nodes[vr].lCh].data.cnt - nodes[nodes[vl].lCh].data.cnt;
 		if (left_count >= k) return find_kth(nodes[vl].lCh, nodes[vr].lCh, l, m, k);
-		return find_kth(nodes[vl].rCh, nodes[vr].rCh, m+1, r, k-left_count);
+		return find_kth(nodes[vl].rCh, nodes[vr].rCh, m + 1, r, k - left_count);
 	}
 	Node::Data calc_in_range(int L, int R, int valueL, int valueR) const {
 		assert(L <= R && valueL <= valueR);
 		int compL = lower_bound(sorted.begin(), sorted.end(), valueL) - sorted.begin();
 		int compR = (int)(upper_bound(sorted.begin(), sorted.end(), valueR) - sorted.begin()) - 1;
 		if(compL > compR) return Node::Data();
-		return calc_in_range(roots[L], roots[R+1], tl, tr, compL, compR);
+		return calc_in_range(roots[L], roots[R + 1], tl, tr, compL, compR);
 	}
 	Node::Data calc_in_range(int vl, int vr, int l, int r, int valueL, int valueR) const {
 		if(valueR < l || r < valueL) return Node::Data();
@@ -113,7 +113,7 @@ private:
 		int m = (l + r) / 2;
 		return combine(
 		           calc_in_range(nodes[vl].lCh, nodes[vr].lCh, l, m, valueL, valueR),
-		           calc_in_range(nodes[vl].rCh, nodes[vr].rCh, m+1, r, valueL, valueR)
+		           calc_in_range(nodes[vl].rCh, nodes[vr].rCh, m + 1, r, valueL, valueR)
 		       );
 	}
 };

@@ -19,12 +19,12 @@ struct biconnected_components {
 	}
 
 	bool is_bridge_edge(int u, int v) const {
-		if(u > v) swap(u,v);
+		if(u > v) swap(u, v);
 		return is_bridge.count(1LL * u * n + v);
 	}
 
 	//vector of all bridge edges
-	vector<pair<int,int>> bridges;
+	vector<pair<int, int>> bridges;
 
 	//vector of all BCCs. Note a node can be in multiple BCCs (iff it's a cut node)
 	vector<vector<int>> components;
@@ -39,7 +39,7 @@ struct biconnected_components {
 	unordered_set<ll> is_bridge;
 
 	void add_bridge(int u, int v) {
-		if(u > v) swap(u,v);
+		if(u > v) swap(u, v);
 		is_bridge.insert(1LL * u * n + v);
 	}
 

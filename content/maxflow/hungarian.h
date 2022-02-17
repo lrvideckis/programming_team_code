@@ -16,14 +16,14 @@ struct match {
 };
 
 match HungarianMatch(const vector<vector<ll>>& cost) {
-	ll n = cost.size()-1;
-	ll m = cost[0].size()-1;
-	vector<ll> u(n+1), v(m+1), p(m+1), way(m+1);
+	ll n = cost.size() - 1;
+	ll m = cost[0].size() - 1;
+	vector<ll> u(n + 1), v(m + 1), p(m + 1), way(m + 1);
 	for(ll i = 1; i <= n; ++i) {
 		p[0] = i;
 		ll j0 = 0;
-		vector<ll> minv(m+1, inf);
-		vector<char> used(m+1, false);
+		vector<ll> minv(m + 1, inf);
+		vector<char> used(m + 1, false);
 		do {
 			used[j0] = true;
 			ll i0 = p[j0], delta = inf, j1 = 0;
@@ -49,7 +49,7 @@ match HungarianMatch(const vector<vector<ll>>& cost) {
 		} while(j0);
 	}
 	// For each N, it contains the M it selected
-	vector<int> ans(n+1);
+	vector<int> ans(n + 1);
 	for(ll j = 1; j <= m ; ++j)
 		ans[p[j]] = j;
 	return {-v[0], ans};

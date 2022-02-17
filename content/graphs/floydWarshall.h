@@ -2,7 +2,7 @@
 
 //status: tested against output of dijkstras on random graphs
 
-vector<vector<ll>> floydWarshall(const vector<vector<pair<int,ll>>>& adj /*directed or undirected, weighted graph*/) {
+vector<vector<ll>> floydWarshall(const vector<vector<pair<int, ll>>>& adj /*directed or undirected, weighted graph*/) {
 	int n = adj.size();
 	vector<vector<ll>> len(n, vector<ll>(n, 1e18));
 	for (int i = 0; i < n; i++) {

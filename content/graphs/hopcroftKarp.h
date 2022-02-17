@@ -7,7 +7,7 @@
 struct match {
 	//edges in matching, given as array of std::pair(leftNode, rightNode)
 	//size of matching = size of min vertex cover by König's theorem
-	vector<pair<int,int>> matching;
+	vector<pair<int, int>> matching;
 	//an arbitrary min vertex cover is found. For this MVC: leftMVC[`left node`] is true iff `left node` is in the min vertex cover (same for rightMVC)
 	//if leftMVC[`left node`] is false, then `left node` is in the corresponding maximal independent set
 	vector<bool> leftMVC, rightMVC;
@@ -31,7 +31,7 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/, const int
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
-			for (int x: adj[u]) {
+			for (int x : adj[u]) {
 				int v = mr[x];
 				if (v != -1 && level[v] < 0) {
 					level[v] = level[u] + 1;
@@ -56,7 +56,7 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/, const int
 		for (int i = 0; i < n; i++) if (ml[i] == -1 && dfs(dfs, i)) found = true;
 		if (!found) break;
 	}
-	vector<pair<int,int>> matching;
+	vector<pair<int, int>> matching;
 	for(int i = 0; i < n; i++)
 		if(ml[i] != -1)
 			matching.push_back({i, ml[i]});
