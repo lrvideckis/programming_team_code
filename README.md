@@ -16,7 +16,7 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 ## Coding style
 Run the following from [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html) (yes, I know I'm picky)
 ```
-astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren
+astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates
 ```
 
 I aim for a balance between best coding practices, speed (runtime), and ease of modifiability.
