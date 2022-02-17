@@ -16,7 +16,7 @@ Yet another competitive programming repo. Directory structure inspired by [KACTL
 ## Coding style
 Run the following from [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) to format:
 ```
-find . -type f -name "*.h" -print0 | xargs -0 astyle --indent=tab --remove-braces --style=attach --align-reference=type --delete-empty-lines
+astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --delete-empty-lines
 ```
 
 I aim for a balance between best coding practices, speed (runtime), and ease of modifiability.
