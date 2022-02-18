@@ -1,6 +1,6 @@
 //status: not tested
 
-//****having `#define int long long` makes this not compile****
+//place this include *before* the `#define int long long`
 #include <bits/extc++.h>
 using namespace __gnu_pbds;
 
