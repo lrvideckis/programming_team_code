@@ -51,7 +51,7 @@ int main() {
 		}
 	}
 	int sizeR = 0;
-	for(int i = 0; i < r; i++) {
+	for(int i = 0; i < (int)res.mr.size(); i++) {
 		if(res.mr[i] != -1) {
 			sizeR++;
 			int nodeL = res.mr[i];
