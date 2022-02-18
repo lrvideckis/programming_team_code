@@ -3,7 +3,6 @@
 "library-checker-tests/graphs/BiconnectedComponents.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/graphs/dijkstra.test.cpp": "2022-02-17 02:55:58 -0800",
 "library-checker-tests/graphs/hld.test.cpp": "2022-02-17 02:28:31 -0800",
-"library-checker-tests/graphs/hopcroftKarp.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/graphs/lca.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/graphs/scc.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/math/matrixDeterminant.test.cpp": "2022-02-17 02:28:31 -0800",
