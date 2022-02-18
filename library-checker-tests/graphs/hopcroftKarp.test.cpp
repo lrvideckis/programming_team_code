@@ -66,11 +66,8 @@ int main() {
 	for(int i = 0; i < l; i++) cnt += res.leftMVC[i];
 	for(int i = 0; i < r; i++) cnt += res.rightMVC[i];
 	assert(cnt == res.sizeOfMatching);//size of min vertex cover == size of max matching
-	for(int i = 0; i < l; i++) {
-		if(res.ml[i] != -1) {
-			int nodeR = res.ml[i];
-			assert(res.leftMVC[i] || res.rightMVC[nodeR]);
-		}
+	for(auto [u,v] : edges) {
+		assert(res.leftMVC[u] || res.rightMVC[v]);
 	}
 	return 0;
 }
