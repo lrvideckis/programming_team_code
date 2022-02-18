@@ -7,6 +7,7 @@
 struct match {
 	//# of edges in matching (which = size of min vertex cover by König's theorem)
 	int sizeOfMatching;
+	//an arbitrary max matching is found. For this matching:
 	//if ml[nodeLeft] == -1:
 	//    `nodeLeft` is not in matching
 	//else:
