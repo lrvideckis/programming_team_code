@@ -77,7 +77,7 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/) {
 	//find min vertex cover
 	vector<bool> visR(rSz, false);
 	auto dfs = [&](auto&& dfs, int node) -> void {
-		for (auto to : adj[node]) {
+		for (int to : adj[node]) {
 			if (!visR[to] && mr[to] != -1) {
 				visR[to] = true;
 				dfs(dfs, mr[to]);
