@@ -13,6 +13,7 @@ struct match {
 	//    the edge `nodeLeft` <=> ml[nodeLeft] is in the matching
 	//
 	//similarly for mr with edge mr[nodeRight] <=> nodeRight in matching if mr[nodeRight] != -1
+	//matchings stored in ml and mr are the same matching
 	//provides way to check if any node is in matching
 	vector<int> ml, mr;
 	//an arbitrary min vertex cover is found. For this MVC: leftMVC[`left node`] is true iff `left node` is in the min vertex cover (same for rightMVC)
