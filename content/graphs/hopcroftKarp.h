@@ -30,6 +30,7 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/) {
 	int sizeOfMatching = 0;
 	int lSz = adj.size();
 	int rSz = 0;
+	/****size of mr = 1 + largest right node****/
 	for (const vector<int>& v : adj) for (int rhs : v) rSz = max(rSz, rhs + 1);
 	vector<int> level(lSz), ml(lSz, -1), mr(rSz, -1);
 	vector<bool> visL(lSz, false);
