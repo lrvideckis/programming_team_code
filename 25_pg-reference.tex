@@ -67,8 +67,8 @@
 
 \makeatletter
 \lstdefinestyle{mystyle}{
-  basewidth=\scriptbasewidth,
-  basicstyle=\ttfamily\lst@ifdisplaystyle\ttfamily\scriptsize\fi
+	basewidth=\scriptbasewidth,
+	basicstyle=\ttfamily\lst@ifdisplaystyle\ttfamily\scriptsize\fi
 }
 \makeatother
 
@@ -81,49 +81,49 @@
 
 \lstset{
 	language=C++,
-  linewidth=\lstlinewidth,
-  style=mystyle,           % set basic font and spacing
-  captionpos=t,            % sets the caption position to top
-  columns=fixed,
-  mathescape=false,
-  breaklines=true,         % sets automatic line breaking
-  breakatwhitespace=true,  % automatic breaks should only happen at whitespace
-  extendedchars=false,     % ASCII printing characters only
-  % escapechar={`},          % Anything between backtics is escaped
-  % escapeinside={{(*}{*)}},
-  % frame=single,          % adds a frame around the code
-  frame=tlrb,              % adds a frame around the code
-  rulecolor=\color{black},
-  xleftmargin=1pt,
-  xrightmargin=1pt,
-  % frameround=fttf,
-  % framesep=3pt,
-  % rulesep=3pt,
-  framerule=0.5pt,
-  % framexleftmargin=10pt,
-  % framexrightmargin=10pt,
-  % framextopmargin=10pt,
-  % framexbottommargin=10pt,
-  %%   %fillcolor=\color{SkyBlue},
-  %%   %rulesepcolor=\color{SkyBlue},
-  %keywordstyle=[1]\color{blue},      % keyword style
-  %keywordstyle=[2]\color{cyan},      % keyword style
-  %keywordstyle=[3]\color{orange},
-  keywordstyle=\color{blue},      % keyword style
-  stringstyle=\color{magenta},     % string literal style
-  commentstyle=\color{gray}\itshape,
-  morecomment=[l][\color{orange}]{\#},
-  identifierstyle=\color{purple},
-  %numberbychapter=true,
-  numbers=none, % where to put the line-numbers; (none, left, right)
-  %numbersep=15pt,                 % how far the line-numbers are from the code
-  %numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
-  postbreak={\mbox{$\hookrightarrow\space$}},
-  showspaces=false, % show spaces everywhere adding particular underscores
-  showstringspaces=false,         % underline spaces within strings only
-  showtabs=false,  % show tabs within strings adding particular underscores
-  stepnumber=1,    % the step between printed line-numbers.
-  tabsize=4        % sets default tab character size to 8 spaces
+	linewidth=\lstlinewidth,
+	style=mystyle,           % set basic font and spacing
+	captionpos=t,            % sets the caption position to top
+	columns=fixed,
+	mathescape=false,
+	breaklines=true,         % sets automatic line breaking
+	breakatwhitespace=true,  % automatic breaks should only happen at whitespace
+	extendedchars=false,     % ASCII printing characters only
+	% escapechar={`},          % Anything between backtics is escaped
+	% escapeinside={{(*}{*)}},
+	% frame=single,          % adds a frame around the code
+	frame=tlrb,              % adds a frame around the code
+	rulecolor=\color{black},
+	xleftmargin=1pt,
+	xrightmargin=1pt,
+	% frameround=fttf,
+	% framesep=3pt,
+	% rulesep=3pt,
+	framerule=0.5pt,
+	% framexleftmargin=10pt,
+	% framexrightmargin=10pt,
+	% framextopmargin=10pt,
+	% framexbottommargin=10pt,
+	%%   %fillcolor=\color{SkyBlue},
+	%%   %rulesepcolor=\color{SkyBlue},
+	%keywordstyle=[1]\color{blue},      % keyword style
+	%keywordstyle=[2]\color{cyan},      % keyword style
+	%keywordstyle=[3]\color{orange},
+	keywordstyle=\color{blue},      % keyword style
+	stringstyle=\color{magenta},     % string literal style
+	commentstyle=\color{gray}\itshape,
+	morecomment=[l][\color{orange}]{\#},
+	identifierstyle=\color{purple},
+	%numberbychapter=true,
+	numbers=none, % where to put the line-numbers; (none, left, right)
+	%numbersep=15pt,                 % how far the line-numbers are from the code
+	%numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+	postbreak={\mbox{$\hookrightarrow\space$}},
+	showspaces=false, % show spaces everywhere adding particular underscores
+	showstringspaces=false,         % underline spaces within strings only
+	showtabs=false,  % show tabs within strings adding particular underscores
+	stepnumber=1,    % the step between printed line-numbers.
+	tabsize=4        % sets default tab character size to 8 spaces
 }
 
 
@@ -133,91 +133,60 @@
 \lstlistoflistings
 \newpage
 
-
-\lstinputlisting[caption={\textbf{GEOMETRY}}]{null}
-
-\lstinputlisting[language=C++, lastline=219, caption={Geometry}]{geometry/geometry.cpp}
-%\lstinputlisting[language=C++, lastline=207, caption={Geometry}]{geometry/geometry1.cpp}
-\lstinputlisting[language=C++, lastline=57,  caption={Convex Hull}]{geometry/convexHullInt.cpp}
-\lstinputlisting[language=C++, lastline=46,  caption={Pick's Theorem}]{geometry/picksTheorem.cpp}
-%\lstinputlisting[language=C++, lastline=126, caption={Rectangle Union}]{geometry/rectangle_union.cpp}
-\lstinputlisting[language=C++, lastline=31,  caption={Closest Pair of Points}]{geometry/closestPairOfPoints.cpp}
-
+\lstinputlisting[caption={\textbf{DATA STRUCTURES}}]{null}
+\lstinputlisting[language=C++, caption={Count Rectangles}]{content/data_structures/cntRectangles.h}
+\lstinputlisting[language=C++, caption={Disjoint Set}]{content/data_structures/disjointSet.h}
+\lstinputlisting[language=C++, caption={PBDS}]{content/data_structures/policy_based_data_structures.h}
 
 \lstinputlisting[caption={\textbf{GRAPHS}}]{null}
+\lstinputlisting[language=C++, caption={Bridges and Cuts}]{content/graphs/bridges_and_cuts.h}
+\lstinputlisting[language=C++, caption={Centroid}]{content/graphs/centroid.h}
+\lstinputlisting[language=C++, caption={Count Path Lengths}]{content/graphs/countPathLengths.cpp}
+\lstinputlisting[language=C++, caption={Dijkstra}]{content/graphs/dijkstra.h}
+\lstinputlisting[language=C++, caption={DSU Tree}]{content/graphs/dsuTree.h}
+\lstinputlisting[language=C++, caption={Floyd Warshall}]{content/graphs/floydWarshall.h}
+\lstinputlisting[language=C++, caption={HLD}]{content/graphs/hld.h}
+\lstinputlisting[language=C++, caption={Hopcroft Karp}]{content/graphs/hopcroftKarp.h}
+\lstinputlisting[language=C++, caption={LCA}]{content/graphs/lca.h}
+\lstinputlisting[language=C++, caption={SCC}]{content/graphs/scc.h}
 
-\lstinputlisting[language=C++, lastline=70,  caption={Bipartite Matching}]{graphs/bipartite.cpp}
-\lstinputlisting[language=C++, lastline=60,  caption={Bridges}]{graphs/bridges.cpp} \lstinputlisting[language=C++, firstline=0, lastline=60,  caption={Centroid Decomposition}]{graphs/centroid.cpp}
-\lstinputlisting[language=C++, lastline=71, caption={Count Paths of Each Length}]{graphs/countPathLengths.cpp}
-\lstinputlisting[language=C++, lastline=55,  caption={Cut Vertices}]{graphs/cutVertices.cpp}
-%\lstinputlisting[language=C++, lastline=22,  caption={Dijkstra's Algorithm}]{graphs/dijkstra.cpp}
-\lstinputlisting[language=C++, lastline=10,  caption={Floyd Warshall}]{graphs/floydWarshall.cpp}
-\lstinputlisting[language=C++, lastline=59,  caption={DSU on Tree}]{graphs/dsuTree.cpp}
-\lstinputlisting[language=C++, lastline=47,  caption={Lowest Common Ancestor (LCA)}]{graphs/lca.cpp}
-\lstinputlisting[language=C++, lastline=66,  caption={Strongly Connected Components (SCC)}]{graphs/scc.cpp}
-
-
-\lstinputlisting[caption={\textbf{MAX FLOW}}]{null}
-\lstinputlisting[language=C++, lastline=74,  caption={Dinic's Max Flow}]{maxflow/dinic.cpp}
-\lstinputlisting[language=C++, lastline=48,  caption={Hungarian Algorithm}]{maxflow/hungarian.cpp}
-\lstinputlisting[language=C++, lastline=75,  caption={Min Cost Max Flow}]{maxflow/minCostMaxFlow.cpp}
-
-
-\lstinputlisting[caption={\textbf{STRINGS}}]{null}
-\lstinputlisting[language=C++, lastline=64,  caption={KMP String Matching}]{stringAlgs/kmp.cpp}
-\lstinputlisting[language=C++, lastline=27,  caption={Manachers (Palindromes)}]{stringAlgs/manachers.cpp}
-\lstinputlisting[language=C++, lastline=37,  caption={Suffix Array}]{stringAlgs/suffixArray.cpp}
-\lstinputlisting[language=C++, lastline=53,  caption={Trie}]{stringAlgs/trie.cpp}
-\lstinputlisting[language=C++, lastline=23,  caption={Z Algorithm}]{stringAlgs/zAlg.cpp}
-
-
-\lstinputlisting[caption={\textbf{DATA STRUCTURES}}]{null}
-\lstinputlisting[language=C++, lastline=62,  caption={Longest Increasing Subsequence (LIS)}]{ds/LIS.cpp}
-\lstinputlisting[language=C++, lastline=48,  caption={Count Rectangles}]{ds/cntRectangles.cpp}
-\lstinputlisting[language=C++, lastline=88,  caption={Disjoint Set}]{ds/disjointSet.cpp}
-\lstinputlisting[language=C++, lastline=7,   caption={Indexed Set}]{ds/indexedSet.cpp}
-\lstinputlisting[language=C++, lastline=30,  caption={Largest Range Where Element Is Max/Min}]{ds/largestMinElementRange.cpp}
-\lstinputlisting[language=C++, lastline=35,  caption={Online Convex Hull}]{ds/onlineConvexHull.cpp}
-\lstinputlisting[language=C++, lastline=49,  caption={Queue Max}]{ds/queueMax.cpp}
-\lstinputlisting[language=C++, lastline=78,  caption={Two Sat}]{ds/twoSat.cpp}
-
-
-\lstinputlisting[caption={\textbf{RANGE DATA STRUCTURES}}]{null}
-\lstinputlisting[language=C++, lastline=54,  caption={Mo's Algorithm}]{rangeDS/MosAlgo.cpp}
-\lstinputlisting[language=C++, lastline=59,  caption={Fenwick Tree}]{rangeDS/fenwickTree.cpp}
-\lstinputlisting[language=C++, lastline=24,  caption={Fenwick Tree 2D}]{rangeDS/fenwickTree2D.cpp}
-\lstinputlisting[language=C++, lastline=80,  caption={Search Buckets}]{rangeDS/searchBuckets.cpp}
-\lstinputlisting[language=C++, lastline=75,  caption={Seg Tree}]{rangeDS/segTree.cpp}
-\lstinputlisting[language=C++, lastline=23,  caption={Sparse Table}]{rangeDS/sparseTable.cpp}
-\lstinputlisting[language=C++, lastline=32,  caption={Sparse Table 2D}]{rangeDS/sparseTable2D.cpp}
+\lstinputlisting[caption={\textbf{HASH}}]{null}
+\lstinputlisting[language=C++, caption={Safe Hash}]{content/hash/safeHash.cpp}
 
 \lstinputlisting[caption={\textbf{MATH}}]{null}
-\lstinputlisting[language=C++, lastline=43,  caption={Chinese Remainder Theorem}]{math/chineseRemainderTheorem.cpp}
-\lstinputlisting[language=C++, lastline=86,  caption={Combinatorics, FastPow, ModInv}]{math/combinatorics.cpp}
-\lstinputlisting[language=C++, lastline=3,   caption={Commonly Used Primes}]{math/commonprimes.txt}
-\lstinputlisting[language=C++, lastline=75,  caption={Count Primes}]{math/countPrimes.cpp}
-\lstinputlisting[language=C++, lastline=59,  caption={Discrete Log}]{math/discreteLog.cpp}
-\lstinputlisting[language=C++, lastline=64,  caption={Fast Fourier Transform (FFT)}]{math/fft.cpp}
-\lstinputlisting[language=C++, lastline=8,   caption={Fibonacci Sequence}]{math/fib.cpp}
-\lstinputlisting[language=C++, lastline=76,  caption={Fractions}]{math/fraction.cpp}
-\lstinputlisting[language=C++, lastline=25,  caption={Gaussian Elimination}]{math/gaussElimination.cpp}
-\lstinputlisting[language=C++, lastline=27,  caption={Matrix Multiplication}]{math/matrixMultPow.cpp}
-%\lstinputlisting[language=C++, lastline=23,  caption={Partition Number}]{math/partition.cpp}
-\lstinputlisting[language=C++, lastline=83,  caption={Pollard Rho}]{math/pollardRho.cpp}
-\lstinputlisting[language=C++, lastline=59,  caption={Mobius Prime Sieve}]{math/primeSeiveMobius.cpp}
-\lstinputlisting[language=C++, lastline=50,  caption={Rabin-Miller Primality Test}]{math/rabinMiller.cpp}
-\lstinputlisting[language=C++, lastline=32,  caption={Sum Floor Arithmetic Series}]{math/sumFloorArithSeries.cpp}
-\lstinputlisting[language=C++, lastline=66,  caption={Sum of Kth Powers}]{math/sumOfKthPowers.cpp}
-\lstinputlisting[language=C++, lastline=19,  caption={Euler's Totient}]{math/totient.cpp}
+\lstinputlisting[language=C++, caption={Count Primes}]{content/math/countPrimes.h}
+\lstinputlisting[language=C++, caption={BIN EXP MOD}]{content/math/exp_mod.h}
+\lstinputlisting[language=C++, caption={Fibonacci}]{content/math/fib.h}
+\lstinputlisting[language=C++, caption={Matrix Mult and Pow}]{content/math/matrixMultPow.h}
+\lstinputlisting[language=C++, caption={N Choose K MOD}]{content/math/n_choose_k_mod.h}
+\lstinputlisting[language=C++, caption={Partition}]{content/math/partition.h}
+\lstinputlisting[language=C++, caption={Prime Sieve Mobius}]{content/math/primeSieveMobius.h}
+\lstinputlisting[language=C++, caption={Solve Linear Equations MOD}]{content/math/solve_linear_mod.h}
+\lstinputlisting[language=C++, caption={Sum Floors of Arithmetic Series}]{content/math/sumFloorArithSeries.h}
+\lstinputlisting[language=C++, caption={Sum of Kth Powers}]{content/math/sumOfKthPowers.h}
+\lstinputlisting[language=C++, caption={Euler's Totient Phi Function}]{content/math/totient.h}
 
+\lstinputlisting[caption={\textbf{MAX FLOW}}]{null}
+\lstinputlisting[language=C++, caption={Dinic}]{content/maxflow/dinic.h}
+\lstinputlisting[language=C++, caption={Hungarian}]{content/maxflow/hungarian.h}
+\lstinputlisting[language=C++, caption={Min Cost Max Flow}]{content/maxflow/minCostMaxFlow.h}
 
-\lstinputlisting[caption={\textbf{MISCELLANEOUS}}]{null}
-\lstinputlisting[language=C++, firstline=0, lastline=6,  caption={Random Numbers}]{misc/random.cpp}
-\lstinputlisting[language=C++, firstline=0,              caption={Josephus Problem}]{misc/josephusProblem.cpp}
-\lstinputlisting[language=C++, firstline=0,              caption={Farey Sequence}]{misc/farey.py}
-\lstinputlisting[language=Python, firstline=0,           caption={Python Test Cases}]{misc/tests.py}
-\lstinputlisting[language=Python, firstline=0,           caption={The only thing that matters}]{misc/vimrc}
+\lstinputlisting[caption={\textbf{RANGE DATA STRUCTURES}}]{null}
+\lstinputlisting[language=C++, caption={Buckets}]{content/range_data_structures/buckets.h}
+\lstinputlisting[language=C++, caption={Fenwick Tree}]{content/range_data_structures/fenwickTree.h}
+\lstinputlisting[language=C++, caption={Merge Sort Tree}]{content/range_data_structures/mergeSortTree.h}
+\lstinputlisting[language=C++, caption={Mos Algorithm}]{content/range_data_structures/MosAlgo.cpp}
+\lstinputlisting[language=C++, caption={Persistent Segment Tree}]{content/range_data_structures/pst.h}
+\lstinputlisting[language=C++, caption={Segment Tree Beats}]{content/range_data_structures/segTreeBeats.h}
+\lstinputlisting[language=C++, caption={Segment Tree}]{content/range_data_structures/segTree.h}
+\lstinputlisting[language=C++, caption={Sparse Table}]{content/range_data_structures/sparseTable.h}
 
+\lstinputlisting[caption={\textbf{RANGE DATA STRUCTURES}}]{null}
+\lstinputlisting[language=C++, caption={KMP}]{content/stringAlgs/kmp.h}
+\lstinputlisting[language=C++, caption={Rolling Hash}]{content/stringAlgs/rollingHash.h}
+\lstinputlisting[language=C++, caption={Rotational Equivalence}]{content/stringAlgs/rotationally_equivalent.h}
+\lstinputlisting[language=C++, caption={Suffix Array}]{content/stringAlgs/suffixArray.h}
+\lstinputlisting[language=C++, caption={Trie}]{content/stringAlgs/trie.h}
 
 \pagebreak
 \end{document}
