@@ -104,8 +104,8 @@ struct SegmentTree {
 		pushLazy(node);
 		if (l <= start && end <= r) return tree[node];
 		return combineChildren(
-			query(2 * node, l, r),
-			query(2 * node + 1, l, r)
-		);
+		           query(2 * node, l, r),
+		           query(2 * node + 1, l, r)
+		       );
 	};
 };
