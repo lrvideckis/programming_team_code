@@ -15,7 +15,9 @@ struct SegmentTree {
 		ll lazy = 0;
 	};
 
-	//change to unordered_map<int, Node> for implicit seg tree. Although I've TLE'd multiple times doing this
+	//For implicit seg tree (Although I've TLE'd multiple times doing this):
+	//    1) change `tree` to unordered_map<int, Node>
+	//    2) update l,r in new Node's as you go down tree
 	vector<Node> tree;
 	int n;
 
@@ -52,56 +54,58 @@ struct SegmentTree {
 	/*********************/
 
 	SegmentTree(const vector<ll>& arr) : n((int) arr.size()) {
-		auto build = [&](auto&& buildPtr, int node, int start, int end) -> void {
-			if (start == end) {
-				tree[node] = Node {
-					arr[start],
-					arr[start],
-					arr[start],
-					start,
-					end
-				};
-			} else {
-				int mid = (start + end) / 2;
-				buildPtr(buildPtr, 2 * node, start, mid);
-				buildPtr(buildPtr, 2 * node + 1, mid + 1, end);
-				tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
-			}
-		};
 		int size = 1;
 		while (size < n) size <<= 1;
 		size <<= 1;
 		tree.resize(size);
-		build(build, 1, 0, n - 1);
+		build(arr, 1, 0, n - 1);
 	}
+	void build(const vector<ll>& arr, int node, int start, int end) {
+		if (start == end) {
+			tree[node] = Node {
+				arr[start],
+				arr[start],
+				arr[start],
+				start,
+				end
+			};
+		} else {
+			int mid = (start + end) / 2;
+			build(arr, 2 * node, start, mid);
+			build(arr, 2 * node + 1, mid + 1, end);
+			tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
+		}
+	}
+
 	//inclusive range: [l,r]
 	void update(int l, int r, ll diff) {
-		auto update = [&](auto&& updatePtr, int node) -> void {
-			pushLazy(node);
-			int start = tree[node].l, end = tree[node].r;
-			if (r < start || end < l) return;
-			if (l <= start && end <= r) {
-				applyDeltaOnRange(node, diff);
-				return;
-			}
-			updatePtr(updatePtr, 2 * node);
-			updatePtr(updatePtr, 2 * node + 1);
-			tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
-		};
-		update(update, 1);
+		update(1, l, r, diff);
 	}
+	void update(int node, int l, int r, ll diff) {
+		pushLazy(node);
+		int start = tree[node].l, end = tree[node].r;
+		if (r < start || end < l) return;
+		if (l <= start && end <= r) {
+			applyDeltaOnRange(node, diff);
+			return;
+		}
+		update(2 * node, l, r, diff);
+		update(2 * node + 1, l, r, diff);
+		tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
+	};
+
 	//inclusive range: [l,r]
 	Node query(int l, int r) {
-		auto query = [&](auto&& queryPtr, int node) -> Node {
-			int start = tree[node].l, end = tree[node].r;
-			if (r < start || end < l) return Node();   //l,r is uninitialized -> access means undefined behavior
-			pushLazy(node);
-			if (l <= start && end <= r) return tree[node];
-			return combineChildren(
-			    queryPtr(queryPtr, 2 * node),
-			    queryPtr(queryPtr, 2 * node + 1)
-			);
-		};
-		return query(query, 1);
+		return query(1, l, r);
 	}
+	Node query(int node, int l, int r) {
+		int start = tree[node].l, end = tree[node].r;
+		if (r < start || end < l) return Node();   //l,r is uninitialized -> access means undefined behavior
+		pushLazy(node);
+		if (l <= start && end <= r) return tree[node];
+		return combineChildren(
+			query(2 * node, l, r),
+			query(2 * node + 1, l, r)
+		);
+	};
 };
