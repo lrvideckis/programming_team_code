@@ -17,7 +17,7 @@ struct SegmentTree {
 
 	//For implicit seg tree (Although I've TLE'd multiple times doing this):
 	//    1) change `tree` to unordered_map<int, Node>
-	//    2) update l,r in new Node's as you go down tree
+	//    2) update l,r when allocating new Nodes when going down tree
 	vector<Node> tree;
 	int n;
 
@@ -53,6 +53,7 @@ struct SegmentTree {
 	}
 	/*********************/
 
+	//There's no constructor `SegmentTree(int size)` because how to initialize l,r in nodes without calling build?
 	SegmentTree(const vector<ll>& arr) : n((int) arr.size()) {
 		int size = 1;
 		while (size < n) size <<= 1;
