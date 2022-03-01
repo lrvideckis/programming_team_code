@@ -34,4 +34,4 @@ astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-ref
 
 ## License
 
-Everything here is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) (e.g. do whatever you want)
+Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
