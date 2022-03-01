@@ -31,3 +31,7 @@ astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-ref
 - [Z function](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Zfunc.h)
 - [Manacher's](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Manacher.h)
 - [Sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc) (search buckets)
+
+## License
+
+Everything here is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/) (e.g. do whatever you want)
