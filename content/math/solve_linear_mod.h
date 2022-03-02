@@ -51,17 +51,16 @@ matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mo
 	}
 	//end of row reduce, start of extracting answer (`x`) from `A` and `b`
 	assert(rank <= min(n, m));
-	matrixInfo info{rank, det, vector<int>() };
 	//check if solution exists
 	for (int i = rank; i < n; i++) {
-		if (b[i] != 0) return info;   //no solution exists
+		if (b[i] != 0) return {rank, det, vector<int>() }; //no solution exists
 	}
-	info.x.resize(m, 0);
 	//initialize solution vector (`x`)
+	vector<int> x(m, 0);
 	for (int i = 0, j = 0; i < rank; i++) {
-		while (A[i][j] == 0) j++;
+		while (A[i][j] == 0) j++; //find pivot column
 		assert(A[i][j] == 1);
-		info.x[j] = b[i];
+		x[j] = b[i];
 	}
-	return info;
+	return {rank, det, x};
 }
