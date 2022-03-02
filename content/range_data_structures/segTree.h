@@ -12,6 +12,10 @@ struct SegmentTree {
 
 		int l, r;
 
+		int len() const {
+			return r - l + 1;
+		}
+
 		ll lazy = 0;
 	};
 
@@ -34,11 +38,10 @@ struct SegmentTree {
 	}
 	//what happens when delta is applied to every index in range [start,end]?
 	void applyDeltaOnRange(int node, ll delta) {
-		int start = tree[node].l, end = tree[node].r;
-		tree[node].sum += (end - start + 1) * delta;
+		tree[node].sum += tree[node].len() * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
-		if (start != end) {
+		if (tree[node].l != tree[node].r) {
 			tree[2 * node].lazy += delta;
 			tree[2 * node + 1].lazy += delta;
 		}
