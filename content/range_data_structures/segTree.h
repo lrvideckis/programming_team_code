@@ -97,7 +97,7 @@ struct SegmentTree {
 		update(2 * node, l, r, diff);
 		update(2 * node + 1, l, r, diff);
 		tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
-	};
+	}
 
 	//inclusive range: [l,r]
 	Node query(int l, int r) {
@@ -112,5 +112,5 @@ struct SegmentTree {
 		           query(2 * node, l, r),
 		           query(2 * node + 1, l, r)
 		       );
-	};
+	}
 };
