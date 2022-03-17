@@ -1,6 +1,6 @@
 #pragma once
 
-//status: not tested, but used in various problems
+//status: stress-tested against persistent seg tree; used in various problems
 
 struct MergeSortTree {
 	struct Node {
@@ -11,31 +11,12 @@ struct MergeSortTree {
 
 	/*implement these*/
 	Node combine(const Node& L, const Node& R) {
-		Node par;
-		//merge from merge sort
-		int ptrL = 0, ptrR = 0;
-		while (ptrL < (int) L.vals.size() && ptrR < (int) R.vals.size()) {
-			int valL = L.vals[ptrL];
-			int valR = R.vals[ptrR];
-			if (valL > valR) {
-				par.vals.push_back(valR);
-				ptrR++;
-			} else if (valL < valR) {
-				par.vals.push_back(valL);
-				ptrL++;
-			} else {
-				par.vals.push_back(valL);
-				par.vals.push_back(valL);
-				ptrL++, ptrR++;
-			}
-		}
-		while (ptrL < (int) L.vals.size())
-			par.vals.push_back(L.vals[ptrL++]);
-		while (ptrR < (int) R.vals.size())
-			par.vals.push_back(R.vals[ptrR++]);
-		return par;
+		vector<int> par(L.vals.size() + R.vals.size());
+		merge(L.vals.begin(), L.vals.end(), R.vals.begin(), R.vals.end(), par.begin());
+		return Node{par};
 	}
 
+	//O(nlogn) time and space
 	MergeSortTree(const vector<int>& arr) : n((int) arr.size()) {
 		size = 1;
 		while (size < n) size <<= 1;
@@ -54,6 +35,7 @@ struct MergeSortTree {
 		}
 	}
 	//returns how many values of arr[l], arr[l+1], ..., arr[r] which are < x
+	//O(log^2)
 	int query(int l, int r, int x) {
 		return query(1, 0, n - 1, l, r, x);
 	}
