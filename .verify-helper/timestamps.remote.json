@@ -10,6 +10,7 @@
 "library-checker-tests/math/solve_linear_mod.test.cpp": "2022-03-01 17:30:45 -0800",
 "library-checker-tests/maxflow/hungarian.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/range_data_structures/fenwickTree.test.cpp": "2022-02-17 02:28:31 -0800",
+"library-checker-tests/range_data_structures/pst.test.cpp": "2022-03-17 14:39:50 -0400",
 "library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/stringAlgs/rollingHash.test.cpp": "2022-02-17 02:28:31 -0800"
 }
