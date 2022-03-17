@@ -90,9 +90,8 @@ struct SegmentTree {
 		pushLazy(node);
 		int start = tree[node].l, end = tree[node].r;
 		if (r < start || end < l) return;
-		if (l <= start && end <= r) {
+		if (l <= start && end <= r)
 			return applyDeltaOnRange(node, diff);
-		}
 		update(2 * node, l, r, diff);
 		update(2 * node + 1, l, r, diff);
 		tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
