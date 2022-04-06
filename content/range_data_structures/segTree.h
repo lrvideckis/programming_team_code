@@ -41,7 +41,7 @@ struct SegmentTree {
 		tree[node].sum += tree[node].len() * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
-		if (tree[node].l != tree[node].r) {
+		if (tree[node].len() > 1) {
 			tree[2 * node].lazy += delta;
 			tree[2 * node + 1].lazy += delta;
 		}
@@ -82,33 +82,33 @@ struct SegmentTree {
 		}
 	}
 
-	//inclusive range: [l,r]
-	void update(int l, int r, ll diff) {
-		update(1, l, r, diff);
+	//inclusive range: [updL,updR]
+	void update(int updL, int updR, ll diff) {
+		update(1, updL, updR, diff);
 	}
-	void update(int node, int l, int r, ll diff) {
+	void update(int node, int updL, int updR, ll diff) {
 		pushLazy(node);
-		int start = tree[node].l, end = tree[node].r;
-		if (r < start || end < l) return;
-		if (l <= start && end <= r)
+		int ndL = tree[node].l, ndR = tree[node].r;
+		if (updR < ndL || ndR < updL) return;
+		if (updL <= ndL && ndR <= updR)
 			return applyDeltaOnRange(node, diff);
-		update(2 * node, l, r, diff);
-		update(2 * node + 1, l, r, diff);
+		update(2 * node, updL, updR, diff);
+		update(2 * node + 1, updL, updR, diff);
 		tree[node] = combineChildren(tree[2 * node], tree[2 * node + 1]);
 	}
 
-	//inclusive range: [l,r]
-	Node query(int l, int r) {
-		return query(1, l, r);
+	//inclusive range: [qryL,qryR]
+	Node query(int qryL, int qryR) {
+		return query(1, qryL, qryR);
 	}
-	Node query(int node, int l, int r) {
-		int start = tree[node].l, end = tree[node].r;
-		if (r < start || end < l) return Node();   //l,r is uninitialized -> access means undefined behavior
+	Node query(int node, int qryL, int qryR) {
+		int ndL = tree[node].l, ndR = tree[node].r;
+		if (qryR < ndL || ndR < qryL) return Node();   //l,r is uninitialized -> access means undefined behavior
 		pushLazy(node);
-		if (l <= start && end <= r) return tree[node];
+		if (qryL <= ndL && ndR <= qryR) return tree[node];
 		return combineChildren(
-		           query(2 * node, l, r),
-		           query(2 * node + 1, l, r)
+		           query(2 * node, qryL, qryR),
+		           query(2 * node + 1, qryL, qryR)
 		       );
 	}
 };
