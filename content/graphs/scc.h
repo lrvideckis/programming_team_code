@@ -1,6 +1,7 @@
 #pragma once
 
 //status: tested against floyd warshals on random graphs. also tested on https://judge.yosupo.jp/problem/scc
+//building of condensation graph tested on https://cses.fi/problemset/task/1686/
 
 struct sccInfo {
 	//sccId[i] is the id of the scc containing node `i`
@@ -56,7 +57,6 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		dfs(dfs, node);
 		res.numberOfSCCs++;
 	}
-	// This condensation graph building part is not tested
 	res.adj.resize(res.numberOfSCCs);
 	for (int i = 0; i < n; i++) {
 		for (int j : adj[i]) {
