@@ -11,11 +11,10 @@ struct persistentSegTree {
 		Node(Node* _lCh, Node* _rCh) : lCh(_lCh), rCh(_rCh), sum(lCh->sum + rCh->sum), l(lCh->l), r(rCh->r) {}
 	};
 
-	int n;
 	vector<Node*> roots;
 
-	persistentSegTree(const vector<ll>& arr) : n(arr.size()) {
-		roots.push_back(build(arr, 0, n - 1));
+	persistentSegTree(const vector<ll>& arr) {
+		roots.push_back(build(arr, 0, (int)arr.size() - 1));
 	}
 	Node* build(const vector<ll>& arr, int tl, int tr) {
 		if (tl == tr)
