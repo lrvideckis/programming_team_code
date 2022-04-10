@@ -23,7 +23,6 @@ struct SegmentTree {
 	//    1) change `tree` to unordered_map<int, Node>
 	//    2) update l,r when allocating new Nodes when going down tree
 	vector<Node> tree;
-	int n;
 
 	/***implement these***/
 	Node combineChildren(const Node& L, const Node& R) {
@@ -58,8 +57,8 @@ struct SegmentTree {
 
 	//There's no constructor `SegmentTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of this constructor was to be simpler by not calling build
-	SegmentTree(const vector<ll>& arr) : n((int) arr.size()) {
-		int size = 1;
+	SegmentTree(const vector<ll>& arr) {
+		int n = arr.size(), size = 1;
 		while (size < n) size <<= 1;
 		size <<= 1;
 		tree.resize(size);
