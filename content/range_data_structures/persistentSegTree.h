@@ -23,16 +23,16 @@ struct persistentSegTree {
 		return new Node(build(arr, tl, tm), build(arr, tm + 1, tr));
 	}
 
-	void update(int version, int pos, int new_val) {
-		roots.push_back(update(roots[version], pos, new_val));
+	void update(int version, int pos, ll diff) {
+		roots.push_back(update(roots[version], pos, diff));
 	}
-	Node* update(Node* v, int pos, int new_val) {
+	Node* update(Node* v, int pos, ll diff) {
 		if (v->l == v->r)
-			return new Node(v->l, v->sum + new_val);
+			return new Node(v->l, v->sum + diff);
 		if (pos <= (v->l + v->r) / 2)
-			return new Node(update(v->lCh, pos, new_val), v->rCh);
+			return new Node(update(v->lCh, pos, diff), v->rCh);
 		else
-			return new Node(v->lCh, update(v->rCh, pos, new_val));
+			return new Node(v->lCh, update(v->rCh, pos, diff));
 	}
 
 	ll query(int version, int l, int r) {
