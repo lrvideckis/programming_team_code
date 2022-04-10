@@ -1,5 +1,6 @@
 //leaks memory
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
+//tested on https://www.spoj.com/problems/PSEGTREE/
 struct persistentSegTree {
 	struct Node {
 		Node* lCh, *rCh;//children -> either both null or both exist
