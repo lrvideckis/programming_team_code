@@ -1,7 +1,7 @@
 #include "../test_utilities/template.h"
 #include "../test_utilities/random.h"
 
-#include "../../content/range_data_structures/pst.h"
+#include "../../content/range_data_structures/kthSmallest.h"
 #include "../../content/range_data_structures/mergeSortTree.h"
 
 
@@ -12,7 +12,7 @@ int main() {
 		for(int i = 0; i < n; i++) {
 			arr[i] = getRand(-1000, 1000);
 		}
-		pst st(arr);
+		persistentSegTree st(arr);
 		MergeSortTree mst(arr);
 		for(int iterations = 1000; iterations--;) {
 			int L = getRand(0,n-1), R = getRand(0,n-1);

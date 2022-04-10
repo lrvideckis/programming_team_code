@@ -25,7 +25,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../content/range_data_structures/pst.h"
+#include "../../content/range_data_structures/kthSmallest.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -35,7 +35,7 @@ int main() {
 	for(int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	pst st(arr);
+	persistentSegTree st(arr);
 	while(q--) {
 		int l,r,k;
 		cin >> l >> r >> k;

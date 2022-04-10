@@ -3,13 +3,13 @@
 //modified from k-th smallest section of https://cp-algorithms.com/data_structures/segment_tree.html
 //
 //status: tested on random inputs, and used in various problems
-struct pst {
+struct persistentSegTree {
 public:
 	/* Persistent seg tree handle a variety of queries
 	 * - no updates. For point updates, use either merge sort tree, wavelet tree or sqrt-decomp
 	 * O(nlogn) time and space to build tree
 	 */
-	pst(const vector<int>& arr) : sorted(arr), n(arr.size()) {
+	persistentSegTree(const vector<int>& arr) : sorted(arr), n(arr.size()) {
 		nodes.reserve(4 * n * log(n + 1));
 		roots.reserve(n + 1);
 		nodes.push_back(Node(Node::Data()));       //acts as nullptr
