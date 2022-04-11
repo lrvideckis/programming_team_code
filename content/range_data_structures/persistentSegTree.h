@@ -1,48 +1,60 @@
-//leaks memory
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 //tested on https://www.spoj.com/problems/PSEGTREE/
 struct persistentSegTree {
+
 	struct Node {
-		Node* lCh, *rCh;//children -> either both null or both exist
+		int lCh, rCh;//children, indexes into `tree` -> either both -1 or both exist
 		ll sum;
 		int l, r; //defines range of node
-
-		Node(int idx, ll val) : lCh(nullptr), rCh(nullptr), sum(val), l(idx), r(idx) {}
-		Node(Node* _lCh, Node* _rCh) : lCh(_lCh), rCh(_rCh), sum(lCh->sum + rCh->sum), l(lCh->l), r(rCh->r) {}
 	};
 
-	vector<Node*> roots;
+	vector<Node> tree;
+	vector<int> roots;
 
 	persistentSegTree(const vector<ll>& arr) {
 		roots.push_back(build(arr, 0, (int)arr.size() - 1));
 	}
-	Node* build(const vector<ll>& arr, int tl, int tr) {
-		if (tl == tr)
-			return new Node(tl, arr[tl]);
+	int build(const vector<ll>& arr, int tl, int tr) {
+		if (tl == tr) {
+			tree.push_back({-1, -1, arr[tl], tl, tr});
+			return tree.size()-1;
+		}
 		int tm = (tl + tr) / 2;
-		return new Node(build(arr, tl, tm), build(arr, tm + 1, tr));
+		int lCh = build(arr, tl, tm);
+		int rCh = build(arr, tm + 1, tr);
+		ll sum = tree[lCh].sum + tree[rCh].sum;
+		tree.push_back({lCh, rCh, sum, tl, tr});
+		return tree.size()-1;
 	}
 
 	void update(int version, int pos, ll diff) {
-		roots.push_back(update(roots[version], pos, diff));
+		roots.push_back(updateImpl(roots[version], pos, diff));
 	}
-	Node* update(Node* v, int pos, ll diff) {
-		if (v->l == v->r)
-			return new Node(v->l, v->sum + diff);
-		if (pos <= (v->l + v->r) / 2)
-			return new Node(update(v->lCh, pos, diff), v->rCh);
-		else
-			return new Node(v->lCh, update(v->rCh, pos, diff));
+	int updateImpl(int v, int pos, ll diff) {
+		if (tree[v].l == tree[v].r) {
+			tree.push_back({-1, -1, tree[v].sum + diff, tree[v].l, tree[v].r});
+			return tree.size()-1;
+		}
+		int lCh = tree[v].lCh;
+		int rCh = tree[v].rCh;
+		if (pos <= (tree[v].l + tree[v].r) / 2) {
+			lCh = updateImpl(tree[v].lCh, pos, diff);
+		} else {
+			rCh = updateImpl(tree[v].rCh, pos, diff);
+		}
+		ll sum = tree[lCh].sum + tree[rCh].sum;
+		tree.push_back({lCh, rCh, sum, tree[v].l, tree[v].r});
+		return tree.size()-1;
 	}
 
 	ll query(int version, int l, int r) {
-		return query(roots[version], l, r);
+		return queryImpl(roots[version], l, r);
 	}
-	ll query(Node* v, int l, int r) {
-		if (v->r < l || r < v->l)
+	ll queryImpl(int v, int l, int r) {
+		if (tree[v].r < l || r < tree[v].l)
 			return 0;
-		if (l <= v->l && v->r <= r)
-			return v->sum;
-		return query(v->lCh, l, r) + query(v->rCh, l, r);
+		if (l <= tree[v].l && tree[v].r <= r)
+			return tree[v].sum;
+		return queryImpl(tree[v].lCh, l, r) + queryImpl(tree[v].rCh, l, r);
 	}
 };
