@@ -17,14 +17,14 @@ struct persistentSegTree {
 	int build(const vector<ll>& arr, int tl, int tr) {
 		if (tl == tr) {
 			tree.push_back({-1, -1, arr[tl], tl, tr});
-			return tree.size()-1;
+			return tree.size() - 1;
 		}
 		int tm = (tl + tr) / 2;
 		int lCh = build(arr, tl, tm);
 		int rCh = build(arr, tm + 1, tr);
 		ll sum = tree[lCh].sum + tree[rCh].sum;
 		tree.push_back({lCh, rCh, sum, tl, tr});
-		return tree.size()-1;
+		return tree.size() - 1;
 	}
 
 	void update(int version, int pos, ll diff) {
@@ -33,18 +33,17 @@ struct persistentSegTree {
 	int updateImpl(int v, int pos, ll diff) {
 		if (tree[v].l == tree[v].r) {
 			tree.push_back({-1, -1, tree[v].sum + diff, tree[v].l, tree[v].r});
-			return tree.size()-1;
+			return tree.size() - 1;
 		}
 		int lCh = tree[v].lCh;
 		int rCh = tree[v].rCh;
-		if (pos <= (tree[v].l + tree[v].r) / 2) {
+		if (pos <= (tree[v].l + tree[v].r) / 2)
 			lCh = updateImpl(tree[v].lCh, pos, diff);
-		} else {
+		else
 			rCh = updateImpl(tree[v].rCh, pos, diff);
-		}
 		ll sum = tree[lCh].sum + tree[rCh].sum;
 		tree.push_back({lCh, rCh, sum, tree[v].l, tree[v].r});
-		return tree.size()-1;
+		return tree.size() - 1;
 	}
 
 	ll query(int version, int l, int r) {
