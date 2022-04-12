@@ -4,7 +4,7 @@
 
 struct implicitSegTree {
 	struct Node {
-		int lCh, rCh;//children ptrs
+		int lCh, rCh;//children ptrs, indexes into `tree`; 0 for null
 		ll sum;
 	};
 
