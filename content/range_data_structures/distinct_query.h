@@ -17,7 +17,7 @@ struct persistentSegTree {
 		tree.reserve(sz * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
-		unordered_map<int, int> lastIdx;
+		map<int, int> lastIdx;
 		for (int i = 0; i < (int)arr.size(); i++) {
 			roots.push_back(update(roots.back(), 0, sz - 1, lastIdx[arr[i]], 1));
 			lastIdx[arr[i]] = i + 1;
