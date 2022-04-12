@@ -1,9 +1,8 @@
-
 #pragma once
 
 //status: tested on https://cses.fi/problemset/task/1144/
 
-struct SegmentTree {
+struct implicitSegTree {
 	struct Node {
 		int lCh, rCh;//children ptrs
 		ll sum;
@@ -12,7 +11,7 @@ struct SegmentTree {
 	int sz;
 	vector<Node> tree;
 
-	SegmentTree(int _sz, int reserveAmount): sz(_sz) {
+	implicitSegTree(int _sz, int reserveAmount): sz(_sz) {
 		tree.reserve(reserveAmount);
 		tree.push_back({0, 0, 0LL});//acts as null
 		tree.push_back({0, 0, 0LL});//root node
