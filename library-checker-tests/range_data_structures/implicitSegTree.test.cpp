@@ -25,7 +25,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../../stress-tests/test_utilities/random.h"
+#include "../../stress-tests/test_utilities/random.h"
 #include "../../content/range_data_structures/implicitSegTree.h"
 
 int main() {
