@@ -13,14 +13,14 @@ struct persistentSegTree {
 	vector<Node> tree;
 	vector<int> roots;
 
-	persistentSegTree(const vector<int>& arr) : sz(arr.size()+1) {
+	persistentSegTree(const vector<int>& arr) : sz(arr.size() + 1) {
 		tree.reserve(sz * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
-		unordered_map<int,int> lastIdx;
-		for(int i = 0; i < (int)arr.size(); i++) {
+		unordered_map<int, int> lastIdx;
+		for (int i = 0; i < (int)arr.size(); i++) {
 			roots.push_back(update(roots.back(), 0, sz - 1, lastIdx[arr[i]], 1));
-			lastIdx[arr[i]] = i+1;
+			lastIdx[arr[i]] = i + 1;
 		}
 	}
 	int update(int v, int tl, int tr, int idx, int diff) {
@@ -42,7 +42,7 @@ struct persistentSegTree {
 
 	//returns number of distinct elements in range [l,r]
 	int query(int l, int r) const {
-		return query(roots[l], roots[r+1], 0, sz - 1, l+1);
+		return query(roots[l], roots[r + 1], 0, sz - 1, l + 1);
 	}
 	int query(int vl, int vr, int tl, int tr, int idx) const {
 		if (tree[vr].sum == 0 || idx <= tl)
