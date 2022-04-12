@@ -1,7 +1,7 @@
 #pragma once
 
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
-//tested on https://www.spoj.com/problems/PSEGTREE/
+//tested on https://www.spoj.com/problems/PSEGTREE/ and https://cses.fi/problemset/task/1737/
 struct persistentSegTree {
 
 	struct Node {
