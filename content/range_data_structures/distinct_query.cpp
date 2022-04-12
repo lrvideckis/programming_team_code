@@ -1,31 +1,5 @@
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <cmath>
-#include <vector>
-#include <list>
-#include <set>
-#include <map>
-#include <unordered_set>
-#include <unordered_map>
-#include <stack>
-#include <queue>
-#include <ctime>
-#include <cassert>
-#include <complex>
-#include <string>
-#include <cstring>
-#include <chrono>
-#include <random>
-#include <bitset>
-#include <climits>
-#include <memory>
-using namespace std;
-#define endl '\n'
-
-
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
-//tested on https://www.spoj.com/problems/PSEGTREE/ and https://cses.fi/problemset/task/1737/
+//tested on https://www.spoj.com/problems/DQUERY/
 struct persistentSegTree {
 
 	struct Node {
@@ -37,14 +11,10 @@ struct persistentSegTree {
 	vector<Node> tree;
 	vector<int> roots;
 
-	//implicit
-	persistentSegTree(int _sz, int reserveSize) : sz(_sz) {
-		tree.reserve(reserveSize);
+	persistentSegTree(const vector<int>& arr) : sz(arr.size()+1) {
+		tree.reserve(arr.size() * log(arr.size()));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
-	}
-
-	persistentSegTree(const vector<int>& arr) : persistentSegTree(arr.size()+1, arr.size() * log(arr.size())) {
 		unordered_map<int,int> lastIdx;
 		for(int i = 0; i < (int)arr.size(); i++) {
 			roots.push_back(update(roots.back(), 0, sz - 1, lastIdx[arr[i]], 1));
@@ -82,26 +52,3 @@ struct persistentSegTree {
 		       query(tree[vl].rCh, tree[vr].rCh, tm + 1, tr, idx);
 	}
 };
-
-int main() {
-	cin.tie(0)->sync_with_stdio(false);
-
-	int n;
-	cin >> n;
-	vector<int> arr(n);
-	for(int i = 0; i < n; i++) {
-		cin >> arr[i];
-	}
-
-	persistentSegTree pst(arr);
-
-	int q;
-	cin >> q;
-	while(q--) {
-		int l,r;
-		cin >> l >> r;
-		l--,r--;
-		cout << pst.query(l,r) << endl;
-	}
-	return 0;
-}
