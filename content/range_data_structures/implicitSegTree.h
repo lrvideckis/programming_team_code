@@ -1,6 +1,6 @@
 #pragma once
 
-//status: tested on https://cses.fi/problemset/task/1144/
+//status: tested on https://cses.fi/problemset/task/1144/ and https://judge.yosupo.jp/problem/point_add_range_sum
 
 struct implicitSegTree {
 	struct Node {
