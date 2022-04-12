@@ -2,12 +2,11 @@
 #pragma once
 
 //status: tested on https://cses.fi/problemset/task/1144/
-//it may overflow if sum is too large
 
 struct SegmentTree {
 	struct Node {
 		int lCh, rCh;//children ptrs
-		int sum;
+		ll sum;
 	};
 
 	int sz;
@@ -15,14 +14,14 @@ struct SegmentTree {
 
 	SegmentTree(int _sz, int reserveAmount): sz(_sz) {
 		tree.reserve(reserveAmount);
-		tree.push_back({0, 0, 0});//acts as null
-		tree.push_back({0, 0, 0});//root node
+		tree.push_back({0, 0, 0LL});//acts as null
+		tree.push_back({0, 0, 0LL});//root node
 	}
 
-	void update(int idx, int diff) {
+	void update(int idx, ll diff) {
 		update(1, 0, sz - 1, idx, diff);
 	}
-	int update(int v, int tl, int tr, int idx, int diff) {
+	int update(int v, int tl, int tr, int idx, ll diff) {
 		if (tl == tr) {
 			if (v == 0) {
 				tree.push_back(tree[0]);
@@ -47,11 +46,11 @@ struct SegmentTree {
 	}
 
 	//inclusive range: [l,r]
-	int query(int l, int r) const {
+	ll query(int l, int r) const {
 		return query(1, 0, sz - 1, l, r);
 	}
-	int query(int v, int tl, int tr, int l, int r) const {
-		if (tree[v].sum == 0 || tr < l || r < tl) return 0;
+	ll query(int v, int tl, int tr, int l, int r) const {
+		if (tree[v].sum == 0LL || tr < l || r < tl) return 0LL;
 		if (l <= tl && tr <= r) return tree[v].sum;
 		int tm = (tl + tr) / 2;
 		return query(tree[v].lCh, tl, tm, l, r) +
