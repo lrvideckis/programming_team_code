@@ -10,7 +10,6 @@ struct MergeSortTree {
 	};
 
 	vector<Node> tree;
-	int n;
 
 	Node combineChildren(const Node& L, const Node& R) {
 		vector<int> par(L.vals.size() + R.vals.size());
@@ -20,8 +19,8 @@ struct MergeSortTree {
 
 	//There's no constructor `SegmentTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of this constructor was to be simpler by not calling build
-	MergeSortTree(const vector<int>& arr) : n((int) arr.size()) {
-		int size = 1;
+	MergeSortTree(const vector<int>& arr)  {
+		int n = arr.size(), size = 1;
 		while (size < n) size <<= 1;
 		size <<= 1;
 		tree.resize(size);
