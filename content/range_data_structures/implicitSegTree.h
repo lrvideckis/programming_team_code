@@ -10,17 +10,17 @@ struct SegmentTree {
 		int sum;
 	};
 
-	int n;
+	int sz;
 	vector<Node> tree;
 
-	SegmentTree(int _n, int reserveAmount): n(_n) {
+	SegmentTree(int _sz, int reserveAmount): sz(_sz) {
 		tree.reserve(reserveAmount);
 		tree.push_back({0, 0, 0});//acts as null
 		tree.push_back({0, 0, 0});//root node
 	}
 
 	void update(int idx, int diff) {
-		update(1, 0, n - 1, idx, diff);
+		update(1, 0, sz - 1, idx, diff);
 	}
 	int update(int v, int tl, int tr, int idx, int diff) {
 		if (tl == tr) {
@@ -48,7 +48,7 @@ struct SegmentTree {
 
 	//inclusive range: [l,r]
 	int query(int l, int r) const {
-		return query(1, 0, n - 1, l, r);
+		return query(1, 0, sz - 1, l, r);
 	}
 	int query(int v, int tl, int tr, int l, int r) const {
 		if (tree[v].sum == 0 || tr < l || r < tl) return 0;
