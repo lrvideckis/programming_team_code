@@ -7,7 +7,7 @@
 #include "../../content/data_structures/disjointSet.h"
 
 int main() {
-	for(int tests = 1000; tests--;) {
+	for(int tests = 100; tests--;) {
 		int n = getRand(1, 1000);//nodes
 		if(getRand(1,2) == 1) n = getRand(1, 6);
 
