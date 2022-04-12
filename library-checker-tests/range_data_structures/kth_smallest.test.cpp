@@ -25,7 +25,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#include "../../content/range_data_structures/kthSmallest.h"
+#include "../../content/range_data_structures/kth_smallest.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -35,11 +35,11 @@ int main() {
 	for(int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	persistentSegTree st(arr);
+	kth_smallest st(arr);
 	while(q--) {
 		int l,r,k;
 		cin >> l >> r >> k;
-		cout << st.find_kth(l, r-1, k+1) << endl;
+		cout << st.query(l, r-1, k+1) << endl;
 	}
 	return 0;
 }
