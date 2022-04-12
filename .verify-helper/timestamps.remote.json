@@ -11,7 +11,7 @@
 "library-checker-tests/maxflow/hungarian.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/range_data_structures/fenwickTree.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/range_data_structures/implicitSegTree.test.cpp": "2022-04-12 14:56:38 -0700",
-"library-checker-tests/range_data_structures/kth_smallest.test.cpp": "2022-04-12 15:54:02 -0700",
+"library-checker-tests/range_data_structures/kth_smallest.test.cpp": "2022-04-12 15:57:43 -0700",
 "library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-02-17 02:28:31 -0800",
 "library-checker-tests/stringAlgs/rollingHash.test.cpp": "2022-02-17 02:28:31 -0800"
 }
