@@ -1,3 +1,5 @@
+#pragma once
+
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 //tested on https://www.spoj.com/problems/DQUERY/
 struct persistentSegTree {
@@ -12,7 +14,7 @@ struct persistentSegTree {
 	vector<int> roots;
 
 	persistentSegTree(const vector<int>& arr) : sz(arr.size()+1) {
-		tree.reserve(arr.size() * log(arr.size()));
+		tree.reserve(sz * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
 		unordered_map<int,int> lastIdx;
