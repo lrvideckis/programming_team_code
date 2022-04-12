@@ -14,7 +14,7 @@ struct persistentSegTree {
 	vector<int> roots;
 
 	persistentSegTree(const vector<int>& arr) : sz(arr.size()+1) {
-		tree.reserve(arr.size() * log(arr.size()));
+		tree.reserve(sz * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
 		unordered_map<int,int> lastIdx;
