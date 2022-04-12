@@ -13,12 +13,15 @@ struct kth_smallest {
 	vector<Node> tree;
 	vector<int> roots;
 
-	kth_smallest(const vector<int>& arr) : sz(1e9 + 1 /*TODO: make sure it's > max(arr)*/) {
+	// only works for 0 <= arr[i] <= 1e9
+	kth_smallest(const vector<int>& arr) : sz(1e9 + 1) {
 		tree.reserve(arr.size() * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
-		for (int i = 0; i < (int)arr.size(); i++)
+		for (int i = 0; i < (int)arr.size(); i++) {
+			assert(0 <= arr[i] && arr[i] < sz);
 			roots.push_back(update(roots.back(), 0, sz - 1, arr[i], 1));
+		}
 	}
 	int update(int v, int tl, int tr, int idx, int diff) {
 		if (tl == tr) {
@@ -40,7 +43,6 @@ struct kth_smallest {
 
 	/* find kth smallest number among arr[l], arr[l+1], ..., arr[r]
 	 * k is 1-based, so find_kth(l,r,1) returns the min
-	 * O(logn)
 	 */
 	int query(int l, int r, int k) const {
 		assert(1 <= k && k <= r - l + 1); //note this condition implies L <= R
