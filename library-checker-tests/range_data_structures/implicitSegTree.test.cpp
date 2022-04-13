@@ -33,7 +33,7 @@ int main() {
 	int n,q;
 	cin >> n >> q;
 
-	implicitSegTree ist(n, 4 * n);
+	implicitSegTree ist(n);
 
 	vector<int> arr(n);
 	vector<int> perm(n);
