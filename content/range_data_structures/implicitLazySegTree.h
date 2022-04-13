@@ -11,7 +11,7 @@ struct implicitLazySegTree {
 	};
 
 	int sz;
-	deque<Node> tree;//https://codeforces.com/blog/entry/100200?#comment-903656
+	deque<Node> tree;//reason for deque: https://codeforces.com/blog/entry/100200?#comment-903656
 
 	implicitLazySegTree(int _sz) : sz(_sz) {
 		tree.push_back({0, 0, 0, 0}); //acts as null
