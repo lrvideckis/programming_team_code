@@ -10,11 +10,10 @@ struct persistentSegTree {
 	};
 
 	int sz;
-	vector<Node> tree;
+	deque<Node> tree;
 	vector<int> roots;
 
 	persistentSegTree(const vector<int>& arr) : sz(arr.size() + 1) {
-		tree.reserve(sz * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
 		map<int, int> lastIdx;

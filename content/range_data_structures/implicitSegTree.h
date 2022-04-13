@@ -9,10 +9,9 @@ struct implicitSegTree {
 	};
 
 	int sz;
-	vector<Node> tree;
+	deque<Node> tree;
 
-	implicitSegTree(int _sz, int reserveAmount): sz(_sz) {
-		tree.reserve(reserveAmount);
+	implicitSegTree(int _sz): sz(_sz) {
 		tree.push_back({0, 0, 0LL});//acts as null
 		tree.push_back({0, 0, 0LL});//root node
 	}

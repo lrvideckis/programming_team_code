@@ -10,12 +10,11 @@ struct kth_smallest {
 	};
 
 	int sz;
-	vector<Node> tree;
+	deque<Node> tree;
 	vector<int> roots;
 
 	// only works for 0 <= arr[i] <= 1e9
 	kth_smallest(const vector<int>& arr) : sz(1e9 + 1) {
-		tree.reserve(arr.size() * log(sz));
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
 		for (int i = 0; i < (int)arr.size(); i++) {

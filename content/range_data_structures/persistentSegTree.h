@@ -10,18 +10,16 @@ struct persistentSegTree {
 	};
 
 	int sz;
-	vector<Node> tree;
+	deque<Node> tree;
 	vector<int> roots;
 
 	//implicit
-	persistentSegTree(int _sz, int reserveSize) : sz(_sz) {
-		tree.reserve(reserveSize);
+	persistentSegTree(int _sz) : sz(_sz) {
 		tree.push_back({0, 0, 0LL}); //acts as null
 		roots.push_back(0);
 	}
 
 	persistentSegTree(const vector<ll>& arr) : sz(arr.size()) {
-		tree.reserve(4 * sz);
 		tree.push_back({0, 0, 0LL}); //acts as null
 		roots.push_back(build(arr, 0, sz - 1));
 	}
