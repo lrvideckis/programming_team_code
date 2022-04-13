@@ -21,9 +21,9 @@ struct implicitLazySegTree {
 	void push(int v, int tl, int tr) {
 		assert(v != 0);
 		if (tl != tr && tree[v].lCh == 0) {
-			tree.push_back(tree[tree[v].lCh]);
+			tree.push_back(tree[0]);
 			tree[v].lCh = tree.size() - 1;
-			tree.push_back(tree[tree[v].rCh]);
+			tree.push_back(tree[0]);
 			tree[v].rCh = tree.size() - 1;
 		}
 		if (tree[v].lazyAdd) {
