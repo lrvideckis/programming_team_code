@@ -66,7 +66,7 @@ struct implicitLazySegTree {
 
 	//min on range [l,r]
 	ll query(int l, int r) {
-		return query(1, 0, sz-1, l, r);
+		return query(1, 0, sz - 1, l, r);
 	}
 	ll query(int v, int tl, int tr, int l, int r) {
 		push(v, tl, tr);
@@ -76,6 +76,6 @@ struct implicitLazySegTree {
 			return tree[v].mn;
 		int tm = (tl + tr) / 2;
 		return min(query(tree[v].lCh, tl, tm, l, r),
-				   query(tree[v].rCh, tm + 1, tr, l, r));
+		           query(tree[v].rCh, tm + 1, tr, l, r));
 	}
 };
