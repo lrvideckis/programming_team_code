@@ -1,11 +1,11 @@
 #pragma once
 
-struct persistentSegTree {
+struct persistentLazySegTree {
 
 	struct Node {
 		int lCh, rCh;//children, indexes into `tree`
-		int sum;
-		bool lazyTog;
+		ll mn;
+		ll lazyAdd;
 	};
 
 	int sz;
@@ -13,34 +13,30 @@ struct persistentSegTree {
 	vector<int> roots;
 
 	//implicit
-	persistentSegTree(int _sz, int reserveSize) : sz(_sz) {
-		//tree.reserve(reserveSize);
+	persistentLazySegTree(int _sz) : sz(_sz) {
 		tree.push_back({0, 0, 0, 0}); //acts as null
-		tree.push_back({0, 0, 0, 0}); //root node
-		roots.push_back(1);
+		roots.push_back(0);
 	}
 
 	void push(int v, int tl, int tr) {
-		assert(v != 0);
-		if (tree[v].lazyTog) {
-			tree[v].sum = (tr - tl + 1) - tree[v].sum;
-			tree[v].lazyTog = false;
+		if (tree[v].lazyAdd) {
+			tree[v].mn += tree[v].lazyAdd;
 			if (tl != tr) {
-				assert(tree[v].lCh != 0);
-				assert(tree[v].rCh != 0);
-				tree[tree[v].lCh].lazyTog = !tree[tree[v].lCh].lazyTog;
-				tree[tree[v].rCh].lazyTog = !tree[tree[v].rCh].lazyTog;
+				if (tree[v].lCh != 0) tree[tree[v].lCh].lazyAdd += tree[v].lazyAdd;
+				if (tree[v].rCh != 0) tree[tree[v].rCh].lazyAdd += tree[v].lazyAdd;
 			}
+			tree[v].lazyAdd = 0;
 		}
 	}
 
-	void toggleRange(int l, int r) {
+	//add diff to each value in range [l,r]
+	void update(int l, int r, ll diff) {
 		tree.push_back(tree[roots.back()]);//allocate top down
 		roots.push_back(tree.size() - 1);
-		toggleRange(roots.back(), 0, sz - 1, l, r);
+		update(roots.back(), 0, sz - 1, l, r, diff);
 	}
-	void toggleRange(int v, int tl, int tr, int l, int r) {
-		//allocate copies of previous children
+	void update(int v, int tl, int tr, int l, int r, ll diff) {
+		//allocate copies of previous version's children
 		if (tl != tr) {
 			tree.push_back(tree[tree[v].lCh]);
 			tree[v].lCh = tree.size() - 1;
@@ -54,17 +50,32 @@ struct persistentSegTree {
 		int lCh = tree[v].lCh;
 		int rCh = tree[v].rCh;
 		if (l <= tl && tr <= r) {
-			tree[v].sum = (tr - tl + 1) - tree[v].sum;
+			tree[v].mn += diff;
 			if (tl != tr) {
 				assert(lCh != 0);
 				assert(rCh != 0);
-				tree[lCh].lazyTog = !tree[lCh].lazyTog;
-				tree[rCh].lazyTog = !tree[rCh].lazyTog;
+				tree[lCh].lazyAdd += diff;
+				tree[rCh].lazyAdd += diff;
 			}
 			return;
 		}
-		toggleRange(lCh, tl, tm, l, r);
-		toggleRange(rCh, tm + 1, tr, l, r);
-		tree[v].sum = tree[lCh].sum + tree[rCh].sum;
+		update(lCh, tl, tm, l, r, diff);
+		update(rCh, tm + 1, tr, l, r, diff);
+		tree[v].mn = min(tree[lCh].mn, tree[rCh].mn);
+	}
+
+	//min on range [l,r] for most recent version
+	ll query(int l, int r) {
+		return query(roots.back(), 0, sz - 1, l, r);
+	}
+	ll query(int v, int tl, int tr, int l, int r) {
+		push(v, tl, tr);
+		if (tr < l || r < tl)
+			return 1e18;
+		if (l <= tl && tr <= r)
+			return tree[v].mn;
+		int tm = (tl + tr) / 2;
+		return min(query(tree[v].lCh, tl, tm, l, r),
+		           query(tree[v].rCh, tm + 1, tr, l, r));
 	}
 };
