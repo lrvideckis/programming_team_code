@@ -3,13 +3,12 @@
 //status: stress tested && tested on https://codeforces.com/contest/52/problem/C
 
 struct Node {
-	//TODO: reorder variables to get best performance
+	ll val;//could represent max, sum, etc
+	ll lazy;
+
 	int lCh, rCh; // children, indexes into `tree`, -1 for null
 
 	int l, r; // range of node: [l,r]
-
-	ll val;//could represent max, sum, etc
-	ll lazy;
 
 	int len() const {
 		return r - l + 1;
@@ -22,11 +21,11 @@ struct implicitLazySegTree {
 	int NEW_NODE;
 
 	implicitLazySegTree(int sz) : NEW_NODE(0) {
-		tree[NEW_NODE++] = {-1, -1, 0, sz - 1, 0, 0}; //root node
+		tree[NEW_NODE++] = {0, 0, -1, -1, 0, sz - 1}; //root node
 	}
 
 	implicitLazySegTree(const vector<ll>& arr) : NEW_NODE(0) {
-		tree[NEW_NODE++] = {-1, -1, 0, (int)arr.size() - 1, 0, 0}; //root node
+		tree[NEW_NODE++] = {0, 0, -1, -1, 0, (int)arr.size() - 1}; //root node
 		build(arr, 0);
 	}
 	void build(const vector<ll>& arr, int v) {
@@ -58,9 +57,9 @@ struct implicitLazySegTree {
 			int tr = tree[v].r;
 			int tm = (tl + tr) / 2;
 			tree[v].lCh = NEW_NODE;
-			tree[NEW_NODE++] = {-1, -1, tl, tm, 0, 0};
+			tree[NEW_NODE++] = {0, 0, -1, -1, tl, tm};
 			tree[v].rCh = NEW_NODE;
-			tree[NEW_NODE++] = {-1, -1, tm+1, tr, 0, 0};
+			tree[NEW_NODE++] = {0, 0, -1, -1, tm+1, tr};
 		}
 		if (tree[v].lazy) {
 			applyDeltaOnRange(v, tree[v].lazy);
