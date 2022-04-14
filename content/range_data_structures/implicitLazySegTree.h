@@ -29,9 +29,9 @@ struct implicitLazySegTree {
 		build(arr, 0);
 	}
 	void build(const vector<ll>& arr, int v) {
-		if (tree[v].len() == 1) {
+		if (tree[v].len() == 1)
 			tree[v].val = arr[tree[v].l];
-		} else {
+		else {
 			push(v);
 			build(arr, tree[v].lCh);
 			build(arr, tree[v].rCh);
@@ -59,7 +59,7 @@ struct implicitLazySegTree {
 			tree[v].lCh = NEW_NODE;
 			tree[NEW_NODE++] = {0, 0, -1, -1, tl, tm};
 			tree[v].rCh = NEW_NODE;
-			tree[NEW_NODE++] = {0, 0, -1, -1, tm+1, tr};
+			tree[NEW_NODE++] = {0, 0, -1, -1, tm + 1, tr};
 		}
 		if (tree[v].lazy) {
 			applyDeltaOnRange(v, tree[v].lazy);
@@ -93,6 +93,6 @@ struct implicitLazySegTree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
 		return combine(query(tree[v].lCh, l, r),
-					   query(tree[v].rCh, l, r));
+		               query(tree[v].rCh, l, r));
 	}
 };
