@@ -1,81 +1,99 @@
 #pragma once
 
-//status: tested on https://codeforces.com/contest/52/problem/C
+//status: stress tested && tested on https://codeforces.com/contest/52/problem/C
+
+struct Node {
+	//TODO: reorder variables to get best performance
+	int lCh, rCh; // children, indexes into `tree`, -1 for null
+
+	int l, r; // range of node: [l,r]
+
+	ll val;//could represent max, sum, etc
+	ll lazy;
+
+	int len() const {
+		return r - l + 1;
+	}
+
+} tree[(int)4e4/*TODO: update*/];
 
 struct implicitLazySegTree {
 
-	struct Node {
-		int lCh, rCh;//children, indexes into `tree`
-		ll mn;
-		ll lazyAdd;
-	};
+	int NEW_NODE;
 
-	int sz;
-	deque<Node> tree;
-
-	implicitLazySegTree(int _sz) : sz(_sz) {
-		tree.push_back({0, 0, 0, 0}); //acts as null
-		tree.push_back({0, 0, 0, 0}); //root node
+	implicitLazySegTree(int sz) : NEW_NODE(0) {
+		tree[NEW_NODE++] = {-1, -1, 0, sz - 1, 0, 0}; //root node
 	}
 
-	void push(int v, int tl, int tr) {
-		assert(v != 0);
-		if (tl != tr && tree[v].lCh == 0) {
-			tree.push_back(tree[0]);
-			tree[v].lCh = tree.size() - 1;
-			tree.push_back(tree[0]);
-			tree[v].rCh = tree.size() - 1;
-		}
-		if (tree[v].lazyAdd) {
-			tree[v].mn += tree[v].lazyAdd;
-			if (tl != tr) {
-				assert(tree[v].lCh != 0);//need to push lazy to childs, else incorrect
-				assert(tree[v].rCh != 0);
-				tree[tree[v].lCh].lazyAdd += tree[v].lazyAdd;
-				tree[tree[v].rCh].lazyAdd += tree[v].lazyAdd;
-			}
-			tree[v].lazyAdd = 0;
+	implicitLazySegTree(const vector<ll>& arr) : NEW_NODE(0) {
+		tree[NEW_NODE++] = {-1, -1, 0, (int)arr.size() - 1, 0, 0}; //root node
+		build(arr, 0);
+	}
+	void build(const vector<ll>& arr, int v) {
+		if (tree[v].len() == 1) {
+			tree[v].val = arr[tree[v].l];
+		} else {
+			push(v);
+			build(arr, tree[v].lCh);
+			build(arr, tree[v].rCh);
+			tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 		}
 	}
 
-	//add diff to each value in range [l,r]
-	void update(int l, int r, ll diff) {
-		update(1, 0, sz - 1, l, r, diff);
+	ll combine(ll l, ll r) {
+		return max(l, r); //TODO: update
 	}
-	void update(int v, int tl, int tr, int l, int r, ll diff) {
-		push(v, tl, tr);
-		if (tr < l || r < tl)
+
+	void applyDeltaOnRange(int v, ll add) {
+		tree[v].val += add; //TODO: update
+		if (tree[v].len() > 1) {
+			tree[tree[v].lCh].lazy += add;
+			tree[tree[v].rCh].lazy += add;
+		}
+	}
+
+	void push(int v) {
+		if (tree[v].len() > 1 && tree[v].lCh == -1) {
+			int tl = tree[v].l;
+			int tr = tree[v].r;
+			int tm = (tl + tr) / 2;
+			tree[v].lCh = NEW_NODE;
+			tree[NEW_NODE++] = {-1, -1, tl, tm, 0, 0};
+			tree[v].rCh = NEW_NODE;
+			tree[NEW_NODE++] = {-1, -1, tm+1, tr, 0, 0};
+		}
+		if (tree[v].lazy) {
+			applyDeltaOnRange(v, tree[v].lazy);
+			tree[v].lazy = 0;
+		}
+	}
+
+	//add `add` to each value in range [l,r]
+	void update(int l, int r, ll add) {
+		update(0, l, r, add);
+	}
+	void update(int v, int l, int r, ll add) {
+		push(v);
+		if (tree[v].r < l || r < tree[v].l)
 			return;
-		int tm = (tl + tr) / 2;
-		int lCh = tree[v].lCh;
-		int rCh = tree[v].rCh;
-		if (l <= tl && tr <= r) {
-			tree[v].mn += diff;
-			if (tl != tr) {
-				assert(lCh != 0);
-				assert(rCh != 0);
-				tree[lCh].lazyAdd += diff;
-				tree[rCh].lazyAdd += diff;
-			}
-			return;
-		}
-		update(lCh, tl, tm, l, r, diff);
-		update(rCh, tm + 1, tr, l, r, diff);
-		tree[v].mn = min(tree[lCh].mn, tree[rCh].mn);
+		if (l <= tree[v].l && tree[v].r <= r)
+			return applyDeltaOnRange(v, add);
+		update(tree[v].lCh, l, r, add);
+		update(tree[v].rCh, l, r, add);
+		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 
 	//min on range [l,r]
 	ll query(int l, int r) {
-		return query(1, 0, sz - 1, l, r);
+		return query(0, l, r);
 	}
-	ll query(int v, int tl, int tr, int l, int r) {
-		push(v, tl, tr);
-		if (tr < l || r < tl)
-			return 1e18;
-		if (l <= tl && tr <= r)
-			return tree[v].mn;
-		int tm = (tl + tr) / 2;
-		return min(query(tree[v].lCh, tl, tm, l, r),
-		           query(tree[v].rCh, tm + 1, tr, l, r));
+	ll query(int v, int l, int r) {
+		if (tree[v].r < l || r < tree[v].l)
+			return -1e18; //TODO: update
+		push(v);
+		if (l <= tree[v].l && tree[v].r <= r)
+			return tree[v].val;
+		return combine(query(tree[v].lCh, l, r),
+					   query(tree[v].rCh, l, r));
 	}
 };
