@@ -82,7 +82,7 @@ struct implicitLazySegTree {
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 
-	//min on range [l,r]
+	//max on range [l,r]
 	ll query(int l, int r) {
 		return query(0, l, r);
 	}
