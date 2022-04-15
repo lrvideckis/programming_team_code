@@ -13,11 +13,11 @@ struct implicitLazySegTree {
 	int NEW_NODE, sz;
 
 	implicitLazySegTree(int _sz) : NEW_NODE(0), sz(_sz) {
-		tree[NEW_NODE++] = {0, 0, -1, -1}; //root node
+		tree[NEW_NODE++] = {0, 0, -1, -1};
 	}
 
 	implicitLazySegTree(const vector<ll>& arr) : NEW_NODE(0), sz(arr.size()) {
-		tree[NEW_NODE++] = {0, 0, -1, -1}; //root node
+		tree[NEW_NODE++] = {0, 0, -1, -1};
 		build(arr, 0, 0, sz - 1);
 	}
 	void build(const vector<ll>& arr, int v, int tl, int tr) {
