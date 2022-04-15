@@ -1,6 +1,6 @@
 # Programming-Team-Code
 
-Yet another competitive programming repo. Directory structure inspired by [KACTL](https://github.com/kth-competitive-programming/kactl):
+Yet another competitive programming repo.
 
 - [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) for copy-pastable c++ code
 - [template.cpp](https://github.com/lrvideckis/Programming-Team-Code/blob/master/template.cpp), although all code *should* work with just `typedef long long ll;`
