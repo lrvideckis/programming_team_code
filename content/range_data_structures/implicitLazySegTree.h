@@ -25,7 +25,7 @@ struct implicitLazySegTree {
 			tree[v].val = arr[tl];
 		else {
 			push(v, tl, tr);
-			int tm = (tl + tr) / 2;
+			int tm = tl + (tr - tl) / 2;
 			build(arr, tree[v].lCh, tl, tm);
 			build(arr, tree[v].rCh, tm + 1, tr);
 			tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
@@ -67,7 +67,7 @@ struct implicitLazySegTree {
 			return;
 		if (l <= tl && tr <= r)
 			return applyDeltaOnRange(v, tl, tr, add);
-		int tm = (tl + tr) / 2;
+		int tm = tl + (tr - tl) / 2;
 		update(tree[v].lCh, tl, tm, l, r, add);
 		update(tree[v].rCh, tm + 1, tr, l, r, add);
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
@@ -83,7 +83,7 @@ struct implicitLazySegTree {
 		push(v, tl, tr);
 		if (l <= tl && tr <= r)
 			return tree[v].val;
-		int tm = (tl + tr) / 2;
+		int tm = tl + (tr - tl) / 2;
 		return combine(query(tree[v].lCh, tl, tm, l, r),
 		               query(tree[v].rCh, tm + 1, tr, l, r));
 	}
