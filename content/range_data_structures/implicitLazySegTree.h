@@ -6,7 +6,7 @@ struct Node {
 	ll val;//could represent max, sum, etc
 	ll lazy;
 	int lCh, rCh; // children, indexes into `tree`, -1 for null
-} tree[(int)2e7/*TODO: update*/];
+} tree[(int)1.5e7/*TODO: update*/];
 
 struct implicitLazySegTree {
 
