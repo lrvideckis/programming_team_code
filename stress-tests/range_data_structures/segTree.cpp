@@ -14,7 +14,7 @@ tuple<SegmentTree, implicitLazySegTree, vector<ll>> treeFactory(int n) {
 		}
 		return make_tuple(SegmentTree(arr), implicitLazySegTree(arr), arr);
 	}
-	return make_tuple(SegmentTree(vector<ll>(n, 0)), implicitLazySegTree(n), vector<ll>(n, 0));
+	return make_tuple(SegmentTree(vector<ll>(n, 0)), implicitLazySegTree(0, n-1), vector<ll>(n, 0));
 }
 
 int main() {
