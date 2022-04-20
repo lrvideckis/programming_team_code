@@ -57,7 +57,7 @@ struct implicitLazySegTree {
 		}
 	}
 
-	//add `add` to each value in range [l,r]
+	//update range [l,r] with `add`
 	void update(int l, int r, ll add) {
 		update(0, rangeL, rangeR, l, r, add);
 	}
@@ -73,7 +73,7 @@ struct implicitLazySegTree {
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 
-	//max on range [l,r]
+	//range [l,r]
 	ll query(int l, int r) {
 		return query(0, rangeL, rangeR, l, r);
 	}
