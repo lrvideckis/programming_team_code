@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
 #include "../../template.h"
 
-#include "../../content/math/solve_linear_mod.h"
+#include "../../../Library/math/solve_linear_mod.h"
 
 //assumes A is row reduced already
 vector<vector<int>> kernel( vector<vector<int>> A, int rank, int mod ) {

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 #include "../../template.h"
 
-#include "../../content/graphs/scc.h"
+#include "../../../Library/graphs/scc.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

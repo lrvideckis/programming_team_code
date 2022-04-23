@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "../../template.h"
 
-#include "../../content/range_data_structures/sparseTable.h"
+#include "../../../Library/range_data_structures/sparseTable.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include "../../template.h"
 
-#include "../../stress-tests/test_utilities/random.h"
-#include "../../content/range_data_structures/implicitSegTree.h"
+#include "../../stress-tests/test_utilities/generators/random.h"
+#include "../../../Library/range_data_structures/implicitSegTree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

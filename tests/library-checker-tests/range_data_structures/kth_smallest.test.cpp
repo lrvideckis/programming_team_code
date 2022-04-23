@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 #include "../../template.h"
 
-#include "../../content/range_data_structures/kth_smallest.h"
+#include "../../../Library/range_data_structures/kth_smallest.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include "../../template.h"
 
-#include "../../content/range_data_structures/fenwickTree.h"
+#include "../../../Library/range_data_structures/fenwickTree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
