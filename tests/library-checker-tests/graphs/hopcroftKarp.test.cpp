@@ -1,30 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <cmath>
-#include <vector>
-#include <list>
-#include <set>
-#include <map>
-#include <unordered_set>
-#include <unordered_map>
-#include <stack>
-#include <queue>
-#include <ctime>
-#include <cassert>
-#include <complex>
-#include <string>
-#include <cstring>
-#include <chrono>
-#include <random>
-#include <bitset>
-#include <climits>
-#include <memory>
-using namespace std;
-#define endl '\n'
+#include "../../stress-tests/test_utilities/template.h"
 
-#include "../../content/graphs/hopcroftKarp.h"
+#include "../../../Library/graphs/hopcroftKarp.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

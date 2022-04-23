@@ -1,4 +1,4 @@
-#include "../test_utilities/template.h"
+#include "../../template.h"
 #include "../test_utilities/generators/random.h"
 
 #include "../../../Library/range_data_structures/kth_smallest.h"

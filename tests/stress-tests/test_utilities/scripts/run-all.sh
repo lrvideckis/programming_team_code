@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
 # use a precompiled header for the template to improve perf
-g++ -Wall -Wfatal-errors -std=c++17 -O2 $DIR/test_utilities/template.h
-trap "rm -f $DIR/test_utilities/template.h.gch" EXIT
+g++ -Wall -Wfatal-errors -std=c++17 -O2 $D../../template.h
+trap "rm -f $D../../template.h.gch" EXIT
 if [[ $# -eq 1 ]] ; then
 	tests="$(find $DIR -name '*.cpp')"
 else

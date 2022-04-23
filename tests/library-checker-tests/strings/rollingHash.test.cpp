@@ -1,29 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-#include <cmath>
-#include <vector>
-#include <list>
-#include <set>
-#include <map>
-#include <unordered_set>
-#include <unordered_map>
-#include <stack>
-#include <queue>
-#include <ctime>
-#include <cassert>
-#include <complex>
-#include <string>
-#include <cstring>
-#include <chrono>
-#include <random>
-#include <bitset>
-#include <climits>
-#include <memory>
-using namespace std;
+#include "../../stress-tests/test_utilities/template.h"
 
-#include "../../content/stringAlgs/rollingHash.h"
+#include "../../../Library/stringAlgs/rollingHash.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
