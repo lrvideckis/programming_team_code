@@ -11,6 +11,7 @@ Yet another competitive programming repo.
   - note `-Wconversion` is missing
 - [library-checker-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/library-checker-tests) which tests code on [Library Checker](https://judge.yosupo.jp/) ([steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html))
 - [stress-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares library code output to a naive version (or another alg) on random inputs.
+-  Not all code is tested; see test status comments at the top of each file.
 
 ## Format
 Run the following from [content/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/content) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
