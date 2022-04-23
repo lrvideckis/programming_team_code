@@ -14,9 +14,9 @@ struct Hash {
 	//larger/smaller `base` *doesn't* change collision odds
 	//ideally `base` would be random to avoid getting hacked
 	const int base = 1e9 + 5;
-	//From C.R.T., this is the same as having a single mod = product of `mods` = n
-	//probability of collision is 1/n
-	//probability that k unique strings have k unique hashes = (1/n)^k * (n permute k) from birthday paradox
+	//From C.R.T., this is the same as having a single mod = product of `mods`
+	//probability of collision = 1/mod_product
+	//probability that k unique strings have k unique hashes = (1/mod_product)^k * (mod_product permute k) from birthday paradox
 	const vector<int> mods = { (int) 1e9 + 7, (int) 1e9 + 9, (int) 1e9 + 21, (int) 1e9 + 33, (int) 1e9 + 87};
 	vector<vector<int>> prefix, powB;
 
