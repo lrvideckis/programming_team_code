@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../../Library/math/solve_linear_mod.h"
 

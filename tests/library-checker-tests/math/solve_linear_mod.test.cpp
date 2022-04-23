@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../content/math/solve_linear_mod.h"
 

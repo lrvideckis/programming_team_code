@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../content/range_data_structures/sparseTable.h"
 

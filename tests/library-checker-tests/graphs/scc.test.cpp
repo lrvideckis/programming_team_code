@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../content/graphs/scc.h"
 

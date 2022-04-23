@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../Library/graphs/dijkstra.h"
 

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../content/range_data_structures/fenwickTree.h"
 

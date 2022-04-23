@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../../Library/data_structures/disjointSet.h"
 

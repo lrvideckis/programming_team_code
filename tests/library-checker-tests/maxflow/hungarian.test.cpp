@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/assignment"
-#include "../../stress-tests/test_utilities/template.h"
+#include "../../template.h"
 
 #include "../../content/maxflow/hungarian.h"
 
