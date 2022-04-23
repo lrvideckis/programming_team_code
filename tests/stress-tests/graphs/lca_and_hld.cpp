@@ -1,12 +1,12 @@
-#include "test_utilities/template.h"
-#include "test_utilities/random.h"
-#include "test_utilities/treeGen.h"
+#include "../test_utilities/template.h"
+#include "../test_utilities/generators/random.h"
+#include "../test_utilities/generators/treeGen.h"
 
-#include "../../Library/graphs/lca.h"
-#include "../../Library/graphs/hld.h"
-#include "../../Library/data_structures/disjointSet.h"
+#include "../../../Library/graphs/lca.h"
+#include "../../../Library/graphs/hld.h"
+#include "../../../Library/data_structures/disjointSet.h"
 
-void dfs(int node, int par, const vector<vector<pair<int, ll>>>& adjweighted, vector<int>& parent, vector<int>& depth, vector<ll>& pathWeight) {
+void dfs(int node, int par, const vector<vector<pair<int, long long>>>& adjweighted, vector<int>& parent, vector<int>& depth, vector<long long>& pathWeight) {
 	parent[node] = par;
 	for(auto [child,weight] : adjweighted[node]) {
 		if(child == par) continue;
@@ -22,7 +22,7 @@ int main() {
 		if(getRand(1,2) == 1) n = getRand(1, 10);
 
 		cout << "n: " << n << endl;
-		vector<vector<pair<int, ll>>> adjweighted(n);
+		vector<vector<pair<int, long long>>> adjweighted(n);
 		vector<vector<int>> adj(n);
 		{
 			disjointSet ds(n);
@@ -30,7 +30,7 @@ int main() {
 			for(auto [u,v] : genRandomTree(n)) {
 				assert(ds.merge(u,v));
 				numEdges++;
-				ll weight = getRand(0, 1e9);
+				long long weight = getRand(0, 1e9);
 				adjweighted[u].push_back({v, weight});
 				adjweighted[v].push_back({u, weight});
 				adj[u].push_back(v);
@@ -45,7 +45,7 @@ int main() {
 
 		vector<int> parent(n);
 		vector<int> depth(n, 0);
-		vector<ll> pathWeight(n, 0);
+		vector<long long> pathWeight(n, 0);
 		dfs(root, root, adjweighted, parent, depth, pathWeight);
 
 		for(int iter = 100; iter--;) {

@@ -1,12 +1,12 @@
-#include "test_utilities/template.h"
-#include "test_utilities/random.h"
+#include "../test_utilities/template.h"
+#include "../test_utilities/generators/random.h"
 
-#include "../../Library/strings/rollingHash.h"
-#include "../../Library/strings/suffixArray.h"
+#include "../../../Library/strings/rollingHash.h"
+#include "../../../Library/strings/suffixArray.h"
 
 int main() {
-	for(int tests = 200; tests--;) {
-		int n = getRand(1, 100);
+	for(int tests = 50; tests--;) {
+		int n = getRand(1, 50);
 		string s(n, 'a');
 		vector<int> arr(n);
 		for(int i = 0; i < n; i++) {

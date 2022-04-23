@@ -1,14 +1,14 @@
 #include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
-#include "../test_utilities/treeGen.h"
-#include "../test_utilities/graphGen.h"
+#include "../test_utilities/generators/random.h"
+#include "../test_utilities/generators/treeGen.h"
+#include "../test_utilities/generators/graphGen.h"
 
-#include "../../Library/graphs/bridges_and_cuts.h"
-#include "../../Library/data_structures/disjointSet.h"
+#include "../../../Library/graphs/bridges_and_cuts.h"
+#include "../../../Library/data_structures/disjointSet.h"
 
 int main() {
-	for(int tests = 100; tests--;) {
-		int n = getRand(1, 1000);//nodes
+	for(int tests = 10; tests--;) {
+		int n = getRand(1, 100);//nodes
 		if(getRand(1,2) == 1) n = getRand(1, 6);
 
 		cout << "n: " << n << flush;

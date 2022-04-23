@@ -1,36 +1,36 @@
-#include "test_utilities/template.h"
-#include "test_utilities/random.h"
+#include "../test_utilities/template.h"
+#include "../test_utilities/generators/random.h"
 
-#include "../../Library/range_data_structures/fenwickTree.h"
+#include "../../../Library/range_data_structures/fenwickTree.h"
 
 int main() {
 	for(int tests = 20; tests--;) {
 		{
 			int n = getRand(1, 1000);
-			vector<ll> arr(n);
+			vector<long long> arr(n);
 			int mx = 1e9;
 			for(int i = 0; i < n; i++) {
 				arr[i] = getRand(-mx, mx);
 			}
-			fenwickTree<ll> ft(0);
+			fenwickTree<long long> ft(0);
 			if(getRand(1,2) == 1) {
 				cout << "constructor 1" << endl;
-				ft = fenwickTree<ll>(arr);
+				ft = fenwickTree<long long>(arr);
 			} else {
 				cout << "constructor 2" << endl;
-				ft = fenwickTree<ll>(n);
-				arr = vector<ll>(n, 0);
+				ft = fenwickTree<long long>(n);
+				arr = vector<long long>(n, 0);
 			}
 			for(int iterations = 5000; iterations--;) {
 				if(getRand(1,2) == 1) {//update
 					int idx = getRand(0, n-1);
-					ll diff = getRand(-mx, mx);
+					long long diff = getRand(-mx, mx);
 					ft.update(idx, diff);
 					arr[idx] += diff;
 				} else {//query
 					int L = getRand(0,n-1), R = getRand(0,n-1);
 					if(L > R) swap(L,R);
-					ll sum = arr[L];
+					long long sum = arr[L];
 					for(int i = L+1; i <= R; i++) {
 						sum += arr[i];
 					}
@@ -40,17 +40,17 @@ int main() {
 		}
 		{
 			int n = getRand(1, 1000);
-			vector<ll> arr(n);
+			vector<long long> arr(n);
 			int mx = 1e9;
 			for(int i = 0; i < n; i++) {
 				arr[i] = getRand(-mx, mx);
 			}
-			rangeUpdatesAndPointQueries<ll> ft(arr);
+			rangeUpdatesAndPointQueries<long long> ft(arr);
 			for(int iterations = 5000; iterations--;) {
 				if(getRand(1,2) == 1) {//update
 					int L = getRand(0,n-1), R = getRand(0,n-1);
 					if(L > R) swap(L,R);
-					ll diff = getRand(-mx, mx);
+					long long diff = getRand(-mx, mx);
 					ft.updateRange(L, R, diff);
 					for(int i = L; i <= R; i++) {
 						arr[i] += diff;

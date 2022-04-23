@@ -2,7 +2,7 @@
 
 #include "random.h"
 
-#include "../../content/data_structures/disjointSet.h"
+#include "../../../../Library/data_structures/disjointSet.h"
 
 
 //https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model
@@ -98,10 +98,10 @@ vector<vector<int>> genRandomGraph(
 	return adj;
 }
 
-vector<vector<pair<int,ll>>> convertAdjToWeighted(const vector<vector<int>>& adj) {
+vector<vector<pair<int,long long>>> convertAdjToWeighted(const vector<vector<int>>& adj) {
 	const int maxEdgeWeight = getRand(0, 1e9);
 	int n = adj.size();
-	vector<vector<pair<int,ll>>> weighted(n);
+	vector<vector<pair<int,long long>>> weighted(n);
 	for(int i = 0; i < n; i++) {
 		for(int next : adj[i]) {
 			weighted[i].push_back({next, getRand(0, maxEdgeWeight)});

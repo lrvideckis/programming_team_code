@@ -1,15 +1,15 @@
-#include "test_utilities/template.h"
-#include "test_utilities/random.h"
-#include "test_utilities/graphGen.h"
+#include "../test_utilities/template.h"
+#include "../test_utilities/generators/random.h"
+#include "../test_utilities/generators/graphGen.h"
 
-#include "../../Library/graphs/scc.h"
-#include "../../Library/graphs/floydWarshall.h"
+#include "../../../Library/graphs/scc.h"
+#include "../../../Library/graphs/floydWarshall.h"
 
-const ll inf = 1e18;//must match inf used in floyd
+const long long inf = 1e18;//must match inf used in floyd
 
 int main() {
-	for(int tests = 1000; tests--;) {
-		int n = getRand(1, 1000);//nodes
+	for(int tests = 50; tests--;) {
+		int n = getRand(1, 50);//nodes
 		if(getRand(1,2) == 1) n = getRand(1, 10);
 
 		cout << "n: " << n << endl;
@@ -17,7 +17,7 @@ int main() {
 		auto adjW = convertAdjToWeighted(adj);
 		assert((int)adj.size() == n && (int)adjW.size() == n);
 
-		vector<vector<ll>> lens = floydWarshall(adjW);
+		vector<vector<long long>> lens = floydWarshall(adjW);
 
 		sccInfo scc = getSCCs(adj);
 		assert((int)scc.adj.size() == scc.numberOfSCCs);

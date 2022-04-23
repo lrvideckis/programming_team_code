@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
 # use a precompiled header for the template to improve perf
-g++ -Wall -Wfatal-errors -std=c++17 -O2 $DIR/stress-tests/test_utilities/template.h
-trap "rm -f $DIR/stress-tests/test_utilities/template.h.gch" EXIT
+g++ -Wall -Wfatal-errors -std=c++17 -O2 $DIR/test_utilities/template.h
+trap "rm -f $DIR/test_utilities/template.h.gch" EXIT
 if [[ $# -eq 1 ]] ; then
-	tests="$(find $DIR/stress-tests -name '*.cpp')"
+	tests="$(find $DIR -name '*.cpp')"
 else
-	tests="$(find $DIR/stress-tests -name "*$2*")"
+	tests="$(find $DIR -name "*$2*")"
 fi
 echo "testing the following:" $tests
 declare -i pass=0

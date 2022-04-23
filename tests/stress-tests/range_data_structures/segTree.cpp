@@ -1,20 +1,20 @@
 #include "../test_utilities/template.h"
-#include "test_utilities/random.h"
+#include "../test_utilities/generators/random.h"
 
-#include "../../Library/range_data_structures/segTree.h"
-#include "../../Library/range_data_structures/implicitLazySegTree.h"
+#include "../../../Library/range_data_structures/segTree.h"
+#include "../../../Library/range_data_structures/implicitLazySegTree.h"
 
 const int mx = 1e9;
 
-tuple<SegmentTree, implicitLazySegTree, vector<ll>> treeFactory(int n) {
+tuple<SegmentTree, implicitLazySegTree, vector<long long>> treeFactory(int n) {
 	if(getRand(1, 2) == 1) {
-		vector<ll> arr(n);
+		vector<long long> arr(n);
 		for(int i = 0; i < n; i++) {
 			arr[i] = getRand(-mx, mx);
 		}
 		return make_tuple(SegmentTree(arr), implicitLazySegTree(arr), arr);
 	}
-	return make_tuple(SegmentTree(vector<ll>(n, 0)), implicitLazySegTree(0, n-1), vector<ll>(n, 0));
+	return make_tuple(SegmentTree(vector<long long>(n, 0)), implicitLazySegTree(0, n-1), vector<long long>(n, 0));
 }
 
 int main() {
@@ -26,12 +26,12 @@ int main() {
 			int L = getRand(0,n-1), R = getRand(0,n-1);
 			if(L > R) swap(L,R);
 			if(getRand(1,2) == 1) {//update
-				ll diff = getRand(-mx, mx);
+				long long diff = getRand(-mx, mx);
 				st.update(L, R, diff);
 				ist.update(L, R, diff);
 				for(int i = L; i <= R; i++) arr[i] += diff;
 			} else {//query
-				ll mn = arr[L], mx = arr[L], sum = arr[L];
+				long long mn = arr[L], mx = arr[L], sum = arr[L];
 				for(int i = L+1; i <= R; i++) {
 					mn = min(mn, arr[i]);
 					mx = max(mx, arr[i]);
