@@ -53,11 +53,11 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/) {
 				}
 			}
 		}
-		auto dfs = [&](auto&& dfs, int u) -> bool {
+		auto dfs = [&](auto&& dfsPtr, int u) -> bool {
 			visL[u] = true;
 			for (int x : adj[u]) {
 				int v = mr[x];
-				if (v == -1 || (!visL[v] && level[u] < level[v] && dfs(dfs, v))) {
+				if (v == -1 || (!visL[v] && level[u] < level[v] && dfsPtr(dfsPtr, v))) {
 					ml[u] = x;
 					mr[x] = u;
 					return true;
@@ -76,11 +76,11 @@ match hopcroftKarp(const vector<vector<int>>& adj /*bipartite graph*/) {
 	}
 	//find min vertex cover
 	vector<bool> visR(rSz, false);
-	auto dfs = [&](auto&& dfs, int node) -> void {
+	auto dfs = [&](auto&& dfsPtr, int node) -> void {
 		for (int to : adj[node]) {
 			if (!visR[to] && mr[to] != -1) {
 				visR[to] = true;
-				dfs(dfs, mr[to]);
+				dfsPtr(dfsPtr, mr[to]);
 			}
 		}
 	};
