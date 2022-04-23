@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 #include "../../template.h"
 
-#include "../../../Library/stringAlgs/rollingHash.h"
+#include "../../../Library/strings/rollingHash.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
