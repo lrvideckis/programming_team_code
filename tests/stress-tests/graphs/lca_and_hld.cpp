@@ -1,10 +1,10 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
-#include "../test_utilities/treeGen.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
+#include "test_utilities/treeGen.h"
 
-#include "../../content/graphs/lca.h"
-#include "../../content/graphs/hld.h"
-#include "../../content/data_structures/disjointSet.h"
+#include "../../Library/graphs/lca.h"
+#include "../../Library/graphs/hld.h"
+#include "../../Library/data_structures/disjointSet.h"
 
 void dfs(int node, int par, const vector<vector<pair<int, ll>>>& adjweighted, vector<int>& parent, vector<int>& depth, vector<ll>& pathWeight) {
 	parent[node] = par;

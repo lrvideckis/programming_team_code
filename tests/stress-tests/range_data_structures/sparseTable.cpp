@@ -1,7 +1,7 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
 
-#include "../../content/range_data_structures/sparseTable.h"
+#include "../../Library/range_data_structures/sparseTable.h"
 
 int main() {
 	for(int tests = 20; tests--;) {

@@ -1,7 +1,7 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
 
-#include "../../content/stringAlgs/suffixArray.h"
+#include "../../Library/strings/suffixArray.h"
 
 int main() {
 	for(int tests = 20; tests--;) {

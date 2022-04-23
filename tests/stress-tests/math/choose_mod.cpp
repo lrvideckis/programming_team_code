@@ -1,7 +1,7 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
 
-#include "../../content/math/n_choose_k_mod.h"
+#include "../../Library/math/n_choose_k_mod.h"
 
 int main() {
 	for(int tests = 10; tests--;) {

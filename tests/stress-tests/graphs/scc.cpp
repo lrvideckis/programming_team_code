@@ -1,9 +1,9 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
-#include "../test_utilities/graphGen.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
+#include "test_utilities/graphGen.h"
 
-#include "../../content/graphs/scc.h"
-#include "../../content/graphs/floydWarshall.h"
+#include "../../Library/graphs/scc.h"
+#include "../../Library/graphs/floydWarshall.h"
 
 const ll inf = 1e18;//must match inf used in floyd
 

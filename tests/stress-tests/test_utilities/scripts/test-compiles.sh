@@ -1,7 +1,7 @@
 mkdir -p build
 FILE="$1"
 echo "
-#include \"../template.cpp\"
+#include \"../../../template.cpp\"
 #include \"../$FILE\"
 " >build/temp.cpp
 # Catching silly mistakes with GCC: https://codeforces.com/blog/entry/15547

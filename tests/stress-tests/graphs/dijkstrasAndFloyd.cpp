@@ -1,9 +1,9 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
-#include "../test_utilities/graphGen.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
+#include "test_utilities/graphGen.h"
 
-#include "../../content/graphs/dijkstra.h"
-#include "../../content/graphs/floydWarshall.h"
+#include "../../Library/graphs/dijkstra.h"
+#include "../../Library/graphs/floydWarshall.h"
 
 int main() {
 	for(int tests = 1000; tests--;) {

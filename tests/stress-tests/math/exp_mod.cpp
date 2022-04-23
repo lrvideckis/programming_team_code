@@ -1,7 +1,7 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
 
-#include "../../content/math/exp_mod.h"
+#include "../../Library/math/exp_mod.h"
 
 void doTest(int base, int power, int mod) {
 

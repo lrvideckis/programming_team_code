@@ -1,8 +1,8 @@
 #include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
+#include "test_utilities/random.h"
 
-#include "../../content/range_data_structures/segTree.h"
-#include "../../content/range_data_structures/implicitLazySegTree.h"
+#include "../../Library/range_data_structures/segTree.h"
+#include "../../Library/range_data_structures/implicitLazySegTree.h"
 
 const int mx = 1e9;
 

@@ -3,8 +3,8 @@
 #include "../test_utilities/treeGen.h"
 #include "../test_utilities/graphGen.h"
 
-#include "../../content/graphs/bridges_and_cuts.h"
-#include "../../content/data_structures/disjointSet.h"
+#include "../../Library/graphs/bridges_and_cuts.h"
+#include "../../Library/data_structures/disjointSet.h"
 
 int main() {
 	for(int tests = 100; tests--;) {

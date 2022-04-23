@@ -8,7 +8,7 @@ help:
 	@echo "	make help		- to show this information"
 
 test:
-	./scripts/run-all.sh . $(which_test)
+	./test_utilities/scripts/run-all.sh . $(which_test)
 
 test-compiles:
-	./scripts/compile-all.sh .
+	./test_utilities/scripts/compile-all.sh .

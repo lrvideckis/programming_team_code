@@ -1,7 +1,7 @@
-#include "../test_utilities/template.h"
-#include "../test_utilities/random.h"
+#include "test_utilities/template.h"
+#include "test_utilities/random.h"
 
-#include "../../content/data_structures/cntRectangles.h"
+#include "../../Library/data_structures/cntRectangles.h"
 
 int main() {
 	for(int tests = 20; tests--;) {
