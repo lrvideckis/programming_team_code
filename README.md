@@ -1,6 +1,6 @@
 # Programming-Team-Code
 
-Yet another competitive programming repo.
+Yet another competitive programming repo. Quick links:
 
 - [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) for copy-pastable c++ code
 - [template.cpp](https://github.com/lrvideckis/Programming-Team-Code/blob/master/template.cpp)
