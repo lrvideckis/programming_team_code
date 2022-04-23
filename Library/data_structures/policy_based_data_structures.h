@@ -10,9 +10,9 @@ using namespace __gnu_pbds;
 template<class T>
 using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 //example initialization:
-indexed_set<int> is;
+indexed_set<pair<long long, int>> is;
 
 
 //hash table (apparently faster than unordered_map): https://codeforces.com/blog/entry/60737
 //example initialization:
-gp_hash_table<int, int> ht;
+gp_hash_table<string, long long> ht;

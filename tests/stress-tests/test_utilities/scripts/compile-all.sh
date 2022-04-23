@@ -5,7 +5,7 @@ DIR=${1:-.}
 g++ -Wall -Wextra -pedantic -Wno-unused-result -Wfatal-errors -DLOCAL -std=c++17 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wcast-qual -Wcast-align -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fstack-protector -x c++-header $DIR/template.cpp
 trap "rm -f $DIR/template.cpp.gch" EXIT
 
-SCRIPT_DIR=$DIR/scripts
+SCRIPT_DIR=$DIR/test_utilities/scripts
 tests="$(find $DIR/content -name '*.h')"
 declare -i pass=0
 declare -i fail=0
