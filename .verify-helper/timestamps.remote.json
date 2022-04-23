@@ -1,6 +1,7 @@
 {
 "tests/library-checker-tests/data_structures/disjointSet.test.cpp": "2022-04-23 03:22:25 -0700",
 "tests/library-checker-tests/graphs/BiconnectedComponents.test.cpp": "2022-04-23 03:22:25 -0700",
+"tests/library-checker-tests/graphs/dijkstra.test.cpp": "2022-04-23 03:44:58 -0700",
 "tests/library-checker-tests/graphs/hld.test.cpp": "2022-04-23 03:22:25 -0700",
 "tests/library-checker-tests/graphs/hopcroftKarp.test.cpp": "2022-04-23 03:22:25 -0700",
 "tests/library-checker-tests/graphs/lca.test.cpp": "2022-04-23 03:39:04 -0700",
@@ -11,5 +12,6 @@
 "tests/library-checker-tests/range_data_structures/fenwickTree.test.cpp": "2022-04-23 03:39:04 -0700",
 "tests/library-checker-tests/range_data_structures/implicitSegTree.test.cpp": "2022-04-23 03:33:20 -0700",
 "tests/library-checker-tests/range_data_structures/kth_smallest.test.cpp": "2022-04-23 03:33:20 -0700",
-"tests/library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-04-23 03:33:20 -0700"
+"tests/library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-04-23 03:33:20 -0700",
+"tests/library-checker-tests/strings/rollingHash.test.cpp": "2022-04-23 03:44:58 -0700"
 }
