@@ -9,8 +9,8 @@ Yet another competitive programming repo.
 
 - All code compiled (no warnings) with: `g++ -Wall -Wextra -pedantic -Wno-unused-result -Wfatal-errors -DLOCAL -std=c++17 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wcast-qual -Wcast-align -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fstack-protector` from [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547)
   - note `-Wconversion` is missing
-- [library-checker-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/library-checker-tests) which tests code on [Library Checker](https://judge.yosupo.jp/) ([steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html))
-- [stress-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares library code output to a naive version (or another alg) on random inputs.
+- [tests/library-checker-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/library-checker-tests) which tests code on [Library Checker](https://judge.yosupo.jp/) ([steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html))
+- [tests/stress-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/stress-tests) which compares library code output to a naive version (or another alg) on random inputs.
 -  Not all code is tested; see test status comments at the top of each file.
 
 ## Format
