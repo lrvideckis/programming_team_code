@@ -9,7 +9,7 @@ signed main() {
 	cin >> n >> m;
 	int s, t;
 	cin >> s >> t;
-	vector<vector<pair<int,ll>>> adj(n);
+	vector<vector<pair<int,long long>>> adj(n);
 	for(int i = 0; i < m; i++) {
 		int u,v,w;
 		cin >> u >> v >> w;

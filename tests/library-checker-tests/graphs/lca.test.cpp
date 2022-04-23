@@ -9,7 +9,7 @@ int main() {
 	cout.tie(0);
 	int n,q;
 	cin >> n >> q;
-	vector<vector<pair<int,ll>>> adj(n);
+	vector<vector<pair<int,long long>>> adj(n);
 	for(int i = 1; i < n; ++i) {
 		int par;
 		cin >> par;

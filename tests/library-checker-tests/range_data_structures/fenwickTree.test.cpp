@@ -7,11 +7,11 @@ int main() {
 	cin.tie(0)->sync_with_stdio(false);
 	int n,q;
 	cin >> n >> q;
-	vector<ll> arr(n);
+	vector<long long> arr(n);
 	for(int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	fenwickTree<ll> ft(arr);
+	fenwickTree<long long> ft(arr);
 	while(q--) {
 		int type;
 		cin >> type;
