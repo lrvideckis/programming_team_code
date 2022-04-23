@@ -7,15 +7,15 @@ bool prime[MAX];
 int prec[MAX];
 vector<int> P;
 
-ll rec(ll N, int K) {
+long long rec(long long N, int K) {
 	if (N <= 1 || K < 0) return 0;
 	if (N <= P[K]) return N - 1;
-	if (N < MAX && ll(P[K]) *P[K] > N) return N - 1 - prec[N] + prec[P[K]];
+	if (N < MAX && (long long)(P[K]) *P[K] > N) return N - 1 - prec[N] + prec[P[K]];
 	const int LIM = 250;
 	static int memo[LIM * LIM][LIM];
 	bool ok = N < LIM * LIM;
 	if (ok && memo[N][K]) return memo[N][K];
-	ll ret = N / P[K] - rec(N / P[K], K - 1) + rec(N, K - 1);
+	long long ret = N / P[K] - rec(N / P[K], K - 1) + rec(N, K - 1);
 	if (ok) memo[N][K] = ret;
 	return ret;
 }
@@ -26,7 +26,7 @@ ll rec(ll N, int K) {
 // Constants to configure:
 // - MAX is the maximum value of sqrt(N) + 2
 // increase MAX to increase time efficiency
-ll count_primes(ll N) {
+long long count_primes(long long N) {
 	if (N < MAX) return prec[N];
 	int K = prec[(int) sqrt(N) + 1];
 	return N - 1 - rec(N, K) + prec[P[K]];

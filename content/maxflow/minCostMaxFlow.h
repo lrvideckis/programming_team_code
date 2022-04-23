@@ -2,9 +2,11 @@
 
 //status: not tested, but used in various problems
 
-const ll inf = 1e18;
+const long long inf = 1e18;
 
 struct mincostmaxflow {
+	typedef long long ll;
+
 	struct edge {
 		ll a, b, cap, cost, flow;
 		size_t back;

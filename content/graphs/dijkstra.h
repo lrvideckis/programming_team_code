@@ -5,18 +5,18 @@
 //
 //status: tested on random graphs against floyd warshals, and on https://judge.yosupo.jp/problem/shortest_path
 
-const ll INF = 1e18;
+const long long INF = 1e18;
 
 struct dij {
-	vector<ll> len;
+	vector<long long> len;
 	vector<int> par;
 };
 
-dij dijkstra(const vector<vector<pair<int, ll>>>& adj /*directed or undirected, weighted graph*/, int startNode) {
-	vector<ll> len(adj.size(), INF);
+dij dijkstra(const vector<vector<pair<int, long long>>>& adj /*directed or undirected, weighted graph*/, int startNode) {
+	vector<long long> len(adj.size(), INF);
 	vector<int> par(adj.size(), -1);
 	len[startNode] = 0;
-	set<pair<ll, int>> q;//weight, node
+	set<pair<long long, int>> q;//weight, node
 	q.insert({0, startNode});
 	while (!q.empty()) {
 		auto it = q.begin();

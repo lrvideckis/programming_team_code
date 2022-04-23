@@ -4,6 +4,7 @@
 
 struct maxflow {
 public:
+	typedef long long ll;
 	ll n, s, t;
 	maxflow(int _n, int _s, int _t) : n(_n), s(_s), t(_t), d(n), ptr(n), q(n), g(n) {}
 	void addedge(ll a, ll b, ll cap) {

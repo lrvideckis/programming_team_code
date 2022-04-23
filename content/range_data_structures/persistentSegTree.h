@@ -6,7 +6,7 @@ struct persistentSegTree {
 
 	struct Node {
 		int lCh, rCh;//children, indexes into `tree`
-		ll sum;
+		long long sum;
 	};
 
 	int sz;
@@ -19,11 +19,11 @@ struct persistentSegTree {
 		roots.push_back(0);
 	}
 
-	persistentSegTree(const vector<ll>& arr) : sz(arr.size()) {
+	persistentSegTree(const vector<long long>& arr) : sz(arr.size()) {
 		tree.push_back({0, 0, 0LL}); //acts as null
 		roots.push_back(build(arr, 0, sz - 1));
 	}
-	int build(const vector<ll>& arr, int tl, int tr) {
+	int build(const vector<long long>& arr, int tl, int tr) {
 		if (tl == tr) {
 			tree.push_back({0, 0, arr[tl]});
 			return tree.size() - 1;
@@ -35,10 +35,10 @@ struct persistentSegTree {
 		return tree.size() - 1;
 	}
 
-	void update(int version, int idx, ll diff) {
+	void update(int version, int idx, long long diff) {
 		roots.push_back(update(roots[version], 0, sz - 1, idx, diff));
 	}
-	int update(int v, int tl, int tr, int idx, ll diff) {
+	int update(int v, int tl, int tr, int idx, long long diff) {
 		if (tl == tr) {
 			assert(tl == idx);
 			tree.push_back({0, 0, tree[v].sum + diff});
@@ -55,10 +55,10 @@ struct persistentSegTree {
 		return tree.size() - 1;
 	}
 
-	ll query(int version, int l, int r) const {
+	long long query(int version, int l, int r) const {
 		return query(roots[version], 0, sz - 1, l, r);
 	}
-	ll query(int v, int tl, int tr, int l, int r) const {
+	long long query(int v, int tl, int tr, int l, int r) const {
 		if (tree[v].sum == 0LL || tr < l || r < tl)
 			return 0LL;
 		if (l <= tl && tr <= r)

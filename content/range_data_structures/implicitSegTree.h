@@ -5,7 +5,7 @@
 struct implicitSegTree {
 	struct Node {
 		int lCh, rCh;//children ptrs, indexes into `tree`; 0 for null
-		ll sum;
+		long long sum;
 	};
 
 	int sz;
@@ -16,10 +16,10 @@ struct implicitSegTree {
 		tree.push_back({0, 0, 0LL});//root node
 	}
 
-	void update(int idx, ll diff) {
+	void update(int idx, long long diff) {
 		update(1, 0, sz - 1, idx, diff);
 	}
-	int update(int v, int tl, int tr, int idx, ll diff) {
+	int update(int v, int tl, int tr, int idx, long long diff) {
 		if (tl == tr) {
 			if (v == 0) {
 				tree.push_back(tree[0]);
@@ -44,10 +44,10 @@ struct implicitSegTree {
 	}
 
 	//inclusive range: [l,r]
-	ll query(int l, int r) const {
+	long long query(int l, int r) const {
 		return query(1, 0, sz - 1, l, r);
 	}
-	ll query(int v, int tl, int tr, int l, int r) const {
+	long long query(int v, int tl, int tr, int l, int r) const {
 		if (tree[v].sum == 0LL || tr < l || r < tl) return 0LL;
 		if (l <= tl && tr <= r) return tree[v].sum;
 		int tm = (tl + tr) / 2;

@@ -3,6 +3,7 @@
 //status: not tested, used in various problems
 
 struct SegTreeBeats {
+	typedef long long ll;
 	struct Node {
 		ll sum;
 		ll mx;

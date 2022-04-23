@@ -36,7 +36,7 @@ struct biconnected_components {
 	//use anything below this at your own risk :)
 	int n;
 	vector<int> tour_start, low_link;
-	unordered_set<ll> is_bridge;
+	unordered_set<long long> is_bridge;
 
 	void add_bridge(int u, int v) {
 		if (u > v) swap(u, v);

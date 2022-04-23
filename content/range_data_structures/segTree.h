@@ -2,13 +2,13 @@
 
 //status: tested on random inputs
 
-const ll inf = 1e18;
+const long long inf = 1e18;
 
 struct SegmentTree {
 	struct Node {
-		ll sum = 0;
-		ll mx = -inf;
-		ll mn = inf;
+		long long sum = 0;
+		long long mx = -inf;
+		long long mn = inf;
 
 		int l, r;
 
@@ -16,7 +16,7 @@ struct SegmentTree {
 			return r - l + 1;
 		}
 
-		ll lazy = 0;
+		long long lazy = 0;
 	};
 
 	//For implicit seg tree (Although I've TLE'd multiple times doing this):
@@ -36,7 +36,7 @@ struct SegmentTree {
 		};
 	}
 	//what happens when delta is applied to every index in range [start,end]?
-	void applyDeltaOnRange(int node, ll delta) {
+	void applyDeltaOnRange(int node, long long delta) {
 		tree[node].sum += tree[node].len() * delta;
 		tree[node].mx += delta;
 		tree[node].mn += delta;
@@ -47,7 +47,7 @@ struct SegmentTree {
 	}
 	//apply lazy value to range
 	void pushLazy(int node) {
-		ll& currLazy = tree[node].lazy;
+		long long& currLazy = tree[node].lazy;
 		if (currLazy) {
 			applyDeltaOnRange(node, currLazy);
 			currLazy = 0;
@@ -57,14 +57,14 @@ struct SegmentTree {
 
 	//There's no constructor `SegmentTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of this constructor was to be simpler by not calling build
-	SegmentTree(const vector<ll>& arr) {
+	SegmentTree(const vector<long long>& arr) {
 		int n = arr.size(), size = 1;
 		while (size < n) size <<= 1;
 		size <<= 1;
 		tree.resize(size);
 		build(arr, 1, 0, n - 1);
 	}
-	void build(const vector<ll>& arr, int node, int start, int end) {
+	void build(const vector<long long>& arr, int node, int start, int end) {
 		if (start == end) {
 			tree[node] = Node {
 				arr[start],
@@ -82,10 +82,10 @@ struct SegmentTree {
 	}
 
 	//inclusive range: [updL,updR]
-	void update(int updL, int updR, ll diff) {
+	void update(int updL, int updR, long long diff) {
 		update(1, updL, updR, diff);
 	}
-	void update(int node, int updL, int updR, ll diff) {
+	void update(int node, int updL, int updR, long long diff) {
 		pushLazy(node);
 		int ndL = tree[node].l, ndR = tree[node].r;
 		if (updR < ndL || ndR < updL) return;

@@ -3,8 +3,8 @@
 //status: stress tested && tested on https://codeforces.com/contest/52/problem/C
 
 struct Node {
-	ll val;//could represent max, sum, etc
-	ll lazy;
+	long long val;//could represent max, sum, etc
+	long long lazy;
 	int lCh, rCh; // children, indexes into `tree`, -1 for null
 } tree[(int)1.5e7/*360 megabytes*/];
 
@@ -17,10 +17,10 @@ struct implicitLazySegTree {
 		tree[NEW_NODE++] = {0, 0, -1, -1};
 	}
 
-	implicitLazySegTree(const vector<ll>& arr) : implicitLazySegTree(0, (int)arr.size() - 1) {
+	implicitLazySegTree(const vector<long long>& arr) : implicitLazySegTree(0, (int)arr.size() - 1) {
 		build(arr, 0, rangeL, rangeR);
 	}
-	void build(const vector<ll>& arr, int v, int tl, int tr) {
+	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tl == tr)
 			tree[v].val = arr[tl];
 		else {
@@ -32,11 +32,11 @@ struct implicitLazySegTree {
 		}
 	}
 
-	ll combine(ll val_l, ll val_r) {
+	long long combine(long long val_l, long long val_r) {
 		return max(val_l, val_r); //TODO: update
 	}
 
-	void applyDeltaOnRange(int v, int tl, int tr, ll add) {
+	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
 		tree[v].val += add; //TODO: update
 		if (tl != tr) {
 			tree[tree[v].lCh].lazy += add;
@@ -58,10 +58,10 @@ struct implicitLazySegTree {
 	}
 
 	//update range [l,r] with `add`
-	void update(int l, int r, ll add) {
+	void update(int l, int r, long long add) {
 		update(0, rangeL, rangeR, l, r, add);
 	}
-	void update(int v, int tl, int tr, int l, int r, ll add) {
+	void update(int v, int tl, int tr, int l, int r, long long add) {
 		push(v, tl, tr);
 		if (tr < l || r < tl)
 			return;
@@ -74,10 +74,10 @@ struct implicitLazySegTree {
 	}
 
 	//range [l,r]
-	ll query(int l, int r) {
+	long long query(int l, int r) {
 		return query(0, rangeL, rangeR, l, r);
 	}
-	ll query(int v, int tl, int tr, int l, int r) {
+	long long query(int v, int tl, int tr, int l, int r) {
 		if (tr < l || r < tl)
 			return -1e18; //TODO: update
 		push(v, tl, tr);

@@ -1,6 +1,6 @@
 #pragma once
 
-const ll inf = 1e18;
+const long long inf = 1e18;
 
 // this is one-indexed
 // jobs X workers cost matrix
@@ -11,31 +11,33 @@ const ll inf = 1e18;
 //status: tested on https://judge.yosupo.jp/problem/assignment
 
 struct match {
-	ll cost;
+	long long cost;
 	vector<int> matching;
 };
 
-match HungarianMatch(const vector<vector<ll>>& cost) {
-	ll n = cost.size() - 1;
-	ll m = cost[0].size() - 1;
-	vector<ll> u(n + 1), v(m + 1), p(m + 1), way(m + 1);
-	for (ll i = 1; i <= n; ++i) {
+match HungarianMatch(const vector<vector<long long>>& cost) {
+	long long n = cost.size() - 1;
+	long long m = cost[0].size() - 1;
+	vector<int> p(m + 1), way(m + 1);
+	vector<long long> u(n + 1), v(m + 1);
+	for (int i = 1; i <= n; ++i) {
 		p[0] = i;
-		ll j0 = 0;
-		vector<ll> minv(m + 1, inf);
+		int j0 = 0;
+		vector<long long> minv(m + 1, inf);
 		vector<char> used(m + 1, false);
 		do {
 			used[j0] = true;
-			ll i0 = p[j0], delta = inf, j1 = 0;
-			for (ll j = 1; j <= m; ++j)
+			int i0 = p[j0], j1 = 0;
+			long long delta = inf;
+			for (int j = 1; j <= m; ++j)
 				if (!used[j]) {
-					ll cur = cost[i0][j] - u[i0] - v[j];
+					long long cur = cost[i0][j] - u[i0] - v[j];
 					if (cur < minv[j])
 						minv[j] = cur, way[j] = j0;
 					if (minv[j] < delta)
 						delta = minv[j], j1 = j;
 				}
-			for (ll j = 0; j <= m; ++j)
+			for (int j = 0; j <= m; ++j)
 				if (used[j])
 					u[p[j]] += delta, v[j] -= delta;
 				else
@@ -43,14 +45,14 @@ match HungarianMatch(const vector<vector<ll>>& cost) {
 			j0 = j1;
 		} while (p[j0] != 0);
 		do {
-			ll j1 = way[j0];
+			int j1 = way[j0];
 			p[j0] = p[j1];
 			j0 = j1;
 		} while (j0);
 	}
 	// For each N, it contains the M it selected
 	vector<int> ans(n + 1);
-	for (ll j = 1; j <= m ; ++j)
+	for (int j = 1; j <= m ; ++j)
 		ans[p[j]] = j;
 	return {-v[0], ans};
 }

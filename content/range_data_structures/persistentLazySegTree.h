@@ -4,8 +4,8 @@ struct persistentLazySegTree {
 
 	struct Node {
 		int lCh, rCh;//children, indexes into `tree`
-		ll mn;
-		ll lazyAdd;
+		long long mn;
+		long long lazyAdd;
 	};
 
 	int sz;
@@ -30,12 +30,12 @@ struct persistentLazySegTree {
 	}
 
 	//add diff to each value in range [l,r]
-	void update(int l, int r, ll diff) {
+	void update(int l, int r, long long diff) {
 		tree.push_back(tree[roots.back()]);//allocate top down
 		roots.push_back(tree.size() - 1);
 		update(roots.back(), 0, sz - 1, l, r, diff);
 	}
-	void update(int v, int tl, int tr, int l, int r, ll diff) {
+	void update(int v, int tl, int tr, int l, int r, long long diff) {
 		//allocate copies of previous version's children
 		if (tl != tr) {
 			tree.push_back(tree[tree[v].lCh]);
@@ -65,10 +65,10 @@ struct persistentLazySegTree {
 	}
 
 	//min on range [l,r] for most recent version
-	ll query(int l, int r) {
+	long long query(int l, int r) {
 		return query(roots.back(), 0, sz - 1, l, r);
 	}
-	ll query(int v, int tl, int tr, int l, int r) {
+	long long query(int v, int tl, int tr, int l, int r) {
 		push(v, tl, tr);
 		if (tr < l || r < tl)
 			return 1e18;
