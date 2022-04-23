@@ -47,4 +47,4 @@ jobs:
       run: make --directory=tests/stress-tests/ test-compiles
 
     - name: Run stress tests
-      run: make -directory=tests/stress-tests/ test
+      run: make --directory=tests/stress-tests/ test
