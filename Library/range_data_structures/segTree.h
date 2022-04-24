@@ -19,9 +19,6 @@ struct SegmentTree {
 		long long lazy = 0;
 	};
 
-	//For implicit seg tree (Although I've TLE'd multiple times doing this):
-	//    1) change `tree` to unordered_map<int, Node>
-	//    2) update l,r when allocating new Nodes when going down tree
 	vector<Node> tree;
 
 	/***implement these***/
