@@ -4,7 +4,7 @@
 #include "../test_utilities/generators/graphGen.h"
 
 #include "../../../Library/graphs/bridges_and_cuts.h"
-#include "../../../Library/data_structures/disjointSet.h"
+#include "../../../Library/misc/disjointSet.h"
 
 int main() {
 	for(int tests = 10; tests--;) {
