@@ -3,6 +3,7 @@
 // status: tested on https://open.kattis.com/problems/longincsubseq
 
 //returns array of indexes representing the longest *strictly* increasing subsequence
+//for non-decreasing: pass in a vector<pair<T, int>> where second is 0, 1, ..., n-1
 template<class T>
 vector<int> lis(const vector<T>& arr) {
 	int n = arr.size();
