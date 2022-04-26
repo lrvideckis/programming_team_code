@@ -4,7 +4,7 @@
 
 #include "../../../Library/graphs/lca.h"
 #include "../../../Library/graphs/hld.h"
-#include "../../../Library/misc/disjointSet.h"
+#include "../../../Library/graphs/disjointSet.h"
 
 void dfs(int node, int par, const vector<vector<pair<int, long long>>>& adjweighted, vector<int>& parent, vector<int>& depth, vector<long long>& pathWeight) {
 	parent[node] = par;
