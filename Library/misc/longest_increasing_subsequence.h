@@ -38,6 +38,7 @@ int lisSize(const vector<T>& arr) {
 			dp.push_back(val);
 		else
 			*it = val;
+		//here, `dp.size()` = length of LIS of prefix of `arr` so far
 	}
 	return dp.size();
 }
