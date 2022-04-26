@@ -26,3 +26,18 @@ vector<int> lis(const vector<T>& arr) {
 		res[--j] = i;
 	return res;
 }
+
+//returns length of longest *strictly* increasing subsequence
+//alternatively, there's this https://codeforces.com/blog/entry/13225
+template<class T>
+int lisSize(const vector<T>& arr) {
+	vector<int> dp;
+	for (int val : arr) {
+		auto it = lower_bound(dp.begin(), dp.end(), val);
+		if (it == dp.end())
+			dp.push_back(val);
+		else
+			*it = val;
+	}
+	return dp.size();
+}
