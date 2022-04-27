@@ -2,7 +2,7 @@
 #include "../test_utilities/generators/random.h"
 
 #include "../../../Library/strings/rollingHash.h"
-#include "../../../Library/strings/suffixArray.h"
+#include "../../../Library/strings/string_queries.h"
 
 int main() {
 	for(int tests = 50; tests--;) {
