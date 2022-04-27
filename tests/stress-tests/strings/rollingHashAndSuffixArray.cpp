@@ -14,7 +14,7 @@ int main() {
 			s[i] = arr[i] + 'a';
 		}
 
-		suffix_array sa(s);
+		str_queries sa(s);
 
 		Hash hStr(s);
 		Hash hArr(arr);
