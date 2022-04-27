@@ -83,6 +83,8 @@ struct persistentLazySegTree {
 		tree[v].sum = tree[lCh].sum + tree[rCh].sum;
 	}
 
+	//let's use implementation trick described here https://codeforces.com/blog/entry/72626
+	//so that we don't have to propogate lazy vals and thus we don't have to allocate new nodes
 	int query(int l, int r) {
 		int version = roots.size() - 1;
 		int root = roots[version];
