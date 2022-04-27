@@ -8,7 +8,7 @@
 // Reference:
 // G. Nong, S. Zhang, and W. H. Chan,
 // Two Efficient Algorithms for Linear Time Suffix Array Construction
-vector<int> sa_is(const vector<int>& s, int upper) {
+vector<int> sa_is(const vector<int>& s, int upper/*max element of `s`*/) {
 	int n = (int) s.size();
 	if (n == 0) return {};
 	if (n == 1) return {0};
