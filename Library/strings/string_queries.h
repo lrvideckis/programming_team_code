@@ -35,7 +35,9 @@ public:
 
 private:
 	sparseTable<int> initST(const string& s) {
-		return sparseTable<int>(lcp_array(s, sa), [](int x, int y) { return min(x,y); });
+		return sparseTable<int>(lcp_array(s, sa), [](int x, int y) {
+			return min(x, y);
+		});
 	}
 	vector<int> sa, inv_sa;
 	sparseTable<int> st;

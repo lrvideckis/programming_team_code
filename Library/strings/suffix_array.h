@@ -100,7 +100,7 @@ vector<int> sa_is(const T& s, int upper/*max element of `s`; for std::string, pa
 			rec_s[lms_map[sorted_lms[i]]] = rec_upper;
 		}
 		auto rec_sa =
-			sa_is(rec_s, rec_upper);
+		    sa_is(rec_s, rec_upper);
 		for (int i = 0; i < m; i++)
 			sorted_lms[i] = lms[rec_sa[i]];
 		induce(sorted_lms);
