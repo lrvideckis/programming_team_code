@@ -6,7 +6,13 @@ g++ -Wall -Wextra -pedantic -Wno-unused-result -Wfatal-errors -DLOCAL -std=c++17
 trap "rm -f $DIR/../../template.cpp.gch" EXIT
 
 SCRIPT_DIR=$DIR/test_utilities/scripts
-tests="$(find $DIR/../../Library -name '*.h')"
+
+if [[ $# -eq 1 ]] ; then
+	tests="$(find $DIR/../../Library -name '*.h')"
+else
+    tests="$(find $DIR/../../Library -name "*$2*")"
+fi
+
 declare -i pass=0
 declare -i fail=0
 failHeaders=""

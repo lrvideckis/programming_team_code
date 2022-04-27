@@ -11,4 +11,4 @@ test:
 	./test_utilities/scripts/run-all.sh . $(which_test)
 
 test-compiles:
-	./test_utilities/scripts/compile-all.sh .
+	./test_utilities/scripts/compile-all.sh . $(which_alg)
