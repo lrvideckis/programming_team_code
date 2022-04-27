@@ -38,16 +38,19 @@ template<class T>
 struct rangeUpdatesAndPointQueries {
 	fenwickTree<T> ft;
 	rangeUpdatesAndPointQueries(int n) : ft(n) {}
-	rangeUpdatesAndPointQueries(vector<T> arr) : ft(0) {
+	rangeUpdatesAndPointQueries(vector<T> arr) : ft(init(arr)) {}
+	fenwickTree<T> init(const vector<T>& arr) {
 		for (int i = (int) arr.size() - 1; i >= 1; i--)
 			arr[i] -= arr[i - 1];
-		ft = fenwickTree<T> (arr);
+		return fenwickTree<T> (arr);
 	}
+	//add `diff` to inclusive range [l, r]
 	void updateRange(int l, int r, const T& diff) {
 		ft.update(l, diff);
 		if (r + 1 < (int) ft.bit.size())
 			ft.update(r + 1, -diff);
 	}
+	//get value at index `idx`
 	T queryIdx(int idx) const {
 		return ft.sum(idx);
 	}
