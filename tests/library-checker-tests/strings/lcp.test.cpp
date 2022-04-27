@@ -9,16 +9,10 @@ int main() {
 
 	string s;
 	cin >> s;
-	int n = s.size();
 
-	vector<int> arr(n);
-	for(int i = 0; i < n; i++) {
-		arr[i] = s[i];
-	}
+	vector<int> sa = sa_is(s, 255);
 
-	vector<int> sa = sa_is(arr, 255);
-
-	vector<int> lcp = lcp_array(arr, sa);
+	vector<int> lcp = lcp_array(s, sa);
 
 	long long res = 1LL * n * (n+1) / 2;
 	for(int val : lcp) res -= val;

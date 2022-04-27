@@ -8,8 +8,9 @@
 // T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
 // Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
 // Applications
-vector<int> lcp_array(const vector<int>& arr, const vector<int>& sa) {
-	int n = arr.size(), k = 0;
+template<class T>
+vector<int> lcp_array(const T& s, const vector<int>& sa) {
+	int n = s.size(), k = 0;
 	vector<int> lcp(n, 0);
 	vector<int> rank(n, 0);
 	for (int i = 0; i < n; i++) rank[sa[i]] = i;
@@ -19,7 +20,7 @@ vector<int> lcp_array(const vector<int>& arr, const vector<int>& sa) {
 			continue;
 		}
 		int j = sa[rank[i] + 1];
-		while (i + k < n && j + k < n && arr[i + k] == arr[j + k]) k++;
+		while (i + k < n && j + k < n && s[i + k] == s[j + k]) k++;
 		lcp[rank[i]] = k;
 	}
 	return lcp;

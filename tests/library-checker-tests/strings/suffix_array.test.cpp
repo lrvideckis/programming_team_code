@@ -9,14 +9,7 @@ int main() {
 	string s;
 	cin >> s;
 
-	int n = s.size();
-
-	vector<int> arr(n);
-	for(int i = 0; i < n; i++) {
-		arr[i] = s[i];
-	}
-
-	vector<int> sa = sa_is(arr, 255);
+	vector<int> sa = sa_is(s, 255);
 
 	for(int val : sa) {
 		cout << val << " ";
