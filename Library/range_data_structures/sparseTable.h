@@ -19,12 +19,13 @@ struct sparseTable {
 		int n = arr.size();
 		for (int pw = 1, k = 1; pw * 2 <= n; pw *= 2, k++) {
 			dp.emplace_back(n - pw * 2 + 1);
-			for(int j = 0; j < (int)dp[k].size(); j++)
+			for (int j = 0; j < (int)dp[k].size(); j++)
 				dp[k][j] = func(dp[k - 1][j], dp[k - 1][j + pw]);
 		}
 	}
 	//inclusive range [l, r]
 	T query(int l, int r) const {
+		assert(0 <= l && l <= r && r < (int)dp[0].size());
 		int lg = 31 - __builtin_clz(r - l + 1);
 		return func(dp[lg][l], dp[lg][r - (1 << lg) + 1]);
 	}
