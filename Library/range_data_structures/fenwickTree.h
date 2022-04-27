@@ -38,8 +38,8 @@ template<class T>
 struct rangeUpdatesAndPointQueries {
 	fenwickTree<T> ft;
 	rangeUpdatesAndPointQueries(int n) : ft(n) {}
-	rangeUpdatesAndPointQueries(vector<T> arr/*intentional pass by value*/) : ft(init(arr)) {}
-	fenwickTree<T> init(vector<T>& arr) {
+	rangeUpdatesAndPointQueries(const vector<T>& arr) : ft(init(arr)) {}
+	fenwickTree<T> init(vector<T> arr/*intentional pass by value*/) {
 		for (int i = (int) arr.size() - 1; i >= 1; i--)
 			arr[i] -= arr[i - 1];
 		return fenwickTree<T> (arr);
