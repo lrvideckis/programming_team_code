@@ -14,6 +14,7 @@ int main() {
 
 	vector<int> lcp = lcp_array(s, sa);
 
+	int n = s.size();
 	long long res = 1LL * n * (n+1) / 2;
 	for(int val : lcp) res -= val;
 	cout << res << endl;
