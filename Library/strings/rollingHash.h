@@ -1,9 +1,13 @@
 #pragma once
 
 //usage:
-//	Hash<string> h(s);
+//	string s;
+//	...
+//	Hash h(s);
 //or
-//	Hash<vector<int>> h(arr);
+//	vector<int> arr;
+//	...
+//	Hash h(arr);
 //	assumes 0 < arr[i] < 1e9+5 = `base`
 //	here, for negatives or longlongs, compress values to {1,2,...,n} and make sure `base` is > n
 //

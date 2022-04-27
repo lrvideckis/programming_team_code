@@ -16,8 +16,8 @@ int main() {
 
 		suffix_array sa(s);
 
-		Hash<string> hStr(s);
-		Hash<vector<int>> hArr(arr);
+		Hash hStr(s);
+		Hash hArr(arr);
 
 		for(int i = 0; i < n; i++) {
 			for(int j = i; j < n; j++) {

@@ -28,8 +28,8 @@ int main() {
 			}
 		}
 		cout << "number of matches: " << matchesNaive.size() << endl;
-		KMP_Match<string> kmp(needle);
-		KMP_Match<vector<int>> kmpArr(needleArr);
+		KMP_Match kmp(needle);
+		KMP_Match kmpArr(needleArr);
 		assert(matchesNaive == kmp.find(haystack));
 		assert(matchesNaive == kmpArr.find(haystackArr));
 

@@ -1,9 +1,13 @@
 #pragma once
 
 //usage:
-//	KMP_Match<string> kmp(needle);
+//	string needle;
+//	...
+//	KMP_Match kmp(needle);
 //or
-//	KMP_Match<vector<int>> kmp(needle);
+//	vector<int> needle;
+//	...
+//	KMP_Match kmp(needle);
 //
 //status: tested on random inputs
 template <class T>

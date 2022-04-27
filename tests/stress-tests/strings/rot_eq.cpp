@@ -41,8 +41,8 @@ int main() {
 			}
 		}
 
-		assert(naiveRotEq == rot_eq<string>(s1, s2));
-		assert(naiveRotEq == rot_eq<vector<int>>(arr1, arr2));
+		assert(naiveRotEq == rot_eq(s1, s2));
+		assert(naiveRotEq == rot_eq(arr1, arr2));
 	}
 
 	cout << "Tests passed!" << endl;

@@ -1,10 +1,12 @@
 #pragma once
 
 //usage:
-//	sparseTable<ll> st(arr, [](ll x, ll y) { return min(x,y); });
+//	vector<long long> arr;
+//	...
+//	sparseTable<long long> st(arr, [](auto x, auto y) { return min(x,y); });
 //
 //to also get index of min element, do:
-//	sparseTable<pair<ll,int>> st(arr, [](auto x, auto y) { return min(x,y); });
+//	sparseTable<pair<long long,int>> st(arr, [](auto x, auto y) { return min(x,y); });
 //and initialize second to index. If there are multiple indexes of min element,
 //it'll return the smallest (left-most) one
 //
@@ -13,8 +15,8 @@ template <class T>
 struct sparseTable {
 	vector<int> log2;
 	vector<vector<T>> dp;
-	function<T(const T&, const T&) > func;
-	sparseTable(const vector<T>& arr, const function<T(const T&, const T&) >& _func) : func(_func) {
+	function<T(const T&, const T&)> func;
+	sparseTable(const vector<T>& arr, const function<T(const T&, const T&)>& _func) : func(_func) {
 		const int n = arr.size();
 		log2.resize(n + 1, -1);
 		for (int i = 1; i <= n; ++i) log2[i] = 1 + log2[i / 2];
