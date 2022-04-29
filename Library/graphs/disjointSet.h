@@ -3,22 +3,22 @@
 //status: tested on random inputs, and on https://judge.yosupo.jp/problem/unionfind
 
 struct disjointSet {
-	int numberOfSets;
-	vector<int> parent;
-	disjointSet(int n) : numberOfSets(n), parent(n, -1) {}
-	disjointSet(const disjointSet& rhs) : numberOfSets(rhs.numberOfSets), parent(rhs.parent) {}
+	int numSets;
+	vector<int> par;
+	disjointSet(int n) : numSets(n), par(n, -1) {}
+	disjointSet(const disjointSet& rhs) : numSets(rhs.numSets), par(rhs.par) {}
 	int find(int x) {
-		return parent[x] < 0 ? x : parent[x] = find(parent[x]);
+		return par[x] < 0 ? x : par[x] = find(par[x]);
 	}
 	int sizeOfSet(int x) {
-		return -parent[find(x)];
+		return -par[find(x)];
 	}
 	bool merge(int x, int y) {
 		if ((x = find(x)) == (y = find(y))) return false;
-		if (parent[y] < parent[x]) swap(x, y);
-		parent[x] += parent[y];
-		parent[y] = x;
-		numberOfSets--;
+		if (par[y] < par[x]) swap(x, y);
+		par[x] += par[y];
+		par[y] = x;
+		numSets--;
 		return true;
 	}
 };
