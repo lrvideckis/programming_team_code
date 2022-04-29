@@ -1,7 +1,7 @@
 #pragma once
 
 //status: stress tested && tested on https://codeforces.com/contest/52/problem/C
-//see TODO for lines you may need to change
+//see TODO for lines of code you may need to change
 
 struct Node {
 	long long val;//could represent max, sum, etc
