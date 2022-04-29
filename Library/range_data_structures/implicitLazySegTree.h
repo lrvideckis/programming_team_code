@@ -33,8 +33,8 @@ struct implicitLazySegTree {
 		}
 	}
 
-	long long combine(long long val_l, long long val_r) {
-		return max(val_l, val_r); //TODO
+	long long combine(long long L, long long R) {
+		return max(L, R); //TODO
 	}
 
 	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
