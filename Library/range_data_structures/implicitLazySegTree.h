@@ -15,7 +15,7 @@ struct implicitLazySegTree {
 
 	implicitLazySegTree(int l, int r) : NEW_NODE(0), rangeL(l), rangeR(r) {
 		assert(l <= r);
-		tree[NEW_NODE++] = {0, 0, -1, -1} //TODO;
+		tree[NEW_NODE++] = {0, 0, -1, -1}; //TODO
 	}
 
 	implicitLazySegTree(const vector<long long>& arr) : implicitLazySegTree(0, (int)arr.size() - 1) {
