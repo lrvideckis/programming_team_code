@@ -30,7 +30,7 @@ int main() {
 		disjointSet ds(n);
 		for(auto [u,v] : edges) ds.merge(u,v);
 
-		int numComponents = ds.numberOfSets;
+		int numComponents = ds.numSets;
 
 		for(auto &eTest : edges) {
 			disjointSet curr(n);
@@ -39,8 +39,8 @@ int main() {
 				curr.merge(e.first,e.second);
 			}
 			//sanity check
-			assert(curr.numberOfSets >= numComponents);
-			bool isBridgeNaive = (curr.numberOfSets > numComponents);
+			assert(curr.numSets >= numComponents);
+			bool isBridgeNaive = (curr.numSets > numComponents);
 			auto [u,v] = eTest;
 			assert(isBridgeNaive == bcc.is_bridge_edge(u,v));
 		}
@@ -55,8 +55,8 @@ int main() {
 			bool isCutNaive = false;
 			if(!adj[i].empty()) {//nodes with 0 neighbors are **not** considered cut nodes
 				//sanity check
-				assert(curr.numberOfSets-1 >= numComponents);
-				isCutNaive = (curr.numberOfSets-1 > numComponents);
+				assert(curr.numSets-1 >= numComponents);
+				isCutNaive = (curr.numSets-1 > numComponents);
 			}
 			assert(isCutNaive == bcc.is_cut[i]);
 		}

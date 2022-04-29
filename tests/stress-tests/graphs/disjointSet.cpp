@@ -53,7 +53,7 @@ int main() {
 						cntCC++;
 					}
 				}
-				assert(cntCC == ds.numberOfSets);
+				assert(cntCC == ds.numSets);
 			}
 		}
 	}
