@@ -1,12 +1,13 @@
 #pragma once
 
 //status: stress tested && tested on https://codeforces.com/contest/52/problem/C
+//see TODO for all places you'll likely have to update
 
 struct Node {
 	long long val;//could represent max, sum, etc
 	long long lazy;
 	int lCh, rCh; // children, indexes into `tree`, -1 for null
-} tree[(int)1.5e7/*360 megabytes*/];
+} tree[(int)1.5e7/*360 megabytes*/]; //TODO
 
 struct implicitLazySegTree {
 
@@ -14,7 +15,7 @@ struct implicitLazySegTree {
 
 	implicitLazySegTree(int l, int r) : NEW_NODE(0), rangeL(l), rangeR(r) {
 		assert(l <= r);
-		tree[NEW_NODE++] = {0, 0, -1, -1};
+		tree[NEW_NODE++] = {0, 0, -1, -1} //TODO;
 	}
 
 	implicitLazySegTree(const vector<long long>& arr) : implicitLazySegTree(0, (int)arr.size() - 1) {
@@ -33,11 +34,11 @@ struct implicitLazySegTree {
 	}
 
 	long long combine(long long val_l, long long val_r) {
-		return max(val_l, val_r); //TODO: update
+		return max(val_l, val_r); //TODO
 	}
 
 	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
-		tree[v].val += add; //TODO: update
+		tree[v].val += add; //TODO
 		if (tl != tr) {
 			tree[tree[v].lCh].lazy += add;
 			tree[tree[v].rCh].lazy += add;
@@ -47,7 +48,7 @@ struct implicitLazySegTree {
 	void push(int v, int tl, int tr) {
 		if (tl != tr && tree[v].lCh == -1) {
 			tree[v].lCh = NEW_NODE;
-			tree[NEW_NODE++] = {0, 0, -1, -1};
+			tree[NEW_NODE++] = {0, 0, -1, -1}; //TODO
 			tree[v].rCh = NEW_NODE;
 			tree[NEW_NODE++] = {0, 0, -1, -1};
 		}
@@ -79,7 +80,7 @@ struct implicitLazySegTree {
 	}
 	long long query(int v, int tl, int tr, int l, int r) {
 		if (tr < l || r < tl)
-			return -1e18; //TODO: update
+			return -1e18; //TODO
 		push(v, tl, tr);
 		if (l <= tl && tr <= r)
 			return tree[v].val;
