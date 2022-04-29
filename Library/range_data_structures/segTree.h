@@ -53,7 +53,7 @@ struct SegmentTree {
 	/*********************/
 
 	//There's no constructor `SegmentTree(int size)` because how to initialize l,r in nodes without calling build?
-	//the whole point of this constructor was to be simpler by not calling build
+	//the whole point of `SegmentTree(int size)` was to be simpler by not calling build
 	SegmentTree(const vector<long long>& arr) {
 		int n = arr.size(), size = 1;
 		while (size < n) size <<= 1;
