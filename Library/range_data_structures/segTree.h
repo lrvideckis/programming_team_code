@@ -16,6 +16,12 @@ struct segTree {
 			return r - l + 1;
 		}
 
+		//1 + (# of nodes in left child's subtree)
+		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
+		int rCh() const {
+			return ((r - l) & ~1) + 2;
+		}
+
 		long long lazy = 0;
 	};
 
@@ -23,12 +29,8 @@ struct segTree {
 
 	//There's no constructor `segTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of `segTree(int size)` was to be simpler by not calling build
-	segTree(const vector<long long>& arr) {
-		int n = arr.size(), size = 1;
-		while (size < n) size <<= 1;
-		size <<= 1;
-		tree.resize(size);
-		build(arr, 1, 0, n - 1);
+	segTree(const vector<long long>& arr) : tree(2 * arr.size()) {
+		build(arr, 1, 0, (int) arr.size() - 1);
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tl == tr) {
@@ -41,9 +43,9 @@ struct segTree {
 			};
 		} else {
 			int tm = tl + (tr - tl) / 2;
-			build(arr, 2 * v, tl, tm);
-			build(arr, 2 * v + 1, tm + 1, tr);
-			tree[v] = combine(tree[2 * v], tree[2 * v + 1]);
+			build(arr, v + 1, tl, tm);
+			build(arr, v + 2 * (tm - tl + 1), tm + 1, tr);
+			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
 		}
 	}
 
@@ -64,8 +66,8 @@ struct segTree {
 		tree[v].mx += add;
 		tree[v].mn += add;
 		if (tree[v].len() > 1) {
-			tree[2 * v].lazy += add;
-			tree[2 * v + 1].lazy += add;
+			tree[v + 1].lazy += add;
+			tree[v + tree[v].rCh()].lazy += add;
 		}
 	}
 
@@ -86,9 +88,9 @@ struct segTree {
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return applyDeltaOnRange(v, add);
-		update(2 * v, l, r, add);
-		update(2 * v + 1, l, r, add);
-		tree[v] = combine(tree[2 * v], tree[2 * v + 1]);
+		update(v + 1, l, r, add);
+		update(v + tree[v].rCh(), l, r, add);
+		tree[v] = combine(tree[v + 1], tree[v + tree[v].rCh()]);
 	}
 
 	//range [l,r]
@@ -101,7 +103,7 @@ struct segTree {
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v];
-		return combine(query(2 * v, l, r),
-		               query(2 * v + 1, l, r));
+		return combine(query(v + 1, l, r),
+		               query(v + tree[v].rCh(), l, r));
 	}
 };
