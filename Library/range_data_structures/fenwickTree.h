@@ -44,11 +44,11 @@ struct rangeUpdatesAndPointQueries {
 			arr[i] -= arr[i - 1];
 		return fenwickTree<T> (arr);
 	}
-	//add `diff` to inclusive range [l, r]
-	void updateRange(int l, int r, const T& diff) {
-		ft.update(l, diff);
+	//add `add` to inclusive range [l, r]
+	void updateRange(int l, int r, const T& add) {
+		ft.update(l, add);
 		if (r + 1 < (int) ft.bit.size())
-			ft.update(r + 1, -diff);
+			ft.update(r + 1, -add);
 	}
 	//get value at index `idx`
 	T queryIdx(int idx) const {
