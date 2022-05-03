@@ -37,3 +37,4 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - [Manacher's](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Manacher.h)
 - [Sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc) (search buckets)
 - [fast IO](https://github.com/nealwu/competitive-programming/blob/master/io/io.cc)
+- [Interval container](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/IntervalContainer.h)
