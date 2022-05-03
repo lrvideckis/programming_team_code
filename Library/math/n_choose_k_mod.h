@@ -36,7 +36,7 @@ struct NchooseK {
 	}
 
 	//lucas theorem to calculate n choose k in O(log(k))
-	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish mod (< 1e6 maybe)
+	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish prime mod (< 1e6 maybe)
 	//handles n >= mod correctly
 	int chooseWithLucasTheorem(long long n, long long k) const {
 		if (k < 0 || k > n) return 0;
