@@ -1,5 +1,6 @@
 #pragma once
 
+//for mod inverse
 #include "exp_mod.h"
 
 struct matrixInfo {
@@ -10,7 +11,7 @@ struct matrixInfo {
 //Solves A * x = b under prime mod.
 //A is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m column vector.
 //assumes n,m >= 1, else RTE
-//Returns rank of A, determinant of A, and x (solution vector). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
+//Returns rank of A, determinant of A, and x (solution vector to A * x = b). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
 //Leaves A in reduced row echelon form (unlike kactl).
 //O(n * m * min(n,m))
 //
@@ -53,7 +54,7 @@ matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mo
 	assert(rank <= min(n, m));
 	//check if solution exists
 	for (int i = rank; i < n; i++) {
-		if (b[i] != 0) return {rank, det, vector<int>() }; //no solution exists
+		if (b[i] != 0) return {rank, det, {} }; //no solution exists
 	}
 	//initialize solution vector (`x`)
 	vector<int> x(m, 0);
