@@ -1,8 +1,6 @@
 #pragma once
 
-//status: not tested
-
-#include "../math/fft.h"
+//status: doesn't compile, but should be correct. Need to import FFT code (like https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h)
 
 const int Max = 1e6+10;
 int n, sizes[Max];
