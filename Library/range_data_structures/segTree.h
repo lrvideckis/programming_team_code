@@ -29,8 +29,8 @@ struct segTree {
 
 	//There's no constructor `segTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of `segTree(int size)` was to be simpler by not calling build
-	segTree(const vector<long long>& arr) : tree(2 * arr.size()) {
-		build(arr, 1, 0, (int) arr.size() - 1);
+	segTree(const vector<long long>& arr) : tree(2 * (int) arr.size() - 1) {
+		build(arr, 0, 0, (int) arr.size() - 1);
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tl == tr) {
@@ -80,7 +80,7 @@ struct segTree {
 
 	//update range [l,r] with `add`
 	void update(int l, int r, long long add) {
-		update(1, l, r, add);
+		update(0, l, r, add);
 	}
 	void update(int v, int l, int r, long long add) {
 		push(v);
@@ -95,7 +95,7 @@ struct segTree {
 
 	//range [l,r]
 	Node query(int l, int r) {
-		return query(1, l, r);
+		return query(0, l, r);
 	}
 	Node query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
