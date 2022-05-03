@@ -14,7 +14,7 @@
 //status: tested on random inputs, and on https://judge.yosupo.jp/problem/zalgorithm
 template <class T>
 struct Hash {
-	//`base` should be relatively prime with all mods and *strictly* larger than max element
+	//`base` should be relatively prime with all mods and *strictly* larger than max element (else trivial collisions)
 	//larger/smaller `base` *doesn't* change collision odds
 	//ideally `base` would be random to avoid getting hacked
 	const int base = 1e9 + 5;
