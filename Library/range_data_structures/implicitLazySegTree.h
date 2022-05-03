@@ -34,11 +34,11 @@ struct implicitLazySegTree {
 	}
 
 	static long long combine(long long L, long long R) {
-		return max(L, R); //TODO
+		return L + R; //TODO
 	}
 
 	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
-		tree[v].val += add; //TODO
+		tree[v].val += (tr - tl + 1) * add; //TODO
 		if (tl != tr) {
 			tree[tree[v].lCh].lazy += add;
 			tree[tree[v].rCh].lazy += add;
@@ -76,16 +76,16 @@ struct implicitLazySegTree {
 
 	//range [l,r]
 	long long query(int l, int r) const {
-		return query(0, rootL, rootR, l, r, 0);
+		return query(0, rootL, rootR, l, r, 0LL);
 	}
-	long long query(int v, int tl, int tr, int l, int r, int lazy) const {
+	long long query(int v, int tl, int tr, int l, int r, long long lazy) const {
 		if (tr < l || r < tl)
-			return -1e18; //TODO
-		lazy += tree[v].lazy;
+			return 0; //TODO
 		if (v == -1)
-			return lazy;
+			return (min(tr, r) - max(tl, l) + 1) * 1LL * lazy;
+		lazy += tree[v].lazy;
 		if (l <= tl && tr <= r)
-			return tree[v].val + lazy;
+			return tree[v].val + (tr - tl + 1) * 1LL * lazy;
 		int tm = tl + (tr - tl) / 2;
 		return combine(query(tree[v].lCh, tl, tm, l, r, lazy),
 		               query(tree[v].rCh, tm + 1, tr, l, r, lazy));

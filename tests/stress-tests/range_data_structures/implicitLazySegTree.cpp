@@ -15,21 +15,21 @@ int main() {
 
 		implicitLazySegTree ist(l, r);
 
-		map<int,int> naive;
+		map<int, long long> naive;
 
 		for(int iterations = 1000; iterations--;) {
 			int L = getRand(l, r), R = getRand(l, r);
 			if(L > R) swap(L,R);
 			if(getRand(1,2) == 1) {//update
-				int diff = getRand(-mx, mx);
+				int diff = getRand(-1e9, 1e9);
 				ist.update(L, R, diff);
 				for(int i = L; i <= R; i++) naive[i] += diff;
 			} else {//query
-				int mx = naive[L];
+				long long sum = naive[L];
 				for(int i = L+1; i <= R; i++) {
-					mx = max(mx, naive[i]);
+					sum += naive[i];
 				}
-				assert(mx == ist.query(L,R));
+				assert(sum == ist.query(L,R));
 			}
 		}
 	}
