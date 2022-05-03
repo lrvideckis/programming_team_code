@@ -7,7 +7,7 @@ Yet another competitive programming repo. Quick links:
 
 ## Testing
 
-see [this](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/README.md)
+see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/README.md)
 
 ## Format
 Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
