@@ -16,7 +16,7 @@ struct segTree {
 			return r - l + 1;
 		}
 
-		//1 + (# of nodes in left child's subtree)
+		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
 		int rCh() const {
 			return ((r - l) & ~1) + 2;
