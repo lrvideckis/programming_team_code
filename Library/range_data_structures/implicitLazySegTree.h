@@ -33,7 +33,7 @@ struct implicitLazySegTree {
 		}
 	}
 
-	long long combine(long long L, long long R) {
+	static long long combine(long long L, long long R) {
 		return max(L, R); //TODO
 	}
 
@@ -75,10 +75,10 @@ struct implicitLazySegTree {
 	}
 
 	//range [l,r]
-	long long query(int l, int r) {
+	long long query(int l, int r) const {
 		return query(0, rootL, rootR, l, r, 0);
 	}
-	long long query(int v, int tl, int tr, int l, int r, int lazy) {
+	long long query(int v, int tl, int tr, int l, int r, int lazy) const {
 		if (tr < l || r < tl)
 			return -1e18; //TODO
 		lazy += tree[v].lazy;
