@@ -7,22 +7,23 @@
  * Time: O(n * log(n)) for construction and all queries can be answered in
  * O(log(n))
  *
-* status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
+ * status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
  */
 
 struct lca {
 	typedef long long ll;
+	int Log;
 	vector<vector<int>> memo;
 	vector<int> depth;
 	vector<ll> dist;
-	int Log;
 
 	// use weights of 1 for unweighted tree
+	// 0 - based nodes
 	lca(const vector<vector<pair<int, ll>>>& adj /*connected, weighted tree*/, int root) :
-		depth(adj.size()), dist(adj.size()), Log(1) {          //0 - based nodes
-		int n = adj.size();
-		while ((1 << Log) < n) ++Log;
-		memo.resize(n, vector<int> (Log));
+		Log(32 - __builtin_clz(adj.size())),
+		memo(adj.size(), vector<int>(Log)),
+		depth(adj.size()),
+		dist(adj.size()) {
 		dfs(root, root, adj);
 	}
 
