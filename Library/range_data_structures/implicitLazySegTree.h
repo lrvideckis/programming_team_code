@@ -11,15 +11,15 @@ struct Node {
 
 struct implicitLazySegTree {
 
-	int NEW_NODE, rangeL, rangeR;//[rangeL, rangeR] defines range of root node; handles negatives
+	int NEW_NODE, rootL, rootR;//[rootL, rootR] defines range of root node; handles negatives
 
-	implicitLazySegTree(int l, int r) : NEW_NODE(0), rangeL(l), rangeR(r) {
+	implicitLazySegTree(int l, int r) : NEW_NODE(0), rootL(l), rootR(r) {
 		assert(l <= r);
 		tree[NEW_NODE++] = {0, 0, -1, -1}; //TODO
 	}
 
 	implicitLazySegTree(const vector<long long>& arr) : implicitLazySegTree(0, (int)arr.size() - 1) {
-		build(arr, 0, rangeL, rangeR);
+		build(arr, 0, rootL, rootR);
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tl == tr)
@@ -60,7 +60,7 @@ struct implicitLazySegTree {
 
 	//update range [l,r] with `add`
 	void update(int l, int r, long long add) {
-		update(0, rangeL, rangeR, l, r, add);
+		update(0, rootL, rootR, l, r, add);
 	}
 	void update(int v, int tl, int tr, int l, int r, long long add) {
 		push(v, tl, tr);
@@ -76,7 +76,7 @@ struct implicitLazySegTree {
 
 	//range [l,r]
 	long long query(int l, int r) {
-		return query(0, rangeL, rangeR, l, r);
+		return query(0, rootL, rootR, l, r);
 	}
 	long long query(int v, int tl, int tr, int l, int r) {
 		if (tr < l || r < tl)
