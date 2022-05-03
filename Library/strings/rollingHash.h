@@ -20,7 +20,7 @@ struct Hash {
 	const int base = 1e9 + 5;
 	//from Chinese Remainder Theorem, this is the same as having a single mod = product of `mods` array
 	//probability of collision = 1/mod_product
-	
+
 	//If you're storing hashes in a set, you want all hashes to be unique.
 	//probability that k unique strings have k unique hashes = (1/mod_product)^k * (mod_product permute k) from birthday paradox
 	//this is approximated as 1 - e^(-k(k-1)/(2*mod_product)) so basically choose enough mods such that mod_product > k^2
