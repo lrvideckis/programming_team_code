@@ -2,6 +2,7 @@
 
 //status: tested on random inputs
 
+//for mod inverse
 #include "exp_mod.h"
 
 // usage:
