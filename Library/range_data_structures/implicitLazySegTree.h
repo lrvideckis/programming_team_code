@@ -76,16 +76,18 @@ struct implicitLazySegTree {
 
 	//range [l,r]
 	long long query(int l, int r) {
-		return query(0, rootL, rootR, l, r);
+		return query(0, rootL, rootR, l, r, 0);
 	}
-	long long query(int v, int tl, int tr, int l, int r) {
+	long long query(int v, int tl, int tr, int l, int r, int lazy) {
 		if (tr < l || r < tl)
 			return -1e18; //TODO
-		push(v, tl, tr);
+		lazy += tree[v].lazy;
+		if (v == -1)
+			return lazy;
 		if (l <= tl && tr <= r)
-			return tree[v].val;
+			return tree[v].val + lazy;
 		int tm = tl + (tr - tl) / 2;
-		return combine(query(tree[v].lCh, tl, tm, l, r),
-		               query(tree[v].rCh, tm + 1, tr, l, r));
+		return combine(query(tree[v].lCh, tl, tm, l, r, lazy),
+		               query(tree[v].rCh, tm + 1, tr, l, r, lazy));
 	}
 };
