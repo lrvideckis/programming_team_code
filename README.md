@@ -2,7 +2,7 @@
 
 Yet another competitive programming repo. Quick links:
 
-- [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) for copy-pastable c++ code
+- [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library)
 - [template.cpp](https://github.com/lrvideckis/Programming-Team-Code/blob/master/template.cpp)
 
 ## Testing
