@@ -6,9 +6,7 @@ const long long inf = 1e18;
 
 struct segTree {
 	struct Node {
-		long long sum = 0;
-		long long mx = -inf;
-		long long mn = inf;
+		long long sum = 0, mx = -inf, mn = inf;
 
 		int l, r;
 
