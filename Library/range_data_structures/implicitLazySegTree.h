@@ -84,7 +84,7 @@ struct implicitLazySegTree {
 	long long query(int v, int tl, int tr, int l, int r, long long lazy) const {
 		if (l > r)
 			return 0; //TODO
-		if (v == -1)
+		if (v == -1) //here, [l,r] is the intersection of the intitial query range, and the node's range 
 			return (r - l + 1) * lazy; //TODO
 		lazy += tree[v].lazy; //TODO
 		if (l == tl && tr == r)
