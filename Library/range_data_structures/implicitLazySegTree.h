@@ -40,7 +40,7 @@ struct implicitLazySegTree {
 	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
 		tree[v].val += (tr - tl + 1) * add; //TODO
 		if (tl != tr) {
-			tree[tree[v].lCh].lazy += add;
+			tree[tree[v].lCh].lazy += add; //TODO
 			tree[tree[v].rCh].lazy += add;
 		}
 	}
@@ -86,7 +86,7 @@ struct implicitLazySegTree {
 			return 0; //TODO
 		if (v == -1)
 			return (r - l + 1) * lazy; //TODO
-		lazy += tree[v].lazy;
+		lazy += tree[v].lazy; //TODO
 		if (l == tl && tr == r)
 			return tree[v].val + (r - l + 1) * lazy; //TODO
 		int tm = tl + (tr - tl) / 2;
