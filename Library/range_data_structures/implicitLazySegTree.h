@@ -88,7 +88,7 @@ struct implicitLazySegTree {
 			return (r - l + 1) * lazy; //TODO
 		lazy += tree[v].lazy;
 		if (l == tl && tr == r)
-			return tree[v].val + (r - l + 1) * lazy;
+			return tree[v].val + (r - l + 1) * lazy; //TODO
 		int tm = tl + (tr - tl) / 2;
 		return combine(query(tree[v].lCh, tl, tm, l, min(r, tm), lazy),
 		               query(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, lazy));
