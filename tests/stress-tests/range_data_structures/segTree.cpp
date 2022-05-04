@@ -42,7 +42,7 @@ int main() {
 				assert(res.mx == mx);
 				assert(res.sum == sum);
 
-				assert(mx == ist.query(L,R));
+				assert(sum == ist.query(L,R));
 			}
 		}
 	}

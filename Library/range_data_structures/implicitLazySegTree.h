@@ -33,12 +33,12 @@ struct implicitLazySegTree {
 		}
 	}
 
-	long long combine(long long L, long long R) {
-		return max(L, R); //TODO
+	static long long combine(long long L, long long R) {
+		return L + R; //TODO
 	}
 
 	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
-		tree[v].val += add; //TODO
+		tree[v].val += (tr - tl + 1) * add; //TODO
 		if (tl != tr) {
 			tree[tree[v].lCh].lazy += add;
 			tree[tree[v].rCh].lazy += add;
@@ -64,28 +64,31 @@ struct implicitLazySegTree {
 	}
 	void update(int v, int tl, int tr, int l, int r, long long add) {
 		push(v, tl, tr);
-		if (tr < l || r < tl)
+		if (l > r)
 			return;
-		if (l <= tl && tr <= r)
+		if (l == tl && tr == r)
 			return applyDeltaOnRange(v, tl, tr, add);
 		int tm = tl + (tr - tl) / 2;
-		update(tree[v].lCh, tl, tm, l, r, add);
-		update(tree[v].rCh, tm + 1, tr, l, r, add);
+		update(tree[v].lCh, tl, tm, l, min(r, tm), add);
+		update(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, add);
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 
-	//range [l,r]
-	long long query(int l, int r) {
-		return query(0, rootL, rootR, l, r);
+	//query range [l,r]
+	//we don't allocate nodes on query using this trick https://codeforces.com/blog/entry/72626
+	long long query(int l, int r) const {
+		return query(0, rootL, rootR, l, r, 0LL);
 	}
-	long long query(int v, int tl, int tr, int l, int r) {
-		if (tr < l || r < tl)
-			return -1e18; //TODO
-		push(v, tl, tr);
-		if (l <= tl && tr <= r)
-			return tree[v].val;
+	long long query(int v, int tl, int tr, int l, int r, long long lazy) const {
+		if (l > r)
+			return 0; //TODO
+		if (v == -1)
+			return (r - l + 1) * lazy; //TODO
+		lazy += tree[v].lazy;
+		if (l == tl && tr == r)
+			return tree[v].val + (r - l + 1) * lazy;
 		int tm = tl + (tr - tl) / 2;
-		return combine(query(tree[v].lCh, tl, tm, l, r),
-		               query(tree[v].rCh, tm + 1, tr, l, r));
+		return combine(query(tree[v].lCh, tl, tm, l, min(r, tm), lazy),
+		               query(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, lazy));
 	}
 };
