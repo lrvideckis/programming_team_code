@@ -74,7 +74,8 @@ struct implicitLazySegTree {
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 
-	//range [l,r]
+	//query range [l,r]
+	//we don't allocate nodes on query using this trick https://codeforces.com/blog/entry/72626
 	long long query(int l, int r) const {
 		return query(0, rootL, rootR, l, r, 0LL);
 	}
