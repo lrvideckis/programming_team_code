@@ -76,7 +76,7 @@ struct implicitLazySegTree {
 
 	//query range [l,r]
 	//we don't allocate nodes on query using this trick https://codeforces.com/blog/entry/72626
-	//ugh, I'm unhappy with how complicated this is. For a simpler; 10% slower version, see:
+	//ugh, I'm unhappy with how complicated this is. For a simpler version which does allocate nodes on query, see:
 	//https://github.com/lrvideckis/Programming-Team-Code/blob/af398d903ab89f924fc0651f97f158ebfc3d5d27/Library/range_data_structures/implicitLazySegTree.h
 	long long query(int l, int r) const {
 		return query(0, rootL, rootR, l, r, 0LL);
