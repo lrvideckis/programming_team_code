@@ -33,8 +33,8 @@ struct implicitLazySegTree {
 		}
 	}
 
-	static long long combine(long long L, long long R) {
-		return L + R; //TODO
+	static long long combine(long long val_l, long long val_r) {
+		return val_l + val_r; //TODO
 	}
 
 	void applyDeltaOnRange(int v, int tl, int tr, long long add) {
