@@ -64,13 +64,13 @@ struct implicitLazySegTree {
 	}
 	void update(int v, int tl, int tr, int l, int r, long long add) {
 		push(v, tl, tr);
-		if (tr < l || r < tl)
+		if (l > r)
 			return;
-		if (l <= tl && tr <= r)
+		if (l == tl && tr == r)
 			return applyDeltaOnRange(v, tl, tr, add);
 		int tm = tl + (tr - tl) / 2;
-		update(tree[v].lCh, tl, tm, l, r, add);
-		update(tree[v].rCh, tm + 1, tr, l, r, add);
+		update(tree[v].lCh, tl, tm, l, min(r, tm), add);
+		update(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, add);
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 
@@ -79,15 +79,15 @@ struct implicitLazySegTree {
 		return query(0, rootL, rootR, l, r, 0LL);
 	}
 	long long query(int v, int tl, int tr, int l, int r, long long lazy) const {
-		if (tr < l || r < tl)
+		if (l > r)
 			return 0; //TODO
-		if (v == -1)//intersection of node range and query range times lazy value
-			return (min(tr, r) - max(tl, l) + 1) * 1LL * lazy;
+		if (v == -1)
+			return (r - l + 1) * lazy; //TODO
 		lazy += tree[v].lazy;
-		if (l <= tl && tr <= r)
-			return tree[v].val + (tr - tl + 1) * 1LL * lazy;
+		if (l == tl && tr == r)
+			return tree[v].val + (r - l + 1) * lazy;
 		int tm = tl + (tr - tl) / 2;
-		return combine(query(tree[v].lCh, tl, tm, l, r, lazy),
-		               query(tree[v].rCh, tm + 1, tr, l, r, lazy));
+		return combine(query(tree[v].lCh, tl, tm, l, min(r, tm), lazy),
+		               query(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, lazy));
 	}
 };
