@@ -3,11 +3,13 @@
 //status: stress tested && AC's on https://cses.fi/problemset/task/1144
 //see TODO for lines of code which usually need to change (not a complete list)
 
+const int N = 1.5e7; //360 megabytes, TODO
+
 struct Node {
 	long long val;//could represent max, sum, etc
 	long long lazy;
 	int lCh, rCh; // children, indexes into `tree`, -1 for null
-} tree[(int)1.5e7/*360 megabytes*/]; //TODO
+} tree[N];
 
 struct implicitLazySegTree {
 
@@ -47,6 +49,7 @@ struct implicitLazySegTree {
 
 	void push(int v, int tl, int tr) {
 		if (tl != tr && tree[v].lCh == -1) {
+			assert(NEW_NODE + 1 < N);
 			tree[v].lCh = NEW_NODE;
 			tree[NEW_NODE++] = {0, 0, -1, -1}; //TODO
 			tree[v].rCh = NEW_NODE;
@@ -84,7 +87,7 @@ struct implicitLazySegTree {
 	long long query(int v, int tl, int tr, int l, int r, long long lazy) const {
 		if (l > r)
 			return 0; //TODO
-		if (v == -1) //here, [l,r] is the intersection of the intitial query range, and the node's range 
+		if (v == -1) //here, [l,r] is the intersection of the intitial query range, and the node's range
 			return (r - l + 1) * lazy; //TODO
 		lazy += tree[v].lazy; //TODO
 		if (l == tl && tr == r)
