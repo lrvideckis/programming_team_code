@@ -20,21 +20,6 @@ struct implicitLazySegTree {
 		tree[NEW_NODE++] = {0, 0, -1, -1}; //TODO
 	}
 
-	implicitLazySegTree(const vector<long long>& arr) : implicitLazySegTree(0, (int)arr.size() - 1) {
-		build(arr, 0, rootL, rootR);
-	}
-	void build(const vector<long long>& arr, int v, int tl, int tr) {
-		if (tl == tr)
-			tree[v].val = arr[tl];
-		else {
-			push(v, tl, tr);
-			int tm = tl + (tr - tl) / 2;
-			build(arr, tree[v].lCh, tl, tm);
-			build(arr, tree[v].rCh, tm + 1, tr);
-			tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
-		}
-	}
-
 	static long long combine(long long val_l, long long val_r) {
 		return val_l + val_r; //TODO
 	}
@@ -67,13 +52,13 @@ struct implicitLazySegTree {
 	}
 	void update(int v, int tl, int tr, int l, int r, long long add) {
 		push(v, tl, tr);
-		if (l > r)
+		if (tr < l || r < tl)
 			return;
-		if (l == tl && tr == r)
+		if (l <= tl && tr <= r)
 			return applyDeltaOnRange(v, tl, tr, add);
 		int tm = tl + (tr - tl) / 2;
-		update(tree[v].lCh, tl, tm, l, min(r, tm), add);
-		update(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, add);
+		update(tree[v].lCh, tl, tm, l, r, add);
+		update(tree[v].rCh, tm + 1, tr, l, r, add);
 		tree[v].val = combine(tree[tree[v].lCh].val, tree[tree[v].rCh].val);
 	}
 

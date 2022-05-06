@@ -2,25 +2,24 @@
 #include "../test_utilities/generators/random.h"
 
 #include "../../../Library/range_data_structures/segTree.h"
-#include "../../../Library/range_data_structures/implicitLazySegTree.h"
 
 const int mx = 1e9;
 
-tuple<segTree, implicitLazySegTree, vector<long long>> treeFactory(int n) {
+tuple<segTree, vector<long long>> treeFactory(int n) {
 	if(getRand(1, 2) == 1) {
 		vector<long long> arr(n);
 		for(int i = 0; i < n; i++) {
 			arr[i] = getRand(-mx, mx);
 		}
-		return make_tuple(segTree(arr), implicitLazySegTree(arr), arr);
+		return make_tuple(segTree(arr), arr);
 	}
-	return make_tuple(segTree(vector<long long>(n, 0)), implicitLazySegTree(0, n-1), vector<long long>(n, 0));
+	return make_tuple(segTree(vector<long long>(n, 0)), vector<long long>(n, 0));
 }
 
 int main() {
 	for(int tests = 50; tests--;) {
 		int n = getRand(1, 1000);
-		auto [st, ist, arr] = treeFactory(n);
+		auto [st, arr] = treeFactory(n);
 
 		for(int iterations = 5000; iterations--;) {
 			int L = getRand(0,n-1), R = getRand(0,n-1);
@@ -28,7 +27,6 @@ int main() {
 			if(getRand(1,2) == 1) {//update
 				long long diff = getRand(-mx, mx);
 				st.update(L, R, diff);
-				ist.update(L, R, diff);
 				for(int i = L; i <= R; i++) arr[i] += diff;
 			} else {//query
 				long long mn = arr[L], mx = arr[L], sum = arr[L];
@@ -41,8 +39,6 @@ int main() {
 				assert(res.mn == mn);
 				assert(res.mx == mx);
 				assert(res.sum == sum);
-
-				assert(sum == ist.query(L,R));
 			}
 		}
 	}
