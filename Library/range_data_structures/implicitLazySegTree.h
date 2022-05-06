@@ -78,22 +78,17 @@ struct implicitLazySegTree {
 	}
 
 	//query range [l,r]
-	//we don't allocate nodes on query using this trick https://codeforces.com/blog/entry/72626
-	//ugh, I'm unhappy with how complicated this is. For a simpler version which does allocate nodes on query, see:
-	//https://github.com/lrvideckis/Programming-Team-Code/blob/af398d903ab89f924fc0651f97f158ebfc3d5d27/Library/range_data_structures/implicitLazySegTree.h
-	long long query(int l, int r) const {
-		return query(0, rootL, rootR, l, r, 0LL);
+	long long query(int l, int r) {
+		return query(0, rootL, rootR, l, r);
 	}
-	long long query(int v, int tl, int tr, int l, int r, long long lazy) const {
-		if (l > r)
+	long long query(int v, int tl, int tr, int l, int r) {
+		if (tr < l || r < tl)
 			return 0; //TODO
-		if (v == -1) //here, [l,r] is the intersection of the intitial query range, and the node's range
-			return (r - l + 1) * lazy; //TODO
-		lazy += tree[v].lazy; //TODO
-		if (l == tl && tr == r)
-			return tree[v].val + (r - l + 1) * lazy; //TODO
+		push(v, tl, tr);
+		if (l <= tl && tr <= r)
+			return tree[v].val;
 		int tm = tl + (tr - tl) / 2;
-		return combine(query(tree[v].lCh, tl, tm, l, min(r, tm), lazy),
-		               query(tree[v].rCh, tm + 1, tr, max(l, tm + 1), r, lazy));
+		return combine(query(tree[v].lCh, tl, tm, l, r),
+		               query(tree[v].rCh, tm + 1, tr, l, r));
 	}
 };
