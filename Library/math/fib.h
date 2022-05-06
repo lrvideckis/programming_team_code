@@ -1,6 +1,7 @@
 #pragma once
 
 //status: not tested
+//https://codeforces.com/blog/entry/14516
 
 const int mod = 1e9 + 7;
 unordered_map<int, int> table;
