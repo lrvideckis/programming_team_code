@@ -34,4 +34,4 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - [Sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc) (search buckets)
 - [fast IO](https://github.com/nealwu/competitive-programming/blob/master/io/io.cc)
 - [Interval container](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/IntervalContainer.h)
-- 2D data structures (like [seg tree](https://github.com/ShahjalalShohag/code-library/blob/master/Data%20Structures/Segment%20Tree%202D%20Dynamic.cpp), [sparse table](https://codeforces.com/blog/entry/45485?f0a28=1) etc)
+- 2D data structures (like [seg tree](https://github.com/ShahjalalShohag/code-library/blob/master/Data%20Structures/Segment%20Tree%202D%20Dynamic.cpp), [sparse table](https://codeforces.com/blog/entry/45485) etc)
