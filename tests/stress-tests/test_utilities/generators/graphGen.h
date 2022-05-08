@@ -1,9 +1,7 @@
 #pragma once
 
-#include "random.h"
-
+#include "../../../../Library/misc/random.h"
 #include "../../../../Library/graphs/disjointSet.h"
-
 
 //https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model
 //each edge has independent probability p of existing
@@ -99,7 +97,7 @@ vector<vector<int>> genRandomGraph(
 }
 
 vector<vector<pair<int,long long>>> convertAdjToWeighted(const vector<vector<int>>& adj) {
-	const int maxEdgeWeight = getRand(0, 1e9);
+	const int maxEdgeWeight = getRand<int>(0, 1e9);
 	int n = adj.size();
 	vector<vector<pair<int,long long>>> weighted(n);
 	for(int i = 0; i < n; i++) {

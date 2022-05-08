@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../../Library/misc/random.h"
 
 #include "../../../Library/math/n_choose_k_mod.h"
 
@@ -9,7 +9,7 @@ int main() {
 		{
 			int type = getRand(1, 2);
 			while(true) {
-				if(type == 1) mod = getRand(2, 1e9+100);
+				if(type == 1) mod = getRand<int>(2, 1e9+100);
 				else mod = getRand(2, 1000);
 				bool isPrime = true;
 				for(int i = 2; i * i <= mod; i++) {

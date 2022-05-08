@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../../Library/misc/random.h"
 
 #include "../../../Library/range_data_structures/distinct_query.h"
 
@@ -9,7 +9,7 @@ int main() {
 		int n = getRand(1, 100);
 		vector<int> arr(n);
 		for(int i = 0; i < n; i++) {
-			arr[i] = getRand(0, 1e9);
+			arr[i] = getRand<int>(0, 1e9);
 		}
 		persistentSegTree pst(arr);
 		for(int l = 0; l < n; l++) {

@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../../Library/misc/random.h"
 
 #include "../../../Library/math/exp_mod.h"
 
@@ -24,9 +24,9 @@ int main() {
 		}
 	}
 	for(int tests = 1000; tests--;) {
-		int base = getRand(0, 1e9+100);
+		int base = getRand<int>(0, 1e9+100);
 		int power = getRand(0, 100);
-		int mod = getRand(1, 1e9+100);
+		int mod = getRand<int>(1, 1e9+100);
 
 		doTest(base, power, mod);
 	}

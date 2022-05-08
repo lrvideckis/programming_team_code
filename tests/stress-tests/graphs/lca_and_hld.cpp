@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../../Library/misc/random.h"
 #include "../test_utilities/generators/treeGen.h"
 
 #include "../../../Library/graphs/lca.h"
@@ -30,7 +30,7 @@ int main() {
 			for(auto [u,v] : genRandomTree(n)) {
 				assert(ds.merge(u,v));
 				numEdges++;
-				long long weight = getRand(0, 1e9);
+				long long weight = getRand<int>(0, 1e9);
 				adjweighted[u].push_back({v, weight});
 				adjweighted[v].push_back({u, weight});
 				adj[u].push_back(v);

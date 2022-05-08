@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../../Library/misc/random.h"
 
 #include "../../../Library/range_data_structures/implicitLazySegTree.h"
 
@@ -21,7 +21,7 @@ int main() {
 			int L = getRand(l, r), R = getRand(l, r);
 			if(L > R) swap(L,R);
 			if(getRand(1,2) == 1) {//update
-				int diff = getRand(-1e9, 1e9);
+				int diff = getRand<int>(-1e9, 1e9);
 				ist.update(L, R, diff);
 				for(int i = L; i <= R; i++) naive[i] += diff;
 			} else {//query
