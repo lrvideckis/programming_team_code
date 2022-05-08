@@ -8,16 +8,20 @@ trap "rm -f $DIR/../../template.cpp.gch" EXIT
 SCRIPT_DIR=$DIR/test_utilities/scripts
 
 if [[ $# -eq 1 ]] ; then
-	tests="$(find $DIR/../../Library -name '*.h')"
+	tests="$(find $DIR/../../Library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
+	echo "skipped: "
+	find $DIR/../../Library -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers.txt
 else
     tests="$(find $DIR/../../Library -name "*$2*")"
 fi
+
+echo "now compiling header(s)"
 
 declare -i pass=0
 declare -i fail=0
 failHeaders=""
 for test in $tests; do
-    echo "$(basename $test): "
+    echo "$test: "
     $SCRIPT_DIR/test-compiles.sh $test
     retCode=$?
     if (($retCode != 0)); then

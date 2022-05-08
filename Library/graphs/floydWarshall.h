@@ -1,20 +1,13 @@
 #pragma once
 
-//status: tested against output of dijkstras on random graphs
+//status: tested against output of dijkstras and SCC on random graphs
+//
+//**for directed graphs only** if you initialize len[i][i] to infinity, then
+//afterwards, len[i][i] = length of shortest cycle including node `i`
 
-vector<vector<long long>> floydWarshall(const vector<vector<pair<int, long long>>>& adj /*directed or undirected, weighted graph*/) {
-	int n = adj.size();
-	vector<vector<long long>> len(n, vector<long long> (n, 1e18));
+for (int k = 0; k < n; k++) {
 	for (int i = 0; i < n; i++) {
-		len[i][i] = 0;//remove this line if you want shortest cycle - len[i][i] will = length of shortest cycle including node i (only for directed graphs)
-		for (auto [neighbor, weight] : adj[i])
-			len[i][neighbor] = min(len[i][neighbor], weight);
+		for (int j = 0; j < n; j++)
+			len[i][j] = min(len[i][j], len[i][k] + len[k][j]);
 	}
-	for (int k = 0; k < n; k++) {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++)
-				len[i][j] = min(len[i][j], len[i][k] + len[k][j]);
-		}
-	}
-	return len;
 }
