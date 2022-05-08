@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
+SCRIPT_DIR=$DIR/test_utilities/scripts
 
 # use a precompiled header for the template to improve perf
-g++ -Wall -Wextra -pedantic -Wno-unused-result -Wfatal-errors -DLOCAL -std=c++17 -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wcast-qual -Wcast-align -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fstack-protector -x c++-header $DIR/../../template.cpp
+g++ $(cat $SCRIPT_DIR/compile_flags.txt) -x c++-header $DIR/../../template.cpp
 trap "rm -f $DIR/../../template.cpp.gch" EXIT
 
-SCRIPT_DIR=$DIR/test_utilities/scripts
+echo "done with compiling!!!"
 
 if [[ $# -eq 1 ]] ; then
 	tests="$(find $DIR/../../Library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
