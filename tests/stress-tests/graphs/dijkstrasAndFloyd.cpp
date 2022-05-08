@@ -15,7 +15,7 @@ int main() {
 
 		vector<vector<long long>> from_dijkstras(n);
 		for(int i = 0; i < n; i++) {
-			from_dijkstras[i] = dijkstra(adj, i).len;
+			from_dijkstras[i] = dijkstra(adj, i);
 		}
 		assert(from_dijkstras == floydWarshall(adj));
 	}
