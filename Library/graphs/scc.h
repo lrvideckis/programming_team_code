@@ -1,6 +1,6 @@
 #pragma once
 
-//status: tested against floyd warshals on random graphs. also tested on https://judge.yosupo.jp/problem/scc
+//status: tested on https://judge.yosupo.jp/problem/scc
 //building of condensation graph tested on https://cses.fi/problemset/task/1686/
 
 struct sccInfo {
