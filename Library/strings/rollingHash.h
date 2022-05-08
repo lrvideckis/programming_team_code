@@ -8,6 +8,9 @@
 //	vector<int> arr;
 //	...
 //	Hash h(arr);
+//
+//	h(2,4) - get hashes of substring/subarray [2,4]
+//
 //	assumes 0 < arr[i] < 1e9+5 = `base`
 //	here, for negatives or longlongs, compress values to {1,2,...,n} and make sure `base` is > n
 //
@@ -42,7 +45,7 @@ struct Hash {
 	}
 
 	//returns hashes of substring/subarray [L,R] inclusive, one hash per mod
-	vector<int> getHashes(int L, int R) const {
+	vector<int> operator()(int L, int R) const {
 		assert(0 <= L && L <= R && R + 1 < (int) prefix[0].size());
 		vector<int> res(mods.size());
 		for (int i = 0; i < (int) mods.size(); i++) {

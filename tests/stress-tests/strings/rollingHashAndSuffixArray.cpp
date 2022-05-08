@@ -26,8 +26,8 @@ int main() {
 					if(s[i+len-1] != s[j+len-1]) {
 						sameNaive = false;
 					}
-					bool sameHashStr = hStr.getHashes(i,i+len-1) == hStr.getHashes(j,j+len-1);
-					bool sameHashArr = hArr.getHashes(i,i+len-1) == hArr.getHashes(j,j+len-1);
+					bool sameHashStr = hStr(i,i+len-1) == hStr(j,j+len-1);
+					bool sameHashArr = hArr(i,i+len-1) == hArr(j,j+len-1);
 					bool sameSA = len <= sa.longest_common_prefix(i,j);
 					assert(sameNaive == sameHashStr);
 					assert(sameNaive == sameHashArr);
@@ -36,12 +36,12 @@ int main() {
 
 					//sanity check on different lengths
 					if(j+len < n) {
-						assert(hStr.getHashes(i,i+len-1) != hStr.getHashes(i, n-1));
-						assert(hArr.getHashes(i,i+len-1) != hArr.getHashes(i, n-1));
+						assert(hStr(i,i+len-1) != hStr(i, n-1));
+						assert(hArr(i,i+len-1) != hArr(i, n-1));
 					}
 					if(len > 1) {
-						assert(hStr.getHashes(i,i+len-1) != hStr.getHashes(i,i));
-						assert(hArr.getHashes(i,i+len-1) != hArr.getHashes(i,i));
+						assert(hStr(i,i+len-1) != hStr(i,i));
+						assert(hArr(i,i+len-1) != hArr(i,i));
 					}
 				}
 			}

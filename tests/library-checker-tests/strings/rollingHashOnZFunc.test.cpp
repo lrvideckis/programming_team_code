@@ -21,7 +21,7 @@ int main() {
 				end = mid;
 				continue;
 			}
-			if(h.getHashes(0, mid-1) == h.getHashes(i, i+mid-1)) start = mid;
+			if(h(0, mid-1) == h(i, i+mid-1)) start = mid;
 			else end = mid;
 		}
 		cout << start << " ";
