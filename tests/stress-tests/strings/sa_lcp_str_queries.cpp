@@ -21,7 +21,6 @@ int main() {
 			});
 
 			assert(sa_fast == sa_naive);
-			cout << "suffix array is correct" << endl;
 		}
 
 		vector<int> lcp_fast = lcp_array(s, sa_fast);
@@ -39,7 +38,6 @@ int main() {
 			}
 
 			assert(lcp_fast == lcpNaive);
-			cout << "lcp array is correct" << endl;
 		}
 
 		str_queries str_qs(s);
@@ -49,7 +47,6 @@ int main() {
 			bool lessNaive = (s.substr(p1) < s.substr(p2));
 			assert(lessNaive == str_qs.less(p1, p2));
 		}
-		cout << "less queries are correct" << endl;
 
 		for(int iter = 5000; iter--;) {
 			int p1 = getRand(0, n-1), p2 = getRand(0, n-1);
@@ -61,7 +58,6 @@ int main() {
 			}
 			assert(naiveLen == fastLen);
 		}
-		cout << "longest common prefix queries are correct" << endl;
 	}
 
 	cout << "Tests passed!" << endl;

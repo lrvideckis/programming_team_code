@@ -38,7 +38,6 @@ vector<vector<int>> genRandomGraph(
 	//see https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model#Properties_of_G(n,_p)
 	//regarding picking a probability for edge existence
 	int probGenType = getRand(1,4);
-	cout << "probGenType: " << probGenType << "   ";
 	double pEdge = 0.001;
 	if(probGenType == 1) {
 		//expected behavior: no components with size > log(n)

@@ -27,7 +27,6 @@ int main() {
 				matchesNaive.push_back(i);
 			}
 		}
-		cout << "number of matches: " << matchesNaive.size() << endl;
 		KMP_Match kmp(needle);
 		KMP_Match kmpArr(needleArr);
 		assert(matchesNaive == kmp.find(haystack));

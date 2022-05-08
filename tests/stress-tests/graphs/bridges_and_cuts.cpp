@@ -11,7 +11,6 @@ int main() {
 		int n = getRand(1, 100);//nodes
 		if(getRand(1,2) == 1) n = getRand(1, 6);
 
-		cout << "n: " << n << flush;
 		vector<vector<int>> adj = genRandomGraph(n, false /*isDirected*/, getRand(1,5) == 1 /*isConnected*/, true /*isSimple*/);
 
 		biconnected_components bcc(adj);
@@ -44,7 +43,6 @@ int main() {
 			auto [u,v] = eTest;
 			assert(isBridgeNaive == bcc.is_bridge_edge(u,v));
 		}
-		cout << "is_bridge_edge passed " << flush;
 
 		for(int i = 0; i < n; i++) {
 			disjointSet curr(n);
@@ -60,7 +58,6 @@ int main() {
 			}
 			assert(isCutNaive == bcc.is_cut[i]);
 		}
-		cout << "cut nodes passed " << flush;
 
 		for(int iter = 100; iter--;) {
 			int node1 = getRand(0,n-1), node2 = getRand(0,n-1);
@@ -119,7 +116,6 @@ int main() {
 			assert((res != -1) == sameBBCMiddle);
 			assert(res == whichBcc);
 		}
-		cout << "bct same bcc test passed" << endl << flush;
 	}
 
 	cout << "Tests passed!" << endl;

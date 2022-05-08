@@ -22,8 +22,6 @@ int main() {
 			}
 		}
 
-		cout << "mod: " << mod << endl;
-
 		int n = 1000;
 		vector<vector<int>> choose(n+1, vector<int>(n+1, 0));
 		for(int i = 0; i <= n; i++) {

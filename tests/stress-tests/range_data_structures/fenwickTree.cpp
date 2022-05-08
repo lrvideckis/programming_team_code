@@ -14,10 +14,8 @@ int main() {
 			}
 			fenwickTree<long long> ft(0);
 			if(getRand(1,2) == 1) {
-				cout << "constructor 1" << endl;
 				ft = fenwickTree<long long>(arr);
 			} else {
-				cout << "constructor 2" << endl;
 				ft = fenwickTree<long long>(n);
 				arr = vector<long long>(n, 0);
 			}

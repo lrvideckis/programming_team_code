@@ -21,7 +21,6 @@ int main() {
 		int n = getRand(1, 1000);//nodes
 		if(getRand(1,2) == 1) n = getRand(1, 10);
 
-		cout << "n: " << n << endl;
 		vector<vector<pair<int, long long>>> adjweighted(n);
 		vector<vector<int>> adj(n);
 		{
