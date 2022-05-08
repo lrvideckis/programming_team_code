@@ -59,7 +59,7 @@ struct segTree {
 	}
 
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
-	void applyDeltaOnRange(int v, long long add) {
+	void apply(int v, long long add) {
 		tree[v].sum += tree[v].len() * add;
 		tree[v].mx += add;
 		tree[v].mn += add;
@@ -71,7 +71,7 @@ struct segTree {
 
 	void push(int v) {
 		if (tree[v].lazy) {
-			applyDeltaOnRange(v, tree[v].lazy);
+			apply(v, tree[v].lazy);
 			tree[v].lazy = 0;
 		}
 	}
@@ -85,7 +85,7 @@ struct segTree {
 		if (tree[v].r < l || r < tree[v].l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
-			return applyDeltaOnRange(v, add);
+			return apply(v, add);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rCh(), l, r, add);
 		tree[v] = combine(tree[v + 1], tree[v + tree[v].rCh()]);
