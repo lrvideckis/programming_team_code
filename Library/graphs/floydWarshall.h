@@ -1,6 +1,6 @@
 #pragma once
 
-//status: tested against output of dijkstras and SCC on random graphs
+//status: not tested
 //
 //**for directed graphs only** if you initialize len[i][i] to infinity, then
 //afterwards, len[i][i] = length of shortest cycle including node `i`
