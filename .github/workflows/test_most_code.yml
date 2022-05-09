@@ -48,3 +48,12 @@ jobs:
 
     - name: Run stress tests
       run: make --directory=tests/stress-tests/ test
+
+  check_code_format:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check code format
+      run: bash tests/stress-tests/test_utilities/scripts/test-format.sh
