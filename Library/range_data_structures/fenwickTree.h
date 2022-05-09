@@ -37,9 +37,9 @@ struct fenwickTree {
 	int lower_bound(T sum) {
 		if (sum <= 0) return -1;
 		int pos = 0;
-		for (int pw = 1<<(31 - __builtin_clz(bit.size()|1)); pw; pw >>= 1) {
-			if (pos + pw <= (int)bit.size() && bit[pos + pw-1] < sum)
-				pos += pw, sum -= bit[pos-1];
+		for (int pw = 1 << (31 - __builtin_clz(bit.size() | 1)); pw; pw >>= 1) {
+			if (pos + pw <= (int)bit.size() && bit[pos + pw - 1] < sum)
+				pos += pw, sum -= bit[pos - 1];
 		}
 		return pos;
 	}
