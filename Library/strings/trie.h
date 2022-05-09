@@ -16,7 +16,7 @@ struct trie {
 		}
 	};
 
-	vector<node> t;    //adj list
+	vector<node> t;
 
 	trie() : t(1) {}
 
