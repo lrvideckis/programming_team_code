@@ -1,6 +1,6 @@
 #pragma once
 
-//runtime initialization
+//MUCH RANDOM!!!
 seed_seq seed{
 	(uint32_t)chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count(),
 	(uint32_t)random_device()(),
