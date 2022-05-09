@@ -3,13 +3,13 @@
 
 #include "../../../Library/range_data_structures/segTree.h"
 
-const int mx = 1e9;
+const int mx_val = 1e9;
 
 tuple<segTree, vector<long long>> treeFactory(int n) {
 	if(getRand(1, 2) == 1) {
 		vector<long long> arr(n);
 		for(int i = 0; i < n; i++) {
-			arr[i] = getRand(-mx, mx);
+			arr[i] = getRand(-mx_val, mx_val);
 		}
 		return make_tuple(segTree(arr), arr);
 	}
@@ -25,7 +25,7 @@ int main() {
 			int L = getRand(0,n-1), R = getRand(0,n-1);
 			if(L > R) swap(L,R);
 			if(getRand(1,2) == 1) {//update
-				long long diff = getRand(-mx, mx);
+				long long diff = getRand(-mx_val, mx_val);
 				st.update(L, R, diff);
 				for(int i = L; i <= R; i++) arr[i] += diff;
 			} else {//query
