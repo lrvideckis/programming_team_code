@@ -2,24 +2,26 @@
 
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 //tested on https://judge.yosupo.jp/problem/range_kth_smallest
+//works for -1e9 <= arr[i] <= 1e9
+
 struct kth_smallest {
+
+	const int mx = 1e9;
 
 	struct Node {
 		int lCh, rCh;//children, indexes into `tree`
 		int sum;
 	};
 
-	int sz;
 	deque<Node> tree;
 	vector<int> roots;
 
-	// only works for 0 <= arr[i] <= 1e9
-	kth_smallest(const vector<int>& arr) : sz(1e9 + 1) {
+	kth_smallest(const vector<int>& arr) {
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
 		for (int i = 0; i < (int)arr.size(); i++) {
-			assert(0 <= arr[i] && arr[i] < sz);
-			roots.push_back(update(roots.back(), 0, sz - 1, arr[i], 1));
+			assert(-mx <= arr[i] && arr[i] <= mx);
+			roots.push_back(update(roots.back(), -mx, mx, arr[i], 1));
 		}
 	}
 	int update(int v, int tl, int tr, int idx, int diff) {
@@ -28,7 +30,7 @@ struct kth_smallest {
 			tree.push_back({0, 0, tree[v].sum + diff});
 			return tree.size() - 1;
 		}
-		int tm = (tl + tr) / 2;
+		int tm = tl + (tr - tl) / 2;
 		int lCh = tree[v].lCh;
 		int rCh = tree[v].rCh;
 		if (idx <= tm)
@@ -45,13 +47,13 @@ struct kth_smallest {
 	 */
 	int query(int l, int r, int k) const {
 		assert(1 <= k && k <= r - l + 1); //note this condition implies L <= R
-		assert(0 <= l && r < sz - 1);
-		return query(roots[l], roots[r + 1], 0, sz - 1, k);
+		assert(0 <= l && r + 1 < (int)roots.size());
+		return query(roots[l], roots[r + 1], -mx, mx, k);
 	}
 	int query(int vl, int vr, int tl, int tr, int k) const {
 		if (tl == tr)
 			return tl;
-		int tm = (tl + tr) / 2;
+		int tm = tl + (tr - tl) / 2;
 		int left_count = tree[tree[vr].lCh].sum - tree[tree[vl].lCh].sum;
 		if (left_count >= k) return query(tree[vl].lCh, tree[vr].lCh, tl, tm, k);
 		return query(tree[vl].rCh, tree[vr].rCh, tm + 1, tr, k - left_count);

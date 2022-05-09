@@ -2,6 +2,9 @@
 
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 //tested on https://www.spoj.com/problems/DQUERY/ and stress tested
+
+//works with negatives
+
 struct persistentSegTree {
 
 	struct Node {

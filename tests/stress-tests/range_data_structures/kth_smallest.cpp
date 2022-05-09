@@ -7,14 +7,20 @@
 
 int main() {
 	for(int tests = 20; tests--;) {
-		int n = getRand(1, 1000);
+		int n = getRand(1, 100);
 		vector<int> arr(n);
-		for(int i = 0; i < n; i++) {
-			arr[i] = getRand<int>(0, 1e9);
+		if(getRand(0,1) == 0) {
+			for(int i = 0; i < n; i++) {
+				arr[i] = getRand<int>(-1e9, 1e9);
+			}
+		} else {
+			for(int i = 0; i < n; i++) {
+				arr[i] = getRand<int>(-2, 2);
+			}
 		}
 		kth_smallest st(arr);
 		MergeSortTree mst(arr);
-		for(int iterations = 1000; iterations--;) {
+		for(int iterations = 200; iterations--;) {
 			int L = getRand(0,n-1), R = getRand(0,n-1);
 			if(L > R) swap(L,R);
 			vector<int> subarr(R-L+1);
