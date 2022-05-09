@@ -85,12 +85,12 @@ struct persistentLazySegTree {
 
 	//let's use implementation trick described here https://codeforces.com/blog/entry/72626
 	//so that we don't have to propogate lazy vals and thus we don't have to allocate new nodes
-	int query(int l, int r) {
+	int query(int l, int r) const {
 		int version = roots.size() - 1;
 		int root = roots[version];
 		return query(root, 0, sz - 1, l, r, tree[root].lazyTog);
 	}
-	int query(int v, int tl, int tr, int l, int r, bool tog) {
+	int query(int v, int tl, int tr, int l, int r, bool tog) const {
 		if (v == 0 || tr < l || r < tl)
 			return 0;
 		if (l <= tl && tr <= r) {
