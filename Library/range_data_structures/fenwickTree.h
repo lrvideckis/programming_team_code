@@ -1,6 +1,8 @@
 #pragma once
 
-//status: tested on random inputs; also tested on https://judge.yosupo.jp/problem/point_add_range_sum
+//status: tested on random inputs; also tested on
+//https://judge.yosupo.jp/problem/point_add_range_sum, lower_bound tested on
+//https://judge.yosupo.jp/problem/predecessor_problem
 
 template<class T>
 struct fenwickTree {
@@ -29,6 +31,17 @@ struct fenwickTree {
 	}
 	T sum(int l, int r) const {
 		return sum(r) - sum(l - 1);
+	}
+	//min pos st sum of [0, pos] >= sum
+	// Returns bit.size() if no sum is >= sum, or -1 if empty sum is.
+	int lower_bound(T sum) {
+		if (sum <= 0) return -1;
+		int pos = 0;
+		for (int pw = 1<<(31 - __builtin_clz(bit.size()|1)); pw; pw >>= 1) {
+			if (pos + pw <= (int)bit.size() && bit[pos + pw-1] < sum)
+				pos += pw, sum -= bit[pos-1];
+		}
+		return pos;
 	}
 };
 
