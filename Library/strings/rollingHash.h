@@ -32,7 +32,7 @@ struct Hash {
 		for (int i = 0; i < (int) bases.size(); i++) {
 			for (int j = 0; j < (int) s.size(); j++) {
 				powB[i][j + 1] = 1ULL * powB[i][j] * bases[i] % mod;
-				prefix[i][j + 1] = (1ULL * bases[i] * prefix[i][j] + s[j] + mx + 1) % mod;
+				prefix[i][j + 1] = (1ULL * prefix[i][j] * bases[i] + s[j] + mx + 1) % mod;
 			}
 		}
 	}
