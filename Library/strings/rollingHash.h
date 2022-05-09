@@ -14,15 +14,12 @@
 #include "../misc/random.h"
 
 const unsigned mod = 4294967087; // largest prime p < UINT_MAX such that (p-1)/2 is also prime
-
 const int mx = 2e9 + 1000;
-
-vector<unsigned> bases {
-	getRand<unsigned>(2u * mx + 2, mod-1),
-	getRand<unsigned>(2u * mx + 2, mod-1),
-	getRand<unsigned>(2u * mx + 2, mod-1)
+const vector<unsigned> bases {
+	getRand<unsigned>(2u * mx + 2, mod - 1),
+	getRand<unsigned>(2u * mx + 2, mod - 1),
+	getRand<unsigned>(2u * mx + 2, mod - 1)
 };
-
 
 template <class T>
 struct Hash {
@@ -47,11 +44,11 @@ struct Hash {
 		};
 		long long num_comparisons = 1e5;
 		cerr << fixed << setprecision(10) << "Probability of **no** collisions when doing "
-			<< num_comparisons << " comparisons is ~ " << getProb(num_comparisons) << endl;
+		     << num_comparisons << " comparisons is ~ " << getProb(num_comparisons) << endl;
 		long long k = 1e5;
 		cerr << fixed << setprecision(10) << "Probability that " << k << " unique strings have "
-			<< k << " unique hashes (if storing hashes in a std::set) is "
-			<< getProb(k * (k-1) / 2) << endl;
+		     << k << " unique hashes (if storing hashes in a std::set) is "
+		     << getProb(k * (k - 1) / 2) << endl;
 	}
 
 	//returns hashes of substring/subarray [L,R] inclusive, one hash per base
