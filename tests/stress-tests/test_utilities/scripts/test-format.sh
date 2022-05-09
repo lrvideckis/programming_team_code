@@ -1,8 +1,10 @@
 #!/bin/bash
 
+ASTYLE_COMMAND=$(cat README.md | grep '^astyle*')
+
 cd Library
 
-VAR=$(astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --dry-run --formatted | grep Formatted)
+VAR=$(eval $ASTYLE_COMMAND --dry-run --formatted | grep Formatted)
 
 if [ -z "$VAR" ];
 then
