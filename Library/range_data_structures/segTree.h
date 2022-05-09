@@ -6,21 +6,18 @@ const long long inf = 1e18;
 
 struct segTree {
 	struct Node {
-		long long sum = 0, mx = -inf, mn = inf;
-
+		long long sum, mx, mn;
+		long long lazy;
 		int l, r;
 
 		int len() const {
 			return r - l + 1;
 		}
-
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
 		int rCh() const {
 			return ((r - l) & ~1) + 2;
 		}
-
-		long long lazy = 0;
 	};
 
 	vector<Node> tree;
@@ -36,6 +33,7 @@ struct segTree {
 				arr[tl],
 				arr[tl],
 				arr[tl],
+				0,
 				tl,
 				tr
 			};
@@ -52,9 +50,9 @@ struct segTree {
 			L.sum + R.sum,
 			max(L.mx, R.mx),
 			min(L.mn, R.mn),
+			0,
 			L.l,
 			R.r
-			//Note lazy value initializes to 0 here which is ok since we always push lazy down&reset before combining back up
 		};
 	}
 
@@ -97,7 +95,7 @@ struct segTree {
 	}
 	Node query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
-			return Node(); //l,r is uninitialized -> access means undefined behavior
+			return Node{0, -inf, inf, 0, 0, 0};
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v];
