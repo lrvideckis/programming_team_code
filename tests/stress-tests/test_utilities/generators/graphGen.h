@@ -94,15 +94,3 @@ vector<vector<int>> genRandomGraph(
 	}
 	return adj;
 }
-
-vector<vector<pair<int,long long>>> convertAdjToWeighted(const vector<vector<int>>& adj) {
-	const int maxEdgeWeight = getRand<int>(0, 1e9);
-	int n = adj.size();
-	vector<vector<pair<int,long long>>> weighted(n);
-	for(int i = 0; i < n; i++) {
-		for(int next : adj[i]) {
-			weighted[i].push_back({next, getRand(0, maxEdgeWeight)});
-		}
-	}
-	return weighted;
-}
