@@ -55,5 +55,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install astyle
+      run: apt-get install astyle
+
     - name: Check code format
       run: bash tests/stress-tests/test_utilities/scripts/test-format.sh
