@@ -1,62 +1,63 @@
-.
-|-- 25_pg-reference.pdf
-|-- 25_pg-reference.tex
-|-- graphs
-|   |-- bridges_and_cuts.h
-|   |-- centroid.h
-|   |-- countPathLengths.h
-|   |-- dijkstra.h
-|   |-- disjointSet.h
-|   |-- dsuTree.h
-|   |-- floydWarshall.h
-|   |-- hld.h
-|   |-- hopcroftKarp.h
-|   |-- lca.h
-|   `-- scc.h
-|-- math
-|   |-- exp_mod.h
-|   |-- fib.h
-|   |-- matrixMultPow.h
-|   |-- n_choose_k_mod.h
-|   |-- partition.h
-|   |-- primeSieveMobius.h
-|   |-- solve_linear_mod.h
-|   |-- sumFloorArithSeries.h
-|   |-- sumOfKthPowers.h
-|   `-- totient.h
-|-- maxflow
-|   |-- dinic.h
-|   |-- hungarian.h
-|   `-- minCostMaxFlow.h
-|-- misc
-|   |-- cntRectangles.h
-|   |-- longest_increasing_subsequence.h
-|   |-- policy_based_data_structures.h
-|   |-- random.h
-|   `-- safehash.h
-|-- range_data_structures
-|   |-- buckets.h
-|   |-- distinct_query.h
-|   |-- fenwickTree.h
-|   |-- implicitLazySegTree.h
-|   |-- implicitSegTree.h
-|   |-- kth_smallest.h
-|   |-- mergeSortTree.h
-|   |-- MosAlgo.h
-|   |-- persistentLazySegTree.h
-|   |-- persistentSegTree.h
-|   |-- segTreeBeats.h
-|   |-- segTree.h
-|   `-- sparseTable.h
-|-- README.md
-`-- strings
-    |-- kmp.h
-    |-- longest_common_prefix.h
-    |-- rollingHash.h
-    |-- rollingHash.h.orig
-    |-- rotationally_equivalent.h
-    |-- string_queries.h
-    |-- suffix_array.h
-    `-- trie.h
+# Project tree
 
-6 directories, 53 files
+.
+ * [25_pg-reference.pdf](./25_pg-reference.pdf)
+ * [25_pg-reference.tex](./25_pg-reference.tex)
+ * [graphs](./graphs)
+   * [bridges_and_cuts.h](./graphs/bridges_and_cuts.h)
+   * [centroid.h](./graphs/centroid.h)
+   * [countPathLengths.h](./graphs/countPathLengths.h)
+   * [disjointSet.h](./graphs/disjointSet.h)
+   * [dsuTree.h](./graphs/dsuTree.h)
+   * [hld.h](./graphs/hld.h)
+   * [hopcroftKarp.h](./graphs/hopcroftKarp.h)
+   * [scc.h](./graphs/scc.h)
+   * [floydWarshall.h](./graphs/floydWarshall.h)
+   * [dijkstra.h](./graphs/dijkstra.h)
+   * [lca.h](./graphs/lca.h)
+ * [math](./math)
+   * [exp_mod.h](./math/exp_mod.h)
+   * [fib.h](./math/fib.h)
+   * [matrixMultPow.h](./math/matrixMultPow.h)
+   * [n_choose_k_mod.h](./math/n_choose_k_mod.h)
+   * [partition.h](./math/partition.h)
+   * [primeSieveMobius.h](./math/primeSieveMobius.h)
+   * [solve_linear_mod.h](./math/solve_linear_mod.h)
+   * [sumFloorArithSeries.h](./math/sumFloorArithSeries.h)
+   * [sumOfKthPowers.h](./math/sumOfKthPowers.h)
+   * [totient.h](./math/totient.h)
+ * [maxflow](./maxflow)
+   * [dinic.h](./maxflow/dinic.h)
+   * [hungarian.h](./maxflow/hungarian.h)
+   * [minCostMaxFlow.h](./maxflow/minCostMaxFlow.h)
+ * [range_data_structures](./range_data_structures)
+   * [buckets.h](./range_data_structures/buckets.h)
+   * [fenwickTree.h](./range_data_structures/fenwickTree.h)
+   * [implicitLazySegTree.h](./range_data_structures/implicitLazySegTree.h)
+   * [implicitSegTree.h](./range_data_structures/implicitSegTree.h)
+   * [mergeSortTree.h](./range_data_structures/mergeSortTree.h)
+   * [MosAlgo.h](./range_data_structures/MosAlgo.h)
+   * [persistentSegTree.h](./range_data_structures/persistentSegTree.h)
+   * [segTreeBeats.h](./range_data_structures/segTreeBeats.h)
+   * [sparseTable.h](./range_data_structures/sparseTable.h)
+   * [persistentLazySegTree.h](./range_data_structures/persistentLazySegTree.h)
+   * [distinct_query.h](./range_data_structures/distinct_query.h)
+   * [kth_smallest.h](./range_data_structures/kth_smallest.h)
+   * [segTree.h](./range_data_structures/segTree.h)
+ * [misc](./misc)
+   * [cntRectangles.h](./misc/cntRectangles.h)
+   * [longest_increasing_subsequence.h](./misc/longest_increasing_subsequence.h)
+   * [policy_based_data_structures.h](./misc/policy_based_data_structures.h)
+   * [safehash.h](./misc/safehash.h)
+   * [random.h](./misc/random.h)
+ * [strings](./strings)
+   * [longest_common_prefix.h](./strings/longest_common_prefix.h)
+   * [rotationally_equivalent.h](./strings/rotationally_equivalent.h)
+   * [string_queries.h](./strings/string_queries.h)
+   * [suffix_array.h](./strings/suffix_array.h)
+   * [rollingHash.h.orig](./strings/rollingHash.h.orig)
+   * [rollingHash.h](./strings/rollingHash.h)
+   * [trie.h](./strings/trie.h)
+   * [kmp.h](./strings/kmp.h)
+ * [tree.sh](./tree.sh)
+ * [README.md](./README.md)
