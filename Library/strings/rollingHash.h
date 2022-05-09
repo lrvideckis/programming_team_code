@@ -8,23 +8,6 @@
 //	works for -2e9 - 1000 <= arr[i] <= 2e9 + 1000
 //
 //status: tested on random inputs, on https://judge.yosupo.jp/problem/zalgorithm, and on https://judge.yosupo.jp/problem/enumerate_palindromes
-//
-//https://codeforces.com/blog/entry/100027
-//https://codeforces.com/blog/entry/60442
-//https://codeforces.com/blog/entry/4898?#comment-157965
-
-
-
-
-//`bases[i]` should be relatively prime with all mods and *strictly* larger than max element
-//larger/smaller `bases` *doesn't* change collision odds
-//ideally `bases` would be random to avoid getting hacked
-//
-//probability of collision = 1/mod_product
-//If you're storing hashes in a set, you want all hashes to be unique.
-//probability that k unique strings have k unique hashes = (1/mod_product)^k * (mod_product permute k) from birthday paradox
-//this is approximated as 1 - e^(-k(k-1)/(2*mod_product)) so basically choose enough mods such that mod_product > k^2
-
 
 #pragma once
 
@@ -58,10 +41,20 @@ struct Hash {
 	}
 
 	void debugCollisionProbability() const {
-		cerr << scientific;
+		// (1 - (str_len / mod) ^ #bases) ^ #comparisons
+		auto getProb = [&](long long num_comparisons) -> double {
+			return pow(1 - pow(powB[0].size() / double(mod), bases.size()), num_comparisons);
+		};
+		long long num_comparisons = 1e5;
+		cerr << fixed << setprecision(10) << "Probability of **no** collisions when doing "
+			<< num_comparisons << " comparisons is ~ " << getProb(num_comparisons) << endl;
+		long long k = 1e5;
+		cerr << fixed << setprecision(10) << "Probability that " << k << " unique strings have "
+			<< k << " unique hashes (if storing hashes in a std::set) is "
+			<< getProb(k * (k-1) / 2) << endl;
 	}
 
-	//returns hashes of substring/subarray [L,R] inclusive, one hash per mod
+	//returns hashes of substring/subarray [L,R] inclusive, one hash per base
 	vector<unsigned> operator()(int L, int R) const {
 		assert(0 <= L && L <= R && R + 1 < (int) prefix[0].size());
 		vector<unsigned> res(bases.size());
