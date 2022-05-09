@@ -35,3 +35,12 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - [fast IO](https://github.com/nealwu/competitive-programming/blob/master/io/io.cc)
 - [Interval container](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/IntervalContainer.h)
 - 2D data structures (like [seg tree](https://github.com/ShahjalalShohag/code-library/blob/master/Data%20Structures/Segment%20Tree%202D%20Dynamic.cpp), [sparse table](https://codeforces.com/blog/entry/45485) etc)
+
+## Other CP repos
+
+- https://github.com/kth-competitive-programming/kactl
+- https://github.com/ShahjalalShohag/code-library
+- https://github.com/ecnerwala/cp-book
+- https://github.com/the-tourist/algo
+- https://github.com/nealwu/competitive-programming
+- https://github.com/dacin21/dacin21_codebook
