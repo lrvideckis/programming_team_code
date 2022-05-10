@@ -35,7 +35,7 @@ struct lca {
 		}
 	}
 
-	//traverse up k edges. So with k=1 this returns `node`'s parent
+	//traverse up k edges in O(log(k)). So with k=1 this returns `node`'s parent
 	int kthPar(int node, int k) const {
 		k = min(k, info[node].depth);
 		while (k > 0) {
