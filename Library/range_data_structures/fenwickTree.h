@@ -34,7 +34,7 @@ struct fenwickTree {
 	}
 	//Returns min pos such that sum of [0, pos] >= sum
 	//Returns bit.size() if no sum is >= sum, or -1 if empty sum is.
-	//Doesn't work with negatives, counterexample: array: {1, -1}, sum: 1, this returns 2
+	//Doesn't work with negatives (since it's greedy), counterexample: array: {1, -1}, sum: 1, this returns 2
 	int lower_bound(T sum) const {
 		if (sum <= 0) return -1;
 		int pos = 0;
