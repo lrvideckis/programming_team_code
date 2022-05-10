@@ -34,7 +34,7 @@ struct fenwickTree {
 	}
 	//min pos st sum of [0, pos] >= sum
 	// Returns bit.size() if no sum is >= sum, or -1 if empty sum is.
-	int lower_bound(T sum) {
+	int lower_bound(T sum) const {
 		if (sum <= 0) return -1;
 		int pos = 0;
 		for (int pw = 1 << (31 - __builtin_clz(bit.size() | 1)); pw; pw >>= 1) {
