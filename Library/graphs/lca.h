@@ -1,37 +1,47 @@
 #pragma once
 
 //https://codeforces.com/blog/entry/74847
+//assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 //status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
 
 struct lca {
 	struct Node {
-		int depth, jump, par, dist;
+		int depth, jump, par;
+		long long dist;
 	};
 	vector<Node> info;
 
-	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
-		info(adj.size()) {
-		dfs(root, root, 0, adj);
+	lca(const vector<vector<pair<int, long long>>>& adj, int root) : info(adj.size()) {
+		info[root] = {
+			0,
+			root,
+			root,
+			0
+		};
+		dfs(root, -1, adj);
 	}
 
-	void dfs(int node, int par, int weightToPar, const vector<vector<pair<int, long long>>>& adj) {
-		int par2 = info[par].jump;
-		info[node] = {
-			info[par].depth + 1,
-			info[par].depth - info[par2].depth == info[par2].depth - info[info[par2].jump].depth ? info[par2].jump : par,
-			par,
-			info[par].dist + weightToPar
-		};
+	void dfs(int node, int par, const vector<vector<pair<int, long long>>>& adj) {
 		for (auto [to, w] : adj[node]) {
 			if (to == par) continue;
-			dfs(to, node, w, adj);
+			int par2 = info[node].jump;
+			info[to] = {
+				info[node].depth + 1,
+				info[node].depth - info[par2].depth == info[par2].depth - info[info[par2].jump].depth ? info[par2].jump : node,
+				node,
+				info[node].dist + w
+			};
+			dfs(to, node, adj);
 		}
 	}
 
+	//traverse up k edges. So with k=1 this returns `node`'s parent
 	int kthPar(int node, int k) const {
-		while(k > 0 && node > 0) {
-			if(info[node].depth - k <= info[info[node].jump].depth) {
-				k -= info[node].depth - info[info[node].jump].depth;
+		k = min(k, info[node].depth);
+		while (k > 0) {
+			int jumpDistEdges = info[node].depth - info[info[node].jump].depth;
+			if (jumpDistEdges <= k) {
+				k -= jumpDistEdges;
 				node = info[node].jump;
 			} else {
 				k--;
@@ -44,15 +54,11 @@ struct lca {
 	int getLca(int x, int y) const {
 		if (info[x].depth < info[y].depth) swap(x, y);
 		x = kthPar(x, info[x].depth - info[y].depth);
-		if (x == y) return x;
-		while(x != y) {
-			if(info[x].jump == info[y].jump) {
-				x = info[x].par;
-				y = info[y].par;
-			} else {
-				x = info[x].jump;
-				y = info[y].jump;
-			}
+		while (x != y) {
+			if (info[x].jump == info[y].jump)
+				x = info[x].par, y = info[y].par;
+			else
+				x = info[x].jump, y = info[y].jump;
 		}
 		return x;
 	}
