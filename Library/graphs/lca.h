@@ -1,70 +1,67 @@
 #pragma once
 
-/*
- * Description: Lowest Common Ancestor (LCA) implemented with Binary Lifting.
- * Supports functionality like kth Parent, distance between pair of nodes in
- * number of edges, and distance between pair of nodes in sum of edge weight.
- * Time: O(n * log(n)) for construction and all queries can be answered in
- * O(log(n))
- *
- * status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
- */
+//https://codeforces.com/blog/entry/74847
+//status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
 
 struct lca {
-	typedef long long ll;
-	int Log;
-	vector<vector<int>> memo;
-	vector<int> depth;
-	vector<ll> dist;
+	struct Node {
+		int depth, jump, par, dist;
+	};
+	vector<Node> info;
 
-	// use weights of 1 for unweighted tree
-	// 0 - based nodes
-	lca(const vector<vector<pair<int, ll>>>& adj /*connected, weighted tree*/, int root) :
-		Log(32 - __builtin_clz(adj.size())),
-		memo(adj.size(), vector<int>(Log)),
-		depth(adj.size()),
-		dist(adj.size()) {
-		dfs(root, root, adj);
+	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
+		info(adj.size()) {
+		dfs(root, root, 0, adj);
 	}
 
-	void dfs(int node, int par, const vector<vector<pair<int, ll>>>& adj) {
-		memo[node][0] = par;
-		for (int i = 1; i < Log; ++i)
-			memo[node][i] = memo[memo[node][i - 1]][i - 1];
+	void dfs(int node, int par, int weightToPar, const vector<vector<pair<int, long long>>>& adj) {
+		int par2 = info[par].jump;
+		info[node] = {
+			info[par].depth + 1,
+			info[par].depth - info[par2].depth == info[par2].depth - info[info[par2].jump].depth ? info[par2].jump : par,
+			par,
+			info[par].dist + weightToPar
+		};
 		for (auto [to, w] : adj[node]) {
 			if (to == par) continue;
-			depth[to] = 1 + depth[node];
-			dist[to] = w + dist[node];
-			dfs(to, node, adj);
+			dfs(to, node, w, adj);
 		}
 	}
 
-	//if k > depth of node, then this returns the root
 	int kthPar(int node, int k) const {
-		for (int bit = 0; bit < Log; ++bit)
-			if (k & (1 << bit))
-				node = memo[node][bit];
+		while(k > 0 && node > 0) {
+			if(info[node].depth - k <= info[info[node].jump].depth) {
+				k -= info[node].depth - info[info[node].jump].depth;
+				node = info[node].jump;
+			} else {
+				k--;
+				node = info[node].par;
+			}
+		}
 		return node;
 	}
 
 	int getLca(int x, int y) const {
-		if (depth[x] < depth[y]) swap(x, y);
-		x = kthPar(x, depth[x] - depth[y]);
+		if (info[x].depth < info[y].depth) swap(x, y);
+		x = kthPar(x, info[x].depth - info[y].depth);
 		if (x == y) return x;
-		for (int bit = Log - 1; bit >= 0; --bit)
-			if (memo[x][bit] != memo[y][bit]) {
-				x = memo[x][bit];
-				y = memo[y][bit];
+		while(x != y) {
+			if(info[x].jump == info[y].jump) {
+				x = info[x].par;
+				y = info[y].par;
+			} else {
+				x = info[x].jump;
+				y = info[y].jump;
 			}
-		assert(x != y && memo[x][0] == memo[y][0]);
-		return memo[x][0];
+		}
+		return x;
 	}
 
 	int distEdges(int x, int y) const {
-		return depth[x] + depth[y] - 2 * depth[getLca(x, y)];
+		return info[x].depth + info[y].depth - 2 * info[getLca(x, y)].depth;
 	}
 
-	ll distWeight(int x, int y) const {
-		return dist[x] + dist[y] - 2 * dist[getLca(x, y)];
+	long long distWeight(int x, int y) const {
+		return info[x].dist + info[y].dist - 2 * info[getLca(x, y)].dist;
 	}
 };
