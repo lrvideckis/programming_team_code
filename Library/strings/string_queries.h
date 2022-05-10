@@ -5,10 +5,11 @@
 #include "../range_data_structures/sparseTable.h"
 
 //status: tested on random inputs, and on https://open.kattis.com/problems/automatictrading
+//computes suffix array, lcp array, and then sparse table over lcp array
+//O(n log n)
+
 struct str_queries {
-	//computes suffix array, lcp array, and then sparse table over lcp array
-	//O(n log n)
-	str_queries(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), st(lcp_array(s, sa), [](int x, int y) {
+	str_queries(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), lcp(lcp_array(s, sa)), st(lcp, [](int x, int y) {
 		return min(x, y);
 	}) {
 		for (int i = 0; i < (int) s.size(); i++)
@@ -29,11 +30,10 @@ struct str_queries {
 
 	//returns true if suffix s[idx1 ... n-1] < s[idx2 ... n-1]
 	//(so false if idx1 == idx2)
-	//O(1)
 	bool less(int idx1, int idx2) const {
 		return inv_sa[idx1] < inv_sa[idx2];
 	}
 
-	vector<int> sa, inv_sa;
+	vector<int> sa, inv_sa, lcp;
 	sparseTable<int> st;
 };
