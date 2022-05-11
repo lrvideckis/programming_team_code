@@ -1,4 +1,4 @@
 floydWarshall.h
-MosAlgo.h
+MosAlg.h
 countPathLengths.h
 policy_based_data_structures.h
