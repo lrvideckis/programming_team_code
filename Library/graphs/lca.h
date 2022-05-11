@@ -22,12 +22,13 @@ struct lca {
 	}
 
 	void dfs(int node, int par, const vector<vector<pair<int, long long>>>& adj) {
+		int par2 = info[node].jump;
+		int childJump = info[node].depth - info[par2].depth == info[par2].depth - info[info[par2].jump].depth ? info[par2].jump : node;
 		for (auto [to, w] : adj[node]) {
 			if (to == par) continue;
-			int par2 = info[node].jump;
 			info[to] = {
 				info[node].depth + 1,
-				info[node].depth - info[par2].depth == info[par2].depth - info[info[par2].jump].depth ? info[par2].jump : node,
+				childJump,
 				node,
 				info[node].dist + w
 			};
