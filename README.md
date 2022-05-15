@@ -45,3 +45,4 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - https://github.com/nealwu/competitive-programming
 - https://github.com/dacin21/dacin21_codebook
 - https://github.com/yosupo06/library-checker-problems
+- https://github.com/ucf-programming-team/hackpack-cpp
