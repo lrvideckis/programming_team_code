@@ -29,7 +29,7 @@ struct segTree {
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tl == tr) {
-			tree[v] = Node {
+			tree[v] = {
 				arr[tl],
 				arr[tl],
 				arr[tl],
@@ -46,7 +46,7 @@ struct segTree {
 	}
 
 	Node combine(const Node& L, const Node& R) {
-		return Node {
+		return {
 			L.sum + R.sum,
 			max(L.mx, R.mx),
 			min(L.mn, R.mn),
@@ -95,7 +95,7 @@ struct segTree {
 	}
 	Node query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
-			return Node{0, -inf, inf, 0, 0, 0};
+			return {0, -inf, inf, 0, 0, 0};
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v];
