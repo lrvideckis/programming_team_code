@@ -24,7 +24,7 @@ struct lca {
 			depth[ch] = 1 + depth[node];
 			par[ch] = node;
 			dist[ch] = w + dist[node];
-			if (jmpEdges[node] == jmpEdges[jmp[node]])
+			if (parent != -1 && jmpEdges[node] == jmpEdges[jmp[node]])
 				jmp[ch] = jmp[jmp[node]], jmpEdges[ch] = 2 * jmpEdges[node] + 1;
 			else
 				jmp[ch] = node, jmpEdges[ch] = 1;
