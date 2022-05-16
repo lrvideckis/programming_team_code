@@ -2,55 +2,59 @@
 using namespace std;
 #define endl '\n'
 
-struct bridge_and_cut {
+struct info {
+	int num2EdgeCCs, numBCCs;
+	vector<bool> isBridge, isCut;
+	vector<int> edgeCC, nodeCC;
+};
 
-	bridge_and_cut(const vector<vector<pair<int/*neighbor*/,int/*edge ID*/>>>& adj, int numEdges) :
-		tin(adj.size(), 0),
-		low(adj.size(), 0),
-		timer(1),
-		isCut(adj.size(), false),
-		isBridge(numEdges, false) {
-		for(int i = 0; i < (int)adj.size(); i++) {
-			if(!tin[i])
-				dfs(i, -1, adj);
-		}
-	}
+info bridge_and_cut(const vector<vector<pair<int,int>>>& adj, int numEdges) {
 
-	vector<int> tin, low;
-	int timer;//, numCCs;
-	vector<bool> isCut, isBridge;
-	//stack<int> st;
-	//vector<int> compId;
+	int n = adj.size(), timer = 1, numCCs = 0;
+	vector<int> tin(n, 0), low(n, 0);
+	vector<bool> isCut(n, false), isBridge(numEdges);
 
-	void dfs(int v, int pId, const vector<vector<pair<int,int>>>& adj) {
+	auto dfs = [&](auto&& dfs, int v, int pId) -> void {
 		tin[v] = low[v] = timer++;
 		int children = 0;
-		//st.push(v);
 		for (auto [to, eId] : adj[v]) {
 			if (eId == pId) continue;
-			if(tin[to]) {
+			if (tin[to]) {
 				low[v] = min(low[v], tin[to]);
 			} else {
 				children++;
-				dfs(to, eId, adj);
-				isCut[v] |= (pId != -1 && low[to] >= tin[v]);
+				dfs(dfs, to, v);
+				if(pId != -1 && low[to] >= tin[v]) isCut[v] = true;
 				isBridge[eId] = (low[to] > tin[v]);
 				low[v] = min(low[v], low[to]);
 			}
 		}
-		isCut[v] |= (pId == -1 && children > 1);
-		  /*
+		if(pId == -1)
+			isCut[v] = (children > 1);
+
 		if(tin[v] == low[v]) {
-			int node;
-			do {
-				compId[node = st.top()] = numCCs;
+			while(true) {
+				int node = st.top();
 				st.pop();
-			} while(node != v);
+				compId[node] = numCCs;
+				if(node == v) break;
+			}
 			numCCs++;
 		}
-			*/
+	};
+
+	for(int i = 0; i < n; i++) {
+		if(!tin[i])
+			dfs(dfs, i, -1);
 	}
-};
+	return {isCut};
+
+
+}
+//stack<int> st;
+//vector<int> compId;
+
+
 
 
 /*
@@ -78,34 +82,8 @@ int main() {
 		if(u > v) swap(u,v);
 		edges[i] = {u,v};
 	}
-	bridge_and_cut bac(adj, m);
 
-	vector<pair<int,int>> bridges;
-	for(int i = 0; i < m; i++) {
-		if(bac.isBridge[i]) {
-			bridges.push_back(edges[i]);
-		}
-	}
-	if(bridges.empty()) {
-		cout << "Sin bloqueos" << endl;
-	} else {
-		sort(bridges.begin(), bridges.end());
-		cout << bridges.size() << endl;
-		for(auto [u,v] : bridges) cout << u << " " << v << endl;
-	}
+	info bac = bridge_and_cut(adj);
 
-
-	/*
-	cout << bac.numCCs << endl;
-	vector<vector<int>> comps(bac.numCCs);
-	for(int i = 0; i < n; i++) {
-		comps[bac.compId[i]].push_back(i);
-	}
-	for(const vector<int>& comp : comps) {
-		cout << comp.size();
-		for(int node : comp) cout << " " << node;
-		cout << endl;
-	}
-	*/
 	return 0;
 }
