@@ -33,12 +33,8 @@ struct bridge_and_cut {
 			} else {
 				children++;
 				dfs(to, eId, adj);
-				if(pId != -1 && low[to] >= tin[v]) {
-					isCut[v] = true;
-				}
-				if(low[to] > tin[v]) {
-					isBridge[eId] = true;
-				}
+				isCut[v] = (pId != -1 && low[to] >= tin[v]);
+				isBridge[eId] = (low[to] > tin[v]);
 				low[v] = min(low[v], low[to]);
 			}
 		}
