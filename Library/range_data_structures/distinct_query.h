@@ -27,7 +27,6 @@ struct persistentSegTree {
 	}
 	int update(int v, int tl, int tr, int idx, int diff) {
 		if (tl == tr) {
-			assert(tl == idx);
 			tree.push_back({0, 0, tree[v].sum + diff});
 			return tree.size() - 1;
 		}
