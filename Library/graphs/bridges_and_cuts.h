@@ -1,5 +1,8 @@
 #pragma once
 
+//tested on https://judge.yosupo.jp/problem/two_edge_connected_components and https://judge.yosupo.jp/problem/biconnected_components
+//with asserts checking correctness of isBridge and isCut
+
 struct info {
 	//2 edge connected component stuff (e.g. components split by bridge edges)
 	int num2EdgeCCs;
