@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/biconnected_components"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../../template.h"
 
 #include "../../../Library/graphs/bridges_and_cuts.h"
