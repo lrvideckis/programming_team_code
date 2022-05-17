@@ -37,7 +37,7 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 	vector<bool> vis(n, false);
 	auto dfs = [&](auto&& dfsPtr, int curr) -> void {
 		vis[curr] = true;
-		res.sccId[curr] = res.numSCCs;
+		sccId[curr] = numSCCs;
 		for (int x : adjInv[curr]) {
 			if (!vis[x])
 				dfsPtr(dfsPtr, x);
@@ -49,7 +49,7 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		if (vis[node])
 			continue;
 		dfs(dfs, node);
-		res.numSCCs++;
+		numSCCs++;
 	}
 	return {numSCCs, sccId};
 }
