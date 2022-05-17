@@ -1,89 +1,70 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define endl '\n'
+#pragma once
 
 struct info {
-	int num2EdgeCCs, numBCCs;
-	vector<bool> isBridge, isCut;
-	vector<int> edgeCC, nodeCC;
+	//2 edge connected component stuff (e.g. components split by bridge edges)
+	int num2EdgeCCs;
+	vector<bool> isBridge;//edge id -> true iff bridge edge
+	vector<int> TwoEdgeCCID;//node -> ID of 2-edge component (which are labeled 0, 1, ..., `num2EdgeCCs`-1)
+
+	//bi-connected component stuff (e.g. components split by cut/articulation nodes)
+	int numBCCs;
+	vector<bool> isCut;//node -> true iff cut node
+	vector<int> bccID;//edge id -> ID of BCC (which are labeled 0, 1, ..., `numBCCs`-1)
 };
 
-info bridge_and_cut(const vector<vector<pair<int,int>>>& adj, int numEdges) {
-
-	int n = adj.size(), timer = 1, numCCs = 0;
+info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
+	//stuff for both
+	int n = adj.size(), timer = 1;
 	vector<int> tin(n, 0), low(n, 0);
-	vector<bool> isCut(n, false), isBridge(numEdges);
-
-	auto dfs = [&](auto&& dfs, int v, int pId) -> void {
+	//2 edge CC stuff
+	int num2EdgeCCs = 0;
+	vector<bool> isBridge(m, false);
+	vector<int> TwoEdgeCCID(n), nodeStack;
+	//BCC stuff
+	int numBCCs = 0;
+	vector<bool> isCut(n, false);
+	vector<int> bccID(m), edgeStack;
+	auto dfs = [&](auto&& dfsPtr, int v, int pId) -> void {
 		tin[v] = low[v] = timer++;
-		int children = 0;
+		int deg = 0;
+		nodeStack.push_back(v);
 		for (auto [to, eId] : adj[v]) {
 			if (eId == pId) continue;
-			if (tin[to]) {
-				low[v] = min(low[v], tin[to]);
-			} else {
-				children++;
-				dfs(dfs, to, v);
-				if(pId != -1 && low[to] >= tin[v]) isCut[v] = true;
-				isBridge[eId] = (low[to] > tin[v]);
+			if (!tin[to]) {
+				edgeStack.push_back(eId);
+				dfsPtr(dfsPtr, to, eId);
+				if (low[to] >= tin[v]) {
+					isCut[v] = true;
+					while (true) {
+						int edge = edgeStack.back();
+						edgeStack.pop_back();
+						bccID[edge] = numBCCs;
+						if (edge == eId) break;
+					}
+					numBCCs++;
+				}
 				low[v] = min(low[v], low[to]);
+				deg++;
+			} else if (tin[to] < tin[v]) {
+				edgeStack.push_back(eId);
+				low[v] = min(low[v], tin[to]);
 			}
 		}
-		if(pId == -1)
-			isCut[v] = (children > 1);
-
-		if(tin[v] == low[v]) {
-			while(true) {
-				int node = st.top();
-				st.pop();
-				compId[node] = numCCs;
-				if(node == v) break;
+		if (pId == -1) isCut[v] = (deg > 1);
+		if (tin[v] == low[v]) {
+			if (pId != -1) isBridge[pId] = true;
+			while (true) {
+				int node = nodeStack.back();
+				nodeStack.pop_back();
+				TwoEdgeCCID[node] = num2EdgeCCs;
+				if (node == v) break;
 			}
-			numCCs++;
+			num2EdgeCCs++;
 		}
 	};
-
-	for(int i = 0; i < n; i++) {
-		if(!tin[i])
+	for (int i = 0; i < n; i++) {
+		if (!tin[i])
 			dfs(dfs, i, -1);
 	}
-	return {isCut};
-
-
-}
-//stack<int> st;
-//vector<int> compId;
-
-
-
-
-/*
- * requirements:
- * - finds both bridges and cut points in single DFS
- * - O(v+e), aka no sort to remove duplicates
- *
- * questions:
- * - struct or function with lambda dfs?
- *
- * */
-
-int main() {
-	cin.tie(0)->sync_with_stdio(0);
-	int n, m;
-	cin >> n >> m;
-	vector<vector<pair<int,int>>> adj(n);
-	vector<pair<int,int>> edges(m);
-	for(int i = 0; i < m; i++) {
-		int u, v;
-		cin >> u >> v;
-		adj[u].emplace_back(v, i);
-		adj[v].emplace_back(u, i);
-
-		if(u > v) swap(u,v);
-		edges[i] = {u,v};
-	}
-
-	info bac = bridge_and_cut(adj);
-
-	return 0;
+	return {num2EdgeCCs, isBridge, TwoEdgeCCID, numBCCs, isCut, bccID};
 }
