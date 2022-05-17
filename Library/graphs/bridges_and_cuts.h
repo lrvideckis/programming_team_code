@@ -3,6 +3,12 @@
 //tested on https://judge.yosupo.jp/problem/two_edge_connected_components and https://judge.yosupo.jp/problem/biconnected_components
 //with asserts checking correctness of isBridge and isCut
 
+//To initialize `adj`:
+//eid = 0
+//for each edge (a,b):
+//	adj[a].emplace_back(b, eid);
+//	adj[b].emplace_back(a, eid++);
+
 struct info {
 	//2 edge connected component stuff (e.g. components split by bridge edges)
 	int num2EdgeCCs;
