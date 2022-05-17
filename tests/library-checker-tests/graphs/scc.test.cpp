@@ -18,7 +18,7 @@ int main() {
 	//sanity check for topo order of SCCs
 	for (int i = 0; i < n; i++) {
 		for (int j : adj[i]) {
-			assert(res.sccId[i] <= res.sccId[j]);
+			assert(info.sccId[i] <= info.sccId[j]);
 		}
 	}
 
