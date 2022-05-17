@@ -5,7 +5,6 @@
 "tests/library-checker-tests/graphs/hld.test.cpp": "2022-04-23 03:22:25 -0700",
 "tests/library-checker-tests/graphs/hopcroftKarp.test.cpp": "2022-05-16 12:28:31 -0700",
 "tests/library-checker-tests/graphs/lca.test.cpp": "2022-05-15 20:02:30 -0700",
-"tests/library-checker-tests/graphs/scc.test.cpp": "2022-05-08 12:54:35 -0700",
 "tests/library-checker-tests/math/matrixDeterminant.test.cpp": "2022-05-06 12:31:42 -0700",
 "tests/library-checker-tests/math/solve_linear_mod.test.cpp": "2022-05-06 12:31:42 -0700",
 "tests/library-checker-tests/maxflow/hungarian.test.cpp": "2022-04-23 03:39:04 -0700",
