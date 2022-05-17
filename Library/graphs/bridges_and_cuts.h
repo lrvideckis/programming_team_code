@@ -2,6 +2,7 @@
 
 //tested on https://judge.yosupo.jp/problem/two_edge_connected_components and https://judge.yosupo.jp/problem/biconnected_components
 //with asserts checking correctness of isBridge and isCut
+//2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 
 //To initialize `adj`:
 //eid = 0
@@ -25,11 +26,11 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	//stuff for both
 	int n = adj.size(), timer = 1;
 	vector<int> tin(n, 0), low(n, 0);
-	//2 edge CC stuff
+	//2 edge CC stuff (delete if not needed)
 	int num2EdgeCCs = 0;
 	vector<bool> isBridge(m, false);
 	vector<int> TwoEdgeCCID(n), nodeStack;
-	//BCC stuff
+	//BCC stuff (delete if not needed)
 	int numBCCs = 0;
 	vector<bool> isCut(n, false);
 	vector<int> bccID(m), edgeStack;
