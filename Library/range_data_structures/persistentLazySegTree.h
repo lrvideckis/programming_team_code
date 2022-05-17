@@ -20,7 +20,6 @@ struct persistentLazySegTree {
 	}
 
 	void push(int v, int tl, int tr) {
-		assert(v != 0);
 		if (tl != tr) {
 			tree.push_back(tree[tree[v].lCh]);
 			tree[v].lCh = tree.size() - 1;

@@ -14,12 +14,20 @@ int main() {
 		adj[u].push_back(v);
 	}
 	sccInfo info = getSCCs(adj);
-	cout << info.numberOfSCCs << endl;
-	vector<vector<int>> eachScc(info.numberOfSCCs);
+
+	//sanity check for topo order of SCCs
+	for (int i = 0; i < n; i++) {
+		for (int j : adj[i]) {
+			assert(info.sccId[i] <= info.sccId[j]);
+		}
+	}
+
+	cout << info.numSCCs << endl;
+	vector<vector<int>> eachScc(info.numSCCs);
 	for(int i = 0; i < n; i++) {
 		eachScc[info.sccId[i]].push_back(i);
 	}
-	for(int i = 0; i < info.numberOfSCCs; i++) {
+	for(int i = 0; i < info.numSCCs; i++) {
 		cout << eachScc[i].size() << " ";
 		for(int node : eachScc[i]) cout << node << " ";
 		cout << endl;

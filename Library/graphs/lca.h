@@ -5,70 +5,66 @@
 //status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
 
 struct lca {
-	struct Node {
-		int depth, jump, par;
-		long long dist;
-	};
-	vector<Node> info;
+	vector<int> jmp, jmpEdges, par, subSize, depth;
+	vector<long long> dist;
 
-	lca(const vector<vector<pair<int, long long>>>& adj, int root) : info(adj.size()) {
-		info[root] = {
-			0,
-			root,
-			root,
-			0
-		};
+	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
+		jmp(adj.size(), root),
+		jmpEdges(adj.size(), 0),
+		par(adj.size(), root),
+		subSize(adj.size(), 1),
+		depth(adj.size(), 0),
+		dist(adj.size(), 0LL) {
 		dfs(root, -1, adj);
 	}
 
-	void dfs(int node, int par, const vector<vector<pair<int, long long>>>& adj) {
-		int par2 = info[node].jump;
-		int childJump = info[node].depth - info[par2].depth == info[par2].depth - info[info[par2].jump].depth ? info[par2].jump : node;
-		for (auto [to, w] : adj[node]) {
-			if (to == par) continue;
-			info[to] = {
-				info[node].depth + 1,
-				childJump,
-				node,
-				info[node].dist + w
-			};
-			dfs(to, node, adj);
+	void dfs(int node, int parent, const vector<vector<pair<int, long long>>>& adj) {
+		for (auto [ch, w] : adj[node]) {
+			if (ch == parent) continue;
+			depth[ch] = 1 + depth[node];
+			par[ch] = node;
+			dist[ch] = w + dist[node];
+			if (parent != -1 && jmpEdges[node] == jmpEdges[jmp[node]])
+				jmp[ch] = jmp[jmp[node]], jmpEdges[ch] = 2 * jmpEdges[node] + 1;
+			else
+				jmp[ch] = node, jmpEdges[ch] = 1;
+			dfs(ch, node, adj);
+			subSize[node] += subSize[ch];
 		}
 	}
 
 	//traverse up k edges in O(log(k)). So with k=1 this returns `node`'s parent
 	int kthPar(int node, int k) const {
-		k = min(k, info[node].depth);
+		k = min(k, depth[node]);
 		while (k > 0) {
-			int jumpDistEdges = info[node].depth - info[info[node].jump].depth;
-			if (jumpDistEdges <= k) {
-				k -= jumpDistEdges;
-				node = info[node].jump;
+			if (jmpEdges[node] <= k) {
+				k -= jmpEdges[node];
+				node = jmp[node];
 			} else {
 				k--;
-				node = info[node].par;
+				node = par[node];
 			}
 		}
 		return node;
 	}
 
 	int getLca(int x, int y) const {
-		if (info[x].depth < info[y].depth) swap(x, y);
-		x = kthPar(x, info[x].depth - info[y].depth);
+		if (depth[x] < depth[y]) swap(x, y);
+		x = kthPar(x, depth[x] - depth[y]);
 		while (x != y) {
-			if (info[x].jump == info[y].jump)
-				x = info[x].par, y = info[y].par;
+			if (jmp[x] == jmp[y])
+				x = par[x], y = par[y];
 			else
-				x = info[x].jump, y = info[y].jump;
+				x = jmp[x], y = jmp[y];
 		}
 		return x;
 	}
 
 	int distEdges(int x, int y) const {
-		return info[x].depth + info[y].depth - 2 * info[getLca(x, y)].depth;
+		return depth[x] + depth[y] - 2 * depth[getLca(x, y)];
 	}
 
 	long long distWeight(int x, int y) const {
-		return info[x].dist + info[y].dist - 2 * info[getLca(x, y)].dist;
+		return dist[x] + dist[y] - 2 * dist[getLca(x, y)];
 	}
 };

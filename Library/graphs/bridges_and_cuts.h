@@ -1,155 +1,80 @@
 #pragma once
 
-//modified from https://github.com/nealwu/competitive-programming/blob/master/graph_theory/biconnected_components.cc
-//
-//status: tested on random graphs
-struct biconnected_components {
-	//don't pass in a graph with multiple edges between the same pair of nodes - it breaks bridge finding
-	biconnected_components(const vector<vector<int>>& adj) :
-		is_cut(adj.size(), false),
-		n(adj.size()),
-		tour_start(n),
-		low_link(n) {
-		int tour = 0;
-		vector<bool> visited(n, false);
-		vector<int> stack;
-		for (int i = 0; i < n; i++)
-			if (!visited[i])
-				dfs(i, -1, adj, visited, stack, tour);
-	}
+//tested on https://judge.yosupo.jp/problem/two_edge_connected_components and https://judge.yosupo.jp/problem/biconnected_components
+//with asserts checking correctness of isBridge and isCut
+//2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 
-	bool is_bridge_edge(int u, int v) const {
-		if (u > v) swap(u, v);
-		return is_bridge.count(1LL * u * n + v);
-	}
+//To initialize `adj`:
+//eid = 0
+//for each edge (a,b):
+//	adj[a].emplace_back(b, eid);
+//	adj[b].emplace_back(a, eid++);
 
-	//vector of all bridge edges
-	vector<pair<int, int>> bridges;
+struct info {
+	//2 edge connected component stuff (e.g. components split by bridge edges)
+	int num2EdgeCCs;
+	vector<bool> isBridge;//edge id -> true iff bridge edge
+	vector<int> TwoEdgeCCID;//node -> ID of 2-edge component (which are labeled 0, 1, ..., `num2EdgeCCs`-1)
 
-	//vector of all BCCs. Note a node can be in multiple BCCs (iff it's a cut node)
-	vector<vector<int>> components;
-
-	//is_cut[`node`] is true iff `node` is a cut node
-	vector<bool> is_cut;
-
-
-	//use anything below this at your own risk :)
-	int n;
-	vector<int> tour_start, low_link;
-	unordered_set<long long> is_bridge;
-
-	void add_bridge(int u, int v) {
-		if (u > v) swap(u, v);
-		is_bridge.insert(1LL * u * n + v);
-	}
-
-	void dfs(int node, int parent, const vector<vector<int>>& adj, vector<bool>& visited, vector<int>& stack, int& tour) {
-		assert(!visited[node]);
-		visited[node] = true;
-		tour_start[node] = tour++;
-		low_link[node] = tour_start[node];
-		is_cut[node] = false;
-		int parent_count = 0, children = 0;
-		for (int next : adj[node]) {
-			// Skip the first edge to the parent, but allow multi-edges.
-			if (next == parent && parent_count++ == 0)
-				continue;
-			if (visited[next]) {
-				// next is a candidate for low_link.
-				low_link[node] = min(low_link[node], tour_start[next]);
-				if (tour_start[next] < tour_start[node])
-					stack.push_back(node);
-			} else {
-				int size = (int) stack.size();
-				dfs(next, node, adj, visited, stack, tour);
-				children++;
-				// next is part of our subtree.
-				low_link[node] = min(low_link[node], low_link[next]);
-				if (low_link[next] > tour_start[node]) {
-					// This is a bridge.
-					bridges.push_back({node, next});
-					add_bridge(node, next);
-					components.push_back({node, next});
-				} else if (low_link[next] == tour_start[node]) {
-					// This is the root of a biconnected component.
-					stack.push_back(node);
-					vector<int> component(stack.begin() + size, stack.end());
-					sort(component.begin(), component.end());
-					component.erase(unique(component.begin(), component.end()), component.end());
-					components.push_back(component);
-					stack.resize(size);
-				} else
-					stack.push_back(node);
-				// In general, `node` is a cut vertex iff it has a child whose subtree cannot reach above `node`.
-				if (low_link[next] >= tour_start[node])
-					is_cut[node] = true;
-			}
-		}
-		// The root of the tree is a cut vertex iff it has more than one child.
-		if (parent < 0) {
-			is_cut[node] = children > 1;
-			if (children == 0) {
-				components.push_back({node});
-			}
-		}
-	}
+	//bi-connected component stuff (e.g. components split by cut/articulation nodes)
+	int numBCCs;
+	vector<bool> isCut;//node -> true iff cut node
+	vector<int> bccID;//edge id -> ID of BCC (which are labeled 0, 1, ..., `numBCCs`-1)
 };
 
-
-// Note: instead of a block-cut tree this is technically a block-vertex tree, which ends up being much easier to use.
-// block-cut tree:
-//     nodes for each BCC, and for each cut node
-//     edges between a BCC and cut node iff that cut node is in that BCC (so no edges between 2 cut nodes, or 2 BCCs)
-//
-// block-vertex tree:
-//     nodes for each BCC, and for each original node in graph
-//     edges between an original node and BCC if that node is inside that BCC
-struct block_cut_tree {
-	block_cut_tree(const biconnected_components& _bi_comps) :
-		n(_bi_comps.n),
-		BC(_bi_comps.components.size()),
-		T(n + BC),
-		block_vertex_tree(T),
-		parent(T, -1),
-		depth(T) {
-		auto add_edge = [&](int a, int b) {
-			assert((a < n) ^ (b < n));
-			block_vertex_tree[a].push_back(b);
-			block_vertex_tree[b].push_back(a);
-		};
-		for (int bc = 0; bc < BC; bc++)
-			for (int x : _bi_comps.components[bc])
-				add_edge(x, n + bc);
-		for (int root = 0; root < T; root++)
-			if (parent[root] < 0)
-				dfs(root, -1);
+info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
+	//stuff for both (always keep)
+	int n = adj.size(), timer = 1;
+	vector<int> tin(n, 0), low(n, 0);
+	//2 edge CC stuff (delete if not needed)
+	int num2EdgeCCs = 0;
+	vector<bool> isBridge(m, false);
+	vector<int> TwoEdgeCCID(n), nodeStack;
+	//BCC stuff (delete if not needed)
+	int numBCCs = 0;
+	vector<bool> isCut(n, false);
+	vector<int> bccID(m), edgeStack;
+	auto dfs = [&](auto&& dfsPtr, int v, int pId) -> void {
+		tin[v] = low[v] = timer++;
+		int deg = 0;
+		nodeStack.push_back(v);
+		for (auto [to, eId] : adj[v]) {
+			if (eId == pId) continue;
+			if (!tin[to]) {
+				edgeStack.push_back(eId);
+				dfsPtr(dfsPtr, to, eId);
+				if (low[to] >= tin[v]) {
+					isCut[v] = true;
+					while (true) {
+						int edge = edgeStack.back();
+						edgeStack.pop_back();
+						bccID[edge] = numBCCs;
+						if (edge == eId) break;
+					}
+					numBCCs++;
+				}
+				low[v] = min(low[v], low[to]);
+				deg++;
+			} else if (tin[to] < tin[v]) {
+				edgeStack.push_back(eId);
+				low[v] = min(low[v], tin[to]);
+			}
+		}
+		if (pId == -1) isCut[v] = (deg > 1);
+		if (tin[v] == low[v]) {
+			if (pId != -1) isBridge[pId] = true;
+			while (true) {
+				int node = nodeStack.back();
+				nodeStack.pop_back();
+				TwoEdgeCCID[node] = num2EdgeCCs;
+				if (node == v) break;
+			}
+			num2EdgeCCs++;
+		}
+	};
+	for (int i = 0; i < n; i++) {
+		if (!tin[i])
+			dfs(dfs, i, -1);
 	}
-
-	//If a and b are in the same BCC, this returns the index into
-	//biconnected_components::components representing which bcc contains both a,b
-	//else returns -1
-	//assumes a != b
-	int which_bcc(int a, int b) const {
-		assert(a != b);
-		if (depth[a] > depth[b])
-			swap(a, b);
-		// Two different nodes are in the same biconnected component iff their distance = 2 in the block-cut tree.
-		if ((depth[b] == depth[a] + 2 && parent[parent[b]] == a) || (parent[a] >= 0 && parent[a] == parent[b]))
-			return parent[b] - n;
-		return -1;
-	}
-
-	//use anything below this at your own risk :)
-	int n, BC, T;
-	vector<vector<int>> block_vertex_tree;//adjacency list of block vertex tree
-	vector<int> parent;
-	vector<int> depth;
-
-	void dfs(int node, int par) {
-		parent[node] = par;
-		depth[node] = par < 0 ? 0 : depth[par] + 1;
-		for (int neigh : block_vertex_tree[node])
-			if (neigh != par)
-				dfs(neigh, node);
-	}
-};
+	return {num2EdgeCCs, isBridge, TwoEdgeCCID, numBCCs, isCut, bccID};
+}
