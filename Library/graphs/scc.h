@@ -4,21 +4,15 @@
 //building of condensation graph tested on https://cses.fi/problemset/task/1686/
 
 struct sccInfo {
+	int numSCCs;
+	//scc's are labeled 0,1,...,`numSCCs-1`
 	//sccId[i] is the id of the scc containing node `i`
 	vector<int> sccId;
-	//scc's are labeled 0,1,...,`numberOfSCCs-1`
-	int numberOfSCCs;
-	//adjacency list of "condensation graph", condensation graph is a dag with topo ordering 0,1,...,`numberOfSCCs-1`
-	//  - nodes are scc's (labeled by sccId)
-	//  - edges: if u -> v exists in original graph, then add edge sccId[u] -> sccId[v] (then remove multiple&self edges)
-	vector<vector<int>> adj;
 };
 
 sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
-	int n = adj.size();
-	sccInfo res;
-	res.sccId.resize(n);
-	res.numberOfSCCs = 0;
+	int n = adj.size(), numSCCs = 0;
+	vector<int> sccId(n);
 	stack<int> seen;
 	{
 		vector<bool> vis(n, false);
@@ -43,7 +37,7 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 	vector<bool> vis(n, false);
 	auto dfs = [&](auto&& dfsPtr, int curr) -> void {
 		vis[curr] = true;
-		res.sccId[curr] = res.numberOfSCCs;
+		res.sccId[curr] = res.numSCCs;
 		for (int x : adjInv[curr]) {
 			if (!vis[x])
 				dfsPtr(dfsPtr, x);
@@ -55,21 +49,7 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		if (vis[node])
 			continue;
 		dfs(dfs, node);
-		res.numberOfSCCs++;
+		res.numSCCs++;
 	}
-	res.adj.resize(res.numberOfSCCs);
-	for (int i = 0; i < n; i++) {
-		for (int j : adj[i]) {
-			int sccI = res.sccId[i], sccJ = res.sccId[j];
-			if (sccI != sccJ) {
-				assert(sccI < sccJ);    //sanity check for topo order
-				res.adj[sccI].push_back(sccJ);
-			}
-		}
-	}
-	for (vector<int>& nexts : res.adj) {
-		sort(nexts.begin(), nexts.end());
-		nexts.erase(unique(nexts.begin(), nexts.end()), nexts.end());
-	}
-	return res;
+	return {numSCCs, sccId};
 }

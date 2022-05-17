@@ -14,6 +14,17 @@ int main() {
 		adj[u].push_back(v);
 	}
 	sccInfo info = getSCCs(adj);
+
+	//sanity check for topo order
+	for (int i = 0; i < n; i++) {
+		for (int j : adj[i]) {
+			int sccI = res.sccId[i], sccJ = res.sccId[j];
+			if (sccI != sccJ) {
+				assert(sccI < sccJ);
+			}
+		}
+	}
+
 	cout << info.numberOfSCCs << endl;
 	vector<vector<int>> eachScc(info.numberOfSCCs);
 	for(int i = 0; i < n; i++) {
