@@ -5,11 +5,11 @@
 
 void doTest(int base, int power, int mod) {
 
-	int fast = fastPow(base, power, mod);
+	int fast = fastPow(base % mod, power, mod);
 
 	int slow = 1;
 	for(int i = 0; i < power; i++) {
-		slow = (1LL * slow * base) % mod;
+		slow = 1LL * slow * base % mod;
 	}
 
 	assert(fast == slow);
