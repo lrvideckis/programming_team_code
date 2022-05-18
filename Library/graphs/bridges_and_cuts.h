@@ -11,12 +11,12 @@
 //	adj[b].emplace_back(a, eid++);
 
 struct info {
-	//2 edge connected component stuff (e.g. components split by bridge edges)
+	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
 	int num2EdgeCCs;
 	vector<bool> isBridge;//edge id -> true iff bridge edge
 	vector<int> TwoEdgeCCID;//node -> ID of 2-edge component (which are labeled 0, 1, ..., `num2EdgeCCs`-1)
 
-	//bi-connected component stuff (e.g. components split by cut/articulation nodes)
+	//bi-connected component stuff (e.g. components split by cut/articulation nodes) https://cp-algorithms.com/graph/cutpoints.html
 	int numBCCs;
 	vector<bool> isCut;//node -> true iff cut node
 	vector<int> bccID;//edge id -> ID of BCC (which are labeled 0, 1, ..., `numBCCs`-1)
