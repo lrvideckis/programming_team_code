@@ -7,12 +7,12 @@
 
 //To improve, use Pollard-rho to find prime factors
 
-int phi(int n) {
+int totient(int n) {
+	assert(n >= 1);
 	int result = n;
 	for (int i = 2, tempN = n; i * i <= tempN; i++) {
 		if (n % i == 0) {
-			while (n % i == 0)
-				n /= i;
+			while (n % i == 0) n /= i;
 			result -= result / i;
 		}
 	}

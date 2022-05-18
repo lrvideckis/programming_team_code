@@ -10,7 +10,7 @@ int main() {
 		for(int j = 1; j <= i; j++) {
 			if(__gcd(i,j) == 1) cnt++;
 		}
-		assert(phi(i) == cnt);
+		assert(totient(i) == cnt);
 	}
 
 	cout << "Tests passed!" << endl;
