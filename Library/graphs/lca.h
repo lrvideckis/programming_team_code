@@ -52,10 +52,10 @@ struct lca {
 		if (depth[x] < depth[y]) swap(x, y);
 		x = kthPar(x, depth[x] - depth[y]);
 		while (x != y) {
-			if (jmp[x] == jmp[y])
-				x = par[x], y = par[y];
-			else
+			if (jmp[x] != jmp[y])
 				x = jmp[x], y = jmp[y];
+			else
+				x = par[x], y = par[y];
 		}
 		return x;
 	}
