@@ -55,6 +55,6 @@ struct MergeSortTree {
 			return lower_bound(vals.begin(), vals.end(), x) - vals.begin();
 		}
 		return query(v + 1, l, r, x) +
-			   query(v + tree[v].rCh(), l, r, x);
+		       query(v + tree[v].rCh(), l, r, x);
 	}
 };
