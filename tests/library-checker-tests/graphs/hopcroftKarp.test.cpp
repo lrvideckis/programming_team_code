@@ -15,7 +15,7 @@ int main() {
 		adj[u].push_back(v);
 		edges.push_back({u,v});
 	}
-	match res = hopcroftKarp(adj);
+	match res = hopcroftKarp(adj, r);
 	cout << res.sizeOfMatching << endl;
 	//asserting correctness of both ml, and mr (as well as printing answer)
 	int sizeL = 0;
@@ -28,7 +28,7 @@ int main() {
 		}
 	}
 	int sizeR = 0;
-	for(int i = 0; i < (int)res.mr.size(); i++) {
+	for(int i = 0; i < r; i++) {
 		if(res.mr[i] != -1) {
 			sizeR++;
 			int nodeL = res.mr[i];
