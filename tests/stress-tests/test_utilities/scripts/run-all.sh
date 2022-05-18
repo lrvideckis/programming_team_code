@@ -21,8 +21,8 @@ for test in $tests; do
     g++ $(cat $(dirname "$0")/compile_flags.txt) $test
     echo "done compiling test"
     ./a.out
-    echo "done running test"
     retCode=$?
+    echo "done running test"
     if (($retCode != 0)); then
         echo "Failed with $retCode"
         fail+=1
