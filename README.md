@@ -36,6 +36,7 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - [Interval container](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/IntervalContainer.h)
 - 2D data structures (like [seg tree](https://github.com/ShahjalalShohag/code-library/blob/master/Data%20Structures/Segment%20Tree%202D%20Dynamic.cpp), [sparse table](https://codeforces.com/blog/entry/45485) etc)
 - [queue with get max](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/data-structures/MonotonicQueue.h)
+- [seg tree beats](https://codeforces.com/blog/entry/57319)
 
 ## Other CP repos
 
