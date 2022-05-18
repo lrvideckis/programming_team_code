@@ -3,7 +3,7 @@
 //status: tested on random inputs
 
 //returns base^pw % mod in O(log(pw))
-//returns 1 for 0^0, but 1 for 0^totient(mod)
+//returns 1 for 0^0, but 0 for 0^totient(mod)
 //for powers > INT_MAX, do: pw %= totient(mod)
 int fastPow(int base, int pw, int mod) {
 	assert(0 <= pw && 0 <= base && base < mod);
