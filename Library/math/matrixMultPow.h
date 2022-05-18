@@ -1,6 +1,6 @@
 #pragma once
 
-//status: not tested, but used on misc. problems
+//status: not tested
 
 const int mod = 1e9 + 7;
 

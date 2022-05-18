@@ -1,4 +1,4 @@
-//status: not tested, but used in various problems
+//status: not tested
 
 #include <bits/stdc++.h>
 using namespace std;

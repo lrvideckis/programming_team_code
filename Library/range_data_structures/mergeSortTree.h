@@ -1,6 +1,6 @@
 #pragma once
 
-//status: stress-tested against persistent seg tree; used in various problems
+//status: stress-tested against persistent seg tree kth-smallest in range
 
 struct MergeSortTree {
 	struct Node {

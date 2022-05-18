@@ -1,6 +1,6 @@
 #pragma once
 
-//status: tested on random inputs, and used in misc. problems
+//status: tested on random inputs
 
 //returns a^pw % mod in O(log(pw))
 long long fastPow(long long a, long long pw, int mod) {

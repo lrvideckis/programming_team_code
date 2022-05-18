@@ -1,6 +1,6 @@
 #pragma once
 
-//status: not tested, but used in various problems
+//status: not tested
 
 const long long inf = 1e18;
 

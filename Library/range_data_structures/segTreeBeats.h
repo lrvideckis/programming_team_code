@@ -1,6 +1,6 @@
 #pragma once
 
-//status: not tested, used in various problems
+//status: not tested
 
 struct SegTreeBeats {
 	typedef long long ll;

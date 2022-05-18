@@ -1,6 +1,6 @@
 #pragma once
 
-//status: not tested, but used on various problems
+//status: not tested
 //intended to be a base template and to be modified
 
 const int K = 26;//character size

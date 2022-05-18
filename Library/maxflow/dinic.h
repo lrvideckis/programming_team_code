@@ -1,6 +1,6 @@
 #pragma once
 
-//status: no tests, but used in various problems
+//status: not tested
 
 struct maxflow {
 public:
