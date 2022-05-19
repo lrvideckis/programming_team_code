@@ -4,7 +4,7 @@
 
 //https://oeis.org/A000041
 //O(n sqrt n) time, but small-ish constant factor
-vector<int> partition(int n, int mod) {
+vector<int> partition(int n/*size of dp array*/, int mod) {
 	vector<int> dp(n, 1);
 	for (int i = 1; i < n; i++) {
 		long long sum = 0;
