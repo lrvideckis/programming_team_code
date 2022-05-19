@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../../../Library/misc/random.h"
-#include "../../../../Library/graphs/disjointSet.h"
+#include "../../../../Library/misc/disjointSet.h"
 
 //https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model
 //each edge has independent probability p of existing

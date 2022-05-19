@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 #include "../../template.h"
 
-#include "../../../Library/graphs/disjointSet.h"
+#include "../../../Library/misc/disjointSet.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
