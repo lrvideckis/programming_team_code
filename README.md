@@ -39,6 +39,7 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - [seg tree beats](https://codeforces.com/blog/entry/57319)
 - [polynomial stuff](https://cp-algorithms.com/algebra/polynomial.html)
 - [DSU with rollback](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/UnionFindRollback.h)
+- [string hashing](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Hashing.h)
 
 ## Other CP repos
 
