@@ -9,13 +9,13 @@
 
 int totient(int n) {
 	assert(n >= 1);
-	int result = n;
+	int res = n;
 	for (int i = 2; i * i <= n; i++) {
 		if (n % i == 0) {
 			while (n % i == 0) n /= i;
-			result -= result / i;
+			res -= res / i;
 		}
 	}
-	if (n > 1) result -= result / n;
-	return result;
+	if (n > 1) res -= res / n;
+	return res;
 }
