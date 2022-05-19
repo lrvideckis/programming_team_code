@@ -1,27 +1,18 @@
 #pragma once
 
-//status: not tested
+//status: tested on https://judge.yosupo.jp/problem/partition_function
 
-struct partitionFunction {
-	vector<long long> remember;
-	//The number of ways you can add to a number
-	long long getPartitionsModM(int n, int m) {
-		if (n < 0) return 0;
-		if (n == 0) return 1;
-		if ((int) remember.size() <= n) remember.resize(n + 1, -1);
-		if (remember[n] != -1) return remember[n];
+//https://oeis.org/A000041
+//O(n sqrt n) time, but small-ish constant factor
+vector<int> partition(int n, int mod) {
+	vector<int> dp(n, 1);
+	for (int i = 1; i < n; i++) {
 		long long sum = 0;
-		long long val = 1;
-		for (int i = 1; val <= n; i++) {
-			long long multiply = 1;
-			if (i % 2 == 0) multiply = -1;
-			val = ((3LL * i * i) + i) / 2;
-			sum += getPartitionsModM(n - val, m) * multiply % m;
-			val = ((3LL * i * i) - i) / 2;
-			sum += getPartitionsModM(n - val, m) * multiply % m;
-			sum %= m;
-			if (sum < 0) sum += m;
+		for (int j = 1, pent = 1, sign = 1; pent <= i; j++, pent += 3 * j - 2, sign = -sign) {
+			if (pent + j <= i) sum += dp[i - pent - j] * sign + mod;
+			sum += dp[i - pent] * sign + mod;
 		}
-		return remember[n] = sum % m;
+		dp[i] = sum % mod;
 	}
-};
+	return dp;
+}
