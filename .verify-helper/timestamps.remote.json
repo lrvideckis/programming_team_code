@@ -8,6 +8,7 @@
 "tests/library-checker-tests/graphs/lca.test.cpp": "2022-05-18 02:05:29 -0700",
 "tests/library-checker-tests/graphs/scc.test.cpp": "2022-05-17 12:34:21 -0700",
 "tests/library-checker-tests/math/matrixDeterminant.test.cpp": "2022-05-18 15:20:19 -0700",
+"tests/library-checker-tests/math/partition.test.cpp": "2022-05-18 18:45:34 -0700",
 "tests/library-checker-tests/math/solve_linear_mod.test.cpp": "2022-05-18 15:20:19 -0700",
 "tests/library-checker-tests/maxflow/hungarian.test.cpp": "2022-04-23 03:39:04 -0700",
 "tests/library-checker-tests/range_data_structures/fenwickTree.test.cpp": "2022-05-10 10:03:24 -0700",
