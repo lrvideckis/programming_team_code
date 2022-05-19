@@ -1,6 +1,6 @@
 #pragma once
 
-//status: tested on n in range [1, 800]
+//status: tested on n in range [1, 3e5]
 
 //  Euler's totient function counts the positive integers
 //  up to a given integer n that are relatively prime to n.
