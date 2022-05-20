@@ -26,8 +26,8 @@ int fastPow(long long base, long long pw, int mod) {
 	int res = 1;
 	base %= mod;
 	while (pw > 0) {
-		if (pw & 1) res = 1LL * res * base % mod;
-		base = 1LL * base * base % mod;
+		if (pw & 1) res = res * base % mod;
+		base = base * base % mod;
 		pw >>= 1;
 	}
 	return res;
