@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../test_utilities/generators/random.h"
 
-#include "../../../Library/range_data_structures/distinct_query.h"
+#include "../../../Library/range_data_structures/seldom_used/distinct_query.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../test_utilities/generators/random.h"
 
-#include "../../../Library/range_data_structures/implicitLazySegTree.h"
+#include "../../../Library/range_data_structures/implicitSegTree.h"
 
 
 
@@ -13,7 +13,7 @@ int main() {
 		int r = getRand(-mx, mx);
 		if(l > r) swap(l,r);
 
-		implicitLazySegTree ist(l, r);
+		implicitSegTree ist(l, r);
 
 		map<int, long long> naive;
 

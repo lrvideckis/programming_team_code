@@ -11,11 +11,11 @@ struct Node {
 	int lCh, rCh; // children, indexes into `tree`, -1 for null
 } tree[N];
 
-struct implicitLazySegTree {
+struct implicitSegTree {
 
 	int NEW_NODE, rootL, rootR;//[rootL, rootR] defines range of root node; handles negatives
 
-	implicitLazySegTree(int l, int r) : NEW_NODE(0), rootL(l), rootR(r) {
+	implicitSegTree(int l, int r) : NEW_NODE(0), rootL(l), rootR(r) {
 		assert(l <= r);
 		tree[NEW_NODE++] = {0, 0, -1, -1}; //TODO
 	}

@@ -1,8 +1,8 @@
 #include "../../template.h"
 #include "../test_utilities/generators/random.h"
 
-#include "../../../Library/range_data_structures/kth_smallest.h"
-#include "../../../Library/range_data_structures/mergeSortTree.h"
+#include "../../../Library/range_data_structures/seldom_used/kth_smallest.h"
+#include "../../../Library/range_data_structures/seldom_used/mergeSortTree.h"
 
 
 int main() {

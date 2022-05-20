@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../test_utilities/generators/random.h"
 
-#include "../../../Library/range_data_structures/buckets.h"
+#include "../../../Library/range_data_structures/seldom_used/buckets.h"
 
 int main() {
 	for(int tests = 20; tests--;) {
