@@ -2,7 +2,7 @@
 #include "../../template.h"
 
 #include "../../../Library/graphs/hld.h"
-#include "../../../Library/range_data_structures/fenwickInv.h"
+#include "../../../Library/range_data_structures/seldom_used/fenwickInv.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
