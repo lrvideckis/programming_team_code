@@ -52,7 +52,7 @@ struct MergeSortTree {
 		if (tree[v].r < l || r < tree[v].l)
 			return 0;
 		if (l <= tree[v].l && tree[v].r <= r) {
-			vector<int>& vals = tree[v].vals;
+			const vector<int>& vals = tree[v].vals;
 			return lower_bound(vals.begin(), vals.end(), x) - vals.begin();
 		}
 		return query(v + 1, l, r, x) +
