@@ -1,5 +1,6 @@
 #pragma once
 
+//source: https://codeforces.com/blog/entry/53170
 //status: all functions tested on random trees; also `lca` tested on https://judge.yosupo.jp/problem/lca
 //assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 
