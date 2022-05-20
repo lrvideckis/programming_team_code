@@ -5,11 +5,7 @@
 const int mod = 1e9 + 7;
 
 vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>& b) {
-	if (a.size() == 0) return {};
-	if (a[0].size() == 0) return {};
-	if (b.size() == 0) return {};
-	if (b[0].size() == 0) return {};
-	if (a[0].size() != b.size()) return {};
+	assert(a[0].size() == b.size());
 	int resultRow = a.size(), resultCol = b[0].size(), n = a[0].size();
 	vector<vector<int>> product(resultRow, vector<int> (resultCol, 0));
 	for (int i = 0; i < resultRow; ++i) {
