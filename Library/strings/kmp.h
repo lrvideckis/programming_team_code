@@ -10,6 +10,10 @@
 //	KMP_Match kmp(needle);
 //
 //status: tested on random inputs
+
+//kmp-doubling-trick: to check if 2 arrays are rotationally equivalent: run kmp
+//with one array as the needle and the other array doubled as the haystack
+//or just use kactl's min rotation code
 template <class T>
 struct KMP_Match {
 public:
