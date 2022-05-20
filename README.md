@@ -10,6 +10,12 @@ Yet another competitive programming repo. Quick links:
 see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/README.md)
 
 ## Format
+
+Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments.
+```
+find . -type f -name "*.h" -exec bash -c 'gcc -fpreprocessed -dD -E -P {} > tmp ; mv tmp {}' \;
+```
+
 Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
 ```
 astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates
