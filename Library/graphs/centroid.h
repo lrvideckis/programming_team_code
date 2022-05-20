@@ -1,47 +1,62 @@
 #pragma once
 
-//status: not tested
+//status: tested on https://judge.yosupo.jp/problem/frequency_table_of_tree_distance with asserts checking depth of tree <= log2(n)
 
-const int Max = 2e5 + 2;
-vector<int> adj[Max];
-int sizes[Max], parent[Max];
-bool removed[Max];
+//returns array `par` where `par[i]` = parent of node `i` in centroid tree
+//`par[root]` is -1
+//0-based nodes
+//O(n log n)
 
-void dfs2(int node, int par) {
-	sizes[node] = 1;
-	for (int to : adj[node]) {
-		if (to != par && !removed[to]) {
-			dfs2(to, node);
-			sizes[node] += sizes[to];
-		}
-	}
-}
-
-int findCentroid(int node) {
-	dfs2(node, node);
-	bool found = true;
-	int sizeCap = sizes[node] / 2;
-	int par = node;
-	while (found) {
-		found = false;
+//usage:
+//	vector<int> parent = getCentroidTree(adj);
+//	vector<vector<int>> childs(n);
+//	int root;
+//	for (int i = 0; i < n; i++) {
+//		if (parent[i] == -1)
+//			root = i;
+//		else
+//			childs[parent[i]].push_back(i);
+//	}
+vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
+	int root;
+	int n = adj.size();
+	vector<int> sizes(n);
+	vector<bool> vis(n, false);
+	auto dfsSz = [&](auto&& dfsSz, int node, int par) -> void {
+		sizes[node] = 1;
 		for (int to : adj[node]) {
-			if (to != par && !removed[to] && sizes[to] > sizeCap) {
-				found = true;
-				par = node;
-				node = to;
-				break;
+			if (to != par && !vis[to]) {
+				dfsSz(dfsSz, to, node);
+				sizes[node] += sizes[to];
 			}
 		}
-	}
-	return node;
+	};
+	auto findCentroid = [&](int node) -> int {
+		dfsSz(dfsSz, node, node);
+		int sizeCap = sizes[node] / 2, par = -1;
+		while (true) {
+			bool found = false;
+			for (int to : adj[node]) {
+				if (to != par && !vis[to] && sizes[to] > sizeCap) {
+					found = true;
+					par = node;
+					node = to;
+					break;
+				}
+			}
+			if(!found) return node;
+		}
+	};
+	vector<int> parent(n);
+	auto dfs1 = [&](auto&& dfs1, int node, int par) -> void {
+		node = findCentroid(node);
+		parent[node] = par;
+		vis[node] = true;
+		for (int to : adj[node]) {
+			if (!vis[to])
+				dfs1(dfs1, to, node);
+		}
+	};
+	dfs1(dfs1, 0, -1);
+	return parent;
 }
-
-void dfs1(int node, int par) {
-	removed[node] = true;
-	parent[node] = par;
-	for (int to : adj[node]) {
-		if (!removed[to])
-			dfs1(findCentroid(to), node);
-	}
-}
-//dfs1(findCentroid(1), 0);
