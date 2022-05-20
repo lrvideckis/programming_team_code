@@ -5,9 +5,9 @@
 
 struct hld {
 	int n;
-	vector<int> Size, par, timeIn, Next, timeInToNode;
+	vector<int> Size, par, timeIn, Next;
 	hld(vector<vector<int>>& adj /*single unrooted tree*/, int root) :
-		n(adj.size()), Size(n, 1), par(n, root), timeIn(n), Next(n, root), timeInToNode(n) {
+		n(adj.size()), Size(n, 1), par(n, root), timeIn(n), Next(n, root) {
 		dfs1(root, adj);
 		int Time = 0;
 		dfs2(root, adj, Time);
@@ -24,7 +24,6 @@ struct hld {
 	}
 	void dfs2(int node, const vector<vector<int>>& adj, int& Time) {
 		timeIn[node] = Time;
-		timeInToNode[Time] = node;
 		Time++;
 		for (auto to : adj[node]) {
 			if (to == par[node]) continue;
