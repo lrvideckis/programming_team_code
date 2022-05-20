@@ -11,15 +11,15 @@ see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/m
 
 ## Format
 
-Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments.
-```
-find . -type f -name "*.h" -exec bash -c 'gcc -fpreprocessed -dD -E -P {} > tmp ; mv tmp {}' \;
-```
+1. (optional) Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments.
+   ```
+   mfind . -type f -name "*.h" -exec bash -c 'gcc -fpreprocessed -dD -E -P {} > tmp ; mv tmp {}' \;
+   ```
 
-Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
-```
-astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates
-```
+2. Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
+   ```
+   astyle --recursive "*.h" --indent=tab --remove-braces --style=attach --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates
+   ```
 
 ## License
 
