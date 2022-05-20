@@ -4,6 +4,7 @@
 //https://judge.yosupo.jp/problem/point_add_range_sum, lower_bound tested on
 //https://judge.yosupo.jp/problem/predecessor_problem
 
+
 template<class T>
 struct fenwickTree {
 	vector<T> bit;
@@ -59,13 +60,13 @@ struct rangeUpdatesAndPointQueries {
 		return fenwickTree<T> (arr);
 	}
 	//add `add` to inclusive range [l, r]
-	void updateRange(int l, int r, const T& add) {
+	void update(int l, int r, const T& add) {
 		ft.update(l, add);
 		if (r + 1 < (int) ft.bit.size())
 			ft.update(r + 1, -add);
 	}
 	//get value at index `idx`
-	T queryIdx(int idx) const {
+	T query(int idx) const {
 		return ft.sum(idx);
 	}
 };
