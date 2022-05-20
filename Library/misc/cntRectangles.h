@@ -8,11 +8,8 @@
 //
 //status: tested on random inputs
 vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
-	vector<vector<int>> cnt;
 	const int rows = grid.size(), cols = grid[0].size();
-	if (rows == 0 || cols == 0) return cnt;
-	cnt.resize(rows + 1, vector<int> (cols + 1, 0));
-	vector<vector<int>> arr(rows + 2, vector<int> (cols + 1, 0));
+	vector<vector<int>>cnt(rows + 1, vector<int> (cols + 1, 0)), arr(rows + 2, vector<int> (cols + 1, 0));
 	for (int i = 1; i <= rows; ++i) {
 		for (int j = 1; j <= cols; ++j) {
 			arr[i][j] = 1 + arr[i][j - 1];
