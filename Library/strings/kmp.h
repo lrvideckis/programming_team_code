@@ -16,7 +16,6 @@
 //or just use kactl's min rotation code
 template <class T>
 struct KMP_Match {
-public:
 	KMP_Match(const T& needle_) : prefixFunction(needle_.size() + 1, 0), needle(needle_) {
 		for (int i = 1, p = 0; i < (int) needle.size(); i++) {
 			update(needle[i], p);
@@ -52,7 +51,6 @@ public:
 		}
 		return matches;
 	}
-private:
 	void update(char val, int& p) const {
 		while (p && val != needle[p]) p = prefixFunction[p];
 		if (val == needle[p]) p++;

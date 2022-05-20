@@ -3,7 +3,6 @@
 //status: not tested
 
 struct maxflow {
-public:
 	typedef long long ll;
 	ll n, s, t;
 	maxflow(int _n, int _s, int _t) : n(_n), s(_s), t(_t), d(n), ptr(n), q(n), g(n) {}
@@ -30,7 +29,6 @@ public:
 		return e[edgeMap[a * n + b]].flow;
 	}
 
-private:
 	const ll inf = 1e18;
 	struct edge {
 		ll a, b, cap, flow;
