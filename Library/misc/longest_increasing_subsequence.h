@@ -34,10 +34,8 @@ int lisSize(const vector<T>& arr) {
 	vector<int> dp;
 	for (int val : arr) {
 		auto it = lower_bound(dp.begin(), dp.end(), val);
-		if (it == dp.end())
-			dp.push_back(val);
-		else
-			*it = val;
+		if (it == dp.end()) dp.push_back(val);
+		else *it = val;
 		//here, `dp.size()` = length of LIS of prefix of `arr` so far
 	}
 	return dp.size();
