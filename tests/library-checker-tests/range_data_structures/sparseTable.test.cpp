@@ -8,13 +8,17 @@ int main() {
 	int n,q;
 	cin >> n >> q;
 	vector<int> arr(n);
+	vector<pair<int,int>> init(n);
 	for(int i = 0; i < n; i++) {
 		cin >> arr[i];
+		init[i] = {arr[i], i};
 	}
-	sparseTable<int> st(arr, [](int x, int y) { return min(x, y); });
+	sparseTable<pair<int,int>> st(init, [](auto x, auto y) { return min(x, y); });
 	while(q--) {
 		int l,r;
 		cin >> l >> r;
-		cout << st.query(l,r-1) << endl;
+		auto [mn, idxMn] = st.query(l, r-1);
+		assert(arr[idxMn] == mn);
+		cout << mn << endl;
 	}
 }
