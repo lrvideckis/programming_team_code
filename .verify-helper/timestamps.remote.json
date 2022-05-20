@@ -18,6 +18,7 @@
 "tests/library-checker-tests/range_data_structures/predecessor.test.cpp": "2022-05-20 00:32:09 -0700",
 "tests/library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-04-26 22:02:08 -0700",
 "tests/library-checker-tests/strings/lcp.test.cpp": "2022-04-27 00:21:10 -0700",
+"tests/library-checker-tests/strings/str_q_palindrome.test.cpp": "2022-05-20 01:10:22 -0700",
 "tests/library-checker-tests/strings/str_q_z_alg.test.cpp": "2022-05-20 00:59:58 -0700",
 "tests/library-checker-tests/strings/suffix_array.test.cpp": "2022-04-27 00:21:10 -0700"
 }
