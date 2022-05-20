@@ -14,6 +14,7 @@
 "tests/library-checker-tests/maxflow/hungarian.test.cpp": "2022-04-23 03:39:04 -0700",
 "tests/library-checker-tests/range_data_structures/fenwickTree.test.cpp": "2022-05-20 03:40:01 -0700",
 "tests/library-checker-tests/range_data_structures/kth_smallest.test.cpp": "2022-05-19 21:34:39 -0700",
+"tests/library-checker-tests/range_data_structures/mergeSortTree.test.cpp": "2022-05-20 05:46:47 -0700",
 "tests/library-checker-tests/range_data_structures/predecessor.test.cpp": "2022-05-20 03:33:27 -0700",
 "tests/library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-05-20 01:13:28 -0700",
 "tests/library-checker-tests/strings/lcp.test.cpp": "2022-04-27 00:21:10 -0700",
