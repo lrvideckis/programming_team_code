@@ -1,23 +1,16 @@
 #pragma once
 
 //status: all functions tested on random trees; also `lca` tested on https://judge.yosupo.jp/problem/lca
+//assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 
 struct hld {
+	int n;
 	vector<int> Size, par, Depth, timeIn, Next, timeInToNode;
-	hld(vector<vector<int>>& adj /*forest of trees*/, int root = -1/*pass in to specify root, usually for a single component*/) :
-		Size(adj.size(), 1), par(adj.size(), -1), Depth(adj.size(), 1), timeIn(adj.size()), Next(adj.size(), -1), timeInToNode(adj.size()) {
+	hld(vector<vector<int>>& adj /*single unrooted tree*/, int root) :
+		n(adj.size()), Size(n, 1), par(n, root), Depth(n, 1), timeIn(n), Next(n, root), timeInToNode(n) {
+		dfs1(root, adj);
 		int Time = 0;
-		auto callDfss = [&](int node) -> void {
-			Next[node] = par[node] = node;
-			dfs1(node, adj);
-			dfs2(node, adj, Time);
-		};
-		if (root != -1)
-			callDfss(root);
-		for (int i = 0; i < (int) adj.size(); i++) {
-			if (par[i] == -1)   //roots each tree by node with min label
-				callDfss(i);
-		}
+		dfs2(root, adj, Time);
 	}
 	void dfs1(int node, vector<vector<int>>& adj) {
 		for (auto& to : adj[node]) {
