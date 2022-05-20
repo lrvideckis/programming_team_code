@@ -59,4 +59,4 @@ jobs:
       run: sudo apt-get install astyle
 
     - name: Check code format
-      run: bash tests/stress-tests/test_utilities/scripts/test-format.sh
+      run: bash tests/stress-tests/scripts/test-format.sh
