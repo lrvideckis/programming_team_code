@@ -23,8 +23,7 @@ struct hld {
 		}
 	}
 	void dfs2(int node, const vector<vector<int>>& adj, int& Time) {
-		timeIn[node] = Time;
-		Time++;
+		timeIn[node] = Time++;
 		for (auto to : adj[node]) {
 			if (to == par[node]) continue;
 			Next[to] = (Time == timeIn[node] + 1 ? Next[node] : to);
