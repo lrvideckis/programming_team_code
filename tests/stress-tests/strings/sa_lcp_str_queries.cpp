@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../../../Library/misc/random.h"
+#include "../test_utilities/generators/random.h"
 
 #include "../../../Library/strings/string_queries.h"
 
