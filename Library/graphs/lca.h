@@ -5,16 +5,12 @@
 //status: all functions tested on random trees. `getLca` also tested on https://judge.yosupo.jp/problem/lca
 
 struct lca {
+	int n;
 	vector<int> jmp, jmpEdges, par, subSize, depth;
 	vector<long long> dist;
 
 	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
-		jmp(adj.size(), root),
-		jmpEdges(adj.size(), 0),
-		par(adj.size(), root),
-		subSize(adj.size(), 1),
-		depth(adj.size(), 0),
-		dist(adj.size(), 0LL) {
+		n(adj.size()), jmp(n, root), jmpEdges(n, 0), par(n, root), subSize(n, 1), depth(n, 0), dist(n, 0LL) {
 		dfs(root, -1, adj);
 	}
 
