@@ -35,7 +35,7 @@ int main() {
 		} else {
 			int u;
 			cin >> u;
-			auto [l,r] = h.subtree(v);
+			auto [l,r] = h.subtree(u);
 			cout << ft.sum(l, r) << endl;
 		}
 	}
