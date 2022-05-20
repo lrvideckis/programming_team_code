@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../random.h"
 
 #include "../../../Library/math/exp_mod.h"
 

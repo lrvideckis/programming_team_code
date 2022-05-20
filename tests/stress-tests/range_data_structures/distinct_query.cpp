@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../random.h"
 
 #include "../../../Library/range_data_structures/seldom_used/distinct_query.h"
 

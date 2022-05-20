@@ -1,5 +1,5 @@
 #include "../../template.h"
-#include "../test_utilities/generators/random.h"
+#include "../../random.h"
 
 #include "../../../Library/misc/cntRectangles.h"
 
