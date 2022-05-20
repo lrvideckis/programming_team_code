@@ -1,6 +1,7 @@
 #pragma once
 
 //status: stress-tested against persistent seg tree kth-smallest in range
+//For point updates: either switch to policy based BST, or use sqrt decomposition
 
 struct MergeSortTree {
 	struct Node {
