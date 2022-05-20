@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
+#define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 #include "../../template.h"
 
 #include "../../../Library/strings/string_queries.h"
