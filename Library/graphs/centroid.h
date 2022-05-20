@@ -7,7 +7,7 @@
 //0-based nodes
 //O(n log n)
 
-//usage:
+//example usage:
 //	vector<int> parent = getCentroidTree(adj);
 //	vector<vector<int>> childs(n);
 //	int root;
