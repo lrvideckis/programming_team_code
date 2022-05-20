@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
-SCRIPT_DIR=$DIR/test_utilities/scripts
+SCRIPT_DIR=$DIR/scripts
 
 # use a precompiled header for the template to improve perf
 g++ $(cat $SCRIPT_DIR/compile_flags.txt) -x c++-header $DIR/../../template.cpp
