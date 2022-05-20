@@ -45,7 +45,7 @@ struct segTree {
 		}
 	}
 
-	Node combine(const Node& L, const Node& R) {
+	static Node combine(const Node& L, const Node& R) {
 		return {
 			L.sum + R.sum,
 			max(L.mx, R.mx),
