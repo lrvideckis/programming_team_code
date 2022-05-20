@@ -2,7 +2,7 @@
 #include "../../template.h"
 
 #include "../../../Library/graphs/hld.h"
-#include "../../../Library/range_data_structures/fenwickTree.h"
+#include "../../../Library/range_data_structures/fenwickInv.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -20,17 +20,17 @@ int main() {
 		adj[par[i]].push_back(i);
 	}
 	hld h(adj, 0);
-	vector<long long> rupqInit(n);
-	for(int i = 0; i < n; i++) rupqInit[h.timeIn[i]] = values[i];
+	vector<long long> ftInvInit(n);
+	for(int i = 0; i < n; i++) ftInvInit[h.timeIn[i]] = values[i];
 	for(int i = n-1; i > 0; i--) {
-		rupqInit[h.timeIn[par[i]]] += rupqInit[h.timeIn[i]];
+		ftInvInit[h.timeIn[par[i]]] += ftInvInit[h.timeIn[i]];
 	}
 	vector<long long> init(n);
 	for(int i = 0; i < n; i++) {
 		init[h.timeIn[i]] = values[i];
 	}
 	fenwickTree<long long> ft(init);
-	fenwickInv<long long> rupq(rupqInit);
+	fenwickInv<long long> ftInv(ftInvInit);
 	while(q--) {
 		int type;
 		cin >> type;
@@ -39,14 +39,14 @@ int main() {
 			cin >> idx >> add;
 			ft.update(h.timeIn[idx], add);
 			for(auto [l,r] : h.path(0, idx)) {
-				rupq.update(l, r, add);
+				ftInv.update(l, r, add);
 			}
 		} else {
 			int u;
 			cin >> u;
 			auto [l,r] = h.subtree(u);
 			long long res = ft.sum(l, r);
-			assert(res == rupq.query(h.timeIn[u]));
+			assert(res == ftInv.query(h.timeIn[u]));
 			cout << res << endl;
 		}
 	}
