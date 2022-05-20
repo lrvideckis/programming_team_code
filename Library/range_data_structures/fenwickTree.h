@@ -50,10 +50,10 @@ struct fenwickTree {
 //status: tested on random inputs
 
 template<class T>
-struct rangeUpdatesAndPointQueries {
+struct fenwickInv {
 	fenwickTree<T> ft;
-	rangeUpdatesAndPointQueries(int n) : ft(n) {}
-	rangeUpdatesAndPointQueries(const vector<T>& arr) : ft(init(arr)) {}
+	fenwickInv(int n) : ft(n) {}
+	fenwickInv(const vector<T>& arr) : ft(init(arr)) {}
 	fenwickTree<T> init(vector<T> arr/*intentional pass by value*/) {
 		for (int i = (int) arr.size() - 1; i >= 1; i--)
 			arr[i] -= arr[i - 1];

@@ -30,7 +30,7 @@ int main() {
 		init[h.timeIn[i]] = values[i];
 	}
 	fenwickTree<long long> ft(init);
-	rangeUpdatesAndPointQueries<long long> rupq(rupqInit);
+	fenwickInv<long long> rupq(rupqInit);
 	while(q--) {
 		int type;
 		cin >> type;
