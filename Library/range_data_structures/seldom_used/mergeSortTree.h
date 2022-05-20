@@ -42,7 +42,7 @@ struct MergeSortTree {
 		return {par, L.l, R.r};
 	}
 
-	//out of arr[l], arr[l+1], ..., arr[r], how many are < x?
+	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
 	//O(log^2(n))
 	int query(int l, int r, int x) const {
 		assert(l <= r);
