@@ -40,6 +40,7 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 - [polynomial stuff](https://cp-algorithms.com/algebra/polynomial.html)
 - [DSU with rollback](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/UnionFindRollback.h)
 - [string hashing](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Hashing.h)
+- [string rotational equivalence](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/MinRotation.h)
 
 ## Other CP repos
 
