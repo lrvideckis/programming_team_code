@@ -4,8 +4,9 @@
 //tested on https://www.spoj.com/problems/DQUERY/ and stress tested
 
 //works with negatives
+//O(n log n) time and space
 
-struct persistentSegTree {
+struct distinct_query {
 
 	struct Node {
 		int lCh, rCh;//children, indexes into `tree`
@@ -16,7 +17,7 @@ struct persistentSegTree {
 	deque<Node> tree;
 	vector<int> roots;
 
-	persistentSegTree(const vector<int>& arr) : sz(arr.size() + 1) {
+	distinct_query(const vector<int>& arr) : sz(arr.size() + 1) {
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
 		map<int, int> lastIdx;

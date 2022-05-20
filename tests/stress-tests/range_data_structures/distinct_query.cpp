@@ -17,7 +17,7 @@ int main() {
 				arr[i] = getRand<int>(-2, 2);
 			}
 		}
-		persistentSegTree pst(arr);
+		distinct_query pst(arr);
 		for(int l = 0; l < n; l++) {
 			for(int r = l; r < n; r++) {
 				set<int> copyArr(arr.begin() + l, arr.begin() + r + 1);
