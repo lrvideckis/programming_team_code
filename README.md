@@ -11,7 +11,7 @@ see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/m
 
 ## Format
 
-1. (optional) Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments.
+1. (optional) Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments. (for the advanced users)
    ```
    find . -type f -name "*.h" -exec bash -c 'gcc -fpreprocessed -dD -E -P {} > tmp ; mv tmp {}' \;
    ```
