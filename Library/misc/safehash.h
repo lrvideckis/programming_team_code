@@ -1,5 +1,6 @@
 #pragma once
 
+//source: https://codeforces.com/blog/entry/62393
 struct custom_hash {
 	static uint64_t splitmix64(uint64_t x) {
 		// http://xorshift.di.unimi.it/splitmix64.c
@@ -14,3 +15,9 @@ struct custom_hash {
 		return splitmix64(x + FIXED_RANDOM);
 	}
 };
+
+//usage:
+unordered_map<long long, int, custom_hash> safe_map;
+
+#include "policy_based_data_structures.h" //not needed when using `unordered_map`
+gp_hash_table<long long, int, custom_hash> safe_hash_table;
