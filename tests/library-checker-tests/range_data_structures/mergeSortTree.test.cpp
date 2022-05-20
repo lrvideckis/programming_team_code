@@ -10,7 +10,7 @@ int main() {
 	cin >> n >> q;
 
 	if(n == 0) {
-		cout << string(q, "0 ");
+		while(q--) cout << 0 << " ";
 		return 0;
 	}
 
