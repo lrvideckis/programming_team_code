@@ -17,8 +17,7 @@ struct MergeSortTree {
 
 	vector<Node> tree;
 
-	//There's no constructor `segTree(int size)` because how to initialize l,r in nodes without calling build?
-	//the whole point of `segTree(int size)` was to be simpler by not calling build
+	//RTE's when `arr` is empty
 	MergeSortTree(const vector<int>& arr) : tree(2 * (int) arr.size() - 1) {
 		build(arr, 0, 0, (int) arr.size() - 1);
 	}
@@ -43,11 +42,13 @@ struct MergeSortTree {
 		return {par, L.l, R.r};
 	}
 
-	//range [l,r]
-	int query(int l, int r, int x) {
+	//out of arr[l], arr[l+1], ..., arr[r], how many are < x?
+	//O(log^2(n))
+	int query(int l, int r, int x) const {
+		assert(l <= r);
 		return query(0, l, r, x);
 	}
-	int query(int v, int l, int r, int x) {
+	int query(int v, int l, int r, int x) const {
 		if (tree[v].r < l || r < tree[v].l)
 			return 0;
 		if (l <= tree[v].l && tree[v].r <= r) {
