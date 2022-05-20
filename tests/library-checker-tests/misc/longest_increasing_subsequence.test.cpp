@@ -399,9 +399,9 @@ int main() {
 		cin >> l >> r;
 		int res = rlq.query(l, r);
 		if(getRand(1, N) < 30) {// this will be true on average Q*30/N times
-			vector<int> subarray(r-l+1);
+			vector<int> subarray;
 			for(int i = l; i < r; i++) {
-				subarray[i-l] = P[i];
+				subarray.push_back(P[i]);
 			}
 			assert((int)lis(subarray).size() == res);
 			assert(lisSize(subarray) == res);
