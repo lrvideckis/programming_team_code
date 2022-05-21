@@ -14,7 +14,7 @@ struct hld {
 		dfs2(root, adj, Time);
 	}
 	void dfs1(int node, vector<vector<int>>& adj) {
-		for (auto& to : adj[node]) {
+		for (int& to : adj[node]) {
 			if (to == par[node]) continue;
 			par[to] = node;
 			dfs1(to, adj);
@@ -25,7 +25,7 @@ struct hld {
 	}
 	void dfs2(int node, const vector<vector<int>>& adj, int& Time) {
 		timeIn[node] = Time++;
-		for (auto to : adj[node]) {
+		for (int to : adj[node]) {
 			if (to == par[node]) continue;
 			Next[to] = (Time == timeIn[node] + 1 ? Next[node] : to);
 			dfs2(to, adj, Time);
