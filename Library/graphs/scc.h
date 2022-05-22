@@ -12,7 +12,6 @@ struct sccInfo {
 
 sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 	int n = adj.size(), numSCCs = 0;
-	vector<int> sccId(n);
 	stack<int> seen;
 	{
 		vector<bool> vis(n, false);
@@ -34,22 +33,21 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		for (int to : adj[i])
 			adjInv[to].push_back(i);
 	}
-	vector<bool> vis(n, false);
+	vector<int> sccId(n, -1);
 	auto dfs = [&](auto&& dfsPtr, int curr) -> void {
-		vis[curr] = true;
 		sccId[curr] = numSCCs;
 		for (int x : adjInv[curr]) {
-			if (!vis[x])
+			if (sccId[x] == -1)
 				dfsPtr(dfsPtr, x);
 		}
 	};
 	while (!seen.empty()) {
 		int node = seen.top();
 		seen.pop();
-		if (vis[node])
-			continue;
-		dfs(dfs, node);
-		numSCCs++;
+		if (sccId[node] == -1) {
+		    dfs(dfs, node);
+		    numSCCs++
+                }
 	}
 	return {numSCCs, sccId};
 }
