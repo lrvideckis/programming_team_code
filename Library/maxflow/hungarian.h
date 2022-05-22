@@ -6,7 +6,7 @@ const long long inf = 1e18;
 // jobs X workers cost matrix
 // cost[i][j] is cost of job i done by worker j
 // #jobs must be <= #workers
-// Default finds min cost; to find max cost set all costs[i][j] to -costs[i][j], set all unused to positive inf, ***set main diagonal (self edges) to 0***
+// Default finds min cost; to find max cost set all costs[i][j] to -costs[i][j], set all unused to positive inf
 
 //status: tested on https://judge.yosupo.jp/problem/assignment
 
