@@ -20,6 +20,7 @@ vector<int> lis(const vector<T>& arr) {
 			prev[i] = it == dp.begin() ? -1 : *(it - 1);
 			*it = i;
 		}
+		//here, dp.size() = length of LIS of prefix of arr ending at index i
 	}
 	vector<int> res(dp.size());
 	for (int i = dp.back(), j = dp.size(); i != -1; i = prev[i])
