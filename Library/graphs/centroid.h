@@ -43,7 +43,7 @@ vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
 					break;
 				}
 			}
-			if(!found) return node;
+			if (!found) return node;
 		}
 	};
 	vector<int> parent(n);
