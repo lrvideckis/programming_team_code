@@ -404,7 +404,6 @@ int main() {
 				subarray.push_back(P[i]);
 			}
 			assert((int)lis(subarray).size() == res);
-			assert(lisSize(subarray) == res);
 		}
 		cout << res << endl;
 	}
