@@ -1,8 +1,8 @@
 //status: not tested
 
-//place this include *before* the `#define int long long` else compile error
-#include <bits/extc++.h>
-using namespace __gnu_pbds;
+//place these includes *before* the `#define int long long` else compile error
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 
 //BST with extra functions https://codeforces.com/blog/entry/11080
 //order_of_key - # of elements *strictly* less than given element
