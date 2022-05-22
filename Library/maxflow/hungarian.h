@@ -2,6 +2,8 @@
 
 const long long inf = 1e18;
 
+//source: https://e-maxx.ru/algo/assignment_hungary
+
 // this is one-indexed
 // jobs X workers cost matrix
 // cost[i][j] is cost of job i done by worker j
