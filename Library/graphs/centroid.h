@@ -18,7 +18,6 @@
 //			childs[parent[i]].push_back(i);
 //	}
 vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
-	int root;
 	int n = adj.size();
 	vector<int> sizes(n);
 	vector<bool> vis(n, false);
