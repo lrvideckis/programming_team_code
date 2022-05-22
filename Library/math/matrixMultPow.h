@@ -18,8 +18,9 @@ vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>
 }
 
 vector<vector<int>> power(vector<vector<int>> matrix, int b) {
-	vector<vector<int>> res(matrix.size(), vector<int> (matrix.size(), 0));
-	for (int i = 0; i < (int) matrix.size(); i++)
+	int n = matrix.size();
+	vector<vector<int>> res(n, vector<int> (n, 0));
+	for (int i = 0; i < n; i++)
 		res[i][i] = 1;
 	while (b > 0) {
 		if (b % 2 == 1)
