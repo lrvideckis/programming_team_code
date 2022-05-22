@@ -46,7 +46,7 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		seen.pop();
 		if (sccId[node] == -1) {
 			dfs(dfs, node);
-			numSCCs++
+			numSCCs++;
 		}
 	}
 	return {numSCCs, sccId};
