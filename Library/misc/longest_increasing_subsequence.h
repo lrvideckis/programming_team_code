@@ -21,8 +21,7 @@ vector<int> lis(const vector<T>& arr) {
 		}
 	}
 	vector<int> res(dp.size());
-	int j = dp.size();
-	for (int i = dp.back(); i != -1; i = prev[i])
+	for (int i = dp.back(), j = dp.size(); i != -1; i = prev[i])
 		res[--j] = i;
 	return res;
 }
