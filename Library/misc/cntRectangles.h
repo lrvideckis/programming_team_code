@@ -8,19 +8,19 @@
 //
 //status: tested on random inputs
 vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
-	const int rows = grid.size(), cols = grid[0].size();
-	vector<vector<int>>cnt(rows + 1, vector<int> (cols + 1, 0)), arr(rows + 2, vector<int> (cols + 1, 0));
-	for (int i = 1; i <= rows; ++i) {
-		for (int j = 1; j <= cols; ++j) {
+	const int n = grid.size(), m = grid[0].size();
+	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0)), arr(n + 2, vector<int>(m + 1, 0));
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= m; j++) {
 			arr[i][j] = 1 + arr[i][j - 1];
 			if (grid[i - 1][j - 1]) arr[i][j] = 0;
 		}
 	}
-	for (int j = 1; j <= cols; ++j) {
-		arr[rows + 1][j] = 0;
+	for (int j = 1; j <= m; j++) {
+		arr[n + 1][j] = 0;
 		stack<pair<int, int>> st;
 		st.push({0, 0});
-		for (int i = 1; i <= rows + 1; ++i) {
+		for (int i = 1; i <= n + 1; i++) {
 			pair<int, int> curr = {i, arr[i][j]};
 			while (arr[i][j] < st.top().second) {
 				curr = st.top();
@@ -31,14 +31,14 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 			st.push({curr.first, arr[i][j]});
 		}
 	}
-	for (int j = 1; j <= cols; ++j) {
-		for (int i = rows - 1; i >= 1; --i)
+	for (int j = 1; j <= m; j++) {
+		for (int i = n - 1; i >= 1; i--)
 			cnt[i][j] += cnt[i + 1][j];
-		for (int i = rows - 1; i >= 1; --i)
+		for (int i = n - 1; i >= 1; i--)
 			cnt[i][j] += cnt[i + 1][j];
 	}
-	for (int i = 1; i <= rows; ++i) {
-		for (int j = cols - 1; j >= 1; --j)
+	for (int i = 1; i <= n; i++) {
+		for (int j = m - 1; j >= 1; j--)
 			cnt[i][j] += cnt[i][j + 1];
 	}
 	return cnt;
