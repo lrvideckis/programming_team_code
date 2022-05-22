@@ -4,6 +4,7 @@
 //not using <bits/extc++.h> as it compile errors on codeforces c++20 compiler
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 
 //BST with extra functions https://codeforces.com/blog/entry/11080
 //order_of_key - # of elements *strictly* less than given element
