@@ -4,6 +4,7 @@
 
 //returns array of indexes representing the longest *strictly* increasing subsequence
 //for non-decreasing: pass in a vector<pair<T, int>> where second is 0, 1, ..., n-1
+//alternatively, there's this https://codeforces.com/blog/entry/13225
 template<class T>
 vector<int> lis(const vector<T>& arr) {
 	if (arr.empty()) return {};
@@ -24,18 +25,4 @@ vector<int> lis(const vector<T>& arr) {
 	for (int i = dp.back(), j = dp.size(); i != -1; i = prev[i])
 		res[--j] = i;
 	return res;
-}
-
-//returns length of longest *strictly* increasing subsequence
-//alternatively, there's this https://codeforces.com/blog/entry/13225
-template<class T>
-int lisSize(const vector<T>& arr) {
-	vector<int> dp;
-	for (int val : arr) {
-		auto it = lower_bound(dp.begin(), dp.end(), val);
-		if (it == dp.end()) dp.push_back(val);
-		else *it = val;
-		//here, `dp.size()` = length of LIS of prefix of `arr` so far
-	}
-	return dp.size();
 }
