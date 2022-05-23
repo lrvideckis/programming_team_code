@@ -17,8 +17,8 @@ struct lca {
 	void dfs(int node, const vector<vector<pair<int, long long>>>& adj) {
 		for (auto [ch, w] : adj[node]) {
 			if (ch == par[node]) continue;
-			depth[ch] = 1 + depth[node];
 			par[ch] = node;
+			depth[ch] = 1 + depth[node];
 			dist[ch] = w + dist[node];
 			if (jmpEdges[node] > 0 && jmpEdges[node] == jmpEdges[jmp[node]])
 				jmp[ch] = jmp[jmp[node]], jmpEdges[ch] = 2 * jmpEdges[node] + 1;
