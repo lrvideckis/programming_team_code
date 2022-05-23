@@ -1,3 +1,5 @@
+#pragma once
+
 //status: not tested
 
 //place these includes *before* the `#define int long long` else compile error
