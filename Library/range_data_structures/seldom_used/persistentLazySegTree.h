@@ -83,7 +83,7 @@ struct persistentLazySegTree {
 	}
 
 	//let's use implementation trick described here https://codeforces.com/blog/entry/72626
-	//so that we don't have to propogate lazy vals and thus we don't have to allocate new nodes
+	//so that we don't have to propagate lazy vals and thus we don't have to allocate new nodes
 	int query(int l, int r) const {
 		int version = roots.size() - 1;
 		int root = roots[version];
