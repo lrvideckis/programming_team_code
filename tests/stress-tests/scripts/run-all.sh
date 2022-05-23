@@ -34,7 +34,6 @@ for test in $tests; do
     runtime=$( echo "$end - $start" | bc -l )
     echo "Took $runtime seconds"
     rm -f a.out
-    echo
 done
 echo "$pass/$(($pass+$fail)) tests passed"
 if (($fail == 0)); then
