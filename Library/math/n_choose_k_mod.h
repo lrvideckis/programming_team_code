@@ -6,7 +6,7 @@
 #include "exp_mod.h"
 
 // usage:
-//     NchooseK nk(n+1, 1e9+7) to use `choose`, `inv` with inputs <= n
+//     NchooseK nk(n, 1e9+7) to use `choose`, `inv` with inputs < n
 // or:
 //     NchooseK nk(mod, mod) to use `chooseWithLucasTheorem`
 struct NchooseK {
