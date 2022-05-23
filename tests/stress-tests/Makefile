@@ -13,3 +13,6 @@ test:
 
 test-compiles:
 	./scripts/compile-all.sh . $(which_alg)
+
+verify-test-comments:
+	./scripts/test_status_checker.sh .
