@@ -46,6 +46,9 @@ jobs:
     - name: Run compiles
       run: make --directory=tests/stress-tests/ test-compiles
 
+    - name: Install bc
+      run: sudo apt-get install bc
+
     - name: Run stress tests
       run: make --directory=tests/stress-tests/ test
 
