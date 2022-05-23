@@ -11,20 +11,20 @@ struct lca {
 
 	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
 		n(adj.size()), jmp(n, root), jmpEdges(n, 0), par(n, root), depth(n, 0), dist(n, 0LL) {
-		dfs(root, -1, adj);
+		dfs(root, adj);
 	}
 
-	void dfs(int node, int parent, const vector<vector<pair<int, long long>>>& adj) {
+	void dfs(int node, const vector<vector<pair<int, long long>>>& adj) {
 		for (auto [ch, w] : adj[node]) {
-			if (ch == parent) continue;
+			if (ch == par[node]) continue;
 			depth[ch] = 1 + depth[node];
 			par[ch] = node;
 			dist[ch] = w + dist[node];
-			if (parent != -1 && jmpEdges[node] == jmpEdges[jmp[node]])
+			if (jmpEdges[node] > 0 && jmpEdges[node] == jmpEdges[jmp[node]])
 				jmp[ch] = jmp[jmp[node]], jmpEdges[ch] = 2 * jmpEdges[node] + 1;
 			else
 				jmp[ch] = node, jmpEdges[ch] = 1;
-			dfs(ch, node, adj);
+			dfs(ch, adj);
 		}
 	}
 
