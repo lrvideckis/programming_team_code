@@ -21,7 +21,7 @@ struct KMP_Match {
 			update(needle[i], p);
 			prefixFunction[i + 1] = p;
 		}
-	};
+	}
 
 	// if haystack = "bananas"
 	// needle = "ana"
