@@ -1,5 +1,7 @@
 #pragma once
 
+#include "prefix_function.h"
+
 //usage:
 //	string needle;
 //	...
@@ -16,12 +18,7 @@
 //or just use kactl's min rotation code
 template <class T>
 struct KMP_Match {
-	KMP_Match(const T& needle_) : prefixFunction(needle_.size() + 1, 0), needle(needle_) {
-		for (int i = 1, p = 0; i < (int) needle.size(); i++) {
-			update(needle[i], p);
-			prefixFunction[i + 1] = p;
-		}
-	}
+	KMP_Match(const T& needle_) : pi(prefix_function(needle_)), needle(needle_) {}
 
 	// if haystack = "bananas"
 	// needle = "ana"
@@ -41,20 +38,17 @@ struct KMP_Match {
 	// KMP_Match::find(<haystack>,false).size() > 0
 	vector<int> find(const T& haystack, bool all = true) const {
 		vector<int> matches;
-		for (int i = 0, p = 0; i < (int) haystack.size(); i++) {
-			update(haystack[i], p);
-			if (p == (int) needle.size()) {
-				matches.push_back(i - (int) needle.size() + 1);
+		for (int i = 0, j = 0; i < (int)haystack.size(); i++) {
+			while (j > 0 && haystack[i] != needle[j]) j = pi[j-1];
+			if(needle[j] == haystack[i]) j++;
+			if (j == (int)needle.size()) {
+				matches.push_back(i - (int)needle.size() + 1);
 				if (!all) return matches;
-				p = prefixFunction[p];
+				j = pi[j-1];
 			}
 		}
 		return matches;
 	}
-	void update(char val, int& p) const {
-		while (p && val != needle[p]) p = prefixFunction[p];
-		if (val == needle[p]) p++;
-	}
-	vector<int> prefixFunction;
+	vector<int> pi;//prefix function
 	T needle;
 };
