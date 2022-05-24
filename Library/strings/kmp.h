@@ -38,7 +38,7 @@ struct KMP_Match {
 	vector<int> find(const T& haystack, bool all = true) const {
 		vector<int> matches;
 		for (int i = 0, j = 0; i < (int)haystack.size(); i++) {
-			while (j > 0 && needle[i] != haystack[j]) j = pi[j - 1];
+			while (j > 0 && needle[j] != haystack[i]) j = pi[j - 1];
 			if (needle[j] == haystack[i]) j++;
 			if (j == (int)needle.size()) {
 				matches.push_back(i - (int)needle.size() + 1);
