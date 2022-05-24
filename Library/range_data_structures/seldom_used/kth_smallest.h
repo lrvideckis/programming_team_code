@@ -10,13 +10,12 @@ struct kth_smallest {
 		int lCh, rCh;//children, indexes into `tree`
 	};
 
-	deque<Node> tree;
+	int mn, mx;
 	vector<int> roots;
+	deque<Node> tree;
 
-	kth_smallest(const vector<int>& arr) {
+	kth_smallest(const vector<int>& arr) : mn(INT_MAX), mx(INT_MIN), roots{1} {
 		tree.push_back({0, 0, 0}); //acts as null
-		roots.push_back(0);
-		int mn = INT_MAX, mx = INT_MIN;
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val);
 		for (int val : arr)
 			roots.push_back(update(roots.back(), -mx, mx, arr[i]));
