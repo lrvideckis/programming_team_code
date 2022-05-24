@@ -14,15 +14,14 @@ struct distinct_query {
 	};
 
 	int sz;
-	deque<Node> tree;
 	vector<int> roots;
+	deque<Node> tree;
 
-	distinct_query(const vector<int>& arr) : sz(arr.size() + 1) {
+	distinct_query(const vector<int>& arr) : sz(arr.size() + 1), roots(sz, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
-		roots.push_back(0);
 		map<int, int> lastIdx;
 		for (int i = 0; i < (int)arr.size(); i++) {
-			roots.push_back(update(roots.back(), 0, sz - 1, lastIdx[arr[i]]));
+			roots[i + 1] = update(roots[i], 0, sz - 1, lastIdx[arr[i]]);
 			lastIdx[arr[i]] = i + 1;
 		}
 	}
