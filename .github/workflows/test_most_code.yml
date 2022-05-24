@@ -31,13 +31,6 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
 
-  test_compiles:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Run compiles
-      run: make --directory=tests/stress-tests/ test-compiles
-  
   stress_tests:
     runs-on: ubuntu-latest
     steps:
@@ -46,6 +39,13 @@ jobs:
       run: sudo apt-get install bc
     - name: Run stress tests
       run: make --directory=tests/stress-tests/ test
+
+  test_compiles:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run compiles
+      run: make --directory=tests/stress-tests/ test-compiles
 
   check_code_format:
     runs-on: ubuntu-latest
