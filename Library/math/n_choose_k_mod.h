@@ -11,7 +11,7 @@
 //     NchooseK nk(mod, mod) to use `chooseWithLucasTheorem`
 struct NchooseK {
 	// `factSz` is the size of the factorial array, so only call `choose`, `inv` with n < factSz
-	NchooseK(int factSz, int currMod) : mod(currMod), fact(factSz, 1), invFact(factSz) {
+	NchooseK(int factSz, int currMod) : mod(currMod), fact(factSz, 1), invFact(factSz, 1) {
 		//this implementation doesn't work if factSz > mod because n! % mod = 0 when n >= mod. So `invFact` array will be all 0's
 		assert(factSz <= mod && mod >= 2);
 		//assert mod is prime. mod is intended to fit inside an int so that
@@ -22,7 +22,7 @@ struct NchooseK {
 		for (int i = 2; i < factSz; i++)
 			fact[i] = 1LL * fact[i - 1] * i % mod;
 		invFact.back() = fastPow(fact.back(), mod - 2, mod);
-		for (int i = factSz - 2; i >= 0; i--)
+		for (int i = factSz - 2; i >= 2; i--)
 			invFact[i] = 1LL * invFact[i + 1] * (i + 1) % mod;
 	}
 
