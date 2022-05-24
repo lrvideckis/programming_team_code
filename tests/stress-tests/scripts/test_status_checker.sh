@@ -15,8 +15,7 @@ do
 
 	#get list of .h files which this test tests
 	g++ -std=c++17 -MMD $test
-	ls
-	dependencies="a-"$(basename $test | sed s/\.cpp/\.d/)
+	dependencies=$(basename $test | sed s/\.cpp/\.d/)
 	for dep in $(cat $dependencies | tr '\\' '\n')
 	do
 		if $(echo $dep | grep --quiet --extended-regexp "*\/Library\/*")
