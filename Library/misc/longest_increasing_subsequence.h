@@ -1,6 +1,5 @@
 #pragma once
-
-// status: stress tested, and tested on https://open.kattis.com/problems/longincsubseq
+//library checker tests: https://judge.yosupo.jp/problem/static_range_lis_query
 
 //returns array of indexes representing the longest *strictly* increasing subsequence
 //for non-decreasing: pass in a vector<pair<T, int>> where second is 0, 1, ..., n-1

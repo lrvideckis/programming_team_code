@@ -1,4 +1,5 @@
 #pragma once
+//library checker tests: https://judge.yosupo.jp/problem/zalgorithm
 
 //source: https://cp-algorithms.com/string/prefix-function.html#implementation
 template <class T>

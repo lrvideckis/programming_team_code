@@ -1,4 +1,5 @@
 #pragma once
+//library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations, https://judge.yosupo.jp/problem/matrix_det
 
 //for mod inverse
 #include "exp_mod.h"
@@ -14,8 +15,6 @@ struct matrixInfo {
 //Returns rank of A, determinant of A, and x (solution vector to A * x = b). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
 //Leaves A in reduced row echelon form (unlike kactl).
 //O(n * m * min(n,m))
-//
-//status: tested on https://judge.yosupo.jp/problem/system_of_linear_equations and https://judge.yosupo.jp/problem/matrix_det
 matrixInfo solve_linear_mod(vector<vector<int>>& A, vector<int>& b, const int mod) {
 	assert(A.size() == b.size());
 	int n = A.size(), m = A[0].size(), rank = 0, det = 1;

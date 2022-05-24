@@ -63,3 +63,12 @@ jobs:
 
     - name: Check code format
       run: bash tests/stress-tests/scripts/test-format.sh
+
+  check_library_checker_test_comments:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check library test comments
+      run: make --directory=tests/stress-tests/ verify-test-comments

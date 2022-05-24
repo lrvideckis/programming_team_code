@@ -1,8 +1,7 @@
 #pragma once
+//library checker tests: https://judge.yosupo.jp/problem/suffixarray, https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/number_of_substrings, https://judge.yosupo.jp/problem/enumerate_palindromes
 
 //modified from here: https://judge.yosupo.jp/submission/37410
-//
-//status: tested on https://judge.yosupo.jp/problem/suffixarray
 //
 // SA-IS, linear-time suffix array construction
 // Reference:

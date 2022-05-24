@@ -1,6 +1,5 @@
 #pragma once
-
-//status: tested on random inputs, and on https://judge.yosupo.jp/problem/unionfind
+//library checker tests: https://judge.yosupo.jp/problem/unionfind
 
 struct disjointSet {
 	int numSets;
