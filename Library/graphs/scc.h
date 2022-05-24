@@ -16,12 +16,10 @@ sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 		auto dfs = [&](auto&& dfsPtr, int curr) -> void {
 			if (vis[curr]) return;
 			vis[curr] = true;
-			for (int x : adj[curr])
-				dfsPtr(dfsPtr, x);
+			for (int x : adj[curr]) dfsPtr(dfsPtr, x);
 			seen.push(curr);
 		};
-		for (int i = 0; i < n; i++)
-			dfs(dfs, i);
+		for (int i = 0; i < n; i++) dfs(dfs, i);
 	}
 	vector<vector<int>> adjInv(n);
 	for (int i = 0; i < n; i++) {
