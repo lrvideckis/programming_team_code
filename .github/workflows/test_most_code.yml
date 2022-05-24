@@ -5,23 +5,18 @@ on: push
 jobs:
   library_checker_tests:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
-
     - name: Set up Python
       uses: actions/setup-python@v1
-
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
-
     - name: Set up Rust (1.42.0)
       uses: actions-rs/toolchain@v1
       with:
         toolchain: 1.42.0-x86_64-unknown-linux-gnu
         default: true
         profile: minimal
-
     # required by cargo-udeps
     - name: Set up Rust (nightly)
       uses: actions-rs/toolchain@v1
@@ -29,7 +24,6 @@ jobs:
         toolchain: nightly-x86_64-unknown-linux-gnu
         default: true
         profile: minimal
-
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,51 +33,39 @@ jobs:
 
   test_compiles:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-
     - name: Run compiles
       run: make --directory=tests/stress-tests/ test-compiles
   
   stress_tests:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-
     - name: Install bc
       run: sudo apt-get install bc
-
     - name: Run stress tests
       run: make --directory=tests/stress-tests/ test
 
   check_code_format:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-
     - name: Install astyle
       run: sudo apt-get install astyle
-
     - name: Check code format
       run: bash tests/stress-tests/scripts/test-format.sh
 
   check_library_checker_test_comments:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-
     - name: Check library test comments
       run: make --directory=tests/stress-tests/ verify-library-checker-test-comments
 
   check-stress-test-comments:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-
     - name: Check stress test comments
       run: make --directory=tests/stress-tests/ verify-stress-test-comments
