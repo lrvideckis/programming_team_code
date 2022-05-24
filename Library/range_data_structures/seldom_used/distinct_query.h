@@ -9,8 +9,8 @@
 struct distinct_query {
 
 	struct Node {
-		int lCh, rCh;//children, indexes into `tree`
 		int sum;
+		int lCh, rCh;//children, indexes into `tree`
 	};
 
 	int sz;
@@ -28,7 +28,7 @@ struct distinct_query {
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
-			tree.push_back({0, 0, tree[v].sum + 1});
+			tree.push_back({tree[v].sum + 1, 0, 0});
 			return tree.size() - 1;
 		}
 		int tm = (tl + tr) / 2;
@@ -38,7 +38,7 @@ struct distinct_query {
 			lCh = update(lCh, tl, tm, idx);
 		else
 			rCh = update(rCh, tm + 1, tr, idx);
-		tree.push_back({lCh, rCh, tree[lCh].sum + tree[rCh].sum});
+		tree.push_back({tree[lCh].sum + tree[rCh].sum, lCh, rCh});
 		return tree.size() - 1;
 	}
 
