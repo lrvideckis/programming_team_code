@@ -1,12 +1,12 @@
-## Test status comments
-
-Each file has 2 standardized comments displaying test status:
-- `//library checker tests: https://judge.yosupo.jp/problem/..., https://judge.yosupo.jp/problem/...`
-- `//stress tests: ...` (TODO)
-
 ## Test details
 - All code in [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) except [these](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/stress-tests/scripts/skip_headers.txt) *compiled* (no warnings) with [these flags](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/stress-tests/scripts/compile_flags.txt) from [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547)
   - note `-Wconversion` is missing
 - [library-checker-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/tests/library-checker-tests) which tests code on [Library Checker](https://judge.yosupo.jp/) ([steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html))
 - [stress-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/tests/stress-tests) which compares library code output to a naive version (or another alg) on random inputs.
 -  Not all code is tested; see test status comments at the top of each file.
+
+## Test status comments
+
+Each file has 2 standardized comments displaying test status:
+- `//library checker tests: https://judge.yosupo.jp/problem/..., https://judge.yosupo.jp/problem/...`
+- `//stress tests: ...` (TODO)
