@@ -7,6 +7,6 @@
 
 ## Test status comments
 
-Each file has 2 standardized comments displaying test status:
+Each file has 2 standardized comments displaying test status (checked by CI):
 - `//library checker tests: https://judge.yosupo.jp/problem/..., https://judge.yosupo.jp/problem/...`
 - `//stress tests: ...` (TODO)
