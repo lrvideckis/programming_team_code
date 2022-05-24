@@ -20,7 +20,6 @@ do
 	do
 		if $(echo $dep | grep --quiet --extended-regexp "*\/Library\/*")
 		then
-			echo "testing dependency "$(basename $dep)" of "$(basename $test)
 			if ! grep --quiet --extended-regexp "//library checker tests:.*$which_lib_problem.*" $dep
 			then
 				echo "Fail! no comment specifying file "$(basename $dep)" is tested on "$which_lib_problem
@@ -30,8 +29,6 @@ do
 				echo "//library checker tests: "$which_lib_problem
 				fail=1
 			fi
-			echo "finished testing dependency "$(basename $dep)" of "$(basename $test)
-			echo
 		fi
 	done
 done
