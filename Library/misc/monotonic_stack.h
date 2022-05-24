@@ -1,7 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/cartesian_tree
 
-//leftLower[i] is the closest index where arr is less.
+//leftLower[i] is the closest smaller index where arr is less.
 //Formally: for every index j with leftLower[i] < j < i: arr[j] >= arr[i]
 //and
 //arr[leftLower[i]] < arr[i] if leftLower[i] != -1
