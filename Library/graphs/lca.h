@@ -20,7 +20,7 @@ struct lca {
 			par[ch] = node;
 			depth[ch] = 1 + depth[node];
 			dist[ch] = w + dist[node];
-			if (depth[node] > 0 /*node is not root*/ && jmpEdges[node] == jmpEdges[jmp[node]])
+			if (depth[node] > 0 && jmpEdges[node] == jmpEdges[jmp[node]])
 				jmp[ch] = jmp[jmp[node]], jmpEdges[ch] = 2 * jmpEdges[node] + 1;
 			else
 				jmp[ch] = node, jmpEdges[ch] = 1;
