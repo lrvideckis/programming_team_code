@@ -14,7 +14,7 @@ do
 	which_lib_problem=$(grep "#define PROBLEM" $test | grep -o '".*"' | tr -d '"')
 
 	#get list of .h files which this test tests
-	g++ -MMD $test
+	g++ -std=c++17 -MMD $test
 	dependencies="a-"$(basename $test | sed s/\.cpp/\.d/)
 	for dep in $(cat $dependencies | tr '\\' '\n')
 	do
