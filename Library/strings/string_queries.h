@@ -1,10 +1,10 @@
 #pragma once
+//library checker tests: https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes
 
 #include "suffix_array.h"
 #include "longest_common_prefix.h"
 #include "../range_data_structures/sparseTable.h"
 
-//status: tested on random inputs, and on https://open.kattis.com/problems/automatictrading
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
 
@@ -12,7 +12,7 @@ struct str_queries {
 	str_queries(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), lcp(lcp_array(s, sa)), st(lcp, [](int x, int y) {
 		return min(x, y);
 	}) {
-		for (int i = 0; i < (int) s.size(); i++)
+		for (int i = 0; i < (int)s.size(); i++)
 			inv_sa[sa[i]] = i;
 	}
 

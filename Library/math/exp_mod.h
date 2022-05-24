@@ -1,6 +1,5 @@
 #pragma once
-
-//status: tested on random inputs
+//library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations, https://judge.yosupo.jp/problem/matrix_det, https://judge.yosupo.jp/problem/binomial_coefficient
 
 //returns (base^pw)%mod in O(log(pw)), but returns 1 for 0^0
 
@@ -19,7 +18,6 @@
 //let t = totient(mod)
 //if pw >= log2(mod) then (base^pw)%mod == (base^(t+(pw%t)))%mod (proof https://cp-algorithms.com/algebra/phi-function.html#generalization)
 //so calculate pw under mod of `t`
-
 
 int fastPow(long long base, long long pw, int mod) {
 	assert(0 <= pw && 0 <= base && 1 <= mod);

@@ -1,7 +1,7 @@
 #pragma once
+//library checker tests: https://judge.yosupo.jp/problem/range_kth_smallest
 
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
-//tested on https://judge.yosupo.jp/problem/range_kth_smallest
 //works for -1e9 <= arr[i] <= 1e9
 
 struct kth_smallest {

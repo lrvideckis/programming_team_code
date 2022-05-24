@@ -1,7 +1,7 @@
 #pragma once
-
-//tested on https://judge.yosupo.jp/problem/two_edge_connected_components and https://judge.yosupo.jp/problem/biconnected_components
+//library checker tests: https://judge.yosupo.jp/problem/biconnected_components, https://judge.yosupo.jp/problem/two_edge_connected_components
 //with asserts checking correctness of isBridge and isCut
+
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 

@@ -4,47 +4,36 @@ echo $DIR
 
 tests=$(find $DIR/../library-checker-tests -name '*.test.cpp')
 
-declare -i pass=0
 declare -i fail=0
 failTests=""
-for test in $tests; do
-	echo "test is: "
-    echo $test
-    start=`date +%s.%N`
+for test in $tests
+do
+	echo "processing library checker test with file name = "$test
 
 	#get URL of library checker problem
 	which_lib_problem=$(grep "#define PROBLEM" $test | grep -o '".*"' | tr -d '"')
-	echo "grep result is"
-	echo $which_lib_problem
 
 	#get list of .h files which this test tests
+	g++ -MMD $test
 	dependencies="a-"$(basename $test | sed s/\.cpp/\.d/)
-	compile_res=$(g++ -MMD $test)
-	echo "compile res is"
-	echo $(cat $dependencies)
-
-
-
-
-
-	retCode=0
-
-    if (($retCode != 0)); then
-        echo "Failed with $retCode"
-        fail+=1
-        failTests="$failTests$test\n"
-    else
-        pass+=1
-    fi
-    end=`date +%s.%N`
-    runtime=$( echo "$end - $start" | bc -l )
-    echo "Took $runtime seconds"
+	for dep in $(cat $dependencies | tr '\\' '\n')
+	do
+		if $(echo $dep | grep --quiet --extended-regexp "*\/Library\/*")
+		then
+			echo "testing dependency "$(basename $dep)" of "$(basename $test)
+			if ! grep --quiet --extended-regexp "//library checker tests:.*$which_lib_problem.*" $dep
+			then
+				echo "Fail! no comment specifying file "$(basename $dep)" is tested on "$which_lib_problem
+				echo "need to add comment which is picked up by the following command:"
+				echo "grep --extended-regexp \"//library checker tests:.*$which_lib_problem.*\" $(basename $dep)"
+				echo "Example comment format:"
+				echo "//library checker tests: "$which_lib_problem
+				fail=1
+			fi
+			echo "finished testing dependency "$(basename $dep)" of "$(basename $test)
+			echo
+		fi
+	done
 done
-echo "$pass/$(($pass+$fail)) tests passed"
-if (($fail == 0)); then
-    echo "No tests failed"
-    exit 0
-else
-    echo -e "These tests failed: \n $failTests"
-    exit 1
-fi
+
+exit $fail

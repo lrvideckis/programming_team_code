@@ -1,8 +1,5 @@
 #pragma once
-
-//status: tested on random inputs; also tested on
-//https://judge.yosupo.jp/problem/point_add_range_sum, lower_bound tested on
-//https://judge.yosupo.jp/problem/predecessor_problem
+//library checker tests: https://judge.yosupo.jp/problem/point_add_range_sum, https://judge.yosupo.jp/problem/vertex_add_path_sum, https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/predecessor_problem
 
 template<class T>
 struct fenwickTree {

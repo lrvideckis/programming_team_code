@@ -1,7 +1,5 @@
 #pragma once
-
-//status: tested on https://judge.yosupo.jp/problem/scc
-//building of condensation graph tested on https://cses.fi/problemset/task/1686/
+//library checker tests: https://judge.yosupo.jp/problem/scc
 
 struct sccInfo {
 	int numSCCs;

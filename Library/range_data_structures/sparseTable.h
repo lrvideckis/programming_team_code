@@ -1,4 +1,5 @@
 #pragma once
+//library checker tests: https://judge.yosupo.jp/problem/staticrmq, https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes
 
 //usage:
 //	vector<long long> arr;
@@ -9,8 +10,6 @@
 //	sparseTable<pair<long long,int>> st(arr, [](auto x, auto y) { return min(x,y); });
 //and initialize second to index. If there are multiple indexes of min element,
 //it'll return the smallest (left-most) one
-//
-//status: tested on random inputs, also on https://judge.yosupo.jp/problem/staticrmq
 template <class T>
 struct sparseTable {
 	vector<vector<T>> dp;
