@@ -71,4 +71,4 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Check library test comments
-      run: make --directory=tests/stress-tests/ verify-test-comments
+      run: make --directory=tests/stress-tests/ verify-library-checker-test-comments
