@@ -1,9 +1,8 @@
 #pragma once
+//stress tests: tests/stress-tests/range_data_structures/buckets.cpp
 
 //this code isn't the best. It's meant as a rough start for sqrt-decomposition, and to be modified
 //doesn't handle overflow
-
-//status: tested on random inputs
 struct buckets {
 	const int BUCKET_SIZE = 50;//TODO: change - small value for testing
 

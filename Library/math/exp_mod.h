@@ -1,5 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations, https://judge.yosupo.jp/problem/binomial_coefficient, https://judge.yosupo.jp/problem/matrix_det
+//stress tests: tests/stress-tests/math/exp_mod.cpp
+
 
 //returns (base^pw)%mod in O(log(pw)), but returns 1 for 0^0
 

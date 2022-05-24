@@ -5,7 +5,6 @@ echo $DIR
 tests=$(find $DIR/../library-checker-tests -name '*.test.cpp')
 
 declare -i fail=0
-failTests=""
 for test in $tests
 do
 	echo "processing library checker test with file name = "$test

@@ -1,5 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/unionfind
+//stress tests: tests/stress-tests/graphs/disjointSet.cpp
 
 struct disjointSet {
 	int numSets;
