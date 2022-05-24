@@ -22,22 +22,22 @@ struct distinct_query {
 		roots.push_back(0);
 		map<int, int> lastIdx;
 		for (int i = 0; i < (int)arr.size(); i++) {
-			roots.push_back(update(roots.back(), 0, sz - 1, lastIdx[arr[i]], 1));
+			roots.push_back(update(roots.back(), 0, sz - 1, lastIdx[arr[i]]));
 			lastIdx[arr[i]] = i + 1;
 		}
 	}
-	int update(int v, int tl, int tr, int idx, int diff) {
+	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
-			tree.push_back({0, 0, tree[v].sum + diff});
+			tree.push_back({0, 0, tree[v].sum + 1});
 			return tree.size() - 1;
 		}
 		int tm = (tl + tr) / 2;
 		int lCh = tree[v].lCh;
 		int rCh = tree[v].rCh;
 		if (idx <= tm)
-			lCh = update(lCh, tl, tm, idx, diff);
+			lCh = update(lCh, tl, tm, idx);
 		else
-			rCh = update(rCh, tm + 1, tr, idx, diff);
+			rCh = update(rCh, tm + 1, tr, idx);
 		tree.push_back({lCh, rCh, tree[lCh].sum + tree[rCh].sum});
 		return tree.size() - 1;
 	}
