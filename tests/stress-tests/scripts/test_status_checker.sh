@@ -22,7 +22,8 @@ do
 		then
 			if ! grep --quiet --extended-regexp "//library checker tests:.*$which_lib_problem.*" $dep
 			then
-				echo "Fail! no comment specifying file "$(basename $dep)" is tested on "$which_lib_problem
+				echo "FAIL!!!!!!!!"
+				echo "no comment specifying file "$(basename $dep)" is tested on "$which_lib_problem
 				echo "need to add comment which is picked up by the following command:"
 				echo "grep --extended-regexp \"//library checker tests:.*$which_lib_problem.*\" $(basename $dep)"
 				echo "Example comment format:"
