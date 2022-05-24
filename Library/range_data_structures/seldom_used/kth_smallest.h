@@ -17,7 +17,8 @@ struct kth_smallest {
 	kth_smallest(const vector<int>& arr) : mn(INT_MAX), mx(INT_MIN), roots(arr.size() + 1, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val);
-		for (int val : arr) roots.push_back(update(roots.back(), -mx, mx, val));
+		for (int i = 0; i < (int)arr.size(); i++)
+			roots[i + 1] = update(roots[i], -mx, mx, arr[i]);
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
