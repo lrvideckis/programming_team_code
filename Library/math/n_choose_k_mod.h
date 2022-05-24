@@ -19,7 +19,7 @@ struct NchooseK {
 		//will take sqrt(2^31) time
 		for (int i = 2; i * i <= mod; i++)
 			assert(mod % i);
-		for (int i = 1; i < factSz; i++)
+		for (int i = 2; i < factSz; i++)
 			fact[i] = 1LL * fact[i - 1] * i % mod;
 		invFact.back() = fastPow(fact.back(), mod - 2, mod);
 		for (int i = factSz - 2; i >= 0; i--)
