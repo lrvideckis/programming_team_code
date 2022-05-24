@@ -72,3 +72,12 @@ jobs:
 
     - name: Check library test comments
       run: make --directory=tests/stress-tests/ verify-library-checker-test-comments
+
+  check-stress-test-comments:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check stress test comments
+      run: make --directory=tests/stress-tests/ verify-stress-test-comments
