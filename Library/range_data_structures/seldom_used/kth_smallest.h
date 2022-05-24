@@ -9,8 +9,8 @@ struct kth_smallest {
 	const int mx = 1e9;
 
 	struct Node {
-		int lCh, rCh;//children, indexes into `tree`
 		int sum;
+		int lCh, rCh;//children, indexes into `tree`
 	};
 
 	deque<Node> tree;
@@ -21,22 +21,22 @@ struct kth_smallest {
 		roots.push_back(0);
 		for (int i = 0; i < (int)arr.size(); i++) {
 			assert(-mx <= arr[i] && arr[i] <= mx);
-			roots.push_back(update(roots.back(), -mx, mx, arr[i], 1));
+			roots.push_back(update(roots.back(), -mx, mx, arr[i]));
 		}
 	}
-	int update(int v, int tl, int tr, int idx, int diff) {
+	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
-			tree.push_back({0, 0, tree[v].sum + diff});
+			tree.push_back({tree[v].sum + 1, 0, 0});
 			return tree.size() - 1;
 		}
 		int tm = tl + (tr - tl) / 2;
 		int lCh = tree[v].lCh;
 		int rCh = tree[v].rCh;
 		if (idx <= tm)
-			lCh = update(lCh, tl, tm, idx, diff);
+			lCh = update(lCh, tl, tm, idx);
 		else
-			rCh = update(rCh, tm + 1, tr, idx, diff);
-		tree.push_back({lCh, rCh, tree[lCh].sum + tree[rCh].sum});
+			rCh = update(rCh, tm + 1, tr, idx);
+		tree.push_back({tree[lCh].sum + tree[rCh].sum, lCh, rCh});
 		return tree.size() - 1;
 	}
 
