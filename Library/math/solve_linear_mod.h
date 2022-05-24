@@ -11,7 +11,7 @@ struct matrixInfo {
 
 //Solves A * x = b under prime mod.
 //A is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m column vector.
-//assumes empty matrices are given with A.empty(), else RTE
+//assumes n,m >= 1, else RTE
 //Returns rank of A, determinant of A, and x (solution vector to A * x = b). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
 //Leaves A in reduced row echelon form (unlike kactl).
 //O(n * m * min(n,m))
