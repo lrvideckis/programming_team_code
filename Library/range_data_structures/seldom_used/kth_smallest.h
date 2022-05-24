@@ -2,11 +2,8 @@
 //library checker tests: https://judge.yosupo.jp/problem/range_kth_smallest
 
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
-//works for -1e9 <= arr[i] <= 1e9
 
 struct kth_smallest {
-
-	const int mx = 1e9;
 
 	struct Node {
 		int sum;
@@ -19,10 +16,10 @@ struct kth_smallest {
 	kth_smallest(const vector<int>& arr) {
 		tree.push_back({0, 0, 0}); //acts as null
 		roots.push_back(0);
-		for (int i = 0; i < (int)arr.size(); i++) {
-			assert(-mx <= arr[i] && arr[i] <= mx);
+		int mn = INT_MAX, mx = INT_MIN;
+		for (int val : arr) mn = min(mn, val), mx = max(mx, val);
+		for (int val : arr)
 			roots.push_back(update(roots.back(), -mx, mx, arr[i]));
-		}
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
