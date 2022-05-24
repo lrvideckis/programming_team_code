@@ -13,7 +13,7 @@ struct NchooseK {
 	// `factSz` is the size of the factorial array, so only call `choose`, `inv` with n < factSz
 	NchooseK(int factSz, int currMod) : mod(currMod), fact(factSz, 1), invFact(factSz, 1) {
 		//this implementation doesn't work if factSz > mod because n! % mod = 0 when n >= mod. So `invFact` array will be all 0's
-		assert(factSz <= mod && mod >= 2);
+		assert(max(factSz, 2) <= mod);
 		//assert mod is prime. mod is intended to fit inside an int so that
 		//multiplications fit in a longlong before being modded down. So this
 		//will take sqrt(2^31) time
