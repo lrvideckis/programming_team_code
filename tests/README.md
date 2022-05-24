@@ -9,4 +9,4 @@
 
 Each file has 2 standardized comments displaying test status (checked by CI):
 - `//library checker tests: https://judge.yosupo.jp/problem/..., https://judge.yosupo.jp/problem/...`
-- `//stress tests: ...` (TODO)
+- `//stress tests: tests/stress-tests/<path_to_test_1>, tests/stress-tests/<path_to_test_2>`
