@@ -1,4 +1,5 @@
 #pragma once
+//stress tests: tests/stress-tests/strings/kmp.cpp
 
 #include "prefix_function.h"
 
@@ -10,8 +11,6 @@
 //	vector<int> needle;
 //	...
 //	KMP_Match kmp(needle);
-//
-//status: tested on random inputs
 
 //kmp-doubling-trick: to check if 2 arrays are rotationally equivalent: run kmp
 //with one array as the needle and the other array doubled as the haystack

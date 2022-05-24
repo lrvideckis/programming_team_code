@@ -1,6 +1,6 @@
 #pragma once
+//stress tests: tests/stress-tests/range_data_structures/implicitSegTree.cpp
 
-//status: stress tested && AC's on https://cses.fi/problemset/task/1144
 //see TODO for lines of code which usually need to change (not a complete list)
 
 const int N = 1.5e7; //TODO

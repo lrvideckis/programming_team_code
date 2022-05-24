@@ -1,6 +1,6 @@
 #pragma once
+//stress tests: tests/stress-tests/range_data_structures/segTree.cpp
 
-//status: tested on random inputs
 
 const long long inf = 1e18;
 

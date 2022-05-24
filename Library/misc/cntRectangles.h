@@ -1,12 +1,11 @@
 #pragma once
+//stress tests: tests/stress-tests/misc/cntRectangles.cpp
 
 //given a 2D boolean matrix, calculate cnt[i][j]
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix
 //such that all cells in the rectangle are false
 //Note cnt[0][j] and cnt[i][0] will contain garbage values
 //O(R*C)
-//
-//status: tested on random inputs
 vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 	const int n = grid.size(), m = grid[0].size();
 	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0)), arr(n + 2, vector<int>(m + 1, 0));
