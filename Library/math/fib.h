@@ -1,8 +1,7 @@
 #pragma once
+//stress tests: tests/stress-tests/math/fib_matrix_expo.cpp
 
-//status: not tested
 //https://codeforces.com/blog/entry/14516
-
 unordered_map<long long, int> table;
 int fib(long long n, int mod) {    //**O(log(n))**
 	if (n < 2) return 1;

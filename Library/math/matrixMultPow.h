@@ -1,5 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/matrix_product
+//stress tests: tests/stress-tests/math/fib_matrix_expo.cpp
 
 //empty matrix -> RTE
 
