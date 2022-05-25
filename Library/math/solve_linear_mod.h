@@ -17,7 +17,7 @@ struct matrixInfo {
 matrixInfo solve_linear_mod(vector<vector<int>>& A, const vector<int>& b, const int mod) {
 	assert(A.size() == b.size());
 	int n = A.size(), m = A[0].size();
-	for(int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		A[i].push_back(b[i]);
 	auto [rank, det] = row_reduce(A, m, mod);//row reduce not including the last column
 	//check if solution exists
