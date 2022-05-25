@@ -38,10 +38,10 @@ struct hld {
 		for (;; v = par[Next[v]]) {
 			if (timeIn[v] < timeIn[u]) swap(u, v);
 			if (timeIn[Next[v]] <= timeIn[u]) {
-				res.push_back({timeIn[u], timeIn[v]});
+				res.emplace_back(timeIn[u], timeIn[v]);
 				return res;
 			}
-			res.push_back({timeIn[Next[v]], timeIn[v]});
+			res.emplace_back(timeIn[Next[v]], timeIn[v]);
 		}
 	}
 	// Returns interval (of timeIn's) corresponding to the subtree of node i
