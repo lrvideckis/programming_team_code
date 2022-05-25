@@ -21,7 +21,7 @@ match HungarianMatch(const vector<vector<long long>>& cost) {
 	long long m = cost[0].size() - 1;
 	vector<int> p(m + 1), way(m + 1);
 	vector<long long> u(n + 1), v(m + 1);
-	for (int i = 1; i <= n; ++i) {
+	for (int i = 1; i <= n; i++) {
 		p[0] = i;
 		int j0 = 0;
 		vector<long long> minv(m + 1, inf);
@@ -30,7 +30,7 @@ match HungarianMatch(const vector<vector<long long>>& cost) {
 			used[j0] = true;
 			int i0 = p[j0], j1 = 0;
 			long long delta = inf;
-			for (int j = 1; j <= m; ++j)
+			for (int j = 1; j <= m; j++)
 				if (!used[j]) {
 					long long cur = cost[i0][j] - u[i0] - v[j];
 					if (cur < minv[j])
@@ -38,7 +38,7 @@ match HungarianMatch(const vector<vector<long long>>& cost) {
 					if (minv[j] < delta)
 						delta = minv[j], j1 = j;
 				}
-			for (int j = 0; j <= m; ++j)
+			for (int j = 0; j <= m; j++)
 				if (used[j])
 					u[p[j]] += delta, v[j] -= delta;
 				else
@@ -53,7 +53,7 @@ match HungarianMatch(const vector<vector<long long>>& cost) {
 	}
 	// For each N, it contains the M it selected
 	vector<int> ans(n + 1);
-	for (int j = 1; j <= m ; ++j)
+	for (int j = 1; j <= m ; j++)
 		ans[p[j]] = j;
 	return {-v[0], ans};
 }

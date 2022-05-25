@@ -46,7 +46,7 @@ struct mincostmaxflow {
 				ll v = q[qh++];
 				id[v] = 2;
 				if (qh == n) qh = 0;
-				for (size_t i = 0; i < g[v].size(); ++i) {
+				for (size_t i = 0; i < g[v].size(); i++) {
 					edge& r = e[g[v][i]];
 					if (r.flow < r.cap && d[v] + r.cost < d[r.b]) {
 						d[r.b] = d[v] + r.cost;

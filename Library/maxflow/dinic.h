@@ -44,7 +44,7 @@ struct maxflow {
 		d[s] = 0;
 		while (qh < qt && d[t] == -1) {
 			ll v = q[qh++];
-			for (size_t i = 0; i < g[v].size(); ++i) {
+			for (size_t i = 0; i < g[v].size(); i++) {
 				ll id = g[v][i],
 				   to = e[id].b;
 				if (d[to] == -1 && e[id].flow < e[id].cap) {
@@ -58,7 +58,7 @@ struct maxflow {
 	ll dfs(ll v, ll flow) {
 		if (!flow) return 0;
 		if (v == t) return flow;
-		for (; ptr[v] < (ll) g[v].size(); ++ptr[v]) {
+		for (; ptr[v] < (ll) g[v].size(); ptr[v]++) {
 			ll id = g[v][ptr[v]];
 			ll to = e[id].b;
 			if (d[to] != d[v] + 1)  continue;

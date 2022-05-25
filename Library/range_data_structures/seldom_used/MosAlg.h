@@ -23,7 +23,7 @@ int main() {
 	int q;
 	cin >> q;
 	vector<query> queries(q);
-	for (int i = 0; i < q; ++i) {
+	for (int i = 0; i < q; i++) {
 		cin >> queries[i].l >> queries[i].r;
 		queries[i].index = i;
 		answer[i] = 0;
@@ -51,6 +51,6 @@ int main() {
 		}
 		answer[q.index] = answerToQuery;
 	}
-	for (int i = 0; i < q; ++i) cout << answer[i] << '\n';
+	for (int i = 0; i < q; i++) cout << answer[i] << '\n';
 	return 0;
 }

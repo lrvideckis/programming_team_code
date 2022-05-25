@@ -8,9 +8,9 @@ vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>
 	assert(a[0].size() == b.size());
 	int resultRow = a.size(), resultCol = b[0].size(), n = a[0].size();
 	vector<vector<int>> product(resultRow, vector<int> (resultCol, 0));
-	for (int i = 0; i < resultRow; ++i) {
-		for (int k = 0; k < n; ++k) {
-			for (int j = 0; j < resultCol; ++j)
+	for (int i = 0; i < resultRow; i++) {
+		for (int k = 0; k < n; k++) {
+			for (int j = 0; j < resultCol; j++)
 				product[i][j] = (product[i][j] + 1LL * a[i][k] * b[k][j]) % mod;
 		}
 	}
