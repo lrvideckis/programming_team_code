@@ -1,12 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 #include "../../template.h"
 
-#include "../../../Library/math/solve_linear_mod.h"
+#include "../../../Library/math/row_reduce.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
-
-	const int mod = 998244353;
 
 	int n;
 	cin >> n;
@@ -18,9 +16,8 @@ int main() {
 		}
 	}
 
-	vector<int> b(n);
-	matrixInfo info = solve_linear_mod(matrix, b, mod);
+	auto [rank, det] = row_reduce(matrix, b, 998244353);
 
-	cout << info.det << endl;
+	cout << det << endl;
 	return 0;
 }
