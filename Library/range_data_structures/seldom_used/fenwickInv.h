@@ -11,7 +11,7 @@ struct fenwickInv {
 	fenwickTree<T> init(vector<T> arr/*intentional pass by value*/) {
 		for (int i = (int) arr.size() - 1; i >= 1; i--)
 			arr[i] -= arr[i - 1];
-		return fenwickTree<T> (arr);
+		return fenwickTree<T>(arr);
 	}
 	//add `add` to inclusive range [l, r]
 	void update(int l, int r, const T& add) {
