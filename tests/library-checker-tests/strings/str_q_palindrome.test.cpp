@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 #include "../../template.h"
 
-#include "../../../Library/strings/string_queries.h"
+#include "../../../Library/strings/lcp_queries.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -16,7 +16,7 @@ int main() {
 		s = s + '$' + rev;
 	}
 
-	str_queries sq(s);
+	lcp_queries sq(s);
 
 	for(int i = 0; i < n; i++) {
 		for(int j : {i, i+1}) {
