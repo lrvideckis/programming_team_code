@@ -3,26 +3,8 @@
 
 #include "../../../Library/math/solve_linear_mod.h"
 
-//assumes A is row reduced already
-vector<vector<int>> kernel( vector<vector<int>> A, int rank, int mod ) {
-	int m = A[0].size();
-	vector<vector<int>> res;
-	vector<int> pivot(m, -1);
-	for (int i = 0, j = 0; i < rank; ++i) {
-		while (A[i][j] == 0) ++j;
-		pivot[j] = i;
-	}
-	for (int j = 0; j < m; ++j) if (pivot[j] == -1) {
-		vector<int> x(m, 0);
-		x[j] = mod-1;
-		for (int k = 0; k < j; ++k) if (pivot[k] != -1) x[k] = A[pivot[k]][j];
-		res.push_back(x);
-	}
-	return res;
-}
-
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 
 	const int mod = 998244353;
 
@@ -48,16 +30,22 @@ int main() {
 		return 0;
 	}
 
-	vector<vector<int>> ker = kernel(A, info.rank, mod);
-	cout << (int)ker.size() << endl;
+	cout << m - info.rank << endl;
 
 	for(int val : info.x) cout << val << " ";
 	cout << endl;
 
-	for (vector<int>& v : ker) {
-		for (int i = 0; i < m; ++i) {
-			cout << v[i] << " ";
-		}
+	vector<int> pivot(m, -1);
+	for (int i = 0, j = 0; i < info.rank; ++i) {
+		while (A[i][j] == 0) ++j;
+		pivot[j] = i;
+	}
+	for (int j = 0; j < m; ++j) if (pivot[j] == -1) {
+		vector<int> x(m, 0);
+		x[j] = mod-1;
+		for (int k = 0; k < j; ++k) if (pivot[k] != -1) x[k] = A[pivot[k]][j];
+
+		for (int k = 0; k < m; ++k) cout << x[k] << " ";
 		cout << endl;
 	}
 	return 0;
