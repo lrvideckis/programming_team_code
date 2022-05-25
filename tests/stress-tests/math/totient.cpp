@@ -1,5 +1,4 @@
 #include "../../template.h"
-#include "../../random.h"
 
 #include "../../../Library/math/totient.h"
 
