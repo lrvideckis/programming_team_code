@@ -38,7 +38,7 @@ struct kth_smallest {
 
 
 	/* find kth smallest number among arr[l], arr[l+1], ..., arr[r]
-	 * k is 1-based, so find_kth(l,r,1) returns the min
+	 * k is 1-based, so query(l,r,1) returns the min
 	 */
 	int query(int l, int r, int k) const {
 		assert(1 <= k && k <= r - l + 1); //note this condition implies L <= R
