@@ -9,6 +9,7 @@
 "tests/library-checker-tests/graphs/lca.test.cpp": "2022-05-25 11:41:00 -0700",
 "tests/library-checker-tests/graphs/scc.test.cpp": "2022-05-25 11:41:00 -0700",
 "tests/library-checker-tests/graphs/tree_freq_dist_centroid_fft.test.cpp": "2022-05-25 11:41:00 -0700",
+"tests/library-checker-tests/math/matrixDeterminant.test.cpp": "2022-05-25 13:30:15 -0700",
 "tests/library-checker-tests/math/matrixMultiply.test.cpp": "2022-05-25 11:54:40 -0700",
 "tests/library-checker-tests/math/n_choose_k.test.cpp": "2022-05-25 11:41:00 -0700",
 "tests/library-checker-tests/math/partition.test.cpp": "2022-05-25 11:41:00 -0700",
