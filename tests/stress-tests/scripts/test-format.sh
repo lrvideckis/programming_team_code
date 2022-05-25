@@ -10,7 +10,7 @@ fi
 
 cd Library
 
-VAR=$(eval $ASTYLE_COMMAND --dry-run --formatted | grep Formatted)
+VAR=$(eval $(echo $ASTYLE_COMMAND | tr -d "\\") --dry-run --formatted | grep Formatted)
 
 if [ -z "$VAR" ];
 then
