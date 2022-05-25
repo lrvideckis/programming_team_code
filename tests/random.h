@@ -9,7 +9,7 @@ seed_seq seed{
 };
 mt19937 rng(seed);
 
-//intended types: int, unsigned
+//intended types: int, unsigned, long long
 template<class T>
 inline T getRand(T l, T r) {
 	assert(l <= r);
