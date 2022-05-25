@@ -16,7 +16,7 @@ int main() {
 		}
 	}
 
-	auto [rank, det] = row_reduce(matrix, b, 998244353);
+	auto [rank, det] = row_reduce(matrix, 998244353);
 
 	cout << det << endl;
 	return 0;
