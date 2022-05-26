@@ -1,6 +1,6 @@
 #pragma once
+//status: not tested
 
-//tested on https://codeforces.com/contest/707/problem/D
 struct persistentLazySegTree {
 
 	struct Node {
