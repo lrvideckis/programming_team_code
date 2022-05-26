@@ -17,8 +17,7 @@ struct NchooseK {
 		//assert mod is prime. mod is intended to fit inside an int so that
 		//multiplications fit in a longlong before being modded down. So this
 		//will take sqrt(2^31) time
-		for (int i = 2; i * i <= mod; i++)
-			assert(mod % i);
+		for (int i = 2; i * i <= mod; i++) assert(mod % i);
 		for (int i = 2; i < factSz; i++)
 			fact[i] = 1LL * fact[i - 1] * i % mod;
 		invFact.back() = fastPow(fact.back(), mod - 2, mod);
