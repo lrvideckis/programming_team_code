@@ -12,9 +12,9 @@ see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/m
 
 ## Format
 
-1. (optional) Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments. (for the advanced users)
+1. (optional) Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to remove all comments and asserts. (for advanced users)
    ```
-   find . -type f -name "*.h" -exec bash -c "sed --regexp-extended --in-place '/^#pragma/d' {}; gcc -fpreprocessed -dD -E -P {} > tmp; mv tmp {}" \;
+   find . -type f -name "*.h" -exec bash -c "sed --regexp-extended --in-place '/^#pragma/d' {}; sed --in-place '/assert/d' {}; gcc -fpreprocessed -dD -E -P {} > tmp; mv tmp {}" \;
    ```
 
 2. Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
