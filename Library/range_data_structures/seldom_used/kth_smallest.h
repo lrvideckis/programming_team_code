@@ -37,11 +37,11 @@ struct kth_smallest {
 	}
 
 
-	/* find kth smallest number among arr[l], arr[l+1], ..., arr[r]
-	 * k is 1-based, so query(l,r,1) returns the min
+	/* find (k+1)th smallest number among arr[l], arr[l+1], ..., arr[r]
+	 * k is 0-based, so query(l,r,0) returns the min
 	 */
 	int query(int l, int r, int k) const {
-		assert(1 <= k && k <= r - l + 1); //note this condition implies L <= R
+		assert(0 <= k && k < r - l + 1); //note this condition implies L <= R
 		assert(0 <= l && r + 1 < (int)roots.size());
 		return query(roots[l], roots[r + 1], -mx, mx, k);
 	}
@@ -50,7 +50,7 @@ struct kth_smallest {
 			return tl;
 		int tm = tl + (tr - tl) / 2;
 		int left_count = tree[tree[vr].lCh].sum - tree[tree[vl].lCh].sum;
-		if (left_count >= k) return query(tree[vl].lCh, tree[vr].lCh, tl, tm, k);
+		if (left_count > k) return query(tree[vl].lCh, tree[vr].lCh, tl, tm, k);
 		return query(tree[vl].rCh, tree[vr].rCh, tm + 1, tr, k - left_count);
 	}
 };
