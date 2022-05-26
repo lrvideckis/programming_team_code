@@ -15,7 +15,7 @@ int main() {
 	while(q--) {
 		int l,r,k;
 		cin >> l >> r >> k;
-		cout << st.query(l, r-1, k+1) << endl;
+		cout << st.query(l, r-1, k) << endl;
 	}
 	return 0;
 }
