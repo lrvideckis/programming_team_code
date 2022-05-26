@@ -1,5 +1,5 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/static_range_frequency
+//library checker tests: https://judge.yosupo.jp/problem/static_range_frequency, https://judge.yosupo.jp/problem/range_kth_smallest
 
 //For point updates: either switch to policy based BST, or use sqrt decomposition
 
