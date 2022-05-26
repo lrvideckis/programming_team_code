@@ -24,7 +24,6 @@ struct sparseTable {
 	}
 	//inclusive range [l, r]
 	T query(int l, int r) const {
-		assert(0 <= l && l <= r && r < (int)dp[0].size());
 		int lg = 31 - __builtin_clz(r - l + 1);
 		return func(dp[lg][l], dp[lg][r - (1 << lg) + 1]);
 	}

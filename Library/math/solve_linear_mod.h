@@ -28,7 +28,6 @@ matrixInfo solve_linear_mod(vector<vector<int>>& A, const vector<int>& b, const 
 	vector<int> x(m, 0);
 	for (int i = 0, j = 0; i < rank; i++) {
 		while (A[i][j] == 0) j++; //find pivot column
-		assert(A[i][j] == 1);
 		x[j] = A[i].back();
 	}
 	return {rank, det, x};

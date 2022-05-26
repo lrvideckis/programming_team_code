@@ -46,7 +46,6 @@ struct MergeSortTree {
 	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
 	//O(log^2(n))
 	int query(int l, int r, int x) const {
-		assert(l <= r);
 		return query(0, l, r, x);
 	}
 	int query(int v, int l, int r, int x) const {

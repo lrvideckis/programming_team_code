@@ -7,7 +7,6 @@
 //To improve, use Pollard-rho to find prime factors
 
 int totient(int n) {
-	assert(n >= 1);
 	int res = n;
 	for (int i = 2; i * i <= n; i++) {
 		if (n % i == 0) {
