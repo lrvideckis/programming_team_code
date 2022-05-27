@@ -4,6 +4,7 @@
 
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
+//handles multiple edges
 
 //example initialization of `adj`:
 //for (int i = 0; i < m; i++) {
