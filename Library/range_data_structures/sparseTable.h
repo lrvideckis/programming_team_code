@@ -8,7 +8,7 @@
 //
 //to also get index of min element, do:
 //	sparseTable<pair<long long,int>> st(arr, [](auto x, auto y) { return min(x,y); });
-//and initialize second to index. If there are multiple indexes of min element,
+//and initialize `.second`'s to index. If there are multiple indexes of min element,
 //it'll return the smallest (left-most) one
 template <class T>
 struct sparseTable {
