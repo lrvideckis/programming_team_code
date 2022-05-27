@@ -32,12 +32,10 @@ struct match {
 match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
 	int sizeOfMatching = 0, lSz = adj.size();
 	vector<int> ml(lSz, -1), mr(rSz, -1);
-	vector<bool> leftMVC(lSz), rightMVC(rSz);
 	while (true) {
 		vector<int> level(lSz, -1);
 		queue<int> q;
-		leftMVC.assign(lSz, true);
-		rightMVC.assign(rSz, false);
+		vector<bool> leftMVC(lSz, true), rightMVC(rSz, false);
 		for (int i = 0; i < lSz; i++) {
 			if (ml[i] == -1) level[i] = 0, q.push(i);
 		}
