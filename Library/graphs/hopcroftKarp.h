@@ -49,8 +49,8 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			for (int x : adj[u]) {
 				rightMVC[x] = true;
 				int v = mr[x];
+				found |= v == -1;;
 				if (v != -1 && level[v] < 0) {
-					found = true;
 					level[v] = level[u] + 1;
 					q.push(v);
 				}
