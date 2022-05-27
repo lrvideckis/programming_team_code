@@ -69,9 +69,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			return false;
 		};
 		for (int i = 0; i < lSz; i++)
-			if (ml[i] == -1 && dfs(dfs, i)) {
-				sizeOfMatching++;
-			}
+			sizeOfMatching += (ml[i] == -1 && dfs(dfs, i));
 	}
 	return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
 }
