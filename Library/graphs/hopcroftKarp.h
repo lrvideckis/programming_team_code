@@ -55,7 +55,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			for (int x : adj[u]) {
 				rightMVC[x] = true;
 				int v = mr[x];
-				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {
+				if (v == -1 || (level[u] < level[v] && self(self, v))) {
 					ml[u] = x;
 					mr[x] = u;
 					return true;
