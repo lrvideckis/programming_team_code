@@ -33,13 +33,13 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 	int sizeOfMatching = 0, lSz = adj.size();
 	vector<int> ml(lSz, -1), mr(rSz, -1);
 	while (true) {
-		vector<int> level(lSz, -1);
 		queue<int> q;
-		vector<bool> leftMVC(lSz, true), rightMVC(rSz, false);
+		vector<int> level(lSz, -1);
 		for (int i = 0; i < lSz; i++) {
 			if (ml[i] == -1) level[i] = 0, q.push(i);
 		}
 		bool found = false;
+		vector<bool> leftMVC(lSz, true), rightMVC(rSz, false);
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
@@ -54,8 +54,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 				}
 			}
 		}
-		if (!found)
-			return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
+		if (!found) return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
 		auto dfs = [&](auto&& self, int u) -> bool {
 			for (int x : adj[u]) {
 				int v = mr[x];
