@@ -31,13 +31,13 @@ struct match {
 //To initialize `adj`: For every edge nodeLeft <=> nodeRight, do: adj[nodeLeft].push_back(nodeRight)
 match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
 	int sizeOfMatching = 0, lSz = adj.size();
-	vector<int> level(lSz), ml(lSz, -1), mr(rSz, -1);
+	vector<int> ml(lSz, -1), mr(rSz, -1);
 	vector<bool> visL(lSz, false);
 	while (true) {
+		vector<int> level(lSz, -1);
 		queue<int> q;
 		for (int i = 0; i < lSz; i++) {
 			if (ml[i] == -1) level[i] = 0, q.push(i);
-			else level[i] = -1;
 		}
 		while (!q.empty()) {
 			int u = q.front();
