@@ -5,11 +5,14 @@
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 
-//To initialize `adj`:
-//eid = 0
-//for each edge (a,b):
-//	adj[a].emplace_back(b, eid);
-//	adj[b].emplace_back(a, eid++);
+//example initialization of `adj`:
+//for (int i = 0; i < m; i++) {
+//	int u, v;
+//	cin >> u >> v;
+//	u--, v--;
+//	adj[u].emplace_back(v, i);
+//	adj[v].emplace_back(u, i);
+//}
 
 struct info {
 	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
