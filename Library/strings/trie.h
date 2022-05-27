@@ -5,7 +5,10 @@
 
 const int K = 26;//character size
 
+
 struct trie {
+
+	const char minCh = 'a';//'A' for uppercase, '0' for digits
 
 	struct node {
 		bool leaf = 0;
@@ -23,7 +26,7 @@ struct trie {
 	void add_string(const string& s, int id) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - 'a';
+			int v = ch - minCh;
 			if (t[c].next[v] == -1) {
 				t[c].next[v] = t.size();
 				t.emplace_back(c, ch);
@@ -37,7 +40,7 @@ struct trie {
 	void remove_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - 'a';
+			int v = ch - minCh;
 			if (t[c].next[v] == -1)
 				return;
 			c = t[c].next[v];
@@ -48,7 +51,7 @@ struct trie {
 	int find_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - 'a';
+			int v = ch - minCh;
 			if (t[c].next[v] == -1)
 				return -1;
 			c = t[c].next[v];
