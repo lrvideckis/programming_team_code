@@ -32,7 +32,7 @@ struct match {
 match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
 	int sizeOfMatching = 0, lSz = adj.size();
 	vector<int> ml(lSz, -1), mr(rSz, -1);
-	vector<bool> visL(lSz), visR(rSz);
+	vector<bool> leftMVC(lSz), rightMVC(rSz);
 	while (true) {
 		vector<int> level(lSz, -1);
 		queue<int> q;
@@ -51,11 +51,11 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 		}
 		auto dfs = [&](auto&& self, int u) -> bool {
-			visL[u] = false;
+			leftMVC[u] = false;
 			for (int x : adj[u]) {
-				visR[x] = true;
+				rightMVC[x] = true;
 				int v = mr[x];
-				if (v == -1 || (visL[v] && level[u] < level[v] && self(self, v))) {
+				if (v == -1 || (leftMVC[v] && level[u] < level[v] && self(self, v))) {
 					ml[u] = x;
 					mr[x] = u;
 					return true;
@@ -63,8 +63,8 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 			return false;
 		};
-		visL.assign(lSz, true);
-		visR.assign(rSz, false);
+		leftMVC.assign(lSz, true);
+		rightMVC.assign(rSz, false);
 		bool found = false;
 		for (int i = 0; i < lSz; i++)
 			if (ml[i] == -1 && dfs(dfs, i)) {
@@ -73,5 +73,5 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 		if (!found) break;
 	}
-	return {sizeOfMatching, ml, mr, visL, visR};
+	return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
 }
