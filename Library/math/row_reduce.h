@@ -16,7 +16,7 @@ pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& A, const i
 		//find arbitrary pivot and swap pivot to current row
 		for (int i = rank; i < n; i++)
 			if (A[i][col] != 0) {
-				if (rank != i) det = det == 0 ? det : mod - det;
+				if (rank != i) det = det == 0 ? 0 : mod - det;
 				swap(A[i], A[rank]);
 				break;
 			}
