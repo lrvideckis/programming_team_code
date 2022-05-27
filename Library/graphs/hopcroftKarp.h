@@ -32,7 +32,7 @@ struct match {
 match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
 	int sizeOfMatching = 0, lSz = adj.size();
 	vector<int> ml(lSz, -1), mr(rSz, -1);
-	vector<bool> visL(lSz, false);
+	vector<bool> visL(lSz), visR(rSz);
 	while (true) {
 		vector<int> level(lSz, -1);
 		queue<int> q;
@@ -55,6 +55,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			for (int x : adj[u]) {
 				int v = mr[x];
 				if (v == -1 || (!visL[v] && level[u] < level[v] && self(self, v))) {
+					visR[x] = true;
 					ml[u] = x;
 					mr[x] = u;
 					return true;
@@ -63,6 +64,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			return false;
 		};
 		visL.assign(lSz, false);
+		visR.assign(rSz, false);
 		bool found = false;
 		for (int i = 0; i < lSz; i++)
 			if (ml[i] == -1 && dfs(dfs, i)) {
@@ -71,20 +73,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 		if (!found) break;
 	}
-	//find min vertex cover
-	vector<bool> visR(rSz, false);
-	auto dfs = [&](auto&& self, int node) -> void {
-		for (int to : adj[node]) {
-			if (!visR[to] && mr[to] != -1) {
-				visR[to] = true;
-				self(self, mr[to]);
-			}
-		}
-	};
-	for (int i = 0; i < lSz; i++) {
+	for (int i = 0; i < lSz; i++)
 		visL[i] = !visL[i];
-		if (ml[i] == -1)
-			dfs(dfs, i);
-	}
 	return {sizeOfMatching, ml, mr, visL, visR};
 }
