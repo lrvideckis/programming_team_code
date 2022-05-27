@@ -31,13 +31,13 @@ struct match {
 //To initialize `adj`: For every edge nodeLeft <=> nodeRight, do: adj[nodeLeft].push_back(nodeRight)
 match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
 	int sizeOfMatching = 0, lSz = adj.size();
-	vector<int> level(lSz), ml(lSz, -1), mr(rSz, -1);
-	vector<bool> visL(lSz, false);
+	vector<int> ml(lSz, -1), mr(rSz, -1);
+	vector<bool> leftMVC(lSz), rightMVC(rSz);
 	while (true) {
+		vector<int> level(lSz, -1);
 		queue<int> q;
 		for (int i = 0; i < lSz; i++) {
 			if (ml[i] == -1) level[i] = 0, q.push(i);
-			else level[i] = -1;
 		}
 		while (!q.empty()) {
 			int u = q.front();
@@ -51,10 +51,11 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 		}
 		auto dfs = [&](auto&& self, int u) -> bool {
-			visL[u] = true;
+			leftMVC[u] = false;
 			for (int x : adj[u]) {
+				rightMVC[x] = true;
 				int v = mr[x];
-				if (v == -1 || (!visL[v] && level[u] < level[v] && self(self, v))) {
+				if (v == -1 || (leftMVC[v] && level[u] < level[v] && self(self, v))) {
 					ml[u] = x;
 					mr[x] = u;
 					return true;
@@ -62,7 +63,8 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 			return false;
 		};
-		visL.assign(lSz, false);
+		leftMVC.assign(lSz, true);
+		rightMVC.assign(rSz, false);
 		bool found = false;
 		for (int i = 0; i < lSz; i++)
 			if (ml[i] == -1 && dfs(dfs, i)) {
@@ -71,20 +73,5 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 			}
 		if (!found) break;
 	}
-	//find min vertex cover
-	vector<bool> visR(rSz, false);
-	auto dfs = [&](auto&& self, int node) -> void {
-		for (int to : adj[node]) {
-			if (!visR[to] && mr[to] != -1) {
-				visR[to] = true;
-				self(self, mr[to]);
-			}
-		}
-	};
-	for (int i = 0; i < lSz; i++) {
-		visL[i] = !visL[i];
-		if (ml[i] == -1)
-			dfs(dfs, i);
-	}
-	return {sizeOfMatching, ml, mr, visL, visR};
+	return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
 }
