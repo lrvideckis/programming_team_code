@@ -64,7 +64,7 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 					return true;
 				}
 			}
-			level[u] = -1;
+			level[u] = INT_MIN; //acts as visited array
 			return false;
 		};
 		for (int i = 0; i < lSz; i++)
