@@ -32,46 +32,42 @@ struct match {
 match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
 	int sizeOfMatching = 0, lSz = adj.size();
 	vector<int> ml(lSz, -1), mr(rSz, -1);
-	vector<bool> leftMVC(lSz), rightMVC(rSz);
 	while (true) {
-		vector<int> level(lSz, -1);
 		queue<int> q;
+		vector<int> level(lSz, -1);
 		for (int i = 0; i < lSz; i++) {
 			if (ml[i] == -1) level[i] = 0, q.push(i);
 		}
+		bool found = false;
+		vector<bool> leftMVC(lSz, true), rightMVC(rSz, false);
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
+			leftMVC[u] = false;
 			for (int x : adj[u]) {
+				rightMVC[x] = true;
 				int v = mr[x];
+				found |= v == -1;
 				if (v != -1 && level[v] < 0) {
 					level[v] = level[u] + 1;
 					q.push(v);
 				}
 			}
 		}
+		if (!found) return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
 		auto dfs = [&](auto&& self, int u) -> bool {
-			leftMVC[u] = false;
 			for (int x : adj[u]) {
-				rightMVC[x] = true;
 				int v = mr[x];
-				if (v == -1 || (leftMVC[v] && level[u] + 1 == level[v] && self(self, v))) {
+				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {
 					ml[u] = x;
 					mr[x] = u;
 					return true;
 				}
 			}
+			level[u] = -1;
 			return false;
 		};
-		leftMVC.assign(lSz, true);
-		rightMVC.assign(rSz, false);
-		bool found = false;
 		for (int i = 0; i < lSz; i++)
-			if (ml[i] == -1 && dfs(dfs, i)) {
-				found = true;
-				sizeOfMatching++;
-			}
-		if (!found) break;
+			sizeOfMatching += (ml[i] == -1 && dfs(dfs, i));
 	}
-	return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
 }
