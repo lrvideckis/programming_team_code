@@ -30,7 +30,7 @@ struct info {
 info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
 	//stuff for both (always keep)
 	int n = adj.size(), timer = 1;
-	vector<int> tin(n, 0), low(n, 0);
+	vector<int> tin(n, 0);
 	//2 edge CC stuff (delete if not needed)
 	int num2EdgeCCs = 0;
 	vector<bool> isBridge(m, false);
@@ -39,16 +39,16 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	int numBCCs = 0;
 	vector<bool> isCut(n, false);
 	vector<int> bccID(m), edgeStack;
-	auto dfs = [&](auto&& self, int v, int pId) -> void {
-		tin[v] = low[v] = timer++;
+	auto dfs = [&](auto&& self, int v, int pId) -> int {
+		int low = tin[v] = timer++;
 		int deg = 0;
 		nodeStack.push_back(v);
 		for (auto [to, eId] : adj[v]) {
 			if (eId == pId) continue;
 			if (!tin[to]) {
 				edgeStack.push_back(eId);
-				self(self, to, eId);
-				if (low[to] >= tin[v]) {
+				int lowCh = self(self, to, eId);
+				if (lowCh >= tin[v]) {
 					isCut[v] = true;
 					while (true) {
 						int edge = edgeStack.back();
@@ -58,15 +58,15 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 					}
 					numBCCs++;
 				}
-				low[v] = min(low[v], low[to]);
+				low = min(low, lowCh);
 				deg++;
 			} else if (tin[to] < tin[v]) {
 				edgeStack.push_back(eId);
-				low[v] = min(low[v], tin[to]);
+				low = min(low, tin[to]);
 			}
 		}
 		if (pId == -1) isCut[v] = (deg > 1);
-		if (tin[v] == low[v]) {
+		if (tin[v] == low) {
 			if (pId != -1) isBridge[pId] = true;
 			while (true) {
 				int node = nodeStack.back();
@@ -76,6 +76,7 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 			}
 			num2EdgeCCs++;
 		}
+		return low;
 	};
 	for (int i = 0; i < n; i++) {
 		if (!tin[i])
