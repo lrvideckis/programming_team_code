@@ -5,43 +5,34 @@ struct sccInfo {
 	int numSCCs;
 	//scc's are labeled 0,1,...,`numSCCs-1`
 	//sccId[i] is the id of the scc containing node `i`
+	//for each edge i -> j: sccId[i] >= sccId[j]
 	vector<int> sccId;
 };
 
 sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
-	const int n = adj.size();
-	stack<int> seen;
-	{
-		vector<bool> vis(n, false);
-		auto dfs = [&](auto&& self, int curr) -> void {
-			if (vis[curr]) return;
-			vis[curr] = true;
-			for (int x : adj[curr]) self(self, x);
-			seen.push(curr);
-		};
-		for (int i = 0; i < n; i++) dfs(dfs, i);
-	}
-	vector<vector<int>> adjInv(n);
-	for (int i = 0; i < n; i++) {
-		for (int to : adj[i])
-			adjInv[to].push_back(i);
-	}
-	int numSCCs = 0;
-	vector<int> sccId(n, -1);
-	auto dfs = [&](auto&& self, int curr) -> void {
-		sccId[curr] = numSCCs;
-		for (int x : adjInv[curr]) {
-			if (sccId[x] == -1)
-				self(self, x);
+	int n = adj.size(), timer = 1, numSCCs = 0;
+	vector<int> tin(n, 0), sccId(n, -1), nodeStack;
+	auto dfs = [&](auto&& self, int v) -> int {
+		int low = tin[v] = timer++;
+		nodeStack.push_back(v);
+		for (int to : adj[v]) {
+			if (sccId[to] < 0)
+				low = min(low, tin[to] ? tin[to] : self(self, to));
 		}
-	};
-	while (!seen.empty()) {
-		int node = seen.top();
-		seen.pop();
-		if (sccId[node] == -1) {
-			dfs(dfs, node);
+		if (tin[v] == low) {
+			while (true) {
+				int node = nodeStack.back();
+				nodeStack.pop_back();
+				sccId[node] = numSCCs;
+				if (node == v) break;
+			}
 			numSCCs++;
 		}
+		return low;
+	};
+	for (int i = 0; i < n; i++) {
+		if (!tin[i])
+			dfs(dfs, i);
 	}
 	return {numSCCs, sccId};
 }

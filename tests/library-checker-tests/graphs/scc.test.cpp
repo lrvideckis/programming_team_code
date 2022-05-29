@@ -15,10 +15,10 @@ int main() {
 	}
 	sccInfo info = getSCCs(adj);
 
-	//sanity check for topo order of SCCs
+	//sanity check for reverse topo order of SCCs
 	for (int i = 0; i < n; i++) {
 		for (int j : adj[i]) {
-			assert(info.sccId[i] <= info.sccId[j]);
+			assert(info.sccId[i] >= info.sccId[j]);
 		}
 	}
 
@@ -27,7 +27,7 @@ int main() {
 	for(int i = 0; i < n; i++) {
 		eachScc[info.sccId[i]].push_back(i);
 	}
-	for(int i = 0; i < info.numSCCs; i++) {
+	for(int i = info.numSCCs - 1; i >= 0; i--) {
 		cout << eachScc[i].size() << " ";
 		for(int node : eachScc[i]) cout << node << " ";
 		cout << endl;
