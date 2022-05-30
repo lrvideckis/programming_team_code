@@ -18,7 +18,7 @@ struct kth_smallest {
 		tree.push_back({0, 0, 0}); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val);
 		for (int i = 0; i < (int)arr.size(); i++)
-			roots[i + 1] = update(roots[i], -mx, mx, arr[i]);
+			roots[i + 1] = update(roots[i], mn, mx, arr[i]);
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
@@ -43,7 +43,7 @@ struct kth_smallest {
 	int query(int l, int r, int k) const {
 		assert(0 <= k && k < r - l + 1); //note this condition implies L <= R
 		assert(0 <= l && r + 1 < (int)roots.size());
-		return query(roots[l], roots[r + 1], -mx, mx, k);
+		return query(roots[l], roots[r + 1], mn, mx, k);
 	}
 	int query(int vl, int vr, int tl, int tr, int k) const {
 		if (tl == tr)
