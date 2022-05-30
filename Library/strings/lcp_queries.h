@@ -21,7 +21,7 @@ struct lcp_queries {
 	//
 	//R2-L2 == R1-L1 && longest_common_prefix(L1, L2) >= R2-L2+1
 	int longest_common_prefix(int idx1, int idx2) const {
-		if (idx1 == idx2) return (int) inv_sa.size() - idx1;
+		if (idx1 == idx2) return (int) sa.size() - idx1;
 		idx1 = inv_sa[idx1];
 		idx2 = inv_sa[idx2];
 		if (idx1 > idx2) swap(idx1, idx2);
