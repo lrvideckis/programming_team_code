@@ -26,7 +26,7 @@
 "tests/library-checker-tests/range_data_structures/sparseTable.test.cpp": "2022-05-26 22:50:15 -0700",
 "tests/library-checker-tests/strings/lcp.test.cpp": "2022-05-25 11:41:00 -0700",
 "tests/library-checker-tests/strings/prefix_to_z.test.cpp": "2022-05-25 11:41:00 -0700",
-"tests/library-checker-tests/strings/str_q_palindrome.test.cpp": "2022-05-26 22:50:15 -0700",
-"tests/library-checker-tests/strings/str_q_z_alg.test.cpp": "2022-05-26 22:50:15 -0700",
+"tests/library-checker-tests/strings/str_q_palindrome.test.cpp": "2022-05-30 15:07:41 -0700",
+"tests/library-checker-tests/strings/str_q_z_alg.test.cpp": "2022-05-30 15:07:41 -0700",
 "tests/library-checker-tests/strings/suffix_array.test.cpp": "2022-05-25 11:41:00 -0700"
 }
