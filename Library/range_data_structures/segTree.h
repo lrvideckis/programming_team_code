@@ -9,8 +9,7 @@ struct segTree {
 		long long lazy;
 		int l, r;
 
-		int len() const
-		{
+		int len() const {
 			return r - l + 1;
 		}
 		//returns 1 + (# of nodes in left child's subtree)
