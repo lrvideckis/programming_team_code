@@ -2,7 +2,7 @@
 DIR=${1:-.}
 echo $DIR
 
-tests=$(find $DIR/ -name '*.cpp')
+tests=$(find $DIR/stress-tests/ -name '*.cpp')
 
 declare -i fail=0
 for test in $tests
