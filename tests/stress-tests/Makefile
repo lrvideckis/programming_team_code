@@ -8,6 +8,7 @@ help:
 	@echo "	make test-compiles which_alg=<name_of_alg> - to test compiling a single alg"
 	@echo "	make verify-library-checker-test-comments  - check library checker test status comments in .h files"
 	@echo "	make verify-stress-test-comments           - check stress test status comments in .h files"
+	@echo "	make pdf                                   - build PDF from .tex file"
 	@echo "	make help                                  - to show this information"
 
 test:
@@ -21,3 +22,7 @@ verify-library-checker-test-comments:
 
 verify-stress-test-comments:
 	./scripts/stress_test_comments.sh .
+
+pdf:
+	./scripts/add_hash_code_comments.sh .
+
