@@ -38,14 +38,14 @@ jobs:
     - name: Install bc
       run: sudo apt-get install bc
     - name: Run stress tests
-      run: make --directory=tests/stress-tests/ test
+      run: make --directory=tests/ test
 
   test_compiles:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Run compiles
-      run: make --directory=tests/stress-tests/ test-compiles
+      run: make --directory=tests/ test-compiles
 
   check_code_format:
     runs-on: ubuntu-latest
@@ -54,18 +54,18 @@ jobs:
     - name: Install astyle
       run: sudo apt-get install astyle
     - name: Check code format
-      run: bash tests/stress-tests/scripts/test-format.sh
+      run: bash tests/scripts/test-format.sh
 
   check_library_checker_test_comments:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Check library test comments
-      run: make --directory=tests/stress-tests/ verify-library-checker-test-comments
+      run: make --directory=tests/ verify-library-checker-test-comments
 
   check-stress-test-comments:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Check stress test comments
-      run: make --directory=tests/stress-tests/ verify-stress-test-comments
+      run: make --directory=tests/ verify-stress-test-comments

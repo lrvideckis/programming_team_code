@@ -3,17 +3,17 @@ DIR=${1:-.}
 SCRIPT_DIR=$DIR/scripts
 
 # use a precompiled header for the template to improve perf
-g++ $(cat $SCRIPT_DIR/compile_flags.txt) -x c++-header $DIR/../../template.cpp
-trap "rm -f $DIR/../../template.cpp.gch" EXIT
+g++ $(cat $SCRIPT_DIR/compile_flags.txt) -x c++-header $DIR/../template.cpp
+trap "rm -f $DIR/../template.cpp.gch" EXIT
 
 echo "done with compiling header"
 
 if [[ $# -eq 1 ]] ; then
-    tests="$(find $DIR/../../Library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
+    tests="$(find $DIR/../Library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
     echo "skipped: "
     find $DIR/../../Library -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers.txt
 else
-    tests="$(find $DIR/../../Library -name "*$2*")"
+    tests="$(find $DIR/../Library -name "*$2*")"
 fi
 
 echo "now compiling header(s)"
