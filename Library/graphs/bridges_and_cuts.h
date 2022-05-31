@@ -39,7 +39,7 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	int numBCCs = 0;
 	vector<bool> isCut(n, false);
 	vector<int> bccID(m), edgeStack;
-	auto dfs = [&](auto&& self, int v, int pId) -> int {
+	auto dfs = [&](auto&& dfs, int v, int pId) -> int {
 		int low = tin[v] = timer++;
 		int deg = 0;
 		nodeStack.push_back(v);
@@ -47,7 +47,7 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 			if (eId == pId) continue;
 			if (!tin[to]) {
 				edgeStack.push_back(eId);
-				int lowCh = self(self, to, eId);
+				int lowCh = dfs(dfs, to, eId);
 				if (lowCh >= tin[v]) {
 					isCut[v] = true;
 					while (true) {
