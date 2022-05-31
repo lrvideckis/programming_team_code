@@ -3,8 +3,8 @@ DIR=${1:-.}
 SCRIPT_DIR=$DIR/scripts
 
 # use a precompiled header for the template to improve perf
-g++ $(cat $SCRIPT_DIR/compile_flags.txt) -x c++-header $DIR/../template.cpp
-trap "rm -f $DIR/../template.cpp.gch" EXIT
+g++ $(cat $SCRIPT_DIR/compile_flags.txt) -x c++-header $DIR/../../template.cpp
+trap "rm -f $DIR/../../template.cpp.gch" EXIT
 
 echo "done with compiling header"
 
