@@ -11,4 +11,4 @@ touch null
 pdflatex scripts/25_pg-reference.tex
 pdflatex scripts/25_pg-reference.tex
 
-mv 25_pg-reference.pdf ../../
+mv 25_pg-reference.pdf ../
