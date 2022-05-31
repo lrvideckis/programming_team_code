@@ -16,6 +16,7 @@ do
 		if $(echo $dep | grep --quiet --extended-regexp "*\/Library\/*")
 		then
 			short_test=$(echo $test | cut --characters 3-)
+			echo $short_test
 			if ! grep --quiet --extended-regexp "//stress tests:.*tests/stress-tests/$short_test.*" $dep
 			then
 				echo "FAIL!!!!!!!!"
