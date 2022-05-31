@@ -3,10 +3,15 @@
   - note `-Wconversion` is missing
 - [library-checker-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/tests/library-checker-tests) which tests code on [Library Checker](https://judge.yosupo.jp/) ([steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html))
 - [stress-tests/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/tests/stress-tests) which compares library code output to a naive version (or another alg) on random inputs.
--  Not all code is tested; see test status comments at the top of each file.
 
 ## Test status comments
 
 Each file has 2 standardized comments displaying test status (checked by CI):
 - `//library checker tests: https://judge.yosupo.jp/problem/..., https://judge.yosupo.jp/problem/...`
 - `//stress tests: tests/stress-tests/<path_to_test_1>, tests/stress-tests/<path_to_test_2>`
+
+## Makefile
+to see commands:
+```
+make help
+```
