@@ -24,5 +24,5 @@ verify-stress-test-comments:
 	./scripts/stress_test_comments.sh .
 
 pdf:
-	./scripts/add_hash_code_comments.sh .
+	./scripts/make_pdf.sh .
 
