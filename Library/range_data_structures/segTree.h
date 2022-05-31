@@ -79,7 +79,7 @@ struct segTree {
 	}
 	void update(int v, int l, int r, long long add) {
 		push(v);
-		if (tree[v].r < l || r <= tree[v].l)
+		if (tree[v].r < l || r < tree[v].l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return apply(v, add);
