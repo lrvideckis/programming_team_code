@@ -11,7 +11,6 @@
 //	reverse(arr.begin(), arr.end());
 //	vector<int> rightLower = monotonic_stack(arr);
 //	reverse(arr.begin(), arr.end());
-//	vector<int> par(n, -1);
 //	for (int i = 0; i < n; i++) {
 //		int L = leftLower[i] + 1, R = n - 2 - rightLower[n - 1 - i];
 //		//arr[i] is the min of inclusive range [L, R], with 0 <= L <= R < n
