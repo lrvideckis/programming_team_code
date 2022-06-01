@@ -7,6 +7,7 @@ Yet another competitive programming repo. Quick links:
 - [25_pg-reference.pdf](https://github.com/lrvideckis/Programming-Team-Code/blob/master/25_pg-reference.pdf)
 
 ## Testing
+[![Actions Status](https://github.com/lrvideckis/Programming-Team-Code/workflows/verify/badge.svg)](https://github.com/lrvideckis/Programming-Team-Code/actions)
 
 see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/README.md)
 
