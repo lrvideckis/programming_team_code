@@ -12,7 +12,7 @@ struct sccInfo {
 sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 	int n = adj.size(), timer = 1, numSCCs = 0;
 	vector<int> tin(n, 0), sccId(n, -1), nodeStack;
-	auto dfs = [&](auto&& self, int v) -> int {
+	auto dfs = [&](auto self, int v) -> int {
 		int low = tin[v] = timer++;
 		nodeStack.push_back(v);
 		for (int to : adj[v]) {

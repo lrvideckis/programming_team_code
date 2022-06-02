@@ -21,7 +21,7 @@ vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
 	int n = adj.size();
 	vector<int> sizes(n);
 	vector<bool> vis(n, false);
-	auto dfsSz = [&](auto&& self, int node, int par) -> void {
+	auto dfsSz = [&](auto self, int node, int par) -> void {
 		sizes[node] = 1;
 		for (int to : adj[node]) {
 			if (to != par && !vis[to]) {
@@ -47,7 +47,7 @@ vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
 		}
 	};
 	vector<int> parent(n);
-	auto dfs = [&](auto&& self, int node, int par) -> void {
+	auto dfs = [&](auto self, int node, int par) -> void {
 		node = findCentroid(node);
 		parent[node] = par;
 		vis[node] = true;
