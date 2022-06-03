@@ -1,3 +1,4 @@
+#pragma once
 //status: not tested
 #include <bits/stdc++.h>
 using namespace std;
