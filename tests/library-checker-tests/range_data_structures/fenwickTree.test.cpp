@@ -4,7 +4,7 @@
 #include "../../../Library/range_data_structures/seldom_used/fenwickInv.h"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
 	vector<long long> arr(n);
