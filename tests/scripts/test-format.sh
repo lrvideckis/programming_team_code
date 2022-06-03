@@ -17,7 +17,7 @@ failTests=""
 for test in $(find . -name '*.h')
 do
 	echo "file is "$test
-	gcc -fpreprocessed -E -P -C $test > tmp
+	cpp -fpreprocessed -P -C $test > tmp
 	sed --in-place '1s;^;#pragma once;' tmp
 	eval $(echo $ASTYLE_COMMAND) tmp
 	diff $test tmp

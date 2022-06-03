@@ -5,5 +5,5 @@
 #	chmod u+x hash.sh
 #	cat <file> | ./hash.sh
 # or just copy this command:
-#	cat <file> | sed -r '/^#(include|pragma)/d' | cpp -dD -P -fpreprocessed -MM | tr -d '[:space:]' | md5sum | cut -c-6
-sed -r '/^#(include|pragma)/d' | cpp -dD -P -fpreprocessed | tr -d '[:space:]' | md5sum | cut -c-6
+#	cat <file> | sed -r '/^#(include|pragma)/d' | gcc -fpreprocessed -E -P | tr -d '[:space:]' | md5sum | cut -c-6
+sed -r '/^#(include|pragma)/d' | cpp -fpreprocessed -P | tr -d '[:space:]' | md5sum | cut -c-6
