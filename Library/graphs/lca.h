@@ -1,19 +1,15 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/lca
-
 //https://codeforces.com/blog/entry/74847
 //assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
-
 struct lca {
 	int n;
 	vector<int> jmp, jmpEdges, par, depth;
 	vector<long long> dist;
-
 	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
 		n(adj.size()), jmp(n, root), jmpEdges(n, 0), par(n, root), depth(n, 0), dist(n, 0LL) {
 		dfs(root, adj);
 	}
-
 	void dfs(int node, const vector<vector<pair<int, long long>>>& adj) {
 		for (auto [ch, w] : adj[node]) {
 			if (ch == par[node]) continue;
@@ -27,7 +23,6 @@ struct lca {
 			dfs(ch, adj);
 		}
 	}
-
 	//traverse up k edges in O(log(k)). So with k=1 this returns `node`'s parent
 	int kthPar(int node, int k) const {
 		k = min(k, depth[node]);
@@ -42,7 +37,6 @@ struct lca {
 		}
 		return node;
 	}
-
 	int getLca(int x, int y) const {
 		if (depth[x] < depth[y]) swap(x, y);
 		x = kthPar(x, depth[x] - depth[y]);
@@ -54,11 +48,9 @@ struct lca {
 		}
 		return x;
 	}
-
 	int distEdges(int x, int y) const {
 		return depth[x] + depth[y] - 2 * depth[getLca(x, y)];
 	}
-
 	long long distWeight(int x, int y) const {
 		return dist[x] + dist[y] - 2 * dist[getLca(x, y)];
 	}

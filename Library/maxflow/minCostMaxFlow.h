@@ -1,26 +1,19 @@
 #pragma once
-
 //status: not tested
-
 const long long inf = 1e18;
-
 struct mincostmaxflow {
 	typedef long long ll;
-
 	struct edge {
 		ll a, b, cap, cost, flow;
 		size_t back;
 	};
-
 	vector<edge> e;
 	vector<vector<ll>> g;
 	ll n, s, t;
 	ll k = inf; // The maximum amount of flow allowed
-
 	mincostmaxflow(int _n, int _s, int _t) : n(_n), s(_s), t(_t) {
 		g.resize(n);
 	}
-
 	void addedge(ll a, ll b, ll cap, ll cost) {
 		edge e1 = {a, b, cap, cost, 0, g[b].size() };
 		edge e2 = {b, a, 0, -cost, 0, g[a].size() };
@@ -29,7 +22,6 @@ struct mincostmaxflow {
 		g[b].push_back((ll) e.size());
 		e.push_back(e2);
 	}
-
 	// Returns {flow,cost}
 	pair<ll, ll> getflow() {
 		ll flow = 0, cost = 0;

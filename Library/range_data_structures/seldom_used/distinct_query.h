@@ -1,22 +1,16 @@
 #pragma once
 //stress tests: tests/stress-tests/range_data_structures/distinct_query.cpp
-
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
-
 //works with negatives
 //O(n log n) time and space
-
 struct distinct_query {
-
 	struct Node {
 		int sum;
 		int lCh, rCh;//children, indexes into `tree`
 	};
-
 	int sz;
 	vector<int> roots;
 	deque<Node> tree;
-
 	distinct_query(const vector<int>& arr) : sz(arr.size() + 1), roots(sz, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
 		map<int, int> lastIdx;
@@ -40,7 +34,6 @@ struct distinct_query {
 		tree.push_back({tree[lCh].sum + tree[rCh].sum, lCh, rCh});
 		return tree.size() - 1;
 	}
-
 	//returns number of distinct elements in range [l,r]
 	int query(int l, int r) const {
 		return query(roots[l], roots[r + 1], 0, sz - 1, l + 1);

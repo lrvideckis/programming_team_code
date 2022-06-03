@@ -1,9 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/matrix_product
 //stress tests: tests/stress-tests/math/fib_matrix_expo.cpp
-
 //empty matrix -> RTE
-
 vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>& b, int mod) {
 	assert(a[0].size() == b.size());
 	int n = a.size(), m = b[0].size(), inner = b.size();
@@ -16,7 +14,6 @@ vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>
 	}
 	return prod;
 }
-
 vector<vector<int>> power(vector<vector<int>> matrix/*intentional pass by value*/, long long pw, int mod) {
 	int n = matrix.size();
 	vector<vector<int>> prod(n, vector<int>(n, 0));

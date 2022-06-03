@@ -1,15 +1,11 @@
 //status: not tested
-
 #include <bits/stdc++.h>
 using namespace std;
-
 const int Max = 1e6 + 2;
 int block, answer[Max], answerToQuery;
-
 struct query {
 	int l, r, index;
 };
-
 bool cmp(query x, query y) {
 	if (x.l / block == y.l / block) return x.r < y.r;
 	return x.l < y.l;
@@ -18,7 +14,6 @@ void add(int pos) {
 }
 void remove(int pos) {
 }
-
 int main() {
 	int q;
 	cin >> q;

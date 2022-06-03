@@ -1,8 +1,6 @@
 #pragma once
 //stress tests: tests/stress-tests/strings/kmp.cpp
-
 #include "prefix_function.h"
-
 //usage:
 //	string needle;
 //	...
@@ -11,14 +9,12 @@
 //	vector<int> needle;
 //	...
 //	KMP_Match kmp(needle);
-
 //kmp-doubling-trick: to check if 2 arrays are rotationally equivalent: run kmp
 //with one array as the needle and the other array doubled as the haystack
 //or just use kactl's min rotation code
 template <class T>
 struct KMP_Match {
 	KMP_Match(const T& needle_) : pi(prefix_function(needle_)), needle(needle_) {}
-
 	// if haystack = "bananas"
 	// needle = "ana"
 	//

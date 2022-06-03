@@ -1,15 +1,9 @@
 #pragma once
-
 //status: not tested
 //intended to be a base template and to be modified
-
 const int K = 26;//character size
-
-
 struct trie {
-
 	const char minCh = 'a';//'A' for uppercase, '0' for digits
-
 	struct node {
 		bool leaf = 0;
 		int next[K], id, p = -1;
@@ -18,11 +12,8 @@ struct trie {
 			fill(next, next + K, -1);
 		}
 	};
-
 	vector<node> t;
-
 	trie() : t(1) {}
-
 	void add_string(const string& s, int id) {
 		int c = 0;
 		for (char ch : s) {
@@ -36,7 +27,6 @@ struct trie {
 		t[c].leaf = 1;
 		t[c].id = id;
 	}
-
 	void remove_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {
@@ -47,7 +37,6 @@ struct trie {
 		}
 		t[c].leaf = 0;
 	}
-
 	int find_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {

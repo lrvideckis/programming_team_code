@@ -1,8 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/inverse_matrix
-
 #include "row_reduce.h"
-
 //returns inverse of square matrix A, empty if no inverse
 vector<vector<int>> matrix_inverse(vector<vector<int>> A/*intentional pass by value*/, const int mod) {
 	int n = A.size();

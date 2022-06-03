@@ -1,8 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/point_add_range_sum
-
 #include "../fenwickTree.h"
-
 template<class T>
 struct fenwickInv {
 	fenwickTree<T> ft;

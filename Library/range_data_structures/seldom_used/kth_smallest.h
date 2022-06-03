@@ -1,19 +1,14 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/range_kth_smallest
-
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
-
 struct kth_smallest {
-
 	struct Node {
 		int sum;
 		int lCh, rCh;//children, indexes into `tree`
 	};
-
 	int mn, mx;
 	vector<int> roots;
 	deque<Node> tree;
-
 	kth_smallest(const vector<int>& arr) : mn(INT_MAX), mx(INT_MIN), roots(arr.size() + 1, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val);
@@ -35,8 +30,6 @@ struct kth_smallest {
 		tree.push_back({tree[lCh].sum + tree[rCh].sum, lCh, rCh});
 		return tree.size() - 1;
 	}
-
-
 	/* find (k+1)th smallest number among arr[l], arr[l+1], ..., arr[r]
 	 * k is 0-based, so query(l,r,0) returns the min
 	 */

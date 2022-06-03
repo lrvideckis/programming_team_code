@@ -1,10 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/binomial_coefficient
 //only the tests with prime mod
-
 //for mod inverse
 #include "exp_mod.h"
-
 // usage:
 //     NchooseK nk(n, 1e9+7) to use `choose`, `inv` with inputs < n
 // or:
@@ -24,7 +22,6 @@ struct NchooseK {
 		for (int i = factSz - 2; i >= 2; i--)
 			invFact[i] = 1LL * invFact[i + 1] * (i + 1) % mod;
 	}
-
 	//classic n choose k
 	//fails when n >= mod
 	int choose(int n, int k) const {
@@ -32,7 +29,6 @@ struct NchooseK {
 		//now we know 0 <= k <= n so 0 <= n
 		return 1LL * fact[n] * invFact[k] % mod * invFact[n - k] % mod;
 	}
-
 	//lucas theorem to calculate n choose k in O(log(k))
 	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish prime mod (< 1e6 maybe)
 	//handles n >= mod correctly
@@ -41,13 +37,11 @@ struct NchooseK {
 		if (k == 0 || k == n) return 1;
 		return 1LL * chooseWithLucasTheorem(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
-
 	//returns inverse of n in O(1)
 	int inv(int n) const {
-		assert(1 <= n);    //don't divide by 0 :)
+		assert(1 <= n); //don't divide by 0 :)
 		return 1LL * fact[n - 1] * invFact[n] % mod;
 	}
-
 	int mod;
 	vector<int> fact, invFact;
 };

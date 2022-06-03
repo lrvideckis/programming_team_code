@@ -1,6 +1,5 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/montmort_number_mod
-
 //https://oeis.org/A000166
 //
 //for a permutation of size i:

@@ -1,23 +1,17 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/static_range_frequency, https://judge.yosupo.jp/problem/range_kth_smallest
-
 //For point updates: either switch to policy based BST, or use sqrt decomposition
-
 struct MergeSortTree {
 	struct Node {
 		vector<int> vals;
-
 		int l, r;
-
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
 		int rCh() const {
 			return ((r - l) & ~1) + 2;
 		}
 	};
-
 	vector<Node> tree;
-
 	//RTE's when `arr` is empty
 	MergeSortTree(const vector<int>& arr) : tree(2 * (int) arr.size() - 1) {
 		build(arr, 0, 0, (int) arr.size() - 1);
@@ -36,13 +30,11 @@ struct MergeSortTree {
 			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
 		}
 	}
-
 	Node combine(const Node& L, const Node& R) {
 		vector<int> par(L.vals.size() + R.vals.size());
 		merge(L.vals.begin(), L.vals.end(), R.vals.begin(), R.vals.end(), par.begin());
 		return {par, L.l, R.r};
 	}
-
 	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
 	//O(log^2(n))
 	int query(int l, int r, int x) const {

@@ -1,7 +1,5 @@
 #pragma once
-
 //status: not tested
-
 struct maxflow {
 	typedef long long ll;
 	ll n, s, t;
@@ -18,7 +16,7 @@ struct maxflow {
 	ll getflow() {
 		ll flow = 0;
 		for (;;) {
-			if (!bfs())  break;
+			if (!bfs()) break;
 			ptr.assign(ptr.size(), 0);
 			while (ll pushed = dfs(s, inf))
 				flow += pushed;
@@ -28,7 +26,6 @@ struct maxflow {
 	ll getFlowForEdge(ll a, ll b) {
 		return e[edgeMap[a * n + b]].flow;
 	}
-
 	const ll inf = 1e18;
 	struct edge {
 		ll a, b, cap, flow;
@@ -61,7 +58,7 @@ struct maxflow {
 		for (; ptr[v] < (ll) g[v].size(); ptr[v]++) {
 			ll id = g[v][ptr[v]];
 			ll to = e[id].b;
-			if (d[to] != d[v] + 1)  continue;
+			if (d[to] != d[v] + 1) continue;
 			ll pushed = dfs(to, min(flow, e[id].cap - e[id].flow));
 			if (pushed) {
 				e[id].flow += pushed;
