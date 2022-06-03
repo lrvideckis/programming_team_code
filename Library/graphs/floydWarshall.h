@@ -1,7 +1,5 @@
 #pragma once
 //status: not tested
-
-
 //**for directed graphs only** if you initialize len[i][i] to infinity, then
 //afterward floyds, len[i][i] = length of shortest cycle including node `i`
 //
@@ -15,7 +13,6 @@
 //results in min-plus matrix multiplication. If adjacency matrix is M, then
 //after computing M^k (with binary exponentiation), M[i][j] = min length path
 //from i to j with at most k edges.
-
 for (int k = 0; k < n; k++)
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)

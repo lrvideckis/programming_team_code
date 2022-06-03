@@ -1,13 +1,10 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations
-
 #include "row_reduce.h"
-
 struct matrixInfo {
 	int rank, det;
 	vector<int> x;
 };
-
 //Solves A * x = b under prime mod.
 //A is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m column vector.
 //assumes n,m >= 1, else RTE

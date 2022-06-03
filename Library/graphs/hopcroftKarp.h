@@ -1,10 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/bipartitematching
 //with asserts checking correctness of min vertex cover
-
 //Modified from https://github.com/foreverbell/acm-icpc-cheat-sheet/blob/master/src/graph-algorithm/hopcroft-karp.cpp
 //Worst case O(E*sqrt(V)) but faster in practice
-
 struct match {
 	//# of edges in matching (which = size of min vertex cover by König's theorem)
 	int sizeOfMatching;
@@ -22,7 +20,6 @@ struct match {
 	//if leftMVC[`left node`] is false, then `left node` is in the corresponding maximal independent set
 	vector<bool> leftMVC, rightMVC;
 };
-
 //Think of the bipartite graph as having a left side (with size lSz) and a right side (with size rSz).
 //Nodes on left side are indexed 0,1,...,lSz-1
 //Nodes on right side are indexed 0,1,...,rSz-1

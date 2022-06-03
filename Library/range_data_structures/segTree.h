@@ -1,14 +1,11 @@
 #pragma once
 //stress tests: tests/stress-tests/range_data_structures/segTree.cpp
-
 const long long inf = 1e18;
-
 struct segTree {
 	struct Node {
 		long long sum, mx, mn;
 		long long lazy;
 		int l, r;
-
 		int len() const {
 			return r - l + 1;
 		}
@@ -18,9 +15,7 @@ struct segTree {
 			return ((r - l) & ~1) + 2;
 		}
 	};
-
 	vector<Node> tree;
-
 	//There's no constructor `segTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of `segTree(int size)` was to be simpler by not calling build
 	segTree(const vector<long long>& arr) : tree(2 * (int) arr.size() - 1) {
@@ -43,7 +38,6 @@ struct segTree {
 			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
 		}
 	}
-
 	static Node combine(const Node& L, const Node& R) {
 		return {
 			L.sum + R.sum,
@@ -54,7 +48,6 @@ struct segTree {
 			R.r
 		};
 	}
-
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
 	void apply(int v, long long add) {
 		tree[v].sum += tree[v].len() * add;
@@ -65,14 +58,12 @@ struct segTree {
 			tree[v + tree[v].rCh()].lazy += add;
 		}
 	}
-
 	void push(int v) {
 		if (tree[v].lazy) {
 			apply(v, tree[v].lazy);
 			tree[v].lazy = 0;
 		}
 	}
-
 	//update range [l,r] with `add`
 	void update(int l, int r, long long add) {
 		update(0, l, r, add);
@@ -87,7 +78,6 @@ struct segTree {
 		update(v + tree[v].rCh(), l, r, add);
 		tree[v] = combine(tree[v + 1], tree[v + tree[v].rCh()]);
 	}
-
 	//range [l,r]
 	Node query(int l, int r) {
 		return query(0, l, r);

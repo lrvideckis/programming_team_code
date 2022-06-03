@@ -1,6 +1,5 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/staticrmq, https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes
-
 //usage:
 //	vector<long long> arr;
 //	...

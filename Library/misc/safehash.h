@@ -1,6 +1,5 @@
 #pragma once
 //status: not tested
-
 //source: https://codeforces.com/blog/entry/62393
 struct custom_hash {
 	static uint64_t splitmix64(uint64_t x) {
@@ -10,15 +9,12 @@ struct custom_hash {
 		x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
 		return x ^ (x >> 31);
 	}
-
 	size_t operator()(uint64_t x) const {
 		static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
 		return splitmix64(x + FIXED_RANDOM);
 	}
 };
-
 //usage:
 unordered_map<long long, int, custom_hash> safe_map;
-
 #include "policy_based_data_structures.h" //not needed when using `unordered_map`
 gp_hash_table<long long, int, custom_hash> safe_hash_table;

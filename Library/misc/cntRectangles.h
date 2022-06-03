@@ -1,6 +1,5 @@
 #pragma once
 //stress tests: tests/stress-tests/misc/cntRectangles.cpp
-
 //given a 2D boolean matrix, calculate cnt[i][j]
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix
 //such that all cells in the rectangle are false

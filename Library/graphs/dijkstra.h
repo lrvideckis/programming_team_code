@@ -1,11 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/shortest_path
-
 //returns array `len` where `len[i]` = shortest path from node `startNode` to node i
 //For example len[startNode] will always = 0
-
 const long long INF = 1e18;
-
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj /*directed or undirected, weighted graph*/, int startNode) {
 	vector<long long> len(adj.size(), INF);
 	len[startNode] = 0;

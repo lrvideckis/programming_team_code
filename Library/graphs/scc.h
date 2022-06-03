@@ -1,6 +1,5 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/scc
-
 struct sccInfo {
 	int numSCCs;
 	//scc's are labeled 0,1,...,`numSCCs-1`
@@ -8,7 +7,6 @@ struct sccInfo {
 	//for each edge i -> j: sccId[i] >= sccId[j]
 	vector<int> sccId;
 };
-
 sccInfo getSCCs(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 	int n = adj.size(), timer = 1, numSCCs = 0;
 	vector<int> tin(n, 0), sccId(n, -1), nodeStack;

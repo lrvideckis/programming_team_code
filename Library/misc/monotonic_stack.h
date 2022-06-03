@@ -1,6 +1,5 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/cartesian_tree
-
 //leftLower[i] is the closest smaller index where arr is less.
 //Formally: for every index j with leftLower[i] < j < i: arr[j] >= arr[i]
 //and
@@ -15,7 +14,6 @@
 //		int L = leftLower[i] + 1, R = n - 2 - rightLower[n - 1 - i];
 //		//arr[i] is the min of inclusive range [L, R], with 0 <= L <= R < n
 //	}
-
 vector<int> monotonic_stack(const vector<int>& arr) {
 	int n = arr.size();
 	stack<int> st;
