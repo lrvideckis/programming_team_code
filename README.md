@@ -20,7 +20,7 @@ see [tests/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob/m
 
 2. Run the following from [Library/](https://github.com/lrvideckis/Programming-Team-Code/tree/master/Library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
    ```
-   astyle --indent=tab --style=attach --remove-braces --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --recursive "*.h" --suffix=none
+   astyle --indent=tab --style=attach --remove-braces --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --indent-col1-comments --recursive "*.h" --suffix=none
    ```
 
 ## License
