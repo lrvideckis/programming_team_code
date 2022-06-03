@@ -10,20 +10,14 @@ fi
 
 cd Library
 
-
 for test in $(find . -name '*.h')
 do
-	echo "here, test is "$test
 	gcc -fpreprocessed -dD -E -P -C $test > tmp
-	cat tmp
-	sed -i '1s;^;#pragma once\n;' tmp
-	cat tmp
+	sed -i '1s;^;#pragma once;' tmp
 	mv tmp $test
 done
 
-
-#VAR=$(eval $(echo $ASTYLE_COMMAND | tr -d "\\") --dry-run --formatted | grep Formatted)
-VAR=$(eval $(echo $ASTYLE_COMMAND | tr -d "\\") --formatted | grep Formatted) #TODO: revert
+VAR=$(eval $(echo $ASTYLE_COMMAND | tr -d "\\") --dry-run --formatted | grep Formatted)
 
 if [ -z "$VAR" ];
 then
