@@ -12,7 +12,7 @@
 //	reverse(arr.begin(), arr.end());
 //	for (int i = 0; i < n; i++) {
 //		int L = leftLower[i] + 1, R = n - 2 - rightLower[n - 1 - i];
-//		//arr[i] is the min of inclusive range [L, R], with 0 <= L <= R < n
+//		//arr[i] is the min of inclusive range [L, R], with 0 <= L <= i <= R < n
 //	}
 vector<int> monotonic_stack(const vector<int>& arr) {
 	int n = arr.size();
