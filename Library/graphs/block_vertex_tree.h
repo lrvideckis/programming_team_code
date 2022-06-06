@@ -1,6 +1,7 @@
 #pragma once
 #include "bridges_and_cuts.h"
 //library checker tests: https://judge.yosupo.jp/problem/biconnected_components
+//(asserts checking correctness of commented-loops)
 //returns adjacency list of block vertex tree
 //usage:
 //	info cc = bridge_and_cut(adj, m);
