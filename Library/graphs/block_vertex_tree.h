@@ -5,7 +5,7 @@
 //usage:
 //	info cc = bridge_and_cut(adj, m);
 //	vector<vector<int>> bvt = block_vertex_tree(adj, cc);
-//to loop over *unique* BCCs for a node i:
+//to loop over *unique* BCC for a node i:
 //	for(int bccid : bvt[i]) {
 //		bccid -= n;
 //		...
