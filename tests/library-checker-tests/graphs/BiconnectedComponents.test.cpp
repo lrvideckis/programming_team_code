@@ -36,26 +36,26 @@ int main() {
 
 	//check correctness of block vertex tree
 	for(int i = 0; i < n; i++) {
+		assert(adj[i].size() >= bvt[i].size());//in particular, if adj[i].empty(), then bct[i].empty()
 		assert(cc.isCut[i] == (bvt[i].size() > 1));//is cut means non-leaf in block vertex tree
-
-		set<int> curr_bccs;
-		for(auto [to, eId] : adj[i]) {
-			int bccid = cc.bccID[eId];
-			curr_bccs.insert(bccid);
-		}
-		assert(curr_bccs.size() == bvt[i].size());
-		for(int bccid : bvt[i]) {
-			bccid -= n;
-			assert(curr_bccs.count(bccid));
-		}
 	}
 
 	{
-		vector<set<int>> bccToNodes(cc.numBCCs);
+		vector<set<int>> bccToNodes(cc.numBCCs), nodeToBCCs(n);
 		for(int i = 0; i < m; i++) {
-			auto [u, v] = edges[i];
-			bccToNodes[cc.bccID[i]].insert(u);
-			bccToNodes[cc.bccID[i]].insert(v);
+			int bccid = cc.bccID[i];
+			for(int node : {edges[i].first, edges[i].second}) {
+				bccToNodes[bccid].insert(node);
+				nodeToBCCs[node].insert(bccid);
+			}
+		}
+
+		for(int i = 0; i < n; i++) {
+			assert(nodeToBCCs[i].size() == bvt[i].size());
+			for(int bccid : bvt[i]) {
+				bccid -= n;
+				assert(nodeToBCCs[i].count(bccid));
+			}
 		}
 
 		for(int bccid = 0; bccid < cc.numBCCs; bccid++) {
