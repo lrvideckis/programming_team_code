@@ -2,12 +2,15 @@
 #include "../../template.h"
 
 #include "../../../Library/strings/prefix_function.h"
+#include "../../../Library/strings/lcp_queries.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 
 	string s;
 	cin >> s;
+
+	lcp_queries sq(s);
 
 	int n = s.size();
 	vector<int> pi = prefix_function(s);
@@ -30,6 +33,7 @@ int main() {
 
 	z[0] = n;
 	for (int i = 0; i < n; i++) {
+		assert(z[i] == sq.longest_common_prefix(i, 0));
 		cout << z[i] << " ";
 	}
 	cout << endl;
