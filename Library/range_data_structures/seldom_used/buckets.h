@@ -15,13 +15,13 @@ struct buckets {
 	vector<int> values;
 	vector<bucket> _buckets;
 	buckets(const vector<int>& initial) : values(initial) {
-		int numBuckets = ((int) values.size() + BUCKET_SIZE - 1) / BUCKET_SIZE;
+		int numBuckets = ((int)values.size() + BUCKET_SIZE - 1) / BUCKET_SIZE;
 		_buckets.resize(numBuckets);
 		for (int i = 0; i < numBuckets; i++) {
 			_buckets[i].sumLazy = 0;
 			_buckets[i].sumBucket = 0;
 			_buckets[i].l = i * BUCKET_SIZE;
-			_buckets[i].r = min((i + 1) * BUCKET_SIZE, (int) values.size()) - 1;
+			_buckets[i].r = min((i + 1) * BUCKET_SIZE, (int)values.size()) - 1;
 			for (int j = _buckets[i].l; j <= _buckets[i].r; j++)
 				_buckets[i].sumBucket += values[j];
 		}

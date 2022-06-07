@@ -8,7 +8,7 @@
 // Two Efficient Algorithms for Linear Time Suffix Array Construction
 template<class T>
 vector<int> sa_is(const T& s, int upper/*max element of `s`; for std::string, pass in 255*/) {
-	int n = (int) s.size();
+	int n = (int)s.size();
 	if (n == 0) return {};
 	if (n == 1) return {0};
 	if (n == 2) {

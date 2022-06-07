@@ -13,8 +13,8 @@ struct MergeSortTree {
 	};
 	vector<Node> tree;
 	//RTE's when `arr` is empty
-	MergeSortTree(const vector<int>& arr) : tree(2 * (int) arr.size() - 1) {
-		build(arr, 0, 0, (int) arr.size() - 1);
+	MergeSortTree(const vector<int>& arr) : tree(2 * (int)arr.size() - 1) {
+		build(arr, 0, 0, (int)arr.size() - 1);
 	}
 	void build(const vector<int>& arr, int v, int tl, int tr) {
 		if (tl == tr) {
