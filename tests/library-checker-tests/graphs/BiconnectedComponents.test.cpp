@@ -32,6 +32,10 @@ int main() {
 		assert(isCut == cc.isCut[i]);
 	}
 
+	for(int i = 0; i < m; i++) {
+		auto [u, v] = edges[i];
+		assert(cc.isBridge[i] == (cc.TwoEdgeCCID[u] != cc.TwoEdgeCCID[v]));
+	}
 
 
 	//check correctness of block vertex tree
