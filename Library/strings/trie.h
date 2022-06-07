@@ -6,9 +6,9 @@ const int K = 26;//character size
 struct trie {
 	const char minCh = 'a';//'A' for uppercase, '0' for digits
 	struct node {
-		bool leaf = 0;
 		int next[K], id, p = -1;
 		char pch;
+		bool leaf = 0;
 		node(int _p = -1, char ch = '#') : p(_p), pch(ch) {
 			fill(next, next + K, -1);
 		}
