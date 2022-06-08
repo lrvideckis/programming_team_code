@@ -1,26 +1,32 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/assignment
-const long long inf = 1e18;
 //source: https://e-maxx.ru/algo/assignment_hungary
-// this is one-indexed
-// jobs X workers cost matrix
-// cost[i][j] is cost of job i done by worker j
-// #jobs must be <= #workers
-// Default finds min cost; to find max cost set all costs[i][j] to -costs[i][j], set all unused to positive inf
+//
+//input: cost[1...n][1...m] with n <= m
+//n workers, indexed 1, 2, ..., n
+//m jobs, indexed 1, 2, ..., m
+//it costs `cost[i][j]` to assign worker i to job j (1<=i<=n, 1<=j<=m)
+//this returns *min* total cost to assign each worker to some distinct job
+//O(n^2 * m)
+//
+//trick 1: set `cost[i][j]` to INF to say: "worker `i` cannot be assigned job `j`"
+//trick 2: `cost[i][j]` can be negative, so to instead find max total cost over all matchings: set all `cost[i][j]` to `-cost[i][j]`.
+//Now max total cost = - HungarianMatch(cost).minCost
+const long long inf = 1e18;
 struct match {
-	long long cost;
-	vector<int> matching;
+	long long minCost;
+	vector<int> matching;//worker `i` (1<=i<=n) is assigned to job `matching[i]` (1<=matching[i]<=m)
 };
 match HungarianMatch(const vector<vector<long long>>& cost) {
-	long long n = cost.size() - 1;
-	long long m = cost[0].size() - 1;
+	int n = cost.size() - 1, m = cost[0].size() - 1;
+	assert(n <= m);
 	vector<int> p(m + 1), way(m + 1);
 	vector<long long> u(n + 1), v(m + 1);
 	for (int i = 1; i <= n; i++) {
 		p[0] = i;
 		int j0 = 0;
 		vector<long long> minv(m + 1, inf);
-		vector<char> used(m + 1, false);
+		vector<bool> used(m + 1, false);
 		do {
 			used[j0] = true;
 			int i0 = p[j0], j1 = 0;
@@ -46,9 +52,8 @@ match HungarianMatch(const vector<vector<long long>>& cost) {
 			j0 = j1;
 		} while (j0);
 	}
-	// For each N, it contains the M it selected
 	vector<int> ans(n + 1);
-	for (int j = 1; j <= m ; j++)
+	for (int j = 1; j <= m; j++)
 		ans[p[j]] = j;
 	return {-v[0], ans};
 }
