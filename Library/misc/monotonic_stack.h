@@ -16,12 +16,11 @@
 //	}
 vector<int> monotonic_stack(const vector<int>& arr) {
 	int n = arr.size();
-	stack<int> st;
-	vector<int> leftLower(n, -1);
+	vector<int> leftLower(n);
 	for (int i = 0; i < n; i++) {
-		while (!st.empty() && arr[st.top()] >= arr[i]) st.pop();
-		if (!st.empty()) leftLower[i] = st.top();
-		st.push(i);
+		int j = i - 1;
+		while (j >= 0 && arr[j] >= arr[i]) j = leftLower[j];
+		leftLower[i] = j;
 	}
 	return leftLower;
 }
