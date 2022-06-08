@@ -30,7 +30,7 @@ struct MergeSortTree {
 			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
 		}
 	}
-	Node combine(const Node& L, const Node& R) {
+	Node combine(const Node& L, const Node& R) const {
 		vector<int> par(L.vals.size() + R.vals.size());
 		merge(L.vals.begin(), L.vals.end(), R.vals.begin(), R.vals.end(), par.begin());
 		return {par, L.l, R.r};
