@@ -4,7 +4,7 @@
 //returns (base^pw)%mod in O(log(pw)), but returns 1 for 0^0
 //
 //What if base doesn't fit in long long?
-//Since (base^pw)%mod == ((base%mod)%pw)%mod we can calculate base under mod of `mod`
+//Since (base^pw)%mod == ((base%mod)^pw)%mod we can calculate base under mod of `mod`
 //
 //What if pw doesn't fit in long long?
 //case 1: mod is prime
