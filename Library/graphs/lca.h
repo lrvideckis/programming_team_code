@@ -7,7 +7,7 @@ struct lca {
 	vector<int> jmp, jmpEdges, par, depth;
 	vector<long long> dist;
 	lca(const vector<vector<pair<int, long long>>>& adj, int root) :
-		n(adj.size()), jmp(n, root), jmpEdges(n, 0), par(n, root), depth(n, 0), dist(n, 0LL) {
+		n(adj.size()), jmp(n, root), jmpEdges(n, 1), par(n, root), depth(n, 0), dist(n, 0LL) {
 		dfs(root, adj);
 	}
 	void dfs(int node, const vector<vector<pair<int, long long>>>& adj) {
@@ -19,7 +19,7 @@ struct lca {
 			if (depth[node] > 0 && jmpEdges[node] == jmpEdges[jmp[node]])
 				jmp[ch] = jmp[jmp[node]], jmpEdges[ch] = 2 * jmpEdges[node] + 1;
 			else
-				jmp[ch] = node, jmpEdges[ch] = 1;
+				jmp[ch] = node;
 			dfs(ch, adj);
 		}
 	}
