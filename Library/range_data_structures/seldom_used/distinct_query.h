@@ -8,14 +8,13 @@ struct distinct_query {
 		int sum;
 		int lCh, rCh;//children, indexes into `tree`
 	};
-	int sz;
 	vector<int> roots;
 	deque<Node> tree;
-	distinct_query(const vector<int>& arr) : sz(arr.size() + 1), roots(sz, 0) {
+	distinct_query(const vector<int>& arr) : roots(arr.size() + 1, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
 		map<int, int> lastIdx;
 		for (int i = 0; i < (int)arr.size(); i++) {
-			roots[i + 1] = update(roots[i], 0, sz - 1, lastIdx[arr[i]]);
+			roots[i + 1] = update(roots[i], 0, arr.size(), lastIdx[arr[i]]);
 			lastIdx[arr[i]] = i + 1;
 		}
 	}
@@ -36,7 +35,7 @@ struct distinct_query {
 	}
 	//returns number of distinct elements in range [l,r]
 	int query(int l, int r) const {
-		return query(roots[l], roots[r + 1], 0, sz - 1, l + 1);
+		return query(roots[l], roots[r + 1], 0, (int)roots.size() - 1, l + 1);
 	}
 	int query(int vl, int vr, int tl, int tr, int idx) const {
 		if (tree[vr].sum == 0 || idx <= tl)
