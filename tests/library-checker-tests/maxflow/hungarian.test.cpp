@@ -14,7 +14,7 @@ int main() {
 		}
 	}
 	match res = HungarianMatch(a);
-	cout << res.cost << endl;
+	cout << res.minCost << endl;
 	for(int i = 1; i <= n; i++) {
 		cout << res.matching[i]-1 << " ";
 	}
