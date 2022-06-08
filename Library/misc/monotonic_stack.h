@@ -4,6 +4,7 @@
 //Formally: for every index j with leftLower[i] < j < i: arr[j] >= arr[i]
 //and
 //arr[leftLower[i]] < arr[i] if leftLower[i] != -1
+//O(n)
 //
 //example usage:
 //	vector<int> leftLower = monotonic_stack(arr);
