@@ -26,9 +26,10 @@ int main() {
 	for(int i = 0; i < n; i++) {
 		int L = leftLower[i], R = n-1-rightLower[n-1-i];
 		assert(0 <= L+1 && L+1 <= i && i <= R-1 && R-1 < n);
-		assert(arr[i] == st.query(L+1, R-1));
-		if(L >= 0) assert(arr[L] < arr[i]);
-		if(R < n) assert(arr[R] < arr[i]);
+		if(L+1 < i) assert(st.query(L+1, i-1) > arr[i]);
+		if(i < R-1) assert(st.query(i+1, R-1) > arr[i]);
+		if(L >= 0) assert(arr[L] <= arr[i]);
+		if(R < n) assert(arr[R] <= arr[i]);
 
 		if(L == -1 && R == n) par[i] = i;
 		else if(L == -1) par[i] = R;
