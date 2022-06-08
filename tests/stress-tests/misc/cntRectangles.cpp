@@ -5,11 +5,11 @@
 
 int main() {
 	for(int tests = 20; tests--;) {
-		int n = getRand(10,100), m = getRand(10, 100);
+		int n = getRand(1,100), m = getRand(1, 100);
 		vector<vector<bool>> grid(n, vector<bool>(m));
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < m; j++) {
-				grid[i][j] = (getRand(1,10) == 1);
+				grid[i][j] = (getRand(1,2) == 1);
 			}
 		}
 
@@ -26,13 +26,14 @@ int main() {
 				for(int j1 = 1; j1 <= m; j1++) {
 					for(int j2 = j1; j2 <= m; j2++) {
 						int cnt = prefix[i2][j2] - prefix[i1-1][j2] - prefix[i2][j1-1] + prefix[i1-1][j1-1];
-						if(cnt == 0) {
+						if(cnt == (i2-i1+1) * (j2-j1+1)) {
 							naive[i2-i1+1][j2-j1+1]++;
 						}
 					}
 				}
 			}
 		}
+
 		vector<vector<int>> fast = getNumRectangles(grid);
 		for(int i = 1; i <= n; i++) {
 			for(int j = 1; j <= m; j++) {
