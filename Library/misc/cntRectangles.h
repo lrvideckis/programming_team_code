@@ -16,8 +16,8 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 		}
 	}
 	for (int i = 0; i < n; i++) {
+		vector<int> left = monotonic_stack(arr[i]);
 		for (int j = 0; j <= m; j++) {
-			vector<int> left = monotonic_stack(arr[i]);
 			int k = j - 1;
 			while (k >= 0 && arr[i][k] > arr[i][j]) {
 				int idx = k, len = j - 1 - left[idx];
