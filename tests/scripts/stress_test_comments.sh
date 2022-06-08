@@ -21,9 +21,9 @@ do
 				echo "FAIL!!!!!!!!"
 				echo "no comment specifying file "$(basename $dep)" is tested by "$test
 				echo "need to add comment which is picked up by the following command:"
-				echo "grep --quiet --extended-regexp \"//stress tests:.*tests/stress-tests/$short_test.*\" $(basename $dep)"
+				echo "grep --quiet --extended-regexp \"//stress tests:.*tests/$short_test.*\" $(basename $dep)"
 				echo "Example comment format:"
-				echo "//stress tests: tests/stress-tests/"$short_test
+				echo "//stress tests: tests/"$short_test
 				fail=1
 			fi
 		fi
