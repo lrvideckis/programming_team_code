@@ -16,5 +16,5 @@ struct custom_hash {
 };
 //usage:
 unordered_map<long long, int, custom_hash> safe_map;
-#include "policy_based_data_structures.h" //not needed when using `unordered_map`
+#include "policy_based_data_structures.h"
 gp_hash_table<long long, int, custom_hash> safe_hash_table;
