@@ -13,8 +13,8 @@ struct lcp_queries {
 			inv_sa[sa[i]] = i;
 	}
 	//length of longest common prefix of suffixes s[idx1 ... n-1], s[idx2 ... n-1], 0-based indexing
-	//You can check if two substrings s[L1..R1], s[L2..R2] are equal in O(1) by:
 	//
+	//You can check if two substrings s[L1..R1], s[L2..R2] are equal in O(1) by:
 	//R2-L2 == R1-L1 && longest_common_prefix(L1, L2) >= R2-L2+1
 	int longest_common_prefix(int idx1, int idx2) const {
 		if (idx1 == idx2) return (int)sa.size() - idx1;
