@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../../template.h"
 
-#include "../../../Library/graphs/lca.h"
-#include "../../../Library/graphs/hld.h"
+#include "../../../library/graphs/LCA.h"
+#include "../../../library/graphs/HLD.h"
 
 int main() {
 	ios::sync_with_stdio(false);

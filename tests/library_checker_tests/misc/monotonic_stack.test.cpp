@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 #include "../../template.h"
 
-#include "../../../Library/misc/monotonic_stack.h"
-#include "../../../Library/range_data_structures/sparseTable.h"
+#include "../../../library/misc/monotonic_stack.h"
+#include "../../../library/range_data_structures/sparse_table.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

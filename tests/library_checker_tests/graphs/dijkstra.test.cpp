@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 #include "../../template.h"
 
-#include "../../../Library/graphs/dijkstra.h"
+#include "../../../library/graphs/dijkstra.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);

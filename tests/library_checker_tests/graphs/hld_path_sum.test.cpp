@@ -2,8 +2,8 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/graphs/hld.h"
-#include "../../../Library/range_data_structures/fenwickTree.h"
+#include "../../../library/graphs/HLD.h"
+#include "../../../library/range_data_structures/BIT.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

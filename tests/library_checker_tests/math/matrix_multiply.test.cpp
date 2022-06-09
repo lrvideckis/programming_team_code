@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
 #include "../../template.h"
 
-#include "../../../Library/math/matrixMultPow.h"
+#include "../../../library/math/matrix_expo.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 #include "../../template.h"
 
-#include "../../../Library/math/row_reduce.h"
+#include "../../../library/math/row_reduce.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

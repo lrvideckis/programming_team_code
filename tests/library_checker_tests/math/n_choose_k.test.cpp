@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient"
 #include "../../template.h"
 
-#include "../../../Library/math/n_choose_k_mod.h"
+#include "../../../library/math/n_choose_k_mod.h"
 
 //source: random AC'd submission https://judge.yosupo.jp/submission/46001
 //for tests with composite mod

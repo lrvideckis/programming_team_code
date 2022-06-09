@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inverse_matrix"
 #include "../../template.h"
 
-#include "../../../Library/math/matrix_inverse.h"
+#include "../../../library/math/matrix_inverse.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

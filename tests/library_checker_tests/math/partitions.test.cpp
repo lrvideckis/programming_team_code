@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/partition_function"
 #include "../../template.h"
 
-#include "../../../Library/math/partitions.h"
+#include "../../../library/math/partitions.h"
 
 int main() {
 

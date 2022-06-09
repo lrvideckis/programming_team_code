@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 #include "../../template.h"
 
-#include "../../../Library/graphs/centroid.h"
+#include "../../../library/graphs/centroid.h"
 
 
 //source https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h
