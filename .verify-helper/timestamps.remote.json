@@ -1,8 +1,18 @@
 {
-"tests/library_checker_tests/misc/longest_increasing_subsequence.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/graphs/biconnected_components.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/dijkstra.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/disjoint_set.test.cpp": "2022-06-09 16:42:10 -0700",
+"tests/library_checker_tests/graphs/hld_path_sum.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/hld_subtree_sum.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/hopcroft_karp.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/lca.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/scc.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/tree_freq_dist_centroid_fft.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/graphs/two_edge_components.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/math/matrix_determinant.test.cpp": "2022-06-09 16:42:10 -0700",
+"tests/library_checker_tests/math/matrix_inverse.test.cpp": "2022-06-09 16:42:10 -0700",
+"tests/library_checker_tests/math/matrix_multiply.test.cpp": "2022-06-09 16:42:10 -0700",
 "tests/library_checker_tests/strings/binary_trie.test.cpp": "2022-06-09 16:31:21 -0700",
 "tests/library_checker_tests/strings/lcp.test.cpp": "2022-06-09 16:31:21 -0700",
-"tests/library_checker_tests/strings/str_q_palindrome.test.cpp": "2022-06-09 16:31:21 -0700",
-"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-06-09 16:31:21 -0700",
-"tests/library_checker_tests/strings/z_func.test.cpp": "2022-06-09 16:31:21 -0700"
+"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-06-09 16:31:21 -0700"
 }
