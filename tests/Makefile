@@ -8,6 +8,7 @@ help:
 	@echo "make verify-library-checker-test-comments  | check library checker test status comments in .h files"
 	@echo "make verify-stress-test-comments           | check stress test status comments in .h files"
 	@echo "make pdf                                   | build PDF from .tex file"
+	@echo "make test-format                           | checks code is formatted with astyle"
 	@echo "make help                                  | to show this information"
 
 test:
@@ -25,3 +26,5 @@ verify-stress-test-comments:
 pdf:
 	./scripts/make_pdf.sh .
 
+test-format:
+	./scripts/test-format.sh .

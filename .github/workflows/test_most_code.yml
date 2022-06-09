@@ -54,7 +54,7 @@ jobs:
     - name: Install astyle
       run: sudo apt-get install astyle
     - name: Check code format
-      run: bash tests/scripts/test-format.sh
+      run: make --directory=tests/ test-format
 
   check_library_checker_test_comments:
     runs-on: ubuntu-latest
