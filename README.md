@@ -33,7 +33,7 @@ see [Library/README.md](https://github.com/lrvideckis/Programming-Team-Code/blob
 
 ## Other CP repos
 
-- https://github.com/kth-competitive-programming/kactl
+- https://github.com/kth-competitive-programming/kactl (one of the best)
 - https://github.com/ShahjalalShohag/code-library
 - https://github.com/ecnerwala/cp-book
 - https://github.com/the-tourist/algo
