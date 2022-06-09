@@ -1,8 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes
 #include "suffix_array.h"
-#include "longest_common_prefix.h"
-#include "../range_data_structures/sparseTable.h"
+#include "LCP.h"
+#include "../range_data_structures/sparse_table.h"
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
 struct lcp_queries {
