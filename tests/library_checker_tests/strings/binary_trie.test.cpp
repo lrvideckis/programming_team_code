@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
 #include "../../template.h"
 
-#include "../../../Library/strings/binaryTrie.h"
+#include "../../../library/strings/binary_trie.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

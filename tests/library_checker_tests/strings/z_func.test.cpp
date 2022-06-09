@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 #include "../../template.h"
 
-#include "../../../Library/strings/prefix_function.h"
-#include "../../../Library/strings/lcp_queries.h"
+#include "../../../library/strings/prefix_function.h"
+#include "../../../library/strings/lcp_queries.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

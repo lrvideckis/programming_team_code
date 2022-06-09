@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 #include "../../template.h"
 
-#include "../../../Library/strings/lcp_queries.h"
+#include "../../../library/strings/lcp_queries.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

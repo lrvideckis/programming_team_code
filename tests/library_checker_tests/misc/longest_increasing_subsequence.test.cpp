@@ -2,7 +2,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/misc/longest_increasing_subsequence.h"
+#include "../../../library/misc/LIS.h"
 
 //source: https://judge.yosupo.jp/submission/70214
 namespace noshi91 {

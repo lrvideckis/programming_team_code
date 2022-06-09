@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "../../template.h"
 
-#include "../../../Library/strings/suffix_array.h"
+#include "../../../library/strings/suffix_array.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

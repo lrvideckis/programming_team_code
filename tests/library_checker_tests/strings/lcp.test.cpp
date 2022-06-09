@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 #include "../../template.h"
 
-#include "../../../Library/strings/suffix_array.h"
-#include "../../../Library/strings/longest_common_prefix.h"
+#include "../../../library/strings/suffix_array.h"
+#include "../../../library/strings/LCP.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
