@@ -5,7 +5,7 @@
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix
 //such that all cells in the rectangle are true
 //Note cnt[0][j] and cnt[i][0] will contain garbage values
-//O(R*C)
+//O(n*m)
 vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 	const int n = grid.size(), m = grid[0].size();
 	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0));
