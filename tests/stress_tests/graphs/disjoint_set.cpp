@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/misc/disjointSet.h"
+#include "../../../library/misc/disjoint_set.h"
 
 int cnt = 0;
 void dfs(int node, const vector<vector<int>>& adj, vector<bool>& vis) {

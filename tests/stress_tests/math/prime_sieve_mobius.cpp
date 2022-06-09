@@ -1,6 +1,6 @@
 #include "../../template.h"
 
-#include "../../../Library/math/primeSieveMobius.h"
+#include "../../../library/math/prime_sieve_mobius.h"
 
 //kactl isPrime
 typedef long long ll;

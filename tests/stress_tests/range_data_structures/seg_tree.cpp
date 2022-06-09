@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/range_data_structures/segTree.h"
+#include "../../../library/range_data_structures/seg_tree.h"
 
 const int mx_val = 1e9;
 

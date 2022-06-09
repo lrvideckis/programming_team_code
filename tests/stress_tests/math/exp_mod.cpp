@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/math/exp_mod.h"
+#include "../../../library/math/exp_mod.h"
 
 void doTest(int base, int power, int mod) {
 

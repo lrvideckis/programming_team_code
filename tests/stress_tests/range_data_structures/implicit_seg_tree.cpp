@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/range_data_structures/implicitSegTree.h"
+#include "../../../library/range_data_structures/implicit_seg_tree.h"
 
 
 

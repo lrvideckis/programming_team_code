@@ -1,8 +1,8 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/math/matrixMultPow.h"
-#include "../../../Library/math/fib.h"
+#include "../../../library/math/matrix_mult_pow.h"
+#include "../../../library/math/fib.h"
 
 void check(long long n) {
 	const int mod = 1e9 + 7;

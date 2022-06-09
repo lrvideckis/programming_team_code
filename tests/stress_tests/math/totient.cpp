@@ -1,6 +1,6 @@
 #include "../../template.h"
 
-#include "../../../Library/math/totient.h"
+#include "../../../library/math/totient.h"
 
 int main() {
 
