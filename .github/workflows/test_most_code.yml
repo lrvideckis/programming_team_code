@@ -56,6 +56,13 @@ jobs:
     - name: Check code format
       run: make --directory=tests/ test-format
 
+  check_snake_case:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check snake case
+      run: make --directory=tests/ check-snake-case
+
   check_library_checker_test_comments:
     runs-on: ubuntu-latest
     steps:

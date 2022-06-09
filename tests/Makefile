@@ -9,6 +9,7 @@ help:
 	@echo "make verify-stress-test-comments           | check stress test status comments in .h files"
 	@echo "make pdf                                   | build PDF from .tex file"
 	@echo "make test-format                           | checks code is formatted with astyle"
+	@echo "make check-snake-case                      | verify all code+file names are snake case"
 	@echo "make help                                  | to show this information"
 
 test:
@@ -28,3 +29,6 @@ pdf:
 
 test-format:
 	./scripts/test-format.sh .
+
+check-snake-case:
+	./scripts/check_snake_case.sh .
