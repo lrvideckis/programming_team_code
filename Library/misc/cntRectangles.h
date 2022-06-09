@@ -22,7 +22,7 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 		vector<int> right = monotonic_stack(arrRev);
 		for (int j = 0; j < m; j++) {
 			int L = j - left[j] - 1, R = rv(right[rv(j)]) - j - 1;
-			cnt[arr[j]][R + L + 1]++;
+			cnt[arr[j]][L + R + 1]++;
 			cnt[arr[j]][L]--;
 			cnt[arr[j]][R]--;
 		}
