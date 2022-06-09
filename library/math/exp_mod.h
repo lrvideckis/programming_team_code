@@ -1,6 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations, https://judge.yosupo.jp/problem/binomial_coefficient, https://judge.yosupo.jp/problem/matrix_det, https://judge.yosupo.jp/problem/inverse_matrix
-//stress tests: tests/stress-tests/math/exp_mod.cpp
+//stress tests: tests/stress_tests/math/exp_mod.cpp
 //returns (base^pw)%mod in O(log(pw)), but returns 1 for 0^0
 //
 //What if base doesn't fit in long long?

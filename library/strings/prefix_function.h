@@ -1,6 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/zalgorithm
-//stress tests: tests/stress-tests/strings/kmp.cpp
+//stress tests: tests/stress_tests/strings/kmp.cpp
 //source: https://cp-algorithms.com/string/prefix-function.html#implementation
 template <class T>
 vector<int> prefix_function(const T& s) {

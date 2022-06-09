@@ -1,5 +1,5 @@
 #pragma once
-//stress tests: tests/stress-tests/math/fib_matrix_expo.cpp
+//stress tests: tests/stress_tests/math/fib_matrix_expo.cpp
 //https://codeforces.com/blog/entry/14516
 unordered_map<long long, int> table;
 int fib(long long n, int mod) { //**O(log(n))**

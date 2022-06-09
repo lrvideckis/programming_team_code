@@ -1,6 +1,6 @@
 #pragma once
 #include "monotonic_stack.h"
-//stress tests: tests/stress-tests/misc/cntRectangles.cpp
+//stress tests: tests/stress-tests/misc/count_rectangles.cpp
 //given a 2D boolean matrix, calculate cnt[i][j]
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix such that all i*j cells in the rectangle are true
 //Note cnt[0][j] and cnt[i][0] will contain garbage values

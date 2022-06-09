@@ -1,5 +1,5 @@
 #pragma once
-//stress tests: tests/stress-tests/strings/kmp.cpp
+//stress tests: tests/stress_tests/strings/kmp.cpp
 #include "prefix_function.h"
 //usage:
 //	string needle;

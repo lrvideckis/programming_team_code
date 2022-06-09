@@ -1,5 +1,5 @@
 #pragma once
-//stress tests: tests/stress-tests/range_data_structures/implicitSegTree.cpp
+//stress tests: tests/stress_tests/range_data_structures/implicit_seg_tree.cpp
 //see TODO for lines of code which usually need to change (not a complete list)
 const int N = 1.5e7; //TODO
 struct Node {

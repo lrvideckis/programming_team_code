@@ -1,5 +1,5 @@
 #pragma once
-//stress tests: tests/stress-tests/range_data_structures/buckets.cpp
+//stress tests: tests/stress_tests/range_data_structures/buckets.cpp
 //this code isn't the best. It's meant as a rough start for sqrt-decomposition, and to be modified
 //doesn't handle overflow
 struct buckets {

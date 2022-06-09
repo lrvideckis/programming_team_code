@@ -1,6 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/unionfind
-//stress tests: tests/stress-tests/graphs/disjointSet.cpp
+//stress tests: tests/stress_tests/graphs/disjoint_set.cpp
 struct disjointSet {
 	int numSets;
 	vector<int> par;

@@ -1,5 +1,5 @@
 #pragma once
-//stress tests: tests/stress-tests/range_data_structures/segTree.cpp
+//stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 const long long inf = 1e18;
 struct segTree {
 	struct Node {
