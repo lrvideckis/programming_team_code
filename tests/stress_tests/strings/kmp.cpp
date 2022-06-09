@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../Library/strings/kmp.h"
+#include "../../../library/strings/KMP.h"
 
 int main() {
 	for(int tests = 20; tests--;) {

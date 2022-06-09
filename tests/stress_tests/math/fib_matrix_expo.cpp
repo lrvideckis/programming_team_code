@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../library/math/matrix_mult_pow.h"
+#include "../../../library/math/matrix_expo.h"
 #include "../../../library/math/fib.h"
 
 void check(long long n) {
