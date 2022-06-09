@@ -2,7 +2,7 @@
 
 DIR=${1:-.}
 
-tests="$(find $DIR/../Library -name "*.h")"
+tests="$(find $DIR/../library -name "*.h")"
 
 for test in $tests; do
 	hash=$(cat $test | ./$DIR/scripts/hash.sh)

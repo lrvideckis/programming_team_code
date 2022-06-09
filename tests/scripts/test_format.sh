@@ -8,7 +8,7 @@ then
 	exit 1
 fi
 
-cd ../Library
+cd ../library
 
 declare -i pass=0
 declare -i fail=0

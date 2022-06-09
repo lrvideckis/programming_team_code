@@ -7,9 +7,9 @@ g++ $(cat $(dirname "$0")/compile_flags.txt) $DIR/template.h
 echo "done compiling header"
 trap "rm -f $DIR/template.h.gch" EXIT
 if [[ $# -eq 1 ]] ; then
-    tests="$(find $DIR/stress-tests/ -name '*.cpp')"
+    tests="$(find $DIR/stress_tests/ -name '*.cpp')"
 else
-    tests="$(find $DIR/stress-tests/ -name "*$2*")"
+    tests="$(find $DIR/stress_tests/ -name "*$2*")"
 fi
 echo "testing the following:" $tests
 declare -i pass=0

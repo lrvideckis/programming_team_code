@@ -9,11 +9,11 @@ trap "rm -f $DIR/../template.cpp.gch" EXIT
 echo "done with compiling header"
 
 if [[ $# -eq 1 ]] ; then
-    tests="$(find $DIR/../Library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
+    tests="$(find $DIR/../library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
     echo "skipped: "
-    find $DIR/../../Library -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers.txt
+    find $DIR/../../library -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers.txt
 else
-    tests="$(find $DIR/../Library -name "*$2*")"
+    tests="$(find $DIR/../library -name "*$2*")"
 fi
 
 echo "now compiling header(s)"
@@ -23,7 +23,7 @@ declare -i fail=0
 failHeaders=""
 for test in $tests; do
     echo "$test: "
-    $SCRIPT_DIR/test-compiles.sh $test
+    $SCRIPT_DIR/test_compiles.sh $test
     retCode=$?
     if (($retCode != 0)); then
         echo $retCode
