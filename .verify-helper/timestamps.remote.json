@@ -1,1 +1,8 @@
-{}
+{
+"tests/library_checker_tests/misc/longest_increasing_subsequence.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/strings/binary_trie.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/strings/lcp.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/strings/str_q_palindrome.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/strings/z_func.test.cpp": "2022-06-09 16:31:21 -0700"
+}
