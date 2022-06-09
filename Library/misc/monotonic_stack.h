@@ -7,7 +7,8 @@
 //arr[left[i]] <= arr[i] if left[i] != -1
 //
 //O(n)
-vector<int> monotonic_stack(const vector<int>& arr) {
+template<class T>
+vector<int> monotonic_stack(const vector<T>& arr) {
 	int n = arr.size();
 	vector<int> left(n);
 	for (int i = 0; i < n; i++) {
