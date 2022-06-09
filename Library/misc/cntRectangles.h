@@ -19,10 +19,10 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 			arrRev[m - 1 - j] = {arr[j], j};
 		vector<int> right = monotonic_stack(arrRev);
 		for (int j = 0; j < m; j++) {
-			int rig = (m - 1 - right[m - 1 - j]) - j, lef = j - left[j] - 1;
-			cnt[arr[j]][rig + lef]++;
+			int rig = (m - 1 - right[m - 1 - j]) - j - 1, lef = j - left[j] - 1;
+			cnt[arr[j]][rig + lef + 1]++;
 			cnt[arr[j]][lef]--;
-			cnt[arr[j]][rig - 1]--;
+			cnt[arr[j]][rig]--;
 		}
 	}
 	for (int i = 1; i <= n; i++)
