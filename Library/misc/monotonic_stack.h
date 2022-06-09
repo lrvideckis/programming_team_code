@@ -6,6 +6,8 @@
 //and
 //arr[left[i]] <= arr[i] if left[i] != -1
 //
+//trick: pass in vector<pair<T/*value*/, int/*index*/>> with arr[i].second = i (0<=i<n) to simulate arr[j] >= arr[i]
+//
 //O(n)
 template<class T>
 vector<int> monotonic_stack(const vector<T>& arr) {
