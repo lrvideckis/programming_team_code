@@ -6,3 +6,4 @@
 *.out
 *.tmp
 *.orig
+tmp.*

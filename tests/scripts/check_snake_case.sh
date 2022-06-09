@@ -5,7 +5,7 @@ cd ../
 files_snake_case="find . -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
 	grep --invert-match '\.verify-helper' | \
-	grep --invert-match -E '(LICENSE|Makefile|README|KMP|LCP|HLD|SCC|LCA|BIT)' "
+	grep --invert-match --extended-regexp '(LICENSE|Makefile|README|KMP|LCP|HLD|SCC|LCA|BIT)' "
 
 if eval $files_snake_case --quiet
 then
@@ -14,7 +14,7 @@ then
 	exit 1
 fi
 
-cd Library
+cd library
 
 declare -i pass=0
 declare -i fail=0
