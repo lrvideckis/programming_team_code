@@ -7,7 +7,7 @@
 // Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
 // Applications
 template<class T>
-vector<int> LCP(const T& s, const vector<int>& sa) {
+vector<int> LCP(const T& s, const vector<int>& sa) { //NOLINT(readability-identifier-naming)
 	int n = s.size(), k = 0;
 	vector<int> lcp(n, 0);
 	vector<int> rank(n, 0);

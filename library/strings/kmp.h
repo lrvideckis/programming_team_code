@@ -13,7 +13,7 @@
 //with one array as the needle and the other array doubled as the haystack
 //or just use kactl's min rotation code
 template <class T>
-struct KMP {
+struct KMP { //NOLINT(readability-identifier-naming)
 	KMP(const T& a_needle) : pi(prefix_function(a_needle)), needle(a_needle) {}
 	// if haystack = "bananas"
 	// needle = "ana"

@@ -7,7 +7,7 @@ struct scc_info {
 	//for each edge i -> j: scc_id[i] >= scc_id[j]
 	vector<int> scc_id;
 };
-scc_info SCC(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
+scc_info SCC(const vector<vector<int>>& adj /*directed, unweighted graph*/) { //NOLINT(readability-identifier-naming)
 	int n = adj.size(), timer = 1, num_sccs = 0;
 	vector<int> tin(n, 0), scc_id(n, -1), node_stack;
 	auto dfs = [&](auto self, int v) -> int {

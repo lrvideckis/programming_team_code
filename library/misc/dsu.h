@@ -1,7 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/unionfind
 //stress tests: tests/stress_tests/graphs/disjoint_set.cpp
-struct DSU {
+struct DSU { //NOLINT(readability-identifier-naming)
 	int num_sets;
 	vector<int> par;
 	DSU(int n) : num_sets(n), par(n, -1) {}
