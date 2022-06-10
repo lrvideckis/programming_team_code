@@ -1,4 +1,4 @@
-name: test-all-code
+name: test_all_code
 
 on: push
 
@@ -45,7 +45,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run compiles
-      run: make --directory=tests/ test-compiles
+      run: make --directory=tests/ test_compiles
 
   check_code_format:
     runs-on: ubuntu-latest
@@ -54,18 +54,25 @@ jobs:
     - name: Install astyle
       run: sudo apt-get install astyle
     - name: Check code format
-      run: make --directory=tests/ test-format
+      run: make --directory=tests/ test_format
+
+  check_snake_case:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check snake case
+      run: make --directory=tests/ check_snake_case
 
   check_library_checker_test_comments:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Check library test comments
-      run: make --directory=tests/ verify-library-checker-test-comments
+      run: make --directory=tests/ verify_library_checker_test_comments
 
   check-stress-test-comments:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Check stress test comments
-      run: make --directory=tests/ verify-stress-test-comments
+      run: make --directory=tests/ verify_stress_test_comments

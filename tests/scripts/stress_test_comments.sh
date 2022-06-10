@@ -2,7 +2,7 @@
 DIR=${1:-.}
 echo $DIR
 
-tests=$(find $DIR/stress-tests/ -name '*.cpp')
+tests=$(find $DIR/stress_tests/ -name '*.cpp')
 
 declare -i fail=0
 for test in $tests
@@ -13,7 +13,7 @@ do
 	dependencies=$(basename $test | sed s/\.cpp/\.d/)
 	for dep in $(cat $dependencies | tr '\\' '\n')
 	do
-		if $(echo $dep | grep --quiet --extended-regexp "*\/Library\/*")
+		if $(echo $dep | grep --quiet --extended-regexp "*\/library\/*")
 		then
 			short_test=$(echo $test | cut --characters 3-)
 			if ! grep --quiet --extended-regexp "//stress tests:.*tests/$short_test.*" $dep

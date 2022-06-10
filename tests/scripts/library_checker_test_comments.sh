@@ -2,7 +2,7 @@
 DIR=${1:-.}
 echo $DIR
 
-tests=$(find $DIR/library-checker-tests -name '*.test.cpp')
+tests=$(find $DIR/library_checker_tests -name '*.test.cpp')
 
 declare -i fail=0
 for test in $tests
