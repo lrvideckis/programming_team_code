@@ -2,7 +2,7 @@
 #include "../../template.h"
 
 #include "../../../library/strings/suffix_array.h"
-#include "../../../library/strings/LCP.h"
+#include "../../../library/strings/lcp.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -12,7 +12,7 @@ int main() {
 
 	vector<int> sa = sa_is(s, 255);
 
-	vector<int> lcp = lcp_array(s, sa);
+	vector<int> lcp = LCP(s, sa);
 
 	int n = s.size();
 	long long res = 1LL * n * (n+1) / 2;

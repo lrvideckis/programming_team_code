@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 #include "../../template.h"
 
-#include "../../../library/range_data_structures/BIT.h"
+#include "../../../library/range_data_structures/bit.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

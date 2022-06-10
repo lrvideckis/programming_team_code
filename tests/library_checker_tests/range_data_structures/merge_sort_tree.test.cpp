@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_frequency"
 #include "../../template.h"
 
-#include "../../../Library/range_data_structures/seldom_used/mergeSortTree.h"
+#include "../../../library/range_data_structures/uncommon/merge_sort_tree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -19,7 +19,7 @@ int main() {
 		cin >> arr[i];
 	}
 
-	MergeSortTree mst(arr);
+	merge_sort_tree mst(arr);
 
 	while(q--) {
 		int l, r, x;
