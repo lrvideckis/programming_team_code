@@ -2,7 +2,7 @@
 #include "../../template.h"
 
 #include "../../../library/misc/monotonic_stack.h"
-#include "../../../library/range_data_structures/RMQ.h"
+#include "../../../library/range_data_structures/rmq.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

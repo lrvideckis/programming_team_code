@@ -2,8 +2,8 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../library/graphs/HLD.h"
-#include "../../../library/range_data_structures/BIT.h"
+#include "../../../library/graphs/hld.h"
+#include "../../../library/range_data_structures/bit.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -20,19 +20,19 @@ int main() {
 		adj[u].push_back(v);
 		adj[v].push_back(u);
 	}
-	hld h(adj, getRand<int>(0, n-1)/*random root*/);
+	HLD h(adj, getRand<int>(0, n-1)/*random root*/);
 	vector<long long> init(n);
 	for(int i = 0; i < n; i++) {
-		init[h.timeIn[i]] = values[i];
+		init[h.time_in[i]] = values[i];
 	}
-	fenwickTree<long long> ft(init);
+	BIT<long long> ft(init);
 	while(q--) {
 		int type;
 		cin >> type;
 		if(type == 0) {
 			int idx, add;
 			cin >> idx >> add;
-			ft.update(h.timeIn[idx], add);
+			ft.update(h.time_in[idx], add);
 		} else {
 			int u, v;
 			cin >> u >> v;

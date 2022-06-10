@@ -19,25 +19,25 @@ int main() {
 		adj[i].push_back(par[i]);
 		adj[par[i]].push_back(i);
 	}
-	hld h(adj, 0);
+	HLD h(adj, 0);
 	vector<long long> ftInvInit(n);
-	for(int i = 0; i < n; i++) ftInvInit[h.timeIn[i]] = values[i];
+	for(int i = 0; i < n; i++) ftInvInit[h.time_in[i]] = values[i];
 	for(int i = n-1; i > 0; i--) {
-		ftInvInit[h.timeIn[par[i]]] += ftInvInit[h.timeIn[i]];
+		ftInvInit[h.time_in[par[i]]] += ftInvInit[h.time_in[i]];
 	}
 	vector<long long> init(n);
 	for(int i = 0; i < n; i++) {
-		init[h.timeIn[i]] = values[i];
+		init[h.time_in[i]] = values[i];
 	}
-	fenwickTree<long long> ft(init);
-	fenwickInv<long long> ftInv(ftInvInit);
+	BIT<long long> ft(init);
+	fenwick_inv<long long> ftInv(ftInvInit);
 	while(q--) {
 		int type;
 		cin >> type;
 		if(type == 0) {
 			int idx, add;
 			cin >> idx >> add;
-			ft.update(h.timeIn[idx], add);
+			ft.update(h.time_in[idx], add);
 			for(auto [l,r] : h.path(0, idx)) {
 				ftInv.update(l, r, add);
 			}
@@ -46,7 +46,7 @@ int main() {
 			cin >> u;
 			auto [l,r] = h.subtree(u);
 			long long res = ft.sum(l, r);
-			assert(res == ftInv.query(h.timeIn[u]));
+			assert(res == ftInv.query(h.time_in[u]));
 			cout << res << endl;
 		}
 	}

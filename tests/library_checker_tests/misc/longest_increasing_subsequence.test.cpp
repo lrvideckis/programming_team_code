@@ -2,7 +2,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../library/misc/LIS.h"
+#include "../../../library/misc/lis.h"
 
 //source: https://judge.yosupo.jp/submission/70214
 namespace noshi91 {
