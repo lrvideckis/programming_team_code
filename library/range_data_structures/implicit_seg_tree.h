@@ -51,8 +51,6 @@ struct implicit_seg_tree {
 		tree[v].val = combine(tree[tree[v].lch].val, tree[tree[v].rch].val);
 	}
 	//query range [l,r]
-	//for more complicated query which doesn't allocate new nodes, see:
-	//https://github.com/lrvideckis/Programming-Team-Code/blob/dc659297850440b65af2550a834cc42af84b37f6/Library/range_data_structures/implicitLazySegTree.h
 	long long query(int l, int r) {
 		return query(0, root_l, root_r, l, r);
 	}
