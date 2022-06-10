@@ -17,5 +17,5 @@ mv 25_pg_reference.pdf ../
 tests="$(find ../library -name "*.h")"
 
 for test in $tests; do
-	sed --in-place '1,3d' $test
+	sed --in-place '1,2d' $test
 done
