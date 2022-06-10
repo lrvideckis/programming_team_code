@@ -60,7 +60,7 @@ int main() {
 		adj[u].push_back(v);
 		adj[v].push_back(u);
 	}
-	vector<int> parent = getCentroidTree(adj);
+	vector<int> parent = get_centroid_tree(adj);
 	vector<vector<int>> childs(n);
 	int root;
 	for (int i = 0; i < n; i++) {

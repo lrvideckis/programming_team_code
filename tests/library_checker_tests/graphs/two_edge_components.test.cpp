@@ -22,14 +22,14 @@ int main() {
 	for(int i = 0; i < m; i++) {
 		auto [u, v] = edges[i];
 		//bridge if nodes are from different 2-edge CCs
-		assert(res.isBridge[i] == (res.TwoEdgeCCID[u] != res.TwoEdgeCCID[v]));
+		assert(res.is_bridge[i] == (res.two_edge_ccid[u] != res.two_edge_ccid[v]));
 	}
 
-	vector<vector<int>> ccs(res.num2EdgeCCs);
+	vector<vector<int>> ccs(res.num_2_edge_ccs);
 	for(int i = 0; i < n; i++) {
-		ccs[res.TwoEdgeCCID[i]].push_back(i);
+		ccs[res.two_edge_ccid[i]].push_back(i);
 	}
-	cout << res.num2EdgeCCs << endl;
+	cout << res.num_2_edge_ccs << endl;
 	for(auto& cc : ccs) {
 		cout << cc.size() << " ";
 		for(int node : cc) cout << node << " ";

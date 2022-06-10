@@ -241,7 +241,7 @@ int main() {
 	}
 
 	if(mod_is_prime) {
-		NchooseK nk(mod, mod);
+		n_choose_k nk(mod, mod);
 		vector<int> inv(mod);
 		inv[1] = 1;
 		for (int i = 2; i < mod; i++) inv[i] = 1LL * (mod - mod / i) * inv[mod % i] % mod;
@@ -249,7 +249,7 @@ int main() {
 		while(t--) {
 			long long n, k;
 			cin >> n >> k;
-			cout << nk.chooseWithLucasTheorem(n, k) << endl;
+			cout << nk.choose_with_lucas_theorem(n, k) << endl;
 		}
 	} else {
 		arbitrary_mod_binomial C(mod);
