@@ -16,8 +16,8 @@ struct seg_tree {
 		}
 	};
 	vector<node> tree;
-	//There's no constructor `segTree(int size)` because how to initialize l,r in nodes without calling build?
-	//the whole point of `segTree(int size)` was to be simpler by not calling build
+	//There's no constructor `seg_tree(int size)` because how to initialize l,r in nodes without calling build?
+	//the whole point of `seg_tree(int size)` was to be simpler by not calling build
 	seg_tree(const vector<long long>& arr) : tree(2 * (int)arr.size() - 1) {
 		build(arr, 0, 0, (int)arr.size() - 1);
 	}
