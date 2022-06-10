@@ -6,7 +6,7 @@
 //0-based nodes
 //O(n log n)
 //example usage:
-//	vector<int> parent = getCentroidTree(adj);
+//	vector<int> parent = get_centroid_tree(adj);
 //	vector<vector<int>> childs(n);
 //	int root;
 //	for (int i = 0; i < n; i++) {
@@ -15,11 +15,11 @@
 //		else
 //			childs[parent[i]].push_back(i);
 //	}
-vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
+vector<int> get_centroid_tree(const vector<vector<int>>& adj/*unrooted tree*/) {
 	int n = adj.size();
 	vector<int> sizes(n);
 	vector<bool> vis(n, false);
-	auto dfsSz = [&](auto self, int node, int par) -> void {
+	auto dfs_sz = [&](auto self, int node, int par) -> void {
 		sizes[node] = 1;
 		for (int to : adj[node]) {
 			if (to != par && !vis[to]) {
@@ -28,13 +28,13 @@ vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
 			}
 		}
 	};
-	auto findCentroid = [&](int node) -> int {
-		dfsSz(dfsSz, node, node);
-		int sizeCap = sizes[node] / 2, par = -1;
+	auto find_centroid = [&](int node) -> int {
+		dfs_sz(dfs_sz, node, node);
+		int size_cap = sizes[node] / 2, par = -1;
 		while (true) {
 			bool found = false;
 			for (int to : adj[node]) {
-				if (to != par && !vis[to] && sizes[to] > sizeCap) {
+				if (to != par && !vis[to] && sizes[to] > size_cap) {
 					found = true;
 					par = node;
 					node = to;
@@ -46,7 +46,7 @@ vector<int> getCentroidTree(const vector<vector<int>>& adj/*unrooted tree*/) {
 	};
 	vector<int> parent(n);
 	auto dfs = [&](auto self, int node, int par) -> void {
-		node = findCentroid(node);
+		node = find_centroid(node);
 		parent[node] = par;
 		vis[node] = true;
 		for (int to : adj[node]) {

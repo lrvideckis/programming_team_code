@@ -1,6 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/biconnected_components, https://judge.yosupo.jp/problem/two_edge_connected_components
-//with asserts checking correctness of isBridge and isCut
+//with asserts checking correctness of is_bridge and is_cut
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 //handles multiple edges
@@ -14,62 +14,62 @@
 //}
 struct info {
 	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
-	int num2EdgeCCs;
-	vector<bool> isBridge;//edge id -> true iff bridge edge
-	vector<int> TwoEdgeCCID;//node -> ID of 2-edge component (which are labeled 0, 1, ..., `num2EdgeCCs`-1)
+	int num_2_edge_ccs;
+	vector<bool> is_bridge;//edge id -> true iff bridge edge
+	vector<int> two_edge_ccid;//node -> ID of 2-edge component (which are labeled 0, 1, ..., `num_2_edge_ccs`-1)
 	//bi-connected component stuff (e.g. components split by cut/articulation nodes) https://cp-algorithms.com/graph/cutpoints.html
-	int numBCCs;
-	vector<bool> isCut;//node -> true iff cut node
-	vector<int> bccID;//edge id -> ID of BCC (which are labeled 0, 1, ..., `numBCCs`-1)
+	int num_bccs;
+	vector<bool> is_cut;//node -> true iff cut node
+	vector<int> bcc_id;//edge id -> ID of BCC (which are labeled 0, 1, ..., `num_bccs`-1)
 };
 info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
 	//stuff for both (always keep)
 	int n = adj.size(), timer = 1;
 	vector<int> tin(n, 0);
 	//2 edge CC stuff (delete if not needed)
-	int num2EdgeCCs = 0;
-	vector<bool> isBridge(m, false);
-	vector<int> TwoEdgeCCID(n), nodeStack;
+	int num_2_edge_ccs = 0;
+	vector<bool> is_bridge(m, false);
+	vector<int> two_edge_ccid(n), node_stack;
 	//BCC stuff (delete if not needed)
-	int numBCCs = 0;
-	vector<bool> isCut(n, false);
-	vector<int> bccID(m), edgeStack;
-	auto dfs = [&](auto self, int v, int pId) -> int {
+	int num_bccs = 0;
+	vector<bool> is_cut(n, false);
+	vector<int> bcc_id(m), edge_stack;
+	auto dfs = [&](auto self, int v, int p_id) -> int {
 		int low = tin[v] = timer++;
 		int deg = 0;
-		nodeStack.push_back(v);
-		for (auto [to, eId] : adj[v]) {
-			if (eId == pId) continue;
+		node_stack.push_back(v);
+		for (auto [to, e_id] : adj[v]) {
+			if (e_id == p_id) continue;
 			if (!tin[to]) {
-				edgeStack.push_back(eId);
-				int lowCh = self(self, to, eId);
-				if (lowCh >= tin[v]) {
-					isCut[v] = true;
+				edge_stack.push_back(e_id);
+				int low_ch = self(self, to, e_id);
+				if (low_ch >= tin[v]) {
+					is_cut[v] = true;
 					while (true) {
-						int edge = edgeStack.back();
-						edgeStack.pop_back();
-						bccID[edge] = numBCCs;
-						if (edge == eId) break;
+						int edge = edge_stack.back();
+						edge_stack.pop_back();
+						bcc_id[edge] = num_bccs;
+						if (edge == e_id) break;
 					}
-					numBCCs++;
+					num_bccs++;
 				}
-				low = min(low, lowCh);
+				low = min(low, low_ch);
 				deg++;
 			} else if (tin[to] < tin[v]) {
-				edgeStack.push_back(eId);
+				edge_stack.push_back(e_id);
 				low = min(low, tin[to]);
 			}
 		}
-		if (pId == -1) isCut[v] = (deg > 1);
+		if (p_id == -1) is_cut[v] = (deg > 1);
 		if (tin[v] == low) {
-			if (pId != -1) isBridge[pId] = true;
+			if (p_id != -1) is_bridge[p_id] = true;
 			while (true) {
-				int node = nodeStack.back();
-				nodeStack.pop_back();
-				TwoEdgeCCID[node] = num2EdgeCCs;
+				int node = node_stack.back();
+				node_stack.pop_back();
+				two_edge_ccid[node] = num_2_edge_ccs;
 				if (node == v) break;
 			}
-			num2EdgeCCs++;
+			num_2_edge_ccs++;
 		}
 		return low;
 	};
@@ -77,5 +77,5 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 		if (!tin[i])
 			dfs(dfs, i, -1);
 	}
-	return {num2EdgeCCs, isBridge, TwoEdgeCCID, numBCCs, isCut, bccID};
+	return {num_2_edge_ccs, is_bridge, two_edge_ccid, num_bccs, is_cut, bcc_id};
 }

@@ -5,45 +5,45 @@
 //Worst case O(E*sqrt(V)) but faster in practice
 struct match {
 	//# of edges in matching (which = size of min vertex cover by König's theorem)
-	int sizeOfMatching;
+	int size_of_matching;
 	//an arbitrary max matching is found. For this matching:
-	//if ml[nodeLeft] == -1:
+	//if match_l[nodeLeft] == -1:
 	//    `nodeLeft` is not in matching
 	//else:
-	//    the edge `nodeLeft` <=> ml[nodeLeft] is in the matching
+	//    the edge `nodeLeft` <=> match_l[nodeLeft] is in the matching
 	//
-	//similarly for mr with edge mr[nodeRight] <=> nodeRight in matching if mr[nodeRight] != -1
-	//matchings stored in ml and mr are the same matching
+	//similarly for match_r with edge match_r[nodeRight] <=> nodeRight in matching if match_r[nodeRight] != -1
+	//matchings stored in match_l and match_r are the same matching
 	//provides way to check if any node is in matching
-	vector<int> ml, mr;
-	//an arbitrary min vertex cover is found. For this MVC: leftMVC[`left node`] is true iff `left node` is in the min vertex cover (same for rightMVC)
-	//if leftMVC[`left node`] is false, then `left node` is in the corresponding maximal independent set
-	vector<bool> leftMVC, rightMVC;
+	vector<int> match_l, match_r;
+	//an arbitrary min vertex cover is found. For this MVC: mvc_l[`left node`] is true iff `left node` is in the min vertex cover (same for mvc_r)
+	//if mvc_l[`left node`] is false, then `left node` is in the corresponding maximal independent set
+	vector<bool> mvc_l, mvc_r;
 };
-//Think of the bipartite graph as having a left side (with size lSz) and a right side (with size rSz).
-//Nodes on left side are indexed 0,1,...,lSz-1
-//Nodes on right side are indexed 0,1,...,rSz-1
+//Think of the bipartite graph as having a left side (with size l_sz) and a right side (with size r_sz).
+//Nodes on left side are indexed 0,1,...,l_sz-1
+//Nodes on right side are indexed 0,1,...,r_sz-1
 //
 //`adj` is like a directed adjacency list containing edges from left side -> right side:
 //To initialize `adj`: For every edge nodeLeft <=> nodeRight, do: adj[nodeLeft].push_back(nodeRight)
-match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*number of nodes on right side*/) {
-	int sizeOfMatching = 0, lSz = adj.size();
-	vector<int> ml(lSz, -1), mr(rSz, -1);
+match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int r_sz/*number of nodes on right side*/) {
+	int size_of_matching = 0, l_sz = adj.size();
+	vector<int> match_l(l_sz, -1), match_r(r_sz, -1);
 	while (true) {
 		queue<int> q;
-		vector<int> level(lSz, -1);
-		for (int i = 0; i < lSz; i++) {
-			if (ml[i] == -1) level[i] = 0, q.push(i);
+		vector<int> level(l_sz, -1);
+		for (int i = 0; i < l_sz; i++) {
+			if (match_l[i] == -1) level[i] = 0, q.push(i);
 		}
 		bool found = false;
-		vector<bool> leftMVC(lSz, true), rightMVC(rSz, false);
+		vector<bool> mvc_l(l_sz, true), mvc_r(r_sz, false);
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
-			leftMVC[u] = false;
+			mvc_l[u] = false;
 			for (int x : adj[u]) {
-				rightMVC[x] = true;
-				int v = mr[x];
+				mvc_r[x] = true;
+				int v = match_r[x];
 				found |= v == -1;
 				if (v != -1 && level[v] < 0) {
 					level[v] = level[u] + 1;
@@ -51,20 +51,20 @@ match hopcroftKarp(const vector<vector<int>>& adj/*bipartite graph*/, int rSz/*n
 				}
 			}
 		}
-		if (!found) return {sizeOfMatching, ml, mr, leftMVC, rightMVC};
+		if (!found) return {size_of_matching, match_l, match_r, mvc_l, mvc_r};
 		auto dfs = [&](auto self, int u) -> bool {
 			for (int x : adj[u]) {
-				int v = mr[x];
+				int v = match_r[x];
 				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {
-					ml[u] = x;
-					mr[x] = u;
+					match_l[u] = x;
+					match_r[x] = u;
 					return true;
 				}
 			}
 			level[u] = 1e9; //acts as visited array
 			return false;
 		};
-		for (int i = 0; i < lSz; i++)
-			sizeOfMatching += (ml[i] == -1 && dfs(dfs, i));
+		for (int i = 0; i < l_sz; i++)
+			size_of_matching += (match_l[i] == -1 && dfs(dfs, i));
 	}
 }
