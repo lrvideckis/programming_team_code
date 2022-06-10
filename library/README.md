@@ -2,7 +2,7 @@
 
 - [Geometry](https://github.com/kth-competitive-programming/kactl/tree/main/content/geometry)
 
-[![](https://github.com/lrvideckis/Programming-Team-Code/blob/master/tests/scripts/geometry_bad.png)](https://codeforces.com/blog/entry/52341?#comment-364050)
+[![](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/geometry_bad.png)](https://codeforces.com/blog/entry/52341?#comment-364050)
 - [Fast Fourier transform](https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h)
 - [2-sat](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/2sat.h)
 - [Chinese Remainder Theorem](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/CRT.h)
