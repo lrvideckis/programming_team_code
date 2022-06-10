@@ -4,14 +4,14 @@
 //usage:
 //	string needle;
 //	...
-//	KMP_Match kmp(needle);
+//	KMP kmp(needle);
 //or
 //	vector<int> needle;
 //	...
-//	KMP_Match kmp(needle);
-//kmp-doubling-trick: to check if 2 arrays are rotationally equivalent: run kmp
-//with one array as the needle and the other array doubled as the haystack
-//or just use kactl's min rotation code
+//	KMP kmp(needle);
+//kmp doubling trick: to check if 2 arrays are rotationally equivalent: run kmp
+//with one array as the needle and the other array doubled (excluding the first
+//& last characters) as the haystack or just use kactl's min rotation code
 template <class T>
 struct KMP { //NOLINT(readability-identifier-naming)
 	KMP(const T& a_needle) : pi(prefix_function(a_needle)), needle(a_needle) {}
@@ -23,14 +23,14 @@ struct KMP { //NOLINT(readability-identifier-naming)
 	// _ana___
 	// ___ana_
 	// 0123456 (indexes)
-	// and KMP_Match::find returns {1,3} - the indexes in haystack where
+	// and KMP::find returns {1,3} - the indexes in haystack where
 	// each match starts.
 	//
-	// You can also pass in false for "all" and KMP_Match::find will only
+	// You can also pass in false for "all" and KMP::find will only
 	// return the first match: {1}. Useful for checking if there exists
 	// some match:
 	//
-	// KMP_Match::find(<haystack>,false).size() > 0
+	// KMP::find(<haystack>,false).size() > 0
 	vector<int> find(const T& haystack, bool all = true) const {
 		vector<int> matches;
 		for (int i = 0, j = 0; i < (int)haystack.size(); i++) {
