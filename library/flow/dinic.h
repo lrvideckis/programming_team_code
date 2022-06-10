@@ -1,11 +1,11 @@
 #pragma once
 //status: not tested
-struct maxflow {
+struct max_flow {
 	typedef long long ll;
 	ll n, s, t;
-	maxflow(int _n, int _s, int _t) : n(_n), s(_s), t(_t), d(n), ptr(n), q(n), g(n) {}
-	void addedge(ll a, ll b, ll cap) {
-		edgeMap[a * n + b] = e.size();
+	max_flow(int a_n, int a_s, int a_t) : n(a_n), s(a_s), t(a_t), d(n), ptr(n), q(n), g(n) {}
+	void add_edge(ll a, ll b, ll cap) {
+		edge_map[a * n + b] = e.size();
 		edge e1 = { a, b, cap, 0 };
 		edge e2 = { b, a, 0, 0 };
 		g[a].push_back((ll) e.size());
@@ -13,7 +13,7 @@ struct maxflow {
 		g[b].push_back((ll) e.size());
 		e.push_back(e2);
 	}
-	ll getflow() {
+	ll get_flow() {
 		ll flow = 0;
 		for (;;) {
 			if (!bfs()) break;
@@ -23,14 +23,14 @@ struct maxflow {
 		}
 		return flow;
 	}
-	ll getFlowForEdge(ll a, ll b) {
-		return e[edgeMap[a * n + b]].flow;
+	ll get_flow_for_edge(ll a, ll b) {
+		return e[edge_map[a * n + b]].flow;
 	}
 	const ll inf = 1e18;
 	struct edge {
 		ll a, b, cap, flow;
 	};
-	unordered_map<int, ll> edgeMap;
+	unordered_map<int, ll> edge_map;
 	vector<ll> d, ptr, q;
 	vector<edge> e;
 	vector<vector<ll>> g;
