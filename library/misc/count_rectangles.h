@@ -2,7 +2,7 @@
 #include "monotonic_stack.h"
 //stress tests: tests/stress_tests/misc/count_rectangles.cpp
 //given a 2D boolean matrix, calculate cnt[i][j]
-//cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix such that all i*j cells in the rectangle are true
+//cnt[i][j] = the number of times an i-by-j rectangle appears in the matrix such that all i*j cells in the rectangle are true
 //Note cnt[0][j] and cnt[i][0] will contain garbage values
 //O(n*m)
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
