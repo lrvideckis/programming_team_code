@@ -11,7 +11,7 @@ struct matrix_info {
 //Returns rank of A, determinant of A, and x (solution vector to A * x = b). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
 //Leaves A in reduced row echelon form (unlike kactl) with b appended.
 //O(n * m * min(n,m))
-matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, const int mod) {
+matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, int mod) {
 	assert(mat.size() == b.size());
 	int n = mat.size(), m = mat[0].size();
 	for (int i = 0; i < n; i++)
