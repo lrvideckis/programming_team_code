@@ -11,7 +11,7 @@ struct seg_tree {
 		}
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
-		int r_ch() const {
+		int rch() const { //right child
 			return ((r - l) & ~1) + 2;
 		}
 	};
@@ -55,7 +55,7 @@ struct seg_tree {
 		tree[v].mn += add;
 		if (tree[v].len() > 1) {
 			tree[v + 1].lazy += add;
-			tree[v + tree[v].r_ch()].lazy += add;
+			tree[v + tree[v].rch()].lazy += add;
 		}
 	}
 	void push(int v) {
@@ -75,8 +75,8 @@ struct seg_tree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return apply(v, add);
 		update(v + 1, l, r, add);
-		update(v + tree[v].r_ch(), l, r, add);
-		tree[v] = combine(tree[v + 1], tree[v + tree[v].r_ch()]);
+		update(v + tree[v].rch(), l, r, add);
+		tree[v] = combine(tree[v + 1], tree[v + tree[v].rch()]);
 	}
 	//range [l,r]
 	node query(int l, int r) {
@@ -89,6 +89,6 @@ struct seg_tree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v];
 		return combine(query(v + 1, l, r),
-		               query(v + tree[v].r_ch(), l, r));
+		               query(v + tree[v].rch(), l, r));
 	}
 };

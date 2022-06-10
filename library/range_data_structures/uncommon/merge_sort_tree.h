@@ -7,7 +7,7 @@ struct merge_sort_tree {
 		int l, r;
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
-		int r_ch() const {
+		int rch() const {
 			return ((r - l) & ~1) + 2;
 		}
 	};
@@ -48,6 +48,6 @@ struct merge_sort_tree {
 			return lower_bound(vals.begin(), vals.end(), x) - vals.begin();
 		}
 		return query(v + 1, l, r, x) +
-		       query(v + tree[v].r_ch(), l, r, x);
+		       query(v + tree[v].rch(), l, r, x);
 	}
 };

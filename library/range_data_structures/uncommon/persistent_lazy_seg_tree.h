@@ -2,7 +2,7 @@
 //status: not tested
 struct persistent_lazy_seg_tree {
 	struct node {
-		int l_ch, r_ch;//children, indexes into `tree`
+		int lch, rch;//children, indexes into `tree`
 		int sum;
 		bool lazy_tog;
 	};
@@ -16,17 +16,17 @@ struct persistent_lazy_seg_tree {
 	}
 	void push(int v, int tl, int tr) {
 		if (tl != tr) {
-			tree.push_back(tree[tree[v].l_ch]);
-			tree[v].l_ch = tree.size() - 1;
-			tree.push_back(tree[tree[v].r_ch]);
-			tree[v].r_ch = tree.size() - 1;
+			tree.push_back(tree[tree[v].lch]);
+			tree[v].lch = tree.size() - 1;
+			tree.push_back(tree[tree[v].rch]);
+			tree[v].rch = tree.size() - 1;
 		}
 		if (tree[v].lazy_tog) {
 			tree[v].sum = (tr - tl + 1) - tree[v].sum;
 			tree[v].lazy_tog = false;
 			if (tl != tr) {
-				tree[tree[v].l_ch].lazy_tog ^= 1;
-				tree[tree[v].r_ch].lazy_tog ^= 1;
+				tree[tree[v].lch].lazy_tog ^= 1;
+				tree[tree[v].rch].lazy_tog ^= 1;
 			}
 		}
 	}
@@ -44,11 +44,11 @@ struct persistent_lazy_seg_tree {
 			return;
 		}
 		int tm = (tl + tr) / 2;
-		int l_ch = tree[v].l_ch;
-		int r_ch = tree[v].r_ch;
-		set(l_ch, tl, tm, idx, new_val);
-		set(r_ch, tm + 1, tr, idx, new_val);
-		tree[v].sum = tree[l_ch].sum + tree[r_ch].sum;
+		int lch = tree[v].lch;
+		int rch = tree[v].rch;
+		set(lch, tl, tm, idx, new_val);
+		set(rch, tm + 1, tr, idx, new_val);
+		tree[v].sum = tree[lch].sum + tree[rch].sum;
 	}
 	void toggle_range(int l, int r) {
 		tree.push_back(tree[roots.back()]);//allocate top down
@@ -59,20 +59,20 @@ struct persistent_lazy_seg_tree {
 		push(v, tl, tr);
 		if (tr < l || r < tl)
 			return;
-		int l_ch = tree[v].l_ch;
-		int r_ch = tree[v].r_ch;
+		int lch = tree[v].lch;
+		int rch = tree[v].rch;
 		if (l <= tl && tr <= r) {
 			tree[v].sum = (tr - tl + 1) - tree[v].sum;
 			if (tl != tr) {
-				tree[l_ch].lazy_tog ^= 1;
-				tree[r_ch].lazy_tog ^= 1;
+				tree[lch].lazy_tog ^= 1;
+				tree[rch].lazy_tog ^= 1;
 			}
 			return;
 		}
 		int tm = (tl + tr) / 2;
-		toggle_range(l_ch, tl, tm, l, r);
-		toggle_range(r_ch, tm + 1, tr, l, r);
-		tree[v].sum = tree[l_ch].sum + tree[r_ch].sum;
+		toggle_range(lch, tl, tm, l, r);
+		toggle_range(rch, tm + 1, tr, l, r);
+		tree[v].sum = tree[lch].sum + tree[rch].sum;
 	}
 	//let's use implementation trick described here https://codeforces.com/blog/entry/72626
 	//so that we don't have to propagate lazy vals and thus we don't have to allocate new nodes
@@ -91,7 +91,7 @@ struct persistent_lazy_seg_tree {
 		}
 		int tm = (tl + tr) / 2;
 		tog ^= tree[v].lazy_tog;
-		return query(tree[v].l_ch, tl, tm, l, r, tog) +
-		       query(tree[v].r_ch, tm + 1, tr, l, r, tog);
+		return query(tree[v].lch, tl, tm, l, r, tog) +
+		       query(tree[v].rch, tm + 1, tr, l, r, tog);
 	}
 };

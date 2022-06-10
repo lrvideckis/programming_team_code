@@ -6,7 +6,7 @@
 struct distinct_query {
 	struct node {
 		int sum;
-		int l_ch, r_ch;//children, indexes into `tree`
+		int lch, rch;//children, indexes into `tree`
 	};
 	vector<int> roots;
 	deque<node> tree;
@@ -24,13 +24,13 @@ struct distinct_query {
 			return tree.size() - 1;
 		}
 		int tm = (tl + tr) / 2;
-		int l_ch = tree[v].l_ch;
-		int r_ch = tree[v].r_ch;
+		int lch = tree[v].lch;
+		int rch = tree[v].rch;
 		if (idx <= tm)
-			l_ch = update(l_ch, tl, tm, idx);
+			lch = update(lch, tl, tm, idx);
 		else
-			r_ch = update(r_ch, tm + 1, tr, idx);
-		tree.push_back({tree[l_ch].sum + tree[r_ch].sum, l_ch, r_ch});
+			rch = update(rch, tm + 1, tr, idx);
+		tree.push_back({tree[lch].sum + tree[rch].sum, lch, rch});
 		return tree.size() - 1;
 	}
 	//returns number of distinct elements in range [l,r]
@@ -43,7 +43,7 @@ struct distinct_query {
 		if (tr < idx)
 			return tree[vr].sum - tree[vl].sum;
 		int tm = (tl + tr) / 2;
-		return query(tree[vl].l_ch, tree[vr].l_ch, tl, tm, idx) +
-		       query(tree[vl].r_ch, tree[vr].r_ch, tm + 1, tr, idx);
+		return query(tree[vl].lch, tree[vr].lch, tl, tm, idx) +
+		       query(tree[vl].rch, tree[vr].rch, tm + 1, tr, idx);
 	}
 };
