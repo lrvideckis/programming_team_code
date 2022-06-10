@@ -29,17 +29,17 @@ bool isPrime(ull n) {
 }
 
 int main() {
-	calcMobius();
-	calcSeive();
+	calc_mobius();
+	calc_seive();
 
-	for(int i = 2; i < N; i++) {
-		assert(isPrime(i) == (aPrime[i] == i));
-		assert(isPrime(aPrime[i]));
-		assert(i % aPrime[i] == 0);
+	for(int i = 2; i < sz; i++) {
+		assert(isPrime(i) == (a_prime[i] == i));
+		assert(isPrime(a_prime[i]));
+		assert(i % a_prime[i] == 0);
 		int val = i;
 		map<int,int> primePower;
 		while(val > 1) {
-			int p = aPrime[val];
+			int p = a_prime[val];
 			primePower[p]++;
 			val /= p;
 		}

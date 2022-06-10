@@ -13,7 +13,7 @@ int main() {
 		int r = getRand(-mx, mx);
 		if(l > r) swap(l,r);
 
-		implicitSegTree ist(l, r);
+		implicit_seg_tree ist(l, r);
 
 		map<int, long long> naive;
 

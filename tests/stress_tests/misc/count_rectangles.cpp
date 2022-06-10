@@ -34,7 +34,7 @@ int main() {
 			}
 		}
 
-		vector<vector<int>> fast = getNumRectangles(grid);
+		vector<vector<int>> fast = count_rectangles(grid);
 		for(int i = 1; i <= n; i++) {
 			for(int j = 1; j <= m; j++) {
 				assert(naive[i][j] == fast[i][j]);

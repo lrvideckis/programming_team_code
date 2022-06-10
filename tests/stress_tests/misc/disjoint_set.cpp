@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../library/misc/disjoint_set.h"
+#include "../../../library/misc/dsu.h"
 
 int cnt = 0;
 void dfs(int node, const vector<vector<int>>& adj, vector<bool>& vis) {
@@ -18,7 +18,7 @@ void dfs(int node, const vector<vector<int>>& adj, vector<bool>& vis) {
 int main() {
 	for(int tests = 20; tests--;) {
 		int n = getRand(1,100);
-		disjointSet ds(n);
+		DSU ds(n);
 		vector<vector<int>> adj(n);
 		for(int ops = 1000; ops--;) {
 			int type = getRand(1, 4);

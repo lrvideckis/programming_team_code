@@ -5,7 +5,7 @@
 
 void doTest(int base, int power, int mod) {
 
-	int fast = fastPow(base % mod, power, mod);
+	int fast = pow(base % mod, power, mod);
 
 	int slow = 1;
 	for(int i = 0; i < power; i++) {

@@ -5,15 +5,15 @@
 
 const int mx_val = 1e9;
 
-tuple<segTree, vector<long long>> treeFactory(int n) {
+tuple<seg_tree, vector<long long>> treeFactory(int n) {
 	if(getRand(1, 2) == 1) {
 		vector<long long> arr(n);
 		for(int i = 0; i < n; i++) {
 			arr[i] = getRand(-mx_val, mx_val);
 		}
-		return make_tuple(segTree(arr), arr);
+		return make_tuple(seg_tree(arr), arr);
 	}
-	return make_tuple(segTree(vector<long long>(n, 0)), vector<long long>(n, 0));
+	return make_tuple(seg_tree(vector<long long>(n, 0)), vector<long long>(n, 0));
 }
 
 int main() {
@@ -35,7 +35,7 @@ int main() {
 					mx = max(mx, arr[i]);
 					sum += arr[i];
 				}
-				segTree::Node res = st.query(L, R);
+				seg_tree::node res = st.query(L, R);
 				assert(res.mn == mn);
 				assert(res.mx == mx);
 				assert(res.sum == sum);

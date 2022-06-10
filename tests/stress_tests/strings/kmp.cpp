@@ -1,7 +1,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../library/strings/KMP.h"
+#include "../../../library/strings/kmp.h"
 
 int main() {
 	for(int tests = 20; tests--;) {
@@ -27,8 +27,8 @@ int main() {
 				matchesNaive.push_back(i);
 			}
 		}
-		KMP_Match kmp(needle);
-		KMP_Match kmpArr(needleArr);
+		KMP kmp(needle);
+		KMP kmpArr(needleArr);
 		assert(matchesNaive == kmp.find(haystack));
 		assert(matchesNaive == kmpArr.find(haystackArr));
 
