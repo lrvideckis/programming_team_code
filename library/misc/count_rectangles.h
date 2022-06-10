@@ -5,7 +5,7 @@
 //cnt[i][j] = the number of times an (i * j) rectangle appears in the matrix such that all i*j cells in the rectangle are true
 //Note cnt[0][j] and cnt[i][0] will contain garbage values
 //O(n*m)
-vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
+vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 	const int n = grid.size(), m = grid[0].size();
 	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0));
 	vector<int> arr(m, 0);
@@ -13,13 +13,13 @@ vector<vector<int>> getNumRectangles(const vector<vector<bool>>& grid) {
 		return m - 1 - j;
 	};
 	for (int i = 0; i < n; i++) {
-		vector<pair<int, int>> arrRev(m);
+		vector<pair<int, int>> arr_rev(m);
 		for (int j = 0; j < m; j++) {
 			arr[j] = grid[i][j] * (arr[j] + 1);
-			arrRev[rv(j)] = {arr[j], j};
+			arr_rev[rv(j)] = {arr[j], j};
 		}
 		vector<int> left = monotonic_stack(arr);
-		vector<int> right = monotonic_stack(arrRev);
+		vector<int> right = monotonic_stack(arr_rev);
 		for (int j = 0; j < m; j++) {
 			int L = j - left[j] - 1, R = rv(right[rv(j)]) - j - 1;
 			cnt[arr[j]][L + R + 1]++;
