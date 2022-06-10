@@ -44,7 +44,7 @@ do
 				{ "name":"BIT" },
 				{ "name":"KMP" }
 		]' \
-		--use-color --warnings-as-errors="*" tmp.cpp -- -std=c++17
+		--use-color --warnings-as-errors="*" $test -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
