@@ -24,9 +24,9 @@ for test in $(find . -name '*.h')
 do
 	echo "file is "$test
 
-	cp ../template.cpp tmp.cpp
-
-	sed --regexp-extended '/^#pragma once/d' $test >> tmp.cpp
+	cp ../template.cpp tmp
+	sed --regexp-extended '/^#pragma once/d' $test >> tmp
+	mv tmp $test
 
 	# clang's "lower_case" == the traditional snake_case
 	clang-tidy -checks="readability-identifier-naming" \
