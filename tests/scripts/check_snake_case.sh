@@ -40,7 +40,7 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-			--use-color --warnings-as-errors="*" tmp.cpp -- -std=c++20
+			--use-color --warnings-as-errors="*" tmp.cpp -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
