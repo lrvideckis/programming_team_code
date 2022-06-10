@@ -2,9 +2,9 @@
 //library checker tests: https://judge.yosupo.jp/problem/scc
 struct scc_info {
 	int num_sccs;
-	//scc's are labeled 0,1,...,`numSCCs-1`
+	//scc's are labeled 0,1,...,`num_sccs-1`
 	//scc_id[i] is the id of the scc containing node `i`
-	//for each edge i -> j: scc_id[i] >= scc_id[j]
+	//for each edge i -> j: scc_id[i] >= scc_id[j] (topo order of scc's)
 	vector<int> scc_id;
 };
 scc_info SCC(const vector<vector<int>>& adj /*directed, unweighted graph*/) { //NOLINT(readability-identifier-naming)
