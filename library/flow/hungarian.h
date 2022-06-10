@@ -2,7 +2,7 @@
 //library checker tests: https://judge.yosupo.jp/problem/assignment
 //source: https://e-maxx.ru/algo/assignment_hungary
 //
-//input: cost[1...n][1...m] with n <= m
+//input: cost[1...n][1...m] with 1 <= n <= m
 //n workers, indexed 1, 2, ..., n
 //m jobs, indexed 1, 2, ..., m
 //it costs `cost[i][j]` to assign worker i to job j (1<=i<=n, 1<=j<=m)
