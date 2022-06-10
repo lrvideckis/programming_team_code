@@ -5,7 +5,7 @@ cd ..
 files_snake_case="find . -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
 	grep --invert-match '\.verify-helper' | \
-	grep --invert-match --extended-regexp '(LICENSE|Makefile|README)' "
+	grep --invert-match --extended-regexp '(LICENSE|Makefile|README)'"
 
 if eval $files_snake_case --quiet
 then
@@ -40,7 +40,8 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-			--use-color --warnings-as-errors="*" tmp.cpp -- -std=c++17
+		--line-filter='["name":"BIT"]' \
+		--use-color --warnings-as-errors="*" tmp.cpp -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
