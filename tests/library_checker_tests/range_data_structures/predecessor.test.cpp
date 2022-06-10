@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 #include "../../template.h"
 
-#include "../../../Library/range_data_structures/fenwickTree.h"
+#include "../../../library/range_data_structures/BIT.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -14,7 +14,7 @@ int main() {
 	for(int i = 0; i < n; i++)
 		init[i] = s[i] - '0';
 
-	fenwickTree<int> ft(init);
+	BIT<int> ft(init);
 
 	while(q--) {
 		int type, k;

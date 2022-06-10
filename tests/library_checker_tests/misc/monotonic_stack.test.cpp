@@ -2,7 +2,7 @@
 #include "../../template.h"
 
 #include "../../../library/misc/monotonic_stack.h"
-#include "../../../library/range_data_structures/sparse_table.h"
+#include "../../../library/range_data_structures/RMQ.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -15,7 +15,7 @@ int main() {
 		cin >> arr[i];
 	}
 
-	sparseTable<int> st(arr, [](int x, int y) { return min(x,y); });
+	RMQ<int> st(arr, [](int x, int y) { return min(x,y); });
 
 	vector<int> leftLower = monotonic_stack(arr);
 	reverse(arr.begin(), arr.end());

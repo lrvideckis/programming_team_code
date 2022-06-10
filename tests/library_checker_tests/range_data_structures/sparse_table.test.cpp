@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "../../template.h"
 
-#include "../../../library/range_data_structures/sparse_table.h"
+#include "../../../library/range_data_structures/RMQ.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -13,7 +13,7 @@ int main() {
 		cin >> arr[i];
 		init[i] = {arr[i], i};
 	}
-	sparseTable<pair<int,int>> st(init, [](auto x, auto y) { return min(x, y); });
+	RMQ<pair<int,int>> st(init, [](auto x, auto y) { return min(x, y); });
 	while(q--) {
 		int l,r;
 		cin >> l >> r;

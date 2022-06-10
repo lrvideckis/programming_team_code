@@ -403,7 +403,7 @@ int main() {
 			for(int i = l; i < r; i++) {
 				subarray.push_back(P[i]);
 			}
-			assert((int)lis(subarray).size() == res);
+			assert((int)LIS(subarray).size() == res);
 		}
 		cout << res << endl;
 	}

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 #include "../../template.h"
 
-#include "../../../Library/range_data_structures/seldom_used/kth_smallest.h"
-#include "../../../Library/range_data_structures/seldom_used/mergeSortTree.h"
+#include "../../../library/range_data_structures/rarely_used/kth_smallest.h"
+#include "../../../library/range_data_structures/rarely_used/merge_sort_tree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -19,7 +19,7 @@ int main() {
 	sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
 
 	kth_smallest st(arr);
-	MergeSortTree mst(arr);
+	merge_sort_tree mst(arr);
 
 	while(q--) {
 		int l,r,k;
