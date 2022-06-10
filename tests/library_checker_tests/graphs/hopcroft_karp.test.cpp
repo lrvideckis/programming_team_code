@@ -15,36 +15,36 @@ int main() {
 		adj[u].push_back(v);
 		edges.push_back({u,v});
 	}
-	match res = hopcroftKarp(adj, r);
-	cout << res.sizeOfMatching << endl;
-	//asserting correctness of both ml, and mr (as well as printing answer)
+	match res = hopcroft_karp(adj, r);
+	cout << res.size_of_matching << endl;
+	//asserting correctness of both match_l, and match_r (as well as printing answer)
 	int sizeL = 0;
 	for(int i = 0; i < l; i++) {
-		if(res.ml[i] != -1) {
+		if(res.match_l[i] != -1) {
 			sizeL++;
-			int nodeR = res.ml[i];
+			int nodeR = res.match_l[i];
 			cout << i << " " << nodeR << endl;
-			assert(res.mr[nodeR] == i);
+			assert(res.match_r[nodeR] == i);
 		}
 	}
 	int sizeR = 0;
 	for(int i = 0; i < r; i++) {
-		if(res.mr[i] != -1) {
+		if(res.match_r[i] != -1) {
 			sizeR++;
-			int nodeL = res.mr[i];
-			assert(res.ml[nodeL] == i);
+			int nodeL = res.match_r[i];
+			assert(res.match_l[nodeL] == i);
 		}
 	}
-	assert(sizeL == res.sizeOfMatching);
-	assert(sizeR == res.sizeOfMatching);
+	assert(sizeL == res.size_of_matching);
+	assert(sizeR == res.size_of_matching);
 
 	//asserting found min vertex cover is correct
 	int cnt = 0;
-	for(int i = 0; i < l; i++) cnt += res.leftMVC[i];
-	for(int i = 0; i < r; i++) cnt += res.rightMVC[i];
-	assert(cnt == res.sizeOfMatching);//size of min vertex cover == size of max matching
+	for(int i = 0; i < l; i++) cnt += res.mvc_l[i];
+	for(int i = 0; i < r; i++) cnt += res.mvc_r[i];
+	assert(cnt == res.size_of_matching);//size of min vertex cover == size of max matching
 	for(auto [u,v] : edges) {
-		assert(res.leftMVC[u] || res.rightMVC[v]);
+		assert(res.mvc_l[u] || res.mvc_r[v]);
 	}
 	return 0;
 }
