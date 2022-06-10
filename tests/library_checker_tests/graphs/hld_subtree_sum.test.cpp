@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
 #include "../../template.h"
 
-#include "../../../library/graphs/HLD.h"
-#include "../../../library/range_data_structures/rarely_used/fenwick_inv.h"
+#include "../../../library/graphs/hld.h"
+#include "../../../library/range_data_structures/uncommon/fenwick_inv.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

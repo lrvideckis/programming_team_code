@@ -23,7 +23,7 @@ int main() {
 		cin >> b[i];
 	}
 
-	matrixInfo info = solve_linear_mod(A, b, mod);
+	matrix_info info = solve_linear_mod(A, b, mod);
 
 	if(info.x.empty()) {
 		cout << -1 << endl;

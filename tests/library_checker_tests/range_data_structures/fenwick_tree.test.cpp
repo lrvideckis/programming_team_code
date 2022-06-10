@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include "../../template.h"
 
-#include "../../../library/range_data_structures/rarely_used/fenwick_inv.h"
+#include "../../../library/range_data_structures/uncommon/fenwick_inv.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -11,11 +11,11 @@ int main() {
 	for(int i = 0; i < n; i++) {
 		cin >> arr[i];
 	}
-	fenwickTree<long long> ft(arr);
+	BIT<long long> ft(arr);
 
 	vector<long long> init(arr);
 	for(int i = n-2; i >= 0; i--) init[i] += init[i+1];
-	fenwickInv<long long> ftInv(init);
+	fenwick_inv<long long> ftInv(init);
 	while(q--) {
 		int type;
 		cin >> type;

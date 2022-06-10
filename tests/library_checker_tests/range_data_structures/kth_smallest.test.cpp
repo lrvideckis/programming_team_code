@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 #include "../../template.h"
 
-#include "../../../library/range_data_structures/rarely_used/kth_smallest.h"
-#include "../../../library/range_data_structures/rarely_used/merge_sort_tree.h"
+#include "../../../library/range_data_structures/uncommon/kth_smallest.h"
+#include "../../../library/range_data_structures/uncommon/merge_sort_tree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
