@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../../template.h"
 
-#include "../../../library/graphs/LCA.h"
-#include "../../../library/graphs/HLD.h"
+#include "../../../library/graphs/lca.h"
+#include "../../../library/graphs/hld.h"
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -23,21 +23,21 @@ int main() {
 		adj[i].push_back(par);
 	}
 
-	lca h(adjWeighted, 0);
-	hld h2(adj, 0);
+	LCA h(adjWeighted, 0);
+	HLD h2(adj, 0);
 
 	for(int i = 0; i < n; ++i) {
-		assert(0 == h.kthPar(i, depth[i]));
-		assert(0 == h.kthPar(i, 1e9));
+		assert(0 == h.kth_par(i, depth[i]));
+		assert(0 == h.kth_par(i, 1e9));
 	}
 
 	while(q--) {
 		int u, v;
 		cin >> u >> v;
-		int res = h.getLca(u,v);
+		int res = h.get_lca(u,v);
 		assert(h2.lca(u,v) == res);
-		assert(res == h.kthPar(u, depth[u] - depth[res]));
-		assert(res == h.kthPar(v, depth[v] - depth[res]));
+		assert(res == h.kth_par(u, depth[u] - depth[res]));
+		assert(res == h.kth_par(v, depth[v] - depth[res]));
 		cout << res << endl;
 	}
 }

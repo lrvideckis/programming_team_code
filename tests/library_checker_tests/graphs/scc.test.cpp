@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 #include "../../template.h"
 
-#include "../../../library/graphs/SCC.h"
+#include "../../../library/graphs/scc.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
@@ -13,21 +13,21 @@ int main() {
 		cin >> u >> v;
 		adj[u].push_back(v);
 	}
-	sccInfo info = getSCCs(adj);
+	scc_info info = SCC(adj);
 
 	//sanity check for reverse topo order of SCCs
 	for (int i = 0; i < n; i++) {
 		for (int j : adj[i]) {
-			assert(info.sccId[i] >= info.sccId[j]);
+			assert(info.scc_id[i] >= info.scc_id[j]);
 		}
 	}
 
-	cout << info.numSCCs << endl;
-	vector<vector<int>> eachScc(info.numSCCs);
+	cout << info.num_sccs << endl;
+	vector<vector<int>> eachScc(info.num_sccs);
 	for(int i = 0; i < n; i++) {
-		eachScc[info.sccId[i]].push_back(i);
+		eachScc[info.scc_id[i]].push_back(i);
 	}
-	for(int i = info.numSCCs - 1; i >= 0; i--) {
+	for(int i = info.num_sccs - 1; i >= 0; i--) {
 		cout << eachScc[i].size() << " ";
 		for(int node : eachScc[i]) cout << node << " ";
 		cout << endl;
