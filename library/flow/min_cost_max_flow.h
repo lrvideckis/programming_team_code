@@ -10,7 +10,7 @@ struct min_cost_max_flow {
 	vector<edge> e;
 	vector<vector<ll>> g;
 	ll n, s, t;
-	ll k = inf; // The maximum amount of flow allowed
+	ll k = inf; // max amount of flow allowed
 	min_cost_max_flow(int a_n, int a_s, int a_t) : n(a_n), s(a_s), t(a_t) {
 		g.resize(n);
 	}
@@ -22,7 +22,7 @@ struct min_cost_max_flow {
 		g[b].push_back((ll) e.size());
 		e.push_back(e2);
 	}
-	// Returns {flow,cost}
+	// returns {flow, cost}
 	pair<ll, ll> get_flow() {
 		ll flow = 0, cost = 0;
 		while (flow < k) {
