@@ -7,33 +7,33 @@
 //
 //example usage:
 //	row_reduce(A, A[0].size(), mod) //row reduce matrix with no extra columns
-pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& A, const int cols, const int mod) {
-	int n = A.size(), m = A[0].size(), rank = 0, det = 1;
+pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, const int cols, const int mod) {
+	int n = mat.size(), m = mat[0].size(), rank = 0, det = 1;
 	assert(cols <= m);
 	for (int col = 0; col < cols && rank < n; col++) {
 		//find arbitrary pivot and swap pivot to current row
 		for (int i = rank; i < n; i++)
-			if (A[i][col] != 0) {
+			if (mat[i][col] != 0) {
 				if (rank != i) det = det == 0 ? 0 : mod - det;
-				swap(A[i], A[rank]);
+				swap(mat[i], mat[rank]);
 				break;
 			}
-		if (A[rank][col] == 0) {
+		if (mat[rank][col] == 0) {
 			det = 0;
 			continue;
 		}
-		det = (1LL * det * A[rank][col]) % mod;
+		det = (1LL * det * mat[rank][col]) % mod;
 		//make pivot 1 by dividing row by inverse of pivot
-		const int aInv = fastPow(A[rank][col], mod - 2, mod);
+		const int a_inv = fastPow(mat[rank][col], mod - 2, mod);
 		for (int j = 0; j < m; j++)
-			A[rank][j] = (1LL * A[rank][j] * aInv) % mod;
+			mat[rank][j] = (1LL * mat[rank][j] * a_inv) % mod;
 		//zero-out all numbers above & below pivot
 		for (int i = 0; i < n; i++)
-			if (i != rank && A[i][col] != 0) {
-				const int val = A[i][col];
+			if (i != rank && mat[i][col] != 0) {
+				const int val = mat[i][col];
 				for (int j = 0; j < m; j++) {
-					A[i][j] -= 1LL * A[rank][j] * val % mod;
-					if (A[i][j] < 0) A[i][j] += mod;
+					mat[i][j] -= 1LL * mat[rank][j] * val % mod;
+					if (mat[i][j] < 0) mat[i][j] += mod;
 				}
 			}
 		rank++;

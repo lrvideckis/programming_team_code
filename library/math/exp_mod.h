@@ -16,7 +16,7 @@
 //if pw >= log2(mod) then (base^pw)%mod == (base^(t+(pw%t)))%mod (proof https://cp-algorithms.com/algebra/phi-function.html#generalization)
 //so calculate pw under mod of `t`
 //incidentally, totient(p) = p - 1 for every prime p, making this a more generalized version of case 1
-int fastPow(long long base, long long pw, int mod) {
+int pow(long long base, long long pw, int mod) {
 	assert(0 <= pw && 0 <= base && 1 <= mod);
 	int res = 1;
 	base %= mod;

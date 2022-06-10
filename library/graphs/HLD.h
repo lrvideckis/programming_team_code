@@ -2,10 +2,10 @@
 //library checker tests: https://judge.yosupo.jp/problem/lca, https://judge.yosupo.jp/problem/vertex_add_path_sum, https://judge.yosupo.jp/problem/vertex_add_subtree_sum
 //source: https://codeforces.com/blog/entry/53170
 //assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
-struct hld {
+struct HLD {
 	int n;
 	vector<int> Size, par, timeIn, Next;
-	hld(vector<vector<int>>& adj /*single unrooted tree*/, int root) :
+	HLD(vector<vector<int>>& adj /*single unrooted tree*/, int root) :
 		n(adj.size()), Size(n, 1), par(n, root), timeIn(n), Next(n, root) {
 		dfs1(root, adj);
 		int Time = 0;

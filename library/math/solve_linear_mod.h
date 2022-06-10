@@ -1,7 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations
 #include "row_reduce.h"
-struct matrixInfo {
+struct matrix_info {
 	int rank, det;
 	vector<int> x;
 };
@@ -11,21 +11,21 @@ struct matrixInfo {
 //Returns rank of A, determinant of A, and x (solution vector to A * x = b). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
 //Leaves A in reduced row echelon form (unlike kactl) with b appended.
 //O(n * m * min(n,m))
-matrixInfo solve_linear_mod(vector<vector<int>>& A, const vector<int>& b, const int mod) {
-	assert(A.size() == b.size());
-	int n = A.size(), m = A[0].size();
+matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, const int mod) {
+	assert(mat.size() == b.size());
+	int n = mat.size(), m = mat[0].size();
 	for (int i = 0; i < n; i++)
-		A[i].push_back(b[i]);
-	auto [rank, det] = row_reduce(A, m, mod);//row reduce not including the last column
+		mat[i].push_back(b[i]);
+	auto [rank, det] = row_reduce(mat, m, mod);//row reduce not including the last column
 	//check if solution exists
 	for (int i = rank; i < n; i++) {
-		if (A[i].back() != 0) return {rank, det, {} }; //no solution exists
+		if (mat[i].back() != 0) return {rank, det, {} }; //no solution exists
 	}
 	//initialize solution vector (`x`) from row-reduced matrix
 	vector<int> x(m, 0);
 	for (int i = 0, j = 0; i < rank; i++) {
-		while (A[i][j] == 0) j++; //find pivot column
-		x[j] = A[i].back();
+		while (mat[i][j] == 0) j++; //find pivot column
+		x[j] = mat[i].back();
 	}
 	return {rank, det, x};
 }

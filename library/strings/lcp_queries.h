@@ -29,5 +29,5 @@ struct lcp_queries {
 		return inv_sa[idx1] < inv_sa[idx2];
 	}
 	vector<int> sa, inv_sa, lcp;
-	sparseTable<int> st;
+	RMQ<int> st;
 };

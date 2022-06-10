@@ -2,15 +2,15 @@
 //status: not tested
 //source: https://cp-algorithms.com/string/aho_corasick.html#construction-of-the-trie
 //intended to be a base template and to be modified
-const int K = 26;//character size
+const int k = 26;//character size
 struct trie {
-	const char minCh = 'a';//'A' for uppercase, '0' for digits
+	const char min_ch = 'a';//'A' for uppercase, '0' for digits
 	struct node {
-		int next[K], id, p = -1;
+		int next[k], id, p = -1;
 		char pch;
 		bool leaf = 0;
 		node(int _p = -1, char ch = '#') : p(_p), pch(ch) {
-			fill(next, next + K, -1);
+			fill(next, next + k, -1);
 		}
 	};
 	vector<node> t;
@@ -18,7 +18,7 @@ struct trie {
 	void add_string(const string& s, int id) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - minCh;
+			int v = ch - min_ch;
 			if (t[c].next[v] == -1) {
 				t[c].next[v] = t.size();
 				t.emplace_back(c, ch);
@@ -31,7 +31,7 @@ struct trie {
 	void remove_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - minCh;
+			int v = ch - min_ch;
 			if (t[c].next[v] == -1)
 				return;
 			c = t[c].next[v];
@@ -41,7 +41,7 @@ struct trie {
 	int find_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - minCh;
+			int v = ch - min_ch;
 			if (t[c].next[v] == -1)
 				return -1;
 			c = t[c].next[v];

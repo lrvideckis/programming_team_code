@@ -6,24 +6,24 @@
 //mobius[i] = 1 iff i has an even number of distinct prime factors
 const int N = 2e6 + 10;
 int mobius[N];
-void calcMobius() {
+void calc_mobius() {
 	mobius[1] = 1;
 	for (int i = 1; i < N; i++)
 		for (int j = i + i; j < N; j += i)
 			mobius[j] -= mobius[i];
 }
-//aPrime[val] = some random prime factor of `val`
+//a_prime[val] = some random prime factor of `val`
 //to get all prime factors of a number `val`:
 //	while(val > 1) {
-//		int p = aPrime[val];
+//		int p = a_prime[val];
 //		//p is some prime factor of val
 //		val /= p;
 //	}
-int aPrime[N];
-void calcSeive() {
-	iota(aPrime, aPrime + N, 0);
+int a_prime[N];
+void calc_seive() {
+	iota(a_prime, a_prime + N, 0);
 	for (int i = 2; i * i < N; i++)
-		if (aPrime[i] == i)
+		if (a_prime[i] == i)
 			for (int j = i * i; j < N; j += i)
-				aPrime[j] = i;
+				a_prime[j] = i;
 }
