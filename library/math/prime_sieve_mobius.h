@@ -16,7 +16,7 @@ void calc_mobius() {
 //to check if `val` is prime:
 //	if (a_prime[val] == val)
 //
-//to get all prime factors of a number `val`:
+//to get all prime factors of a number `val` in O(log(val)):
 //	while(val > 1) {
 //		int p = a_prime[val];
 //		//p is some prime factor of val
