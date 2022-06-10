@@ -13,9 +13,8 @@ pdflatex scripts/25_pg_reference.tex
 
 mv 25_pg_reference.pdf ../
 
-
+#removes hash code comments
 tests="$(find ../library -name "*.h")"
-
 for test in $tests; do
 	sed --in-place '1,2d' $test
 done
