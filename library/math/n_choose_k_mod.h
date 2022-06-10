@@ -6,7 +6,7 @@
 // usage:
 //     n_choose_k nk(n, 1e9+7) to use `choose`, `inv` with inputs < n
 // or:
-//     n_choose_k nk(mod, mod) to use `chooseWithLucasTheorem`
+//     n_choose_k nk(mod, mod) to use `choose_with_lucas_theorem` with arbitrarily large inputs
 struct n_choose_k {
 	n_choose_k(int n, int a_mod) : mod(a_mod), fact(n, 1), inv_fact(n, 1) {
 		//this implementation doesn't work if n > mod because n! % mod = 0 when n >= mod. So `inv_fact` array will be all 0's
