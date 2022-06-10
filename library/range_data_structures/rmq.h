@@ -3,12 +3,13 @@
 //usage:
 //	vector<long long> arr;
 //	...
-//	sparseTable<long long> st(arr, [](auto x, auto y) { return min(x,y); });
+//	RMQ<long long> st(arr, [](auto x, auto y) { return min(x,y); });
 //
 //to also get index of min element, do:
-//	sparseTable<pair<long long,int>> st(arr, [](auto x, auto y) { return min(x,y); });
-//and initialize `.second`'s to index. If there are multiple indexes of min element,
-//it'll return the smallest (left-most) one
+//	RMQ<pair<T, int>> st(arr, [](auto x, auto y) { return min(x,y); });
+//and initialize arr[i].second = i (0<=i<n)
+//If there are multiple indexes of min element, it'll return the smallest
+//(left-most) one
 template <class T>
 struct RMQ { //NOLINT(readability-identifier-naming)
 	vector<vector<T>> dp;
