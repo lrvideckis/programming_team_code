@@ -11,7 +11,7 @@ echo "done with compiling header"
 if [[ $# -eq 1 ]] ; then
     tests="$(find $DIR/../library -name '*.h' | grep -vFf $SCRIPT_DIR/skip_headers.txt)"
     echo "skipped: "
-    find $DIR/../../library -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers.txt
+    find $DIR/../library -name '*.h' | grep -Ff $SCRIPT_DIR/skip_headers.txt
 else
     tests="$(find $DIR/../library -name "*$2*")"
 fi
