@@ -1,8 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes
 #include "suffix_array.h"
-#include "LCP.h"
-#include "../range_data_structures/RMQ.h"
+#include "lcp.h"
+#include "../range_data_structures/rmq.h"
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
 struct lcp_queries {

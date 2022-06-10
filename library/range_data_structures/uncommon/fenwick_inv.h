@@ -1,6 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/point_add_range_sum
-#include "../BIT.h"
+#include "../bit.h"
 template<class T>
 struct fenwick_inv {
 	BIT<T> ft;

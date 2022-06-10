@@ -24,7 +24,7 @@ pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, const
 		}
 		det = (1LL * det * mat[rank][col]) % mod;
 		//make pivot 1 by dividing row by inverse of pivot
-		const int a_inv = fastPow(mat[rank][col], mod - 2, mod);
+		const int a_inv = pow(mat[rank][col], mod - 2, mod);
 		for (int j = 0; j < m; j++)
 			mat[rank][j] = (1LL * mat[rank][j] * a_inv) % mod;
 		//zero-out all numbers above & below pivot

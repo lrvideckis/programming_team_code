@@ -21,7 +21,7 @@ scc_info SCC(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 			while (true) {
 				int node = node_stack.back();
 				node_stack.pop_back();
-				scc_id[node] = numSCCs;
+				scc_id[node] = num_sccs;
 				if (node == v) break;
 			}
 			num_sccs++;
