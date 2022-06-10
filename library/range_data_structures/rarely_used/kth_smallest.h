@@ -2,13 +2,13 @@
 //library checker tests: https://judge.yosupo.jp/problem/range_kth_smallest
 //modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 struct kth_smallest {
-	struct Node {
+	struct node {
 		int sum;
-		int lCh, rCh;//children, indexes into `tree`
+		int l_ch, r_ch;//children, indexes into `tree`
 	};
 	int mn, mx;
 	vector<int> roots;
-	deque<Node> tree;
+	deque<node> tree;
 	kth_smallest(const vector<int>& arr) : mn(INT_MAX), mx(INT_MIN), roots(arr.size() + 1, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val);
@@ -21,13 +21,13 @@ struct kth_smallest {
 			return tree.size() - 1;
 		}
 		int tm = tl + (tr - tl) / 2;
-		int lCh = tree[v].lCh;
-		int rCh = tree[v].rCh;
+		int l_ch = tree[v].l_ch;
+		int r_ch = tree[v].r_ch;
 		if (idx <= tm)
-			lCh = update(lCh, tl, tm, idx);
+			l_ch = update(l_ch, tl, tm, idx);
 		else
-			rCh = update(rCh, tm + 1, tr, idx);
-		tree.push_back({tree[lCh].sum + tree[rCh].sum, lCh, rCh});
+			r_ch = update(r_ch, tm + 1, tr, idx);
+		tree.push_back({tree[l_ch].sum + tree[r_ch].sum, l_ch, r_ch});
 		return tree.size() - 1;
 	}
 	/* find (k+1)th smallest number among arr[l], arr[l+1], ..., arr[r]
@@ -42,8 +42,8 @@ struct kth_smallest {
 		if (tl == tr)
 			return tl;
 		int tm = tl + (tr - tl) / 2;
-		int left_count = tree[tree[vr].lCh].sum - tree[tree[vl].lCh].sum;
-		if (left_count > k) return query(tree[vl].lCh, tree[vr].lCh, tl, tm, k);
-		return query(tree[vl].rCh, tree[vr].rCh, tm + 1, tr, k - left_count);
+		int left_count = tree[tree[vr].l_ch].sum - tree[tree[vl].l_ch].sum;
+		if (left_count > k) return query(tree[vl].l_ch, tree[vr].l_ch, tl, tm, k);
+		return query(tree[vl].r_ch, tree[vr].r_ch, tm + 1, tr, k - left_count);
 	}
 };

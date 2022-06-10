@@ -1,8 +1,8 @@
 #pragma once
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 const long long inf = 1e18;
-struct segTree {
-	struct Node {
+struct seg_tree {
+	struct node {
 		long long sum, mx, mn;
 		long long lazy;
 		int l, r;
@@ -11,14 +11,14 @@ struct segTree {
 		}
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
-		int rCh() const {
+		int r_ch() const {
 			return ((r - l) & ~1) + 2;
 		}
 	};
-	vector<Node> tree;
+	vector<node> tree;
 	//There's no constructor `segTree(int size)` because how to initialize l,r in nodes without calling build?
 	//the whole point of `segTree(int size)` was to be simpler by not calling build
-	segTree(const vector<long long>& arr) : tree(2 * (int)arr.size() - 1) {
+	seg_tree(const vector<long long>& arr) : tree(2 * (int)arr.size() - 1) {
 		build(arr, 0, 0, (int)arr.size() - 1);
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
@@ -38,7 +38,7 @@ struct segTree {
 			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
 		}
 	}
-	static Node combine(const Node& L, const Node& R) {
+	static node combine(const node& L, const node& R) {
 		return {
 			L.sum + R.sum,
 			max(L.mx, R.mx),
@@ -55,7 +55,7 @@ struct segTree {
 		tree[v].mn += add;
 		if (tree[v].len() > 1) {
 			tree[v + 1].lazy += add;
-			tree[v + tree[v].rCh()].lazy += add;
+			tree[v + tree[v].r_ch()].lazy += add;
 		}
 	}
 	void push(int v) {
@@ -75,20 +75,20 @@ struct segTree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return apply(v, add);
 		update(v + 1, l, r, add);
-		update(v + tree[v].rCh(), l, r, add);
-		tree[v] = combine(tree[v + 1], tree[v + tree[v].rCh()]);
+		update(v + tree[v].r_ch(), l, r, add);
+		tree[v] = combine(tree[v + 1], tree[v + tree[v].r_ch()]);
 	}
 	//range [l,r]
-	Node query(int l, int r) {
+	node query(int l, int r) {
 		return query(0, l, r);
 	}
-	Node query(int v, int l, int r) {
+	node query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
 			return {0, -inf, inf, 0, 0, 0};
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v];
 		return combine(query(v + 1, l, r),
-		               query(v + tree[v].rCh(), l, r));
+		               query(v + tree[v].r_ch(), l, r));
 	}
 };

@@ -10,10 +10,10 @@
 //and initialize `.second`'s to index. If there are multiple indexes of min element,
 //it'll return the smallest (left-most) one
 template <class T>
-struct sparseTable {
+struct RMQ {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> func;
-	sparseTable(const vector<T>& arr, const function<T(const T&, const T&)>& _func) : dp(1, arr), func(_func) {
+	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_func) : dp(1, arr), func(a_func) {
 		int n = arr.size();
 		for (int pw = 1, k = 1; pw * 2 <= n; pw *= 2, k++) {
 			dp.emplace_back(n - pw * 2 + 1);

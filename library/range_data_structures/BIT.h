@@ -1,10 +1,10 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/point_add_range_sum, https://judge.yosupo.jp/problem/vertex_add_path_sum, https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/predecessor_problem
 template<class T>
-struct fenwickTree {
+struct BIT {
 	vector<T> bit;
-	fenwickTree(int n) : bit(n, 0) {}
-	fenwickTree(const vector<T>& a) : bit(a.size()) {
+	BIT(int n) : bit(n, 0) {}
+	BIT(const vector<T>& a) : bit(a.size()) {
 		if (a.empty()) return;
 		bit[0] = a[0];
 		for (int i = 1; i < (int)a.size(); i++)

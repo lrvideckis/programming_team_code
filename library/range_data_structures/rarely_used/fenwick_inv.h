@@ -2,14 +2,14 @@
 //library checker tests: https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/point_add_range_sum
 #include "../BIT.h"
 template<class T>
-struct fenwickInv {
-	fenwickTree<T> ft;
-	fenwickInv(int n) : ft(n) {}
-	fenwickInv(const vector<T>& arr) : ft(init(arr)) {}
-	fenwickTree<T> init(vector<T> arr/*intentional pass by value*/) const {
+struct fenwick_inv {
+	BIT<T> ft;
+	fenwick_inv(int n) : ft(n) {}
+	fenwick_inv(const vector<T>& arr) : ft(init(arr)) {}
+	BIT<T> init(vector<T> arr/*intentional pass by value*/) const {
 		for (int i = (int)arr.size() - 1; i >= 1; i--)
 			arr[i] -= arr[i - 1];
-		return fenwickTree<T>(arr);
+		return BIT<T>(arr);
 	}
 	//add `add` to inclusive range [l, r]
 	void update(int l, int r, const T& add) {
