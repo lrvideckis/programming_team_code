@@ -2,7 +2,5 @@
 "tests/library_checker_tests/math/derangement.test.cpp": "2022-06-09 17:32:38 -0700",
 "tests/library_checker_tests/math/matrix_multiply.test.cpp": "2022-06-09 18:06:25 -0700",
 "tests/library_checker_tests/math/partitions.test.cpp": "2022-06-09 16:35:36 -0700",
-"tests/library_checker_tests/misc/longest_increasing_subsequence.test.cpp": "2022-06-09 17:49:52 -0700",
-"tests/library_checker_tests/range_data_structures/fenwick_tree.test.cpp": "2022-06-09 16:35:36 -0700",
 "tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-06-09 16:31:21 -0700"
 }
