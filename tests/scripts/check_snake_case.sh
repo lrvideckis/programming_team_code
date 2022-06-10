@@ -24,9 +24,10 @@ for test in $(find . -name '*.h')
 do
 	echo "file is "$test
 
-	cp ../template.cpp tmp
-	sed --regexp-extended '/^#pragma once/d' $test >> tmp
-	mv tmp $test
+	tmp_file=$(dirname $test)"/tmp.cpp"
+
+	cp ../template.cpp $tmp_file
+	sed --regexp-extended '/^#pragma once/d' $test >> $tmp_file
 
 	# clang's "lower_case" == the traditional snake_case
 	clang-tidy -checks="readability-identifier-naming" \
@@ -44,7 +45,7 @@ do
 				{ "name":"BIT" },
 				{ "name":"KMP" }
 		]' \
-		--use-color --warnings-as-errors="*" $test -- -std=c++17
+		--use-color --warnings-as-errors="*" $tmp_file -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
