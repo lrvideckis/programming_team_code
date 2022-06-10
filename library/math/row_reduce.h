@@ -2,11 +2,11 @@
 //library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations, https://judge.yosupo.jp/problem/matrix_det, https://judge.yosupo.jp/problem/inverse_matrix
 //for mod inverse
 #include "exp_mod.h"
-//First `cols` columns of A represents a matrix to be left in reduced row echelon form
+//First `cols` columns of mat represents a matrix to be left in reduced row echelon form
 //Row operations will be performed to all later columns
 //
 //example usage:
-//	row_reduce(A, A[0].size(), mod) //row reduce matrix with no extra columns
+//	row_reduce(mat, mat[0].size(), mod) //row reduce matrix with no extra columns
 pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, int cols, int mod) {
 	int n = mat.size(), m = mat[0].size(), rank = 0, det = 1;
 	assert(cols <= m);
