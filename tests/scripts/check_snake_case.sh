@@ -42,10 +42,6 @@ do
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
 		--use-color --warnings-as-errors="*" $tmp_file -- -std=c++17
-#		--line-filter='[
-#				{ "name":"BIT" },
-#				{ "name":"KMP" }
-#		]' \
 	if (($? != 0))
 	then
 		fail+=1
