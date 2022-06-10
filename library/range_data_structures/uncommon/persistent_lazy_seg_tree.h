@@ -10,7 +10,7 @@ struct persistent_lazy_seg_tree {
 	deque<node> tree;
 	vector<int> roots;
 	//implicit
-	persistent_lazy_seg_tree(int _sz) : sz(_sz) {
+	persistent_lazy_seg_tree(int a_sz) : sz(a_sz) {
 		tree.push_back({0, 0, 0, 0}); //acts as null
 		roots.push_back(0);
 	}

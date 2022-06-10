@@ -38,14 +38,14 @@ struct seg_tree {
 			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
 		}
 	}
-	static node combine(const node& L, const node& R) {
+	static node combine(const node& l, const node& r) {
 		return {
-			L.sum + R.sum,
-			max(L.mx, R.mx),
-			min(L.mn, R.mn),
+			l.sum + r.sum,
+			max(l.mx, r.mx),
+			min(l.mn, r.mn),
 			0,
-			L.l,
-			R.r
+			l.l,
+			r.r
 		};
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?

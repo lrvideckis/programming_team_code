@@ -7,9 +7,9 @@ struct trie {
 	const char min_ch = 'a';//'A' for uppercase, '0' for digits
 	struct node {
 		int next[k], id, p = -1;
-		char pch;
+		char ch;
 		bool leaf = 0;
-		node(int _p = -1, char ch = '#') : p(_p), pch(ch) {
+		node(int a_p = -1, char a_ch = '#') : p(a_p), ch(a_ch) {
 			fill(next, next + k, -1);
 		}
 	};

@@ -33,12 +33,12 @@ struct buckets {
 			values[i] += b.sum_lazy;
 		b.sum_lazy = 0;
 	}
-	//update range [L,R]
-	void update(int L, int R, int diff) {
-		int start_bucket = L / bucket_size;
-		int end_bucket = R / bucket_size;
+	//update range [l,r]
+	void update(int l, int r, int diff) {
+		int start_bucket = l / bucket_size;
+		int end_bucket = r / bucket_size;
 		if (start_bucket == end_bucket) { //range contained in same bucket case
-			for (int i = L; i <= R; i++) {
+			for (int i = l; i <= r; i++) {
 				values[i] += diff;
 				bucket[start_bucket].sum_bucket += diff;
 			}
@@ -48,7 +48,7 @@ struct buckets {
 		            start_bucket, end_bucket
 		        }) { //handle "endpoint" buckets
 			node& b = bucket[b_idx];
-			for (int i = max(b.l, L); i <= min(b.r, R); i++) {
+			for (int i = max(b.l, l); i <= min(b.r, r); i++) {
 				values[i] += diff;
 				b.sum_bucket += diff;
 			}
@@ -59,14 +59,14 @@ struct buckets {
 			b.sum_bucket += b.len() * diff;
 		}
 	}
-	//sum of range [L,R]
-	int query(int L, int R) {
-		int start_bucket = L / bucket_size;
-		int end_bucket = R / bucket_size;
+	//sum of range [l,r]
+	int query(int l, int r) {
+		int start_bucket = l / bucket_size;
+		int end_bucket = r / bucket_size;
 		if (start_bucket == end_bucket) { //range contained in same bucket case
 			push(start_bucket);
 			int sum = 0;
-			for (int i = L; i <= R; i++)
+			for (int i = l; i <= r; i++)
 				sum += values[i];
 			return sum;
 		}
@@ -76,7 +76,7 @@ struct buckets {
 		        }) { //handle "endpoint" buckets
 			node& b = bucket[b_idx];
 			push(b_idx);
-			for (int i = max(b.l, L); i <= min(b.r, R); i++)
+			for (int i = max(b.l, l); i <= min(b.r, r); i++)
 				sum += values[i];
 		}
 		for (int i = start_bucket + 1; i < end_bucket; i++) //handle all n/B buckets in middle
