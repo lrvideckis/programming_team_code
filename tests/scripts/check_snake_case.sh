@@ -5,7 +5,7 @@ cd ..
 files_snake_case="find . -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
 	grep --invert-match '\.verify-helper' | \
-	grep --invert-match --extended-regexp '(LICENSE|Makefile|README|KMP|LCP|HLD|SCC|LCA|BIT|LIS|RMQ)' "
+	grep --invert-match --extended-regexp '(LICENSE|Makefile|README|KMP|LCP|HLD|SCC|LCA|BIT|LIS|RMQ|DSU)' "
 
 if eval $files_snake_case --quiet
 then
