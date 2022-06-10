@@ -7,7 +7,7 @@
 touch null
 
 #need to compile twice for it to generate the table of contents
-#I think it's related to not knowing page numbers after first pdf generation
+#I think it's related to not knowing page numbers until after first pdf generation
 pdflatex scripts/25_pg_reference.tex
 pdflatex scripts/25_pg_reference.tex
 
