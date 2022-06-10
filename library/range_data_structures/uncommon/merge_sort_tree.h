@@ -32,7 +32,7 @@ struct merge_sort_tree {
 	}
 	node combine(const node& l, const node& r) const {
 		vector<int> par(l.vals.size() + r.vals.size());
-		merge(l.vals.begin(), L.vals.end(), r.vals.begin(), R.vals.end(), par.begin());
+		merge(l.vals.begin(), l.vals.end(), r.vals.begin(), r.vals.end(), par.begin());
 		return {par, l.l, r.r};
 	}
 	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
