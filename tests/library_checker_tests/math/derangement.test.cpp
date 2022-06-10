@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/montmort_number_mod"
 #include "../../template.h"
 
-#include "../../../Library/math/derangements.h"
+#include "../../../library/math/derangements.h"
 
 int main() {
 

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/assignment"
 #include "../../template.h"
 
-#include "../../../library/maxflow/hungarian.h"
+#include "../../../library/flow/hungarian.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
