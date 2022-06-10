@@ -41,10 +41,10 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-		--line-filter='[
-				{ "name":"BIT" },
-				{ "name":"KMP" }
-		]' \
+#		--line-filter='[
+#				{ "name":"BIT" },
+#				{ "name":"KMP" }
+#		]' \
 		--use-color --warnings-as-errors="*" $tmp_file -- -std=c++17
 	if (($? != 0))
 	then
