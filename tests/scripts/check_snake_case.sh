@@ -41,7 +41,8 @@ do
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
 		--line-filter='[
-				{ "name":"BIT" }
+				{ "name":"BIT" },
+				{ "name":"KMP" }
 		]' \
 		--use-color --warnings-as-errors="*" tmp.cpp -- -std=c++17
 	if (($? != 0))
