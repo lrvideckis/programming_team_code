@@ -13,8 +13,8 @@ int main() {
 			cin >> a[i][j];
 		}
 	}
-	match res = HungarianMatch(a);
-	cout << res.minCost << endl;
+	match res = hungarian(a);
+	cout << res.min_cost << endl;
 	for(int i = 1; i <= n; i++) {
 		cout << res.matching[i]-1 << " ";
 	}
