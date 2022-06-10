@@ -12,3 +12,10 @@ pdflatex scripts/25_pg_reference.tex
 pdflatex scripts/25_pg_reference.tex
 
 mv 25_pg_reference.pdf ../
+
+
+tests="$(find ../library -name "*.h")"
+
+for test in $tests; do
+	sed --in-place '1,3d' $test
+done
