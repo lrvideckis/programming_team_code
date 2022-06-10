@@ -34,7 +34,7 @@ struct kth_smallest {
 	 * k is 0-based, so query(l,r,0) returns the min
 	 */
 	int query(int l, int r, int k) const {
-		assert(0 <= k && k < r - l + 1); //note this condition implies L <= R
+		assert(0 <= k && k < r - l + 1); //note this condition implies l <= r
 		assert(0 <= l && r + 1 < (int)roots.size());
 		return query(roots[l], roots[r + 1], mn, mx, k);
 	}
