@@ -27,10 +27,6 @@ see [tests/README.md](https://github.com/lrvideckis/programming_team_code/blob/m
 
 Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
-## Out of scope
-
-see [library/README.md](https://github.com/lrvideckis/programming_team_code/blob/master/library/README.md)
-
 ## Other CP repos
 
 - https://github.com/kth-competitive-programming/kactl (one of the best)
