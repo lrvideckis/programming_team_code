@@ -4,7 +4,7 @@
 //for non-decreasing: pass in a vector<pair<T, int>> where second is 0, 1, ..., n-1
 //alternatively, there's this https://codeforces.com/blog/entry/13225
 template<class T>
-vector<int> LIS(const vector<T>& arr) {
+vector<int> LIS(const vector<T>& arr) { //NOLINT(readability-identifier-naming)
 	if (arr.empty()) return {};
 	vector<int> dp{0}/*array of indexes into `arr`*/, prev(arr.size(), -1);
 	for (int i = 1; i < (int)arr.size(); i++) {
