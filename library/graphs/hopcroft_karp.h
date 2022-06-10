@@ -7,12 +7,12 @@ struct match {
 	//# of edges in matching (which = size of min vertex cover by König's theorem)
 	int size_of_matching;
 	//an arbitrary max matching is found. For this matching:
-	//if match_l[nodeLeft] == -1:
-	//    `nodeLeft` is not in matching
+	//if match_l[node_left] == -1:
+	//    `node_left` is not in matching
 	//else:
-	//    the edge `nodeLeft` <=> match_l[nodeLeft] is in the matching
+	//    the edge `node_left` <=> match_l[node_left] is in the matching
 	//
-	//similarly for match_r with edge match_r[nodeRight] <=> nodeRight in matching if match_r[nodeRight] != -1
+	//similarly for match_r with edge match_r[node_right] <=> node_right in matching if match_r[node_right] != -1
 	//matchings stored in match_l and match_r are the same matching
 	//provides way to check if any node is in matching
 	vector<int> match_l, match_r;
@@ -20,23 +20,23 @@ struct match {
 	//if mvc_l[`left node`] is false, then `left node` is in the corresponding maximal independent set
 	vector<bool> mvc_l, mvc_r;
 };
-//Think of the bipartite graph as having a left side (with size l_sz) and a right side (with size r_sz).
-//Nodes on left side are indexed 0,1,...,l_sz-1
-//Nodes on right side are indexed 0,1,...,r_sz-1
+//Think of the bipartite graph as having a left side (with size lsz) and a right side (with size rsz).
+//Nodes on left side are indexed 0,1,...,lsz-1
+//Nodes on right side are indexed 0,1,...,rsz-1
 //
 //`adj` is like a directed adjacency list containing edges from left side -> right side:
-//To initialize `adj`: For every edge nodeLeft <=> nodeRight, do: adj[nodeLeft].push_back(nodeRight)
-match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int r_sz/*number of nodes on right side*/) {
-	int size_of_matching = 0, l_sz = adj.size();
-	vector<int> match_l(l_sz, -1), match_r(r_sz, -1);
+//To initialize `adj`: For every edge node_left <=> node_right, do: adj[node_left].push_back(node_right)
+match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*number of nodes on right side*/) {
+	int size_of_matching = 0, lsz = adj.size();
+	vector<int> match_l(lsz, -1), match_r(rsz, -1);
 	while (true) {
 		queue<int> q;
-		vector<int> level(l_sz, -1);
-		for (int i = 0; i < l_sz; i++) {
+		vector<int> level(lsz, -1);
+		for (int i = 0; i < lsz; i++) {
 			if (match_l[i] == -1) level[i] = 0, q.push(i);
 		}
 		bool found = false;
-		vector<bool> mvc_l(l_sz, true), mvc_r(r_sz, false);
+		vector<bool> mvc_l(lsz, true), mvc_r(rsz, false);
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
@@ -64,7 +64,7 @@ match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int r_sz/
 			level[u] = 1e9; //acts as visited array
 			return false;
 		};
-		for (int i = 0; i < l_sz; i++)
+		for (int i = 0; i < lsz; i++)
 			size_of_matching += (match_l[i] == -1 && dfs(dfs, i));
 	}
 }
