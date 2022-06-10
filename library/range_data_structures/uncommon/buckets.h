@@ -1,9 +1,9 @@
 #pragma once
 //stress tests: tests/stress_tests/range_data_structures/buckets.cpp
-//this code isn't the best. It's meant as a rough start for sqrt-decomposition, and to be modified
+//this code isn't the best. It's meant as a rough start for sqrt_decomposition, and to be modified
 //doesn't handle overflow
 struct buckets {
-	const int bucket_size = 50;//TODO: change - small value for testing
+	const int bucket_size = 300;//TODO
 	struct node {
 		int sum_lazy = 0;
 		int sum_bucket = 0;
@@ -53,7 +53,7 @@ struct buckets {
 				b.sum_bucket += diff;
 			}
 		}
-		for (int i = start_bucket + 1; i < end_bucket; i++) { //handle all n/B buckets in middle
+		for (int i = start_bucket + 1; i < end_bucket; i++) { //handle all n/bucket_size buckets in middle
 			node& b = bucket[i];
 			b.sum_lazy += diff;
 			b.sum_bucket += b.len() * diff;
@@ -79,7 +79,7 @@ struct buckets {
 			for (int i = max(b.l, l); i <= min(b.r, r); i++)
 				sum += values[i];
 		}
-		for (int i = start_bucket + 1; i < end_bucket; i++) //handle all n/B buckets in middle
+		for (int i = start_bucket + 1; i < end_bucket; i++) //handle all n/bucket_size buckets in middle
 			sum += bucket[i].sum_bucket;
 		return sum;
 	}
