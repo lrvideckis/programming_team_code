@@ -20,7 +20,10 @@ declare -i pass=0
 declare -i fail=0
 failTests=""
 
-for test in $(find . -name '*.h')
+echo "skipped headers: "
+find . -name '*.h' | grep -Ff ../tests/scripts/skip_headers.txt
+
+for test in $(find . -name '*.h' | grep -vFf ../tests/scripts/skip_headers.txt)
 do
 	echo "file is "$test
 
