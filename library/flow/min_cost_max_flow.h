@@ -11,7 +11,7 @@ struct min_cost_max_flow {
 	vector<vector<ll>> g;
 	ll n, s, t;
 	ll k = inf; // The maximum amount of flow allowed
-	min_cost_max_flow(int _n, int _s, int _t) : n(_n), s(_s), t(_t) {
+	min_cost_max_flow(int a_n, int a_s, int a_t) : n(a_n), s(a_s), t(a_t) {
 		g.resize(n);
 	}
 	void add_edge(ll a, ll b, ll cap, ll cost) {
