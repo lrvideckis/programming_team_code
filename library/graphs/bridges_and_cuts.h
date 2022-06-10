@@ -4,6 +4,7 @@
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 //handles multiple edges
+//
 //example initialization of `adj`:
 //for (int i = 0; i < m; i++) {
 //	int u, v;
@@ -16,21 +17,21 @@ struct info {
 	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
 	int num_2_edge_ccs;
 	vector<bool> is_bridge;//edge id -> true iff bridge edge
-	vector<int> two_edge_ccid;//node -> ID of 2-edge component (which are labeled 0, 1, ..., `num_2_edge_ccs`-1)
-	//bi-connected component stuff (e.g. components split by cut/articulation nodes) https://cp-algorithms.com/graph/cutpoints.html
+	vector<int> two_edge_ccid;//node -> id of 2 edge component (which are labeled 0, 1, ..., `num_2_edge_ccs`-1)
+	//bi connected component stuff (e.g. components split by cut/articulation nodes) https://cp-algorithms.com/graph/cutpoints.html
 	int num_bccs;
 	vector<bool> is_cut;//node -> true iff cut node
-	vector<int> bcc_id;//edge id -> ID of BCC (which are labeled 0, 1, ..., `num_bccs`-1)
+	vector<int> bcc_id;//edge id -> id of bcc (which are labeled 0, 1, ..., `num_bccs`-1)
 };
 info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
 	//stuff for both (always keep)
 	int n = adj.size(), timer = 1;
 	vector<int> tin(n, 0);
-	//2 edge CC stuff (delete if not needed)
+	//2 edge cc stuff (delete if not needed)
 	int num_2_edge_ccs = 0;
 	vector<bool> is_bridge(m, false);
 	vector<int> two_edge_ccid(n), node_stack;
-	//BCC stuff (delete if not needed)
+	//bcc stuff (delete if not needed)
 	int num_bccs = 0;
 	vector<bool> is_cut(n, false);
 	vector<int> bcc_id(m), edge_stack;
