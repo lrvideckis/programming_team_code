@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ../
+cd ..
 
 files_snake_case="find . -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
@@ -24,8 +24,9 @@ for test in $(find . -name '*.h')
 do
 	echo "file is "$test
 
-	# concatenate 2 files - the actual purpose of "cat" command!
-	cat ../template.cpp $test > tmp.cpp
+	cp ../template.cpp tmp.cpp
+
+	sed --regexp-extended '/^#pragma once/d' $test >> tmp.cpp
 
 	# clang's "lower_case" == the traditional snake_case
 	clang-tidy -checks="readability-identifier-naming" \

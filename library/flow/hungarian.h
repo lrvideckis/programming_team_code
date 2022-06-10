@@ -14,10 +14,10 @@
 //Now max total cost = - HungarianMatch(cost).minCost
 const long long inf = 1e18;
 struct match {
-	long long minCost;
+	long long min_cost;
 	vector<int> matching;//worker `i` (1<=i<=n) is assigned to job `matching[i]` (1<=matching[i]<=m)
 };
-match HungarianMatch(const vector<vector<long long>>& cost) {
+match hungarian(const vector<vector<long long>>& cost) {
 	int n = cost.size() - 1, m = cost[0].size() - 1;
 	assert(n <= m);
 	vector<int> p(m + 1), way(m + 1);
