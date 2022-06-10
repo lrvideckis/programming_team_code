@@ -1,4 +1,5 @@
 {
+"tests/library_checker_tests/flow/hungarian.test.cpp": "2022-06-09 17:32:38 -0700",
 "tests/library_checker_tests/graphs/biconnected_components.test.cpp": "2022-06-09 16:35:36 -0700",
 "tests/library_checker_tests/graphs/dijkstra.test.cpp": "2022-06-09 16:35:36 -0700",
 "tests/library_checker_tests/graphs/disjoint_set.test.cpp": "2022-06-09 16:42:10 -0700",
@@ -9,10 +10,16 @@
 "tests/library_checker_tests/graphs/scc.test.cpp": "2022-06-09 16:35:36 -0700",
 "tests/library_checker_tests/graphs/tree_freq_dist_centroid_fft.test.cpp": "2022-06-09 16:35:36 -0700",
 "tests/library_checker_tests/graphs/two_edge_components.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/math/derangement.test.cpp": "2022-06-09 17:32:38 -0700",
 "tests/library_checker_tests/math/matrix_determinant.test.cpp": "2022-06-09 16:42:10 -0700",
 "tests/library_checker_tests/math/matrix_inverse.test.cpp": "2022-06-09 16:42:10 -0700",
 "tests/library_checker_tests/math/matrix_multiply.test.cpp": "2022-06-09 16:42:10 -0700",
+"tests/library_checker_tests/math/n_choose_k.test.cpp": "2022-06-09 16:42:10 -0700",
+"tests/library_checker_tests/math/partitions.test.cpp": "2022-06-09 16:35:36 -0700",
+"tests/library_checker_tests/range_data_structures/fenwick_tree.test.cpp": "2022-06-09 16:35:36 -0700",
 "tests/library_checker_tests/strings/binary_trie.test.cpp": "2022-06-09 16:31:21 -0700",
 "tests/library_checker_tests/strings/lcp.test.cpp": "2022-06-09 16:31:21 -0700",
-"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-06-09 16:31:21 -0700"
+"tests/library_checker_tests/strings/str_q_palindrome.test.cpp": "2022-06-09 17:31:51 -0700",
+"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-06-09 16:31:21 -0700",
+"tests/library_checker_tests/strings/z_func.test.cpp": "2022-06-09 17:31:51 -0700"
 }
