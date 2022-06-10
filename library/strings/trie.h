@@ -2,7 +2,7 @@
 //status: not tested
 //source: https://cp-algorithms.com/string/aho_corasick.html#construction-of-the-trie
 //intended to be a base template and to be modified
-const int k = 26;//character size
+const int k = 26;//alphabet size
 struct trie {
 	const char min_ch = 'a';//'A' for uppercase, '0' for digits
 	struct node {
