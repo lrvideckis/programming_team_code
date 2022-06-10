@@ -9,9 +9,9 @@
 //this returns *min* total cost to assign each worker to some distinct job
 //O(n^2 * m)
 //
-//trick 1: set `cost[i][j]` to INF to say: "worker `i` cannot be assigned job `j`"
+//trick 1: set `cost[i][j]` to inf to say: "worker `i` cannot be assigned job `j`"
 //trick 2: `cost[i][j]` can be negative, so to instead find max total cost over all matchings: set all `cost[i][j]` to `-cost[i][j]`.
-//Now max total cost = - HungarianMatch(cost).minCost
+//Now max total cost = - hungarian(cost).min_cost
 const long long inf = 1e18;
 struct match {
 	long long min_cost;
