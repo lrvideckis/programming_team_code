@@ -6,7 +6,7 @@
 //Note cnt[0][j] and cnt[i][0] will contain garbage values
 //O(n*m)
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
-	const int n = grid.size(), m = grid[0].size();
+	int n = grid.size(), m = grid[0].size();
 	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0));
 	vector<int> arr(m, 0);
 	auto rv = [&](int j) -> int {//reverse
