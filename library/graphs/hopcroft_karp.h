@@ -12,7 +12,7 @@ struct match {
 	//else:
 	//	the edge `node_left` <=> l_to_r[node_left] is in the matching
 	//
-	//similarly for r_to_l with edge r_to_l[node_right] <=> node_left in matching if r_to_l[node_right] != -1
+	//similarly for r_to_l with edge r_to_l[node_right] <=> node_right in matching if r_to_l[node_right] != -1
 	//matchings stored in l_to_r and r_to_l are the same matching
 	//provides way to check if any node is in matching
 	vector<int> l_to_r, r_to_l;
