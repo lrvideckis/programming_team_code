@@ -10,6 +10,7 @@
 //case 1: mod is prime
 //(base^pw)%mod == (base^(pw%(mod-1)))%mod (from Fermat's little theorem)
 //so calculate pw under mod of `mod-1`
+//note `mod-1` is not prime, so you need to be able to calculate `pw%(mod-1)` without division
 //
 //case 2: non-prime mod
 //let t = totient(mod)
