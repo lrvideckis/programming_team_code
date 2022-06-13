@@ -6,13 +6,13 @@
 //usage:
 //	info cc = bridge_and_cut(adj, m);
 //	vector<vector<int>> bvt = block_vertex_tree(adj, cc);
-//to loop over each *unique* bcc containing a node i:
-//	for(int bccid : bvt[i]) {
+//to loop over each *unique* bcc containing a node v:
+//	for(int bccid : bvt[v]) {
 //		bccid -= n;
 //		...
 //	}
 //to loop over each *unique* node inside a bcc:
-//	for(int i : bvt[bccid + n]) {
+//	for(int v : bvt[bccid + n]) {
 //		...
 //	}
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const info& cc) {

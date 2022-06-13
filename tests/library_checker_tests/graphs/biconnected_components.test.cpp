@@ -54,17 +54,18 @@ int main() {
 		}
 
 		// testing commented loops in block_vertex_tree
-		for(int i = 0; i < n; i++) {
-			assert(nodeToBCCs[i].size() == bvt[i].size());
-			for(int bccid : bvt[i]) {
+		for(int v = 0; v < n; v++) {
+			assert(nodeToBCCs[v].size() == bvt[v].size());
+
+			for(int bccid : bvt[v]) {
 				bccid -= n;
-				assert(nodeToBCCs[i].count(bccid));
+				assert(nodeToBCCs[v].count(bccid));
 			}
 		}
 		for(int bccid = 0; bccid < cc.num_bccs; bccid++) {
 			assert(bccToNodes[bccid].size() == bvt[bccid+n].size());
-			for(int i : bvt[bccid + n]) {
-				assert(bccToNodes[bccid].count(i));
+			for(int v : bvt[bccid + n]) {
+				assert(bccToNodes[bccid].count(v));
 			}
 		}
 	}
