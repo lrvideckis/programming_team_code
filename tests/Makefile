@@ -8,6 +8,7 @@ help:
 	@echo "make verify_library_checker_test_comments  | check library checker test status comments in .h files"
 	@echo "make verify_stress_test_comments           | check stress test status comments in .h files"
 	@echo "make pdf                                   | build PDF from .tex file"
+	@echo "make push_pdf                              | push PDF to remote"
 	@echo "make test_format                           | checks code is formatted with astyle"
 	@echo "make check_snake_case                      | verify all code+file names are snake case"
 	@echo "make help                                  | to show this information"
@@ -26,6 +27,9 @@ verify_stress_test_comments:
 
 pdf:
 	./scripts/make_pdf.sh .
+
+push_pdf:
+	./scripts/push_pdf.sh .
 
 test_format:
 	./scripts/test_format.sh .
