@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../../template.h"
 
-#include "../../../library/graphs/bridges_and_cuts.h"
+#include "../../../library/graphs/bridge_tree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -17,19 +17,59 @@ int main() {
 		edges[i] = {u, v};
 	}
 
-	info res = bridge_and_cut(adj, m);
+	info cc = bridge_and_cut(adj, m);
+	vector<vector<int>> bt = bridge_tree(adj, cc);
+
+	//check correctness of bridge tree
+	{
+		assert((int)bt.size() == cc.num_2_edge_ccs);
+
+		set<pair<int,int>> seen_edges;
+		int sum_deg = 0;
+		for(int v = 0; v < cc.num_2_edge_ccs; v++) {
+			sum_deg += bt[v].size();
+			for(int to : bt[v]) {
+				assert(to != v); //didn't add any non-bridge
+				assert(!seen_edges.count({v, to}));//didn't add a bridge twice
+				seen_edges.insert({v, to});
+			}
+		}
+		for(auto [u, v] : seen_edges) {
+			assert(seen_edges.count({v, u}));
+		}
+		int cnt_bridges = 0;
+		for(int i = 0; i < m; i++)
+			cnt_bridges += cc.is_bridge[i];
+		assert(sum_deg%2 == 0 && sum_deg/2 == cnt_bridges);
+		assert(seen_edges.size()%2 == 0 && (int)seen_edges.size()/2 == cnt_bridges);
+
+		for(int v = 0; v < cc.num_2_edge_ccs; v++) {
+			sort(bt[v].begin(), bt[v].end());
+		}
+		for(int i = 0; i < m; i++) {
+			auto [u, v] = edges[i];
+			u = cc.two_edge_ccid[u];
+			v = cc.two_edge_ccid[v];
+			for(int j = 0; j < 2; j++) {
+				auto it = lower_bound(bt[u].begin(), bt[u].end(), v);
+				bool in_adj_list = (it != bt[u].end() && (*it) == v);
+				assert(in_adj_list == cc.is_bridge[i]);
+				swap(u, v);
+			}
+		}
+	}
 
 	for(int i = 0; i < m; i++) {
 		auto [u, v] = edges[i];
 		//bridge if nodes are from different 2-edge CCs
-		assert(res.is_bridge[i] == (res.two_edge_ccid[u] != res.two_edge_ccid[v]));
+		assert(cc.is_bridge[i] == (cc.two_edge_ccid[u] != cc.two_edge_ccid[v]));
 	}
 
-	vector<vector<int>> ccs(res.num_2_edge_ccs);
+	vector<vector<int>> ccs(cc.num_2_edge_ccs);
 	for(int i = 0; i < n; i++) {
-		ccs[res.two_edge_ccid[i]].push_back(i);
+		ccs[cc.two_edge_ccid[i]].push_back(i);
 	}
-	cout << res.num_2_edge_ccs << endl;
+	cout << cc.num_2_edge_ccs << endl;
 	for(auto& cc : ccs) {
 		cout << cc.size() << " ";
 		for(int node : cc) cout << node << " ";
