@@ -21,10 +21,10 @@ vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj,
 	vector<int> cnt(cc.num_bccs, 0);
 	for (int i = 0; i < n; i++) {
 		for (auto [_, e_id] : adj[i]) {
-			int bcc = cc.bcc_id[e_id];
-			if (cnt[bcc]++ == 0) {
-				tree[i].push_back(bcc + n);// add edge between original node, and bcc node
-				tree[bcc + n].push_back(i);
+			int bccid = cc.bcc_id[e_id];
+			if (cnt[bccid]++ == 0) {
+				tree[i].push_back(bccid + n);// add edge between original node, and bcc node
+				tree[bccid + n].push_back(i);
 			}
 		}
 		for (auto [_, e_id] : adj[i])
