@@ -36,8 +36,7 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	vector<bool> is_cut(n, false);
 	vector<int> bcc_id(m), edge_stack;
 	auto dfs = [&](auto self, int v, int p_id) -> int {
-		int low = tin[v] = timer++;
-		int deg = 0;
+		int low = tin[v] = timer++, deg = 0;
 		node_stack.push_back(v);
 		for (auto [to, e_id] : adj[v]) {
 			if (e_id == p_id) continue;
