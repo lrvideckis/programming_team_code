@@ -73,9 +73,8 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 		}
 		return low;
 	};
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		if (!tin[i])
 			dfs(dfs, i, -1);
-	}
 	return {num_2_edge_ccs, is_bridge, two_edge_ccid, num_bccs, is_cut, bcc_id};
 }
