@@ -8,7 +8,8 @@ struct matrix_info {
 //Solves mat * x = b under prime mod.
 //mat is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m vector.
 //assumes n,m >= 1, else RTE
-//Returns rank of mat, determinant of mat, and x (solution vector to mat * x = b). x is empty if no solution. If multiple solutions, an arbitrary one is returned.
+//Returns rank of mat, determinant of mat, and x (solution vector to mat * x = b).
+//x is empty if no solution. If rank < m, there are multiple solutions and an arbitrary one is returned.
 //Leaves mat in reduced row echelon form (unlike kactl) with b appended.
 //O(n * m * min(n,m))
 matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, int mod) {
