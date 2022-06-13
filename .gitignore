@@ -5,5 +5,4 @@
 *.lol
 *.out
 *.tmp
-*.orig
-tmp.*
+tmp
