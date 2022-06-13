@@ -19,15 +19,15 @@ vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj,
 	int n = adj.size();
 	vector<vector<int>> tree(n + cc.num_bccs);
 	vector<int> cnt(cc.num_bccs, 0);
-	for (int i = 0; i < n; i++) {
-		for (auto [_, e_id] : adj[i]) {
+	for (int v = 0; v < n; v++) {
+		for (auto [_, e_id] : adj[v]) {
 			int bccid = cc.bcc_id[e_id];
 			if (cnt[bccid]++ == 0) {
-				tree[i].push_back(bccid + n);// add edge between original node, and bcc node
-				tree[bccid + n].push_back(i);
+				tree[v].push_back(bccid + n);// add edge between original node, and bcc node
+				tree[bccid + n].push_back(v);
 			}
 		}
-		for (auto [_, e_id] : adj[i])
+		for (auto [_, e_id] : adj[v])
 			cnt[cc.bcc_id[e_id]]--;
 	}
 	return tree;
