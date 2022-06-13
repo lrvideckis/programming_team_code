@@ -38,7 +38,7 @@ struct trie {
 		}
 		t[c].leaf = 0;
 	}
-	int find_string(const string& s) {
+	int find_string(const string& s) const {
 		int c = 0;
 		for (char ch : s) {
 			int v = ch - min_ch;
