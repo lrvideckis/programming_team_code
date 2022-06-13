@@ -1,5 +1,5 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/unionfind
+//library checker tests: https://judge.yosupo.jp/problem/unionfind, https://judge.yosupo.jp/problem/two_edge_connected_components
 //stress tests: tests/stress_tests/misc/disjoint_set.cpp
 struct DSU { //NOLINT(readability-identifier-naming)
 	int num_sets;
