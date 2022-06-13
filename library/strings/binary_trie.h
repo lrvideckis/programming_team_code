@@ -9,8 +9,8 @@ struct binary_trie {
 	};
 	vector<node> t;
 	binary_trie() : t(1) {}
-	//delta = 1 to insert val, -1 to remove val
-	void update(long long val, int delta) {
+	//delta = 1 to insert val, -1 to remove val, 0 to get the # of val's in this data structure
+	int update(long long val, int delta) {
 		int c = 0;
 		t[0].sub_sz += delta;
 		for (int bit = mx_bit; bit >= 0; bit--) {
@@ -23,16 +23,6 @@ struct binary_trie {
 			t[c].sub_sz += delta;
 		}
 		t[c].val = val;
-	}
-	//returns # of val's in this data structure
-	int cnt(long long val) const {
-		int c = 0;
-		for (int bit = mx_bit; bit >= 0; bit--) {
-			bool v = (val >> bit) & 1;
-			if (t[c].next[v] == -1)
-				return 0;
-			c = t[c].next[v];
-		}
 		return t[c].sub_sz;
 	}
 	int size() const {
