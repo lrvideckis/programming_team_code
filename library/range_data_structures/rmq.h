@@ -24,7 +24,7 @@ struct RMQ { //NOLINT(readability-identifier-naming)
 	}
 	//inclusive range [l, r]
 	T query(int l, int r) const {
-		int lg = 31 - __builtin_clz(r - l);
+		int lg = 31 - __builtin_clz(r - l + 1);
 		return func(dp[lg][l], dp[lg][r - (1 << lg) + 1]);
 	}
 };
