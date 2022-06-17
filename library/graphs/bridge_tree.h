@@ -9,11 +9,8 @@ vector<vector<int>> bridge_tree(const vector<vector<pair<int, int>>>& adj, const
 	vector<vector<int>> tree(cc.num_2_edge_ccs);
 	for (int i = 0; i < (int)adj.size(); i++) {
 		for (auto [to, e_id] : adj[i]) {
-			if (i < to && cc.is_bridge[e_id]) {
-				int u = cc.two_edge_ccid[i];
-				int v = cc.two_edge_ccid[to];
-				tree[u].push_back(v);
-				tree[v].push_back(u);
+			if (cc.is_bridge[e_id]) {
+				tree[cc.two_edge_ccid[i]].push_back(cc.two_edge_ccid[to]);
 			}
 		}
 	}
