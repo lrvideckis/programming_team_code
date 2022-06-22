@@ -1,11 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/number_of_substrings, https://judge.yosupo.jp/problem/enumerate_palindromes
-//modified from here: https://judge.yosupo.jp/submission/37410
-//
-// Reference:
-// T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
-// Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
-// Applications
+//source: https://judge.yosupo.jp/submission/37410
+//mnemonic: Longest Common Prefix
 template<class T>
 vector<int> LCP(const T& s, const vector<int>& sa) { //NOLINT(readability-identifier-naming)
 	int n = s.size(), k = 0;

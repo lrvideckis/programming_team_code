@@ -1,5 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/scc
+//mnemonic: Strongly Connected Component
 struct scc_info {
 	int num_sccs;
 	//scc's are labeled 0,1,...,`num_sccs-1`

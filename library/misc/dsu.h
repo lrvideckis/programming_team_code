@@ -1,6 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/unionfind, https://judge.yosupo.jp/problem/two_edge_connected_components
 //stress tests: tests/stress_tests/misc/disjoint_set.cpp
+//mnemonic: Disjoint Set Union
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct DSU {
 	int num_sets;

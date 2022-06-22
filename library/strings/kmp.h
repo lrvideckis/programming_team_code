@@ -1,5 +1,6 @@
 #pragma once
 //stress tests: tests/stress_tests/strings/kmp.cpp
+//mnemonic: Knuth Morris Pratt
 #include "prefix_function.h"
 //usage:
 //	string needle;

@@ -1,7 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/bipartitematching
 //with asserts checking correctness of min vertex cover
-//Modified from https://github.com/foreverbell/acm-icpc-cheat-sheet/blob/master/src/graph-algorithm/hopcroft-karp.cpp
+//source: https://github.com/foreverbell/acm-icpc-cheat-sheet/blob/master/src/graph-algorithm/hopcroft-karp.cpp
 //Worst case O(E*sqrt(V)) but faster in practice
 struct match {
 	//# of edges in matching (which = size of min vertex cover by König's theorem)

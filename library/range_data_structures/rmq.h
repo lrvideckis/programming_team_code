@@ -10,6 +10,7 @@
 //and initialize arr[i].second = i (0<=i<n)
 //If there are multiple indexes of min element, it'll return the smallest
 //(left-most) one
+//mnemonic: Range Min/Max Query
 template <class T>
 struct RMQ { //NOLINT(readability-identifier-naming)
 	vector<vector<T>> dp;

@@ -2,6 +2,7 @@
 //library checker tests: https://judge.yosupo.jp/problem/lca, https://judge.yosupo.jp/problem/vertex_add_path_sum, https://judge.yosupo.jp/problem/vertex_add_subtree_sum
 //source: https://codeforces.com/blog/entry/53170
 //assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
+//mnemonic: Heavy Light Decomposition
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct HLD {
 	int n;

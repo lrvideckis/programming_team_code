@@ -1,6 +1,6 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/range_kth_smallest
-//modified from https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
+//source: https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 struct kth_smallest {
 	struct node {
 		int sum;

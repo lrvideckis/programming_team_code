@@ -1,11 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/suffixarray, https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/number_of_substrings, https://judge.yosupo.jp/problem/enumerate_palindromes
-//modified from here: https://judge.yosupo.jp/submission/37410
-//
-// SA-IS, linear-time suffix array construction
-// Reference:
-// G. Nong, S. Zhang, and W. H. Chan,
-// Two Efficient Algorithms for Linear Time Suffix Array Construction
+//source: https://judge.yosupo.jp/submission/37410
+//O(n)
+//mnemonic: Suffix Array Induced Sorting
 template<class T>
 vector<int> sa_is(const T& s, int upper/*max element of `s`; for std::string, pass in 255*/) {
 	int n = (int)s.size();

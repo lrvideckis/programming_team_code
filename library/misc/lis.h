@@ -3,6 +3,7 @@
 //returns array of indexes representing the longest *strictly* increasing subsequence
 //for non-decreasing: pass in a vector<pair<T, int>> with arr[i].second = i (0<=i<n)
 //alternatively, there's this https://codeforces.com/blog/entry/13225
+//mnemonic: Longest Increasing Subsequence
 template<class T>
 vector<int> LIS(const vector<T>& arr) { //NOLINT(readability-identifier-naming)
 	if (arr.empty()) return {};
