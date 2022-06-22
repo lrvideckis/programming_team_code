@@ -3,10 +3,10 @@
 //usage:
 //	vector<long long> arr;
 //	...
-//	RMQ<long long> st(arr, [](auto x, auto y) { return min(x,y); });
+//	RMQ<long long> st(arr, [&](auto x, auto y) { return min(x,y); });
 //
 //to also get index of min element, do:
-//	RMQ<pair<T, int>> st(arr, [](auto x, auto y) { return min(x,y); });
+//	RMQ<pair<T, int>> st(arr, [&](auto x, auto y) { return min(x,y); });
 //and initialize arr[i].second = i (0<=i<n)
 //If there are multiple indexes of min element, it'll return the smallest
 //(left-most) one
