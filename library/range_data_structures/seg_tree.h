@@ -11,10 +11,6 @@ struct seg_tree {
 		}
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
-		//Now, a seg tree over an array of size n requires 2*n-1 nodes. These
-		//are broken into n leaf nodes and n-1 internal nodes. Having only n-1
-		//internal nodes is minimal as each internal node can only combine 2
-		//childs into 1.
 		int rch() const { //right child
 			return ((r - l) & ~1) + 2;
 		}
