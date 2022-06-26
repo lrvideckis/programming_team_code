@@ -27,13 +27,10 @@ struct merge_sort_tree {
 			int tm = tl + (tr - tl) / 2;
 			build(arr, v + 1, tl, tm);
 			build(arr, v + 2 * (tm - tl + 1), tm + 1, tr);
-			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
+			const auto& l = tree[v + 1].vals, r = tree[v + 2 * (tm - tl + 1)].vals;
+			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(tree[v].vals));
+			tree[v].l = tl, tree[v].r = tr;
 		}
-	}
-	node combine(const node& l, const node& r) const {
-		vector<int> par(l.vals.size() + r.vals.size());
-		merge(l.vals.begin(), l.vals.end(), r.vals.begin(), r.vals.end(), par.begin());
-		return {par, l.l, r.r};
 	}
 	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
 	//O(log^2(n))
