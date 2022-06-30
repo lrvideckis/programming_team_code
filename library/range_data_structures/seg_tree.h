@@ -12,16 +12,18 @@ struct seg_tree {
 		//returns 1 + (# of nodes in left child's subtree)
 		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
 		int rch() const { //right child
-			return ((r - l) & ~1) + 2;
+			return (r - l + 2) & ~1;
 		}
 	};
 	vector<node> tree;
 	seg_tree(const vector<long long>& arr) : tree(2 * (int)arr.size() - 1) {
-		build(arr, 0, 0, (int)arr.size() - 1);
+		int timer = 0;
+		build(arr, timer, 0, (int)arr.size() - 1);
 	}
-	void build(const vector<long long>& arr, int v, int tl, int tr) {
+	node build(const vector<long long>& arr, int& timer, int tl, int tr) {
+		node& curr = tree[timer++];
 		if (tl == tr) {
-			tree[v] = {
+			curr = {
 				arr[tl],
 				arr[tl],
 				arr[tl],
@@ -31,10 +33,11 @@ struct seg_tree {
 			};
 		} else {
 			int tm = tl + (tr - tl) / 2;
-			build(arr, v + 1, tl, tm);
-			build(arr, v + 2 * (tm - tl + 1), tm + 1, tr);
-			tree[v] = combine(tree[v + 1], tree[v + 2 * (tm - tl + 1)]);
+			const node& l = build(arr, timer, tl, tm);
+			const node& r = build(arr, timer, tm + 1, tr);
+			curr = combine(l, r);
 		}
+		return curr;
 	}
 	static node combine(const node& l, const node& r) {
 		return {
