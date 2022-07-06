@@ -29,12 +29,12 @@ struct seg_tree {
 			int tm = tl + (tr - tl) / 2;
 			const data& l = build(arr, timer, tl, tm);
 			const data& r = build(arr, timer, tm + 1, tr);
-			curr.val = combine(l, r);
+			curr.val = pull(l, r);
 		}
 		curr.lazy = 0, curr.l = tl, curr.r = tr;
 		return curr.val;
 	}
-	static data combine(const data& l, const data& r) {
+	static data pull(const data& l, const data& r) {
 		return {
 			l[0] + r[0],
 			max(l[1], r[1]),
@@ -69,7 +69,7 @@ struct seg_tree {
 			return apply(v, add);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rch(), l, r, add);
-		tree[v].val = combine(tree[v + 1].val, tree[v + tree[v].rch()].val);
+		tree[v].val = pull(tree[v + 1].val, tree[v + tree[v].rch()].val);
 	}
 	//range [l,r]
 	data query(int l, int r) {
@@ -81,7 +81,7 @@ struct seg_tree {
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
-		return combine(query(v + 1, l, r),
-		               query(v + tree[v].rch(), l, r));
+		return pull(query(v + 1, l, r),
+		            query(v + tree[v].rch(), l, r));
 	}
 };
