@@ -20,18 +20,17 @@ struct merge_sort_tree {
 	node build(const vector<int>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
 		if (tl == tr) {
-			curr = {
+			return curr = {
 				{arr[tl]},
 				tl,
 				tr
 			};
-		} else {
-			int tm = tl + (tr - tl) / 2;
-			const vector<int>& l = build(arr, timer, tl, tm).vals;
-			const vector<int>& r = build(arr, timer, tm + 1, tr).vals;
-			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(curr.vals));
-			curr.l = tl, curr.r = tr;
 		}
+		int tm = tl + (tr - tl) / 2;
+		const vector<int>& l = build(arr, timer, tl, tm).vals;
+		const vector<int>& r = build(arr, timer, tm + 1, tr).vals;
+		merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(curr.vals));
+		curr.l = tl, curr.r = tr;
 		return curr;
 	}
 	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
