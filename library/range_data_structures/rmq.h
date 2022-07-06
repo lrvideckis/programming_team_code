@@ -11,8 +11,8 @@
 //If there are multiple indexes of min element, it'll return the smallest
 //(left-most) one
 //mnemonic: Range Min/Max Query
-template <class T>
-struct RMQ { //NOLINT(readability-identifier-naming)
+//NOLINTNEXTLINE(readability-identifier-naming)
+template <class T> struct RMQ {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> func;
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_func) : dp(1, arr), func(a_func) {

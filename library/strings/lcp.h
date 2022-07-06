@@ -2,8 +2,8 @@
 //library checker tests: https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/number_of_substrings, https://judge.yosupo.jp/problem/enumerate_palindromes
 //source: https://judge.yosupo.jp/submission/37410
 //mnemonic: Longest Common Prefix
-template<class T>
-vector<int> LCP(const T& s, const vector<int>& sa) { //NOLINT(readability-identifier-naming)
+//NOLINTNEXTLINE(readability-identifier-naming)
+template<class T> vector<int> LCP(const T& s, const vector<int>& sa) {
 	int n = s.size(), k = 0;
 	vector<int> lcp(n, 0);
 	vector<int> rank(n, 0);

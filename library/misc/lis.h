@@ -4,8 +4,8 @@
 //for non-decreasing: pass in a vector<pair<T, int>> with arr[i].second = i (0<=i<n)
 //alternatively, there's this https://codeforces.com/blog/entry/13225
 //mnemonic: Longest Increasing Subsequence
-template<class T>
-vector<int> LIS(const vector<T>& arr) { //NOLINT(readability-identifier-naming)
+//NOLINTNEXTLINE(readability-identifier-naming)
+template<class T> vector<int> LIS(const vector<T>& arr) {
 	if (arr.empty()) return {};
 	vector<int> dp{0}/*array of indexes into `arr`*/, prev(arr.size(), -1);
 	for (int i = 1; i < (int)arr.size(); i++) {

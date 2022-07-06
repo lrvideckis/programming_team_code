@@ -1,8 +1,8 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/point_add_range_sum, https://judge.yosupo.jp/problem/vertex_add_path_sum, https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/predecessor_problem
 //mnemonic: Binary Indexed Tree
-template<class T>
-struct BIT { //NOLINT(readability-identifier-naming)
+//NOLINTNEXTLINE(readability-identifier-naming)
+template<class T> struct BIT {
 	vector<T> bit;
 	BIT(int n) : bit(n, 0) {}
 	BIT(const vector<T>& a) : bit(a.size()) {
