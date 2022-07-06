@@ -21,25 +21,18 @@ struct seg_tree {
 		int timer = 0;
 		build(arr, timer, 0, (int)arr.size() - 1);
 	}
-	node build(const vector<long long>& arr, int& timer, int tl, int tr) {
+	data build(const vector<long long>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
 		if (tl == tr) {
-			return curr = {
-				{arr[tl], arr[tl], arr[tl]},
-				0,
-				tl,
-				tr
-			};
+			curr.val = {arr[tl], arr[tl], arr[tl]};
+		} else {
+			int tm = tl + (tr - tl) / 2;
+			const data& l = build(arr, timer, tl, tm);
+			const data& r = build(arr, timer, tm + 1, tr);
+			curr.val = combine(l, r);
 		}
-		int tm = tl + (tr - tl) / 2;
-		const data& l = build(arr, timer, tl, tm).val;
-		const data& r = build(arr, timer, tm + 1, tr).val;
-		return curr = {
-			combine(l, r),
-			0,
-			tl,
-			tr
-		};
+		curr.lazy = 0, curr.l = tl, curr.r = tr;
+		return curr.val;
 	}
 	static data combine(const data& l, const data& r) {
 		return {
