@@ -35,10 +35,10 @@ int main() {
 					mx = max(mx, arr[i]);
 					sum += arr[i];
 				}
-				seg_tree::node res = st.query(L, R);
-				assert(res.mn == mn);
-				assert(res.mx == mx);
-				assert(res.sum == sum);
+				seg_tree::data res = st.query(L, R);
+				assert(res[0] == sum);
+				assert(res[1] == mx);
+				assert(res[2] == mn);
 			}
 		}
 	}

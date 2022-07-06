@@ -2,8 +2,9 @@
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 const long long inf = 1e18;
 struct seg_tree {
+	using data = array<long long, 3>;//sum, max, min
 	struct node {
-		long long sum, mx, mn;
+		data val;
 		long long lazy;
 		int l, r;
 		int len() const {
@@ -24,34 +25,34 @@ struct seg_tree {
 		node& curr = tree[timer++];
 		if (tl == tr) {
 			return curr = {
-				arr[tl],
-				arr[tl],
-				arr[tl],
+				{arr[tl], arr[tl], arr[tl]},
 				0,
 				tl,
 				tr
 			};
 		}
 		int tm = tl + (tr - tl) / 2;
-		const node& l = build(arr, timer, tl, tm);
-		const node& r = build(arr, timer, tm + 1, tr);
-		return curr = combine(l, r);
-	}
-	static node combine(const node& l, const node& r) {
-		return {
-			l.sum + r.sum,
-			max(l.mx, r.mx),
-			min(l.mn, r.mn),
+		const data& l = build(arr, timer, tl, tm).val;
+		const data& r = build(arr, timer, tm + 1, tr).val;
+		return curr = {
+			combine(l, r),
 			0,
-			l.l,
-			r.r
+			tl,
+			tr
+		};
+	}
+	static data combine(const data& l, const data& r) {
+		return {
+			l[0] + r[0],
+			max(l[1], r[1]),
+			min(l[2], r[2])
 		};
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
 	void apply(int v, long long add) {
-		tree[v].sum += tree[v].len() * add;
-		tree[v].mx += add;
-		tree[v].mn += add;
+		tree[v].val[0] += tree[v].len() * add;
+		tree[v].val[1] += add;
+		tree[v].val[2] += add;
 		if (tree[v].len() > 1) {
 			tree[v + 1].lazy += add;
 			tree[v + tree[v].rch()].lazy += add;
@@ -75,18 +76,18 @@ struct seg_tree {
 			return apply(v, add);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rch(), l, r, add);
-		tree[v] = combine(tree[v + 1], tree[v + tree[v].rch()]);
+		tree[v].val = combine(tree[v + 1].val, tree[v + tree[v].rch()].val);
 	}
 	//range [l,r]
-	node query(int l, int r) {
+	data query(int l, int r) {
 		return query(0, l, r);
 	}
-	node query(int v, int l, int r) {
+	data query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
-			return {0, -inf, inf, 0, 0, 0};
+			return {0, -inf, inf};
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
-			return tree[v];
+			return tree[v].val;
 		return combine(query(v + 1, l, r),
 		               query(v + tree[v].rch(), l, r));
 	}
