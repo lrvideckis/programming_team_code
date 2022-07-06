@@ -1,15 +1,14 @@
 #pragma once
 //stress tests: tests/stress_tests/range_data_structures/implicit_seg_tree.cpp
-//see TODO for lines of code which usually need to change (not a complete list)
 using dt = array<long long, 3>; //sum, max, min
 const long long inf = 1e18;
-const int sz = 1.5e7; //TODO
+const int sz = 1.5e7;
 struct node {
 	dt val;
 	long long lazy;
 	int lch, rch; // children, indexes into `tree`, -1 for null
 	node() {}
-	node(dt a_val) : val(a_val) {
+	node(const dt& a_val) : val(a_val) {
 		lazy = 0, lch = rch = -1;
 	}
 } tree[sz];
@@ -17,9 +16,9 @@ struct implicit_seg_tree {
 	int ptr, root_l, root_r;//[root_l, root_r] defines range of root node; handles negatives
 	//RTE's when `arr` is empty
 	implicit_seg_tree(int l, int r) : ptr(0), root_l(l), root_r(r) {
-		tree[ptr++] = node({0, 0, 0}); //TODO
+		tree[ptr++] = node(dt{0, 0, 0});
 	}
-	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
+	//what happens when `add` is applied to every index in range [tl, tr]?
 	void apply(int v, int tl, int tr, long long add) {
 		tree[v].val[0] += (tr - tl + 1) * add;
 		tree[v].val[1] += add;
@@ -33,7 +32,7 @@ struct implicit_seg_tree {
 		if (tl != tr && tree[v].lch == -1) {
 			assert(ptr + 1 < sz);
 			tree[v].lch = ptr;
-			tree[ptr++] = node(dt{0, 0, 0}); //TODO
+			tree[ptr++] = node(dt{0, 0, 0});
 			tree[v].rch = ptr;
 			tree[ptr++] = node(dt{0, 0, 0});
 		}
@@ -70,7 +69,7 @@ struct implicit_seg_tree {
 	}
 	dt query(int v, int tl, int tr, int l, int r) {
 		if (tr < l || r < tl)
-			return {0, -inf, inf}; //TODO
+			return {0, -inf, inf};
 		push(v, tl, tr);
 		if (l <= tl && tr <= r)
 			return tree[v].val;
