@@ -35,9 +35,9 @@ struct seg_tree {
 		int tm = tl + (tr - tl) / 2;
 		const node& l = build(arr, timer, tl, tm);
 		const node& r = build(arr, timer, tm + 1, tr);
-		return curr = combine(l, r);
+		return curr = pull(l, r);
 	}
-	static node combine(const node& l, const node& r) {
+	static node pull(const node& l, const node& r) {
 		return {
 			l.sum + r.sum,
 			max(l.mx, r.mx),
@@ -75,7 +75,7 @@ struct seg_tree {
 			return apply(v, add);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rch(), l, r, add);
-		tree[v] = combine(tree[v + 1], tree[v + tree[v].rch()]);
+		tree[v] = pull(tree[v + 1], tree[v + tree[v].rch()]);
 	}
 	//range [l,r]
 	node query(int l, int r) {
@@ -87,7 +87,7 @@ struct seg_tree {
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v];
-		return combine(query(v + 1, l, r),
-		               query(v + tree[v].rch(), l, r));
+		return pull(query(v + 1, l, r),
+		            query(v + tree[v].rch(), l, r));
 	}
 };
