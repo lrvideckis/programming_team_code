@@ -2,7 +2,7 @@
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 const long long inf = 1e18;
 struct seg_tree {
-	using data = array<long long, 3>;//sum, max, min
+	using data = array<long long, 3>; //sum, max, min
 	struct node {
 		data val;
 		long long lazy;
