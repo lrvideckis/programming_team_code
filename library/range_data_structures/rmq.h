@@ -16,10 +16,9 @@ struct RMQ { //NOLINT(readability-identifier-naming)
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> func;
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_func) : dp(1, arr), func(a_func) {
-		int n = arr.size();
-		for (int pw = 1, k = 1; 2 * pw <= n; pw *= 2, k++) {
+		for (int pw = 1, k = 1, n = arr.size(); 2 * pw <= n; pw *= 2, k++) {
 			dp.emplace_back(n - 2 * pw + 1);
-			for (int j = 0; j + 2 * pw - 1 < n; j++)
+			for (int j = 0; j < n - 2 * pw + 1; j++)
 				dp[k][j] = func(dp[k - 1][j], dp[k - 1][j + pw]);
 		}
 	}
