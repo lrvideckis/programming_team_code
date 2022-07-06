@@ -2,8 +2,9 @@
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 const long long inf = 1e18;
 struct seg_tree {
+	using data = array<long long, 3>;//sum, max, min
 	struct node {
-		long long sum, mx, mn;
+		data val;
 		long long lazy;
 		int l, r;
 		int len() const {
@@ -20,38 +21,31 @@ struct seg_tree {
 		int timer = 0;
 		build(arr, timer, 0, (int)arr.size() - 1);
 	}
-	node build(const vector<long long>& arr, int& timer, int tl, int tr) {
+	data build(const vector<long long>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
 		if (tl == tr) {
-			return curr = {
-				arr[tl],
-				arr[tl],
-				arr[tl],
-				0,
-				tl,
-				tr
-			};
+			curr.val = {arr[tl], arr[tl], arr[tl]};
+		} else {
+			int tm = tl + (tr - tl) / 2;
+			const data& l = build(arr, timer, tl, tm);
+			const data& r = build(arr, timer, tm + 1, tr);
+			curr.val = pull(l, r);
 		}
-		int tm = tl + (tr - tl) / 2;
-		const node& l = build(arr, timer, tl, tm);
-		const node& r = build(arr, timer, tm + 1, tr);
-		return curr = pull(l, r);
+		curr.lazy = 0, curr.l = tl, curr.r = tr;
+		return curr.val;
 	}
-	static node pull(const node& l, const node& r) {
+	static data pull(const data& l, const data& r) {
 		return {
-			l.sum + r.sum,
-			max(l.mx, r.mx),
-			min(l.mn, r.mn),
-			0,
-			l.l,
-			r.r
+			l[0] + r[0],
+			max(l[1], r[1]),
+			min(l[2], r[2])
 		};
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
 	void apply(int v, long long add) {
-		tree[v].sum += tree[v].len() * add;
-		tree[v].mx += add;
-		tree[v].mn += add;
+		tree[v].val[0] += tree[v].len() * add;
+		tree[v].val[1] += add;
+		tree[v].val[2] += add;
 		if (tree[v].len() > 1) {
 			tree[v + 1].lazy += add;
 			tree[v + tree[v].rch()].lazy += add;
@@ -75,18 +69,18 @@ struct seg_tree {
 			return apply(v, add);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rch(), l, r, add);
-		tree[v] = pull(tree[v + 1], tree[v + tree[v].rch()]);
+		tree[v].val = pull(tree[v + 1].val, tree[v + tree[v].rch()].val);
 	}
 	//range [l,r]
-	node query(int l, int r) {
+	data query(int l, int r) {
 		return query(0, l, r);
 	}
-	node query(int v, int l, int r) {
+	data query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
-			return {0, -inf, inf, 0, 0, 0};
+			return {0, -inf, inf};
 		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
-			return tree[v];
+			return tree[v].val;
 		return pull(query(v + 1, l, r),
 		            query(v + tree[v].rch(), l, r));
 	}
