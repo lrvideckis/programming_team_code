@@ -2,7 +2,7 @@
 //stress tests: tests/stress_tests/range_data_structures/implicit_seg_tree.cpp
 using dt = array<long long, 3>; //sum, max, min
 const long long inf = 1e18;
-const int sz = 1.5e7;
+const int sz = 2e7;
 struct node {
 	dt val;
 	long long lazy;
