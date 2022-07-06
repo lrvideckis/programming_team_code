@@ -24,6 +24,7 @@ struct seg_tree {
 	}
 	data build(const vector<long long>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
+		curr.lazy = 0, curr.l = tl, curr.r = tr;
 		if (tl == tr) {
 			curr.val = {arr[tl], arr[tl], arr[tl]};
 		} else {
@@ -32,7 +33,6 @@ struct seg_tree {
 			data r = build(arr, timer, tm + 1, tr);
 			curr.val = pull(l, r);
 		}
-		curr.lazy = 0, curr.l = tl, curr.r = tr;
 		return curr.val;
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
