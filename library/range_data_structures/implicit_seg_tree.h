@@ -8,9 +8,7 @@ struct node {
 	long long lazy;
 	int lch, rch; // children, indexes into `tree`, -1 for null
 	node() {}
-	node(const dt& a_val) : val(a_val) {
-		lazy = 0, lch = rch = -1;
-	}
+	node(const dt& a_val) : val(a_val), lazy(0), lch(-1), rch(-1) {}
 } tree[sz];
 struct implicit_seg_tree {
 	int ptr, root_l, root_r;//[root_l, root_r] defines range of root node; handles negatives
@@ -61,7 +59,8 @@ struct implicit_seg_tree {
 		int tm = tl + (tr - tl) / 2;
 		update(tree[v].lch, tl, tm, l, r, add);
 		update(tree[v].rch, tm + 1, tr, l, r, add);
-		tree[v].val = pull(tree[tree[v].lch].val, tree[tree[v].rch].val);
+		tree[v].val = pull(tree[tree[v].lch].val,
+		                   tree[tree[v].rch].val);
 	}
 	//query range [l,r]
 	dt query(int l, int r) {
