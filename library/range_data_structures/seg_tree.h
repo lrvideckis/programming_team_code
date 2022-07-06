@@ -28,8 +28,8 @@ struct seg_tree {
 			curr.val = {arr[tl], arr[tl], arr[tl]};
 		} else {
 			int tm = tl + (tr - tl) / 2;
-			const data& l = build(arr, timer, tl, tm);
-			const data& r = build(arr, timer, tm + 1, tr);
+			data l = build(arr, timer, tl, tm);
+			data r = build(arr, timer, tm + 1, tr);
 			curr.val = pull(l, r);
 		}
 		curr.lazy = 0, curr.l = tl, curr.r = tr;
