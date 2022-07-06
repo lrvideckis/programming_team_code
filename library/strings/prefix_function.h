@@ -2,8 +2,7 @@
 //library checker tests: https://judge.yosupo.jp/problem/zalgorithm
 //stress tests: tests/stress_tests/strings/kmp.cpp
 //source: https://cp-algorithms.com/string/prefix-function.html#implementation
-template <class T>
-vector<int> prefix_function(const T& s) {
+template <class T> vector<int> prefix_function(const T& s) {
 	int n = s.size();
 	vector<int> pi(n, 0);
 	for (int i = 1; i < n; i++) {

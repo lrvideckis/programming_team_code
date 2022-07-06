@@ -1,8 +1,7 @@
 #pragma once
 //library checker tests: https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/point_add_range_sum
 #include "../bit.h"
-template<class T>
-struct fenwick_inv {
+template<class T> struct fenwick_inv {
 	BIT<T> ft;
 	fenwick_inv(int n) : ft(n) {}
 	fenwick_inv(const vector<T>& arr) : ft(init(arr)) {}

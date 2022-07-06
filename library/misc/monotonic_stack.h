@@ -9,8 +9,7 @@
 //trick: pass in vector<pair<T/*value*/, int/*index*/>> with arr[i].second = i (0<=i<n) to simulate arr[j] >= arr[i]
 //
 //O(n)
-template<class T>
-vector<int> monotonic_stack(const vector<T>& arr) {
+template<class T> vector<int> monotonic_stack(const vector<T>& arr) {
 	int n = arr.size();
 	vector<int> left(n);
 	for (int i = 0; i < n; i++) {

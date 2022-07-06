@@ -3,8 +3,7 @@
 //source: https://judge.yosupo.jp/submission/37410
 //O(n)
 //mnemonic: Suffix Array Induced Sorting
-template<class T>
-vector<int> sa_is(const T& s, int upper/*max element of `s`; for std::string, pass in 255*/) {
+template<class T> vector<int> sa_is(const T& s, int upper/*max element of `s`; for std::string, pass in 255*/) {
 	int n = (int)s.size();
 	if (n == 0) return {};
 	if (n == 1) return {0};
