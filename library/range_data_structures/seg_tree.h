@@ -34,13 +34,6 @@ struct seg_tree {
 		curr.lazy = 0, curr.l = tl, curr.r = tr;
 		return curr.val;
 	}
-	static data pull(const data& l, const data& r) {
-		return {
-			l[0] + r[0],
-			max(l[1], r[1]),
-			min(l[2], r[2])
-		};
-	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
 	void apply(int v, long long add) {
 		tree[v].val[0] += tree[v].len() * add;
@@ -56,6 +49,13 @@ struct seg_tree {
 			apply(v, tree[v].lazy);
 			tree[v].lazy = 0;
 		}
+	}
+	static data pull(const data& l, const data& r) {
+		return {
+			l[0] + r[0],
+			max(l[1], r[1]),
+			min(l[2], r[2])
+		};
 	}
 	//update range [l,r] with `add`
 	void update(int l, int r, long long add) {
