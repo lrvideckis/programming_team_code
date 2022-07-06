@@ -19,6 +19,7 @@ struct merge_sort_tree {
 	}
 	void build(const vector<int>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
+		curr.l = tl, curr.r = tr;
 		if (tl == tr) {
 			curr.val = {arr[tl]};
 		} else {
@@ -29,7 +30,6 @@ struct merge_sort_tree {
 			build(arr, timer, tm + 1, tr);
 			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(curr.val));
 		}
-		curr.l = tl, curr.r = tr;
 	}
 	//How many of arr[l], arr[l+1], ..., arr[r] are < x?
 	//O(log^2(n))
