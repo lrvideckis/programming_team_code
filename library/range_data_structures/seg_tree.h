@@ -67,7 +67,8 @@ struct seg_tree {
 			return apply(v, add);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rch(), l, r, add);
-		tree[v].val = pull(tree[v + 1].val, tree[v + tree[v].rch()].val);
+		tree[v].val = pull(tree[v + 1].val,
+		                   tree[v + tree[v].rch()].val);
 	}
 	//query range [l,r]
 	dt query(int l, int r) {
