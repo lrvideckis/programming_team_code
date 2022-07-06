@@ -2,9 +2,9 @@
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 const long long inf = 1e18;
 struct seg_tree {
-	using data = array<long long, 3>; //sum, max, min
+	using dt /*data type*/ = array<long long, 3>; //sum, max, min
 	struct node {
-		data val;
+		dt val;
 		long long lazy;
 		int l, r;
 		int len() const {
@@ -22,15 +22,15 @@ struct seg_tree {
 		int timer = 0;
 		build(arr, timer, 0, (int)arr.size() - 1);
 	}
-	data build(const vector<long long>& arr, int& timer, int tl, int tr) {
+	dt build(const vector<long long>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
 		curr.lazy = 0, curr.l = tl, curr.r = tr;
 		if (tl == tr) {
 			curr.val = {arr[tl], arr[tl], arr[tl]};
 		} else {
 			int tm = tl + (tr - tl) / 2;
-			data l = build(arr, timer, tl, tm);
-			data r = build(arr, timer, tm + 1, tr);
+			dt l = build(arr, timer, tl, tm);
+			dt r = build(arr, timer, tm + 1, tr);
 			curr.val = pull(l, r);
 		}
 		return curr.val;
@@ -51,7 +51,7 @@ struct seg_tree {
 			tree[v].lazy = 0;
 		}
 	}
-	static data pull(const data& l, const data& r) {
+	static dt pull(const dt& l, const dt& r) {
 		return {
 			l[0] + r[0],
 			max(l[1], r[1]),
@@ -72,11 +72,11 @@ struct seg_tree {
 		update(v + tree[v].rch(), l, r, add);
 		tree[v].val = pull(tree[v + 1].val, tree[v + tree[v].rch()].val);
 	}
-	//range [l,r]
-	data query(int l, int r) {
+	//query range [l,r]
+	dt query(int l, int r) {
 		return query(0, l, r);
 	}
-	data query(int v, int l, int r) {
+	dt query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
 			return {0, -inf, inf};
 		push(v);

@@ -25,11 +25,13 @@ int main() {
 				ist.update(L, R, diff);
 				for(int i = L; i <= R; i++) naive[i] += diff;
 			} else {//query
-				long long sum = naive[L];
+				array<long long, 3> curr_naive = {naive[L], naive[L], naive[L]};
 				for(int i = L+1; i <= R; i++) {
-					sum += naive[i];
+					curr_naive[0] += naive[i];
+					curr_naive[1] = max(curr_naive[1], naive[i]);
+					curr_naive[2] = min(curr_naive[2], naive[i]);
 				}
-				assert(sum == ist.query(L,R));
+				assert(curr_naive == ist.query(L,R));
 			}
 		}
 	}

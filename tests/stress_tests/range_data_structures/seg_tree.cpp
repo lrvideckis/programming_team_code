@@ -35,7 +35,7 @@ int main() {
 					mx = max(mx, arr[i]);
 					sum += arr[i];
 				}
-				seg_tree::data res = st.query(L, R);
+				seg_tree::dt res = st.query(L, R);
 				assert(res[0] == sum);
 				assert(res[1] == mx);
 				assert(res[2] == mn);
