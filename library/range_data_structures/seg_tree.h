@@ -23,7 +23,7 @@ struct seg_tree {
 	node build(const vector<long long>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
 		if (tl == tr) {
-			curr = {
+			return curr = {
 				arr[tl],
 				arr[tl],
 				arr[tl],
@@ -31,13 +31,11 @@ struct seg_tree {
 				tl,
 				tr
 			};
-		} else {
-			int tm = tl + (tr - tl) / 2;
-			const node& l = build(arr, timer, tl, tm);
-			const node& r = build(arr, timer, tm + 1, tr);
-			curr = combine(l, r);
 		}
-		return curr;
+		int tm = tl + (tr - tl) / 2;
+		const node& l = build(arr, timer, tl, tm);
+		const node& r = build(arr, timer, tm + 1, tr);
+		return curr = combine(l, r);
 	}
 	static node combine(const node& l, const node& r) {
 		return {
