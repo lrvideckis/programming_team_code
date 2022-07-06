@@ -4,9 +4,9 @@ const long long inf = 1e18;
 struct seg_tree {
 	using data = array<long long, 3>;//sum, max, min
 	struct node {
-		data val;
+		data val; //could represent max, sum, etc ({sum,max,min} in this implementation)
 		long long lazy;
-		int l, r;
+		int l, r; //[l, r] -> range of node
 		int len() const {
 			return r - l + 1;
 		}
