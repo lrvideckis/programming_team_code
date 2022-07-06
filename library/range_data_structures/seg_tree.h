@@ -25,15 +25,12 @@ struct seg_tree {
 	dt build(const vector<long long>& arr, int& timer, int tl, int tr) {
 		node& curr = tree[timer++];
 		curr.lazy = 0, curr.l = tl, curr.r = tr;
-		if (tl == tr) {
-			curr.val = {arr[tl], arr[tl], arr[tl]};
-		} else {
-			int tm = tl + (tr - tl) / 2;
-			dt l = build(arr, timer, tl, tm);
-			dt r = build(arr, timer, tm + 1, tr);
-			curr.val = pull(l, r);
-		}
-		return curr.val;
+		if (tl == tr)
+			return curr.val = {arr[tl], arr[tl], arr[tl]};
+		int tm = tl + (tr - tl) / 2;
+		dt l = build(arr, timer, tl, tm);
+		dt r = build(arr, timer, tm + 1, tr);
+		return curr.val = pull(l, r);
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
 	void apply(int v, long long add) {
