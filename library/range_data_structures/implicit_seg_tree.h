@@ -12,7 +12,6 @@ struct node {
 } tree[sz];
 struct implicit_seg_tree {
 	int ptr, root_l, root_r;//[root_l, root_r] defines range of root node; handles negatives
-	//RTE's when `arr` is empty
 	implicit_seg_tree(int l, int r) : ptr(0), root_l(l), root_r(r) {
 		tree[ptr++] = node(dt{0, 0, 0});
 	}
