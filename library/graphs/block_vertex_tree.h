@@ -18,17 +18,18 @@
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const info& cc) {
 	int n = adj.size();
 	vector<vector<int>> tree(n + cc.num_bccs);
-	vector<int> cnt(cc.num_bccs, 0);
+	vector<bool> vis(cc.num_bccs, false);
 	for (int v = 0; v < n; v++) {
 		for (auto [_, e_id] : adj[v]) {
 			int bccid = cc.bcc_id[e_id];
-			if (cnt[bccid]++ == 0) {
+			if (!vis[bccid]) {
+				vis[bccid] = true;
 				tree[v].push_back(bccid + n);// add edge between original node, and bcc node
 				tree[bccid + n].push_back(v);
 			}
 		}
 		for (auto [_, e_id] : adj[v])
-			cnt[cc.bcc_id[e_id]]--;
+			vis[cc.bcc_id[e_id]] = false;
 	}
 	return tree;
 }
