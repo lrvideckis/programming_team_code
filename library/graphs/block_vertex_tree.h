@@ -24,7 +24,7 @@ vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj,
 			int bccid = cc.bcc_id[e_id];
 			if (!vis[bccid]) {
 				vis[bccid] = true;
-				bvt[v].push_back(bccid + n);// add edge between original node, and bcc node
+				bvt[v].push_back(bccid + n);//add edge between original node, and bcc node
 				bvt[bccid + n].push_back(v);
 			}
 		}
