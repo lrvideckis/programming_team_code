@@ -18,7 +18,7 @@ struct kth_smallest {
 	int update(int v, int tl, int tr, int idx) {
 		if (tl == tr) {
 			tree.push_back({tree[v].sum + 1, 0, 0});
-			return tree.size() - 1;
+			return (int) tree.size() - 1;
 		}
 		int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
@@ -28,7 +28,7 @@ struct kth_smallest {
 		else
 			rch = update(rch, tm + 1, tr, idx);
 		tree.push_back({tree[lch].sum + tree[rch].sum, lch, rch});
-		return tree.size() - 1;
+		return (int) tree.size() - 1;
 	}
 	/* find (k+1)th smallest number among arr[l], arr[l+1], ..., arr[r]
 	 * k is 0-based, so query(l,r,0) returns the min
