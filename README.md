@@ -30,10 +30,10 @@ Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 ## Other CP repos
 
 - https://github.com/kth-competitive-programming/kactl (one of the best)
+- https://github.com/yosupo06/Algorithm (also one of the best)
 - https://github.com/ShahjalalShohag/code-library
 - https://github.com/ecnerwala/cp-book
 - https://github.com/the-tourist/algo
 - https://github.com/nealwu/competitive-programming
 - https://github.com/dacin21/dacin21_codebook
-- https://github.com/yosupo06/library-checker-problems
 - https://github.com/ucf-programming-team/hackpack-cpp
