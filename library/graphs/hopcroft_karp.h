@@ -14,7 +14,7 @@ struct match {
 	//
 	//similarly for r_to_l with edge r_to_l[node_right] <=> node_right in matching if r_to_l[node_right] != -1
 	//matchings stored in l_to_r and r_to_l are the same matching
-	//provides way to check if any node is in matching
+	//provides way to check if any node/edge is in matching
 	vector<int> l_to_r, r_to_l;
 	//an arbitrary min vertex cover is found. For this mvc: mvc_l[node_left] is true iff node_left is in the min vertex cover (same for mvc_r)
 	//if mvc_l[node_left] is false, then node_left is in the corresponding maximal independent set
