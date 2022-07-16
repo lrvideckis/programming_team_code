@@ -28,9 +28,8 @@ vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj,
 				bvt[bccid + n].push_back(v);
 			}
 		}
-		for (int bccid : bvt[v]) {
+		for (int bccid : bvt[v])
 			vis[bccid - n] = false;
-		}
 	}
 	return bvt;
 }
