@@ -37,14 +37,12 @@ struct seg_tree {
 		tree[v].val[0] += tree[v].len() * add;
 		tree[v].val[1] += add;
 		tree[v].val[2] += add;
-		if (tree[v].len() > 1) {
-			tree[v + 1].lazy += add;
-			tree[v + tree[v].rch()].lazy += add;
-		}
+		tree[v].lazy += add;
 	}
 	void push(int v) {
-		if (tree[v].lazy) {
-			apply(v, tree[v].lazy);
+		if (tree[v].lazy && tree[v].len() > 1) {
+			apply(v + 1, tree[v].lazy);
+			apply(v + tree[v].rch(), tree[v].lazy);
 			tree[v].lazy = 0;
 		}
 	}
@@ -60,11 +58,11 @@ struct seg_tree {
 		update(0, l, r, add);
 	}
 	void update(int v, int l, int r, long long add) {
-		push(v);
 		if (tree[v].r < l || r < tree[v].l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return apply(v, add);
+		push(v);
 		update(v + 1, l, r, add);
 		update(v + tree[v].rch(), l, r, add);
 		tree[v].val = pull(tree[v + 1].val,
@@ -77,9 +75,9 @@ struct seg_tree {
 	dt query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
 			return {0, -inf, inf};
-		push(v);
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
+		push(v);
 		return pull(query(v + 1, l, r),
 		            query(v + tree[v].rch(), l, r));
 	}
