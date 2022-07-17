@@ -19,7 +19,7 @@ struct n_choose_k {
 			fact[i] = 1LL * fact[i - 1] * i % mod;
 		inv_fact.back() = pow(fact.back(), mod - 2, mod);
 		for (int i = n - 2; i >= 2; i--)
-			inv_fact[i] = 1LL * inv_fact[i + 1] * (i + 1) % mod;
+			inv_fact[i] = inv_fact[i + 1] * (i + 1LL) % mod;
 	}
 	//classic n choose k
 	//fails when n >= mod
