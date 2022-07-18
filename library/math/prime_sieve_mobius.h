@@ -1,5 +1,4 @@
 #pragma once
-//stress tests: tests/stress_tests/math/prime_sieve_mobius.cpp
 //mobius[i] = 0 iff there exists a prime p s.t. i%(p^2)=0
 //mobius[i] = -1 iff i has an odd number of distinct prime factors
 //mobius[i] = 1 iff i has an even number of distinct prime factors

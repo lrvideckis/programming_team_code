@@ -1,6 +1,5 @@
 #pragma once
 #include "../misc/helpers.h"
-//library checker tests: https://judge.yosupo.jp/problem/point_add_range_sum, https://judge.yosupo.jp/problem/vertex_add_path_sum, https://judge.yosupo.jp/problem/vertex_add_subtree_sum, https://judge.yosupo.jp/problem/predecessor_problem
 //mnemonic: Binary Indexed Tree
 //NOLINTNEXTLINE(readability-identifier-naming)
 template<class T> struct BIT {

@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations
 #include "row_reduce.h"
 struct matrix_info {
 	int rank, det;

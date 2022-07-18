@@ -1,5 +1,4 @@
 #pragma once
-//stress tests: tests/stress_tests/range_data_structures/distinct_query.cpp
 //source: https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 //works with negatives
 //O(n log n) time and space

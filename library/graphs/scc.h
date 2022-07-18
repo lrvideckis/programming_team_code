@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/scc
 //source: https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/SCC.h
 //mnemonic: Strongly Connected Component
 struct scc_info {

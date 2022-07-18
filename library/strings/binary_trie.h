@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/set_xor_min
 struct binary_trie {
 	const int mx_bit = 62;
 	struct node {

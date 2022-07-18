@@ -1,5 +1,4 @@
 #pragma once
-//stress tests: tests/stress_tests/math/totient.cpp
 //Euler's totient function counts the positive integers
 //up to a given integer n that are relatively prime to n.
 //

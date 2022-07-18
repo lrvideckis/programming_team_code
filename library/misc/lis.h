@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/static_range_lis_query
 //returns array of indexes representing the longest *strictly* increasing subsequence
 //for non-decreasing: pass in a vector<pair<T, int>> with arr[i].second = i (0<=i<n)
 //alternatively, there's this https://codeforces.com/blog/entry/13225

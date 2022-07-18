@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/assignment
 //source: https://e-maxx.ru/algo/assignment_hungary
 //
 //input: cost[1...n][1...m] with 1 <= n <= m

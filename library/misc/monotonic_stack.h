@@ -1,6 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/cartesian_tree
-//stress tests: tests/stress_tests/misc/count_rectangles.cpp
 //calculates array `left` with:
 //for every index j with left[i] < j < i: arr[j] > arr[i]
 //and

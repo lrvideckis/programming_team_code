@@ -1,5 +1,4 @@
 #pragma once
-//stress tests: tests/stress_tests/math/fib_matrix_expo.cpp
 //https://codeforces.com/blog/entry/14516
 //O(log(n))
 unordered_map<long long, int> table;

@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
 //with asserts checking depth of tree <= log2(n)
 //returns array `par` where `par[i]` = parent of node `i` in centroid tree
 //`par[root]` is -1

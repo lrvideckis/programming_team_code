@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/biconnected_components, https://judge.yosupo.jp/problem/two_edge_connected_components
 //with asserts checking correctness of is_bridge and is_cut
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed

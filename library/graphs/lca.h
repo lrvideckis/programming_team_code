@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/lca
 //https://codeforces.com/blog/entry/74847
 //assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 //mnemonic: Least/Lowest Common Ancestor

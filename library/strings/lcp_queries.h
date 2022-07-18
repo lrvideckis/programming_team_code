@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes
 #include "suffix_array.h"
 #include "lcp.h"
 #include "../range_data_structures/rmq.h"

@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/system_of_linear_equations, https://judge.yosupo.jp/problem/matrix_det, https://judge.yosupo.jp/problem/inverse_matrix
 //for mod inverse
 #include "exp_mod.h"
 //First `cols` columns of mat represents a matrix to be left in reduced row echelon form

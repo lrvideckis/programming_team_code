@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/binomial_coefficient
 //only the tests with prime mod
 //for mod inverse
 #include "exp_mod.h"

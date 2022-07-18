@@ -1,5 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/shortest_path
 //returns array `len` where `len[i]` = shortest path from node v to node i
 //For example len[v] will always = 0
 const long long inf = 1e18;

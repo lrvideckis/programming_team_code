@@ -1,6 +1,4 @@
 #pragma once
-//library checker tests: https://judge.yosupo.jp/problem/matrix_product
-//stress tests: tests/stress_tests/math/fib_matrix_expo.cpp
 //empty matrix -> RTE
 vector<vector<int>> mult(const vector<vector<int>>& a, const vector<vector<int>>& b, int mod) {
 	assert(a[0].size() == b.size());

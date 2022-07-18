@@ -1,6 +1,5 @@
 #pragma once
 #include "bridges_and_cuts.h"
-//library checker tests: https://judge.yosupo.jp/problem/two_edge_connected_components
 //never adds multiple edges as bridges_and_cuts.h correctly marks them as non-bridges
 //usage:
 //	info cc = bridge_and_cut(adj, m);
