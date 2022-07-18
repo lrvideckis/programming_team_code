@@ -7,10 +7,10 @@ template<class T> struct BIT {
 	vector<T> bit;
 	BIT(int a_n) : n(a_n), bit(n + 1, 0) {}
 	BIT(const vector<T>& a) : n(a.size()), bit(n + 1, 0) {
-		for(int i = 1; i <= n; i++) {
+		for (int i = 1; i <= n; i++) {
 			bit[i] += a[i - 1];
 			int j = i + (i & -i);
-			if(j <= n) bit[j] += bit[i];
+			if (j <= n) bit[j] += bit[i];
 		}
 	}
 	void update(int i, const T& d) {
