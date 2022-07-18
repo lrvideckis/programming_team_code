@@ -1,10 +1,7 @@
 #pragma once
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
 //source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp, https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
-//floor of log_2(a); index of highest 1-bit
-int log_2(int a) {
-	return a ? (8 * sizeof(a)) - 1 - __builtin_clz(a) : -1;
-}
+#include "../misc/helpers.h"
 struct range_hook {
 	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
 	range_hook(int a_n) : n(a_n), lg(log_2(2 * n - 1)) {}
