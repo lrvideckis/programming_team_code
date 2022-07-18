@@ -6,9 +6,8 @@ struct merge_sort_tree {
 	vector<vector<int>> tree;
 	//RTE's when `arr` is empty
 	merge_sort_tree(const vector<int>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
-		for (int i = 0; i < rh.n; i++) {
+		for (int i = 0; i < rh.n; i++)
 			tree[rh.leaf_idx(i)] = {arr[i]};
-		}
 		for (int i = rh.n - 1; i >= 1; i--) {
 			const auto& l = tree[2 * i];
 			const auto& r = tree[2 * i + 1];
