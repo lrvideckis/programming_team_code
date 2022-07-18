@@ -24,7 +24,6 @@ int main() {
 	while(q--) {
 		int l,r,k;
 		cin >> l >> r >> k;
-		r--;
 
 		int res = st.query(l, r, k);
 		cout << res << endl;
