@@ -10,7 +10,7 @@ int main() {
 	cin >> n >> q;
 
 	struct event {
-		int x, y, w, query_id;
+		int x, yl, yr, w, query_id;
 		int is_query;
 	};
 	vector<event> arr;
@@ -18,38 +18,35 @@ int main() {
 	for(int i = 0; i < n; i++) {
 		int x, y, w;
 		cin >> x >> y >> w;
-		arr.push_back({x, y, w, -1, 0});
+		arr.push_back({x + 1, y, y + 1, w, -1, 0});
 	}
 
 	for(int i = 0; i < q; i++) {
 		int l, d, r, u;
 		cin >> l >> d >> r >> u;
-		l--, d--, r--, u--;
-		arr.push_back({l, d, -1, i, 1});
-		arr.push_back({l, u, -1, i, -1});
-		arr.push_back({r, d, -1, i, -1});
-		arr.push_back({r, u, -1, i, 1});
+		arr.push_back({l, d, u, -1, i, -1});
+		arr.push_back({r, d, u, -1, i, 1});
 	}
 
 	sort(arr.begin(), arr.end(), [](const event& u, const event& v) -> bool {
 		if(u.x == v.x) {
-			if(u.y == v.y && (u.is_query == 0) != (v.is_query == 0)) {
+			if((u.is_query == 0) != (v.is_query == 0)) {
 				return u.is_query == 0;
 			}
-			return u.y < v.y;
+			return false;
 		}
 		return u.x < v.x;
 	});
 
-	implicit_seg_tree ist(-1, 1e9);
+	implicit_seg_tree ist(0, 1e9 + 10);
 
 	vector<long long> res(q, 0);
 
-	for(auto [x, y, w, query_id, is_query] : arr) {
+	for(auto [x, yl, yr, w, query_id, is_query] : arr) {
 		if(is_query) {
-			res[query_id] += is_query * ist.query(0, y+1)[0];
+			res[query_id] += is_query * ist.query(yl, yr)[0];
 		} else {
-			ist.update(y, y+1, w);
+			ist.update(yl, yr, w);
 		}
 	}
 
