@@ -11,10 +11,11 @@ struct seg_tree {
 			return r - l;
 		}
 	};
+	const int n;
 	vector<node> tree;
 	//RTE's when `arr` is empty
-	seg_tree(const vector<long long>& arr) : tree(4 * arr.size()) {
-		build(arr, 1, 0, arr.size());
+	seg_tree(const vector<long long>& arr) : n(arr.size()), tree(4 * n) {
+		build(arr, 1, 0, n);
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tr - tl == 1) {
@@ -59,6 +60,7 @@ struct seg_tree {
 	}
 	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
+		assert(0 <= l && l <= r && r <= n);
 		update(1, l, r, add);
 	}
 	void update(int v, int l, int r, long long add) {
@@ -74,6 +76,7 @@ struct seg_tree {
 	}
 	//query range [l,r)
 	dt query(int l, int r) {
+		assert(0 <= l && l <= r && r <= n);
 		return query(1, l, r);
 	}
 	dt query(int v, int l, int r) {

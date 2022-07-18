@@ -1,3 +1,10 @@
+#include "../../template.h"
+#include "../../random.h"
+
+#include "../../../library/range_data_structures/seg_tree.h"
+
+const int mx_val = 1e9;
+
 tuple<seg_tree, vector<long long>> treeFactory(int n) {
 	if(getRand(1, 2) == 1) {
 		vector<long long> arr(n);
