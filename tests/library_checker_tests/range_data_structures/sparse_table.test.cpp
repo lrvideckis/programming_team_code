@@ -17,7 +17,7 @@ int main() {
 	while(q--) {
 		int l,r;
 		cin >> l >> r;
-		auto [mn, idxMn] = st.query(l, r-1);
+		auto [mn, idxMn] = st.query(l, r);
 		assert(arr[idxMn] == mn);
 		cout << mn << endl;
 	}
