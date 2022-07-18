@@ -1,6 +1,6 @@
 #pragma once
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
-//source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
+//source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp, https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
 //floor of log_2(a); index of highest 1-bit
 int log_2(int a) {
 	return a ? (8 * sizeof(a)) - 1 - __builtin_clz(a) : -1;
