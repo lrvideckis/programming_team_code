@@ -6,5 +6,12 @@
 "tests/library_checker_tests/graphs/hld_subtree_sum.test.cpp": "2022-07-18 14:08:23 -0700",
 "tests/library_checker_tests/graphs/hopcroft_karp.test.cpp": "2022-07-18 14:08:23 -0700",
 "tests/library_checker_tests/graphs/lca.test.cpp": "2022-07-18 14:08:23 -0700",
-"tests/library_checker_tests/graphs/scc.test.cpp": "2022-07-18 14:08:23 -0700"
+"tests/library_checker_tests/graphs/scc.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/graphs/tree_freq_dist_centroid_fft.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/graphs/two_edge_components.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/math/derangement.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/math/matrix_determinant.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/math/matrix_inverse.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/math/matrix_multiply.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/math/n_choose_k.test.cpp": "2022-07-18 14:08:23 -0700"
 }
