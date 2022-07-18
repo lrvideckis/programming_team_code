@@ -24,8 +24,8 @@ template <class T> struct RMQ {
 	}
 	//inclusive-exclusive range [l, r)
 	T query(int l, int r) const {
-		assert(l < r);
 		int lg = log_2(r - l);
+		assert(lg >= 0);//same as l < r
 		return func(dp[lg][l], dp[lg][r - (1 << lg)]);
 	}
 };
