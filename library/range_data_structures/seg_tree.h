@@ -116,8 +116,7 @@ struct seg_tree {
 		push(v);
 		update(2 * v, l, r, add);
 		update(2 * v + 1, l, r, add);
-		tree[v].val = pull(tree[2 * v].val,
-		                   tree[2 * v + 1].val);
+		tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
 	}
 	//query range [l,r)
 	dt query(int l, int r) {
@@ -136,7 +135,6 @@ struct seg_tree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
 		push(v);
-		return pull(query(2 * v, l, r),
-		            query(2 * v + 1, l, r));
+		return pull(query(2 * v, l, r), query(2 * v + 1, l, r));
 	}
 };
