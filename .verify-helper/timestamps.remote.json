@@ -22,6 +22,10 @@
 "tests/library_checker_tests/range_data_structures/kth_smallest.test.cpp": "2022-07-17 23:08:31 -0700",
 "tests/library_checker_tests/range_data_structures/merge_sort_tree.test.cpp": "2022-07-17 23:08:31 -0700",
 "tests/library_checker_tests/range_data_structures/predecessor.test.cpp": "2022-07-17 23:08:31 -0700",
+"tests/library_checker_tests/range_data_structures/sparse_table.test.cpp": "2022-07-17 23:08:31 -0700",
+"tests/library_checker_tests/strings/binary_trie.test.cpp": "2022-07-17 23:08:31 -0700",
 "tests/library_checker_tests/strings/lcp.test.cpp": "2022-07-05 19:06:05 -0700",
-"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-07-05 19:06:05 -0700"
+"tests/library_checker_tests/strings/str_q_palindrome.test.cpp": "2022-07-17 23:08:31 -0700",
+"tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-07-05 19:06:05 -0700",
+"tests/library_checker_tests/strings/z_func.test.cpp": "2022-07-17 23:08:31 -0700"
 }
