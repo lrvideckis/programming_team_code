@@ -1,41 +1,103 @@
 #pragma once
 //stress tests: tests/stress_tests/range_data_structures/seg_tree.cpp
+//source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
+//floor of log_2(a); index of highest 1-bit
+int log_2(int a) {
+	return a ? (8 * sizeof(a)) - 1 - __builtin_clz(a) : -1;
+}
+//returns smallest exponent k such that 2^k >= n
+int next_lg(int n) {
+	assert(n > 0);
+	return log_2(2 * n - 1);
+}
+struct range_hook {
+	const int n, lg;
+	range_hook(int a_n) : n(a_n), lg(next_lg(n)) {}
+	int leaf_idx(int i) const { //returns idx of leaf in `tree` corresponding to arr[i]
+		assert(0 <= i && i < n);
+		i += 1 << lg;
+		return i < 2 * n ? i : i - n;
+	}
+	int get_range(int i) const {
+		assert(0 <= i && i <= n);
+		i += 1 << lg;
+		return i < 2 * n ? i : 2 * (i - n);//left child of above indexing method
+	}
+	//calls function `f` on all nodes making up range [l, r)
+	template <typename F> void for_each(int l, int r, F f) const {
+		assert(0 <= l && l <= r && r <= n);
+		for (l = get_range(l), r = get_range(r); l < r; l >>= 1, r >>= 1) {
+			if (l & 1) f(l++);
+			if (r & 1) f(--r);
+		}
+	}
+	//calls function `f` on ancestors of nodes making up range [l, r)
+	template <typename F> void for_pars_up(int l, int r, F f) const {
+		assert(0 <= l && l <= r && r <= n);
+		int x = get_range(l), y = get_range(r);
+		if ((x ^ y) > x)
+			x <<= 1, swap(x, y);
+		int dx = __builtin_ctz(x);
+		int dy = __builtin_ctz(y);
+		int anc_depth = log_2((x - 1) ^ y);
+		for (int i = dx + 1; i <= anc_depth; i++)
+			f(x >> i);
+		for (int v = y >> (dy + 1); v; v >>= 1)
+			f(v);
+	}
+	//calls function `f` on ancestors of nodes making up range [l, r)
+	template <typename F> void for_pars_down(int l, int r, F f) const {
+		assert(0 <= l && l <= r && r <= n);
+		int x = get_range(l), y = get_range(r);
+		if ((x ^ y) > x)
+			x <<= 1, swap(x, y);
+		int dx = __builtin_ctz(x);
+		int dy = __builtin_ctz(y);
+		int anc_depth = log_2((x - 1) ^ y);
+		for (int i = log_2(x); i > dx; i--)
+			f(x >> i);
+		for (int i = anc_depth; i > dy; i--)
+			f(y >> i);
+	}
+};
 const long long inf = 1e18;
 struct seg_tree {
 	using dt /*data type*/ = array<long long, 3>; //sum, max, min
 	struct node {
 		dt val;
 		long long lazy;
-		int l, r;
+		int l, r;//[l, r)
 		int len() const {
 			return r - l;
 		}
 	};
-	const int n;
+	range_hook rh;
 	vector<node> tree;
 	//RTE's when `arr` is empty
-	seg_tree(const vector<long long>& arr) : n(arr.size()), tree(4 * n) {
-		build(arr, 1, 0, n);
-	}
-	void build(const vector<long long>& arr, int v, int tl, int tr) {
-		if (tr - tl == 1) {
-			tree[v] = {
-				{arr[tl], arr[tl], arr[tl]},
+	seg_tree(const vector<long long>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
+		for (int i = 0; i < rh.n; i++) {
+			tree[rh.leaf_idx(i)] = {
+				{arr[i], arr[i], arr[i]},
 				0,
-				tl,
-				tr
-			};
-		} else {
-			int tm = tl + (tr - tl) / 2;
-			build(arr, 2 * v, tl, tm);
-			build(arr, 2 * v + 1, tm, tr);
-			tree[v] = {
-				pull(tree[2 * v].val, tree[2 * v + 1].val),
-				0,
-				tl,
-				tr
+				i,
+				i + 1
 			};
 		}
+		for (int i = rh.n - 1; i >= 1; i--) {
+			tree[i] = {
+				pull(tree[2 * i].val, tree[2 * i + 1].val),
+				0,
+				tree[2 * i].l,
+				tree[2 * i + 1].r
+			};
+		}
+	}
+	static dt pull(const dt& l, const dt& r) {
+		return {
+			l[0] + r[0],
+			max(l[1], r[1]),
+			min(l[2], r[2])
+		};
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r)?
 	void apply(int v, long long add) {
@@ -51,19 +113,19 @@ struct seg_tree {
 			tree[v].lazy = 0;
 		}
 	}
-	static dt pull(const dt& l, const dt& r) {
-		return {
-			l[0] + r[0],
-			max(l[1], r[1]),
-			min(l[2], r[2])
-		};
-	}
 	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
-		assert(0 <= l && l <= r && r <= n);
-		update(1, l, r, add);
+		rh.for_pars_down(l, r, [&](int v) -> void {
+			push(v);
+		});
+		rh.for_each(l, r, [&](int v) -> void {
+			apply(v, add);
+		});
+		rh.for_pars_up(l, r, [&](int v) -> void {
+			tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
+		});
 	}
-	void update(int v, int l, int r, long long add) {
+	void update(int v/* = 1*/, int l, int r, long long add) {
 		if (r <= tree[v].l || tree[v].r <= l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
@@ -76,10 +138,16 @@ struct seg_tree {
 	}
 	//query range [l,r)
 	dt query(int l, int r) {
-		assert(0 <= l && l <= r && r <= n);
-		return query(1, l, r);
+		rh.for_pars_down(l, r, [&](int v) -> void {
+			push(v);
+		});
+		dt res = {0, -inf, inf};
+		rh.for_each(l, r, [&](int v) -> void {
+			res = pull(res, tree[v].val);
+		});
+		return res;
 	}
-	dt query(int v, int l, int r) {
+	dt query(int v/* = 1*/, int l, int r) {
 		if (r <= tree[v].l || tree[v].r <= l)
 			return {0, -inf, inf};
 		if (l <= tree[v].l && tree[v].r <= r)
