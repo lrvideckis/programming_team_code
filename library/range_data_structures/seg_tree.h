@@ -29,8 +29,7 @@ struct range_hook {
 	//calls function `f` on ancestors of nodes making up range [l, r)
 	template <typename F> void for_pars_up(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		l = range_idx(l), r = range_idx(r);
-		for (int i = 1; i <= lg; i++) {
+		for (int i = 1, l = range_idx(l), r = range_idx(r); i <= lg; i++) {
 			if (((l >> i) << i) != l) f(l >> i);
 			if (((r >> i) << i) != r) f((r - 1) >> i);
 		}
@@ -38,8 +37,7 @@ struct range_hook {
 	//calls function `f` on ancestors of nodes making up range [l, r)
 	template <typename F> void for_pars_down(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		l = range_idx(l), r = range_idx(r);
-		for (int i = lg; i >= 1; i--) {
+		for (int i = lg, l = range_idx(l), r = range_idx(r); i >= 1; i--) {
 			if (((l >> i) << i) != l) f(l >> i);
 			if (((r >> i) << i) != r) f((r - 1) >> i);
 		}
