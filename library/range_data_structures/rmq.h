@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/helpers.h"
+#include "../misc/log_2.h"
 //usage:
 //	vector<long long> arr;
 //	...

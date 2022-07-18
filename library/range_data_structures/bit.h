@@ -1,5 +1,5 @@
 #pragma once
-#include "../misc/helpers.h"
+#include "../misc/log_2.h"
 //mnemonic: Binary Indexed Tree
 //NOLINTNEXTLINE(readability-identifier-naming)
 template<class T> struct BIT {
