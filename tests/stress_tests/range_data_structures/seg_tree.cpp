@@ -22,15 +22,15 @@ int main() {
 		auto [st, arr] = treeFactory(n);
 
 		for(int iterations = 5000; iterations--;) {
-			int L = getRand(0,n-1), R = getRand(0,n-1);
+			int L = getRand(0,n), R = getRand(0,n);
 			if(L > R) swap(L,R);
 			if(getRand(1,2) == 1) {//update
 				long long diff = getRand(-mx_val, mx_val);
 				st.update(L, R, diff);
-				for(int i = L; i <= R; i++) arr[i] += diff;
+				for(int i = L; i < R; i++) arr[i] += diff;
 			} else {//query
-				long long mn = arr[L], mx = arr[L], sum = arr[L];
-				for(int i = L+1; i <= R; i++) {
+				long long mn = 1e18, mx = -1e18, sum = 0;
+				for(int i = L; i < R; i++) {
 					mn = min(mn, arr[i]);
 					mx = max(mx, arr[i]);
 					sum += arr[i];

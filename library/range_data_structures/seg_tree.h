@@ -8,16 +8,16 @@ struct seg_tree {
 		long long lazy;
 		int l, r;
 		int len() const {
-			return r - l + 1;
+			return r - l;
 		}
 	};
 	vector<node> tree;
 	//RTE's when `arr` is empty
 	seg_tree(const vector<long long>& arr) : tree(4 * arr.size()) {
-		build(arr, 1, 0, (int)arr.size() - 1);
+		build(arr, 1, 0, (int)arr.size());
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
-		if (tl == tr) {
+		if (tr - tl == 1) {
 			tree[v] = {
 				{arr[tl], arr[tl], arr[tl]},
 				0,
@@ -27,7 +27,7 @@ struct seg_tree {
 		} else {
 			int tm = tl + (tr - tl) / 2;
 			build(arr, 2 * v, tl, tm);
-			build(arr, 2 * v + 1, tm + 1, tr);
+			build(arr, 2 * v + 1, tm, tr);
 			tree[v] = {
 				pull(tree[2 * v].val, tree[2 * v + 1].val),
 				0,
@@ -62,7 +62,7 @@ struct seg_tree {
 		update(1, l, r, add);
 	}
 	void update(int v, int l, int r, long long add) {
-		if (tree[v].r < l || r < tree[v].l)
+		if (r <= tree[v].l || tree[v].r <= l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return apply(v, add);
@@ -77,7 +77,7 @@ struct seg_tree {
 		return query(1, l, r);
 	}
 	dt query(int v, int l, int r) {
-		if (tree[v].r < l || r < tree[v].l)
+		if (r <= tree[v].l || tree[v].r <= l)
 			return {0, -inf, inf};
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
