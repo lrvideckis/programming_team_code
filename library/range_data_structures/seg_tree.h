@@ -8,7 +8,7 @@ int log_2(int a) {
 struct range_hook {
 	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
 	range_hook(int a_n) : n(a_n), lg(log_2(2 * n - 1)) {}
-	int leaf_idx(int i) const { //returns idx of leaf in `tree` corresponding to arr[i]
+	int leaf_idx(int i) const {
 		assert(0 <= i && i < n);
 		i += 1 << lg;
 		return i < 2 * n ? i : i - n;
@@ -16,7 +16,7 @@ struct range_hook {
 	int range_idx(int i) const {
 		assert(0 <= i && i <= n);
 		i += 1 << lg;
-		return i < 2 * n ? i : 2 * (i - n);//left child of above indexing method
+		return i < 2 * n ? i : 2 * (i - n);
 	}
 	//calls function `f` on all nodes making up range [l, r)
 	template <typename F> void for_each(int l, int r, F f) const {
@@ -26,7 +26,7 @@ struct range_hook {
 			if (r & 1) f(--r);
 		}
 	}
-	//calls function `f` on ancestors of nodes making up range [l, r)
+	//calls function `f` on ancestors of nodes making up range [l, r), bottom up
 	template <typename F> void for_pars_up(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
 		for (int i = 1, a = range_idx(l), b = range_idx(r); i <= lg; i++) {
@@ -34,7 +34,7 @@ struct range_hook {
 			if (((b >> i) << i) != b) f((b - 1) >> i);
 		}
 	}
-	//calls function `f` on ancestors of nodes making up range [l, r)
+	//calls function `f` on ancestors of nodes making up range [l, r), top down
 	template <typename F> void for_pars_down(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
 		for (int i = lg, a = range_idx(l), b = range_idx(r); i >= 1; i--) {
