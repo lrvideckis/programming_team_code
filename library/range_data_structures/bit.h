@@ -17,17 +17,17 @@ template<class T> struct BIT {
 		}
 	}
 	void update(int idx, const T& d) {
-		for (; idx < (int)bit.size(); idx = idx | (idx + 1))
+		for (; idx < (int)bit.size(); idx |= idx + 1)
 			bit[idx] += d;
 	}
-	T sum(int r) const {
+	T sum(int r) const {//sum of range [0, r)
 		T ret = 0;
-		for (; r >= 0; r = (r & (r + 1)) - 1)
-			ret += bit[r];
+		for (; r > 0; r &= r - 1)
+			ret += bit[r - 1];
 		return ret;
 	}
-	T sum(int l, int r) const {
-		return sum(r) - sum(l - 1);
+	T sum(int l, int r) const {//sum of range [l, r)
+		return sum(r) - sum(l);
 	}
 	//Returns min pos such that sum of [0, pos] >= sum
 	//Returns bit.size() if no sum is >= sum, or -1 if empty sum is.

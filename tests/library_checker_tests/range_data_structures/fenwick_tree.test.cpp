@@ -15,7 +15,8 @@ int main() {
 
 	vector<long long> init(arr);
 	for(int i = n-2; i >= 0; i--) init[i] += init[i+1];
-	fenwick_inv<long long> ftInv(init);
+	fenwick_inv<long long> ft_inv(init);
+
 	while(q--) {
 		int type;
 		cin >> type;
@@ -27,9 +28,8 @@ int main() {
 		} else {
 			int l,r;
 			cin >> l >> r;
-			r--;
 			long long res = ft.sum(l, r);
-			assert(res == ftInv.query(l) - (r+1<n?ftInv.query(r+1):0));
+			assert(res == ft_inv.query(l) - (r<n?ft_inv.query(r):0));
 			cout << res << endl;
 		}
 	}
