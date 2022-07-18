@@ -18,7 +18,7 @@ struct range_hook {
 		i += 1 << lg;
 		return i < 2 * n ? i : i - n;
 	}
-	int get_range(int i) const {
+	int range_idx(int i) const {
 		assert(0 <= i && i <= n);
 		i += 1 << lg;
 		return i < 2 * n ? i : 2 * (i - n);//left child of above indexing method
@@ -26,7 +26,7 @@ struct range_hook {
 	//calls function `f` on all nodes making up range [l, r)
 	template <typename F> void for_each(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		for (l = get_range(l), r = get_range(r); l < r; l >>= 1, r >>= 1) {
+		for (l = range_idx(l), r = range_idx(r); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) f(l++);
 			if (r & 1) f(--r);
 		}
@@ -34,7 +34,7 @@ struct range_hook {
 	//calls function `f` on ancestors of nodes making up range [l, r)
 	template <typename F> void for_pars_up(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		l = get_range(l), r = get_range(r);
+		l = range_idx(l), r = range_idx(r);
 		for (int i = 1; i <= lg; i++) {
 			if (((l >> i) << i) != l) f(l >> i);
 			if (((r >> i) << i) != r) f((r - 1) >> i);
@@ -43,7 +43,7 @@ struct range_hook {
 	//calls function `f` on ancestors of nodes making up range [l, r)
 	template <typename F> void for_pars_down(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		l = get_range(l), r = get_range(r);
+		l = range_idx(l), r = range_idx(r);
 		for (int i = lg; i >= 1; i--) {
 			if (((l >> i) << i) != l) f(l >> i);
 			if (((r >> i) << i) != r) f((r - 1) >> i);
