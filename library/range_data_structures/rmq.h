@@ -22,9 +22,10 @@ template <class T> struct RMQ {
 				dp[k][j] = func(dp[k - 1][j], dp[k - 1][j + pw]);
 		}
 	}
-	//inclusive range [l, r]
+	//inclusive-exclusive range [l, r)
 	T query(int l, int r) const {
-		int lg = 31 - __builtin_clz(r - l + 1);
-		return func(dp[lg][l], dp[lg][r - (1 << lg) + 1]);
+		assert(l < r);
+		int lg = 31 - __builtin_clz(r - l);
+		return func(dp[lg][l], dp[lg][r - (1 << lg));
 	}
 };
