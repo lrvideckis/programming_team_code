@@ -30,8 +30,8 @@ struct range_hook {
 	template <typename F> void for_pars_up(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
 		for (int i = 1, a = range_idx(l), b = range_idx(r); i <= lg; i++) {
-			if (((a >> i) << a) != l) f(a >> i);
-			if (((b >> i) << b) != r) f((b - 1) >> i);
+			if (((a >> i) << i) != a) f(a >> i);
+			if (((b >> i) << i) != b) f((b - 1) >> i);
 		}
 	}
 	//calls function `f` on ancestors of nodes making up range [l, r)
