@@ -4,7 +4,7 @@
 #include "range_hook.h"
 const long long inf = 1e18;
 struct seg_tree {
-	using dt /*data type*/ = array<long long, 3>; //sum, max, min
+	using dt /*data type*/ = long long;//min
 	struct node {
 		dt val;
 		long long lazy;
@@ -19,7 +19,7 @@ struct seg_tree {
 	seg_tree(const vector<long long>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
 		for (int i = 0; i < rh.n; i++) {
 			tree[rh.leaf_idx(i)] = {
-				{arr[i], arr[i], arr[i]},
+				arr[i],
 				0,
 				i,
 				i + 1
@@ -36,9 +36,7 @@ struct seg_tree {
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r)?
 	void apply(int v, long long add) {
-		tree[v].val[0] += tree[v].len() * add;
-		tree[v].val[1] += add;
-		tree[v].val[2] += add;
+		tree[v].val += add;
 		tree[v].lazy += add;
 	}
 	void push(int v) {
@@ -49,11 +47,7 @@ struct seg_tree {
 		}
 	}
 	static dt pull(const dt& l, const dt& r) {
-		return {
-			l[0] + r[0],
-			max(l[1], r[1]),
-			min(l[2], r[2])
-		};
+		return min(l, r);
 	}
 	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
@@ -82,7 +76,7 @@ struct seg_tree {
 		rh.for_pars(l, r, false, [&](int v) -> void {
 			push(v);
 		});
-		dt res = {0, -inf, inf};
+		dt res = inf;
 		rh.for_each(l, r, [&](int v) -> void {
 			res = pull(res, tree[v].val);
 		});
@@ -90,7 +84,7 @@ struct seg_tree {
 	}
 	dt query(int v/* = 1*/, int l, int r) {
 		if (r <= tree[v].l || tree[v].r <= l)
-			return {0, -inf, inf};
+			return inf;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
 		push(v);
