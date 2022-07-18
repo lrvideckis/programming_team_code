@@ -32,8 +32,8 @@ int main() {
 			}
 			int order = ft.sum(k);
 			int res = ft.lower_bound(order+1);
-			if(res == n) res = -1;
-			cout << res << endl;
+			if(res == n + 1) res = 0;
+			cout << res - 1 << endl;
 		} else {
 			if(ft.sum(k,k+1) == 1) {
 				cout << k << endl;
@@ -41,7 +41,7 @@ int main() {
 			}
 			int order = ft.sum(k);
 			int res = ft.lower_bound(order);
-			cout << res << endl;
+			cout << res - 1 << endl;
 		}
 	}
 	return 0;

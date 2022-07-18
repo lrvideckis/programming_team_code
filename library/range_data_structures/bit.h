@@ -3,42 +3,40 @@
 //mnemonic: Binary Indexed Tree
 //NOLINTNEXTLINE(readability-identifier-naming)
 template<class T> struct BIT {
+	const int n;
 	vector<T> bit;
-	BIT(int n) : bit(n, 0) {}
-	BIT(const vector<T>& a) : bit(a.size()) {
-		if (a.empty()) return;
-		bit[0] = a[0];
-		for (int i = 1; i < (int)a.size(); i++)
-			bit[i] = bit[i - 1] + a[i];
-		for (int i = (int)a.size() - 1; i > 0; i--) {
-			int lower_i = (i & (i + 1)) - 1;
-			if (lower_i >= 0)
-				bit[i] -= bit[lower_i];
+	BIT(int a_n) : n(a_n), bit(n + 1, 0) {}
+	BIT(const vector<T>& a) : n(a.size()), bit(n + 1, 0) {
+		for(int i = 1; i <= n; i++) {
+			bit[i] += a[i - 1];
+			int j = i + (i & -i);
+			if(j <= n) bit[j] += bit[i];
 		}
 	}
-	void update(int idx, const T& d) {
-		for (; idx < (int)bit.size(); idx |= idx + 1)
-			bit[idx] += d;
+	void update(int i, const T& d) {
+		assert(0 <= i && i < n);
+		for (i++; i <= n; i += i & -i) bit[i] += d;
 	}
 	T sum(int r) const {//sum of range [0, r)
+		assert(0 <= r && r <= n);
 		T ret = 0;
-		for (; r > 0; r &= r - 1)
-			ret += bit[r - 1];
+		for (; r; r -= r & -r) ret += bit[r];
 		return ret;
 	}
 	T sum(int l, int r) const {//sum of range [l, r)
+		assert(0 <= l && l <= r && r <= n);
 		return sum(r) - sum(l);
 	}
-	//Returns min pos such that sum of [0, pos] >= sum
-	//Returns bit.size() if no sum is >= sum, or -1 if empty sum is.
-	//Doesn't work with negatives (since it's greedy), counterexample: array: {1, -1}, sum: 1, this returns 2, but should return 0
+	//Returns min pos such that sum of [0, pos) >= sum
+	//Returns n + 1 if no sum is >= sum, or 0 if empty sum is.
+	//Doesn't work with negatives
 	int lower_bound(T sum) const {
-		if (sum <= 0) return -1;
+		if (sum <= 0) return 0;
 		int pos = 0;
-		for (int pw = 1 << (31 - __builtin_clz(bit.size() | 1)); pw; pw >>= 1) {
-			if (pos + pw <= (int)bit.size() && bit[pos + pw - 1] < sum)
-				pos += pw, sum -= bit[pos - 1];
+		for (int pw = 1 << (31 - __builtin_clz(n | 1)); pw; pw >>= 1) {
+			if (pos + pw <= n && bit[pos + pw] < sum)
+				pos += pw, sum -= bit[pos];
 		}
-		return pos;
+		return pos + 1;
 	}
 };

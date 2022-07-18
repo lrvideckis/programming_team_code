@@ -14,7 +14,7 @@ struct seg_tree {
 	vector<node> tree;
 	//RTE's when `arr` is empty
 	seg_tree(const vector<long long>& arr) : tree(4 * arr.size()) {
-		build(arr, 1, 0, (int)arr.size());
+		build(arr, 1, 0, arr.size());
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tr - tl == 1) {
