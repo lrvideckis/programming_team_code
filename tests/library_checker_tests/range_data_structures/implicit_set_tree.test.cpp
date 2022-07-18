@@ -47,9 +47,9 @@ int main() {
 
 	for(auto [x, y, w, query_id, is_query] : arr) {
 		if(is_query) {
-			res[query_id] += is_query * ist.query(0, y)[0];
+			res[query_id] += is_query * ist.query(0, y+1)[0];
 		} else {
-			ist.update(y, y, w);
+			ist.update(y, y+1, w);
 		}
 	}
 

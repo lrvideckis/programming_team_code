@@ -36,7 +36,7 @@ struct seg_tree {
 			};
 		}
 	}
-	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
+	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r)?
 	void apply(int v, long long add) {
 		tree[v].val[0] += tree[v].len() * add;
 		tree[v].val[1] += add;
@@ -57,7 +57,7 @@ struct seg_tree {
 			min(l[2], r[2])
 		};
 	}
-	//update range [l,r] with `add`
+	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
 		update(1, l, r, add);
 	}
@@ -72,7 +72,7 @@ struct seg_tree {
 		tree[v].val = pull(tree[2 * v].val,
 		                   tree[2 * v + 1].val);
 	}
-	//query range [l,r]
+	//query range [l,r)
 	dt query(int l, int r) {
 		return query(1, l, r);
 	}
