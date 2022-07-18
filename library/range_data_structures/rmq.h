@@ -1,4 +1,5 @@
 #pragma once
+#include "../misc/helpers.h"
 //library checker tests: https://judge.yosupo.jp/problem/staticrmq, https://judge.yosupo.jp/problem/zalgorithm, https://judge.yosupo.jp/problem/enumerate_palindromes, https://judge.yosupo.jp/problem/cartesian_tree
 //usage:
 //	vector<long long> arr;
@@ -25,7 +26,7 @@ template <class T> struct RMQ {
 	//inclusive-exclusive range [l, r)
 	T query(int l, int r) const {
 		assert(l < r);
-		int lg = 31 - __builtin_clz(r - l);
+		int lg = log_2(r - l);
 		return func(dp[lg][l], dp[lg][r - (1 << lg)]);
 	}
 };
