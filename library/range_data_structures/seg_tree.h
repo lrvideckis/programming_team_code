@@ -57,13 +57,13 @@ struct seg_tree {
 	}
 	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
-		rh.for_pars_down(l, r, [&](int v) -> void {
+		rh.for_pars(l, r, false, [&](int v) -> void {
 			push(v);
 		});
 		rh.for_each(l, r, [&](int v) -> void {
 			apply(v, add);
 		});
-		rh.for_pars_up(l, r, [&](int v) -> void {
+		rh.for_pars(l, r, true, [&](int v) -> void {
 			tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
 		});
 	}
@@ -79,7 +79,7 @@ struct seg_tree {
 	}
 	//query range [l,r)
 	dt query(int l, int r) {
-		rh.for_pars_down(l, r, [&](int v) -> void {
+		rh.for_pars(l, r, false, [&](int v) -> void {
 			push(v);
 		});
 		dt res = {0, -inf, inf};

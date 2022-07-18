@@ -26,20 +26,13 @@ struct range_hook {
 			if (r & 1) f(--r);
 		}
 	}
-	//calls function `f` on ancestors of nodes making up range [l, r), bottom up
-	template <typename F> void for_pars_up(int l, int r, F f) const {
+	//calls function `f` on ancestors of nodes making up range [l, r), if `up`: bottom up, else top down
+	template <typename F> void for_pars(int l, int r, bool up, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		for (int i = 1, a = range_idx(l), b = range_idx(r); i <= lg; i++) {
-			if (((a >> i) << i) != a) f(a >> i);
-			if (((b >> i) << i) != b) f((b - 1) >> i);
-		}
-	}
-	//calls function `f` on ancestors of nodes making up range [l, r), top down
-	template <typename F> void for_pars_down(int l, int r, F f) const {
-		assert(0 <= l && l <= r && r <= n);
-		for (int i = lg, a = range_idx(l), b = range_idx(r); i >= 1; i--) {
-			if (((a >> i) << i) != a) f(a >> i);
-			if (((b >> i) << i) != b) f((b - 1) >> i);
+		l = range_idx(l), r = range_idx(r);
+		for (int i = (up ? 1 : lg); i != (up ? lg + 1 : 0); i += 2 * up - 1) {
+			if (((l >> i) << i) != l) f(l >> i);
+			if (((r >> i) << i) != r) f((r - 1) >> i);
 		}
 	}
 };
