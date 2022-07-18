@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
 #include "../../template.h"
 
-#include "../../../library/range_data_structures/implicit_seg_tree.h"
+#include "../../../library/range_data_structures/uncommon/implicit_seg_tree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
