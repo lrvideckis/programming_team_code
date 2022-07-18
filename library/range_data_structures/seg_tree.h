@@ -5,14 +5,9 @@
 int log_2(int a) {
 	return a ? (8 * sizeof(a)) - 1 - __builtin_clz(a) : -1;
 }
-//returns smallest exponent k such that 2^k >= n
-int next_lg(int n) {
-	assert(n > 0);
-	return log_2(2 * n - 1);
-}
 struct range_hook {
-	const int n, lg;
-	range_hook(int a_n) : n(a_n), lg(next_lg(n)) {}
+	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
+	range_hook(int a_n) : n(a_n), lg(log_2(2 * n - 1)) {}
 	int leaf_idx(int i) const { //returns idx of leaf in `tree` corresponding to arr[i]
 		assert(0 <= i && i < n);
 		i += 1 << lg;
