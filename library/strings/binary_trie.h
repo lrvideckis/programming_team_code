@@ -5,7 +5,7 @@ struct binary_trie {
 	struct node {
 		long long val = -1;
 		int sub_sz = 0;//number of inserted values in subtree
-		int next[2] = {-1, -1};
+		array<int, 2> next = {-1, -1};
 	};
 	vector<node> t;
 	binary_trie() : t(1) {}
