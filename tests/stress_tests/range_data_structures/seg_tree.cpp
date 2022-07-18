@@ -32,7 +32,7 @@ void do_test(int n, int q) {
 }
 
 int main() {
-	for(int n = 1; n <= 16; n++) {
+	for(int n = 0; n <= 16; n++) {
 		do_test(n, n * n);
 	}
 	for(int tests = 50; tests--;) {

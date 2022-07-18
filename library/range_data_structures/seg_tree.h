@@ -14,7 +14,6 @@ struct seg_tree {
 	};
 	range_hook rh;
 	vector<node> tree;
-	//RTE's when `arr` is empty
 	seg_tree(const vector<long long>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
 		for (int i = 0; i < rh.n; i++) {
 			tree[rh.leaf_idx(i)] = {
