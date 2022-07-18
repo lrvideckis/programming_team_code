@@ -62,17 +62,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: Check snake case
       run: make --directory=tests/ check_snake_case
-
-  check_library_checker_test_comments:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Check library test comments
-      run: make --directory=tests/ verify_library_checker_test_comments
-
-  check_stress_test_comments:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Check stress test comments
-      run: make --directory=tests/ verify_stress_test_comments
