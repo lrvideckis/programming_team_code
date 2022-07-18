@@ -4,12 +4,16 @@
 struct range_hook {
 	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
 	range_hook(int a_n) : n(a_n), lg(log_2(2 * n - 1)) {}
-	int leaf_idx(int i) const {
+	int leaf_idx(int i) const {//index in array -> index of leaf in seg_tree
 		assert(0 <= i && i < n);
 		i += 1 << lg;
 		return i < 2 * n ? i : i - n;
 	}
-	int range_idx(int i) const {
+	int arr_idx(int i) const {//index of leaf in seg_tree -> index in array
+		assert(n <= i && i < 2 * n);
+		return (i < (1 << lg) ? i + n : i) - (1 << lg);
+	}
+	int range_idx(int i) const {//range query bound -> index of leaf in seg_tree
 		assert(0 <= i && i <= n);
 		i += 1 << lg;
 		return i < 2 * n ? i : 2 * (i - n);
