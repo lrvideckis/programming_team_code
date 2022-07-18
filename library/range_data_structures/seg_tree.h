@@ -10,27 +10,31 @@ struct seg_tree {
 		int len() const {
 			return r - l + 1;
 		}
-		//returns 1 + (# of nodes in left child's subtree)
-		//https://cp-algorithms.com/data_structures/segment_tree.html#memory-efficient-implementation
-		int rch() const { //right child
-			return (r - l + 2) & ~1;
-		}
 	};
 	vector<node> tree;
 	//RTE's when `arr` is empty
-	seg_tree(const vector<long long>& arr) : tree(2 * (int)arr.size() - 1) {
-		int timer = 0;
-		build(arr, timer, 0, (int)arr.size() - 1);
+	seg_tree(const vector<long long>& arr) : tree(4 * arr.size()) {
+		build(arr, 1, 0, (int)arr.size() - 1);
 	}
-	dt build(const vector<long long>& arr, int& timer, int tl, int tr) {
-		node& curr = tree[timer++];
-		curr.lazy = 0, curr.l = tl, curr.r = tr;
-		if (tl == tr)
-			return curr.val = {arr[tl], arr[tl], arr[tl]};
-		int tm = tl + (tr - tl) / 2;
-		dt l = build(arr, timer, tl, tm);
-		dt r = build(arr, timer, tm + 1, tr);
-		return curr.val = pull(l, r);
+	void build(const vector<long long>& arr, int v, int tl, int tr) {
+		if (tl == tr) {
+			tree[v] = {
+				{arr[tl], arr[tl], arr[tl]},
+				0,
+				tl,
+				tr
+			};
+		} else {
+			int tm = tl + (tr - tl) / 2;
+			build(arr, 2 * v, tl, tm);
+			build(arr, 2 * v + 1, tm + 1, tr);
+			tree[v] = {
+				pull(tree[2 * v].val, tree[2 * v + 1].val),
+				0,
+				tl,
+				tr
+			};
+		}
 	}
 	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
 	void apply(int v, long long add) {
@@ -41,8 +45,8 @@ struct seg_tree {
 	}
 	void push(int v) {
 		if (tree[v].lazy) {
-			apply(v + 1, tree[v].lazy);
-			apply(v + tree[v].rch(), tree[v].lazy);
+			apply(2 * v, tree[v].lazy);
+			apply(2 * v + 1, tree[v].lazy);
 			tree[v].lazy = 0;
 		}
 	}
@@ -55,7 +59,7 @@ struct seg_tree {
 	}
 	//update range [l,r] with `add`
 	void update(int l, int r, long long add) {
-		update(0, l, r, add);
+		update(1, l, r, add);
 	}
 	void update(int v, int l, int r, long long add) {
 		if (tree[v].r < l || r < tree[v].l)
@@ -63,14 +67,14 @@ struct seg_tree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return apply(v, add);
 		push(v);
-		update(v + 1, l, r, add);
-		update(v + tree[v].rch(), l, r, add);
-		tree[v].val = pull(tree[v + 1].val,
-		                   tree[v + tree[v].rch()].val);
+		update(2 * v, l, r, add);
+		update(2 * v + 1, l, r, add);
+		tree[v].val = pull(tree[2 * v].val,
+		                   tree[2 * v + 1].val);
 	}
 	//query range [l,r]
 	dt query(int l, int r) {
-		return query(0, l, r);
+		return query(1, l, r);
 	}
 	dt query(int v, int l, int r) {
 		if (tree[v].r < l || r < tree[v].l)
@@ -78,7 +82,7 @@ struct seg_tree {
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
 		push(v);
-		return pull(query(v + 1, l, r),
-		            query(v + tree[v].rch(), l, r));
+		return pull(query(2 * v, l, r),
+		            query(2 * v + 1, l, r));
 	}
 };
