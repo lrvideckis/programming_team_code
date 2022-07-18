@@ -34,30 +34,20 @@ struct range_hook {
 	//calls function `f` on ancestors of nodes making up range [l, r)
 	template <typename F> void for_pars_up(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		int x = get_range(l), y = get_range(r);
-		if ((x ^ y) > x)
-			x <<= 1, swap(x, y);
-		int dx = __builtin_ctz(x);
-		int dy = __builtin_ctz(y);
-		int anc_depth = log_2((x - 1) ^ y);
-		for (int i = dx + 1; i <= anc_depth; i++)
-			f(x >> i);
-		for (int v = y >> (dy + 1); v; v >>= 1)
-			f(v);
+		l = get_range(l), r = get_range(r);
+		for (int i = 1; i <= lg; i++) {
+			if (((l >> i) << i) != l) f(l >> i);
+			if (((r >> i) << i) != r) f((r - 1) >> i);
+		}
 	}
 	//calls function `f` on ancestors of nodes making up range [l, r)
 	template <typename F> void for_pars_down(int l, int r, F f) const {
 		assert(0 <= l && l <= r && r <= n);
-		int x = get_range(l), y = get_range(r);
-		if ((x ^ y) > x)
-			x <<= 1, swap(x, y);
-		int dx = __builtin_ctz(x);
-		int dy = __builtin_ctz(y);
-		int anc_depth = log_2((x - 1) ^ y);
-		for (int i = log_2(x); i > dx; i--)
-			f(x >> i);
-		for (int i = anc_depth; i > dy; i--)
-			f(y >> i);
+		l = get_range(l), r = get_range(r);
+		for (int i = lg; i >= 1; i--) {
+			if (((l >> i) << i) != l) f(l >> i);
+			if (((r >> i) << i) != r) f((r - 1) >> i);
+		}
 	}
 };
 const long long inf = 1e18;
