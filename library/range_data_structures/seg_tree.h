@@ -40,7 +40,7 @@ struct seg_tree {
 		tree[v].lazy += add;
 	}
 	void push(int v) {
-		if (tree[v].lazy && tree[v].len() > 1) {
+		if (tree[v].lazy) {
 			apply(v + 1, tree[v].lazy);
 			apply(v + tree[v].rch(), tree[v].lazy);
 			tree[v].lazy = 0;
