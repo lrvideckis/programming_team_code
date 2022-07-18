@@ -11,22 +11,19 @@ struct node {
 	node(const dt& a_val) : val(a_val), lazy(0), lch(-1), rch(-1) {}
 } tree[sz];
 struct implicit_seg_tree {
-	int ptr, root_l, root_r;//[root_l, root_r] defines range of root node; handles negatives
+	int ptr, root_l, root_r;//[root_l, root_r) defines range of root node; handles negatives
 	implicit_seg_tree(int l, int r) : ptr(0), root_l(l), root_r(r) {
 		tree[ptr++] = node(dt{0, 0, 0});
 	}
-	//what happens when `add` is applied to every index in range [tl, tr]?
+	//what happens when `add` is applied to every index in range [tl, tr)?
 	void apply(int v, int tl, int tr, long long add) {
-		tree[v].val[0] += (tr - tl + 1) * add;
+		tree[v].val[0] += (tr - tl) * add;
 		tree[v].val[1] += add;
 		tree[v].val[2] += add;
-		if (tl != tr) {
-			tree[tree[v].lch].lazy += add;
-			tree[tree[v].rch].lazy += add;
-		}
+		tree[v].lazy += add;
 	}
 	void push(int v, int tl, int tr) {
-		if (tl != tr && tree[v].lch == -1) {
+		if (tr - tl > 1 && tree[v].lch == -1) {
 			assert(ptr + 1 < sz);
 			tree[v].lch = ptr;
 			tree[ptr++] = node(dt{0, 0, 0});
@@ -34,7 +31,9 @@ struct implicit_seg_tree {
 			tree[ptr++] = node(dt{0, 0, 0});
 		}
 		if (tree[v].lazy) {
-			apply(v, tl, tr, tree[v].lazy);
+			int tm = tl + (tr - tl) / 2;
+			apply(tree[v].lch, tl, tm, tree[v].lazy);
+			apply(tree[v].rch, tm, tr, tree[v].lazy);
 			tree[v].lazy = 0;
 		}
 	}
@@ -45,34 +44,34 @@ struct implicit_seg_tree {
 			min(l[2], r[2])
 		};
 	}
-	//update range [l,r] with `add`
+	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
 		update(0, root_l, root_r, l, r, add);
 	}
 	void update(int v, int tl, int tr, int l, int r, long long add) {
-		push(v, tl, tr);
-		if (tr < l || r < tl)
+		if (r <= tl || tr <= l)
 			return;
 		if (l <= tl && tr <= r)
 			return apply(v, tl, tr, add);
+		push(v, tl, tr);
 		int tm = tl + (tr - tl) / 2;
 		update(tree[v].lch, tl, tm, l, r, add);
-		update(tree[v].rch, tm + 1, tr, l, r, add);
+		update(tree[v].rch, tm, tr, l, r, add);
 		tree[v].val = pull(tree[tree[v].lch].val,
 		                   tree[tree[v].rch].val);
 	}
-	//query range [l,r]
+	//query range [l,r)
 	dt query(int l, int r) {
 		return query(0, root_l, root_r, l, r);
 	}
 	dt query(int v, int tl, int tr, int l, int r) {
-		if (tr < l || r < tl)
+		if (r <= tl || tr <= l)
 			return {0, -inf, inf};
-		push(v, tl, tr);
 		if (l <= tl && tr <= r)
 			return tree[v].val;
+		push(v, tl, tr);
 		int tm = tl + (tr - tl) / 2;
 		return pull(query(tree[v].lch, tl, tm, l, r),
-		            query(tree[v].rch, tm + 1, tr, l, r));
+		            query(tree[v].rch, tm, tr, l, r));
 	}
 };

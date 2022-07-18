@@ -24,12 +24,7 @@ int main() {
 	while(q--) {
 		int l, r, x;
 		cin >> l >> r >> x;
-		r--;
-		if(l > r) {
-			cout << 0 << endl;
-		} else {
-			cout << mst.query(l, r, x+1) - mst.query(l, r, x) << endl;
-		}
+		cout << mst.query(l, r, x+1) - mst.query(l, r, x) << endl;
 	}
 
 	return 0;

@@ -11,10 +11,11 @@ struct seg_tree {
 			return r - l;
 		}
 	};
+	const int n;
 	vector<node> tree;
 	//RTE's when `arr` is empty
-	seg_tree(const vector<long long>& arr) : tree(4 * arr.size()) {
-		build(arr, 1, 0, (int)arr.size());
+	seg_tree(const vector<long long>& arr) : n(arr.size()), tree(4 * n) {
+		build(arr, 1, 0, n);
 	}
 	void build(const vector<long long>& arr, int v, int tl, int tr) {
 		if (tr - tl == 1) {
@@ -36,7 +37,7 @@ struct seg_tree {
 			};
 		}
 	}
-	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r]?
+	//what happens when `add` is applied to every index in range [tree[v].l, tree[v].r)?
 	void apply(int v, long long add) {
 		tree[v].val[0] += tree[v].len() * add;
 		tree[v].val[1] += add;
@@ -57,8 +58,9 @@ struct seg_tree {
 			min(l[2], r[2])
 		};
 	}
-	//update range [l,r] with `add`
+	//update range [l,r) with `add`
 	void update(int l, int r, long long add) {
+		assert(0 <= l && l <= r && r <= n);
 		update(1, l, r, add);
 	}
 	void update(int v, int l, int r, long long add) {
@@ -72,8 +74,9 @@ struct seg_tree {
 		tree[v].val = pull(tree[2 * v].val,
 		                   tree[2 * v + 1].val);
 	}
-	//query range [l,r]
+	//query range [l,r)
 	dt query(int l, int r) {
+		assert(0 <= l && l <= r && r <= n);
 		return query(1, l, r);
 	}
 	dt query(int v, int l, int r) {

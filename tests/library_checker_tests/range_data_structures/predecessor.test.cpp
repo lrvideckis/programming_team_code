@@ -20,28 +20,28 @@ int main() {
 		int type, k;
 		cin >> type >> k;
 		if(type == 0) {
-			if(ft.sum(k,k) == 0) ft.update(k, 1);
+			if(ft.sum(k,k+1) == 0) ft.update(k, 1);
 		} else if(type == 1) {
-			if(ft.sum(k,k) == 1) ft.update(k, -1);
+			if(ft.sum(k,k+1) == 1) ft.update(k, -1);
 		} else if(type == 2) {
-			cout << ft.sum(k,k) << endl;
+			cout << ft.sum(k,k+1) << endl;
 		} else if(type == 3) {
-			if(ft.sum(k,k) == 1) {
+			if(ft.sum(k,k+1) == 1) {
 				cout << k << endl;
 				continue;
 			}
 			int order = ft.sum(k);
 			int res = ft.lower_bound(order+1);
-			if(res == n) res = -1;
-			cout << res << endl;
+			if(res == n + 1) res = 0;
+			cout << res - 1 << endl;
 		} else {
-			if(ft.sum(k,k) == 1) {
+			if(ft.sum(k,k+1) == 1) {
 				cout << k << endl;
 				continue;
 			}
 			int order = ft.sum(k);
 			int res = ft.lower_bound(order);
-			cout << res << endl;
+			cout << res - 1 << endl;
 		}
 	}
 	return 0;

@@ -31,23 +31,23 @@ struct HLD {
 			dfs2(to, adj, timer);
 		}
 	}
-	// Returns intervals (of time_in's) corresponding to the path between u and v, not necessarily in order
+	// Returns inclusive-exclusive intervals (of time_in's) corresponding to the path between u and v, not necessarily in order
 	// This can answer queries for "is some node `x` on some path" by checking if the time_in[x] is in any of these intervals
 	vector<pair<int, int>> path(int u, int v) const {
 		vector<pair<int, int>> res;
 		for (;; v = par[next[v]]) {
 			if (time_in[v] < time_in[u]) swap(u, v);
 			if (time_in[next[v]] <= time_in[u]) {
-				res.emplace_back(time_in[u], time_in[v]);
+				res.emplace_back(time_in[u], time_in[v] + 1);
 				return res;
 			}
-			res.emplace_back(time_in[next[v]], time_in[v]);
+			res.emplace_back(time_in[next[v]], time_in[v] + 1);
 		}
 	}
 	// Returns interval (of time_in's) corresponding to the subtree of node i
 	// This can answer queries for "is some node `x` in some other node's subtree" by checking if time_in[x] is in this interval
 	pair<int, int> subtree(int i) const {
-		return {time_in[i], time_in[i] + sub_sz[i] - 1};
+		return {time_in[i], time_in[i] + sub_sz[i]};
 	}
 	// Returns lca of nodes u and v
 	int lca(int u, int v) const {

@@ -29,7 +29,7 @@ int main() {
 				st.update(L, R, diff);
 				for(int i = L; i < R; i++) arr[i] += diff;
 			} else {//query
-				long long mn = 1e18, mx = -1e18, sum = 0;
+				long long sum = 0, mx = -1e18, mn = 1e18;
 				for(int i = L; i < R; i++) {
 					mn = min(mn, arr[i]);
 					mx = max(mx, arr[i]);
