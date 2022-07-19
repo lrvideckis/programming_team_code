@@ -1,5 +1,5 @@
 #pragma once
-//source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp, https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
+//source: https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
 #include "../misc/log_2.h"
 struct range_hook {
 	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
