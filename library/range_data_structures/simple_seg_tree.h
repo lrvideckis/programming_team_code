@@ -1,12 +1,11 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/18051
 #include "range_hook.h"
-const long long inf = 1e18;
 struct simple_seg_tree {
 	using dt /*data type*/ = long long;//sum
 	range_hook rh;
 	vector<dt> tree;
-	simple_seg_tree(const vector<long long>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
+	simple_seg_tree(const vector<dt>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
 		for (int i = 0; i < rh.n; i++)
 			tree[rh.leaf_idx(i)] = arr[i];
 		for (int i = rh.n - 1; i >= 1; i--)
@@ -16,8 +15,8 @@ struct simple_seg_tree {
 		return l + r;
 	}
 	//update index `idx` with `add`
-	void update(int idx, long long add) {
-		tree[rh.leaf_idx(idx)].val += add;
+	void update(int idx, dt add) {
+		tree[rh.leaf_idx(idx)] += add;
 		rh.for_parents_up(idx, idx + 1, [&](int v) -> void {
 			tree[v] = pull(tree[2 * v], tree[2 * v + 1]);
 		});
