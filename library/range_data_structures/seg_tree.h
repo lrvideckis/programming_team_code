@@ -47,7 +47,7 @@ struct seg_tree {
 	static dt pull(const dt& l, const dt& r) {
 		return min(l, r);
 	}
-	//update range [l,r) with `add`
+	//update range [l, r) with `add`
 	void update(int l, int r, long long add) {
 		rh.for_parents_down(l, r, [&](int v) -> void {
 			push(v);
@@ -69,7 +69,7 @@ struct seg_tree {
 		update(2 * v + 1, l, r, add);
 		tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
 	}
-	//query range [l,r)
+	//query range [l, r)
 	dt query(int l, int r) {
 		rh.for_parents_down(l, r, [&](int v) -> void {
 			push(v);
