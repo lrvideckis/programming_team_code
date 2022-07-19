@@ -52,7 +52,6 @@ struct seg_tree {
 		rh.for_parents_down(l, r, [&](int v) -> void {
 			push(v);
 		});
-		//switch out with for_each_l_to_r if order matters
 		rh.for_each(l, r, [&](int v) -> void {
 			apply(v, add);
 		});
