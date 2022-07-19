@@ -70,16 +70,18 @@ int main() {
 		}
 	}
 
-	cout << cc.num_bccs << endl;
-	vector<vector<int>> ccs(cc.num_bccs);
-	for(int i = 0; i < m; i++) {
-		ccs[cc.bcc_id[i]].push_back(i);
-	}
-	for(auto& cc : ccs) {
-		cout << cc.size() << " ";
-		for(int node : cc) cout << node << " ";
-		cout << endl;
-	}
+	vector<int> lone_nodes;
+	for(int v = 0; v < n; v++)
+		if(bvt[v].empty()) lone_nodes.push_back(v);
 
+	cout << cc.num_bccs + lone_nodes.size() << endl;
+
+	for(int bccid = 0; bccid < cc.num_bccs; bccid++) {
+		cout << bvt[bccid + n].size() << " ";
+		for(int v : bvt[bccid + n])
+			cout << v << " ";
+		cout << '\n';
+	}
+	for(int v : lone_nodes) cout << "1 " << v << '\n';
 	return 0;
 }
