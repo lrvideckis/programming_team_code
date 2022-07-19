@@ -32,14 +32,14 @@ struct simple_seg_tree {
 	static dt pull(const dt& l, const dt& r) {
 		return l + r;
 	}
-	//update range [l,r) with `add`
+	//update index `idx` with `add`
 	void update(int idx, long long add) {
 		tree[rh.leaf_idx(idx)].val += add;
 		rh.for_parents_up(idx, idx + 1, [&](int v) -> void {
 			tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
 		});
 	}
-	//query range [l,r)
+	//query range [l, r)
 	dt query(int l, int r) {
 		dt res = 0;
 		//switch out with for_each_l_to_r if order matters
