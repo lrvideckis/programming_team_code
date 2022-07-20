@@ -17,6 +17,7 @@
 "tests/library_checker_tests/math/n_choose_k.test.cpp": "2022-07-18 14:08:23 -0700",
 "tests/library_checker_tests/math/partitions.test.cpp": "2022-07-18 14:08:23 -0700",
 "tests/library_checker_tests/math/solve_linear_mod.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/misc/count_rectangles.test.cpp": "2022-07-19 22:51:15 -0700",
 "tests/library_checker_tests/misc/longest_increasing_subsequence.test.cpp": "2022-07-18 14:08:23 -0700",
 "tests/library_checker_tests/misc/monotonic_stack.test.cpp": "2022-07-18 21:24:29 -0700",
 "tests/library_checker_tests/range_data_structures/fenwick_tree.test.cpp": "2022-07-19 20:45:01 -0700",
