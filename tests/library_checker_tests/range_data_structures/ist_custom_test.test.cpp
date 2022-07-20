@@ -1,9 +1,8 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../template.h"
 #include "../../random.h"
 
 #include "../../../library/range_data_structures/uncommon/implicit_seg_tree.h"
-
-
 
 int main() {
 	const int mx = 1000;
@@ -36,6 +35,8 @@ int main() {
 			}
 		}
 	}
-	cout << "Tests passed!" << endl;
+	int a, b;
+	cin >> a >> b;
+	cout << a + b << endl;
 	return 0;
 }
