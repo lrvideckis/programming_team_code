@@ -2,7 +2,7 @@
 #include "../../template.h"
 
 #include "../../../library/range_data_structures/bit.h"
-#include "../../../library/range_data_structures/simple_seg_tree.h"
+#include "../../../library/range_data_structures/seg_tree.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
