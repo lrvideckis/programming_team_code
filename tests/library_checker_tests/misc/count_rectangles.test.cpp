@@ -1,3 +1,4 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../template.h"
 #include "../../random.h"
 
@@ -42,6 +43,8 @@ int main() {
 		}
 	}
 
-	cout << "Tests passed!" << endl;
+	int a, b;
+	cin >> a >> b;
+	cout << a + b << endl;
 	return 0;
 }
