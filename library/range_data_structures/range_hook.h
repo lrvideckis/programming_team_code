@@ -1,9 +1,8 @@
 #pragma once
 //source: https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
-#include "../misc/log_2.h"
 struct range_hook {
 	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
-	range_hook(int a_n) : n(a_n), lg(log_2(2 * n - 1)) {}
+	range_hook(int a_n) : n(a_n), lg(__lg(2 * n - 1)) {}
 	int leaf_idx(int i) const {//index in array -> index of leaf in seg_tree
 		assert(0 <= i && i < n);
 		i += 1 << lg;
@@ -34,14 +33,14 @@ struct range_hook {
 		assert(l <= r);
 		if (l == r) return;
 		int a = range_idx(l), b = range_idx(r);
-		int anc_depth = log_2((a - 1) ^ b);
+		int anc_depth = __lg((a - 1) ^ b);
 		int anc_msk = (1 << anc_depth) - 1;
 		for (int v = (-a) & anc_msk; v; v &= v - 1) {
 			int i = __builtin_ctz(v);
 			f(((a - 1) >> i) + 1);
 		}
 		for (int v = b & anc_msk; v;) {
-			int i = log_2(v);
+			int i = __lg(v);
 			f((b >> i) - 1);
 			v ^= (1 << i);
 		}
@@ -54,8 +53,8 @@ struct range_hook {
 			x <<= 1, swap(x, y);
 		int dx = __builtin_ctz(x);
 		int dy = __builtin_ctz(y);
-		int anc_depth = log_2((x - 1) ^ y);
-		for (int i = log_2(x); i > dx; i--)
+		int anc_depth = __lg((x - 1) ^ y);
+		for (int i = __lg(x); i > dx; i--)
 			f(x >> i);
 		for (int i = anc_depth; i > dy; i--)
 			f(y >> i);
@@ -68,7 +67,7 @@ struct range_hook {
 			x <<= 1, swap(x, y);
 		int dx = __builtin_ctz(x);
 		int dy = __builtin_ctz(y);
-		int anc_depth = log_2((x - 1) ^ y);
+		int anc_depth = __lg((x - 1) ^ y);
 		for (int i = dx + 1; i <= anc_depth; i++)
 			f(x >> i);
 		for (int v = y >> (dy + 1); v; v >>= 1)
