@@ -21,7 +21,8 @@ struct range_hook {
 	// Iterate over the range from outside-in.
 	//   Calls f(idx)
 	template <typename F> void for_each(int l, int r, F f) const {
-		assert(l < r);
+		assert(l <= r);
+		if (l == r) return;
 		for (l = range_idx(l), r = range_idx(r); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) f(l++);
 			if (r & 1) f(--r);
@@ -30,7 +31,8 @@ struct range_hook {
 	// Iterate over the range from left to right.
 	//    Calls f(idx)
 	template <typename F> void for_each_l_to_r(int l, int r, F f) const {
-		assert(l < r);
+		assert(l <= r);
+		if (l == r) return;
 		int a = range_idx(l), b = range_idx(r);
 		int anc_depth = log_2((a - 1) ^ b);
 		int anc_msk = (1 << anc_depth) - 1;
@@ -45,7 +47,8 @@ struct range_hook {
 		}
 	}
 	template <typename F> void for_parents_down(int l, int r, F f) const {
-		assert(l < r);
+		assert(l <= r);
+		if (l == r) return;
 		int x = range_idx(l), y = range_idx(r);
 		if ((x ^ y) > x)
 			x <<= 1, swap(x, y);
@@ -58,7 +61,8 @@ struct range_hook {
 			f(y >> i);
 	}
 	template <typename F> void for_parents_up(int l, int r, F f) const {
-		assert(l < r);
+		assert(l <= r);
+		if (l == r) return;
 		int x = range_idx(l), y = range_idx(r);
 		if ((x ^ y) > x)
 			x <<= 1, swap(x, y);
