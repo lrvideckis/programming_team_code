@@ -1,3 +1,4 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../template.h"
 #include "../../random.h"
 
@@ -18,6 +19,8 @@ int main() {
 		long long pw = getRand<long long>(0, 1e18);
 		check(pw);
 	}
-	cout << "Tests passed!" << endl;
+	int a, b;
+	cin >> a >> b;
+	cout << a + b << endl;
 	return 0;
 }

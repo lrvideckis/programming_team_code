@@ -1,3 +1,4 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../template.h"
 #include "../../random.h"
 
@@ -38,6 +39,8 @@ int main() {
 	for(int tests = 50; tests--;) {
 		do_test(getRand(1, 1000), 5000);
 	}
-	cout << "Tests passed!" << endl;
+	int a, b;
+	cin >> a >> b;
+	cout << a + b << endl;
 	return 0;
 }
