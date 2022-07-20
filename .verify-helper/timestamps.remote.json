@@ -26,6 +26,7 @@
 "tests/library_checker_tests/range_data_structures/predecessor.test.cpp": "2022-07-18 21:24:29 -0700",
 "tests/library_checker_tests/range_data_structures/sparse_table.test.cpp": "2022-07-18 21:24:29 -0700",
 "tests/library_checker_tests/strings/binary_trie.test.cpp": "2022-07-18 14:08:23 -0700",
+"tests/library_checker_tests/strings/kmp.test.cpp": "2022-07-19 22:48:34 -0700",
 "tests/library_checker_tests/strings/lcp.test.cpp": "2022-07-18 14:08:23 -0700",
 "tests/library_checker_tests/strings/str_q_palindrome.test.cpp": "2022-07-18 21:24:29 -0700",
 "tests/library_checker_tests/strings/suffix_array.test.cpp": "2022-07-18 14:08:23 -0700",
