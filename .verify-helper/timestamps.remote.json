@@ -26,6 +26,7 @@
 "tests/library_checker_tests/pseudo_tests/kmp.test.cpp": "2022-07-19 23:16:27 -0700",
 "tests/library_checker_tests/pseudo_tests/lazy_seg_tree.test.cpp": "2022-07-19 23:16:27 -0700",
 "tests/library_checker_tests/pseudo_tests/prime_sieve_mobius.test.cpp": "2022-07-19 23:16:27 -0700",
+"tests/library_checker_tests/pseudo_tests/range_hooks.test.cpp": "2022-07-19 23:50:32 -0700",
 "tests/library_checker_tests/pseudo_tests/totient.test.cpp": "2022-07-19 23:16:27 -0700",
 "tests/library_checker_tests/range_data_structures/fenwick_tree.test.cpp": "2022-07-19 20:45:01 -0700",
 "tests/library_checker_tests/range_data_structures/implicit_set_tree.test.cpp": "2022-07-18 14:08:23 -0700",
