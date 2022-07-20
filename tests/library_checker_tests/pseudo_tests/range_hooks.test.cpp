@@ -18,9 +18,9 @@ int main() {
 				{//range operations
 					vector<int> range_idxs;
 					rh.for_each(l, r, [&](int v) -> void {
-							assert(1 <= v && v < 2 * n);
-							range_idxs.push_back(v);
-							});
+						assert(1 <= v && v < 2 * n);
+						range_idxs.push_back(v);
+					});
 					{
 						vector<int> check_uniq(range_idxs);
 						sort(check_uniq.begin(), check_uniq.end());
@@ -29,9 +29,9 @@ int main() {
 					}
 					vector<int> range_idxs_l_to_r;
 					rh.for_each_l_to_r(l, r, [&](int v) -> void {
-							assert(1 <= v && v < 2 * n);
-							range_idxs_l_to_r.push_back(v);
-							});
+						assert(1 <= v && v < 2 * n);
+						range_idxs_l_to_r.push_back(v);
+					});
 					{
 						vector<int> check_uniq(range_idxs_l_to_r);
 						sort(check_uniq.begin(), check_uniq.end());
@@ -43,34 +43,26 @@ int main() {
 					assert(range_idxs == range_idxs_l_to_r);
 				}
 				{//for each parent
-					vector<int> par_down;
+					set<int> down;
 					rh.for_parents_down(l, r, [&](int v) -> void {
 						assert(1 <= v && v < n);
-						par_down.push_back(v);
+						assert(down.find(v) == down.end());
+						down.insert(v);
 					});
-					{
-						int prev_sz = par_down.size();
-						sort(par_down.begin(), par_down.end());
-						par_down.erase(unique(par_down.begin(), par_down.end()), par_down.end());
-						assert(prev_sz == (int)par_down.size());
-					}
-					vector<int> par_up;
-					rh.for_parents_down(l, r, [&](int v) -> void {
+
+					set<int> up;
+					rh.for_parents_up(l, r, [&](int v) -> void {
 						assert(1 <= v && v < n);
-						par_up.push_back(v);
+						assert(up.find(v) == up.end());
+						up.insert(v);
 					});
-					{
-						int prev_sz = par_up.size();
-						sort(par_up.begin(), par_up.end());
-						par_up.erase(unique(par_up.begin(), par_up.end()), par_up.end());
-						assert(prev_sz == (int)par_up.size());
-					}
-					assert(par_down == par_up);
+
+					assert(up == down);
 
 					set<int> all_ancs;
 					for(int v = rh.range_idx(l); v; v /= 2) all_ancs.insert(v);
 					for(int v = rh.range_idx(r); v; v /= 2) all_ancs.insert(v);
-					for(int v : par_up) {
+					for(int v : up) {
 						assert(all_ancs.count(v));
 					}
 				}
