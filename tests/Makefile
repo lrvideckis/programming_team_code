@@ -1,8 +1,6 @@
 help:
 	@echo "Available commands                         | explanation"
 	@echo "------------------------------------------ | -----------"
-	@echo "make test                                  | to run all the stress tests in stress_tests/"
-	@echo "make test which_test=<name_of_test_file>   | runs only the specified test"
 	@echo "make test_compiles                         | to test compiling all headers"
 	@echo "make test_compiles which_alg=<name_of_alg> | to test compiling a single alg"
 	@echo "make pdf                                   | build PDF from .tex file"
@@ -10,9 +8,6 @@ help:
 	@echo "make test_format                           | checks code is formatted with astyle"
 	@echo "make check_snake_case                      | verify all code+file names are snake case"
 	@echo "make help                                  | to show this information"
-
-test:
-	./scripts/run_all.sh . $(which_test)
 
 test_compiles:
 	./scripts/compile_all.sh . $(which_alg)
