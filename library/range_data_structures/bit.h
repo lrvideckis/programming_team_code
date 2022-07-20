@@ -1,5 +1,4 @@
 #pragma once
-#include "../misc/log_2.h"
 //mnemonic: Binary Indexed Tree
 //NOLINTNEXTLINE(readability-identifier-naming)
 template<class T> struct BIT {
@@ -33,7 +32,7 @@ template<class T> struct BIT {
 	int lower_bound(T sum) const {
 		if (sum <= 0) return 0;
 		int pos = 0;
-		for (int pw = 1 << log_2(n | 1); pw; pw >>= 1) {
+		for (int pw = 1 << __lg(n | 1); pw; pw >>= 1) {
 			if (pos + pw <= n && bit[pos + pw] < sum)
 				pos += pw, sum -= bit[pos];
 		}

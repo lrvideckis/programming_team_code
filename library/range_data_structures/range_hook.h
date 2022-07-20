@@ -1,9 +1,8 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp, https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
-#include "../misc/log_2.h"
 struct range_hook {
 	const int n, lg;//lg is the smallest integer satisfying 2^lg >= n
-	range_hook(int a_n) : n(a_n), lg(log_2(2 * n - 1)) {}
+	range_hook(int a_n) : n(a_n), lg(__lg(2 * n - 1)) {}
 	int leaf_idx(int i) const {//index in array -> index of leaf in seg_tree
 		assert(0 <= i && i < n);
 		i += 1 << lg;
