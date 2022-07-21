@@ -21,7 +21,6 @@ struct range_hook {
 	//   Calls f(idx)
 	template <typename F> void for_each(int l, int r, F f) const {
 		assert(l <= r);
-		if (l == r) return;
 		for (l = range_idx(l), r = range_idx(r); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) f(l++);
 			if (r & 1) f(--r);
@@ -31,7 +30,6 @@ struct range_hook {
 	//    Calls f(idx)
 	template <typename F> void for_each_l_to_r(int l, int r, F f) const {
 		assert(l <= r);
-		if (l == r) return;
 		int a = range_idx(l), b = range_idx(r);
 		int anc_depth = __lg((a - 1) ^ b);
 		int anc_msk = (1 << anc_depth) - 1;
