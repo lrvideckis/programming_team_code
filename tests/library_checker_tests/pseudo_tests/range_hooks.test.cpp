@@ -5,7 +5,7 @@
 #include "../../../library/range_data_structures/range_hook.h"
 
 int main() {
-	for(int n = 0; n <= 100; n++) {
+	for(int n = 0; n <= 140; n++) {
 		range_hook rh(n);
 		for(int i = 0; i < n; i++) {
 			assert(rh.arr_idx(rh.leaf_idx(i)) == i);
@@ -14,6 +14,18 @@ int main() {
 		}
 
 		for(int l = 0; l <= n; l++) {
+			rh.for_each(l, l, [&](int v) -> void {
+				assert(false);
+			});
+			rh.for_each_l_to_r(l, l, [&](int v) -> void {
+				assert(false);
+			});
+			rh.for_parents_up(l, l, [&](int v) -> void {
+				assert(false);
+			});
+			rh.for_parents_down(l, l, [&](int v) -> void {
+				assert(false);
+			});
 			for(int r = l; r <= n; r++) {
 				{//range operations
 					vector<int> range_idxs;
@@ -21,6 +33,7 @@ int main() {
 						assert(1 <= v && v < 2 * n);
 						range_idxs.push_back(v);
 					});
+					if(r - l == 1) assert((int)range_idxs.size() == 1 && rh.leaf_idx(l) == range_idxs[0]);
 					{
 						vector<int> check_uniq(range_idxs);
 						sort(check_uniq.begin(), check_uniq.end());
@@ -65,6 +78,21 @@ int main() {
 					for(int v : up) {
 						assert(all_ancs.count(v));
 					}
+				}
+				{
+					set<int> vis;
+					rh.for_each(l, r, [&](int v) -> void {
+						for(int par = v >> 1; par > 0; par >>= 1) {
+							if(vis.find(par) != vis.end()) break;
+							vis.insert(par);
+						}
+					});
+					set<int> vis_par;
+					rh.for_parents_up(l, r, [&](int v) -> void {
+						assert(vis_par.find(v) == vis_par.end());
+						vis_par.insert(v);
+					});
+					assert(vis_par == vis);
 				}
 			}
 		}
