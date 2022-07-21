@@ -46,25 +46,15 @@ struct range_hook {
 	template <typename F> void for_parents_down(int l, int r, F f) const {
 		assert(l <= r);
 		if (l == r) return;
-		int x = range_idx(l), y = range_idx(r);
-		int dx = __builtin_ctz(x);
-		int dy = __builtin_ctz(y);
-		int anc_depth = __lg((x - 1) ^ y);
-		for (int i = __lg(x); i > dx; i--)
-			f(x >> i);
-		for (int i = anc_depth; i > dy; i--)
-			f(y >> i);
+		l = range_idx(l), r = range_idx(r);
+		for (int i = __lg(l); i > __builtin_ctz(l); i--) f(l >> i);
+		for (int i = __lg(r); i > __builtin_ctz(r); i--) f(r >> i);
 	}
 	template <typename F> void for_parents_up(int l, int r, F f) const {
 		assert(l <= r);
 		if (l == r) return;
-		int x = range_idx(l), y = range_idx(r);
-		int dx = __builtin_ctz(x);
-		int dy = __builtin_ctz(y);
-		int anc_depth = __lg((x - 1) ^ y);
-		for (int i = dy + 1; i <= anc_depth; i++)
-			f(y >> i);
-		for (int v = x >> (dx + 1); v; v >>= 1)
-			f(v);
+		l = range_idx(l), r = range_idx(r);
+		for (int v = l >> (__builtin_ctz(l) + 1); v; v >>= 1) f(v);
+		for (int v = r >> (__builtin_ctz(r) + 1); v; v >>= 1) f(v);
 	}
 };

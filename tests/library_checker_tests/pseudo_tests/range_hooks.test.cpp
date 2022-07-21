@@ -60,24 +60,19 @@ int main() {
 					assert(cnt == (int)range_nodes.size());
 				}
 
-				set<int> pars;
+				set<int> pars_down;
 				rh.for_parents_down(l, r, [&](int v) -> void {
 					assert(1 <= v && v < n);
-					assert(!pars.count(v));
-					pars.insert(v);
+					pars_down.insert(v);
 				});
 
-				{
-					int cnt = 0;
-					rh.for_parents_up(l, r, [&](int v) -> void {
-						assert(1 <= v && v < n);
-						assert(pars.count(v));
-						cnt++;
-					});
-					assert(cnt == (int)pars.size());
-				}
-
-				assert(pars == naive_pars);
+				set<int> pars_up;
+				rh.for_parents_up(l, r, [&](int v) -> void {
+					assert(1 <= v && v < n);
+					pars_up.insert(v);
+				});
+				assert(pars_down == pars_up);
+				assert(pars_up == naive_pars);
 			}
 		}
 	}
