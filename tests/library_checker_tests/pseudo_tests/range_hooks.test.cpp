@@ -4,8 +4,19 @@
 #include "../../../library/range_data_structures/range_hook.h"
 
 int main() {
-	for(int n = 0; n <= 140; n++) {
+	for(int n = 0; n <= 100; n++) {
 		range_hook rh(n);
+		//initialize range bounds
+		vector<int> left(2 * n), right(2 * n);
+		for(int i = 0; i < n; i++) {
+			left[rh.leaf_idx(i)] = i;
+			right[rh.leaf_idx(i)] = i + 1;
+		}
+		for(int i = n - 1; i >= 1; i--) {
+			left[i] = left[2 * i];
+			right[i] = right[2 * i + 1];
+		}
+
 		for(int i = 0; i < n; i++) {
 			assert(rh.arr_idx(rh.leaf_idx(i)) == i);
 			assert(n <= rh.leaf_idx(i) && rh.leaf_idx(i) < 2 * n);
@@ -16,83 +27,57 @@ int main() {
 			rh.for_each(l, l, [&](int v) -> void {
 				assert(false);
 			});
-			rh.for_each_l_to_r(l, l, [&](int v) -> void {
+			rh.for_parents_up(l, l, [&](int v) -> void {
 				assert(false);
 			});
-			rh.for_parents_up(l, l, [&](int v) -> void {
+			rh.for_each_l_to_r(l, l, [&](int v) -> void {
 				assert(false);
 			});
 			rh.for_parents_down(l, l, [&](int v) -> void {
 				assert(false);
 			});
 			for(int r = l; r <= n; r++) {
-				{//range operations
-					vector<int> range_idxs;
-					rh.for_each(l, r, [&](int v) -> void {
-						assert(1 <= v && v < 2 * n);
-						range_idxs.push_back(v);
-					});
-					if(r - l == 1) assert((int)range_idxs.size() == 1 && rh.leaf_idx(l) == range_idxs[0]);
-					{
-						vector<int> check_uniq(range_idxs);
-						sort(check_uniq.begin(), check_uniq.end());
-						check_uniq.erase(unique(check_uniq.begin(), check_uniq.end()), check_uniq.end());
-						assert(check_uniq.size() == range_idxs.size());
-					}
-					vector<int> range_idxs_l_to_r;
+				set<int> range_nodes, naive_pars;
+				rh.for_each(l, r, [&](int v) -> void {
+					assert(1 <= v && v < 2 * n);
+					assert(!range_nodes.count(v));//assert uniqueness
+					range_nodes.insert(v);
+					for(int curr_parent = (v >> 1); curr_parent >= 1; curr_parent >>= 1)
+						naive_pars.insert(curr_parent);
+				});
+				if(r - l == 1) assert((int)range_nodes.size() == 1 && rh.leaf_idx(l) == *range_nodes.begin());
+				{
+					int cnt = 0;
+					int prev_l = l;
 					rh.for_each_l_to_r(l, r, [&](int v) -> void {
 						assert(1 <= v && v < 2 * n);
-						range_idxs_l_to_r.push_back(v);
+						assert(prev_l == left[v]);
+						prev_l = right[v];
+						assert(range_nodes.count(v));
+						cnt++;
 					});
-					{
-						vector<int> check_uniq(range_idxs_l_to_r);
-						sort(check_uniq.begin(), check_uniq.end());
-						check_uniq.erase(unique(check_uniq.begin(), check_uniq.end()), check_uniq.end());
-						assert(check_uniq.size() == range_idxs_l_to_r.size());
-					}
-					sort(range_idxs.begin(), range_idxs.end());
-					sort(range_idxs_l_to_r.begin(), range_idxs_l_to_r.end());
-					assert(range_idxs == range_idxs_l_to_r);
+					assert(prev_l == r);
+					assert(cnt == (int)range_nodes.size());
 				}
-				{//for each parent
-					set<int> down;
-					rh.for_parents_down(l, r, [&](int v) -> void {
-						assert(1 <= v && v < n);
-						assert(down.find(v) == down.end());
-						down.insert(v);
-					});
 
-					set<int> up;
-					rh.for_parents_up(l, r, [&](int v) -> void {
-						assert(1 <= v && v < n);
-						assert(up.find(v) == up.end());
-						up.insert(v);
-					});
+				set<int> pars;
+				rh.for_parents_down(l, r, [&](int v) -> void {
+					assert(1 <= v && v < n);
+					assert(!pars.count(v));
+					pars.insert(v);
+				});
 
-					assert(up == down);
-
-					set<int> all_ancs;
-					for(int v = rh.range_idx(l); v; v /= 2) all_ancs.insert(v);
-					for(int v = rh.range_idx(r); v; v /= 2) all_ancs.insert(v);
-					for(int v : up) {
-						assert(all_ancs.count(v));
-					}
-				}
 				{
-					set<int> vis;
-					rh.for_each(l, r, [&](int v) -> void {
-						for(int par = v >> 1; par > 0; par >>= 1) {
-							if(vis.find(par) != vis.end()) break;
-							vis.insert(par);
-						}
-					});
-					set<int> vis_par;
+					int cnt = 0;
 					rh.for_parents_up(l, r, [&](int v) -> void {
-						assert(vis_par.find(v) == vis_par.end());
-						vis_par.insert(v);
+						assert(1 <= v && v < n);
+						assert(pars.count(v));
+						cnt++;
 					});
-					assert(vis_par == vis);
+					assert(cnt == (int)pars.size());
 				}
+
+				assert(pars == naive_pars);
 			}
 		}
 	}

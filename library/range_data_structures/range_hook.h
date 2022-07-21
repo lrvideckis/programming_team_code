@@ -47,8 +47,6 @@ struct range_hook {
 		assert(l <= r);
 		if (l == r) return;
 		int x = range_idx(l), y = range_idx(r);
-		if ((x ^ y) > x)
-			x <<= 1, swap(x, y);
 		int dx = __builtin_ctz(x);
 		int dy = __builtin_ctz(y);
 		int anc_depth = __lg((x - 1) ^ y);
@@ -61,14 +59,12 @@ struct range_hook {
 		assert(l <= r);
 		if (l == r) return;
 		int x = range_idx(l), y = range_idx(r);
-		if ((x ^ y) > x)
-			x <<= 1, swap(x, y);
 		int dx = __builtin_ctz(x);
 		int dy = __builtin_ctz(y);
 		int anc_depth = __lg((x - 1) ^ y);
-		for (int i = dx + 1; i <= anc_depth; i++)
-			f(x >> i);
-		for (int v = y >> (dy + 1); v; v >>= 1)
+		for (int i = dy + 1; i <= anc_depth; i++)
+			f(y >> i);
+		for (int v = x >> (dx + 1); v; v >>= 1)
 			f(v);
 	}
 };
