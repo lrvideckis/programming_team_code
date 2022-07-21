@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../template.h"
-#include "../../random.h"
 
 #include "../../../library/range_data_structures/range_hook.h"
 
