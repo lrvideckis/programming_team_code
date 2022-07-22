@@ -4,7 +4,7 @@
 //mnemonic: Heavy Light Decomposition
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct HLD {
-	int n;
+	const int n;
 	vector<int> sub_sz, par, time_in, next;
 	HLD(vector<vector<int>>& adj /*single unrooted tree*/, int root) :
 		n(adj.size()), sub_sz(n, 1), par(n, root), time_in(n), next(n, root) {
