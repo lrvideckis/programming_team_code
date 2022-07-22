@@ -19,7 +19,7 @@ struct merge_sort_tree {
 			tree[i].r = tree[2 * i + 1].r;
 		}
 	}
-	int num_less(int v, int x) const {
+	int value(int v, int x) const {
 		const vector<int>& val = tree[v].val;
 		return lower_bound(val.begin(), val.end(), x) - val.begin();
 	}
@@ -33,8 +33,8 @@ struct merge_sort_tree {
 		l = range_idx(l), r = range_idx(r);
 		int res = 0;
 		for (; l < r; l >>= 1, r >>= 1) {
-			if (l & 1) res += num_less(l++, x);
-			if (r & 1) res += num_less(--r, x);
+			if (l & 1) res += value(l++, x);
+			if (r & 1) res += value(--r, x);
 		}
 		return res;
 	}
@@ -42,7 +42,7 @@ struct merge_sort_tree {
 		if (r <= tree[v].l || tree[v].r <= l)
 			return 0;
 		if (l <= tree[v].l && tree[v].r <= r)
-			return num_less(v, x);
+			return value(v, x);
 		return query(2 * v, l, r, x) +
 		       query(2 * v + 1, l, r, x);
 	}
