@@ -2,7 +2,6 @@
 //source: https://codeforces.com/blog/entry/18051
 #include "range_hook.h"
 const long long inf = 1e18;
-
 struct seg_tree {
 	using dt /*data type*/ = long long;//min
 	static dt combine(const dt& l, const dt& r) {
