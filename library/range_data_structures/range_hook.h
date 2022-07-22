@@ -26,29 +26,12 @@ struct range_hook {
 			if (r & 1) f(--r);
 		}
 	}
-	// Iterate over the range from left to right.
-	//    Calls f(idx)
-	template <typename F> void for_each_l_to_r(int l, int r, F f) const {
-		assert(l <= r);
-		int a = range_idx(l), b = range_idx(r);
-		int anc_depth = __lg((a - 1) ^ b);
-		int anc_msk = (1 << anc_depth) - 1;
-		for (int v = (-a) & anc_msk; v; v &= v - 1) {
-			int i = __builtin_ctz(v);
-			f(((a - 1) >> i) + 1);
-		}
-		for (int v = b & anc_msk; v;) {
-			int i = __lg(v);
-			f((b >> i) - 1);
-			v ^= (1 << i);
-		}
-	}
 	template <typename F> void for_parents_down(int l, int r, F f) const {
 		assert(l <= r);
 		if (l == r) return;
 		l = range_idx(l), r = range_idx(r);
-		for (int i = __lg(l); i > __builtin_ctz(l); i--) f(l >> i);
-		for (int i = __lg(r); i > __builtin_ctz(r); i--) f(r >> i);
+		for (int i = __lg(l); ((l >> i) << i) != l; i--) f(l >> i);
+		for (int i = __lg(r); ((r >> i) << i) != r; i--) f(r >> i);
 	}
 	template <typename F> void for_parents_up(int l, int r, F f) const {
 		assert(l <= r);

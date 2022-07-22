@@ -30,34 +30,30 @@ int main() {
 			rh.for_parents_up(l, l, [&](int v) -> void {
 				assert(false);
 			});
-			rh.for_each_l_to_r(l, l, [&](int v) -> void {
-				assert(false);
-			});
 			rh.for_parents_down(l, l, [&](int v) -> void {
 				assert(false);
 			});
 			for(int r = l; r <= n; r++) {
-				set<int> range_nodes, naive_pars;
-				rh.for_each(l, r, [&](int v) -> void {
-					assert(1 <= v && v < 2 * n);
-					assert(!range_nodes.count(v));//assert uniqueness
-					range_nodes.insert(v);
-					for(int curr_parent = (v >> 1); curr_parent >= 1; curr_parent >>= 1)
-						naive_pars.insert(curr_parent);
-				});
-				if(r - l == 1) assert((int)range_nodes.size() == 1 && rh.leaf_idx(l) == *range_nodes.begin());
+				set<int> naive_pars;
 				{
-					int cnt = 0;
-					int prev_l = l;
-					rh.for_each_l_to_r(l, r, [&](int v) -> void {
+					vector<pair<int,int>> ranges;
+					set<int> range_nodes;
+					rh.for_each(l, r, [&](int v) -> void {
 						assert(1 <= v && v < 2 * n);
-						assert(prev_l == left[v]);
-						prev_l = right[v];
-						assert(range_nodes.count(v));
-						cnt++;
+						assert(!range_nodes.count(v));//assert uniqueness
+						range_nodes.insert(v);
+						ranges.emplace_back(left[v], right[v]);
+						for(int curr_parent = (v >> 1); curr_parent >= 1; curr_parent >>= 1) naive_pars.insert(curr_parent);
 					});
-					assert(prev_l == r);
-					assert(cnt == (int)range_nodes.size());
+					if(r - l == 1) assert((int)range_nodes.size() == 1 && rh.leaf_idx(l) == *range_nodes.begin());
+					if(r - l > 0) {
+						sort(ranges.begin(), ranges.end());
+						assert(ranges[0].first == l);
+						assert(ranges.back().second == r);
+						for(int i = 1; i < (int)ranges.size(); i++) {
+							assert(ranges[i-1].second == ranges[i].first);
+						}
+					}
 				}
 
 				set<int> pars_down;
