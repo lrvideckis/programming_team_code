@@ -10,9 +10,6 @@ struct seg_tree {
 		dt val;
 		long long lazy;
 		int l, r;//[l, r)
-		int len() const {
-			return r - l;
-		}
 	};
 	const int n;
 	vector<node> tree;
