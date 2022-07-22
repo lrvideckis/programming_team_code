@@ -12,11 +12,12 @@ struct seg_tree {
 			return r - l;
 		}
 	};
-	range_hook rh;
+	const int n;
 	vector<node> tree;
-	seg_tree(const vector<long long>& arr) : rh(range_hook(arr.size())), tree(2 * rh.n) {
-		for (int i = 0; i < rh.n; i++) {
-			tree[rh.leaf_idx(i)] = {
+	seg_tree(const vector<long long>& arr) : n(arr.size()), tree(2 * n) {
+		for (int i = 0; i < n; i++) {
+			int j = i + (1 << __lg(2 * n - 1));
+			tree[j < 2 * n ? j : j - n] = {
 				arr[i],
 				0,
 				i,
