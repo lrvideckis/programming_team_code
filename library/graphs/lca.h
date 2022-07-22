@@ -4,55 +4,63 @@
 //mnemonic: Least/Lowest Common Ancestor
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
-	const int n;
-	vector<int> jmp, jmp_edges, par, depth;
-	vector<long long> dist;
-	LCA(const vector<vector<pair<int, long long>>>& adj, int root) :
-		n(adj.size()), jmp(n, root), jmp_edges(n, 1), par(n, root), depth(n, 0), dist(n, 0LL) {
+	struct node {
+		int jmp, jmp_edges, par, depth;
+		long long dist;
+	};
+	vector<node> tree;
+	LCA(const vector<vector<pair<int, long long>>>& adj, int root) : tree(adj.size(), {
+		root, 1, root, 0, 0LL
+	}) {
 		dfs(root, adj);
 	}
 	void dfs(int node, const vector<vector<pair<int, long long>>>& adj) {
+		int jmp, jmp_edges;
+		if (tree[node].depth > 0 && tree[node].jmp_edges == tree[tree[node].jmp].jmp_edges)
+			jmp = tree[tree[node].jmp].jmp, jmp_edges = 2 * tree[node].jmp_edges + 1;
+		else
+			jmp = node, jmp_edges = 1;
 		for (auto [ch, w] : adj[node]) {
-			if (ch == par[node]) continue;
-			par[ch] = node;
-			depth[ch] = 1 + depth[node];
-			dist[ch] = w + dist[node];
-			if (depth[node] > 0 && jmp_edges[node] == jmp_edges[jmp[node]])
-				jmp[ch] = jmp[jmp[node]], jmp_edges[ch] = 2 * jmp_edges[node] + 1;
-			else
-				jmp[ch] = node;
+			if (ch == tree[node].par) continue;
+			tree[ch] = {
+				jmp,
+				jmp_edges,
+				node,
+				1 + tree[node].depth,
+				w + tree[node].dist
+			};
 			dfs(ch, adj);
 		}
 	}
 	//traverse up k edges in O(log(k)). So with k=1 this returns `node`'s parent
 	int kth_par(int node, int k) const {
-		k = min(k, depth[node]);
+		k = min(k, tree[node].depth);
 		while (k > 0) {
-			if (jmp_edges[node] <= k) {
-				k -= jmp_edges[node];
-				node = jmp[node];
+			if (tree[node].jmp_edges <= k) {
+				k -= tree[node].jmp_edges;
+				node = tree[node].jmp;
 			} else {
 				k--;
-				node = par[node];
+				node = tree[node].par;
 			}
 		}
 		return node;
 	}
 	int get_lca(int x, int y) const {
-		if (depth[x] < depth[y]) swap(x, y);
-		x = kth_par(x, depth[x] - depth[y]);
+		if (tree[x].depth < tree[y].depth) swap(x, y);
+		x = kth_par(x, tree[x].depth - tree[y].depth);
 		while (x != y) {
-			if (jmp[x] != jmp[y])
-				x = jmp[x], y = jmp[y];
+			if (tree[x].jmp != tree[y].jmp)
+				x = tree[x].jmp, y = tree[y].jmp;
 			else
-				x = par[x], y = par[y];
+				x = tree[x].par, y = tree[y].par;
 		}
 		return x;
 	}
 	int dist_edges(int x, int y) const {
-		return depth[x] + depth[y] - 2 * depth[get_lca(x, y)];
+		return tree[x].depth + tree[y].depth - 2 * tree[get_lca(x, y)].depth;
 	}
 	long long dist_weight(int x, int y) const {
-		return dist[x] + dist[y] - 2 * dist[get_lca(x, y)];
+		return tree[x].dist + tree[y].dist - 2 * tree[get_lca(x, y)].dist;
 	}
 };
