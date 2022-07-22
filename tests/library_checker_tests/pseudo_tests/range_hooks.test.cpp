@@ -18,9 +18,7 @@ int main() {
 		}
 
 		for(int i = 0; i < n; i++) {
-			assert(rh.arr_idx(rh.leaf_idx(i)) == i);
 			assert(n <= rh.leaf_idx(i) && rh.leaf_idx(i) < 2 * n);
-			assert(0 <= rh.arr_idx(i + n) && rh.arr_idx(i + n) < n);
 		}
 
 		for(int l = 0; l <= n; l++) {
