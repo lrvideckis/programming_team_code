@@ -53,7 +53,7 @@ struct seg_tree {
 	//update range [l, r) with `add`
 	void update(int l, int r, long long add) {
 		l = range_idx(l), r = range_idx(r);
-		for(int lg = __lg(l); lg >= 1; lg--) {
+		for (int lg = __lg(l); lg >= 1; lg--) {
 			if (((l >> lg) << lg) != l) push(l >> lg);
 			if (((r >> lg) << lg) != r) push(r >> lg);
 		}
@@ -65,7 +65,7 @@ struct seg_tree {
 			}
 			l = l2, r = r2;
 		}
-		for(int lg = 1, mx = __lg(l); lg <= mx; lg++) {
+		for (int lg = 1; lg <= __lg(l); lg++) {
 			if (((l >> lg) << lg) != l) build(l >> lg);
 			if (((r >> lg) << lg) != r) build(r >> lg);
 		}
@@ -83,7 +83,7 @@ struct seg_tree {
 	//query range [l, r)
 	dt query(int l, int r) {
 		l = range_idx(l), r = range_idx(r);
-		for(int lg = __lg(l); lg >= 1; lg--) {
+		for (int lg = __lg(l); lg >= 1; lg--) {
 			if (((l >> lg) << lg) != l) push(l >> lg);
 			if (((r >> lg) << lg) != r) push(r >> lg);
 		}
