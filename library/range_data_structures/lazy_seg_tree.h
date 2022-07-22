@@ -73,7 +73,7 @@ struct seg_tree {
 		}
 		pars_up(l), pars_up(r);
 	}
-	void update(int v, int l, int r, long long add) {
+	void update(int v/* = 1*/, int l, int r, long long add) {
 		if (r <= tree[v].l || tree[v].r <= l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
@@ -94,7 +94,7 @@ struct seg_tree {
 		}
 		return combine(resl, resr);
 	}
-	dt query(int v, int l, int r) {
+	dt query(int v/* = 1*/, int l, int r) {
 		if (r <= tree[v].l || tree[v].r <= l)
 			return inf;
 		if (l <= tree[v].l && tree[v].r <= r)
