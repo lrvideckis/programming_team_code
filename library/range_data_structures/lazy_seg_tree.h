@@ -49,7 +49,6 @@ struct seg_tree {
 		}
 	}
 	int range_idx(int i) const {
-		assert(0 <= i && i <= n);
 		i += 1 << __lg(2 * n - 1);
 		return i < 2 * n ? i : 2 * (i - n);
 	}
