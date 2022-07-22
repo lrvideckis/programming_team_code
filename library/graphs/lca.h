@@ -4,7 +4,7 @@
 //mnemonic: Least/Lowest Common Ancestor
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
-	int n;
+	const int n;
 	vector<int> jmp, jmp_edges, par, depth;
 	vector<long long> dist;
 	LCA(const vector<vector<pair<int, long long>>>& adj, int root) :
