@@ -43,21 +43,20 @@ struct seg_tree {
 			tree[v].lazy = 0;
 		}
 	}
+	void build(int v) {
+		tree[v].val = combine(tree[2 * v].val, tree[2 * v + 1].val);
+	}
 	int range_idx(int i) const {
 		i += 1 << __lg(2 * n - 1);
 		return i < 2 * n ? i : 2 * (i - n);
 	}
-	void pars_down(int i) {
-		for (int j = __lg(i); ((i >> j) << j) != i; j--) push(i >> j);
-	}
-	void pars_up(int i) {
-		for (int v = i >> (__builtin_ctz(i) + 1); v; v >>= 1)
-			tree[v].val = combine(tree[2 * v].val, tree[2 * v + 1].val);
-	}
 	//update range [l, r) with `add`
 	void update(int l, int r, long long add) {
 		l = range_idx(l), r = range_idx(r);
-		pars_down(l), pars_down(r);
+		for(int lg = __lg(l); lg >= 1; lg--) {
+			if (((l >> lg) << lg) != l) push(l >> lg);
+			if (((r >> lg) << lg) != r) push(r >> lg);
+		}
 		{
 			int l2 = l, r2 = r;
 			for (; l < r; l >>= 1, r >>= 1) {
@@ -66,7 +65,10 @@ struct seg_tree {
 			}
 			l = l2, r = r2;
 		}
-		pars_up(l), pars_up(r);
+		for(int lg = 1, mx = __lg(l); lg <= mx; lg++) {
+			if (((l >> lg) << lg) != l) build(l >> lg);
+			if (((r >> lg) << lg) != r) build(r >> lg);
+		}
 	}
 	void update(int v/* = 1*/, int l, int r, long long add) {
 		if (r <= tree[v].l || tree[v].r <= l)
@@ -81,7 +83,10 @@ struct seg_tree {
 	//query range [l, r)
 	dt query(int l, int r) {
 		l = range_idx(l), r = range_idx(r);
-		pars_down(l), pars_down(r);
+		for(int lg = __lg(l); lg >= 1; lg--) {
+			if (((l >> lg) << lg) != l) push(l >> lg);
+			if (((r >> lg) << lg) != r) push(r >> lg);
+		}
 		dt resl = inf, resr = inf;
 		for (; l < r; l >>= 1, r >>= 1) {
 			if (l & 1) resl = combine(resl, tree[l++].val);
