@@ -1,15 +1,16 @@
 #pragma once
-using dt = array<long long, 3>; //sum, max, min
+//example initialization:
+//	implicit_seg_tree<10'000'000> ist(l, r);
 const long long inf = 1e18;
-const int sz = 2e7;
-struct node {
-	dt val;
-	long long lazy;
-	int lch, rch; // children, indexes into `tree`, -1 for null
-	node() {}
-	node(const dt& a_val) : val(a_val), lazy(0), lch(-1), rch(-1) {}
-} tree[sz];
-struct implicit_seg_tree {
+template <int N> struct implicit_seg_tree {
+	using dt = array<long long, 3>; //sum, max, min
+	struct node {
+		dt val;
+		long long lazy;
+		int lch, rch; // children, indexes into `tree`, -1 for null
+		node() {}
+		node(const dt& a_val) : val(a_val), lazy(0), lch(-1), rch(-1) {}
+	} tree[N];
 	int ptr, root_l, root_r;//[root_l, root_r) defines range of root node; handles negatives
 	implicit_seg_tree(int l, int r) : ptr(0), root_l(l), root_r(r) {
 		tree[ptr++] = node(dt{0, 0, 0});
@@ -23,7 +24,7 @@ struct implicit_seg_tree {
 	}
 	void push(int v, int tl, int tr) {
 		if (tr - tl > 1 && tree[v].lch == -1) {
-			assert(ptr + 1 < sz);
+			assert(ptr + 1 < N);
 			tree[v].lch = ptr;
 			tree[ptr++] = node(dt{0, 0, 0});
 			tree[v].rch = ptr;

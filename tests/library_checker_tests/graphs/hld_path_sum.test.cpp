@@ -23,7 +23,7 @@ int main() {
 	HLD h(adj, getRand<int>(0, n-1)/*random root*/);
 	vector<long long> init(n);
 	for(int i = 0; i < n; i++) {
-		init[h.time_in[i]] = values[i];
+		init[h.tree[i].time_in] = values[i];
 	}
 	BIT<long long> ft(init);
 	while(q--) {
@@ -32,7 +32,7 @@ int main() {
 		if(type == 0) {
 			int idx, add;
 			cin >> idx >> add;
-			ft.update(h.time_in[idx], add);
+			ft.update(h.tree[idx].time_in, add);
 		} else {
 			int u, v;
 			cin >> u >> v;
