@@ -38,7 +38,7 @@ int main() {
 		return u.x < v.x;
 	});
 
-	implicit_seg_tree ist(0, 1e9 + 10);
+	implicit_seg_tree<20'000'000> ist(0, 1e9 + 10);
 
 	vector<long long> res(q, 0);
 

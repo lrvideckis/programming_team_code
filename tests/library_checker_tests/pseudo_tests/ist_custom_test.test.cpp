@@ -13,7 +13,7 @@ int main() {
 		if(l > r) swap(l,r);
 		if(l == r) r++;
 
-		implicit_seg_tree ist(l, r);
+		implicit_seg_tree<10'000'000> ist(l, r);
 
 		map<int, long long> naive;
 
