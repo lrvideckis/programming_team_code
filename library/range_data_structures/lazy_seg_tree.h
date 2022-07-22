@@ -78,7 +78,7 @@ struct seg_tree {
 		push(v);
 		update(2 * v, l, r, add);
 		update(2 * v + 1, l, r, add);
-		tree[v].val = combine(tree[2 * v].val, tree[2 * v + 1].val);
+		build(v);
 	}
 	//query range [l, r)
 	dt query(int l, int r) {
