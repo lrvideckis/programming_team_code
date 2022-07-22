@@ -2,7 +2,7 @@
 #include "../../template.h"
 #include "../../random.h"
 
-#include "../../../library/range_data_structures/lazy_seg_tree.h"
+#include "../../../library/range_data_structures/seg_tree.h"
 
 void do_test(int n, int q) {
 	const int mx_val = 1e9;
