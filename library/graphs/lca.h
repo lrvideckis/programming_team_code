@@ -14,37 +14,37 @@ struct LCA {
 	}) {
 		dfs(root, adj);
 	}
-	void dfs(int node, const vector<vector<pair<int, long long>>>& adj) {
+	void dfs(int v, const vector<vector<pair<int, long long>>>& adj) {
 		int jmp, jmp_edges;
-		if (tree[node].depth > 0 && tree[node].jmp_edges == tree[tree[node].jmp].jmp_edges)
-			jmp = tree[tree[node].jmp].jmp, jmp_edges = 2 * tree[node].jmp_edges + 1;
+		if (tree[v].depth > 0 && tree[v].jmp_edges == tree[tree[v].jmp].jmp_edges)
+			jmp = tree[tree[v].jmp].jmp, jmp_edges = 2 * tree[v].jmp_edges + 1;
 		else
-			jmp = node, jmp_edges = 1;
-		for (auto [ch, w] : adj[node]) {
-			if (ch == tree[node].par) continue;
+			jmp = v, jmp_edges = 1;
+		for (auto [ch, w] : adj[v]) {
+			if (ch == tree[v].par) continue;
 			tree[ch] = {
 				jmp,
 				jmp_edges,
-				node,
-				1 + tree[node].depth,
-				w + tree[node].dist
+				v,
+				1 + tree[v].depth,
+				w + tree[v].dist
 			};
 			dfs(ch, adj);
 		}
 	}
-	//traverse up k edges in O(log(k)). So with k=1 this returns `node`'s parent
-	int kth_par(int node, int k) const {
-		k = min(k, tree[node].depth);
+	//traverse up k edges in O(log(k)). So with k=1 this returns `v`'s parent
+	int kth_par(int v, int k) const {
+		k = min(k, tree[v].depth);
 		while (k > 0) {
-			if (tree[node].jmp_edges <= k) {
-				k -= tree[node].jmp_edges;
-				node = tree[node].jmp;
+			if (tree[v].jmp_edges <= k) {
+				k -= tree[v].jmp_edges;
+				v = tree[v].jmp;
 			} else {
 				k--;
-				node = tree[node].par;
+				v = tree[v].par;
 			}
 		}
-		return node;
+		return v;
 	}
 	int get_lca(int x, int y) const {
 		if (tree[x].depth < tree[y].depth) swap(x, y);

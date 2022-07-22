@@ -15,21 +15,21 @@ struct HLD {
 		int timer = 0;
 		dfs2(root, adj, timer);
 	}
-	void dfs1(int node, vector<vector<int>>& adj) {
-		for (int& to : adj[node]) {
-			if (to == tree[node].par) continue;
-			tree[to].par = node;
+	void dfs1(int v, vector<vector<int>>& adj) {
+		for (int& to : adj[v]) {
+			if (to == tree[v].par) continue;
+			tree[to].par = v;
 			dfs1(to, adj);
-			tree[node].sub_sz += tree[to].sub_sz;
-			if (tree[to].sub_sz > tree[adj[node][0]].sub_sz || adj[node][0] == tree[node].par)
-				swap(to, adj[node][0]);
+			tree[v].sub_sz += tree[to].sub_sz;
+			if (tree[to].sub_sz > tree[adj[v][0]].sub_sz || adj[v][0] == tree[v].par)
+				swap(to, adj[v][0]);
 		}
 	}
-	void dfs2(int node, const vector<vector<int>>& adj, int& timer) {
-		tree[node].time_in = timer++;
-		for (int to : adj[node]) {
-			if (to == tree[node].par) continue;
-			tree[to].next = (timer == tree[node].time_in + 1 ? tree[node].next : to);
+	void dfs2(int v, const vector<vector<int>>& adj, int& timer) {
+		tree[v].time_in = timer++;
+		for (int to : adj[v]) {
+			if (to == tree[v].par) continue;
+			tree[to].next = (timer == tree[v].time_in + 1 ? tree[v].next : to);
 			dfs2(to, adj, timer);
 		}
 	}
@@ -47,7 +47,7 @@ struct HLD {
 		}
 	}
 	// Returns interval (of time_in's) corresponding to the subtree of node i
-	// This can answer queries for "is some node `x` in some other node's subtree" by checking if time_in[x] is in this interval
+	// This can answer queries for "is some node `x` in some other node's subtree" by checking if tree[x].time_in is in this interval
 	pair<int, int> subtree(int i) const {
 		return {tree[i].time_in, tree[i].time_in + tree[i].sub_sz};
 	}
