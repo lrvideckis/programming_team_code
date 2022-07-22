@@ -22,22 +22,16 @@ struct range_hook {
 	template <typename F> void for_each(int l, int r, F f) const {
 		assert(l <= r);
 		for (l = range_idx(l), r = range_idx(r); l < r; l >>= 1, r >>= 1) {
-			if (l & 1) f(l++);
-			if (r & 1) f(--r);
+			if (l & 1) f(l++, true);
+			if (r & 1) f(--r, false);
 		}
 	}
-	template <typename F> void for_parents_down(int l, int r, F f) const {
-		assert(l <= r);
-		if (l == r) return;
-		l = range_idx(l), r = range_idx(r);
-		for (int i = __lg(l); ((l >> i) << i) != l; i--) f(l >> i);
-		for (int i = __lg(r); ((r >> i) << i) != r; i--) f(r >> i);
+	template <typename F> void for_parents_down(int i, F f) const {
+		i = range_idx(i);
+		for (int j = __lg(i); ((i >> j) << j) != i; j--) f(i >> j);
 	}
-	template <typename F> void for_parents_up(int l, int r, F f) const {
-		assert(l <= r);
-		if (l == r) return;
-		l = range_idx(l), r = range_idx(r);
-		for (int v = l >> (__builtin_ctz(l) + 1); v; v >>= 1) f(v);
-		for (int v = r >> (__builtin_ctz(r) + 1); v; v >>= 1) f(v);
+	template <typename F> void for_parents_up(int i, F f) const {
+		i = range_idx(i);
+		for (int v = i >> (__builtin_ctz(i) + 1); v; v >>= 1) f(v);
 	}
 };

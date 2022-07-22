@@ -49,13 +49,19 @@ struct seg_tree {
 	}
 	//update range [l, r) with `add`
 	void update(int l, int r, long long add) {
-		rh.for_parents_down(l, r, [&](int v) -> void {
+		rh.for_parents_down(l, [&](int v) -> void {
 			push(v);
 		});
-		rh.for_each(l, r, [&](int v) -> void {
+		rh.for_parents_down(r, [&](int v) -> void {
+			push(v);
+		});
+		rh.for_each(l, r, [&](int v, bool _) -> void {
 			apply(v, add);
 		});
-		rh.for_parents_up(l, r, [&](int v) -> void {
+		rh.for_parents_up(l, [&](int v) -> void {
+			tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
+		});
+		rh.for_parents_up(r, [&](int v) -> void {
 			tree[v].val = pull(tree[2 * v].val, tree[2 * v + 1].val);
 		});
 	}
@@ -71,15 +77,18 @@ struct seg_tree {
 	}
 	//query range [l, r)
 	dt query(int l, int r) {
-		rh.for_parents_down(l, r, [&](int v) -> void {
+		rh.for_parents_down(l, [&](int v) -> void {
 			push(v);
 		});
-		dt res = inf;
-		//switch out with for_each_l_to_r if order matters
-		rh.for_each(l, r, [&](int v) -> void {
-			res = pull(res, tree[v].val);
+		rh.for_parents_down(r, [&](int v) -> void {
+			push(v);
 		});
-		return res;
+		dt resl = inf, resr = inf;
+		rh.for_each(l, r, [&](int v, bool side) -> void {
+			if (side) resl = pull(resl, tree[v].val);
+			else resr = pull(tree[v].val, resr);
+		});
+		return pull(resl, resr);
 	}
 	dt query(int v/* = 1*/, int l, int r) {
 		if (r <= tree[v].l || tree[v].r <= l)

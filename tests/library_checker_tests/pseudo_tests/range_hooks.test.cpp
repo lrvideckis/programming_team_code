@@ -24,21 +24,15 @@ int main() {
 		}
 
 		for(int l = 0; l <= n; l++) {
-			rh.for_each(l, l, [&](int v) -> void {
+			rh.for_each(l, l, [&](int v, bool _) -> void {
 				assert(false);
 			});
-			rh.for_parents_up(l, l, [&](int v) -> void {
-				assert(false);
-			});
-			rh.for_parents_down(l, l, [&](int v) -> void {
-				assert(false);
-			});
-			for(int r = l; r <= n; r++) {
+			for(int r = l + 1; r <= n; r++) {
 				set<int> naive_pars;
 				{
 					vector<pair<int,int>> ranges;
 					set<int> range_nodes;
-					rh.for_each(l, r, [&](int v) -> void {
+					rh.for_each(l, r, [&](int v, bool _) -> void {
 						assert(1 <= v && v < 2 * n);
 						assert(!range_nodes.count(v));//assert uniqueness
 						range_nodes.insert(v);
@@ -46,24 +40,30 @@ int main() {
 						for(int curr_parent = (v >> 1); curr_parent >= 1; curr_parent >>= 1) naive_pars.insert(curr_parent);
 					});
 					if(r - l == 1) assert((int)range_nodes.size() == 1 && rh.leaf_idx(l) == *range_nodes.begin());
-					if(r - l > 0) {
-						sort(ranges.begin(), ranges.end());
-						assert(ranges[0].first == l);
-						assert(ranges.back().second == r);
-						for(int i = 1; i < (int)ranges.size(); i++) {
-							assert(ranges[i-1].second == ranges[i].first);
-						}
+					sort(ranges.begin(), ranges.end());
+					assert(ranges[0].first == l);
+					assert(ranges.back().second == r);
+					for(int i = 1; i < (int)ranges.size(); i++) {
+						assert(ranges[i-1].second == ranges[i].first);
 					}
 				}
 
 				set<int> pars_down;
-				rh.for_parents_down(l, r, [&](int v) -> void {
+				rh.for_parents_down(l, [&](int v) -> void {
+					assert(1 <= v && v < n);
+					pars_down.insert(v);
+				});
+				rh.for_parents_down(r, [&](int v) -> void {
 					assert(1 <= v && v < n);
 					pars_down.insert(v);
 				});
 
 				set<int> pars_up;
-				rh.for_parents_up(l, r, [&](int v) -> void {
+				rh.for_parents_up(l, [&](int v) -> void {
+					assert(1 <= v && v < n);
+					pars_up.insert(v);
+				});
+				rh.for_parents_up(r, [&](int v) -> void {
 					assert(1 <= v && v < n);
 					pars_up.insert(v);
 				});
