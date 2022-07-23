@@ -57,13 +57,9 @@ struct seg_tree {
 			if (((l >> lg) << lg) != l) push(l >> lg);
 			if (((r >> lg) << lg) != r) push(r >> lg);
 		}
-		{
-			int l2 = l, r2 = r;
-			for (; l < r; l >>= 1, r >>= 1) {
-				if (l & 1) apply(l++, add);
-				if (r & 1) apply(--r, add);
-			}
-			l = l2, r = r2;
+		for (int x = l, y = r; x < y; x >>= 1, y >>= 1) {
+			if (x & 1) apply(x++, add);
+			if (y & 1) apply(--y, add);
 		}
 		for (int lg = 1; lg <= __lg(l); lg++) {
 			if (((l >> lg) << lg) != l) build(l >> lg);
