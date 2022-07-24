@@ -8,10 +8,10 @@
 //this returns *min* total cost to assign each worker to some distinct job
 //O(n^2 * m)
 //
-//trick 1: set `cost[i][j]` to inf to say: "worker `i` cannot be assigned job `j`"
+//trick 1: set `cost[i][j]` to INF to say: "worker `i` cannot be assigned job `j`"
 //trick 2: `cost[i][j]` can be negative, so to instead find max total cost over all matchings: set all `cost[i][j]` to `-cost[i][j]`.
 //Now max total cost = - hungarian(cost).min_cost
-const long long inf = 1e18;
+const long long INF = 1e18;
 struct match {
 	long long min_cost;
 	vector<int> matching;//worker `i` (1<=i<=n) is assigned to job `matching[i]` (1<=matching[i]<=m)
@@ -24,12 +24,12 @@ match hungarian(const vector<vector<long long>>& cost) {
 	for (int i = 1; i <= n; i++) {
 		p[0] = i;
 		int j0 = 0;
-		vector<long long> minv(m + 1, inf);
+		vector<long long> minv(m + 1, INF);
 		vector<bool> used(m + 1, false);
 		do {
 			used[j0] = true;
 			int i0 = p[j0], j1 = 0;
-			long long delta = inf;
+			long long delta = INF;
 			for (int j = 1; j <= m; j++)
 				if (!used[j]) {
 					long long cur = cost[i0][j] - u[i0] - v[j];
