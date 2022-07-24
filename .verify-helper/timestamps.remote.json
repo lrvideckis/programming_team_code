@@ -24,6 +24,7 @@
 "tests/library_checker_tests/pseudo_tests/fib_matrix_expo.test.cpp": "2022-07-19 23:16:27 -0700",
 "tests/library_checker_tests/pseudo_tests/ist_custom_test.test.cpp": "2022-07-23 23:08:22 -0700",
 "tests/library_checker_tests/pseudo_tests/kmp.test.cpp": "2022-07-19 23:16:27 -0700",
+"tests/library_checker_tests/pseudo_tests/lazy_seg_tree.test.cpp": "2022-07-23 23:37:09 -0700",
 "tests/library_checker_tests/pseudo_tests/prime_sieve_mobius.test.cpp": "2022-07-19 23:16:27 -0700",
 "tests/library_checker_tests/pseudo_tests/totient.test.cpp": "2022-07-19 23:16:27 -0700",
 "tests/library_checker_tests/range_data_structures/fenwick_tree.test.cpp": "2022-07-22 14:30:12 -0700",
