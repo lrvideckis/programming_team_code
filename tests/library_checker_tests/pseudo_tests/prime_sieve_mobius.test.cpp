@@ -3,10 +3,10 @@
 
 #include "../../../library/math/prime_sieve_mobius.h"
 
-//kactl isPrime
+//kactl is_prime
 typedef long long ll;
 typedef unsigned long long ull;
-ull modmul(ull a, ull b, ull M) {
+ull modmul(ull a, ull b, const ull M) {
 	ll ret = a * b - M * ull(1.L / M * a * b);
 	return ret + M * (ret < 0) - M * (ret >= (ll)M);
 }
@@ -16,7 +16,7 @@ ull modpow(ull b, ull e, ull mod) {
 		if (e & 1) ans = modmul(ans, b, mod);
 	return ans;
 }
-bool isPrime(ull n) {
+bool is_prime(ull n) {
 	if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;
 	ull A[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022},
 	    s = __builtin_ctzll(n-1), d = n >> s;
@@ -34,23 +34,23 @@ int main() {
 	calc_seive();
 
 	for(int i = 2; i < N; i++) {
-		assert(isPrime(i) == (a_prime[i] == i));
-		assert(isPrime(a_prime[i]));
+		assert(is_prime(i) == (a_prime[i] == i));
+		assert(is_prime(a_prime[i]));
 		assert(i % a_prime[i] == 0);
 		int val = i;
-		map<int,int> primePower;
+		map<int,int> prime_power;
 		while(val > 1) {
 			int p = a_prime[val];
-			primePower[p]++;
+			prime_power[p]++;
 			val /= p;
 		}
-		bool foundSquare = false;
-		for(auto [prime, exp] : primePower) {
-			if(exp >= 2) foundSquare = true;
+		bool found_square = false;
+		for(auto [prime, exp] : prime_power) {
+			if(exp >= 2) found_square = true;
 		}
-		if(foundSquare) {
+		if(found_square) {
 			assert(mobius[i] == 0);
-		} else if(primePower.size()%2 == 0) {
+		} else if(prime_power.size()%2 == 0) {
 			assert(mobius[i] == 1);
 		} else {
 			assert(mobius[i] == -1);

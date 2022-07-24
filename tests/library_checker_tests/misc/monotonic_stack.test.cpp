@@ -17,24 +17,24 @@ int main() {
 
 	RMQ<int> st(arr, [](int x, int y) { return min(x,y); });
 
-	vector<int> leftLower = monotonic_stack(arr);
+	vector<int> left_lower = monotonic_stack(arr);
 	reverse(arr.begin(), arr.end());
-	vector<int> rightLower = monotonic_stack(arr);
+	vector<int> right_lower = monotonic_stack(arr);
 	reverse(arr.begin(), arr.end());
 
 	vector<int> par(n, -1);
 	for(int i = 0; i < n; i++) {
-		int L = leftLower[i], R = n-1-rightLower[n-1-i];
-		assert(0 <= L+1 && L+1 <= i && i <= R-1 && R-1 < n);
-		if(L+1 < i) assert(st.query(L+1, i) > arr[i]);
-		if(i < R-1) assert(st.query(i+1, R) > arr[i]);
-		if(L >= 0) assert(arr[L] <= arr[i]);
-		if(R < n) assert(arr[R] <= arr[i]);
+		int l = left_lower[i], r = n-1-right_lower[n-1-i];
+		assert(0 <= l+1 && l+1 <= i && i <= r-1 && r-1 < n);
+		if(l+1 < i) assert(st.query(l+1, i) > arr[i]);
+		if(i < r-1) assert(st.query(i+1, r) > arr[i]);
+		if(l >= 0) assert(arr[l] <= arr[i]);
+		if(r < n) assert(arr[r] <= arr[i]);
 
-		if(L == -1 && R == n) par[i] = i;
-		else if(L == -1) par[i] = R;
-		else if(R == n) par[i] = L;
-		else par[i] = arr[L] > arr[R] ? L : R;
+		if(l == -1 && r == n) par[i] = i;
+		else if(l == -1) par[i] = r;
+		else if(r == n) par[i] = l;
+		else par[i] = arr[l] > arr[r] ? l : r;
 	}
 
 	for(int i = 0; i < n; i++) {

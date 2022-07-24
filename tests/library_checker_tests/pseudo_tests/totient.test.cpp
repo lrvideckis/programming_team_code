@@ -5,7 +5,7 @@
 
 int main() {
 
-	int MX = 3e5;
+	const int MX = 3e5;
 
 	vector<int> phi(MX);
 	for(int i = 0; i < MX; i++) {

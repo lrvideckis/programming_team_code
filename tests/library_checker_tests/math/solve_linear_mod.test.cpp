@@ -6,15 +6,15 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 
-	const int mod = 998244353;
+	const int MOD = 998244353;
 
 	int n, m;
 	cin >> n >> m;
 
-	vector<vector<int>> A(n, vector<int>(m));
+	vector<vector<int>> mat(n, vector<int>(m));
 	for(int i = 0; i < n; i++) {
 		for(int j = 0; j < m; j++) {
-			cin >> A[i][j];
+			cin >> mat[i][j];
 		}
 	}
 
@@ -23,7 +23,7 @@ int main() {
 		cin >> b[i];
 	}
 
-	matrix_info info = solve_linear_mod(A, b, mod);
+	matrix_info info = solve_linear_mod(mat, b, MOD);
 
 	if(info.x.empty()) {
 		cout << -1 << endl;
@@ -37,13 +37,13 @@ int main() {
 
 	vector<int> pivot(m, -1);
 	for (int i = 0, j = 0; i < info.rank; ++i) {
-		while (A[i][j] == 0) ++j;
+		while (mat[i][j] == 0) ++j;
 		pivot[j] = i;
 	}
 	for (int j = 0; j < m; ++j) if (pivot[j] == -1) {
 		vector<int> x(m, 0);
-		x[j] = mod-1;
-		for (int k = 0; k < j; ++k) if (pivot[k] != -1) x[k] = A[pivot[k]][j];
+		x[j] = MOD-1;
+		for (int k = 0; k < j; ++k) if (pivot[k] != -1) x[k] = mat[pivot[k]][j];
 
 		for (int k = 0; k < m; ++k) cout << x[k] << " ";
 		cout << endl;

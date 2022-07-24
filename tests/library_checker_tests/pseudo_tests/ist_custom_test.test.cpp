@@ -5,33 +5,33 @@
 #include "../../../library/range_data_structures/uncommon/implicit_seg_tree.h"
 
 int main() {
-	const int mx = 1000;
+	const int MX = 1000;
 
 	for(int tests = 50; tests--;) {
-		int l = get_rand(-mx, mx);
-		int r = get_rand(-mx, mx);
-		if(l > r) swap(l,r);
-		if(l == r) r++;
+		int range_l = get_rand(-MX, MX);
+		int range_r = get_rand(-MX, MX);
+		if(range_l > range_r) swap(range_l,range_r);
+		if(range_l == range_r) range_r++;
 
-		implicit_seg_tree<10'000'000> ist(l, r);
+		implicit_seg_tree<10'000'000> ist(range_l, range_r);
 
 		map<int, long long> naive;
 
 		for(int iterations = 1000; iterations--;) {
-			int L = get_rand(l, r - 1), R = get_rand(l, r - 1);
-			if(L > R) swap(L, R);
+			int l = get_rand(range_l, range_r - 1), r = get_rand(range_l, range_r - 1);
+			if(l > r) swap(l, r);
 			if(get_rand(1,2) == 1) {//update
 				int diff = get_rand<int>(-1e9, 1e9);
-				ist.update(L, R, diff);
-				for(int i = L; i < R; i++) naive[i] += diff;
+				ist.update(l, r, diff);
+				for(int i = l; i < r; i++) naive[i] += diff;
 			} else {//query
 				array<long long, 3> curr_naive = {0, -(long long)1e18, (long long)1e18};
-				for(int i = L; i < R; i++) {
+				for(int i = l; i < r; i++) {
 					curr_naive[0] += naive[i];
 					curr_naive[1] = max(curr_naive[1], naive[i]);
 					curr_naive[2] = min(curr_naive[2], naive[i]);
 				}
-				assert(curr_naive == ist.query(L,R));
+				assert(curr_naive == ist.query(l,r));
 			}
 		}
 	}

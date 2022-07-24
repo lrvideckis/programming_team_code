@@ -5,11 +5,11 @@
 #include "../../../library/range_data_structures/seg_tree.h"
 
 void do_test(int n, int q) {
-	const int mx_val = 1e9;
+	const int MX_VAL = 1e9;
 
 	vector<long long> arr(n);
 	for(int i = 0; i < n; i++)
-		arr[i] = get_rand(-mx_val, mx_val);
+		arr[i] = get_rand(-MX_VAL, MX_VAL);
 
 	seg_tree st(arr);
 
@@ -17,7 +17,7 @@ void do_test(int n, int q) {
 		int l = get_rand(0,n), r = get_rand(0,n);
 		if(l > r) swap(l,r);
 		if(get_rand(1,2) == 1) {//update
-			long long diff = get_rand(-mx_val, mx_val);
+			long long diff = get_rand(-MX_VAL, MX_VAL);
 			st.update(l, r, diff);
 			for(int i = l; i < r; i++) arr[i] += diff;
 		} else {//query
