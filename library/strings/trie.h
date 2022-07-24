@@ -4,7 +4,7 @@
 //intended to be a base template and to be modified
 const int k = 26;//alphabet size
 struct trie {
-	const char min_ch = 'a';//'A' for uppercase, '0' for digits
+	const char MIN_CH = 'a';//'A' for uppercase, '0' for digits
 	struct node {
 		int next[k], id, p = -1;
 		char ch;
@@ -18,7 +18,7 @@ struct trie {
 	void add_string(const string& s, int id) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - min_ch;
+			int v = ch - MIN_CH;
 			if (t[c].next[v] == -1) {
 				t[c].next[v] = t.size();
 				t.emplace_back(c, ch);
@@ -31,7 +31,7 @@ struct trie {
 	void remove_string(const string& s) {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - min_ch;
+			int v = ch - MIN_CH;
 			if (t[c].next[v] == -1)
 				return;
 			c = t[c].next[v];
@@ -41,7 +41,7 @@ struct trie {
 	int find_string(const string& s) const {
 		int c = 0;
 		for (char ch : s) {
-			int v = ch - min_ch;
+			int v = ch - MIN_CH;
 			if (t[c].next[v] == -1)
 				return -1;
 			c = t[c].next[v];

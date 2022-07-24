@@ -1,6 +1,6 @@
 #pragma once
 struct binary_trie {
-	const int mx_bit = 62;
+	const int MX_BIT = 62;
 	struct node {
 		long long val = -1;
 		int sub_sz = 0;//number of inserted values in subtree
@@ -12,7 +12,7 @@ struct binary_trie {
 	int update(long long val, int delta) {
 		int c = 0;
 		t[0].sub_sz += delta;
-		for (int bit = mx_bit; bit >= 0; bit--) {
+		for (int bit = MX_BIT; bit >= 0; bit--) {
 			bool v = (val >> bit) & 1;
 			if (t[c].next[v] == -1) {
 				t[c].next[v] = t.size();
@@ -33,7 +33,7 @@ struct binary_trie {
 	long long min_xor(long long val) const {
 		assert(size() > 0);
 		int c = 0;
-		for (int bit = mx_bit; bit >= 0; bit--) {
+		for (int bit = MX_BIT; bit >= 0; bit--) {
 			bool v = (val >> bit) & 1;
 			int ch = t[c].next[v];
 			if (ch != -1 && t[ch].sub_sz > 0)
