@@ -8,8 +8,8 @@ int main() {
 	const int mx = 1000;
 
 	for(int tests = 50; tests--;) {
-		int l = getRand(-mx, mx);
-		int r = getRand(-mx, mx);
+		int l = get_rand(-mx, mx);
+		int r = get_rand(-mx, mx);
 		if(l > r) swap(l,r);
 		if(l == r) r++;
 
@@ -18,10 +18,10 @@ int main() {
 		map<int, long long> naive;
 
 		for(int iterations = 1000; iterations--;) {
-			int L = getRand(l, r - 1), R = getRand(l, r - 1);
+			int L = get_rand(l, r - 1), R = get_rand(l, r - 1);
 			if(L > R) swap(L, R);
-			if(getRand(1,2) == 1) {//update
-				int diff = getRand<int>(-1e9, 1e9);
+			if(get_rand(1,2) == 1) {//update
+				int diff = get_rand<int>(-1e9, 1e9);
 				ist.update(L, R, diff);
 				for(int i = L; i < R; i++) naive[i] += diff;
 			} else {//query

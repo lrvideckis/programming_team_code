@@ -9,15 +9,15 @@ void do_test(int n, int q) {
 
 	vector<long long> arr(n);
 	for(int i = 0; i < n; i++)
-		arr[i] = getRand(-mx_val, mx_val);
+		arr[i] = get_rand(-mx_val, mx_val);
 
 	seg_tree st(arr);
 
 	for(int iterations = q; iterations--;) {
-		int L = getRand(0,n), R = getRand(0,n);
+		int L = get_rand(0,n), R = get_rand(0,n);
 		if(L > R) swap(L,R);
-		if(getRand(1,2) == 1) {//update
-			long long diff = getRand(-mx_val, mx_val);
+		if(get_rand(1,2) == 1) {//update
+			long long diff = get_rand(-mx_val, mx_val);
 			st.update(L, R, diff);
 			for(int i = L; i < R; i++) arr[i] += diff;
 		} else {//query
@@ -35,7 +35,7 @@ int main() {
 		do_test(n, n * n);
 	}
 	for(int tests = 50; tests--;) {
-		do_test(getRand(1, 1000), 5000);
+		do_test(get_rand(1, 1000), 5000);
 	}
 	int a, b;
 	cin >> a >> b;

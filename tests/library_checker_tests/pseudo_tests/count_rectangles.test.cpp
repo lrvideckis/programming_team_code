@@ -6,11 +6,11 @@
 
 int main() {
 	for(int tests = 20; tests--;) {
-		int n = getRand(1,100), m = getRand(1, 100);
+		int n = get_rand(1,100), m = get_rand(1, 100);
 		vector<vector<bool>> grid(n, vector<bool>(m));
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < m; j++) {
-				grid[i][j] = (getRand(1,2) == 1);
+				grid[i][j] = (get_rand(1,2) == 1);
 			}
 		}
 

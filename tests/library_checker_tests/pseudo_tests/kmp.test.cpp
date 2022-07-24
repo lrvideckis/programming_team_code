@@ -6,19 +6,19 @@
 
 int main() {
 	for(int tests = 20; tests--;) {
-		int n = getRand(1, 5);
+		int n = get_rand(1, 5);
 		string needle(n, 'a');
 		vector<int> needleArr(n);
 		for(int i = 0; i < n; i++) {
-			needleArr[i] = getRand(0, 3);
+			needleArr[i] = get_rand(0, 3);
 			needle[i] = needleArr[i] + 'a';
 		}
 
-		int m = getRand(n, 10000);
+		int m = get_rand(n, 10000);
 		string haystack(m, 'a');
 		vector<int> haystackArr(m);
 		for(int i = 0; i < m; i++) {
-			haystackArr[i] = getRand(0,3);
+			haystackArr[i] = get_rand(0,3);
 			haystack[i] = haystackArr[i] + 'a';
 		}
 
