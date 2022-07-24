@@ -40,6 +40,7 @@ do
 			{ key: readability-identifier-naming.FunctionCase, value: lower_case },
 			{ key: readability-identifier-naming.MethodCase, value: lower_case },
 			{ key: readability-identifier-naming.VariableCase, value: lower_case },
+			{ key: readability-identifier-naming.ConstantCase, value: UPPER_CASE },
 			{ key: readability-identifier-naming.ParameterCase, value: lower_case },
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }

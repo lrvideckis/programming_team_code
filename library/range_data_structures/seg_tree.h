@@ -12,10 +12,10 @@ struct seg_tree {
 		ch lazy;
 		int l, r;//[l, r)
 	};
-	const int n;
+	const int N;
 	vector<node> tree;
-	seg_tree(const vector<long long>& arr) : n(arr.size()), tree(2 * n) {
-		for (int i = 0, j = 1 << __lg(2 * n - 1); i < n; i++, j = (j + 1) % n + n) {
+	seg_tree(const vector<long long>& arr) : N(arr.size()), tree(2 * N) {
+		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N) {
 			tree[j] = {
 				arr[i],
 				0,
@@ -23,7 +23,7 @@ struct seg_tree {
 				i + 1
 			};
 		}
-		for (int i = n - 1; i >= 1; i--) {
+		for (int i = N - 1; i >= 1; i--) {
 			tree[i] = {
 				combine(tree[2 * i].val, tree[2 * i + 1].val),
 				0,
@@ -48,8 +48,8 @@ struct seg_tree {
 		tree[v].val = combine(tree[2 * v].val, tree[2 * v + 1].val);
 	}
 	int range_idx(int i) const {
-		i += 1 << __lg(2 * n - 1);
-		return i < 2 * n ? i : 2 * (i - n);
+		i += 1 << __lg(2 * N - 1);
+		return i < 2 * N ? i : 2 * (i - N);
 	}
 	//update range [l, r) with `change`
 	void update(int l, int r, ch change) {

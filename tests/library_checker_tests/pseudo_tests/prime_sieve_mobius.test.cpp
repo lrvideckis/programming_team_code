@@ -33,7 +33,7 @@ int main() {
 	calc_mobius();
 	calc_seive();
 
-	for(int i = 2; i < sz; i++) {
+	for(int i = 2; i < N; i++) {
 		assert(isPrime(i) == (a_prime[i] == i));
 		assert(isPrime(a_prime[i]));
 		assert(i % a_prime[i] == 0);

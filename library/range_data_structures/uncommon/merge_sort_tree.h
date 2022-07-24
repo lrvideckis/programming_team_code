@@ -1,17 +1,17 @@
 #pragma once
 //For point updates: either switch to policy based BST, or use sqrt decomposition
 struct merge_sort_tree {
-	const int n;
+	const int N;
 	struct node {
 		vector<int> val;
 		int l, r;//[l, r)
 	};
 	vector<node> tree;
 	//RTE's when `arr` is empty
-	merge_sort_tree(const vector<int>& arr) : n(arr.size()), tree(2 * n) {
-		for (int i = 0, j = 1 << __lg(2 * n - 1); i < n; i++, j = (j + 1) % n + n)
+	merge_sort_tree(const vector<int>& arr) : N(arr.size()), tree(2 * N) {
+		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N)
 			tree[j] = {{arr[i]}, i, i + 1};
-		for (int i = n - 1; i >= 1; i--) {
+		for (int i = N - 1; i >= 1; i--) {
 			const auto& l = tree[2 * i].val;
 			const auto& r = tree[2 * i + 1].val;
 			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(tree[i].val));
@@ -24,8 +24,8 @@ struct merge_sort_tree {
 		return lower_bound(val.begin(), val.end(), x) - val.begin();
 	}
 	int range_idx(int i) const {
-		i += 1 << __lg(2 * n - 1);
-		return i < 2 * n ? i : 2 * (i - n);
+		i += 1 << __lg(2 * N - 1);
+		return i < 2 * N ? i : 2 * (i - N);
 	}
 	//How many values in range [l, r) are < x?
 	//O(log^2(n))
