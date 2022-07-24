@@ -23,7 +23,7 @@ failTests=""
 echo "skipped headers: "
 find . -name '*.h' | grep -Ff ../tests/scripts/skip_headers.txt
 
-for test in $(find . -name '*.h' | grep -vFf ../tests/scripts/skip_headers.txt)
+for test in $(find . -name '*.h' | grep -vFf ../tests/scripts/skip_headers.txt ; find ../tests/library_checker_tests/ -name '*.test.cpp')
 do
 	echo "file is "$test
 
