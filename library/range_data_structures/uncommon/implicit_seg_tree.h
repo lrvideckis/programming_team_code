@@ -1,7 +1,7 @@
 #pragma once
 //example initialization:
 //	implicit_seg_tree<10'000'000> ist(l, r);
-const long long inf = 1e18;
+const long long INF = 1e18;
 template <int N> struct implicit_seg_tree {
 	using dt = array<long long, 3>; //sum, max, min
 	struct node {
@@ -66,7 +66,7 @@ template <int N> struct implicit_seg_tree {
 	}
 	dt query(int v, int tl, int tr, int l, int r) {
 		if (r <= tl || tr <= l)
-			return {0, -inf, inf};
+			return {0, -INF, INF};
 		if (l <= tl && tr <= r)
 			return tree[v].val;
 		push(v, tl, tr);

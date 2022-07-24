@@ -1,6 +1,6 @@
 #pragma once
 //status: not tested
-const long long inf = 1e18;
+const long long INF = 1e18;
 struct min_cost_max_flow {
 	typedef long long ll;
 	struct edge {
@@ -10,7 +10,7 @@ struct min_cost_max_flow {
 	vector<edge> e;
 	vector<vector<ll>> g;
 	ll n, s, t;
-	ll k = inf; // max amount of flow allowed
+	ll k = INF; // max amount of flow allowed
 	min_cost_max_flow(int a_n, int a_s, int a_t) : n(a_n), s(a_s), t(a_t) {
 		g.resize(n);
 	}
@@ -26,7 +26,7 @@ struct min_cost_max_flow {
 	pair<ll, ll> get_flow() {
 		ll flow = 0, cost = 0;
 		while (flow < k) {
-			vector<ll> id(n, 0), d(n, inf), q(n), p(n);
+			vector<ll> id(n, 0), d(n, INF), q(n), p(n);
 			vector<size_t> p_edge(n);
 			ll qh = 0, qt = 0;
 			q[qt++] = s;
@@ -52,7 +52,7 @@ struct min_cost_max_flow {
 					}
 				}
 			}
-			if (d[t] == inf) break;
+			if (d[t] == INF) break;
 			ll addflow = k - flow;
 			for (ll v = t; v != s; v = p[v]) {
 				ll pv = p[v];
