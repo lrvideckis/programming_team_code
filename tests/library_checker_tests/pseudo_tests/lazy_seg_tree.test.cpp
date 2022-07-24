@@ -18,16 +18,14 @@ void do_test(int n, int q) {
 		if(L > R) swap(L,R);
 		if(getRand(1,2) == 1) {//update
 			long long diff = getRand(-mx_val, mx_val);
-			if(getRand(1,2) == 1) st.update(L, R, diff);//iterative version
-			else st.update(1, L, R, diff);//recursive versoin
+			st.update(L, R, diff);
 			for(int i = L; i < R; i++) arr[i] += diff;
 		} else {//query
 			seg_tree::dt mn = 1e18;
 			for(int i = L; i < R; i++) {
 				mn = min(mn, arr[i]);
 			}
-			if(getRand(1,2) == 1) assert(mn == st.query(L, R));//iterative version
-			else assert(mn == st.query(1, L, R));//recursive version
+			assert(mn == st.query(L, R));
 		}
 	}
 }
