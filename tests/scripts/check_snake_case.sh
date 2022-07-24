@@ -30,8 +30,7 @@ do
 	tmp_file=$(dirname $test)"/tmp.cpp"
 	> $tmp_file
 
-	grep -q "main\(\)" $test
-	if [[ $? -eq 1 ]] ; then
+	if [[ $test == *.h ]] ; then
 		cp ../template.cpp $tmp_file
 	fi
 	sed --regexp-extended '/^#pragma once/d' $test >> $tmp_file
