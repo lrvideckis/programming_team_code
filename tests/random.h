@@ -11,12 +11,12 @@ mt19937 rng(seed);
 
 //intended types: int, unsigned, long long
 template<class T>
-inline T getRand(T l, T r) {
+inline T get_rand(T l, T r) {
 	assert(l <= r);
 	return uniform_int_distribution<T>(l, r)(rng);
 }
 
-inline double getRandReal(double l, double r) {
+inline double get_rand_real(double l, double r) {
 	assert(l < r);
 	return uniform_real_distribution(l, r)(rng);
 }

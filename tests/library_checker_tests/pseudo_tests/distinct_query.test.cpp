@@ -7,15 +7,15 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(false);
 	for(int tests = 5; tests--;) {
-		int n = getRand(1, 100);
+		int n = get_rand(1, 100);
 		vector<int> arr(n);
-		if(getRand(0,1) == 1) {
+		if(get_rand(0,1) == 1) {
 			for(int i = 0; i < n; i++) {
-				arr[i] = getRand<int>(-1e9, 1e9);
+				arr[i] = get_rand<int>(-1e9, 1e9);
 			}
 		} else {
 			for(int i = 0; i < n; i++) {
-				arr[i] = getRand<int>(-2, 2);
+				arr[i] = get_rand<int>(-2, 2);
 			}
 		}
 		distinct_query pst(arr);

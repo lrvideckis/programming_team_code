@@ -16,7 +16,7 @@ int main() {
 		check(i);
 	}
 	for(int tests = 1000; tests--;) {
-		long long pw = getRand<long long>(0, 1e18);
+		long long pw = get_rand<long long>(0, 1e18);
 		check(pw);
 	}
 	int a, b;

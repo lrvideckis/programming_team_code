@@ -398,7 +398,7 @@ int main() {
 		int l, r;
 		cin >> l >> r;
 		int res = rlq.query(l, r);
-		if(getRand(1, N) < 30) {// this will be true on average Q*30/N times
+		if(get_rand(1, N) < 30) {// this will be true on average Q*30/N times
 			vector<int> subarray;
 			for(int i = l; i < r; i++) {
 				subarray.push_back(P[i]);
