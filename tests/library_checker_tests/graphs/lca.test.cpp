@@ -11,19 +11,19 @@ int main() {
 	int n,q;
 	cin >> n >> q;
 	vector<vector<int>> adj(n);
-	vector<vector<pair<int,long long>>> adjWeighted(n);
+	vector<vector<pair<int,long long>>> adj_weighted(n);
 	vector<int> depth(n, 0);
 	for(int i = 1; i < n; ++i) {
 		int par;
 		cin >> par;
 		depth[i] = 1 + depth[par];
-		adjWeighted[par].push_back({i,1LL});
-		adjWeighted[i].push_back({par,1LL});
+		adj_weighted[par].push_back({i,1LL});
+		adj_weighted[i].push_back({par,1LL});
 		adj[par].push_back(i);
 		adj[i].push_back(par);
 	}
 
-	LCA h(adjWeighted, 0);
+	LCA h(adj_weighted, 0);
 	HLD h2(adj, 0);
 
 	for(int i = 0; i < n; ++i) {

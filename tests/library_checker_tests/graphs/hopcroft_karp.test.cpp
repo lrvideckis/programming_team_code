@@ -18,25 +18,25 @@ int main() {
 	match res = hopcroft_karp(adj, r);
 	cout << res.size_of_matching << endl;
 	//asserting correctness of both l_to_r, and r_to_l (as well as printing answer)
-	int sizeL = 0;
+	int size_l = 0;
 	for(int i = 0; i < l; i++) {
 		if(res.l_to_r[i] != -1) {
-			sizeL++;
-			int nodeR = res.l_to_r[i];
-			cout << i << " " << nodeR << endl;
-			assert(res.r_to_l[nodeR] == i);
+			size_l++;
+			int node_r = res.l_to_r[i];
+			cout << i << " " << node_r << endl;
+			assert(res.r_to_l[node_r] == i);
 		}
 	}
-	int sizeR = 0;
+	int size_r = 0;
 	for(int i = 0; i < r; i++) {
 		if(res.r_to_l[i] != -1) {
-			sizeR++;
-			int nodeL = res.r_to_l[i];
-			assert(res.l_to_r[nodeL] == i);
+			size_r++;
+			int node_l = res.r_to_l[i];
+			assert(res.l_to_r[node_l] == i);
 		}
 	}
-	assert(sizeL == res.size_of_matching);
-	assert(sizeR == res.size_of_matching);
+	assert(size_l == res.size_of_matching);
+	assert(size_r == res.size_of_matching);
 
 	//asserting found min vertex cover is correct
 	int cnt = 0;

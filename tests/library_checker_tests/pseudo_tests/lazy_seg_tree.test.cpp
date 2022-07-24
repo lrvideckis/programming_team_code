@@ -14,18 +14,18 @@ void do_test(int n, int q) {
 	seg_tree st(arr);
 
 	for(int iterations = q; iterations--;) {
-		int L = get_rand(0,n), R = get_rand(0,n);
-		if(L > R) swap(L,R);
+		int l = get_rand(0,n), r = get_rand(0,n);
+		if(l > r) swap(l,r);
 		if(get_rand(1,2) == 1) {//update
 			long long diff = get_rand(-mx_val, mx_val);
-			st.update(L, R, diff);
-			for(int i = L; i < R; i++) arr[i] += diff;
+			st.update(l, r, diff);
+			for(int i = l; i < r; i++) arr[i] += diff;
 		} else {//query
 			seg_tree::dt mn = 1e18;
-			for(int i = L; i < R; i++) {
+			for(int i = l; i < r; i++) {
 				mn = min(mn, arr[i]);
 			}
-			assert(mn == st.query(L, R));
+			assert(mn == st.query(l, r));
 		}
 	}
 }

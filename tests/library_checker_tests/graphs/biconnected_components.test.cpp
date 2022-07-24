@@ -44,28 +44,28 @@ int main() {
 	}
 
 	{
-		vector<set<int>> bccToNodes(cc.num_bccs), nodeToBCCs(n);
+		vector<set<int>> bcc_to_nodes(cc.num_bccs), node_to_bccs(n);
 		for(int i = 0; i < m; i++) {
 			int bccid = cc.bcc_id[i];
 			for(int node : {edges[i].first, edges[i].second}) {
-				bccToNodes[bccid].insert(node);
-				nodeToBCCs[node].insert(bccid);
+				bcc_to_nodes[bccid].insert(node);
+				node_to_bccs[node].insert(bccid);
 			}
 		}
 
 		// testing commented loops in block_vertex_tree
 		for(int v = 0; v < n; v++) {
-			assert(nodeToBCCs[v].size() == bvt[v].size());
+			assert(node_to_bccs[v].size() == bvt[v].size());
 
 			for(int bccid : bvt[v]) {
 				bccid -= n;
-				assert(nodeToBCCs[v].count(bccid));
+				assert(node_to_bccs[v].count(bccid));
 			}
 		}
 		for(int bccid = 0; bccid < cc.num_bccs; bccid++) {
-			assert(bccToNodes[bccid].size() == bvt[bccid+n].size());
+			assert(bcc_to_nodes[bccid].size() == bvt[bccid+n].size());
 			for(int v : bvt[bccid + n]) {
-				assert(bccToNodes[bccid].count(v));
+				assert(bcc_to_nodes[bccid].count(v));
 			}
 		}
 	}

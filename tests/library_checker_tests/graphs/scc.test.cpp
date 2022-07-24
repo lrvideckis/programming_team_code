@@ -23,13 +23,13 @@ int main() {
 	}
 
 	cout << info.num_sccs << endl;
-	vector<vector<int>> eachScc(info.num_sccs);
+	vector<vector<int>> each_scc(info.num_sccs);
 	for(int i = 0; i < n; i++) {
-		eachScc[info.scc_id[i]].push_back(i);
+		each_scc[info.scc_id[i]].push_back(i);
 	}
 	for(int i = info.num_sccs - 1; i >= 0; i--) {
-		cout << eachScc[i].size() << " ";
-		for(int node : eachScc[i]) cout << node << " ";
+		cout << each_scc[i].size() << " ";
+		for(int node : each_scc[i]) cout << node << " ";
 		cout << endl;
 	}
 	return 0;

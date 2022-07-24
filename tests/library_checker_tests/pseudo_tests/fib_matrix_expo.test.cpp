@@ -6,8 +6,8 @@
 #include "../../../library/math/fib.h"
 
 void check(long long n) {
-	const int mod = 1e9 + 7;
-	assert(fib(n, mod) == mult(power({{1, 1}, {1, 0}}, n, mod), {{1}, {0}}, mod)[0][0]);
+	const int MOD = 1e9 + 7;
+	assert(fib(n, MOD) == mult(power({{1, 1}, {1, 0}}, n, MOD), {{1}, {0}}, MOD)[0][0]);
 
 }
 

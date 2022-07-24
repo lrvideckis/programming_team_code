@@ -21,8 +21,8 @@ int main() {
 		distinct_query pst(arr);
 		for(int l = 0; l < n; l++) {
 			for(int r = l; r <= n; r++) {
-				set<int> copyArr(arr.begin() + l, arr.begin() + r);
-				assert(pst.query(l, r) == (int)copyArr.size());
+				set<int> copy_arr(arr.begin() + l, arr.begin() + r);
+				assert(pst.query(l, r) == (int)copy_arr.size());
 			}
 		}
 	}
