@@ -18,7 +18,7 @@ int main() {
 		inv[v].push_back({u,w});
 	}
 	vector<long long> len = dijkstra(adj, s);
-	if(len[t] == inf) {
+	if(len[t] == INF) {
 		cout << -1 << endl;
 		return 0;
 	}

@@ -18,7 +18,7 @@ struct max_flow {
 		for (;;) {
 			if (!bfs()) break;
 			ptr.assign(ptr.size(), 0);
-			while (ll pushed = dfs(s, inf))
+			while (ll pushed = dfs(s, INF))
 				flow += pushed;
 		}
 		return flow;
@@ -26,7 +26,7 @@ struct max_flow {
 	ll get_flow_for_edge(ll a, ll b) {
 		return e[edge_map[a * n + b]].flow;
 	}
-	const ll inf = 1e18;
+	const ll INF = 1e18;
 	struct edge {
 		ll a, b, cap, flow;
 	};

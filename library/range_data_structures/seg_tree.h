@@ -1,6 +1,6 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/18051
-const long long inf = 1e18;
+const long long INF = 1e18;
 struct seg_tree {
 	using dt /*data type*/ = long long;//min
 	static dt combine(const dt& l, const dt& r) {
@@ -83,7 +83,7 @@ struct seg_tree {
 			if (((l >> lg) << lg) != l) push(l >> lg);
 			if (((r >> lg) << lg) != r) push(r >> lg);
 		}
-		dt resl = inf, resr = inf;
+		dt resl = INF, resr = INF;
 		for (; l < r; l >>= 1, r >>= 1) {
 			if (l & 1) resl = combine(resl, tree[l++].val);
 			if (r & 1) resr = combine(tree[--r].val, resr);
@@ -92,7 +92,7 @@ struct seg_tree {
 	}
 	dt query(int v/* = 1*/, int l, int r) {
 		if (r <= tree[v].l || tree[v].r <= l)
-			return inf;
+			return INF;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
 		push(v);
