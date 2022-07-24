@@ -28,8 +28,12 @@ do
 	echo "file is "$test
 
 	tmp_file=$(dirname $test)"/tmp.cpp"
+	> $tmp_file
 
-	cp ../template.cpp $tmp_file
+	grep -q "main\(\)" $test
+	if [[ $? -eq 1 ]] ; then
+		cp ../template.cpp $tmp_file
+	fi
 	sed --regexp-extended '/^#pragma once/d' $test >> $tmp_file
 
 	# clang's "lower_case" == the traditional snake_case
