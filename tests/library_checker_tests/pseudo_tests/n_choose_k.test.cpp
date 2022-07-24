@@ -12,14 +12,14 @@ int main() {
 			while(true) {
 				if(type == 1) mod = get_rand(2, (int)1e9+100);
 				else mod = get_rand(2, 1000);
-				bool isPrime = true;
+				bool is_prime = true;
 				for(int i = 2; i * i <= mod; i++) {
 					if(mod%i == 0) {
-						isPrime = false;
+						is_prime = false;
 						break;
 					}
 				}
-				if(isPrime) break;
+				if(is_prime) break;
 			}
 		}
 
