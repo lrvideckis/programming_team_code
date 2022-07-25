@@ -15,14 +15,8 @@ struct seg_tree {
 	const int N;
 	vector<node> tree;
 	seg_tree(const vector<long long>& arr) : N(arr.size()), tree(2 * N) {
-		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N) {
-			tree[j] = {
-				arr[i],
-				0,
-				i,
-				i + 1
-			};
-		}
+		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N)
+			tree[j] = {arr[i], 0, i, i + 1};
 		for (int i = N - 1; i >= 1; i--) {
 			tree[i] = {
 				combine(tree[2 * i].val, tree[2 * i + 1].val),
