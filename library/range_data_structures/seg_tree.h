@@ -3,7 +3,7 @@
 const long long INF = 1e18;
 struct seg_tree {
 	using dt /*data type*/ = long long;//min
-	using ch /*data type*/ = long long;//add
+	using ch = long long;
 	static dt combine(const dt& l, const dt& r) {
 		return min(l, r);
 	}
