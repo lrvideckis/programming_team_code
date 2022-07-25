@@ -25,10 +25,7 @@ int main() {
 	while(q--) {
 		int l, r, x;
 		cin >> l >> r >> x;
-		if(get_rand(1, 2) == 1)
-			cout << mst.query(l, r, x+1) - mst.query(l, r, x) << endl; //iterative
-		else
-			cout << mst.query(1, l, r, x+1) - mst.query(1, l, r, x) << endl; //recursive
+		cout << mst.query(l, r, x+1) - mst.query(l, r, x) << endl;
 	}
 
 	return 0;

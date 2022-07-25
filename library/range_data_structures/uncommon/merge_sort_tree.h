@@ -2,25 +2,19 @@
 //For point updates: either switch to policy based BST, or use sqrt decomposition
 struct merge_sort_tree {
 	const int N;
-	struct node {
-		vector<int> val;
-		int l, r;//[l, r)
-	};
-	vector<node> tree;
+	vector<vector<int>> tree;
 	//RTE's when `arr` is empty
 	merge_sort_tree(const vector<int>& arr) : N(arr.size()), tree(2 * N) {
 		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N)
-			tree[j] = {{arr[i]}, i, i + 1};
+			tree[j] = {arr[i]};
 		for (int i = N - 1; i >= 1; i--) {
-			const auto& l = tree[2 * i].val;
-			const auto& r = tree[2 * i + 1].val;
-			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(tree[i].val));
-			tree[i].l = tree[2 * i].l;
-			tree[i].r = tree[2 * i + 1].r;
+			const auto& l = tree[2 * i];
+			const auto& r = tree[2 * i + 1];
+			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(tree[i]));
 		}
 	}
 	int value(int v, int x) const {
-		const vector<int>& val = tree[v].val;
+		const vector<int>& val = tree[v];
 		return lower_bound(val.begin(), val.end(), x) - val.begin();
 	}
 	int range_idx(int i) const {
@@ -37,13 +31,5 @@ struct merge_sort_tree {
 			if (r & 1) res += value(--r, x);
 		}
 		return res;
-	}
-	int query(int v/* = 1*/, int l, int r, int x) const {
-		if (r <= tree[v].l || tree[v].r <= l)
-			return 0;
-		if (l <= tree[v].l && tree[v].r <= r)
-			return value(v, x);
-		return query(2 * v, l, r, x) +
-		       query(2 * v + 1, l, r, x);
 	}
 };
