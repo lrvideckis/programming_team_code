@@ -1,5 +1,4 @@
 #pragma once
-//only the tests with prime mod
 //for mod inverse
 #include "exp_mod.h"
 // usage:
