@@ -21,3 +21,4 @@
 - [string hashing](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Hashing.h)
 - [string rotational equivalence](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/MinRotation.h)
 - [Mo queries](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/misc/HilbertMos.h)
+- [Non-lazy seg tree](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/SegmentTree.h)
