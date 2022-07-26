@@ -48,26 +48,20 @@ struct seg_tree {
 	//update range [l, r) with `change`
 	void update(int l, int r, ch change) {
 		l = range_idx(l), r = range_idx(r);
-		for (int lg = __lg(l); lg >= 1; lg--) {
-			if (((l >> lg) << lg) != l) push(l >> lg);
-			if (((r >> lg) << lg) != r && lg <= __lg((l - 1) ^ r) push(r >> lg);
-		}
+		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
+		for (int lg = __lg((l - 1) ^ r); lg > __builtin_ctz(r); lg--) push(r >> lg);
 		for (int x = l, y = r; x < y; x >>= 1, y >>= 1) {
 			if (x & 1) apply(x++, change);
 			if (y & 1) apply(--y, change);
 		}
-		for (int lg = 1; lg <= __lg(l); lg++) {
-			if (((l >> lg) << lg) != l) build(l >> lg);
-			if (((r >> lg) << lg) != r && lg <= __lg((l - 1) ^ r) build(r >> lg);
-		}
+		for (int lg = __builtin_ctz(r) + 1; lg <= __lg((l - 1) ^ r); lg++) build(r >> lg);
+		for (int lg = __builtin_ctz(l) + 1; lg <= __lg(l); lg++) build(l >> lg);
 	}
 	//query range [l, r)
 	dt query(int l, int r) {
 		l = range_idx(l), r = range_idx(r);
-		for (int lg = __lg(l); lg >= 1; lg--) {
-			if (((l >> lg) << lg) != l) push(l >> lg);
-			if (((r >> lg) << lg) != r && lg <= __lg((l - 1) ^ r) push(r >> lg);
-		}
+		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
+		for (int lg = __lg((l - 1) ^ r); lg > __builtin_ctz(r); lg--) push(r >> lg);
 		dt resl = INF, resr = INF;
 		for (; l < r; l >>= 1, r >>= 1) {
 			if (l & 1) resl = combine(resl, tree[l++].val);
