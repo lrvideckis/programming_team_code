@@ -26,7 +26,6 @@ struct seg_tree {
 			};
 		}
 	}
-	//what happens when `change` is applied to every index in range [tree[v].l, tree[v].r)?
 	void apply(int v, ch change) {
 		tree[v].val += change;
 		tree[v].lazy += change;
@@ -45,7 +44,7 @@ struct seg_tree {
 		i += 1 << __lg(2 * N - 1);
 		return i < 2 * N ? i : 2 * (i - N);
 	}
-	//update range [l, r) with `change`
+	//update range [l, r)
 	void update(int l, int r, ch change) {
 		l = to_leaf(l), r = to_leaf(r);
 		int lca_l_r = __lg((l - 1) ^ r);
