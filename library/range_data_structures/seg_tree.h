@@ -1,5 +1,5 @@
 #pragma once
-//source: https://codeforces.com/blog/entry/18051
+//source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
 const long long INF = 1e18;
 struct seg_tree {
 	using dt /*data type*/ = long long;//min
