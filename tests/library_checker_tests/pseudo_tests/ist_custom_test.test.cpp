@@ -25,13 +25,11 @@ int main() {
 				ist.update(l, r, diff);
 				for(int i = l; i < r; i++) naive[i] += diff;
 			} else {//query
-				array<long long, 3> curr_naive = {0, -(long long)1e18, (long long)1e18};
+				implicit_seg_tree<0>::dt curr_naive = implicit_seg_tree<0>::INF;
 				for(int i = l; i < r; i++) {
-					curr_naive[0] += naive[i];
-					curr_naive[1] = max(curr_naive[1], naive[i]);
-					curr_naive[2] = min(curr_naive[2], naive[i]);
+					curr_naive = min(curr_naive, naive[i]);
 				}
-				assert(curr_naive == ist.query(l,r));
+				assert(curr_naive == ist.query(l, r));
 			}
 		}
 	}
