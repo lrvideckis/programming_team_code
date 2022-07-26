@@ -12,7 +12,7 @@ struct merge_sort_tree {
 	int value(int v, int x) const {
 		return lower_bound(tree[v].begin(), tree[v].end(), x) - tree[v].begin();
 	}
-	int range_idx(int i) const {
+	int to_leaf(int i) const {
 		i += 1 << __lg(2 * N - 1);
 		return i < 2 * N ? i : 2 * (i - N);
 	}
@@ -20,7 +20,7 @@ struct merge_sort_tree {
 	//O(log^2(n))
 	int query(int l, int r, int x) const {
 		int res = 0;
-		for (l = range_idx(l), r = range_idx(r); l < r; l >>= 1, r >>= 1) {
+		for (l = to_leaf(l), r = to_leaf(r); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) res += value(l++, x);
 			if (r & 1) res += value(--r, x);
 		}
