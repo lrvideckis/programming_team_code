@@ -23,9 +23,9 @@ void do_test(int n, int q) {
 		}
 	} else {
 		for(int i = 0; i < q; i++) {
-			int l = get_rand(0, n), r = get_rand(0, n);
+			int l = get_rand(0, n + 1), r = get_rand(0, n + 1);
 			if(l > r) swap(l,r);
-			query.emplace_back(l, r, get_rand(0, 1));
+			query.emplace_back(l, r, get_rand(0, 2));
 		}
 	}
 

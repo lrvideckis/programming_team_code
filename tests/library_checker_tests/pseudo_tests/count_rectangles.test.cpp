@@ -10,7 +10,7 @@ int main() {
 		vector<vector<bool>> grid(n, vector<bool>(m));
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < m; j++) {
-				grid[i][j] = (get_rand(1,2) == 1);
+				grid[i][j] = (get_rand(1,3) == 1);
 			}
 		}
 

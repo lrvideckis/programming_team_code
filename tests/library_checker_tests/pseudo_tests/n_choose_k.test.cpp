@@ -8,7 +8,7 @@ int main() {
 	for(int tests = 10; tests--;) {
 		int mod;
 		{
-			int type = get_rand(1, 2);
+			int type = get_rand(1, 3);
 			while(true) {
 				if(type == 1) mod = get_rand(2, (int)1e9+100);
 				else mod = get_rand(2, 1000);

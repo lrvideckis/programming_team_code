@@ -18,9 +18,9 @@ int main() {
 		map<int, long long> naive;
 
 		for(int iterations = 1000; iterations--;) {
-			int l = get_rand(range_l, range_r - 1), r = get_rand(range_l, range_r - 1);
+			int l = get_rand(range_l, range_r), r = get_rand(range_l, range_r);
 			if(l > r) swap(l, r);
-			if(get_rand(1,2) == 1) {//update
+			if(get_rand(1,3) == 1) {//update
 				int diff = get_rand<int>(-1e9, 1e9);
 				ist.update(l, r, diff);
 				for(int i = l; i < r; i++) naive[i] += diff;
