@@ -3,7 +3,6 @@
 struct merge_sort_tree {
 	const int N;
 	vector<vector<int>> tree;
-	//RTE's when `arr` is empty
 	merge_sort_tree(const vector<int>& arr) : N(arr.size()), tree(2 * N) {
 		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N)
 			tree[j] = {arr[i]};
