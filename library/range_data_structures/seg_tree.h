@@ -50,7 +50,7 @@ struct seg_tree {
 		l = range_idx(l), r = range_idx(r);
 		for (int lg = __lg(l); lg >= 1; lg--) {
 			if (((l >> lg) << lg) != l) push(l >> lg);
-			if (((r >> lg) << lg) != r) push(r >> lg);
+			if (((r >> lg) << lg) != r && lg <= __lg((l - 1) ^ r) push(r >> lg);
 		}
 		for (int x = l, y = r; x < y; x >>= 1, y >>= 1) {
 			if (x & 1) apply(x++, change);
@@ -58,7 +58,7 @@ struct seg_tree {
 		}
 		for (int lg = 1; lg <= __lg(l); lg++) {
 			if (((l >> lg) << lg) != l) build(l >> lg);
-			if (((r >> lg) << lg) != r) build(r >> lg);
+			if (((r >> lg) << lg) != r && lg <= __lg((l - 1) ^ r) build(r >> lg);
 		}
 	}
 	//query range [l, r)
@@ -66,7 +66,7 @@ struct seg_tree {
 		l = range_idx(l), r = range_idx(r);
 		for (int lg = __lg(l); lg >= 1; lg--) {
 			if (((l >> lg) << lg) != l) push(l >> lg);
-			if (((r >> lg) << lg) != r) push(r >> lg);
+			if (((r >> lg) << lg) != r && lg <= __lg((l - 1) ^ r) push(r >> lg);
 		}
 		dt resl = INF, resr = INF;
 		for (; l < r; l >>= 1, r >>= 1) {
