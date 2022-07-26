@@ -13,10 +13,26 @@ void do_test(int n, int q) {
 
 	seg_tree st(arr);
 
-	for(int iterations = q; iterations--;) {
-		int l = get_rand(0,n), r = get_rand(0,n);
-		if(l > r) swap(l,r);
-		if(get_rand(1,2) == 1) {//update
+	vector<tuple<int,int,bool>> query;
+	if(q == INT_MAX) {
+		for(int l = 0; l <= n; l++) {
+			for(int r = l; r <= n; r++) {
+				query.emplace_back(l, r, 0);
+				query.emplace_back(l, r, 1);
+			}
+		}
+	} else {
+		for(int i = 0; i < q; i++) {
+			int l = get_rand(0, n), r = get_rand(0, n);
+			if(l > r) swap(l,r);
+			query.emplace_back(l, r, get_rand(0, 1));
+		}
+	}
+
+	shuffle(query.begin(), query.end(), rng);
+
+	for(auto [l, r, is_update] : query) {
+		if(is_update) {//update
 			long long diff = get_rand(-MX_VAL, MX_VAL);
 			st.update(l, r, diff);
 			for(int i = l; i < r; i++) arr[i] += diff;
@@ -31,11 +47,14 @@ void do_test(int n, int q) {
 }
 
 int main() {
-	for(int n = 0; n <= 16; n++) {
-		do_test(n, n * n);
+	for(int n = 0; n <= 140; n++) {
+		do_test(n, INT_MAX);
 	}
 	for(int tests = 50; tests--;) {
-		do_test(get_rand(1, 1000), 5000);
+		do_test(get_rand(500, 1000), 5000);
+	}
+	for(int tests = 8; tests--;) {
+		do_test(get_rand((int)1e5, (int)2e5), 50);
 	}
 	int a, b;
 	cin >> a >> b;
