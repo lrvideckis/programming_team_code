@@ -20,9 +20,8 @@ struct merge_sort_tree {
 	//How many values in range [l, r) are < x?
 	//O(log^2(n))
 	int query(int l, int r, int x) const {
-		l = range_idx(l), r = range_idx(r);
 		int res = 0;
-		for (; l < r; l >>= 1, r >>= 1) {
+		for (l = range_idx(l), r = range_idx(r); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) res += value(l++, x);
 			if (r & 1) res += value(--r, x);
 		}
