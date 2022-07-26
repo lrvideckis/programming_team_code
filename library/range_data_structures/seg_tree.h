@@ -1,7 +1,7 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
 struct seg_tree {
-	using dt /*data type*/ = long long;//min
+	using dt /*data type*/ = long long;
 	using ch = long long;
 	static dt combine(const dt& l, const dt& r) {
 		return min(l, r);
