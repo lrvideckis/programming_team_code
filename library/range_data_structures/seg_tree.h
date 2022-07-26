@@ -1,12 +1,12 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
-const long long INF = 1e18;
 struct seg_tree {
 	using dt /*data type*/ = long long;//min
 	using ch = long long;
 	static dt combine(const dt& l, const dt& r) {
 		return min(l, r);
 	}
+	static const dt INF = 1e18;
 	struct node {
 		dt val;
 		ch lazy;
@@ -14,7 +14,7 @@ struct seg_tree {
 	};
 	const int N;
 	vector<node> tree;
-	seg_tree(const vector<long long>& arr) : N(arr.size()), tree(2 * N) {
+	seg_tree(const vector<dt>& arr) : N(arr.size()), tree(2 * N) {
 		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N)
 			tree[j] = {arr[i], 0, i, i + 1};
 		for (int i = N - 1; i >= 1; i--) {

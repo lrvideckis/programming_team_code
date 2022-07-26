@@ -21,7 +21,7 @@ void do_test(int n, int q) {
 			st.update(l, r, diff);
 			for(int i = l; i < r; i++) arr[i] += diff;
 		} else {//query
-			seg_tree::dt mn = 1e18;
+			seg_tree::dt mn = seg_tree::INF;
 			for(int i = l; i < r; i++) {
 				mn = min(mn, arr[i]);
 			}
