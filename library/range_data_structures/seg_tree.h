@@ -48,7 +48,7 @@ struct seg_tree {
 	//update range [l, r) with `change`
 	void update(int l, int r, ch change) {
 		l = to_leaf(l), r = to_leaf(r);
-		int lca_l_r = __lg((l - 1) ^ r);
+		const int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
 		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
 		for (int x = l, y = r; x < y; x >>= 1, y >>= 1) {
@@ -61,7 +61,7 @@ struct seg_tree {
 	//query range [l, r)
 	dt query(int l, int r) {
 		l = to_leaf(l), r = to_leaf(r);
-		int lca_l_r = __lg((l - 1) ^ r);
+		const int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
 		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
 		dt resl = INF, resr = INF;
