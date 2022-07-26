@@ -41,13 +41,13 @@ struct seg_tree {
 	void build(int v) {
 		tree[v].val = combine(tree[2 * v].val, tree[2 * v + 1].val);
 	}
-	int leaf_idx(int i) const {
+	int to_leaf(int i) const {
 		i += 1 << __lg(2 * N - 1);
 		return i < 2 * N ? i : 2 * (i - N);
 	}
 	//update range [l, r) with `change`
 	void update(int l, int r, ch change) {
-		l = leaf_idx(l), r = leaf_idx(r);
+		l = to_leaf(l), r = to_leaf(r);
 		int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
 		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
@@ -60,7 +60,7 @@ struct seg_tree {
 	}
 	//query range [l, r)
 	dt query(int l, int r) {
-		l = leaf_idx(l), r = leaf_idx(r);
+		l = to_leaf(l), r = to_leaf(r);
 		int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
 		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
