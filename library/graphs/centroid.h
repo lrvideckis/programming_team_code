@@ -1,5 +1,4 @@
 #pragma once
-//with asserts checking depth of tree <= log2(n)
 //returns array `par` where `par[i]` = parent of node `i` in centroid tree
 //`par[root]` is -1
 //0-based nodes
