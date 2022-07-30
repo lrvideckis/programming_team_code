@@ -1,5 +1,4 @@
 #pragma once
-//with asserts checking correctness of is_bridge and is_cut
 //O(n+m) time & space
 //2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
 //handles multiple edges
