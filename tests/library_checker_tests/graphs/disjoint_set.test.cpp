@@ -8,12 +8,12 @@ int main() {
 	int n, q;
 	cin >> n >> q;
 	DSU ds(n);
-	while(q--) {
+	while (q--) {
 		int t, u, v;
 		cin >> t >> u >> v;
-		if(t == 0) {
-			ds.join(u,v);
-		} else {
+		if (t == 0)
+			ds.join(u, v);
+		else {
 			assert(t == 1);
 			cout << (ds.find(u) == ds.find(v)) << endl;
 		}

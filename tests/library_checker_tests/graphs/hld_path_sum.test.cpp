@@ -10,11 +10,10 @@ int main() {
 	int n, q;
 	cin >> n >> q;
 	vector<int> values(n);
-	for(int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		cin >> values[i];
-	}
 	vector<vector<int>> adj(n);
-	for(int i = 0; i < n-1; i++) {
+	for (int i = 0; i < n - 1; i++) {
 		int u, v;
 		cin >> u >> v;
 		adj[u].push_back(v);
@@ -22,14 +21,13 @@ int main() {
 	}
 	HLD h(adj, get_rand<int>(0, n)/*random root*/);
 	vector<long long> init(n);
-	for(int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		init[h.tree[i].time_in] = values[i];
-	}
 	BIT<long long> ft(init);
-	while(q--) {
+	while (q--) {
 		int type;
 		cin >> type;
-		if(type == 0) {
+		if (type == 0) {
 			int idx, add;
 			cin >> idx >> add;
 			ft.update(h.tree[idx].time_in, add);
@@ -37,9 +35,8 @@ int main() {
 			int u, v;
 			cin >> u >> v;
 			long long res = 0;
-			for(auto [l,r] : h.path(u,v)) {
+			for (auto [l, r] : h.path(u, v))
 				res += ft.sum(l, r);
-			}
 			cout << res << endl;
 		}
 	}

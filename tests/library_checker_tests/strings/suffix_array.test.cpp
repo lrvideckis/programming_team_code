@@ -5,16 +5,11 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-
 	string s;
 	cin >> s;
-
 	vector<int> sa = sa_is(s, 255);
-
-	for(int val : sa) {
+	for (int val : sa)
 		cout << val << " ";
-	}
 	cout << endl;
-
 	return 0;
 }

@@ -19,12 +19,12 @@ ull modpow(ull b, ull e, ull mod) {
 bool is_prime(ull n) {
 	if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;
 	ull vals[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022},
-	    s = __builtin_ctzll(n-1), d = n >> s;
+	             s = __builtin_ctzll(n - 1), d = n >> s;
 	for (ull a : vals) {   // ^ count trailing zeroes
-		ull p = modpow(a%n, d, n), i = s;
+		ull p = modpow(a % n, d, n), i = s;
 		while (p != 1 && p != n - 1 && a % n && i--)
 			p = modmul(p, p, n);
-		if (p != n-1 && i != s) return 0;
+		if (p != n - 1 && i != s) return 0;
 	}
 	return 1;
 }
@@ -32,31 +32,28 @@ bool is_prime(ull n) {
 int main() {
 	calc_mobius();
 	calc_seive();
-
-	for(int i = 2; i < N; i++) {
+	for (int i = 2; i < N; i++) {
 		assert(is_prime(i) == (a_prime[i] == i));
 		assert(is_prime(a_prime[i]));
 		assert(i % a_prime[i] == 0);
 		int val = i;
-		map<int,int> prime_power;
-		while(val > 1) {
+		map<int, int> prime_power;
+		while (val > 1) {
 			int p = a_prime[val];
 			prime_power[p]++;
 			val /= p;
 		}
 		bool found_square = 0;
-		for(auto [prime, exp] : prime_power) {
-			if(exp >= 2) found_square = 1;
+		for (auto [prime, exp] : prime_power) {
+			if (exp >= 2) found_square = 1;
 		}
-		if(found_square) {
+		if (found_square)
 			assert(mobius[i] == 0);
-		} else if(prime_power.size()%2 == 0) {
+		else if (prime_power.size() % 2 == 0)
 			assert(mobius[i] == 1);
-		} else {
+		else
 			assert(mobius[i] == -1);
-		}
 	}
-
 	int a, b;
 	cin >> a >> b;
 	cout << a + b << endl;

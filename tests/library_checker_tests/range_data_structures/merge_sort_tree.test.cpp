@@ -6,27 +6,20 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-
 	int n, q;
 	cin >> n >> q;
-
-	if(n == 0) {
-		while(q--) cout << 0 << " ";
+	if (n == 0) {
+		while (q--) cout << 0 << " ";
 		return 0;
 	}
-
 	vector<int> arr(n);
-	for(int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	}
-
 	merge_sort_tree mst(arr);
-
-	while(q--) {
+	while (q--) {
 		int l, r, x;
 		cin >> l >> r >> x;
-		cout << mst.query(l, r, x+1) - mst.query(l, r, x) << endl;
+		cout << mst.query(l, r, x + 1) - mst.query(l, r, x) << endl;
 	}
-
 	return 0;
 }
