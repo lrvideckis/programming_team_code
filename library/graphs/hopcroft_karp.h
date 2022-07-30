@@ -1,5 +1,4 @@
 #pragma once
-//with asserts checking correctness of min vertex cover
 //source: https://github.com/foreverbell/acm-icpc-cheat-sheet/blob/master/src/graph-algorithm/hopcroft-karp.cpp
 //Worst case O(E*sqrt(V)) but faster in practice
 struct match {
