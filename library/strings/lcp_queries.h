@@ -22,8 +22,8 @@ struct lcp_queries {
 		if (idx1 > idx2) swap(idx1, idx2);
 		return st.query(idx1, idx2);
 	}
-	//returns true if suffix s[idx1 ... n) < s[idx2 ... n)
-	//(so false if idx1 == idx2)
+	//returns 1 if suffix s[idx1 ... n) < s[idx2 ... n)
+	//(so 0 if idx1 == idx2)
 	bool less(int idx1, int idx2) const {
 		return inv_sa[idx1] < inv_sa[idx2];
 	}

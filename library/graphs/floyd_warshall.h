@@ -3,10 +3,10 @@
 //**for directed graphs only** if you initialize len[i][i] to infinity, then
 //afterward floyds, len[i][i] = length of shortest cycle including node `i`
 //
-//another trick: change `len` to 2d array of *bools* where len[i][j] = true if
+//another trick: change `len` to 2d array of *bools* where len[i][j] = 1 if
 //there exists an edge from i -> j in initial graph. Also do:
 //`len[i][j] = len[i][j] | (len[i][k] & len[k][j])`
-//Then after floyds, len[i][j] = true iff there's exists some path from node
+//Then after floyds, len[i][j] = 1 iff there's exists some path from node
 //`i` to node `j`
 //
 //Changing the order of for-loops to i-j-k (instead of the current k-i-j)

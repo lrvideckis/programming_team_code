@@ -13,11 +13,11 @@ struct DSU {
 		return -par[find(x)];
 	}
 	bool join(int x, int y) {
-		if ((x = find(x)) == (y = find(y))) return false;
+		if ((x = find(x)) == (y = find(y))) return 0;
 		if (par[y] < par[x]) swap(x, y);
 		par[x] += par[y];
 		par[y] = x;
 		num_sets--;
-		return true;
+		return 1;
 	}
 };

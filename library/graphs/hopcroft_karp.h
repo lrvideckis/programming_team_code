@@ -15,8 +15,8 @@ struct match {
 	//matchings stored in l_to_r and r_to_l are the same matching
 	//provides way to check if any node/edge is in matching
 	vector<int> l_to_r, r_to_l;
-	//an arbitrary min vertex cover is found. For this mvc: mvc_l[node_left] is true iff node_left is in the min vertex cover (same for mvc_r)
-	//if mvc_l[node_left] is false, then node_left is in the corresponding maximal independent set
+	//an arbitrary min vertex cover is found. For this mvc: mvc_l[node_left] is 1 iff node_left is in the min vertex cover (same for mvc_r)
+	//if mvc_l[node_left] is 0, then node_left is in the corresponding maximal independent set
 	vector<bool> mvc_l, mvc_r;
 };
 //Think of the bipartite graph as having a left side (with size lsz) and a right side (with size rsz).
@@ -28,22 +28,22 @@ struct match {
 match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*number of nodes on right side*/) {
 	int size_of_matching = 0, lsz = adj.size();
 	vector<int> l_to_r(lsz, -1), r_to_l(rsz, -1);
-	while (true) {
+	while (1) {
 		queue<int> q;
 		vector<int> level(lsz, -1);
 		for (int i = 0; i < lsz; i++)
 			if (l_to_r[i] == -1)
 				level[i] = 0, q.push(i);
-		bool found = false;
-		vector<bool> mvc_l(lsz, true), mvc_r(rsz, false);
+		bool found = 0;
+		vector<bool> mvc_l(lsz, 1), mvc_r(rsz, 0);
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
-			mvc_l[u] = false;
+			mvc_l[u] = 0;
 			for (int x : adj[u]) {
-				mvc_r[x] = true;
+				mvc_r[x] = 1;
 				int v = r_to_l[x];
-				if (v == -1) found = true;
+				if (v == -1) found = 1;
 				else if (level[v] == -1) {
 					level[v] = level[u] + 1;
 					q.push(v);
@@ -57,11 +57,11 @@ match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*
 				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {
 					l_to_r[u] = x;
 					r_to_l[x] = u;
-					return true;
+					return 1;
 				}
 			}
 			level[u] = 1e9; //acts as visited array
-			return false;
+			return 0;
 		};
 		for (int i = 0; i < lsz; i++)
 			size_of_matching += (l_to_r[i] == -1 && dfs(dfs, i));

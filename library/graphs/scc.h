@@ -20,7 +20,7 @@ scc_info SCC(const vector<vector<int>>& adj /*directed, unweighted graph*/) {
 				low = min(low, tin[to] ? tin[to] : self(self, to));
 		}
 		if (tin[v] == low) {
-			while (true) {
+			while (1) {
 				int node = node_stack.back();
 				node_stack.pop_back();
 				scc_id[node] = num_sccs;

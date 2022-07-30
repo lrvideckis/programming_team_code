@@ -77,9 +77,9 @@ template<class T> vector<int> sa_is(const T& s, int upper/*max element of `s`; f
 			int l = sorted_lms[i - 1], r = sorted_lms[i];
 			int end_l = (lms_map[l] + 1 < m) ? lms[lms_map[l] + 1] : n;
 			int end_r = (lms_map[r] + 1 < m) ? lms[lms_map[r] + 1] : n;
-			bool same = true;
+			bool same = 1;
 			if (end_l - l != end_r - r)
-				same = false;
+				same = 0;
 			else {
 				while (l < end_l) {
 					if (s[l] != s[r])
@@ -87,7 +87,7 @@ template<class T> vector<int> sa_is(const T& s, int upper/*max element of `s`; f
 					l++;
 					r++;
 				}
-				if (l == n || s[l] != s[r]) same = false;
+				if (l == n || s[l] != s[r]) same = 0;
 			}
 			if (!same) rec_upper++;
 			rec_s[lms_map[sorted_lms[i]]] = rec_upper;

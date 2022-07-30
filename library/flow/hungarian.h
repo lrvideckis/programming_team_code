@@ -25,9 +25,9 @@ match hungarian(const vector<vector<long long>>& cost) {
 		p[0] = i;
 		int j0 = 0;
 		vector<long long> minv(m + 1, INF);
-		vector<bool> used(m + 1, false);
+		vector<bool> used(m + 1, 0);
 		do {
-			used[j0] = true;
+			used[j0] = 1;
 			int i0 = p[j0], j1 = 0;
 			long long delta = INF;
 			for (int j = 1; j <= m; j++)

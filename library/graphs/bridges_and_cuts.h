@@ -15,11 +15,11 @@
 struct info {
 	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
 	int num_2_edge_ccs;
-	vector<bool> is_bridge;//edge id -> true iff bridge edge
+	vector<bool> is_bridge;//edge id -> 1 iff bridge edge
 	vector<int> two_edge_ccid;//node -> id of 2 edge component (which are labeled 0, 1, ..., `num_2_edge_ccs`-1)
 	//bi connected component stuff (e.g. components split by cut/articulation nodes) https://cp-algorithms.com/graph/cutpoints.html
 	int num_bccs;
-	vector<bool> is_cut;//node -> true iff cut node
+	vector<bool> is_cut;//node -> 1 iff cut node
 	vector<int> bcc_id;//edge id -> id of bcc (which are labeled 0, 1, ..., `num_bccs`-1)
 };
 info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
@@ -28,11 +28,11 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	vector<int> tin(n, 0);
 	//2 edge cc stuff (delete if not needed)
 	int num_2_edge_ccs = 0;
-	vector<bool> is_bridge(m, false);
+	vector<bool> is_bridge(m, 0);
 	vector<int> two_edge_ccid(n), node_stack;
 	//bcc stuff (delete if not needed)
 	int num_bccs = 0;
-	vector<bool> is_cut(n, false);
+	vector<bool> is_cut(n, 0);
 	vector<int> bcc_id(m), edge_stack;
 	auto dfs = [&](auto self, int v, int p_id) -> int {
 		int low = tin[v] = timer++, deg = 0;
@@ -43,8 +43,8 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 				edge_stack.push_back(e_id);
 				int low_ch = self(self, to, e_id);
 				if (low_ch >= tin[v]) {
-					is_cut[v] = true;
-					while (true) {
+					is_cut[v] = 1;
+					while (1) {
 						int edge = edge_stack.back();
 						edge_stack.pop_back();
 						bcc_id[edge] = num_bccs;
@@ -61,8 +61,8 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 		}
 		if (p_id == -1) is_cut[v] = (deg > 1);
 		if (tin[v] == low) {
-			if (p_id != -1) is_bridge[p_id] = true;
-			while (true) {
+			if (p_id != -1) is_bridge[p_id] = 1;
+			while (1) {
 				int node = node_stack.back();
 				node_stack.pop_back();
 				two_edge_ccid[node] = num_2_edge_ccs;

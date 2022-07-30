@@ -17,7 +17,7 @@
 vector<int> get_centroid_tree(const vector<vector<int>>& adj/*unrooted tree*/) {
 	int n = adj.size();
 	vector<int> sizes(n);
-	vector<bool> vis(n, false);
+	vector<bool> vis(n, 0);
 	auto dfs_sz = [&](auto self, int node, int par) -> void {
 		sizes[node] = 1;
 		for (int to : adj[node]) {
@@ -30,11 +30,11 @@ vector<int> get_centroid_tree(const vector<vector<int>>& adj/*unrooted tree*/) {
 	auto find_centroid = [&](int node) -> int {
 		dfs_sz(dfs_sz, node, node);
 		int size_cap = sizes[node] / 2, par = -1;
-		while (true) {
-			bool found = false;
+		while (1) {
+			bool found = 0;
 			for (int to : adj[node]) {
 				if (to != par && !vis[to] && sizes[to] > size_cap) {
-					found = true;
+					found = 1;
 					par = node;
 					node = to;
 					break;
@@ -47,7 +47,7 @@ vector<int> get_centroid_tree(const vector<vector<int>>& adj/*unrooted tree*/) {
 	auto dfs = [&](auto self, int node, int par) -> void {
 		node = find_centroid(node);
 		parent[node] = par;
-		vis[node] = true;
+		vis[node] = 1;
 		for (int to : adj[node]) {
 			if (!vis[to])
 				self(self, to, node);

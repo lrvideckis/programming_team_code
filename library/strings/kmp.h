@@ -26,12 +26,12 @@ template <class T> struct KMP {
 	// and KMP::find returns {1,3} - the indexes in haystack where
 	// each match starts.
 	//
-	// You can also pass in false for "all" and KMP::find will only
+	// You can also pass in 0 for "all" and KMP::find will only
 	// return the first match: {1}. Useful for checking if there exists
 	// some match:
 	//
-	// KMP::find(<haystack>,false).size() > 0
-	vector<int> find(const T& haystack, bool all = true) const {
+	// KMP::find(<haystack>,0).size() > 0
+	vector<int> find(const T& haystack, bool all = 1) const {
 		vector<int> matches;
 		for (int i = 0, j = 0; i < (int)haystack.size(); i++) {
 			while (j > 0 && needle[j] != haystack[i]) j = pi[j - 1];
