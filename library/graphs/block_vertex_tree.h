@@ -1,6 +1,5 @@
 #pragma once
 #include "bridges_and_cuts.h"
-//(asserts checking correctness of commented-example-usage-loops)
 //returns adjacency list of block vertex tree
 //usage:
 //	info cc = bridge_and_cut(adj, m);
