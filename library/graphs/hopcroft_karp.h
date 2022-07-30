@@ -31,9 +31,9 @@ match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*
 	while (true) {
 		queue<int> q;
 		vector<int> level(lsz, -1);
-		for (int i = 0; i < lsz; i++) {
-			if (l_to_r[i] == -1) level[i] = 0, q.push(i);
-		}
+		for (int i = 0; i < lsz; i++)
+			if (l_to_r[i] == -1)
+				level[i] = 0, q.push(i);
 		bool found = false;
 		vector<bool> mvc_l(lsz, true), mvc_r(rsz, false);
 		while (!q.empty()) {
