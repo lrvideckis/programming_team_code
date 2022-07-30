@@ -4,7 +4,7 @@
 #include "../../../library/graphs/scc.h"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 	int n,m;
 	cin >> n >> m;
 	vector<vector<int>> adj(n);

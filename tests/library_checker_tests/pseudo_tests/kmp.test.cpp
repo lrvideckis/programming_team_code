@@ -33,8 +33,8 @@ int main() {
 		assert(matches_naive == kmp.find(haystack));
 		assert(matches_naive == kmp_arr.find(haystack_arr));
 
-		vector<int> first_match = kmp.find(haystack, false);
-		vector<int> first_match_arr = kmp_arr.find(haystack_arr, false);
+		vector<int> first_match = kmp.find(haystack, 0);
+		vector<int> first_match_arr = kmp_arr.find(haystack_arr, 0);
 		while(matches_naive.size() > 1) matches_naive.pop_back();
 		assert(matches_naive == first_match);
 		assert(matches_naive == first_match_arr);

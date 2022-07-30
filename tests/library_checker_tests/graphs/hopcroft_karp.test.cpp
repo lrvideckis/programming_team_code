@@ -4,7 +4,7 @@
 #include "../../../library/graphs/hopcroft_karp.h"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 	int l, r, m;
 	cin >> l >> r >> m;
 	vector<vector<int>> adj(l);

@@ -44,9 +44,9 @@ int main() {
 			prime_power[p]++;
 			val /= p;
 		}
-		bool found_square = false;
+		bool found_square = 0;
 		for(auto [prime, exp] : prime_power) {
-			if(exp >= 2) found_square = true;
+			if(exp >= 2) found_square = 1;
 		}
 		if(found_square) {
 			assert(mobius[i] == 0);

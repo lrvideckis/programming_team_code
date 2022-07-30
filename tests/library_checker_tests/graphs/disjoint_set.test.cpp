@@ -4,7 +4,7 @@
 #include "../../../library/misc/dsu.h"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
 	DSU ds(n);

@@ -22,10 +22,10 @@ int main() {
 
 	for(int i = 0; i < n; i++) {
 		//cut node if there exists a pair of adjacent edges belonging to different BCCs
-		bool is_cut = false;
+		bool is_cut = 0;
 		for(int j = 0; j < (int)adj[i].size(); j++) {
 			if(cc.bcc_id[adj[i][0].second] != cc.bcc_id[adj[i][j].second]) {
-				is_cut = true;
+				is_cut = 1;
 			}
 		}
 		assert(is_cut == cc.is_cut[i]);

@@ -9,13 +9,13 @@ int main() {
 		int mod;
 		{
 			int type = get_rand(1, 3);
-			while(true) {
+			while(1) {
 				if(type == 1) mod = get_rand(2, (int)1e9+100);
 				else mod = get_rand(2, 1000);
-				bool is_prime = true;
+				bool is_prime = 1;
 				for(int i = 2; i * i <= mod; i++) {
 					if(mod%i == 0) {
-						is_prime = false;
+						is_prime = 0;
 						break;
 					}
 				}

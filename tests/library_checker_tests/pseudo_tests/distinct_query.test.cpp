@@ -5,7 +5,7 @@
 #include "../../../library/range_data_structures/uncommon/distinct_query.h"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 	for(int tests = 5; tests--;) {
 		int n = get_rand(1, 100);
 		vector<int> arr(n);

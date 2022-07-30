@@ -4,7 +4,7 @@
 #include "../../../library/flow/hungarian.h"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(false);
+	cin.tie(0)->sync_with_stdio(0);
 	int n;
 	cin >> n;
 	vector<vector<long long>> a(n+1, vector<long long>(n+1));
