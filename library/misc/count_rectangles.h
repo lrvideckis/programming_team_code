@@ -8,7 +8,7 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 	int n = grid.size(), m = grid[0].size();
 	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0));
 	vector<int> arr(m, 0);
-	auto rv = [&](int j) -> int {//reverse
+	auto rv /*reverse*/ = [&](int j) -> int {
 		return m - 1 - j;
 	};
 	for (int i = 0; i < n; i++) {
