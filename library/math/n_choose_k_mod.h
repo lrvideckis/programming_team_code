@@ -34,7 +34,7 @@ struct n_choose_k {
 		if (k == 0 || k == n) return 1;
 		return 1LL * choose_with_lucas_theorem(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
-	//returns inverse of n in O(1)
+	//returns x such that x * n % mod == 1
 	int inv(int n) const {
 		assert(1 <= n); //don't divide by 0 :)
 		return 1LL * fact[n - 1] * inv_fact[n] % mod;
