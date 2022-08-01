@@ -2,7 +2,7 @@
 //for mod inverse
 #include "exp_mod.h"
 // usage:
-//     n_choose_k nk(n, 1e9+7) to use `choose`, `inv` with inputs < n
+//     n_choose_k nk(n, 1e9+7) to use `choose`, `inv` with inputs strictly < n
 // or:
 //     n_choose_k nk(mod, mod) to use `choose_with_lucas_theorem` with arbitrarily large inputs
 struct n_choose_k {
