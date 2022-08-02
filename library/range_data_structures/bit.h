@@ -32,10 +32,9 @@ template<class T> struct BIT {
 	int lower_bound(T sum) const {
 		if (sum <= 0) return 0;
 		int pos = 0;
-		for (int pw = 1 << __lg(N | 1); pw; pw >>= 1) {
+		for (int pw = 1 << __lg(N | 1); pw; pw >>= 1)
 			if (pos + pw <= N && bit[pos + pw] < sum)
 				pos += pw, sum -= bit[pos];
-		}
 		return pos + 1;
 	}
 };
