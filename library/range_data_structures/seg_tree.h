@@ -12,10 +12,11 @@ struct seg_tree {
 		ch lazy;
 		int l, r;//[l, r)
 	};
-	const int N;
+	const int N, S/*smallest power of 2 >= N*/;
 	vector<node> tree;
-	seg_tree(const vector<dt>& arr) : N(arr.size()), tree(2 * N) {
-		for (int i = 0, j = 1 << __lg(2 * N - 1); i < N; i++, j = (j + 1) % N + N)
+	//doesn't work with empty array
+	seg_tree(const vector<dt>& arr) : N(arr.size()), S(1 << __lg(2 * N - 1)), tree(2 * N) {
+		for (int i = 0, j = S; i < N; i++, j = (j + 1) % N + N)
 			tree[j] = {arr[i], 0, i, i + 1};
 		for (int i = N - 1; i >= 1; i--) {
 			tree[i] = {
@@ -41,7 +42,7 @@ struct seg_tree {
 		tree[v].val = combine(tree[2 * v].val, tree[2 * v + 1].val);
 	}
 	int to_leaf(int i) const {
-		i += 1 << __lg(2 * N - 1);
+		i += S;
 		return i < 2 * N ? i : 2 * (i - N);
 	}
 	//update range [l, r)
