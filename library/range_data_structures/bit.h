@@ -26,7 +26,7 @@ template<class T> struct BIT {
 		assert(0 <= l && l <= r && r <= N);
 		return sum(r) - sum(l);
 	}
-	//Returns min pos such that sum of [0, pos) >= sum
+	//Returns min pos (0<=pos<=N+1) such that sum of [0, pos) >= sum
 	//Returns N + 1 if no sum is >= sum, or 0 if empty sum is.
 	//Doesn't work with negatives
 	int lower_bound(T sum) const {
