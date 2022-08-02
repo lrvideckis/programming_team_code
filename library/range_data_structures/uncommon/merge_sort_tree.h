@@ -1,7 +1,7 @@
 #pragma once
 //For point updates: either switch to policy based BST, or use sqrt decomposition
 struct merge_sort_tree {
-	const int N, S;
+	const int N, S/*smallest power of 2 >= N*/;
 	vector<vector<int>> tree;
 	merge_sort_tree(const vector<int>& arr) : N(arr.size()), S(1 << __lg(2 * N - 1)), tree(2 * N) {
 		for (int i = 0, j = S; i < N; i++, j = (j + 1) % N + N)
