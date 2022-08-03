@@ -6,13 +6,13 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 
-	const int mod = 998244353;
+	const int MOD = 998244353;
 
 	int n;
 	cin >> n;
 	vector<int> arr(n);
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	cout << (num_subsequences(arr, mod) - 1 + mod) % mod << endl;
+	cout << (num_subsequences(arr, MOD) - 1 + MOD) % MOD << endl;
 	return 0;
 }
