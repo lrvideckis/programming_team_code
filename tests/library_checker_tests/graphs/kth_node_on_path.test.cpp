@@ -4,9 +4,7 @@
 #include "../../../library/graphs/kth_node_on_path.h"
 
 int main() {
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	cout.tie(0);
+	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
 	vector<vector<pair<int, long long>>> adj(n);
