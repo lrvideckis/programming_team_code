@@ -9,6 +9,7 @@
 "tests/library_checker_tests/graphs/kth_node_on_path.test.cpp": "2022-08-03 03:27:13 -0700",
 "tests/library_checker_tests/graphs/lca.test.cpp": "2022-08-03 03:27:13 -0700",
 "tests/library_checker_tests/graphs/scc.test.cpp": "2022-07-29 23:49:36 -0700",
+"tests/library_checker_tests/graphs/tree_diameter.test.cpp": "2022-08-03 03:39:21 -0700",
 "tests/library_checker_tests/graphs/two_edge_components.test.cpp": "2022-07-30 02:27:12 -0700",
 "tests/library_checker_tests/math/derangement.test.cpp": "2022-07-29 23:49:36 -0700",
 "tests/library_checker_tests/math/matrix_determinant.test.cpp": "2022-07-29 23:49:36 -0700",
