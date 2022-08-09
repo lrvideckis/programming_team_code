@@ -41,7 +41,7 @@ void do_test(int n, int q) {
 }
 
 int main() {
-	for (int n = 0; n <= 140; n++)
+	for (int n = 1; n <= 140; n++)
 		do_test(n, INT_MAX);
 	for (int tests = 50; tests--;)
 		do_test(get_rand(500, 1000), 5000);

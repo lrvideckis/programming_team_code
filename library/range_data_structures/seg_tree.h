@@ -16,8 +16,9 @@ struct seg_tree {
 	vector<node> tree;
 	//doesn't work with empty array
 	seg_tree(const vector<dt>& arr) : N(arr.size()), S(1 << __lg(2 * N - 1)), tree(2 * N) {
-		for (int i = 0, j = S; i < N; i++, j = (j + 1) % N + N)
-			tree[j] = {arr[i], 0, i, i + 1};
+		for (int i = 0; i < N; i++)
+			tree[i + N] = {arr[i], 0, i, i + 1};
+		rotate(tree.rbegin(), tree.rbegin() + S - N, tree.rbegin() + N);
 		for (int i = N - 1; i >= 1; i--) {
 			tree[i] = {
 				combine(tree[2 * i].val, tree[2 * i + 1].val),
