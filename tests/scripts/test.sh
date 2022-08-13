@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #runs 2 programs against each other on random inputs until they output different results
+#source: https://youtu.be/JXTVOyQpSGM?t=484s
 #usage:
 #	chmod +x test.sh
 #	./test.sh
