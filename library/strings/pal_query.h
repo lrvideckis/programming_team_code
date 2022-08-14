@@ -1,7 +1,8 @@
-#include "lcp_queries.h"
+#pragma once
+#include "lcp_query.h"
 struct pal_query {
 	const int n;
-	lcp_queries lq;
+	lcp_query lq;
 	pal_query(const string& s) : n(s.size()), lq(s + string(s.rbegin(), s.rend())) {}
 	//returns 1 if substring s[l...r) is a palendrome
 	bool is_pal(int l, int r) const {

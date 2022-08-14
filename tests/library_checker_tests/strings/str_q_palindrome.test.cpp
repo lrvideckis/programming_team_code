@@ -13,7 +13,7 @@ int main() {
 		reverse(rev.begin(), rev.end());
 		s = s + '$' + rev;
 	}
-	lcp_queries sq(s);
+	lcp_query sq(s);
 	pal_query pal_q(s);
 	for (int i = 0; i < n; i++) {
 		for (int j : {

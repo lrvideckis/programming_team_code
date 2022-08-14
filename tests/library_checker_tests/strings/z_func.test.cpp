@@ -2,13 +2,13 @@
 #include "../../template.h"
 
 #include "../../../library/strings/prefix_function.h"
-#include "../../../library/strings/lcp_queries.h"
+#include "../../../library/strings/lcp_query.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	lcp_queries sq(s);
+	lcp_query sq(s);
 	int n = s.size();
 	vector<int> pi = prefix_function(s);
 	//prefix -> z func conversion

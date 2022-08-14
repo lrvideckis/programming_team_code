@@ -4,8 +4,8 @@
 #include "../range_data_structures/rmq.h"
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
-struct lcp_queries {
-	lcp_queries(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), lcp(LCP(s, sa)), st(lcp, [](int x, int y) {
+struct lcp_query {
+	lcp_query(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), lcp(LCP(s, sa)), st(lcp, [](int x, int y) {
 		return min(x, y);
 	}) {
 		for (int i = 0; i < (int)s.size(); i++)
