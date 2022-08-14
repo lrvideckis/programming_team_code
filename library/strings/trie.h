@@ -20,7 +20,7 @@ struct trie {
 		for (char ch : s) {
 			int v = ch - MIN_CH;
 			if (t[c].next[v] == -1) {
-				t[c].next[v] = t.size();
+				t[c].next[v] = ssize(t);
 				t.emplace_back(c, ch);
 			}
 			c = t[c].next[v];

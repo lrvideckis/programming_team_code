@@ -14,7 +14,7 @@
 //			childs[parent[i]].push_back(i);
 //	}
 vector<int> get_centroid_tree(const vector<vector<int>>& adj/*unrooted tree*/) {
-	int n = adj.size();
+	int n = ssize(adj);
 	vector<int> sizes(n);
 	vector<bool> vis(n, 0);
 	auto dfs_sz = [&](auto self, int node, int par) -> void {

@@ -15,11 +15,11 @@ struct min_cost_max_flow {
 		g.resize(n);
 	}
 	void add_edge(ll a, ll b, ll cap, ll cost) {
-		edge e1 = {a, b, cap, cost, 0, g[b].size() };
-		edge e2 = {b, a, 0, -cost, 0, g[a].size() };
-		g[a].push_back((ll) e.size());
+		edge e1 = {a, b, cap, cost, 0, ssize(g[b]) };
+		edge e2 = {b, a, 0, -cost, 0, ssize(g[a]) };
+		g[a].push_back((ll) ssize(e));
 		e.push_back(e1);
-		g[b].push_back((ll) e.size());
+		g[b].push_back((ll) ssize(e));
 		e.push_back(e2);
 	}
 	// returns {flow, cost}
@@ -35,7 +35,7 @@ struct min_cost_max_flow {
 				ll v = q[qh++];
 				id[v] = 2;
 				if (qh == n) qh = 0;
-				for (size_t i = 0; i < g[v].size(); i++) {
+				for (size_t i = 0; i < ssize(g[v]); i++) {
 					edge& r = e[g[v][i]];
 					if (r.flow < r.cap && d[v] + r.cost < d[r.b]) {
 						d[r.b] = d[v] + r.cost;

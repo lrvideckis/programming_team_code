@@ -5,10 +5,10 @@
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
 struct lcp_query {
-	lcp_query(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), lcp(LCP(s, sa)), st(lcp, [](int x, int y) {
+	lcp_query(const string& s) : sa(sa_is(s, 255)), inv_sa(ssize(s)), lcp(LCP(s, sa)), st(lcp, [](int x, int y) {
 		return min(x, y);
 	}) {
-		for (int i = 0; i < (int)s.size(); i++)
+		for (int i = 0; i < ssize(s); i++)
 			inv_sa[sa[i]] = i;
 	}
 	//length of longest common prefix of suffixes s[idx1 ... n), s[idx2 ... n), 0-based indexing
@@ -16,7 +16,7 @@ struct lcp_query {
 	//You can check if two substrings s[l1..r1), s[l2..r2) are equal in O(1) by:
 	//r1-l1 == r2-l2 && longest_common_prefix(l1, l2) >= r1-l1
 	int longest_common_prefix(int idx1, int idx2) const {
-		if (idx1 == idx2) return (int)sa.size() - idx1;
+		if (idx1 == idx2) return ssize(sa) - idx1;
 		idx1 = inv_sa[idx1];
 		idx2 = inv_sa[idx2];
 		if (idx1 > idx2) swap(idx1, idx2);

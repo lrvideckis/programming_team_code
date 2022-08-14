@@ -15,7 +15,7 @@ struct seg_tree {
 	const int N, S/*smallest power of 2 >= N*/;
 	vector<node> tree;
 	//doesn't work with empty array
-	seg_tree(const vector<dt>& arr) : N(arr.size()), S(1 << __lg(2 * N - 1)), tree(2 * N) {
+	seg_tree(const vector<dt>& arr) : N(ssize(arr)), S(1 << __lg(2 * N - 1)), tree(2 * N) {
 		for (int i = 0; i < N; i++)
 			tree[i + N] = {arr[i], 0, i, i + 1};
 		rotate(tree.rbegin(), tree.rbegin() + S - N, tree.rbegin() + N);

@@ -9,7 +9,7 @@ struct LCA {
 		long long dist;
 	};
 	vector<node> tree;
-	LCA(const vector<vector<pair<int, long long>>>& adj, int root) : tree(adj.size(), {
+	LCA(const vector<vector<pair<int, long long>>>& adj, int root) : tree(ssize(adj), {
 		root, 1, root, 0, 0LL
 	}) {
 		dfs(root, adj);

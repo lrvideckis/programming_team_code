@@ -8,7 +8,7 @@
 //
 //O(n)
 template<class T> vector<int> monotonic_stack(const vector<T>& arr) {
-	int n = arr.size();
+	int n = ssize(arr);
 	vector<int> left(n);
 	for (int i = 0; i < n; i++) {
 		int& j = left[i] = i - 1;

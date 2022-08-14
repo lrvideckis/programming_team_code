@@ -8,8 +8,8 @@ struct HLD {
 		int sub_sz, par, time_in, next;
 	};
 	vector<node> tree;
-	HLD(vector<vector<int>>& adj /*single unrooted tree*/, int root) : tree(adj.size(), {
-		1, root, (int)adj.size(), root
+	HLD(vector<vector<int>>& adj /*single unrooted tree*/, int root) : tree(ssize(adj), {
+		1, root, ssize(adj), root
 	}) {
 		dfs1(root, adj);
 		int timer = 0;

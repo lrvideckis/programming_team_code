@@ -2,8 +2,8 @@
 #include "row_reduce.h"
 //returns inverse of square matrix mat, empty if no inverse
 vector<vector<int>> matrix_inverse(vector<vector<int>> mat/*intentional pass by value*/, int mod) {
-	int n = mat.size();
-	assert(n == (int)mat[0].size());
+	int n = ssize(mat);
+	assert(n == ssize(mat[0]));
 	//append identity matrix
 	for (int i = 0; i < n; i++) {
 		mat[i].resize(2 * n, 0);

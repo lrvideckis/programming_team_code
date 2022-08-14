@@ -5,9 +5,9 @@
 //Row operations will be performed to all later columns
 //
 //example usage:
-//	row_reduce(mat, mat[0].size(), mod) //row reduce matrix with no extra columns
+//	row_reduce(mat, ssize(mat[0]), mod) //row reduce matrix with no extra columns
 pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, int cols, int mod) {
-	int n = mat.size(), m = mat[0].size(), rank = 0, det = 1;
+	int n = ssize(mat), m = ssize(mat[0]), rank = 0, det = 1;
 	assert(cols <= m);
 	for (int col = 0; col < cols && rank < n; col++) {
 		//find arbitrary pivot and swap pivot to current row

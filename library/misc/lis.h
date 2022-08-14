@@ -6,8 +6,8 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 template<class T> vector<int> LIS(const vector<T>& arr) {
 	if (arr.empty()) return {};
-	vector<int> dp{0}/*array of indexes into `arr`*/, prev(arr.size(), -1);
-	for (int i = 1; i < (int)arr.size(); i++) {
+	vector<int> dp{0}/*array of indexes into `arr`*/, prev(ssize(arr), -1);
+	for (int i = 1; i < ssize(arr); i++) {
 		auto it = lower_bound(dp.begin(), dp.end(), i, [&](int x, int y) -> bool {
 			return arr[x] < arr[y];
 		});
@@ -18,10 +18,10 @@ template<class T> vector<int> LIS(const vector<T>& arr) {
 			prev[i] = it == dp.begin() ? -1 : *(it - 1);
 			*it = i;
 		}
-		//here, dp.size() = length of LIS of prefix of arr ending at index i
+		//here, ssize(dp) = length of LIS of prefix of arr ending at index i
 	}
-	vector<int> res(dp.size());
-	for (int i = dp.back(), j = dp.size(); i != -1; i = prev[i])
-		res[--j] = i;
+	vector<int> res(ssize(dp));
+	for (int i = dp.back(), j = ssize(dp) - 1; i != -1; i = prev[i])
+		res[j--] = i;
 	return res;
 }

@@ -15,7 +15,7 @@ struct binary_trie {
 		for (int bit = MX_BIT; bit >= 0; bit--) {
 			bool v = (val >> bit) & 1;
 			if (t[c].next[v] == -1) {
-				t[c].next[v] = t.size();
+				t[c].next[v] = ssize(t);
 				t.emplace_back();
 			}
 			c = t[c].next[v];

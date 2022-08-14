@@ -23,7 +23,7 @@ struct info {
 };
 info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
 	//stuff for both (always keep)
-	int n = adj.size(), timer = 1;
+	int n = ssize(adj), timer = 1;
 	vector<int> tin(n, 0);
 	//2 edge cc stuff (delete if not needed)
 	int num_2_edge_ccs = 0;

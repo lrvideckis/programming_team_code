@@ -25,7 +25,7 @@ struct match {
 //`adj` is like a directed adjacency list containing edges from left side -> right side:
 //To initialize `adj`: For every edge node_left <=> node_right, do: adj[node_left].push_back(node_right)
 match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*number of nodes on right side*/) {
-	int size_of_matching = 0, lsz = adj.size();
+	int size_of_matching = 0, lsz = ssize(adj);
 	vector<int> l_to_r(lsz, -1), r_to_l(rsz, -1);
 	while (1) {
 		queue<int> q;
