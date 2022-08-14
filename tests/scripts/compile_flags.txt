@@ -2,7 +2,7 @@
 -Wall
 -Wextra
 -pedantic
--Wno-unused-result
+-Wunused
 -DLOCAL
 -std=c++17
 -O2
