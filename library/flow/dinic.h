@@ -41,7 +41,7 @@ struct max_flow {
 		d[s] = 0;
 		while (qh < qt && d[t] == -1) {
 			ll v = q[qh++];
-			for (size_t i = 0; i < ssize(g[v]); i++) {
+			for (int i = 0; i < ssize(g[v]); i++) {
 				ll id = g[v][i],
 				   to = e[id].b;
 				if (d[to] == -1 && e[id].flow < e[id].cap) {

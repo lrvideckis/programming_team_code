@@ -9,7 +9,7 @@ struct HLD {
 	};
 	vector<node> tree;
 	HLD(vector<vector<int>>& adj /*single unrooted tree*/, int root) : tree(ssize(adj), {
-		1, root, ssize(adj), root
+		1, root, (int)ssize(adj), root
 	}) {
 		dfs1(root, adj);
 		int timer = 0;
