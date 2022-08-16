@@ -7,10 +7,10 @@ struct min_cost_max_flow {
 		ll cap, cost, flow;
 		int back;
 	};
-	int n;
+	const int N;
 	vector<edge> e;
 	vector<vector<int>> g;
-	min_cost_max_flow(int a_n) : n(a_n), g(n) {}
+	min_cost_max_flow(int a_n) : N(a_n), g(N) {}
 	void add_edge(int a, int b, ll cap, ll cost) {
 		edge e1 = {a, b, cap, cost, 0, (int)g[b].size() };
 		edge e2 = {b, a, 0, -cost, 0, (int)g[a].size() };
@@ -23,24 +23,24 @@ struct min_cost_max_flow {
 	ll get_flow(int s, int t, ll total_flow) {
 		ll flow = 0, cost = 0;
 		while (flow < total_flow) {
-			vector<ll> d(n, INF);
-			vector<int> p_edge(n), id(n, 0), q(n), p(n);
+			vector<ll> d(N, INF);
+			vector<int> p_edge(N), id(N, 0), q(N), p(N);
 			int qh = 0, qt = 0;
 			q[qt++] = s;
 			d[s] = 0;
 			while (qh != qt) {
 				int v = q[qh++];
 				id[v] = 2;
-				if (qh == n) qh = 0;
+				if (qh == N) qh = 0;
 				for (int i = 0; i < (int)g[v].size(); i++) {
 					const edge& r = e[g[v][i]];
 					if (r.flow < r.cap && d[v] + r.cost < d[r.b]) {
 						d[r.b] = d[v] + r.cost;
 						if (id[r.b] == 0) {
 							q[qt++] = r.b;
-							if (qt == n) qt = 0;
+							if (qt == N) qt = 0;
 						} else if (id[r.b] == 2) {
-							if (--qh == -1) qh = n - 1;
+							if (--qh == -1) qh = N - 1;
 							q[qh] = r.b;
 						}
 						id[r.b] = 1;
