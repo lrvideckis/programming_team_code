@@ -10,7 +10,7 @@
 //		//p is some prime factor of val
 //		val /= p;
 //	}
-const int N = 1e8 + 10;//TODO: change
+const int N = 1e6 + 10;
 int a_prime[N];
 void calc_seive() {
 	iota(a_prime, a_prime + N, 0);

@@ -1,4 +1,4 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_1_C"
+#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/all/NTL_1_C"
 #include "../../template.h"
 
 #include "../../../library/math/prime_sieve.h"
@@ -8,13 +8,31 @@ int main() {
 
 	int n;
 	cin >> n;
-	int cnt_prime = 0;
+
+	map<int, int> prime_to_max_exponent;
+
 	while(n--) {
 		int val;
 		cin >> val;
-		cnt_prime += a_prime[val] == val;
+
+		map<int, int> curr;
+
+		while(val > 1) {
+			int p = a_prime[val];
+			val /= p;
+			curr[p]++;
+		}
+
+		for(auto [p, e] : curr) {
+			prime_to_max_exponent[p] = max(prime_to_max_exponent[p], e);
+		}
 	}
-	cout << cnt_prime << '\n';
+
+	int res = 1;
+	for(auto [p, e] : prime_to_max_exponent) {
+		while(e--) res *= p;
+	}
+	cout << res << '\n';
 
 	return 0;
 }
