@@ -1,5 +1,4 @@
 #pragma once
-//status: not tested
 //place these includes *before* the `#define int long long` else compile error
 //not using <bits/extc++.h> as it compile errors on codeforces c++20 compiler
 #include <ext/pb_ds/assoc_container.hpp>
