@@ -6,11 +6,10 @@ struct max_flow {
 		int a, b;
 		ll cap, flow;
 	};
-	const int n;
 	vector<edge> e;
 	vector<vector<int>> g;
 	vector<int> q, d, ptr;
-	max_flow(int a_n) : n(a_n), g(n), q(n), d(n), ptr(n) {}
+	max_flow(int n) : g(n), q(n), d(n), ptr(n) {}
 	void add_edge(int a, int b, ll cap) {
 		edge e1 = { a, b, cap, 0 };
 		edge e2 = { b, a, 0, 0 };
