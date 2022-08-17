@@ -78,9 +78,9 @@ int main() {
 	for (int i = 0; i < n; i++)
 		ccs[cc.two_edge_ccid[i]].push_back(i);
 	cout << cc.num_2_edge_ccs << endl;
-	for (auto& cc : ccs) {
-		cout << cc.size() << " ";
-		for (int node : cc) cout << node << " ";
+	for (auto& curr_cc : ccs) {
+		cout << curr_cc.size() << " ";
+		for (int node : curr_cc) cout << node << " ";
 		cout << endl;
 	}
 	return 0;

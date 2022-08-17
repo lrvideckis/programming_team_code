@@ -6,18 +6,18 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 
-	int v, e;
-	cin >> v >> e;
+	int n, m;
+	cin >> n >> m;
 
-	max_flow mf(v);
+	max_flow mf(n);
 
-	while(e--) {
+	while(m--) {
 		int u, v, c;
 		cin >> u >> v >> c;
 		mf.add_edge(u, v, c);
 	}
 
-	cout << mf.get_flow(0, v - 1) << '\n';
+	cout << mf.get_flow(0, n - 1) << '\n';
 
 	return 0;
 }
