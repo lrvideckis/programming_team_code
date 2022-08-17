@@ -42,6 +42,7 @@ do
 	# clang's "lower_case" == the traditional snake_case
 	clang-tidy -checks="readability-identifier-naming" \
 		-config="{CheckOptions: [
+			{ key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp, value: expr-type }, # workaround to use -std=c++2a https://github.com/llvm/llvm-project/issues/46097#issuecomment-992626543
 			{ key: readability-identifier-naming.StructCase, value: lower_case },
 			{ key: readability-identifier-naming.ClassCase, value: lower_case },
 			{ key: readability-identifier-naming.FunctionCase, value: lower_case },
@@ -50,8 +51,7 @@ do
 			{ key: readability-identifier-naming.ConstantCase, value: UPPER_CASE },
 			{ key: readability-identifier-naming.ParameterCase, value: lower_case },
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
-			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE },
-			{ key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp, value: expr-type } # workaround to use -std=c++2a https://github.com/llvm/llvm-project/issues/46097#issuecomment-992626543
+			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
 			--use-color --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
 	if (($? != 0))
