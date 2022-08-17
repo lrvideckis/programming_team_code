@@ -1,6 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_4_A"
 #include "../../template.h"
-#include "../../random.h"
 
 #include "../../../library/range_data_structures/uncommon/implicit_seg_tree.h"
 
