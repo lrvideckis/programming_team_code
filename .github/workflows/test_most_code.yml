@@ -31,7 +31,7 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
 
-  check_snake_case:
+  check_format:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
