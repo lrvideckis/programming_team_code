@@ -1,24 +1,3 @@
 [[languages.cpp.environments]]
 CXX = "g++"
-CXXFLAGS = [
-	"-g",
-	"-Wall",
-	"-Wextra",
-	"-pedantic",
-	"-Wunused",
-	"-DLOCAL",
-	"-std=c++2a", 
-	"-O2",
-	"-Wshadow",
-	"-Wformat=2",
-	"-Wfloat-equal",
-	"-Wcast-qual",
-	"-Wcast-align",
-	"-D_GLIBCXX_DEBUG",
-	"-D_GLIBCXX_DEBUG_PEDANTIC",
-	"-fsanitize=address",
-	"-fsanitize=undefined",
-	"-fno-sanitize-recover=all",
-	"-fstack-protector",
-	"-Werror"
-]
+CXXFLAGS = ["-std=c++2a", "-O2"]
