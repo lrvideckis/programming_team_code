@@ -16,6 +16,18 @@ declare -i pass=0
 declare -i fail=0
 failTests=""
 
+
+
+#TODO
+#if [[ $# -eq 1 ]] ; then
+#    tests="$(find $DIR/../library -name '*.h')"
+#else
+#    tests="$(find $DIR/../library -name "*$2*")"
+#fi
+
+
+
+
 for test in $(find library_checker_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
@@ -33,7 +45,7 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-		--use-color --warnings-as-errors="*" $test -- -std=c++17
+			--use-color --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
 	if (($? != 0))
 	then
 		fail+=1
