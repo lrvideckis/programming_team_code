@@ -25,12 +25,6 @@ astyle_output=$(
 	$(echo $ASTYLE_COMMAND) --dry-run --formatted --recursive "*.h"
 )
 cd tests/
-
-
-	echo "some files are not formatted, output of astyle: "
-	echo "$astyle_output"
-
-
 if grep --quiet "Formatted" <<< "$astyle_output"
 then
 	echo "some files are not formatted, output of astyle: "
