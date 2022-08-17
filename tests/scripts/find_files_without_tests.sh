@@ -11,7 +11,7 @@ done)
 all_tested_headers=$(for dependency in $all_test_dependencies
 do
 	echo $(basename $dependency)
-done | sort | uniq | grep "\.h")
+done | grep "\.h" | sort | uniq)
 
 #find all headers in library/
 all_headers_raw=$(find ../library/ -type f -name "*.h")
