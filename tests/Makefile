@@ -1,7 +1,7 @@
 help:
 	@echo "Available commands                         | explanation"
 	@echo "------------------------------------------ | -----------"
-	@echo "make check_format                          | verify all code+file names are snake case"
+	@echo "make check_format                          | verify snake case, and Astyle format"
 	@echo "make print_untested_files                  | print list of all .h files with no tests"
 	@echo "make pdf                                   | build PDF from .tex file"
 	@echo "make push_pdf                              | push PDF to remote"
