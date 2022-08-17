@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-cd ..
-
-files_snake_case="find . -name '*[A-Z]*' -or -name '*-*' | \
+files_snake_case="find .. -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
 	grep --invert-match '\.verify-helper' | \
 	grep --invert-match --extended-regexp '(LICENSE|Makefile|README)'"
@@ -14,26 +12,13 @@ then
 	exit 1
 fi
 
-cd library
-
 declare -i pass=0
 declare -i fail=0
 failTests=""
 
-echo "skipped headers: "
-find . -name '*.h' | grep -Ff ../tests/scripts/skip_headers.txt
-
-for test in $(find . -name '*.h' | grep -vFf ../tests/scripts/skip_headers.txt ; find ../tests/library_checker_tests/ -name '*.test.cpp')
+for test in $(find library_checker_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
-
-	tmp_file=$(dirname $test)"/tmp.cpp"
-	> $tmp_file
-
-	if [[ $test == *.h ]] ; then
-		cp ../template.cpp $tmp_file
-	fi
-	sed --regexp-extended '/^#pragma once/d' $test >> $tmp_file
 
 	# clang's "lower_case" == the traditional snake_case
 	clang-tidy -checks="readability-identifier-naming" \
@@ -48,7 +33,7 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-		--use-color --warnings-as-errors="*" $tmp_file -- -std=c++17
+		--use-color --warnings-as-errors="*" $test -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
