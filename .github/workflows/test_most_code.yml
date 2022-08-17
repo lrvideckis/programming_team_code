@@ -31,15 +31,6 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
 
-  check_code_format:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install astyle
-      run: sudo apt-get install astyle
-    - name: Check code format
-      run: make --directory=tests/ test_format
-
   check_snake_case:
     runs-on: ubuntu-latest
     steps:
