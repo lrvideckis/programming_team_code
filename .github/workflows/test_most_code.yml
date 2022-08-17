@@ -35,5 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Install astyle
+      run: sudo apt-get install astyle
     - name: Check snake case
       run: make --directory=tests/ check_snake_case
