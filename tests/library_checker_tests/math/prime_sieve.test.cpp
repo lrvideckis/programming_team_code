@@ -5,34 +5,25 @@
 
 int main() {
 	calc_seive();
-
 	int n;
 	cin >> n;
-
 	map<int, int> prime_to_max_exponent;
-
-	while(n--) {
+	while (n--) {
 		int val;
 		cin >> val;
-
 		map<int, int> curr;
-
-		while(val > 1) {
+		while (val > 1) {
 			int p = a_prime[val];
 			val /= p;
 			curr[p]++;
 		}
-
-		for(auto [p, e] : curr) {
+		for (auto [p, e] : curr)
 			prime_to_max_exponent[p] = max(prime_to_max_exponent[p], e);
-		}
 	}
-
 	int res = 1;
-	for(auto [p, e] : prime_to_max_exponent) {
-		while(e--) res *= p;
+	for (auto [p, e] : prime_to_max_exponent) {
+		while (e--) res *= p;
 	}
 	cout << res << '\n';
-
 	return 0;
 }

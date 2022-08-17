@@ -5,23 +5,19 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-
 	int n, q;
 	cin >> n >> q;
-
 	seg_tree st(vector<long long>(n, 0));
-
-	while(q--) {
+	while (q--) {
 		int type, l, r;
 		cin >> type >> l >> r;
 		r++;
-		if(type == 0) {
+		if (type == 0) {
 			int x;
 			cin >> x;
 			st.update(l, r, x);
-		} else {
+		} else
 			cout << st.query(l, r) << '\n';
-		}
 	}
 	return 0;
 }

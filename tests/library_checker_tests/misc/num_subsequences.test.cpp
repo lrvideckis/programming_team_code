@@ -5,9 +5,7 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-
 	const int MOD = 998244353;
-
 	int n;
 	cin >> n;
 	vector<int> arr(n);
