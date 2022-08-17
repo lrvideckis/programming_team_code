@@ -7,7 +7,7 @@ help:
 	@echo "make push_pdf                              | push PDF to remote"
 	@echo "make test_format                           | checks code is formatted with astyle"
 	@echo "make check_snake_case                      | verify all code+file names are snake case"
-	@echo "make untested_files                        | print list of all .h files with no tests"
+	@echo "make print_untested_files                  | print list of all .h files with no tests"
 	@echo "make help                                  | to show this information"
 
 test_compiles:
@@ -25,5 +25,5 @@ test_format:
 check_snake_case:
 	./scripts/check_snake_case.sh .
 
-untested_files:
+print_untested_files:
 	./scripts/find_files_without_tests.sh
