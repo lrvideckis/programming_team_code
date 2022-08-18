@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-cd ..
-
-files_snake_case="find . -name '*[A-Z]*' -or -name '*-*' | \
+#check file names are snake case
+files_snake_case="find .. -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
 	grep --invert-match '\.verify-helper' | \
 	grep --invert-match --extended-regexp '(LICENSE|Makefile|README)'"
-
 if eval $files_snake_case --quiet
 then
 	echo "these files/directories are not snake case:"
@@ -14,27 +12,33 @@ then
 	exit 1
 fi
 
-cd library
+#check files are formatted with astyle
+ASTYLE_COMMAND="astyle --indent=tab --style=attach --remove-braces --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --indent-col1-comments --suffix=none"
+if ! grep --quiet "$ASTYLE_COMMAND" ../README.md
+then
+	echo "command doesn't match what's in README.md. Maybe you changed the README's asyle command."
+	exit 1
+fi
+cd ..
+astyle_output=$(
+	$(echo $ASTYLE_COMMAND) --dry-run --formatted --recursive "*.test.cpp" &&
+	$(echo $ASTYLE_COMMAND) --dry-run --formatted --recursive "*.h"
+)
+cd tests/
+if grep --quiet "Formatted" <<< "$astyle_output"
+then
+	echo "some files are not formatted, output of astyle: "
+	echo "$astyle_output"
+	exit 1
+fi
 
+#check snake case
 declare -i pass=0
 declare -i fail=0
 failTests=""
-
-echo "skipped headers: "
-find . -name '*.h' | grep -Ff ../tests/scripts/skip_headers.txt
-
-for test in $(find . -name '*.h' | grep -vFf ../tests/scripts/skip_headers.txt ; find ../tests/library_checker_tests/ -name '*.test.cpp')
+for test in $(find library_checker_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
-
-	tmp_file=$(dirname $test)"/tmp.cpp"
-	> $tmp_file
-
-	if [[ $test == *.h ]] ; then
-		cp ../template.cpp $tmp_file
-	fi
-	sed --regexp-extended '/^#pragma once/d' $test >> $tmp_file
-
 	# clang's "lower_case" == the traditional snake_case
 	clang-tidy -checks="readability-identifier-naming" \
 		-config="{CheckOptions: [
@@ -48,7 +52,7 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-		--use-color --warnings-as-errors="*" $tmp_file -- -std=c++17
+			--use-color --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
 	if (($? != 0))
 	then
 		fail+=1
@@ -57,7 +61,6 @@ do
 		pass+=1
 	fi
 done
-
 echo "$pass/$(($pass+$fail)) tests passed"
 if (($fail == 0)); then
 	echo "No tests failed"

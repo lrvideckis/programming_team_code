@@ -1,5 +1,4 @@
 #pragma once
-//status: not tested
 //source: https://codeforces.com/blog/entry/62393
 struct custom_hash {
 	static uint64_t splitmix64(uint64_t x) {
