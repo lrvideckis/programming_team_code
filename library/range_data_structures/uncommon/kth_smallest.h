@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+using namespace std;
 #pragma once
 //source: https://cp-algorithms.com/data_structures/segment_tree.html#preserving-the-history-of-its-values-persistent-segment-tree
 struct kth_smallest {
@@ -19,7 +21,7 @@ struct kth_smallest {
 			tree.push_back({tree[v].sum + 1, 0, 0});
 			return tree.size() - 1;
 		}
-		const int tm = tl + (tr - tl) / 2;
+		int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
 		int rch = tree[v].rch;
 		if (idx < tm)

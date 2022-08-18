@@ -20,8 +20,7 @@ template <int N> struct implicit_seg_tree {
 	implicit_seg_tree(int l, int r) : ptr(0), root_l(l), root_r(r) {
 		tree[ptr++] = node(dt{0, r - l});
 	}
-	//what happens when `add` is applied to every index in range [tl, tr)?
-	void apply(int v, int tl, int tr, ch add) {
+	void apply(int v, ch add) {
 		tree[v].val[0] += add;
 		tree[v].lazy += add;
 	}
@@ -36,12 +35,12 @@ template <int N> struct implicit_seg_tree {
 		}
 		if (tree[v].lazy) {
 			int tm = tl + (tr - tl) / 2;
-			apply(tree[v].lch, tl, tm, tree[v].lazy);
-			apply(tree[v].rch, tm, tr, tree[v].lazy);
+			apply(tree[v].lch, tree[v].lazy);
+			apply(tree[v].rch, tree[v].lazy);
 			tree[v].lazy = 0;
 		}
 	}
-	//update range [l,r) with `add`
+	//update range [l,r)
 	void update(int l, int r, ch add) {
 		update(0, root_l, root_r, l, r, add);
 	}
@@ -49,7 +48,7 @@ template <int N> struct implicit_seg_tree {
 		if (r <= tl || tr <= l)
 			return;
 		if (l <= tl && tr <= r)
-			return apply(v, tl, tr, add);
+			return apply(v, add);
 		push(v, tl, tr);
 		int tm = tl + (tr - tl) / 2;
 		update(tree[v].lch, tl, tm, l, r, add);
