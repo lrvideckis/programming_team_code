@@ -19,7 +19,7 @@ struct kth_smallest {
 			tree.push_back({tree[v].sum + 1, 0, 0});
 			return tree.size() - 1;
 		}
-		int tm = tl + (tr - tl) / 2;
+		const int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
 		int rch = tree[v].rch;
 		if (idx < tm)
