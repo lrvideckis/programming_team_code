@@ -24,6 +24,8 @@ jobs:
         toolchain: nightly-x86_64-unknown-linux-gnu
         default: true
         profile: minimal
+    - name: Set up kactl submodule
+      run: git submodule init && git submodule update
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
