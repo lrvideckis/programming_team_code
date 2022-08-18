@@ -39,7 +39,7 @@ git submodule update
 declare -i pass=0
 declare -i fail=0
 failTests=""
-for test in $(find library_checker_tests/ -type f -name '*.test.cpp')
+for test in $(find oj_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
 	# clang's "lower_case" == the traditional snake_case

@@ -3,7 +3,7 @@ name: test_all_code
 on: push
 
 jobs:
-  library_checker_tests:
+  oj_tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
