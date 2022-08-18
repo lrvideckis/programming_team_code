@@ -39,7 +39,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install astyle
       run: sudo apt-get install astyle
-    - name: Set up kactl submodule
-      run: git submodule init && git submodule update
     - name: Check snake case
       run: make --directory=tests/ check_format
