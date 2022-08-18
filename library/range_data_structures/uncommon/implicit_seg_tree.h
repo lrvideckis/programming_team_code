@@ -26,15 +26,14 @@ template <int N> struct implicit_seg_tree {
 	}
 	void push(int v, int tl, int tr) {
 		if (tr - tl > 1 && tree[v].lch == -1) {
-			int mid = tl + (tr - tl) / 2;
+			int tm = tl + (tr - tl) / 2;
 			assert(ptr + 1 < N);
 			tree[v].lch = ptr;
-			tree[ptr++] = node(dt{0, mid - tl});
+			tree[ptr++] = node(dt{0, tm - tl});
 			tree[v].rch = ptr;
-			tree[ptr++] = node(dt{0, tr - mid});
+			tree[ptr++] = node(dt{0, tr - tm});
 		}
 		if (tree[v].lazy) {
-			int tm = tl + (tr - tl) / 2;
 			apply(tree[v].lch, tree[v].lazy);
 			apply(tree[v].rch, tree[v].lazy);
 			tree[v].lazy = 0;
