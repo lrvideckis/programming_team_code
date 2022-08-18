@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
-#include "../../template.h"
+#include "../../../kactl/stress-tests/utilities/template.h"
 
-#include "../../../library/misc/dsu.h"
+#include "../../../kactl/content/data-structures/UnionFind.h"
 #include "../../../library/graphs/bridge_tree.h"
 
 int main() {
@@ -54,7 +54,7 @@ int main() {
 			}
 		}
 	}
-	DSU dsu(n);
+	UF dsu(n);
 	for (int i = 0; i < m; i++) {
 		if (!cc.is_bridge[i]) {
 			auto [u, v] = edges[i];
