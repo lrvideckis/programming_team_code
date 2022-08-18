@@ -17,6 +17,7 @@
 - [queue with get max](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/data-structures/MonotonicQueue.h)
 - [seg tree beats](https://codeforces.com/blog/entry/57319)
 - [polynomial stuff](https://cp-algorithms.com/algebra/polynomial.html)
+- [Disjoint set](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/UnionFind.h)
 - [DSU with rollback](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/UnionFindRollback.h)
 - [string hashing](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Hashing.h)
 - [string rotational equivalence](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/MinRotation.h)
