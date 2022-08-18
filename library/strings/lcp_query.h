@@ -5,11 +5,15 @@
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
 struct lcp_query {
-	lcp_query(const string& s) : sa(sa_is(s, 255)), inv_sa(s.size()), lcp(LCP(s, sa)), st(lcp, [](int x, int y) {
+	vector<int> sa, inv_sa, lcp;
+	RMQ<int> st;
+	lcp_query(const string& s) : sa(sa_is(s, 255)), inv_sa(init_inv()), lcp(LCP(s, sa, inv_sa)), st(lcp, [](int x, int y) {
 		return min(x, y);
-	}) {
-		for (int i = 0; i < (int)s.size(); i++)
-			inv_sa[sa[i]] = i;
+	}) {}
+	vector<int> init_inv() const {
+		vector<int> inv(sa.size());
+		for (int i = 0; i < (int)sa.size(); i++) inv[sa[i]] = i;
+		return inv;
 	}
 	//length of longest common prefix of suffixes s[idx1 ... n), s[idx2 ... n), 0-based indexing
 	//
@@ -27,6 +31,4 @@ struct lcp_query {
 	bool less(int idx1, int idx2) const {
 		return inv_sa[idx1] < inv_sa[idx2];
 	}
-	vector<int> sa, inv_sa, lcp;
-	RMQ<int> st;
 };
