@@ -1,6 +1,6 @@
 #pragma once
 #include "../../kactl/content/numerical/FastFourierTransform.h"
-//returns array `len` where `len[i]` = # of paths in tree with `i` edges
+//returns array `cnt_paths` where `cnt_paths[i]` = # of paths in tree with `i` edges
 //O(n log^2 n)
 vector<long long> tree_freq_dist(const vector<vector<int>>& adj/*unrooted, connected tree*/) {
 	int n = adj.size();
@@ -29,19 +29,19 @@ vector<long long> tree_freq_dist(const vector<vector<int>>& adj/*unrooted, conne
 			if (!found) return node;
 		}
 	};
-	vector<long long> res(n, 0);
+	vector<long long> cnt_paths(n, 0);
 	auto dfs = [&](auto self, int node) -> void {
 		node = find_centroid(node);
 		vis[node] = 1;
-		vector<double> total_cnt(1, 1.0);
+		vector<double> total_depth(1, 1.0);
 		for (int to : adj[node]) {
 			if (!vis[to]) {
-				vector<double> cnt_dist(1, 0.0);
+				vector<double> cnt_depth(1, 0.0);
 				{
 					queue<pair<int, int>> q;
 					q.emplace(to, node);
 					while (!q.empty()) {
-						cnt_dist.push_back(q.size());
+						cnt_depth.push_back(q.size());
 						queue<pair<int, int>> new_q;
 						while (!q.empty()) {
 							auto [curr, par] = q.front();
@@ -55,15 +55,15 @@ vector<long long> tree_freq_dist(const vector<vector<int>>& adj/*unrooted, conne
 					}
 				}
 				{
-					vector<double> prod = conv(total_cnt, cnt_dist);
-					for (int i = 1; i < (int)prod.size(); i++) res[i] += (long long)(prod[i] + 0.5);
+					vector<double> prod = conv(total_depth, cnt_depth);
+					for (int i = 1; i < (int)prod.size(); i++) cnt_paths[i] += (long long)(prod[i] + 0.5);
 				}
-				if (total_cnt.size() < cnt_dist.size()) total_cnt.resize(cnt_dist.size(), 0.0);
-				for (int i = 1; i < (int)cnt_dist.size(); i++) total_cnt[i] += cnt_dist[i];
+				if (total_depth.size() < cnt_depth.size()) total_depth.resize(cnt_depth.size(), 0.0);
+				for (int i = 1; i < (int)cnt_depth.size(); i++) total_depth[i] += cnt_depth[i];
 				self(self, to);
 			}
 		}
 	};
 	dfs(dfs, 0);
-	return res;
+	return cnt_paths;
 }
