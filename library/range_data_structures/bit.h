@@ -4,22 +4,22 @@
 template<class T> struct BIT {
 	const int N;
 	vector<T> bit;
-	BIT(int a_n) : N(a_n), bit(N + 1, 0) {}
-	BIT(const vector<T>& a) : N(a.size()), bit(N + 1, 0) {
-		for (int i = 1; i <= N; i++) {
-			bit[i] += a[i - 1];
-			int j = i + (i & -i);
-			if (j <= N) bit[j] += bit[i];
+	BIT(int a_n) : N(a_n), bit(N, 0) {}
+	BIT(const vector<T>& a) : BIT(a.size()) {
+		for (int i = 0; i < N; i++) {
+			bit[i] += a[i];
+			int j = i | (i + 1);
+			if (j < N) bit[j] += bit[i];
 		}
 	}
 	void update(int i, const T& d) {
 		assert(0 <= i && i < N);
-		for (i++; i <= N; i += i & -i) bit[i] += d;
+		for (; i < N; i |= i + 1) bit[i] += d;
 	}
 	T sum(int r) const {//sum of range [0, r)
 		assert(0 <= r && r <= N);
 		T ret = 0;
-		for (; r; r -= r & -r) ret += bit[r];
+		for (; r > 0; r &= r - 1) ret += bit[r - 1];
 		return ret;
 	}
 	T sum(int l, int r) const {//sum of range [l, r)
@@ -33,8 +33,8 @@ template<class T> struct BIT {
 		if (sum <= 0) return 0;
 		int pos = 0;
 		for (int pw = 1 << __lg(N | 1); pw; pw >>= 1)
-			if (pos + pw <= N && bit[pos + pw] < sum)
-				pos += pw, sum -= bit[pos];
+			if (pos + pw <= N && bit[pos + pw - 1] < sum)
+				pos += pw, sum -= bit[pos - 1];
 		return pos + 1;
 	}
 };
