@@ -1,7 +1,7 @@
 #pragma once
 #include "../../kactl/content/numerical/FastFourierTransform.h"
 //returns array `len` where `len[i]` = # of paths in tree with length `i`
-//O(n log^2 n) -- TODO: is this correct?
+//O(n log^2 n)
 vector<long long> tree_freq_dist(const vector<vector<int>>& adj/*unrooted, connected tree*/) {
 	int n = adj.size();
 	vector<int> vis(n, 0), sizes(n);
