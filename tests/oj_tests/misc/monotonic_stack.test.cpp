@@ -14,9 +14,11 @@ int main() {
 	RMQ<int> st(arr, [](int x, int y) {
 		return min(x, y);
 	});
-	vector<int> left_lower = monotonic_stack(arr);
+	vector<int> left_lower = monotonic_stack<int>(arr, [&](int x, int y) {
+		return x > y;
+	});
 	reverse(arr.begin(), arr.end());
-	vector<int> right_lower = monotonic_stack(arr);
+	vector<int> right_lower = monotonic_stack<int>(arr, greater());
 	reverse(arr.begin(), arr.end());
 	vector<int> par(n, -1);
 	for (int i = 0; i < n; i++) {

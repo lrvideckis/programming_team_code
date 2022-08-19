@@ -1,18 +1,18 @@
 #pragma once
-//calculates array `left` with:
-//for every index j with left[i] < j < i: arr[j] > arr[i]
-//and
-//arr[left[i]] <= arr[i] if left[i] != -1
+//usages:
+//	vector<int> left = monotonic_stack<int>(arr, less()); //(or replace `less` with: less_equal, greater, greater_equal
+//	vector<int> left = monotonic_stack<int>(arr, [&](int x, int y) {return x < y;});
 //
-//trick: pass in vector<pair<T/*value*/, int/*index*/>> with arr[i].second = i (0<=i<n) to simulate arr[j] >= arr[i]
-//
+//returns array `left` where `left[i]` = max index such that:
+//	`left[i]` < i && !op(arr[left[i]], arr[i])
+//or -1 if no index exists
 //O(n)
-template<class T> vector<int> monotonic_stack(const vector<T>& arr) {
+template<class T> vector<int> monotonic_stack(const vector<T>& arr, const function<T(const T&, const T&)>& op) {
 	int n = arr.size();
 	vector<int> left(n);
 	for (int i = 0; i < n; i++) {
 		int& j = left[i] = i - 1;
-		while (j >= 0 && arr[j] > arr[i]) j = left[j];
+		while (j >= 0 && op(arr[j], arr[i])) j = left[j];
 	}
 	return left;
 }
