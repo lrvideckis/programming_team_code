@@ -5,7 +5,6 @@ long long max_rect_histogram(const vector<int>& arr) {
 	auto rv /*reverse*/ = [&](int j) -> int {
 		return n - 1 - j;
 	};
-	//vector<int> left = monotonic_stack<int>(arr, greater_equal());
 	vector<int> left = monotonic_stack<int>(arr, greater_equal());
 	vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), greater_equal());
 	long long max_area = 0;
