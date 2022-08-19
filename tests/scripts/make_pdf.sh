@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-./scripts/add_hash_code_comments.sh
+#adds hash code comments
+tests="$(find ../library -name "*.h") $(find ../ac-library/atcoder -name "*.hpp")"
+for test in $tests
+do
+	hash=$(cat $test | scripts/hash.sh)
+	comment="cat $(basename $test) | ./hash.sh"
+	sed --in-place "1s;^;//$comment\n//$hash\n;" $test
+done
 
 
 #needed to make boxes under headings empty. Else you get this weird text
@@ -14,7 +21,7 @@ pdflatex scripts/25_pg_reference.tex
 mv 25_pg_reference.pdf ../
 
 #removes hash code comments
-tests="$(find ../library -name "*.h")"
-for test in $tests; do
+for test in $tests
+do
 	sed --in-place '1,2d' $test
 done
