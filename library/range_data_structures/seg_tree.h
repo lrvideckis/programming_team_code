@@ -48,6 +48,7 @@ struct seg_tree {
 	}
 	//update range [l, r)
 	void update(int l, int r, ch change) {
+		assert(0 <= l && l < r && r <= N);
 		l = to_leaf(l), r = to_leaf(r);
 		int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
@@ -61,6 +62,7 @@ struct seg_tree {
 	}
 	//query range [l, r)
 	dt query(int l, int r) {
+		assert(0 <= l && l < r && r <= N);
 		l = to_leaf(l), r = to_leaf(r);
 		int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
