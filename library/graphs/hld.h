@@ -16,19 +16,19 @@ struct HLD {
 		dfs2(root, adj, timer);
 	}
 	void dfs1(int v, vector<vector<int>>& adj) {
+		auto par = find(adj[v].begin(), adj[v].end(), tree[v].par);
+		if (par != adj[v].end()) adj[v].erase(par);
 		for (int& to : adj[v]) {
-			if (to == tree[v].par) continue;
 			tree[to].par = v;
 			dfs1(to, adj);
 			tree[v].sub_sz += tree[to].sub_sz;
-			if (tree[to].sub_sz > tree[adj[v][0]].sub_sz || adj[v][0] == tree[v].par)
+			if (tree[to].sub_sz > tree[adj[v][0]].sub_sz)
 				swap(to, adj[v][0]);
 		}
 	}
 	void dfs2(int v, const vector<vector<int>>& adj, int& timer) {
 		tree[v].time_in = timer++;
 		for (int to : adj[v]) {
-			if (to == tree[v].par) continue;
 			tree[to].next = (timer == tree[v].time_in + 1 ? tree[v].next : to);
 			dfs2(to, adj, timer);
 		}
