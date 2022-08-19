@@ -12,7 +12,8 @@ vector<int> cartesian_tree(const vector<int>& arr) {
 	for (int i = 0; i < n; i++) {
 		int l = left[i], r = rv(right[rv(i)]);
 		if (l >= 0 && r < n) par[i] = arr[l] > arr[r] ? l : r;
-		else if (l >= 0 || r < n) par[i] = l >= 0 ? l : r;
+		else if (l >= 0) par[i] = l;
+		else if (r < n) par[i] = r;
 		else par[i] = i;
 	}
 	return par;
