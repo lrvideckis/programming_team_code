@@ -1,3 +1,6 @@
 [submodule "kactl"]
 	path = kactl
 	url = https://github.com/kth-competitive-programming/kactl
+[submodule "ac-library"]
+	path = ac-library
+	url = https://github.com/atcoder/ac-library
