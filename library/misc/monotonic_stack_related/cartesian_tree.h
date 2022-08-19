@@ -1,6 +1,6 @@
 #pragma once
 #include "monotonic_stack.h"
-
+//min cartesian tree
 vector<int> cartesian_tree(const vector<int>& arr) {
 	int n = arr.size();
 	auto rv /*reverse*/ = [&](int i) -> int {
