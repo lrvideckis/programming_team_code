@@ -8,9 +8,8 @@ int main() {
 	string s;
 	cin >> s;
 	lcp_query sq(s);
-	for (int i = 0; i < (int)s.size(); i++) {
+	for (int i = 0; i < (int)s.size(); i++)
 		cout << sq.longest_common_prefix(i, 0) << " ";
-	}
 	cout << endl;
 	return 0;
 }
