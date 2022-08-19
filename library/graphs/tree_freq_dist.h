@@ -1,6 +1,6 @@
 #pragma once
 #include "../../kactl/content/numerical/FastFourierTransform.h"
-//returns array `len` where `len[i]` = # of paths in tree with length `i`
+//returns array `len` where `len[i]` = # of paths in tree with `i` edges
 //O(n log^2 n)
 vector<long long> tree_freq_dist(const vector<vector<int>>& adj/*unrooted, connected tree*/) {
 	int n = adj.size();
