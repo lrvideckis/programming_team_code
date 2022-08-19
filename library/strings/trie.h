@@ -1,5 +1,4 @@
 #pragma once
-//status: not tested
 //source: https://cp-algorithms.com/string/aho_corasick.html#construction-of-the-trie
 //intended to be a base template and to be modified
 const int K = 26;//alphabet size
