@@ -17,7 +17,7 @@ make help
 ```
 ## Steps to add code from other repos to PDF
 1. add other repo as a submodule
-2. if repo isn't snake case, then update [this script](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/check_format.sh) to skip the new submodule
+2. if the repo's root directory name isn't snake case, then update [this script](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/check_format.sh) to skip the new submodule
 3. Include new file(s) in [PDF latex file](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/25_pg_reference.tex)
 4. Add new file path(s) to [this script](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/make_pdf.sh) to include hash codes in PDF
 5. build pdf
