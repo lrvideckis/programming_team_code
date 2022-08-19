@@ -5,7 +5,7 @@
 //	if (a_prime[val] == val)
 //
 //to get all prime factors of a number `val` in O(log(val)):
-//	while(val > 1) {
+//	while (val > 1) {
 //		int p = a_prime[val];
 //		//p is some prime factor of val
 //		val /= p;
