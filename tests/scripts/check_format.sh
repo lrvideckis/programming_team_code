@@ -55,7 +55,7 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-			--use-color -header-filter="^((?!/library/).)*$" --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
+			--use-color -header-filter="/library/" --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
 	if (($? != 0))
 	then
 		fail+=1
