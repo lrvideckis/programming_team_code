@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 #include "../../template.h"
 
-#include "../../../library/misc/monotonic_stack.h"
+#include "../../../library/misc/monotonic_stack_related/monotonic_stack.h"
 #include "../../../library/range_data_structures/rmq.h"
 
 int main() {
