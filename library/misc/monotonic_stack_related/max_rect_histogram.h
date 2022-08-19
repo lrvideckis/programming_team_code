@@ -2,8 +2,8 @@
 #include "monotonic_stack.h"
 long long max_rect_histogram(const vector<int>& arr) {
 	int n = arr.size();
-	auto rv /*reverse*/ = [&](int j) -> int {
-		return n - 1 - j;
+	auto rv /*reverse*/ = [&](int i) -> int {
+		return n - 1 - i;
 	};
 	vector<int> left = monotonic_stack<int>(arr, greater_equal());
 	vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), greater_equal());
