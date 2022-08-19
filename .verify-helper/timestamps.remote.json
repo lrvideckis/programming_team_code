@@ -40,5 +40,5 @@
 "tests/oj_tests/strings/kmp.test.cpp": "2022-08-18 18:59:03 -0700",
 "tests/oj_tests/strings/palindrome_query.test.cpp": "2022-08-18 19:40:08 -0700",
 "tests/oj_tests/strings/trie.test.cpp": "2022-08-19 08:28:20 -0700",
-"tests/oj_tests/strings/z_func.test.cpp": "2022-08-19 10:48:03 -0700"
+"tests/oj_tests/strings/z_func.test.cpp": "2022-08-19 10:55:03 -0700"
 }
