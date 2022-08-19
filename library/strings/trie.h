@@ -1,6 +1,5 @@
 #pragma once
 //source: https://cp-algorithms.com/string/aho_corasick.html#construction-of-the-trie
-//intended to be a base template and to be modified
 const int K = 26;//alphabet size
 struct trie {
 	const char MIN_CH = 'A';//'a' for lowercase, '0' for digits
