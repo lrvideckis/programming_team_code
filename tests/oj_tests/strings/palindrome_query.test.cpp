@@ -2,7 +2,7 @@
 #include "../../../kactl/stress-tests/utilities/template.h"
 
 #include "../../random.h"
-#include "../../../library/strings/pal_query.h"
+#include "../../../library/strings/palindrome_query.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
