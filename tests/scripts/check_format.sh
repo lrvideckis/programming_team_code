@@ -55,7 +55,11 @@ do
 			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
 			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
 		]}" \
-			--use-color -header-filter="/library/" --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
+			--use-color -header-filter="/library/[^.]+\.h$" --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
+	# the `-header-filter` flag tells clang-tidy to lint all includes which match that regex
+	# explanation of regex: /library/ followed by a positive number of non-period's followed by .h as a suffix
+	# tricky cases: we want to lint: /programming_team_code/tests/library_checker_tests/range_data_structures/../../../library/range_data_structures/uncommon/kth_smallest.h
+	# we don't want to lint /programming_team_code/tests/oj_tests/graphs/../../../library/graphs/../../kactl/content/numerical/FastFourierTransform.h
 	if (($? != 0))
 	then
 		fail+=1
