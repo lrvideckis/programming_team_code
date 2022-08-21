@@ -1,11 +1,52 @@
 Checks: >
     bugprone-*,
-    misc-*,
-    modernize-*,
+    misc-confusable-identifiers
+    misc-const-correctness,
+    misc-misleading-bidirectional,
+    misc-misleading-identifier,
+    misc-misplaced-const,
+    misc-new-delete-overloads,
+    misc-no-recursion,
+    misc-non-copyable-objects,
+    misc-non-private-member-variables-in-classes,
+    misc-redundant-expression,
+    misc-static-assert,
+    misc-throw-by-value-catch-by-reference,
+    misc-unconventional-assign-operator,
+    misc-uniqueptr-reset-release,
+    misc-unused-alias-decls,
+    misc-unused-parameters,
+    misc-unused-using-decls,
+    modernize-use-auto,
+    modernize-use-emplace,
+    modernize-use-using,
+    modernize-use-default-member-init,
+    modernize-pass-by-value,
+    modernize-avoid-c-arrays,
+    modernize-return-braced-init-list,
+    cppcoreguidelines-avoid-const-or-ref-data-members,
+    cppcoreguidelines-avoid-goto,
+    cppcoreguidelines-avoid-non-const-global-variables,
+    cppcoreguidelines-interfaces-global-init,
+    cppcoreguidelines-narrowing-conversions,
+    cppcoreguidelines-prefer-member-initializer,
     performance-*,
-    cppcoreguidelines-*,
     readability-identifier-naming,
     readability-make-member-function-const,
+    readability-function-cognitive-complexity,
+    readability-container-size-empty,
+    readability-convert-member-functions-to-static,
+    readability-else-after-return,
+    readability-duplicate-include,
+    readability-function-size,
+    readability-misleading-indentation,
+    readability-misplaced-array-index,
+    readability-named-parameter,
+    readability-string-compare,
+    readability-suspicious-call-argument,
+    readability-use-anyofallof,
+    readability-redundant-*,
+    readability-simplify-*,
     readability-container-contains
 WarningsAsErrors: "*"
 HeaderFilterRegex: "/library/[^.]+\\.h$"
@@ -29,3 +70,5 @@ CheckOptions:
     value:           lower_case
   - key:             readability-identifier-naming.TemplateParameterCase
     value:           UPPER_CASE
+  - key:             readability-function-cognitive-complexity.Threshold
+    value:           40

@@ -44,7 +44,6 @@ failTests=""
 for test in $(find oj_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
-	# clang's "lower_case" == the traditional snake_case
 	clang-tidy $test -- $(cat scripts/compile_flags.txt)
 	if (($? != 0))
 	then
