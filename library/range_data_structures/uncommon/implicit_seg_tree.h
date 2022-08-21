@@ -15,7 +15,8 @@ template <int N> struct implicit_seg_tree {
 		int lch, rch; // children, indexes into `tree`, -1 for null
 		node() {}
 		node(const dt& a_val) : val(a_val), lazy(0), lch(-1), rch(-1) {}
-	} tree[N];
+	};
+	array<node, N> tree;
 	int ptr, root_l, root_r;//[root_l, root_r) defines range of root node; handles negatives
 	implicit_seg_tree(int l, int r) : ptr(0), root_l(l), root_r(r) {
 		tree[ptr++] = node(dt{0, r - l});

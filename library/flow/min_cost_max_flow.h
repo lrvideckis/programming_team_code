@@ -1,7 +1,7 @@
 #pragma once
 const long long INF = 1e18;
 struct min_cost_max_flow {
-	typedef long long ll;
+	using ll = long long;
 	struct edge {
 		int a, b;
 		ll cap, cost, flow;

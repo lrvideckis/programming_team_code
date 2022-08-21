@@ -14,7 +14,7 @@ int main() {
 	for (int i = 0; i < 500; i++)
 		check(i);
 	for (int tests = 1000; tests--;) {
-		long long pw = get_rand<long long>(0, 1e18);
+		auto pw = get_rand<long long>(0, 1e18);
 		check(pw);
 	}
 	int a, b;

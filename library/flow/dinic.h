@@ -1,6 +1,6 @@
 #pragma once
 struct max_flow {
-	typedef long long ll;
+	using ll = long long;
 	const ll INF = 1e18;
 	struct edge {
 		int a, b;
