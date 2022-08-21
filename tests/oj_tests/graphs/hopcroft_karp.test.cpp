@@ -13,7 +13,7 @@ int main() {
 		int u, v;
 		cin >> u >> v;
 		adj[u].push_back(v);
-		edges.push_back({u, v});
+		edges.emplace_back(u, v);
 	}
 	match res = hopcroft_karp(adj, r);
 	cout << res.size_of_matching << endl;

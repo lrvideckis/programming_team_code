@@ -5,6 +5,7 @@ files_snake_case="find .. -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
 	grep --invert-match '\.verify-helper' | \
 	grep --invert-match 'ac-library' | \
+	grep --invert-match '\.clang-tidy' | \
 	grep --invert-match --extended-regexp '(LICENSE|Makefile|README)'"
 if eval $files_snake_case --quiet
 then
@@ -43,24 +44,7 @@ failTests=""
 for test in $(find oj_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
-	# clang's "lower_case" == the traditional snake_case
-	clang-tidy -checks="readability-identifier-naming" \
-		-config="{CheckOptions: [
-			{ key: readability-identifier-naming.StructCase, value: lower_case },
-			{ key: readability-identifier-naming.ClassCase, value: lower_case },
-			{ key: readability-identifier-naming.FunctionCase, value: lower_case },
-			{ key: readability-identifier-naming.MethodCase, value: lower_case },
-			{ key: readability-identifier-naming.VariableCase, value: lower_case },
-			{ key: readability-identifier-naming.ConstantCase, value: UPPER_CASE },
-			{ key: readability-identifier-naming.ParameterCase, value: lower_case },
-			{ key: readability-identifier-naming.TypedefCase, value: lower_case },
-			{ key: readability-identifier-naming.TemplateParameterCase, value: UPPER_CASE }
-		]}" \
-			--use-color -header-filter="/library/[^.]+\.h$" --warnings-as-errors="*" $test -- $(cat scripts/compile_flags.txt)
-	# the `-header-filter` flag tells clang-tidy to lint all includes which match that regex
-	# explanation of regex: /library/ followed by a positive number of non-period's followed by .h as a suffix
-	# tricky cases: we want to lint: /programming_team_code/tests/library_checker_tests/range_data_structures/../../../library/range_data_structures/uncommon/kth_smallest.h
-	# we don't want to lint /programming_team_code/tests/oj_tests/graphs/../../../library/graphs/../../kactl/content/numerical/FastFourierTransform.h
+	clang-tidy $test -- $(cat scripts/compile_flags.txt)
 	if (($? != 0))
 	then
 		fail+=1

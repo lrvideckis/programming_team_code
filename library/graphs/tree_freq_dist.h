@@ -53,7 +53,7 @@ vector<long long> tree_freq_dist(const vector<vector<int>>& adj/*unrooted, conne
 			}
 			{
 				vector<double> prod = conv(total_depth, cnt_depth);
-				for (int i = 1; i < (int)prod.size(); i++) cnt_paths[i] += (long long)(prod[i] + 0.5);
+				for (int i = 1; i < (int)prod.size(); i++) cnt_paths[i] += llround(prod[i]);
 			}
 			if (total_depth.size() < cnt_depth.size()) total_depth.resize(cnt_depth.size(), 0.0);
 			for (int i = 1; i < (int)cnt_depth.size(); i++) total_depth[i] += cnt_depth[i];
