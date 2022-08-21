@@ -4,11 +4,10 @@ const int K = 26;//alphabet size
 struct trie {
 	const char MIN_CH = 'A';//'a' for lowercase, '0' for digits
 	struct node {
-		array<int, K> next;
-		int cnt_words = 0, par = -1;
+		int next[K], cnt_words = 0, par = -1;
 		char ch;
 		node(int a_par = -1, char a_ch = '#') : par(a_par), ch(a_ch) {
-			fill(next.begin(), next.end(), -1);
+			fill(next, next + K, -1);
 		}
 	};
 	vector<node> t;

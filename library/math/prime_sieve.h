@@ -11,9 +11,9 @@
 //		val /= p;
 //	}
 const int N = 1e6 + 10;
-array<int, N> a_prime;
+int a_prime[N];
 void calc_seive() {
-	iota(a_prime.begin(), a_prime.end(), 0);
+	iota(a_prime, a_prime + N, 0);
 	for (int i = 2; i * i < N; i++)
 		if (a_prime[i] == i)
 			for (int j = i * i; j < N; j += i)

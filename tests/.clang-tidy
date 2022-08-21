@@ -80,7 +80,6 @@ Checks: >
     modernize-use-emplace,
     modernize-use-using,
     modernize-use-default-member-init,
-    modernize-avoid-c-arrays,
     modernize-return-braced-init-list,
     cppcoreguidelines-avoid-const-or-ref-data-members,
     cppcoreguidelines-avoid-goto,
