@@ -10,6 +10,11 @@
 oj-verify --config-file ~/programming_team_code/.verify-helper/config.toml run palindrome_query.test.cpp
 ```
 
+## Linting
+
+- See [.clang-tidy](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.clang-tidy) for the list of lint-checks ([wiki](https://clang.llvm.org/extra/clang-tidy/checks/list.html)). Notable checks:
+  - `readability-identifier-naming` to check for snake_case.
+
 ## Makefile
 to see commands:
 ```
