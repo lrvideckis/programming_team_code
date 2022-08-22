@@ -39,5 +39,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: sudo apt-get install astyle clang
-    - name: Check snake case
+    - name: Check snake case and lint
       run: make --directory=tests/ check_format
