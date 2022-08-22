@@ -7,10 +7,10 @@ struct kth_smallest {
 		int sum;
 		int lch, rch;//children, indexes into `tree`
 	};
-	int mn, mx;
+	int mn = INT_MAX, mx = INT_MIN;
 	vector<int> roots;
 	deque<node> tree;
-	kth_smallest(const vector<int>& arr) : mn(INT_MAX), mx(INT_MIN), roots(arr.size() + 1, 0) {
+	kth_smallest(const vector<int>& arr) : roots(arr.size() + 1, 0) {
 		tree.push_back({0, 0, 0}); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val + 1);
 		for (int i = 0; i < (int)arr.size(); i++)

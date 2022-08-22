@@ -34,10 +34,10 @@ jobs:
       run: oj-verify all
 
   check_format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-    - name: Install astyle
-      run: sudo apt-get install astyle
+    - name: Install dependencies
+      run: sudo apt-get install astyle clang
     - name: Check snake case
       run: make --directory=tests/ check_format
