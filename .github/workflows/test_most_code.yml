@@ -40,6 +40,6 @@ jobs:
     - name: Install astyle
       run: sudo apt-get install astyle
     - name: Install clang
-      run: sudo apt-get install clang
+      run: sudo apt-get install clang-14
     - name: Check snake case
       run: make --directory=tests/ check_format
