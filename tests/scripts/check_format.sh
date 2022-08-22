@@ -37,6 +37,8 @@ fi
 git submodule init
 git submodule update
 
+clang --version
+clang-tidy --version
 clang-tidy --dump-config
 
 #check snake case
