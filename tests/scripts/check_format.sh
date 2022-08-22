@@ -38,11 +38,6 @@ fi
 git submodule init
 git submodule update
 
-clang --version
-clang-tidy --version
-lsb_release -a
-clang-tidy --dump-config
-
 #check snake case
 declare -i pass=0
 declare -i fail=0

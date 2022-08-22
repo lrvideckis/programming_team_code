@@ -8,11 +8,9 @@ Checks: >
     bugprone-copy-constructor-init,
     bugprone-dangling-handle,
     bugprone-dynamic-static-initializers,
-    bugprone-easily-swappable-parameters,
     bugprone-fold-init-type,
     bugprone-forward-declaration-namespace,
     bugprone-forwarding-reference-overload,
-    bugprone-implicit-widening-of-multiplication-result,
     bugprone-inaccurate-erase,
     bugprone-incorrect-roundings,
     bugprone-infinite-loop,
@@ -88,7 +86,6 @@ Checks: >
     performance-*,
     readability-identifier-naming,
     readability-make-member-function-const,
-    readability-function-cognitive-complexity,
     readability-container-size-empty,
     readability-convert-member-functions-to-static,
     readability-else-after-return,
@@ -125,5 +122,3 @@ CheckOptions:
     value:           lower_case
   - key:             readability-identifier-naming.TemplateParameterCase
     value:           UPPER_CASE
-  - key:             readability-function-cognitive-complexity.Threshold
-    value:           40
