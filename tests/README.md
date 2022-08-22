@@ -1,5 +1,5 @@
 ## Test details
-- Most code in [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library) *compiled* (no warnings) with [these flags](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/compile_flags.txt) from [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547)
+- Most code in [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library) *compiled* (no warnings) with [these flags](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/compile_flags.txt) inspired by [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547)
   - note `-Wconversion` is missing
   - see output of `make print_untested_files` for files which are *not compiled, nor linted*
 - [oj_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/oj_tests) which tests code on either [Library Checker](https://judge.yosupo.jp/) or [Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/home) ([steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html))
