@@ -40,6 +40,7 @@ git submodule update
 
 clang --version
 clang-tidy --version
+lsb_release -a
 clang-tidy --dump-config
 
 #check snake case
