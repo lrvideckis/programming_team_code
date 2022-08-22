@@ -1,6 +1,6 @@
 # programming_team_code
 
-Yet another competitive programming repo. Quick links:
+My library of algorithms for competitive programming. Quick links:
 
 - [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library)
 - [template.cpp](https://github.com/lrvideckis/programming_team_code/blob/master/library/contest/template.cpp)
@@ -25,7 +25,7 @@ see [tests/README.md](https://github.com/lrvideckis/programming_team_code/blob/m
 
 ## License
 
-Everything is under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Most code is writen/modified by me; I've added links to sources when applicable. Everything is under the [CC0](https://creativecommons.org/publicdomain/zero/1.0/) license, so use/take anything with no strings attached.
 
 ## Other CP repos
 
