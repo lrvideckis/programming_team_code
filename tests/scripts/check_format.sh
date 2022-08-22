@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 #check file names are snake case
 files_snake_case="find .. -name '*[A-Z]*' -or -name '*-*' | \
 	grep --invert-match '\.git' | \
