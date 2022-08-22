@@ -3,7 +3,7 @@
 Yet another competitive programming repo. Quick links:
 
 - [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library)
-- [template.cpp](https://github.com/lrvideckis/programming_team_code/blob/master/template.cpp)
+- [template.cpp](https://github.com/lrvideckis/programming_team_code/blob/master/library/contest/template.cpp)
 - [25_pg_reference.pdf](https://github.com/lrvideckis/programming_team_code/blob/master/25_pg_reference.pdf)
 
 ## Testing

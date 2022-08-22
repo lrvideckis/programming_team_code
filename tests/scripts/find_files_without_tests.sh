@@ -10,7 +10,7 @@ all_test_dependencies=$(
 		g++ -MM $file
 	done
 )
-all_tested_headers=$(
+all_test_dependencies=$(
 	for dependency in $all_test_dependencies
 	do
 		echo $(basename $dependency)
@@ -18,9 +18,9 @@ all_tested_headers=$(
 )
 
 #find all headers in library/
-all_headers_raw=$(find ../library/ -type f -name "*.h")
-all_headers_clean=$(
-	for header in $all_headers_raw
+all_headers=$(find ../library/ -type f -name "*.h")
+all_headers=$(
+	for header in $all_headers
 	do
 		echo $(basename $header)
 	done | sort | uniq
@@ -28,4 +28,4 @@ all_headers_clean=$(
 
 #compare list with all headers in library/
 echo "files with no tests:"
-comm -23 <(tr ' ' '\n' <<< "$all_headers_clean") <(tr ' ' '\n' <<< "$all_tested_headers")
+comm -23 <(tr ' ' '\n' <<< "$all_headers") <(tr ' ' '\n' <<< "$all_test_dependencies")

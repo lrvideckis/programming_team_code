@@ -4,7 +4,7 @@
 tests="$(find ../library -name "*.h") $(find ../ac-library/atcoder -name "*.hpp")"
 for test in $tests
 do
-	hash=$(cat $test | scripts/hash.sh)
+	hash=$(cat $test | ../library/contest/hash.sh)
 	comment="cat $(basename $test) | ./hash.sh"
 	sed --in-place "1s;^;//$comment\n//$hash\n;" $test
 done
