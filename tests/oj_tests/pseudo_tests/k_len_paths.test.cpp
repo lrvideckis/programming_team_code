@@ -6,23 +6,22 @@
 
 #include "../../../library/graphs/k_len_path_node_count.h"
 
-vector<long long> naive(const vector<vector<pair<int, long long>>>& adj_weighted, int k) {
+vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted) {
 	int n = adj_weighted.size();
 	kth_node_on_path path(adj_weighted, 0);
-	vector<long long> cnts_naive(n, 0);
+	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
 			int path_len_nodes = path.lca.dist_edges(u, v) + 1;
-			if (path_len_nodes == k) {
-				for (int i = 0; i < path_len_nodes; i++)
-					cnts_naive[path.query(u, v, i)]++;
-			}
+			for (int i = 0; i < path_len_nodes; i++)
+				cnts_naive[path_len_nodes][path.query(u, v, i)]++;
 		}
 	}
 	return cnts_naive;
 }
 
 int main() {
+	srand(time(NULL)); //since kactl's genRandomTree uses rand
 	for (int n = 2; n <= 100; n++) {
 		vector<vector<int>> adj(n);
 		vector<vector<pair<int, long long>>> adj_weighted(n);
@@ -32,8 +31,9 @@ int main() {
 			adj_weighted[u].emplace_back(v, 1LL);
 			adj_weighted[v].emplace_back(u, 1LL);
 		}
-		int k = get_rand(1, n + 1);
-		assert(get_num_paths(adj, k) == naive(adj_weighted, k));
+		vector<vector<long long>> cnts_naive = naive(adj_weighted);
+		for (int k = 1; k <= n; k++)
+			assert(get_num_paths(adj, k) == cnts_naive[k]);
 	}
 	cout << "Hello World\n";
 	return 0;
