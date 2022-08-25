@@ -18,7 +18,7 @@ int main() {
 	}
 	vector<long long> cnt_len = tree_freq_dist(adj);
 	{
-		int k = get_rand(2, n + 1);
+		int k = get_rand(2, max(3, n + 1));
 		long long sum = 0;
 		for (long long num_paths : get_num_paths(adj, k))
 			sum += num_paths;
