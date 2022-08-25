@@ -9,7 +9,7 @@
 
 #usage:
 #	chmod +x hash.sh
-#	cat <file> | ./hash.sh
+#	cat a.cpp | ./hash.sh
 #or just copy this command:
-#	cat <file> | sed -r '/(assert|include|pragma)/d' | cpp -fpreprocessed -P | tr -d '[:space:]' | md5sum | cut -c-6
+#	cat a.cpp | sed -r '/(assert|include|pragma)/d' | cpp -fpreprocessed -P | tr -d '[:space:]' | md5sum | cut -c-6
 sed -r '/(assert|include|pragma)/d' | cpp -fpreprocessed -P | tr -d '[:space:]' | md5sum | cut -c-6
