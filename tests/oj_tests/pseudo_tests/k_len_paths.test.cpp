@@ -11,7 +11,7 @@ vector<long long> naive(const vector<vector<pair<int, long long>>>& adj_weighted
 	kth_node_on_path path(adj_weighted, 0);
 	vector<long long> cnts_naive(n, 0);
 	for (int u = 0; u < n; u++) {
-		for (int v = u + 1; v < n; v++) {
+		for (int v = u; v < n; v++) {
 			int path_len_nodes = path.lca.dist_edges(u, v) + 1;
 			if (path_len_nodes == k) {
 				for (int i = 0; i < path_len_nodes; i++)
