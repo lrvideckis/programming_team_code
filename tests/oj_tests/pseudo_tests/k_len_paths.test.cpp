@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../template.h"
-#include "../../random.h"
 #include "../../../kactl/stress-tests/utilities/genTree.h"
 #include "../../../library/graphs/kth_node_on_path.h"
 
