@@ -22,11 +22,11 @@ int main() {
 		return 0;
 	}
 	vector<int> par(n, -1);
-	auto dfs = [&](auto&& dfs, int node) -> void {
+	auto dfs = [&](auto self, int node) -> void {
 		for (auto [prev, weight] : inv[node]) {
 			if (par[prev] == -1 && len[prev] + weight == len[node]) {
 				par[prev] = node;
-				dfs(dfs, prev);
+				self(self, prev);
 			}
 		}
 	};
