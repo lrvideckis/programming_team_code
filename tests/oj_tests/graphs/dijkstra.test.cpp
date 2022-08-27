@@ -1,42 +1,22 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
+#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/problems/GRL_1_A"
 #include "../../template.h"
 
 #include "../../../library/graphs/dijkstra.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	int n, m;
-	cin >> n >> m;
-	int s, t;
-	cin >> s >> t;
-	vector<vector<pair<int, long long>>> adj(n), inv(n);
+	int n, m, s;
+	cin >> n >> m >> s;
+	vector<vector<pair<int, long long>>> adj(n);
 	for (int i = 0; i < m; i++) {
 		int u, v, w;
 		cin >> u >> v >> w;
-		adj[u].push_back({v, w});
-		inv[v].push_back({u, w});
+		adj[u].emplace_back(v, w);
 	}
 	vector<long long> len = dijkstra(adj, s);
-	if (len[t] == INF) {
-		cout << -1 << endl;
-		return 0;
+	for (int i = 0; i < n; i++) {
+		if (len[i] == INF) cout << "INF\n";
+		else cout << len[i] << '\n';
 	}
-	vector<int> par(n, -1);
-	auto dfs = [&](auto self, int node) -> void {
-		for (auto [prev, weight] : inv[node]) {
-			if (par[prev] == -1 && len[prev] + weight == len[node]) {
-				par[prev] = node;
-				self(self, prev);
-			}
-		}
-	};
-	dfs(dfs, t);
-	vector<int> path;
-	for (int node = s; node != t; node = par[node])
-		path.push_back(node);
-	path.push_back(t);
-	cout << len[t] << " " << (int)path.size() - 1 << endl;
-	for (int i = 0; i + 1 < (int)path.size(); i++)
-		cout << path[i] << " " << path[i + 1] << endl;
 	return 0;
 }
