@@ -8,7 +8,7 @@ vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj /*dir
 	vector<long long> len(n, INF);
 	len[start] = 0;
 	priority_queue<node, vector<node>, greater<node>> q;
-	q.push({0, start});
+	q.emplace(0, start);
 	while (!q.empty()) {
 		auto [curr_len, v] = q.top();
 		q.pop();
@@ -16,7 +16,7 @@ vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj /*dir
 		for (auto [to, weight] : adj[v])
 			if (len[to] > weight + len[v]) {
 				len[to] = weight + len[v];
-				q.push({len[to], to});
+				q.emplace(len[to], to);
 			}
 	}
 	return len;
