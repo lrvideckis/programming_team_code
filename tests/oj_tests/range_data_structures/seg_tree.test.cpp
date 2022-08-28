@@ -5,14 +5,12 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-
 	{
 		//test empty seg tree
 		seg_tree st(vector<long long>(0));
 		st.query(0, 0);
 		st.update(0, 0, 1);
 	}
-
 	int n, q;
 	cin >> n >> q;
 	seg_tree st(vector<long long>(n, 0));
