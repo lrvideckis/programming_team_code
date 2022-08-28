@@ -8,8 +8,8 @@ int main() {
 	{
 		//test empty seg tree
 		seg_tree st(vector<long long>(0));
-		st.query(0, 0);
 		st.update(0, 0, 1);
+		assert(st.query(0, 0) == seg_tree::INF);
 	}
 	int n, q;
 	cin >> n >> q;
