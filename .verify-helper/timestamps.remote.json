@@ -1,7 +1,7 @@
 {
 "tests/oj_tests/flow/dinic.test.cpp": "2022-08-29 14:56:00 -0700",
 "tests/oj_tests/flow/hungarian.test.cpp": "2022-08-18 02:36:35 -0700",
-"tests/oj_tests/flow/mcmf.test.cpp": "2022-08-21 00:59:21 -0700",
+"tests/oj_tests/flow/mcmf.test.cpp": "2022-08-29 15:55:26 -0700",
 "tests/oj_tests/graphs/biconnected_components.test.cpp": "2022-08-21 01:09:16 -0700",
 "tests/oj_tests/graphs/dijkstra.test.cpp": "2022-08-27 16:29:07 -0700",
 "tests/oj_tests/graphs/freq_table_tree_distance.test.cpp": "2022-08-21 00:59:21 -0700",
