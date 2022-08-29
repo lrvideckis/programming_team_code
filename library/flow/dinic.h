@@ -8,8 +8,8 @@ struct max_flow {
 	};
 	vector<edge> e;
 	vector<vector<int>> g;
-	vector<int> q, d, ptr;
-	max_flow(int n) : g(n), q(n), d(n), ptr(n) {}
+	vector<int> d, ptr;
+	max_flow(int n) : g(n), d(n), ptr(n) {}
 	void add_edge(int a, int b, ll cap) {
 		edge e1 = { a, b, cap, 0 };
 		edge e2 = { b, a, 0, 0 };
@@ -20,39 +20,37 @@ struct max_flow {
 	}
 	ll get_flow(int s, int t) {
 		ll flow = 0;
-		for (;;) {
-			if (!bfs(s, t)) break;
+		while (bfs(s, t)) {
 			ptr.assign(ptr.size(), 0);
-			while (ll pushed = dfs(s, INF, t))
+			while (ll pushed = dfs(s, t, INF))
 				flow += pushed;
 		}
 		return flow;
 	}
 	bool bfs(int s, int t) {
-		int qh = 0, qt = 0;
-		q[qt++] = s;
+		queue<int> q({s});
 		d.assign(d.size(), -1);
 		d[s] = 0;
-		while (qh < qt && d[t] == -1) {
-			int v = q[qh++];
-			for (int i = 0; i < (int)g[v].size(); i++) {
-				int id = g[v][i], to = e[id].b;
+		while (!q.empty() && d[t] == -1) {
+			int v = q.front();
+			q.pop();
+			for (int id : g[v]) {
+				int to = e[id].b;
 				if (d[to] == -1 && e[id].flow < e[id].cap) {
-					q[qt++] = to;
+					q.push(to);
 					d[to] = d[v] + 1;
 				}
 			}
 		}
 		return d[t] != -1;
 	}
-	ll dfs(int v, ll flow, int t) {
+	ll dfs(int v, int t, ll flow) {
 		if (!flow) return 0;
 		if (v == t) return flow;
 		for (; ptr[v] < (int)g[v].size(); ptr[v]++) {
 			int id = g[v][ptr[v]], to = e[id].b;
 			if (d[to] != d[v] + 1) continue;
-			ll pushed = dfs(to, min(flow, e[id].cap - e[id].flow), t);
-			if (pushed) {
+			if (ll pushed = dfs(to, t, min(flow, e[id].cap - e[id].flow))) {
 				e[id].flow += pushed;
 				e[id ^ 1].flow -= pushed;
 				return pushed;
