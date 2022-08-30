@@ -18,12 +18,12 @@ int main() {
 	}
 	vector<long long> cnt_len = tree_freq_dist(adj);
 	if (n >= 2) {
-		int k = get_rand(2, n + 1);
+		int k = get_rand(1, n);
 		long long sum = 0;
 		for (long long num_paths : get_num_paths(adj, k))
 			sum += num_paths;
-		assert(sum % k == 0);
-		assert(sum / k == cnt_len[k - 1]);
+		assert(sum % (k + 1) == 0);
+		assert(sum / (k + 1) == cnt_len[k]);
 	}
 	for (int i = 1; i < n; i++)
 		cout << cnt_len[i] << " ";
