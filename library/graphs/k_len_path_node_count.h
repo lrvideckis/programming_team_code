@@ -97,7 +97,7 @@ void func(const vector<vector<int>>& adj, int root) {
 }
 
 //0-based nodes
-//returns array `num_paths` where `num_paths[i]` = number of paths with k nodes where node `i` is on the path
+//returns array `num_paths` where `num_paths[i]` = number of paths with k edges where node `i` is on the path
 //O(n log n)
 vector<long long> get_num_paths(const vector<vector<int>>& adj/*unrooted tree*/, int a_k) {
 	k = a_k;
