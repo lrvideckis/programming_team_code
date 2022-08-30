@@ -44,7 +44,7 @@ failTests=""
 for test in $(find oj_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
-	clang-tidy $test -- $(cat scripts/compile_flags.txt)
+	g++ $test $(cat scripts/compile_flags.txt) && clang-tidy $test -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
