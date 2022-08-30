@@ -5,6 +5,12 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	{
+		//test empty seg tree
+		seg_tree st(vector<long long>(0));
+		st.update(0, 0, 1);
+		assert(st.query(0, 0) == seg_tree::INF);
+	}
 	int n, q;
 	cin >> n >> q;
 	seg_tree st(vector<long long>(n, 0));
@@ -16,8 +22,13 @@ int main() {
 			int x;
 			cin >> x;
 			st.update(l, r, x);
-		} else
+			st.update(l, l, 1);
+			st.update(r, r, 1);
+		} else {
 			cout << st.query(l, r) << '\n';
+			assert(st.query(l, l) == seg_tree::INF);
+			assert(st.query(r, r) == seg_tree::INF);
+		}
 	}
 	return 0;
 }
