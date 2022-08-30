@@ -2,8 +2,8 @@
 #include "../../../kactl/stress-tests/utilities/template.h"
 #include "../../random.h"
 
-#include "../../../library/graphs/tree_freq_dist.h"
-#include "../../../library/graphs/k_len_path_node_count.h"
+#include "../../../library/graphs/count_paths_per_length.h"
+#include "../../../library/graphs/count_paths_per_node.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

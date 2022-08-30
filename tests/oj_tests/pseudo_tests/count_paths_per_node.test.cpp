@@ -3,7 +3,7 @@
 #include "../../../kactl/stress-tests/utilities/genTree.h"
 #include "../../../library/graphs/kth_node_on_path.h"
 
-#include "../../../library/graphs/k_len_path_node_count.h"
+#include "../../../library/graphs/count_paths_per_node.h"
 
 vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted) {
 	int n = adj_weighted.size();
