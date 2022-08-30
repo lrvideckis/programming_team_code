@@ -6,10 +6,10 @@ struct centroid_decomp {
 	vector<int> subtree_sizes;
 
 	centroid_decomp(const vector<vector<int>>& a_adj,
-			const function<void(const vector<vector<int>>&, int)> & a_func)
+	                const function<void(const vector<vector<int>>&, int)>& a_func)
 		: adj(a_adj), func(a_func), subtree_sizes(adj.size()) {
-			decomp(find_centroid(0));
-		}
+		decomp(find_centroid(0));
+	}
 
 	void calc_subtree_sizes(int u, int p = -1) {
 		subtree_sizes[u] = 1;
@@ -29,12 +29,12 @@ struct centroid_decomp {
 				if (v == p)
 					continue;
 				if (biggest_ch == -1 ||
-						subtree_sizes[biggest_ch] < subtree_sizes[v])
+				        subtree_sizes[biggest_ch] < subtree_sizes[v])
 					biggest_ch = v;
 			}
 
 			if (biggest_ch != -1 &&
-					2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
+			        2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
 				return self(self, biggest_ch, u);
 			return u;
 		};
@@ -76,9 +76,7 @@ vector<long long> get_num_paths(const vector<vector<int>>& adj/*unrooted tree*/,
 			for (int v : adj_u) {
 				if (v == p)
 					continue;
-
 				cnt += self(self, v, u, d + 1, rot);
-
 				if (u == root) {
 					for (int i = 1; i < int(cur_d.size()) && cur_d[i]; i++) {
 						if (int(pre_d.size()) <= i)
