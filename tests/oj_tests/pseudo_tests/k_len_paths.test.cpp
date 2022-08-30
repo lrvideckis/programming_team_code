@@ -11,9 +11,9 @@ vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
-			int path_len_nodes = path.lca.dist_edges(u, v) + 1;
-			for (int i = 0; i < path_len_nodes; i++)
-				cnts_naive[path_len_nodes][path.query(u, v, i)]++;
+			int path_length_edges = path.lca.dist_edges(u, v);
+			for (int i = 0; i <= path_length_edges; i++)
+				cnts_naive[path_length_edges][path.query(u, v, i)]++;
 		}
 	}
 	return cnts_naive;
