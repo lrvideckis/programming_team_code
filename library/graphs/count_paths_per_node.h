@@ -3,7 +3,7 @@
 //0-based nodes
 //returns array `num_paths` where `num_paths[i]` = number of paths with k edges where node `i` is on the path
 //O(n log n)
-vector<long long> get_num_paths(const vector<vector<int>>& a_adj/*unrooted tree*/, int k) {
+vector<long long> count_paths_per_node(const vector<vector<int>>& a_adj/*unrooted tree*/, int k) {
 	vector<long long> num_paths(a_adj.size());
 	auto func = [&](const vector<vector<int>>& adj, int root) {
 		vector<int> pre_d(1, 1), cur_d(1);

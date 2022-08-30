@@ -3,7 +3,7 @@
 #include "centroid_decomposition.h"
 //returns array `cnt_paths` where `cnt_paths[i]` = # of paths in tree with `i` edges
 //O(n log^2 n)
-vector<long long> tree_freq_dist(const vector<vector<int>>& a_adj/*unrooted, connected tree*/) {
+vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unrooted, connected tree*/) {
 	vector<long long> cnt_paths(a_adj.size(), 0);
 	auto func = [&](const vector<vector<int>>& adj, int root) {
 		vector<double> total_depth(1, 1.0);

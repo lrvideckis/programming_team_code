@@ -32,7 +32,7 @@ int main() {
 		}
 		vector<vector<long long>> cnts_naive = naive(adj_weighted);
 		for (int k = 1; k <= n; k++)
-			assert(get_num_paths(adj, k) == cnts_naive[k]);
+			assert(count_paths_per_node(adj, k) == cnts_naive[k]);
 	}
 	cout << "Hello World\n";
 	return 0;
