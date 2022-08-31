@@ -1,5 +1,13 @@
 #pragma once
 
+// Time and Space complexity are given in terms of n where n is the number of nodes in the tree
+// Time complexity O(n log n)
+// Space complexity O(n)
+
+// Given an unweighted tree with undirected edges and a function centroid_decomp
+// implements the function on every decomposition
+
+// see count_paths_per_node for example usage
 struct centroid_decomp {
 	vector<vector<int>> adj;
 	function<void(const vector<vector<int>>&, int)> func;
@@ -29,12 +37,12 @@ struct centroid_decomp {
 				if (v == p)
 					continue;
 				if (biggest_ch == -1 ||
-				        subtree_sizes[biggest_ch] < subtree_sizes[v])
+						subtree_sizes[biggest_ch] < subtree_sizes[v])
 					biggest_ch = v;
 			}
 
 			if (biggest_ch != -1 &&
-			        2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
+					2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
 				return self(self, biggest_ch, u);
 			return u;
 		};
