@@ -37,12 +37,12 @@ struct centroid_decomp {
 				if (v == p)
 					continue;
 				if (biggest_ch == -1 ||
-						subtree_sizes[biggest_ch] < subtree_sizes[v])
+				        subtree_sizes[biggest_ch] < subtree_sizes[v])
 					biggest_ch = v;
 			}
 
 			if (biggest_ch != -1 &&
-					2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
+			        2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
 				return self(self, biggest_ch, u);
 			return u;
 		};
