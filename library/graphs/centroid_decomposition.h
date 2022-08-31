@@ -1,51 +1,23 @@
 #pragma once
 
+#include "find_centroid.h"
+
 struct centroid_decomp {
 	vector<vector<int>> adj;
 	function<void(const vector<vector<int>>&, int)> func;
-	vector<int> subtree_sizes;
+	find_centroid find_c;
 
 	centroid_decomp(const vector<vector<int>>& a_adj,
 	                const function<void(const vector<vector<int>>&, int)>& a_func)
-		: adj(a_adj), func(a_func), subtree_sizes(adj.size()) {
-		decomp(find_centroid(0));
-	}
-
-	void calc_subtree_sizes(int u, int p = -1) {
-		subtree_sizes[u] = 1;
-		for (auto v : adj[u]) {
-			if (v == p)
-				continue;
-			calc_subtree_sizes(v, u);
-			subtree_sizes[u] += subtree_sizes[v];
-		}
-	}
-
-	int find_centroid(int root) {
-		calc_subtree_sizes(root);
-		auto dfs = [&](auto self, int u, int p) -> int {
-			int biggest_ch = -1;
-			for (auto v : adj[u]) {
-				if (v == p)
-					continue;
-				if (biggest_ch == -1 ||
-				        subtree_sizes[biggest_ch] < subtree_sizes[v])
-					biggest_ch = v;
-			}
-
-			if (biggest_ch != -1 &&
-			        2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
-				return self(self, biggest_ch, u);
-			return u;
-		};
-		return dfs(dfs, root, root);
+		: adj(a_adj), func(a_func), find_c(adj.size()) {
+		decomp(find_c.centroid(adj, 0));
 	}
 
 	void decomp(int root) {
 		func(adj, root);
 		for (auto v : adj[root]) {
 			adj[v].erase(find(adj[v].begin(), adj[v].end(), root));
-			decomp(find_centroid(v));
+			decomp(find_c.centroid(adj, v));
 		}
 	}
 };
