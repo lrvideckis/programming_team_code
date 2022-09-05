@@ -2,7 +2,7 @@
 //Euler's totient function counts the positive integers
 //up to a given integer n that are relatively prime to n.
 //
-//To improve, use Pollard-rho to find prime factors
+//To improve, pre-calc prime factors or use Pollard-rho to find prime factors.
 int totient(int n) {
 	int res = n;
 	for (int i = 2; i * i <= n; i++) {
