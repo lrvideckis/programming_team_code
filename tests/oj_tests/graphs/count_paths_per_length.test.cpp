@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
-#include "../../../kactl/stress-tests/utilities/template.hpp"
+#include "../../../kactl/stress-tests/utilities/template.h"
 #include "../../random.hpp"
 
 #include "../../../library/graphs/count_paths_per_length.hpp"
