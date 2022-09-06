@@ -1,6 +1,6 @@
 #pragma once
-#include "bridges_and_cuts.h"
-//never adds multiple edges as bridges_and_cuts.h correctly marks them as non-bridges
+#include "bridges_and_cuts.hpp"
+//never adds multiple edges as bridges_and_cuts.hpp correctly marks them as non-bridges
 //usage:
 //	info cc = bridge_and_cut(adj, m);
 //	vector<vector<int>> bt = bridge_tree(adj, cc);

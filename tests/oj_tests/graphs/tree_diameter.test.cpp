@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/graphs/kth_node_on_path.h"
+#include "../../../library/graphs/kth_node_on_path.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

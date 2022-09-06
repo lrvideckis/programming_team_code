@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all/GRL_6_A"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/flow/dinic.h"
+#include "../../../library/flow/dinic.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

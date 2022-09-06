@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/range_data_structures/rmq.h"
+#include "../../../library/range_data_structures/rmq.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/misc/monotonic_stack_related/cartesian_tree.h"
+#include "../../../library/misc/monotonic_stack_related/cartesian_tree.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

@@ -1,5 +1,5 @@
 #pragma once
-#include "monotonic_stack.h"
+#include "monotonic_stack.hpp"
 //min cartesian tree
 vector<int> cartesian_tree(const vector<int>& arr) {
 	int n = arr.size();

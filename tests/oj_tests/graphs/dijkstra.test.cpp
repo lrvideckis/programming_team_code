@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/problems/GRL_1_A"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/graphs/dijkstra.h"
+#include "../../../library/graphs/dijkstra.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

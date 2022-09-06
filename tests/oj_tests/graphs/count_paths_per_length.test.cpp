@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 #include "../../../kactl/stress-tests/utilities/template.h"
-#include "../../random.h"
+#include "../../random.hpp"
 
-#include "../../../library/graphs/count_paths_per_length.h"
-#include "../../../library/graphs/count_paths_per_node.h"
+#include "../../../library/graphs/count_paths_per_length.hpp"
+#include "../../../library/graphs/count_paths_per_node.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

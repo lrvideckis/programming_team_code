@@ -1,6 +1,6 @@
 #pragma once
 #include "../../ac-library/atcoder/string.hpp"
-#include "../range_data_structures/rmq.h"
+#include "../range_data_structures/rmq.hpp"
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
 struct lcp_query {

@@ -2,7 +2,7 @@
 #include "../../../kactl/stress-tests/utilities/template.h"
 
 #include "../../../kactl/content/data-structures/UnionFind.h"
-#include "../../../library/graphs/bridge_tree.h"
+#include "../../../library/graphs/bridge_tree.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
