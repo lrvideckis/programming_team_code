@@ -1,7 +1,6 @@
 -g
 -Wall
 -Wextra
--pedantic
 -Wunused
 -DLOCAL
 -std=c++17

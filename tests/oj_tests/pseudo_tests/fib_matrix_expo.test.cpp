@@ -1,13 +1,17 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../template.hpp"
+#include "../../../kactl/stress-tests/utilities/template.h"
 #include "../../random.hpp"
 
-#include "../../../library/math/matrix_expo.hpp"
+#include "../../../kactl/content/data-structures/Matrix.h"
+#include "../../../ac-library/atcoder/modint.hpp"
 #include "../../../library/math/fib.hpp"
 
 void check(long long n) {
 	const int MOD = 1e9 + 7;
-	assert(fib(n, MOD) == mult(power({{1, 1}, {1, 0}}, n, MOD), {{1}, {0}}, MOD)[0][0]);
+	Matrix<atcoder::static_modint<MOD>, 2> mat;
+	mat.d = {{{{1, 1}}, {{1, 0}}}};
+	vector<atcoder::static_modint<MOD>> vec = {1, 0};
+	assert(fib(n, MOD) == ((mat ^ n) * vec)[0]);
 }
 
 int main() {

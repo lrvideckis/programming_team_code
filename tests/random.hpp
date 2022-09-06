@@ -15,8 +15,3 @@ template<class T> inline T get_rand(T l, T r) {
 	assert(l < r);
 	return uniform_int_distribution<T>(l, r - 1)(rng);
 }
-
-inline double get_rand_real(double l, double r) {
-	assert(l < r);
-	return uniform_real_distribution(l, r)(rng);
-}
