@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../../kactl/stress-tests/utilities/template.h"
-#include "../../random.h"
+#include "../../random.hpp"
 
 #include "../../../kactl/content/data-structures/Matrix.h"
 #include "../../../ac-library/atcoder/modint.hpp"
-#include "../../../library/math/fib.h"
+#include "../../../library/math/fib.hpp"
 
 void check(long long n) {
 	const int MOD = 1e9 + 7;
