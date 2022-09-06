@@ -29,6 +29,7 @@
 "tests/oj_tests/misc/num_subsequences.test.cpp": "2022-08-18 02:36:35 -0700",
 "tests/oj_tests/pseudo_tests/count_paths_per_node.test.cpp": "2022-08-30 21:03:13 -0400",
 "tests/oj_tests/pseudo_tests/distinct_query.test.cpp": "2022-08-18 02:36:35 -0700",
+"tests/oj_tests/pseudo_tests/fib_matrix_expo.test.cpp": "2022-09-05 21:01:00 -0400",
 "tests/oj_tests/range_data_structures/fenwick_tree.test.cpp": "2022-08-18 19:26:51 -0700",
 "tests/oj_tests/range_data_structures/implicit_seg_tree.test.cpp": "2022-08-22 14:56:15 -0700",
 "tests/oj_tests/range_data_structures/kth_smallest.test.cpp": "2022-08-22 14:56:15 -0700",
