@@ -25,6 +25,7 @@
 - [Non-lazy seg tree](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/SegmentTree.h)
 - [Floyd Warshall](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/FloydWarshall.h)
 - [Suffix Array and LCP Array](https://github.com/atcoder/ac-library/blob/master/atcoder/string.hpp)
+- [Matrix Operations](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/Matrix.h)
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
