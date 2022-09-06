@@ -1,5 +1,5 @@
 #pragma once
-#include "row_reduce.h"
+#include "row_reduce.hpp"
 struct matrix_info {
 	int rank, det;
 	vector<int> x;

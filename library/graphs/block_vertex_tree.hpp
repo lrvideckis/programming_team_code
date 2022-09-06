@@ -1,5 +1,5 @@
 #pragma once
-#include "bridges_and_cuts.h"
+#include "bridges_and_cuts.hpp"
 //returns adjacency list of block vertex tree
 //usage:
 //	info cc = bridge_and_cut(adj, m);

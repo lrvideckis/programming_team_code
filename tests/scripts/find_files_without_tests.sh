@@ -14,11 +14,11 @@ all_test_dependencies=$(
 	for dependency in $all_test_dependencies
 	do
 		echo $(basename $dependency)
-	done | grep "\.h" | sort | uniq
+	done | grep "\.hpp" | sort | uniq
 )
 
 #find all headers in library/
-all_headers=$(find ../library/ -type f -name "*.h")
+all_headers=$(find ../library/ -type f -name "*.hpp")
 all_headers=$(
 	for header in $all_headers
 	do

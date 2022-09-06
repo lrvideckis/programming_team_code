@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../template.h"
-#include "../../random.h"
+#include "../../template.hpp"
+#include "../../random.hpp"
 
-#include "../../../library/math/matrix_expo.h"
-#include "../../../library/math/fib.h"
+#include "../../../library/math/matrix_expo.hpp"
+#include "../../../library/math/fib.hpp"
 
 void check(long long n) {
 	const int MOD = 1e9 + 7;

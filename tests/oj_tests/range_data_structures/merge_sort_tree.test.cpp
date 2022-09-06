@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_frequency"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/range_data_structures/uncommon/merge_sort_tree.h"
+#include "../../../library/range_data_structures/uncommon/merge_sort_tree.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

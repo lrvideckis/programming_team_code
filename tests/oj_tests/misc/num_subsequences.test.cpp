@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_subsequences"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/misc/num_distinct_subsequences.h"
+#include "../../../library/misc/num_distinct_subsequences.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

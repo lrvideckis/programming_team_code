@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_5_E"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/math/n_choose_k_mod.h"
+#include "../../../library/math/n_choose_k_mod.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

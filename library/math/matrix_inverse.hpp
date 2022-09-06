@@ -1,5 +1,5 @@
 #pragma once
-#include "row_reduce.h"
+#include "row_reduce.hpp"
 //returns inverse of square matrix mat, empty if no inverse
 vector<vector<int>> matrix_inverse(vector<vector<int>> mat/*intentional pass by value*/, int mod) {
 	int n = mat.size();

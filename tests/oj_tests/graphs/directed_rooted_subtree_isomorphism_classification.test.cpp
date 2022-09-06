@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/graphs/rooted_subtree_isomorphism_classification.h"
+#include "../../../library/graphs/rooted_subtree_isomorphism_classification.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

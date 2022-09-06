@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_4_C"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/strings/trie.h"
+#include "../../../library/strings/trie.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

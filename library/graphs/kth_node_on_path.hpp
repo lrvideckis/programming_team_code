@@ -1,5 +1,5 @@
 #pragma once
-#include "lca.h"
+#include "lca.hpp"
 struct kth_node_on_path {
 	LCA lca;
 	kth_node_on_path(const vector<vector<pair<int, long long>>>& adj, int root) : lca(adj, root) {}

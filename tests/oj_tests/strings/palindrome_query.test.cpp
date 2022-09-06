@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
-#include "../../../kactl/stress-tests/utilities/template.h"
+#include "../../../kactl/stress-tests/utilities/template.hpp"
 
-#include "../../random.h"
-#include "../../../library/strings/palindrome_query.h"
+#include "../../random.hpp"
+#include "../../../library/strings/palindrome_query.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

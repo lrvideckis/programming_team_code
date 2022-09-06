@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/graphs/hopcroft_karp.h"
+#include "../../../library/graphs/hopcroft_karp.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

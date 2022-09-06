@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/math/solve_linear_mod.h"
+#include "../../../library/math/solve_linear_mod.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

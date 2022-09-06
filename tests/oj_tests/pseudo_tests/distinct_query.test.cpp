@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include "../../template.h"
-#include "../../random.h"
+#include "../../template.hpp"
+#include "../../random.hpp"
 
-#include "../../../library/range_data_structures/uncommon/distinct_query.h"
+#include "../../../library/range_data_structures/uncommon/distinct_query.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
