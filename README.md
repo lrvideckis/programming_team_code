@@ -15,12 +15,12 @@ see [tests/README.md](https://github.com/lrvideckis/programming_team_code/blob/m
 
 1. (optional) Run the following from [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library) to remove all comments and asserts. (for advanced users)
    ```
-   find . -type f -name "*.h" -exec bash -c "sed --in-place --expression '/^#pragma/d' --expression '/assert/d' {}; cpp -fpreprocessed -P {} > tmp; mv tmp {}" \;
+   find . -type f -name "*.hpp" -exec bash -c "sed --in-place --expression '/^#pragma/d' --expression '/assert/d' {}; cpp -fpreprocessed -P {} > tmp; mv tmp {}" \;
    ```
 
 2. Run the following from [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library) to format. [astyle wiki](http://astyle.sourceforge.net/astyle.html)
    ```
-   astyle --indent=tab --style=attach --remove-braces --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --indent-col1-comments --suffix=none --recursive "*.h"
+   astyle --indent=tab --style=attach --remove-braces --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --indent-col1-comments --suffix=none --recursive "*.hpp"
    ```
 
 ## License
