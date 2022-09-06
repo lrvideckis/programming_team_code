@@ -9,9 +9,9 @@
 void check(long long n) {
 	const int MOD = 1e9 + 7;
 	Matrix<atcoder::static_modint<MOD>, 2> A;
-	A.d = {{{{1,1}}, {{1,0}}}};
-	vector<atcoder::static_modint<MOD>> vec = {1,0};
-	assert(fib(n, MOD) == ((A^n) * vec)[0]);
+	A.d = {{{{1, 1}}, {{1, 0}}}};
+	vector<atcoder::static_modint<MOD>> vec = {1, 0};
+	assert(fib(n, MOD) == ((A ^ n) * vec)[0]);
 }
 
 int main() {
