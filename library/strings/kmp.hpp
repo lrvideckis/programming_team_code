@@ -1,6 +1,6 @@
 #pragma once
 //mnemonic: Knuth Morris Pratt
-#include "../../kactl/content/strings/KMP.hpp"
+#include "../../kactl/content/strings/KMP.h"
 //usage:
 //	string needle;
 //	...

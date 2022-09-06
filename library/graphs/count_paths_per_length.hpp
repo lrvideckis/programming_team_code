@@ -1,5 +1,5 @@
 #pragma once
-#include "../../kactl/content/numerical/FastFourierTransform.hpp"
+#include "../../kactl/content/numerical/FastFourierTransform.h"
 #include "centroid_decomposition.hpp"
 //returns array `num_paths` where `num_paths[i]` = # of paths in tree with `i` edges
 //O(n log^2 n)
