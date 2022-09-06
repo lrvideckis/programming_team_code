@@ -28,26 +28,24 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	//2 edge cc stuff (delete if not needed)
 	int num_2_edge_ccs = 0;
 	vector<bool> is_bridge(m, 0);
-	vector<int> two_edge_ccid(n);
-	stack<int> nodes;
+	vector<int> two_edge_ccid(n), node_stack;
 	//bcc stuff (delete if not needed)
 	int num_bccs = 0;
 	vector<bool> is_cut(n, 0);
-	vector<int> bcc_id(m);
-	stack<int> edges;
+	vector<int> bcc_id(m), edge_stack;
 	auto dfs = [&](auto self, int v, int p_id) -> int {
 		int low = tin[v] = timer++, deg = 0;
-		nodes.push(v);
+		node_stack.push_back(v);
 		for (auto [to, e_id] : adj[v]) {
 			if (e_id == p_id) continue;
 			if (!tin[to]) {
-				edges.push(e_id);
+				edge_stack.push_back(e_id);
 				int low_ch = self(self, to, e_id);
 				if (low_ch >= tin[v]) {
 					is_cut[v] = 1;
 					while (1) {
-						int edge = edges.top();
-						edges.pop();
+						int edge = edge_stack.back();
+						edge_stack.pop_back();
 						bcc_id[edge] = num_bccs;
 						if (edge == e_id) break;
 					}
@@ -56,7 +54,7 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 				low = min(low, low_ch);
 				deg++;
 			} else if (tin[to] < tin[v]) {
-				edges.push(e_id);
+				edge_stack.push_back(e_id);
 				low = min(low, tin[to]);
 			}
 		}
@@ -64,8 +62,8 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 		if (tin[v] == low) {
 			if (p_id != -1) is_bridge[p_id] = 1;
 			while (1) {
-				int node = nodes.top();
-				nodes.pop();
+				int node = node_stack.back();
+				node_stack.pop_back();
 				two_edge_ccid[node] = num_2_edge_ccs;
 				if (node == v) break;
 			}

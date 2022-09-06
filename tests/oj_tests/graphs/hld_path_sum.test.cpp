@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
-#include "../../template.h"
-#include "../../random.h"
+#include "../../template.hpp"
+#include "../../random.hpp"
 
-#include "../../../library/graphs/hld.h"
-#include "../../../library/range_data_structures/bit.h"
+#include "../../../library/graphs/hld.hpp"
+#include "../../../library/range_data_structures/bit.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/strings/lcp_query.h"
+#include "../../../library/strings/lcp_query.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

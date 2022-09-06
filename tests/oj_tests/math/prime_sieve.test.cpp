@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/all/NTL_1_C"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/math/prime_sieve.h"
+#include "../../../library/math/prime_sieve.hpp"
 
 int main() {
 	calc_seive();

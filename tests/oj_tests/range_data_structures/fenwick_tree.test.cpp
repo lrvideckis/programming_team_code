@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/range_data_structures/bit.h"
+#include "../../../library/range_data_structures/bit.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

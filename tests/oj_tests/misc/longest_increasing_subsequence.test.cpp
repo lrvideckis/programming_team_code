@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/longest_increasing_subsequence"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/misc/lis.h"
+#include "../../../library/misc/lis.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

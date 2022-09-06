@@ -1,5 +1,5 @@
 #pragma once
-#include "monotonic_stack.h"
+#include "monotonic_stack.hpp"
 long long max_rect_histogram(const vector<int>& arr) {
 	int n = arr.size();
 	auto rv /*reverse*/ = [&](int i) -> int {

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
-#include "../../template.h"
+#include "../../template.hpp"
 
-#include "../../../library/graphs/lca.h"
-#include "../../../library/graphs/hld.h"
+#include "../../../library/graphs/lca.hpp"
+#include "../../../library/graphs/hld.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
