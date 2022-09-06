@@ -25,7 +25,7 @@ jobs:
         default: true
         profile: minimal
     - name: Set up kactl submodule
-      run: git submodule init && git submodule update
+      run: git submodule init && git submodule update && cd ac-library/atcoder && ln -s . atcoder
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
