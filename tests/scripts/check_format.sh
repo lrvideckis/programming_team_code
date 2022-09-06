@@ -36,8 +36,9 @@ fi
 
 git submodule init
 git submodule update
-cd ac-library/atcoder
+cd ../ac-library/atcoder/
 ln -s . atcoder
+cd ../../tests/
 
 #check snake case
 declare -i pass=0
