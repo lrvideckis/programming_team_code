@@ -38,7 +38,7 @@
 "tests/oj_tests/range_data_structures/sparse_table.test.cpp": "2022-09-05 18:11:57 -0700",
 "tests/oj_tests/strings/binary_trie.test.cpp": "2022-09-05 18:11:57 -0700",
 "tests/oj_tests/strings/kmp.test.cpp": "2022-09-05 18:11:57 -0700",
+"tests/oj_tests/strings/lcp_query.test.cpp": "2022-09-07 14:19:36 -0700",
 "tests/oj_tests/strings/palindrome_query.test.cpp": "2022-09-07 15:26:33 -0400",
-"tests/oj_tests/strings/trie.test.cpp": "2022-09-05 18:11:57 -0700",
-"tests/oj_tests/strings/z_func.test.cpp": "2022-09-07 16:50:10 -0400"
+"tests/oj_tests/strings/trie.test.cpp": "2022-09-05 18:11:57 -0700"
 }
