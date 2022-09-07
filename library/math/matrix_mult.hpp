@@ -2,6 +2,8 @@
 
 // generic matrix multiplication (not overflow safe)
 // will RTE if the given matricies are not compatible
+// Time: O(n * m * inner)
+// Space: O(n * m)
 
 template<typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, const vector<vector<T>>& b) {
 	assert(a[0].size() == b.size());

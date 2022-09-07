@@ -5,15 +5,15 @@
 #include "../../../ac-library/atcoder/modint.hpp"
 
 const int MOD = 998'244'353;
-istream & operator >> (istream & is, atcoder::static_modint<MOD> & mint) {
-    int x;
-    is >> x;
-    mint = x;
-    return is;
+istream& operator >> (istream& is, atcoder::static_modint<MOD>& mint) {
+	int x;
+	is >> x;
+	mint = x;
+	return is;
 }
 
-ostream & operator << (ostream & os, atcoder::static_modint<MOD> mint) {
-    return os << mint.val();
+ostream& operator << (ostream& os, atcoder::static_modint<MOD> mint) {
+	return os << mint.val();
 }
 
 int main() {
