@@ -25,7 +25,7 @@ see [tests/README.md](https://github.com/lrvideckis/programming_team_code/blob/m
 
 ## License
 
-Most code is writen/modified by me and Cameron Custer; I've added links to sources when applicable. Everything is under the [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/), so use/take anything with no strings attached.
+I've added links to sources when applicable. Everything is under the [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/), so use/take anything with no strings attached.
 
 ## Other CP repos
 
