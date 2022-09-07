@@ -1,6 +1,6 @@
 #pragma once
-//returns array `len` where `len[i]` = shortest path from node v to node i
-//For example len[v] will always = 0
+//returns array `len` where `len[i]` = shortest path from node `start` to node `i`
+//For example `len[start]` will always = 0
 const long long INF = 1e18;
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj /*directed or undirected, weighted graph*/, int start) {
 	using node = pair<long long, int>;
