@@ -24,9 +24,10 @@ isomorphic_classifications rooted_subtree_isomorphism_classification(
 				ch_ids.push_back(self(self, v, u));
 		}
 		sort(ch_ids.begin(), ch_ids.end());
-		if (!hashes.count(ch_ids))
-			hashes[ch_ids] = hashes.size();
-		return classifications.ids[u] = hashes[ch_ids];
+		auto it = hashes.find(ch_ids);
+		if (it == hashes.end())
+			return classifications.ids[u] = hashes[ch_ids] = hashes.size();
+		return classifications.ids[u] = it->second;
 	};
 	dfs(dfs, root, root);
 	classifications.k = hashes.size();
