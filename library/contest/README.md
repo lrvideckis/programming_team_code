@@ -2,6 +2,7 @@
 - [C++ tips and tricks](https://codeforces.com/blog/entry/74684)
 - use `#pragma GCC optimize "trapv"` to invoke RTE (Run Time Error) upon integer overflow
 - use `mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());` to generate random integers
+	- `shuffle(arr.begin(), arr.end(), rng);`
 
 ### Troubleshooting
 ```
