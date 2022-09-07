@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
 #include "../../../kactl/stress-tests/utilities/template.h"
 
-#include "../../random.hpp"
+#include "../../../library/misc/random.hpp"
 #include "../../../library/strings/palindrome_query.hpp"
 
 int main() {
