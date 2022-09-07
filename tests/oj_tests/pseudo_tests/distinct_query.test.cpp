@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 #include "../../template.hpp"
-#include "../../random.hpp"
+#include "../../../library/misc/random.hpp"
 
 #include "../../../library/range_data_structures/uncommon/distinct_query.hpp"
 
