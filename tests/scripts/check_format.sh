@@ -36,9 +36,8 @@ fi
 
 git submodule init
 git submodule update
-cd ../ac-library/atcoder/
-ln -s . atcoder
-cd ../../tests/
+
+source scripts/add_symlink.sh
 
 #check snake case
 declare -i pass=0
