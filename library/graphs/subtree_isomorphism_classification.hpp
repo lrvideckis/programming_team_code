@@ -12,7 +12,7 @@ struct isomorphic_classifications {
 	isomorphic_classifications(int n) : ids(n) { }
 };
 
-isomorphic_classifications rooted_subtree_isomorphism_classification(
+isomorphic_classifications subtree_isomorphism_classification(
     const vector<vector<int>>& adj, int root) {
 	isomorphic_classifications classifications(adj.size());
 	map<vector<int>, int> hashes;
