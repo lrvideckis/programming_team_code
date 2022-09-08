@@ -9,12 +9,12 @@ struct LCA {
 		long long dist;
 	};
 	vector<node> tree;
-	LCA(const vector<vector<pair<int, long long>>>& adj) : tree(adj.size(), {
-		-1, 1, -1, 0, 0LL
-	}) {
-		for(int i = 0; i < (int)adj.size(); i++) {
-			if(tree[i].par == -1) {
-				tree[i].jmp = tree[i].par = i;
+	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(adj.size(), {
+		-1, 0, -1, 0, 0LL
+	    }) {
+		for (int i = 0; i < (int)adj.size(); i++) {
+			if (tree[i].depth == 0) {//lowest indexed node in each tree becomes root
+				tree[i].jmp = i;
 				dfs(i, adj);
 			}
 		}
@@ -51,6 +51,7 @@ struct LCA {
 		}
 		return v;
 	}
+	//doesn't work when x, y are in different components
 	int get_lca(int x, int y) const {
 		if (tree[x].depth < tree[y].depth) swap(x, y);
 		x = kth_par(x, tree[x].depth - tree[y].depth);

@@ -8,12 +8,17 @@ struct HLD {
 		int sub_sz, par, time_in, next;
 	};
 	vector<node> tree;
-	HLD(vector<vector<int>>& adj /*single unrooted tree*/, int root) : tree(adj.size(), {
-		1, root, (int)adj.size(), root
+	HLD(vector<vector<int>>& adj/*forest of unrooted trees*/) : tree(adj.size(), {
+		1, -1, (int)adj.size(), -1
 	}) {
-		dfs1(root, adj);
 		int timer = 0;
-		dfs2(root, adj, timer);
+		for (int i = 0; i < (int)adj.size(); i++) {
+			if (tree[i].par == -1) {
+				tree[i].par = tree[i].next = i;
+				dfs1(i, adj);
+				dfs2(i, adj, timer);
+			}
+		}
 	}
 	void dfs1(int v, vector<vector<int>>& adj) {
 		auto par = find(adj[v].begin(), adj[v].end(), tree[v].par);
