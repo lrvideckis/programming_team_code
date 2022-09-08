@@ -2,7 +2,8 @@
 
 //MUCH RANDOM!!!
 seed_seq seed{
-	(uint32_t)chrono::duration_cast<chrono::nanoseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count(),
+	(uint32_t)chrono::duration_cast<chrono::nanoseconds>
+	(chrono::high_resolution_clock::now().time_since_epoch()).count(),
 	(uint32_t)random_device()(),
 	(uint32_t)(uintptr_t)make_unique<char>().get(),
 	(uint32_t)__builtin_ia32_rdtsc()
