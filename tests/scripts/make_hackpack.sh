@@ -26,4 +26,4 @@ do
 	sed --in-place '1,2d' $test
 done
 
-rm NULL
+rm NULL hackpack.aux hackpack.lol hackpack.log
