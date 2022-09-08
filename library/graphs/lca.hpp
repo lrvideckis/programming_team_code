@@ -9,10 +9,15 @@ struct LCA {
 		long long dist;
 	};
 	vector<node> tree;
-	LCA(const vector<vector<pair<int, long long>>>& adj, int root) : tree(adj.size(), {
-		root, 1, root, 0, 0LL
+	LCA(const vector<vector<pair<int, long long>>>& adj) : tree(adj.size(), {
+		-1, 1, -1, 0, 0LL
 	}) {
-		dfs(root, adj);
+		for(int i = 0; i < (int)adj.size(); i++) {
+			if(tree[i].par == -1) {
+				tree[i].jmp = tree[i].par = i;
+				dfs(i, adj);
+			}
+		}
 	}
 	void dfs(int v, const vector<vector<pair<int, long long>>>& adj) {
 		int jmp, jmp_edges;
