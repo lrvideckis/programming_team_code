@@ -15,10 +15,10 @@ touch null
 
 #need to compile twice for it to generate the table of contents
 #I think it's related to not knowing page numbers until after first pdf generation
-pdflatex scripts/25_pg_reference.tex
-pdflatex scripts/25_pg_reference.tex
+pdflatex scripts/hackpack.tex
+pdflatex scripts/hackpack.tex
 
-mv 25_pg_reference.pdf ../
+mv hackpack.pdf ../
 
 #removes hash code comments
 for test in $tests
