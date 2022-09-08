@@ -1,15 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SDSM&T Hackpack PDF                                                         %
+% Legends: Luke Videckis, Vedang Goankar, Matthew Schallenkamp, Andrew Stelter%
+%   Michael Pfeifer, Gabe Dean                                                %
+% Prof's: Dr. Hinker, Dr. Logar, Dr. Corwin, Dr. Pyeatt, Prof. Schrader       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page Settings                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % a4 paper gives us over 2000 more square mm per page, for a total of
 % almost 5/6 of a page extra space
 \newif\ifuseletter
 
-%\useletterfalse
 \uselettertrue
+%\useletterfalse
 
 % if you need extra room to staple, adjust textheight and topmargin.
 
 \ifuseletter
 \documentclass[12pt,letterpaper,twocolumn,landscape]{article}
-\textheight 8.25in
+\textheight 8in
 \textwidth 10.75in
 \evensidemargin -0.875in
 \oddsidemargin -0.875in
@@ -26,16 +37,19 @@
 \addtolength{\topmargin}{5mm}
 \fi
 
-\headheight 15pt
-\headsep 4pt
-\addtolength{\textheight}{-14pt}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Latex package imports                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{fancyhdr}
 \usepackage{caption}
+
+\headheight 15pt
+\headsep 4pt
+\addtolength{\textheight}{-14pt}
 
 \DeclareCaptionFormat{listing}{#3}
 \captionsetup[lstlisting]{format=listing}
@@ -59,13 +73,6 @@
 \newlength{\scriptbasewidth}
 \settowidth{\scriptbasewidth}{\ttfamily\scriptsize m}
 
-%% \makeatletter
-%% \lstdefinestyle{mystyle}{
-%%   basewidth=\footnotebasewidth,
-%%   basicstyle=\ttfamily\lst@ifdisplaystyle\ttfamily\footnotesize\fi
-%% }
-%% \makeatother
-
 \makeatletter
 \lstdefinestyle{mystyle}{
 	basewidth=\scriptbasewidth,
@@ -77,6 +84,10 @@
 \lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
 \@empty\z@\@empty
 \makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Latex Listings package settings                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % choose the colors you like below.
 
@@ -90,35 +101,17 @@
 	breaklines=true,         % sets automatic line breaking
 	breakatwhitespace=true,  % automatic breaks should only happen at whitespace
 	extendedchars=false,     % ASCII printing characters only
-	% escapechar={`},          % Anything between backtics is escaped
-	% escapeinside={{(*}{*)}},
-	% frame=single,          % adds a frame around the code
 	frame=tlrb,              % adds a frame around the code
 	rulecolor=\color{black},
 	xleftmargin=1pt,
 	xrightmargin=1pt,
-	% frameround=fttf,
-	% framesep=3pt,
-	% rulesep=3pt,
 	framerule=0.5pt,
-	% framexleftmargin=10pt,
-	% framexrightmargin=10pt,
-	% framextopmargin=10pt,
-	% framexbottommargin=10pt,
-	%%   %fillcolor=\color{SkyBlue},
-	%%   %rulesepcolor=\color{SkyBlue},
-	%keywordstyle=[1]\color{blue},      % keyword style
-	%keywordstyle=[2]\color{cyan},      % keyword style
-	%keywordstyle=[3]\color{orange},
 	keywordstyle=\color{blue},      % keyword style
 	stringstyle=\color{magenta},     % string literal style
 	commentstyle=\color{gray}\itshape,
 	morecomment=[l][\color{orange}]{\#},
 	identifierstyle=\color{purple},
-	%numberbychapter=true,
 	numbers=none, % where to put the line-numbers; (none, left, right)
-	%numbersep=15pt,                 % how far the line-numbers are from the code
-	%numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
 	postbreak={\mbox{$\hookrightarrow\space$}},
 	showspaces=false, % show spaces everywhere adding particular underscores
 	showstringspaces=false,         % underline spaces within strings only
@@ -127,23 +120,27 @@
 	tabsize=4        % sets default tab character size to 8 spaces
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document: list of listings                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
 \lstlistoflistings
 \newpage
 
-\lstinputlisting[caption={\textbf{CONTEST}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{CONTEST}}, frame=none]{NULL}
 \lstinputlisting[language=bash, caption={Hash codes}]{../library/contest/hash.sh}
 \lstinputlisting[caption={Tips and Tricks}]{../library/contest/README.md}
 \lstinputlisting[language=bash, caption={Template}]{../library/contest/template.cpp}
 \lstinputlisting[language=bash, caption={Test on random inputs}]{../library/contest/test.sh}
 
-\lstinputlisting[caption={\textbf{MAX FLOW}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{MAX FLOW}}, frame=none]{NULL}
 \lstinputlisting[language=C++, caption={Dinic}]{../library/flow/dinic.hpp}
 \lstinputlisting[language=C++, caption={Hungarian}]{../library/flow/hungarian.hpp}
 \lstinputlisting[language=C++, caption={Min Cost Max Flow}]{../library/flow/min_cost_max_flow.hpp}
 
-\lstinputlisting[caption={\textbf{GRAPHS}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{GRAPHS}}, frame=none]{NULL}
 \lstinputlisting[language=C++, caption={Block Vertex Tree}]{../library/graphs/block_vertex_tree.hpp}
 \lstinputlisting[language=C++, caption={Bridge Tree}]{../library/graphs/bridge_tree.hpp}
 \lstinputlisting[language=C++, caption={Bridges and Cuts}]{../library/graphs/bridges_and_cuts.hpp}
@@ -158,7 +155,7 @@
 \lstinputlisting[language=C++, caption={SCC}]{../library/graphs/scc.hpp}
 \lstinputlisting[language=C++, caption={TREE ISOMORPHISM}]{../library/graphs/subtree_isomorphism_classification.hpp}
 
-\lstinputlisting[caption={\textbf{MATH}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{MATH}}, frame=none]{NULL}
 \lstinputlisting[language=C++, caption={Derangements}]{../library/math/derangements.hpp}
 \lstinputlisting[language=C++, caption={BIN EXP MOD}]{../library/math/exp_mod.hpp}
 \lstinputlisting[language=C++, caption={Fibonacci}]{../library/math/fib.hpp}
@@ -171,7 +168,7 @@
 \lstinputlisting[language=C++, caption={Solve Linear Equations MOD}]{../library/math/solve_linear_mod.hpp}
 \lstinputlisting[language=C++, caption={Euler's Totient Phi Function}]{../library/math/totient.hpp}
 
-\lstinputlisting[caption={\textbf{MISC}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{MISC}}, frame=none]{NULL}
 
 % monotonic stack related
 \lstinputlisting[language=C++, caption={Cartesian Tree}]{../library/misc/monotonic_stack_related/cartesian_tree.hpp}
@@ -188,7 +185,7 @@
 \lstinputlisting[language=C++, caption={Random}]{../library/misc/random.hpp}
 \lstinputlisting[language=C++, caption={Safe Hash}]{../library/misc/safe_hash.hpp}
 
-\lstinputlisting[caption={\textbf{RANGE DATA STRUCTURES}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{RANGE DATA STRUCTURES}}, frame=none]{NULL}
 
 % uncommon
 \lstinputlisting[language=C++, caption={Number Distinct Elements}]{../library/range_data_structures/uncommon/distinct_query.hpp}
@@ -200,7 +197,7 @@
 \lstinputlisting[language=C++, caption={RMQ}]{../library/range_data_structures/rmq.hpp}
 \lstinputlisting[language=C++, caption={Lazy Segment Tree}]{../library/range_data_structures/seg_tree.hpp}
 
-\lstinputlisting[caption={\textbf{STRINGS}}, frame=none]{null}
+\lstinputlisting[caption={\textbf{STRINGS}}, frame=none]{NULL}
 \lstinputlisting[language=C++, caption={Binary Trie}]{../library/strings/binary_trie.hpp}
 \lstinputlisting[language=C++, caption={KMP}]{../library/strings/kmp.hpp}
 \lstinputlisting[language=C++, caption={Longest Common Prefix Query}]{../library/strings/lcp_query.hpp}

@@ -11,7 +11,7 @@ done
 
 
 #needed to make boxes under headings empty. Else you get this weird text
-touch null
+touch NULL
 
 #need to compile twice for it to generate the table of contents
 #I think it's related to not knowing page numbers until after first pdf generation
