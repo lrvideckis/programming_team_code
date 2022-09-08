@@ -10,7 +10,7 @@ do
 done
 
 
-#needed to make boxes under headings empty, otherwise you get filler text touch NULL
+#needed to make boxes under headings empty, otherwise you get filler text
 touch NULL
 
 #need to compile twice for it to generate the table of contents
