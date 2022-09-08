@@ -4,7 +4,7 @@ My library of algorithms for competitive programming. Quick links:
 
 - [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library)
 - [template.cpp](https://github.com/lrvideckis/programming_team_code/blob/master/library/contest/template.cpp)
-- [25_pg_reference.pdf](https://github.com/lrvideckis/programming_team_code/blob/master/25_pg_reference.pdf)
+- [hackpack.pdf](https://github.com/lrvideckis/programming_team_code/blob/master/hackpack.pdf)
 
 ## Testing
 [![Actions Status](https://github.com/lrvideckis/programming_team_code/workflows/verify/badge.svg)](https://github.com/lrvideckis/programming_team_code/actions)
