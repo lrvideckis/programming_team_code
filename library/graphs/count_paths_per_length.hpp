@@ -1,6 +1,6 @@
 #pragma once
 #include "../../kactl/content/numerical/FastFourierTransform.h"
-#include "centroid_decomposition.hpp"
+#include "centroid_decomp.hpp"
 //returns array `num_paths` where `num_paths[i]` = # of paths in tree with `i` edges
 //O(n log^2 n)
 vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unrooted, connected tree*/) {

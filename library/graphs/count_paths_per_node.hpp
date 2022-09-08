@@ -1,5 +1,5 @@
 #pragma once
-#include "centroid_decomposition.hpp"
+#include "centroid_decomp.hpp"
 //0-based nodes
 //returns array `num_paths` where `num_paths[i]` = number of paths with k edges where node `i` is on the path
 //O(n log n)
