@@ -3,8 +3,7 @@
 struct merge_sort_tree {
 	const int N, S/*smallest power of 2 >= N*/;
 	vector<vector<int>> tree;
-	//doesn't work with empty array
-	merge_sort_tree(const vector<int>& arr) : N(arr.size()), S(1 << __lg(2 * N - 1)), tree(2 * N) {
+	merge_sort_tree(const vector<int>& arr) : N(arr.size()), S(N ? 1 << __lg(2 * N - 1) : 0), tree(2 * N) {
 		for (int i = 0; i < N; i++)
 			tree[i + N] = {arr[i]};
 		rotate(tree.rbegin(), tree.rbegin() + S - N, tree.rbegin() + N);

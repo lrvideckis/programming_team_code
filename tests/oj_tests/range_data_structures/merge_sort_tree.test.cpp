@@ -7,10 +7,6 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	if (n == 0) {
-		while (q--) cout << 0 << " ";
-		return 0;
-	}
 	vector<int> arr(n);
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
