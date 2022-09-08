@@ -1,6 +1,6 @@
 #pragma once
 
-// iterates all submasks of size n with k bits set
+// iterates all bitmasks of size n with k bits set
 // Time Complexity: O(n choose k)
 // Space Complexity: O(1)
 
