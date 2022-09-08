@@ -14,8 +14,8 @@ int main() {
 		mask |= 1 << bit;
 	}
 	vector<int> supermasks;
-	auto func = [&](int mask) {
-		supermasks.push_back(mask);
+	auto func = [&](int supermask) {
+		supermasks.push_back(supermask);
 	};
 	iterate_supermasks(mask, n, func);
 	sort(supermasks.begin(), supermasks.end());
