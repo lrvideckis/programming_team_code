@@ -6,8 +6,8 @@
 template<typename T> struct lcp_query {
 	const int N;
 	vector<int> sa, lcp, inv_sa;
-	RMQ<int> st;
-	lcp_query(const T& s) : N(s.size()), sa(atcoder::suffix_array(s)), lcp(atcoder::lcp_array(s, sa)), inv_sa(N), st(lcp, [](int x, int y) {
+	RMQ<int> rmq;
+	lcp_query(const T& s) : N(s.size()), sa(atcoder::suffix_array(s)), lcp(atcoder::lcp_array(s, sa)), inv_sa(N), rmq(lcp, [](int x, int y) {
 		return min(x, y);
 	}) {
 		for (int i = 0; i < N; i++) inv_sa[sa[i]] = i;
@@ -21,7 +21,7 @@ template<typename T> struct lcp_query {
 		idx1 = inv_sa[idx1];
 		idx2 = inv_sa[idx2];
 		if (idx1 > idx2) swap(idx1, idx2);
-		return st.query(idx1, idx2);
+		return rmq.query(idx1, idx2);
 	}
 	//returns 1 if suffix s[idx1 ... n) < s[idx2 ... n)
 	//(so 0 if idx1 == idx2)

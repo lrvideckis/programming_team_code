@@ -13,13 +13,13 @@ int main() {
 		cin >> arr[i];
 		init[i] = {arr[i], i};
 	}
-	RMQ<pair<int, int>> st(init, [](auto x, auto y) {
+	RMQ<pair<int, int>> rmq(init, [](auto x, auto y) {
 		return min(x, y);
 	});
 	while (q--) {
 		int l, r;
 		cin >> l >> r;
-		auto [mn, idxMn] = st.query(l, r);
+		auto [mn, idxMn] = rmq.query(l, r);
 		assert(arr[idxMn] == mn);
 		cout << mn << endl;
 	}
