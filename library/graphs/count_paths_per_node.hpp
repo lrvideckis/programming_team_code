@@ -7,7 +7,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& a_adj/*unroote
 	vector<long long> num_paths(a_adj.size());
 	auto func = [&](const vector<vector<int>>& adj, int root) {
 		vector<int> pre_d(1, 1), cur_d(1);
-		auto dfs = [&](auto self, int u, int p, int d, int rot) -> long long {
+		auto dfs = [&](auto self, int u, int p, int d) -> long long {
 			if (d > k)
 				return 0;
 
@@ -19,31 +19,29 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& a_adj/*unroote
 			if (k - d < int(pre_d.size()))
 				cnt += pre_d[k - d];
 
-			auto adj_u = adj[u];
-			if (rot == 1)
-				reverse(adj_u.begin(), adj_u.end());
-
-			for (int v : adj_u) {
-				if (v == p)
-					continue;
-				cnt += self(self, v, u, d + 1, rot);
-				if (u == root) {
-					for (int i = 1; i < int(cur_d.size()) && cur_d[i]; i++) {
-						if (int(pre_d.size()) <= i)
-							pre_d.push_back(0);
-						pre_d[i] += cur_d[i];
-						cur_d[i] = 0;
-					}
-				}
+			for (int v : adj[u]) {
+				if (v != p)
+					cnt += self(self, v, u, d + 1);
 			}
 
 			num_paths[u] += cnt;
 			return cnt;
 		};
-		dfs(dfs, root, root, 0, 0);
+		auto dfs_child = [&](int child) {
+			auto cnt = dfs(dfs, child, root, 1);
+			pre_d.resize(cur_d.size());
+			for (int i = 1; i < int(cur_d.size()) && cur_d[i]; i++) {
+				pre_d[i] += cur_d[i];
+				cur_d[i] = 0;
+			}
+			return cnt;
+		};
+		for (int child : adj[root])
+			num_paths[root] += dfs_child(child);
 		pre_d = vector<int>(1);
 		cur_d = vector<int>(1);
-		num_paths[root] -= dfs(dfs, root, root, 0, 1);
+		for (auto it = adj[root].rbegin(); it != adj[root].rend(); it++)
+			dfs_child(*it);
 	};
 	centroid_decomp decomp(a_adj, func);
 	return num_paths;
