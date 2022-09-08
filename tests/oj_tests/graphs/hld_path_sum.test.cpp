@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 #include "../../template.hpp"
-#include "../../../library/misc/random.hpp"
 
 #include "../../../library/graphs/hld.hpp"
 #include "../../../library/range_data_structures/bit.hpp"
@@ -19,7 +18,7 @@ int main() {
 		adj[u].push_back(v);
 		adj[v].push_back(u);
 	}
-	HLD h(adj, get_rand<int>(0, n)/*random root*/);
+	HLD h(adj);
 	vector<long long> init(n);
 	for (int i = 0; i < n; i++)
 		init[h.tree[i].time_in] = values[i];
