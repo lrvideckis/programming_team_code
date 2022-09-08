@@ -21,7 +21,7 @@ int main() {
 		adj[i].push_back(par);
 	}
 	LCA h(adj_weighted);
-	HLD h2(adj, 0);
+	HLD h2(adj);
 	for (int i = 0; i < n; ++i) {
 		assert(0 == h.kth_par(i, depth[i]));
 		assert(0 == h.kth_par(i, 1e9));
