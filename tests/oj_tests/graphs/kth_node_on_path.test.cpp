@@ -14,7 +14,7 @@ int main() {
 		adj[u].emplace_back(v, 1ll);
 		adj[v].emplace_back(u, 1ll);
 	}
-	kth_node_on_path kpath(adj, 0);
+	kth_node_on_path kpath(adj);
 	while (q--) {
 		int u, v, k;
 		cin >> u >> v >> k;

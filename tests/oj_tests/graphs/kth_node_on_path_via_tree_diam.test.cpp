@@ -14,7 +14,7 @@ int main() {
 		adj[u].emplace_back(v, w);
 		adj[v].emplace_back(u, w);
 	}
-	kth_node_on_path kpath(adj, 0);
+	kth_node_on_path kpath(adj);
 	int u = 0;
 	for (int i = 1; i < n; i++)
 		if (kpath.lca.dist_weight(0, i) > kpath.lca.dist_weight(0, u)) u = i;

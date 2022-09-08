@@ -1,6 +1,5 @@
 #pragma once
 //https://codeforces.com/blog/entry/74847
-//assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 //mnemonic: Least/Lowest Common Ancestor
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
@@ -9,10 +8,15 @@ struct LCA {
 		long long dist;
 	};
 	vector<node> tree;
-	LCA(const vector<vector<pair<int, long long>>>& adj, int root) : tree(adj.size(), {
-		root, 1, root, 0, 0LL
-	}) {
-		dfs(root, adj);
+	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(adj.size(), {
+		-1, 0, -1, 0, 0LL
+	    }) {
+		for (int i = 0; i < (int)adj.size(); i++) {
+			if (tree[i].depth == 0) {//lowest indexed node in each tree becomes root
+				tree[i].jmp = i;
+				dfs(i, adj);
+			}
+		}
 	}
 	void dfs(int v, const vector<vector<pair<int, long long>>>& adj) {
 		int jmp, jmp_edges;
@@ -46,6 +50,7 @@ struct LCA {
 		}
 		return v;
 	}
+	// x, y must be in the same component
 	int get_lca(int x, int y) const {
 		if (tree[x].depth < tree[y].depth) swap(x, y);
 		x = kth_par(x, tree[x].depth - tree[y].depth);

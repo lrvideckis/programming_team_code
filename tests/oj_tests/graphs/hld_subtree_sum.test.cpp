@@ -18,7 +18,7 @@ int main() {
 		adj[i].push_back(par[i]);
 		adj[par[i]].push_back(i);
 	}
-	HLD h(adj, 0);
+	HLD h(adj);
 	vector<long long> init(n);
 	for (int i = 0; i < n; i++)
 		init[h.tree[i].time_in] = values[i];
