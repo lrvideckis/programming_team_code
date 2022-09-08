@@ -10,6 +10,6 @@ int next_subset(int mask) {
 }
 
 void iterate_chooses(int n, int k, const function<void(int)>& func) {
-	for (int mask = (1 << k) - 1; mask <= (1 << n) - (1 << (n - k)); mask = next_subset(mask))
+	for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
 		func(mask);
 }
