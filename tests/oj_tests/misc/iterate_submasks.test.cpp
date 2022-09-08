@@ -15,8 +15,8 @@ int main() {
 	}
 	cout << 0 << ':' << '\n';
 	vector<int> submasks;
-	auto func = [&](int mask) {
-		submasks.push_back(mask);
+	auto func = [&](int submask) {
+		submasks.push_back(submask);
 	};
 	iterate_submasks(mask, func);
 	sort(submasks.begin(), submasks.end());
