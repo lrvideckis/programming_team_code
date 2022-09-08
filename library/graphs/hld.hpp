@@ -1,6 +1,5 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/53170
-//assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 //mnemonic: Heavy Light Decomposition
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct HLD {
@@ -40,6 +39,7 @@ struct HLD {
 	}
 	// Returns inclusive-exclusive intervals (of time_in's) corresponding to the path between u and v, not necessarily in order
 	// This can answer queries for "is some node `x` on some path" by checking if the tree[x].time_in is in any of these intervals
+	// u, v must be in the same component
 	vector<pair<int, int>> path(int u, int v) const {
 		vector<pair<int, int>> res;
 		for (;; v = tree[tree[v].next].par) {
@@ -57,6 +57,7 @@ struct HLD {
 		return {tree[i].time_in, tree[i].time_in + tree[i].sub_sz};
 	}
 	// Returns lca of nodes u and v
+	// u, v must be in the same component
 	int lca(int u, int v) const {
 		for (;; v = tree[tree[v].next].par) {
 			if (tree[v].time_in < tree[u].time_in) swap(u, v);

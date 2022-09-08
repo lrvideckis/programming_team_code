@@ -7,7 +7,7 @@
 
 vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted) {
 	int n = adj_weighted.size();
-	kth_node_on_path path(adj_weighted, 0);
+	kth_node_on_path path(adj_weighted);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {

@@ -1,6 +1,5 @@
 #pragma once
 //https://codeforces.com/blog/entry/74847
-//assumes a single tree, 1-based nodes is possible by passing in `root` in range [1, n]
 //mnemonic: Least/Lowest Common Ancestor
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
@@ -51,7 +50,7 @@ struct LCA {
 		}
 		return v;
 	}
-	//doesn't work when x, y are in different components
+	// x, y must be in the same component
 	int get_lca(int x, int y) const {
 		if (tree[x].depth < tree[y].depth) swap(x, y);
 		x = kth_par(x, tree[x].depth - tree[y].depth);

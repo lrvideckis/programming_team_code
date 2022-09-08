@@ -2,9 +2,10 @@
 #include "lca.hpp"
 struct kth_node_on_path {
 	LCA lca;
-	kth_node_on_path(const vector<vector<pair<int, long long>>>& adj, int root) : lca(adj, root) {}
+	kth_node_on_path(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : lca(adj) {}
 	//consider path {u, u's par, ..., LCA(u,v), ..., v's par, v}. This returns the node at index k
 	//assumes 0 <= k <= number of edges on path from u to v
+	// u, v must be in the same component
 	int query(int u, int v, int k) const {
 		int lca_uv = lca.get_lca(u, v);
 		int u_lca = lca.tree[u].depth - lca.tree[lca_uv].depth;
