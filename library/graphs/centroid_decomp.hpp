@@ -52,6 +52,7 @@ struct centroid_decomp {
 	void decomp(int root) {
 		func(adj, root);
 		for (auto v : adj[root]) {
+			//each node is adjacent to O(logn) centroids
 			adj[v].erase(find(adj[v].begin(), adj[v].end(), root));
 			decomp(find_centroid(v));
 		}
