@@ -1,6 +1,6 @@
 #pragma once
 
-//source: https://codeforces.com/blog/entry/80195
+// source: https://codeforces.com/blog/entry/80195
 
 // generic matrix multiplication (not overflow safe)
 // will RTE if the given matricies are not compatible
