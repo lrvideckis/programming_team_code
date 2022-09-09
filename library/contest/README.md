@@ -4,6 +4,12 @@
 - use `mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());` to generate random integers
 	- `shuffle(arr.begin(), arr.end(), rng);`
 
+- use pramgas for C++ speed boost
+```
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+```
+
 ### Troubleshooting
 ```
 /* stuff you should look for
@@ -22,3 +28,4 @@ Author: Benq
 
 - [Don't use rand(): a guide to random number generators in C++](https://codeforces.com/blog/entry/61587)
 - [Troubleshoot](https://github.com/kth-competitive-programming/kactl/blob/main/content/contest/troubleshoot.txt)
+- [[Tutorial] GCC Optimization Pragmas](https://codeforces.com/blog/entry/96344)
