@@ -12,7 +12,7 @@ struct HLD {
 	}) {
 		int timer = 0;
 		for (int i = 0; i < (int)adj.size(); i++) {
-			if (tree[i].par == -1) {
+			if (tree[i].par == -1) {//lowest indexed node in each tree becomes root
 				tree[i].par = tree[i].next = i;
 				dfs1(i, adj);
 				dfs2(i, adj, timer);
