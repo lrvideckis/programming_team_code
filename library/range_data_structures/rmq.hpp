@@ -1,5 +1,6 @@
 #pragma once
-//source: https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/RMQ.h
+//source: https://github.com/kth-competitive-programming/
+//	kactl/blob/main/content/data-structures/RMQ.h
 //usage:
 //	vector<long long> arr;
 //	...

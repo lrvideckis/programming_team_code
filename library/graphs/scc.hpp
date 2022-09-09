@@ -1,5 +1,6 @@
 #pragma once
-//source: https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/SCC.h
+//source: https://github.com/kth-competitive-programming/
+//	kactl/blob/main/content/graph/SCC.h
 //mnemonic: Strongly Connected Component
 struct scc_info {
 	int num_sccs;
