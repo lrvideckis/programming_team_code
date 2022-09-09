@@ -4,15 +4,13 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct HLD {
 	struct node {
-		int sub_sz, par, time_in, next;
+		int sub_sz = 1, par = -1, time_in = -1, next = -1;
 	};
 	vector<node> tree;
-	HLD(vector<vector<int>>& adj/*forest of unrooted trees*/) : tree(adj.size(), {
-		1, -1, (int)adj.size(), -1
-	}) {
+	HLD(vector<vector<int>>& adj/*forest of unrooted trees*/) : tree(adj.size()) {
 		int timer = 0;
 		for (int i = 0; i < (int)adj.size(); i++) {
-			if (tree[i].par == -1) {//lowest indexed node in each tree becomes root
+			if (tree[i].next == -1) {//lowest indexed node in each tree becomes root
 				tree[i].next = i;
 				dfs1(i, adj);
 				dfs2(i, adj, timer);

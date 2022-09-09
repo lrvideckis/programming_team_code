@@ -4,15 +4,13 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
 	struct node {
-		int jmp, jmp_edges, par, depth;
-		long long dist;
+		int jmp = -1, jmp_edges = 0, par = -1, depth = 0;
+		long long dist = 0LL;
 	};
 	vector<node> tree;
-	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(adj.size(), {
-		-1, 0, -1, 0, 0LL
-	    }) {
+	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(adj.size()) {
 		for (int i = 0; i < (int)adj.size(); i++) {
-			if (tree[i].depth == 0) {//lowest indexed node in each tree becomes root
+			if (tree[i].jmp == -1) {//lowest indexed node in each tree becomes root
 				tree[i].jmp = i;
 				dfs(i, adj);
 			}
@@ -20,7 +18,7 @@ struct LCA {
 	}
 	void dfs(int v, const vector<vector<pair<int, long long>>>& adj) {
 		int jmp, jmp_edges;
-		if (tree[v].depth > 0 && tree[v].jmp_edges == tree[tree[v].jmp].jmp_edges)
+		if (tree[v].jmp != v && tree[v].jmp_edges == tree[tree[v].jmp].jmp_edges)
 			jmp = tree[tree[v].jmp].jmp, jmp_edges = 2 * tree[v].jmp_edges + 1;
 		else
 			jmp = v, jmp_edges = 1;
