@@ -1,5 +1,7 @@
 #pragma once
 
+//source: https://codeforces.com/blog/entry/60442
+
 //MUCH RANDOM!!!
 seed_seq seed{
 	(uint32_t)chrono::duration_cast<chrono::nanoseconds>
