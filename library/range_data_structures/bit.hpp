@@ -5,9 +5,8 @@ template<class T> struct BIT {
 	const int N;
 	vector<T> bit;
 	BIT(int a_n) : N(a_n), bit(N, 0) {}
-	BIT(const vector<T>& a) : BIT(a.size()) {
+	BIT(const vector<T>& a) : N(a.size()), bit(a) {
 		for (int i = 0; i < N; i++) {
-			bit[i] += a[i];
 			int j = i | (i + 1);
 			if (j < N) bit[j] += bit[i];
 		}
