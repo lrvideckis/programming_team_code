@@ -43,7 +43,6 @@ struct centroid_decomp {
 			p = u;
 			u = big_ch;
 		}
-		assert(false);
 	}
 
 	void decomp(int root) {

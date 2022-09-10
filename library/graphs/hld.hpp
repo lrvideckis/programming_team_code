@@ -48,7 +48,6 @@ struct HLD {
 			}
 			res.emplace_back(tree[tree[v].next].time_in, tree[v].time_in + 1);
 		}
-		assert(false);
 	}
 	// Returns interval (of time_in's) corresponding to the subtree of node i
 	// This can answer queries for "is some node `x` in some other node's subtree" by checking if tree[x].time_in is in this interval
@@ -62,6 +61,5 @@ struct HLD {
 			if (tree[v].time_in < tree[u].time_in) swap(u, v);
 			if (tree[tree[v].next].time_in <= tree[u].time_in) return u;
 		}
-		assert(false);
 	}
 };
