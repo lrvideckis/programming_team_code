@@ -45,6 +45,6 @@
 "tests/oj_tests/strings/binary_trie.test.cpp": "2022-09-05 18:11:57 -0700",
 "tests/oj_tests/strings/kmp.test.cpp": "2022-09-05 18:11:57 -0700",
 "tests/oj_tests/strings/lcp_query.test.cpp": "2022-09-09 16:58:24 -0400",
-"tests/oj_tests/strings/palindrome_query.test.cpp": "2022-09-08 21:23:37 -0700",
+"tests/oj_tests/strings/palindrome_query.test.cpp": "2022-09-10 12:27:29 -0700",
 "tests/oj_tests/strings/trie.test.cpp": "2022-09-05 18:11:57 -0700"
 }
