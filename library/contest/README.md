@@ -22,10 +22,9 @@
 ```
 Author: Benq
 
-- refer to KACTL Troubleshoot (linked below) for more details
+- refer to [KACTL Troubleshoot](../../kactl/content/contest/troubleshoot.txt)
 
 ## Sources
 
-- [Don't use rand(): a guide to random number generators in C++](https://codeforces.com/blog/entry/61587)
-- [Troubleshoot](https://github.com/kth-competitive-programming/kactl/blob/main/content/contest/troubleshoot.txt)
 - [[Tutorial] GCC Optimization Pragmas](https://codeforces.com/blog/entry/96344)
+- [Don't use rand(): a guide to random number generators in C++](https://codeforces.com/blog/entry/61587)

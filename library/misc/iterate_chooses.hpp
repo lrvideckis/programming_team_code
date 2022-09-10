@@ -1,6 +1,7 @@
 #pragma once
 
-// source: https://github.com/kth-competitive-programming/kactl/blob/main/content/various/chapter.tex
+// source: https://github.com/kth-competitive-programming/
+//	kactl/blob/main/content/various/chapter.tex
 // iterates all bitmasks of size n with k bits set
 // Time Complexity: O(n choose k)
 // Space Complexity: O(1)
