@@ -11,42 +11,39 @@
 struct centroid_decomp {
 	vector<vector<int>> adj;
 	function<void(const vector<vector<int>>&, int)> func;
-	vector<int> subtree_sizes;
+	vector<int> sub_sz;
 
 	centroid_decomp(const vector<vector<int>>& a_adj,
 	                const function<void(const vector<vector<int>>&, int)>& a_func)
-		: adj(a_adj), func(a_func), subtree_sizes(adj.size()) {
+		: adj(a_adj), func(a_func), sub_sz(adj.size()) {
 		decomp(find_centroid(0));
 	}
 
 	void calc_subtree_sizes(int u, int p = -1) {
-		subtree_sizes[u] = 1;
-		for (auto v : adj[u]) {
-			if (v == p)
-				continue;
+		sub_sz[u] = 1;
+		for (int v : adj[u]) {
+			if (v == p) continue;
 			calc_subtree_sizes(v, u);
-			subtree_sizes[u] += subtree_sizes[v];
+			sub_sz[u] += sub_sz[v];
 		}
 	}
 
 	int find_centroid(int root) {
 		calc_subtree_sizes(root);
-		auto dfs = [&](auto self, int u, int p) -> int {
-			int biggest_ch = -1;
-			for (auto v : adj[u]) {
-				if (v == p)
-					continue;
-				if (biggest_ch == -1 ||
-				        subtree_sizes[biggest_ch] < subtree_sizes[v])
-					biggest_ch = v;
+		int u = root, p = -1;
+		while (1) {
+			int big_ch = -1;
+			for (int v : adj[u]) {
+				if (v == p) continue;
+				if (big_ch == -1 || sub_sz[big_ch] < sub_sz[v])
+					big_ch = v;
 			}
-
-			if (biggest_ch != -1 &&
-			        2 * subtree_sizes[biggest_ch] > subtree_sizes[root])
-				return self(self, biggest_ch, u);
-			return u;
-		};
-		return dfs(dfs, root, root);
+			if (big_ch == -1 || 2 * sub_sz[big_ch] <= sub_sz[root])
+				return u;
+			p = u;
+			u = big_ch;
+		}
+		assert(false);
 	}
 
 	void decomp(int root) {
