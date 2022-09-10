@@ -28,6 +28,8 @@
 - [Suffix Tree](https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/strings/SuffixTree.h)
 - [Sum Over Subsets with Convolution](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/numerical/SumOverSubsets.h)
 - [Z function](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Zfunc.h)
+- [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
+- [Dinic](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/graphs/SebaDinic.h)
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it

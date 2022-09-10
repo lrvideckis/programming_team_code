@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_11_D"
 #include "../../template.hpp"
 
-#include "../../../library/misc/iterate_chooses.hpp"
+#include "../../../library/misc/iterate_subsets/iterate_chooses.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
