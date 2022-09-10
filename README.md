@@ -11,6 +11,12 @@ My library of algorithms for competitive programming. Quick links:
 
 see [tests/README.md](https://github.com/lrvideckis/programming_team_code/blob/master/tests/README.md)
 
+## Contributing
+I appreciate all feedback. It can be anything from suggestions, or importantly bugs! You can submit an issue or email me at
+```
+lukevideckis@gmail.com
+```
+
 ## Format
 
 1. (optional) Run the following from [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library) to remove all comments and asserts. (for advanced users)
