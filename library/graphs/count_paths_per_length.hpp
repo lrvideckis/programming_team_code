@@ -5,7 +5,7 @@
 //O(n log^2 n)
 vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unrooted, connected tree*/) {
 	vector<long long> num_paths(a_adj.size(), 0);
-	auto func = [&](const vector<vector<int>>& adj, int root) {
+	auto func = [&](const vector<vector<int>>& adj, int root) -> void {
 		vector<double> total_depth(1, 1.0);
 		for (int to : adj[root]) {
 			vector<double> cnt_depth(1, 0.0);
