@@ -7,12 +7,13 @@ struct distinct_query {
 	struct node {
 		int sum;
 		int lch, rch;//children, indexes into `tree`
+		node(int a_sum, int a_lch, int a_rch) : sum(a_sum), lch(a_lch), rch(a_rch) {}
 	};
 	const int N;
 	vector<int> roots;
 	deque<node> tree;
 	distinct_query(const vector<int>& arr) : N(arr.size()), roots(N + 1, 0) {
-		tree.push_back({0, 0, 0}); //acts as null
+		tree.emplace_back(0, 0, 0); //acts as null
 		map<int, int> last_idx;
 		for (int i = 0; i < N; i++) {
 			roots[i + 1] = update(roots[i], 0, N, last_idx[arr[i]]);
@@ -21,7 +22,7 @@ struct distinct_query {
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tr - tl == 1) {
-			tree.push_back({tree[v].sum + 1, 0, 0});
+			tree.emplace_back(tree[v].sum + 1, 0, 0);
 			return tree.size() - 1;
 		}
 		int tm = tl + (tr - tl) / 2;
@@ -31,7 +32,7 @@ struct distinct_query {
 			lch = update(lch, tl, tm, idx);
 		else
 			rch = update(rch, tm, tr, idx);
-		tree.push_back({tree[lch].sum + tree[rch].sum, lch, rch});
+		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return tree.size() - 1;
 	}
 	//returns number of distinct elements in range [l,r)

@@ -7,19 +7,20 @@ struct kth_smallest {
 	struct node {
 		int sum;
 		int lch, rch;//children, indexes into `tree`
+		node(int a_sum, int a_lch, int a_rch) : sum(a_sum), lch(a_lch), rch(a_rch) {}
 	};
 	int mn = INT_MAX, mx = INT_MIN;
 	vector<int> roots;
 	deque<node> tree;
 	kth_smallest(const vector<int>& arr) : roots(arr.size() + 1, 0) {
-		tree.push_back({0, 0, 0}); //acts as null
+		tree.emplace_back(0, 0, 0); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val + 1);
 		for (int i = 0; i < (int)arr.size(); i++)
 			roots[i + 1] = update(roots[i], mn, mx, arr[i]);
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tr - tl == 1) {
-			tree.push_back({tree[v].sum + 1, 0, 0});
+			tree.emplace_back(tree[v].sum + 1, 0, 0);
 			return tree.size() - 1;
 		}
 		int tm = tl + (tr - tl) / 2;
@@ -29,7 +30,7 @@ struct kth_smallest {
 			lch = update(lch, tl, tm, idx);
 		else
 			rch = update(rch, tm, tr, idx);
-		tree.push_back({tree[lch].sum + tree[rch].sum, lch, rch});
+		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return tree.size() - 1;
 	}
 	/* find (k+1)th smallest number in range [l, r)
