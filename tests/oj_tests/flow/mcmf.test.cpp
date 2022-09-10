@@ -13,6 +13,7 @@ int main() {
 		cin >> u >> v >> cap >> cost;
 		mcmf.add_edge(u, v, cap, cost);
 	}
-	cout << mcmf.get_flow(0, n - 1, f) << '\n';
+	auto [flow, cost] = mcmf.get_flow(0, n - 1, f);
+	cout << (flow < f ? -1 : cost) << '\n';
 	return 0;
 }

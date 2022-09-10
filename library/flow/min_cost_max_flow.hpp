@@ -20,8 +20,7 @@ struct min_cost_max_flow {
 		g[b].push_back(e.size());
 		e.push_back(e2);
 	}
-	//returns minimum cost to send `total_flow` flow through the graph, or -1 if impossible
-	ll get_flow(int s, int t, ll total_flow) {
+	pair<ll, ll> get_flow(int s, int t, ll total_flow) {
 		ll flow = 0, cost = 0;
 		while (flow < total_flow) {
 			vector<ll> d(N, INF);
@@ -64,6 +63,6 @@ struct min_cost_max_flow {
 			}
 			flow += addflow;
 		}
-		return flow < total_flow ? -1 : cost;
+		return {flow, cost};
 	}
 };
