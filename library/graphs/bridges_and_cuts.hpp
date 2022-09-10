@@ -29,10 +29,12 @@ info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>&
 	int num_2_edge_ccs = 0;
 	vector<bool> is_bridge(m, 0);
 	vector<int> two_edge_ccid(n), node_stack;
+	node_stack.reserve(n);
 	//bcc stuff (delete if not needed)
 	int num_bccs = 0;
 	vector<bool> is_cut(n, 0);
 	vector<int> bcc_id(m), edge_stack;
+	edge_stack.reserve(m);
 	auto dfs = [&](auto self, int v, int p_id) -> int {
 		int low = tin[v] = timer++, deg = 0;
 		node_stack.push_back(v);
