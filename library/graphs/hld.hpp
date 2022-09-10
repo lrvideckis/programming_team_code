@@ -23,9 +23,9 @@ struct HLD {
 		for (int& to : adj[v]) {
 			tree[to].par = v;
 			dfs1(to, adj);
+			tree[v].sub_sz += tree[to].sub_sz;
 			if (tree[to].sub_sz > tree[adj[v][0]].sub_sz)
 				swap(to, adj[v][0]);
-			tree[v].sub_sz += tree[to].sub_sz;
 		}
 	}
 	void dfs2(int v, const vector<vector<int>>& adj, int& timer) {
