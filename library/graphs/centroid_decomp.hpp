@@ -4,8 +4,8 @@
 // Time complexity O(n log n)
 // Space complexity O(n)
 
-// Given an unweighted tree with undirected edges and a function centroid_decomp
-// implements the function on every decomposition
+// Given an unweighted, undirected tree and a function,
+// centroid_decomp runs the function on every decomposition
 
 // see count_paths_per_node for example usage
 struct centroid_decomp {
@@ -47,7 +47,7 @@ struct centroid_decomp {
 
 	void decomp(int root) {
 		func(adj, root);
-		for (auto v : adj[root]) {
+		for (int v : adj[root]) {
 			//each node is adjacent to O(logn) centroids
 			adj[v].erase(find(adj[v].begin(), adj[v].end(), root));
 			decomp(find_centroid(v));
