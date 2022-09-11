@@ -6,30 +6,27 @@
 
 // Given an undirected or directed rooted tree
 // rooted_subtree_isomorphism classifies each rooted subtree
-struct isomorphic_classifications {
-	int k;
-	vector<int> ids;
-	isomorphic_classifications(int n) : ids(n) { }
+struct info {
+	int num_distinct_subtrees; //0 <= id[i] < num_distinct_subtrees for all i
+	vector<int> id; //id[u] == id[v] iff subtree u is isomorphic to subtree v
 };
 
-isomorphic_classifications subtree_isomorphism_classification(
-    const vector<vector<int>>& adj, int root) {
-	isomorphic_classifications classifications(adj.size());
+info subtree_iso(const vector<vector<int>>& adj, int root) {
+	vector<int> id(adj.size());
 	map<vector<int>, int> hashes;
 	auto dfs = [&](auto self, int u, int p) -> int {
 		vector<int> ch_ids;
 		ch_ids.reserve(adj[u].size());
-		for (auto v : adj[u]) {
+		for (int v : adj[u]) {
 			if (v != p)
 				ch_ids.push_back(self(self, v, u));
 		}
 		sort(ch_ids.begin(), ch_ids.end());
 		auto it = hashes.find(ch_ids);
 		if (it == hashes.end())
-			return classifications.ids[u] = hashes[ch_ids] = hashes.size();
-		return classifications.ids[u] = it->second;
+			return id[u] = hashes[ch_ids] = hashes.size();
+		return id[u] = it->second;
 	};
 	dfs(dfs, root, root);
-	classifications.k = hashes.size();
-	return classifications;
+	return {(int)hashes.size(), id};
 }
