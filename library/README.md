@@ -1,8 +1,6 @@
 ## Out of scope
 
 - [Geometry](https://github.com/kth-competitive-programming/kactl/tree/main/content/geometry)
-
-[![](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/geometry_bad.png)](https://codeforces.com/blog/entry/52341?#comment-364050)
 - 2D data structures (like [seg tree](https://github.com/ShahjalalShohag/code-library/blob/master/Data%20Structures/Segment%20Tree%202D%20Dynamic.cpp), [sparse table](https://codeforces.com/blog/entry/45485) etc)
 - [2-sat](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/2sat.h)
 - [Chinese Remainder Theorem](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/CRT.h)
