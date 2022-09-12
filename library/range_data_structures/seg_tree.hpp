@@ -64,6 +64,16 @@ struct seg_tree {
 		for (int lg = __builtin_ctz(r) + 1; lg <= lca_l_r; lg++) build(r >> lg);
 		for (int lg = __builtin_ctz(l) + 1; lg <= __lg(l); lg++) build(l >> lg);
 	}
+	void update(int v/* = 1*/, int l, int r, long long add) {
+		if (r <= tree[v].l || tree[v].r <= l)
+			return;
+		if (l <= tree[v].l && tree[v].r <= r)
+			return apply(v, add);
+		push(v);
+		update(2 * v, l, r, add);
+		update(2 * v + 1, l, r, add);
+		build(v);
+	}
 	//query range [l, r)
 	dt query(int l, int r) {
 		assert(0 <= l && l <= r && r <= N);
@@ -77,5 +87,13 @@ struct seg_tree {
 			if (r & 1) resr = combine(tree[--r].val, resr);
 		}
 		return combine(resl, resr);
+	}
+	dt query(int v/* = 1*/, int l, int r) {
+		if (r <= tree[v].l || tree[v].r <= l)
+			return INF;
+		if (l <= tree[v].l && tree[v].r <= r)
+			return tree[v].val;
+		push(v);
+		return combine(query(2 * v, l, r), query(2 * v + 1, l, r));
 	}
 };

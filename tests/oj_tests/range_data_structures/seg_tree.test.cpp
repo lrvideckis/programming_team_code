@@ -21,13 +21,19 @@ int main() {
 		if (type == 0) {
 			int x;
 			cin >> x;
-			st.update(l, r, x);
+			if (q % 2) st.update(l, r, x);
+			else st.update(1, l, r, x);
 			st.update(l, l, 1);
 			st.update(r, r, 1);
+			st.update(1, l, l, 1);
+			st.update(1, r, r, 1);
 		} else {
-			cout << st.query(l, r) << '\n';
+			if (q % 2) cout << st.query(l, r) << '\n';
+			else cout << st.query(1, l, r) << '\n';
 			assert(st.query(l, l) == seg_tree::INF);
 			assert(st.query(r, r) == seg_tree::INF);
+			assert(st.query(1, l, l) == seg_tree::INF);
+			assert(st.query(1, r, r) == seg_tree::INF);
 		}
 	}
 	return 0;
