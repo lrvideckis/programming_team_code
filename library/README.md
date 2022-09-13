@@ -4,6 +4,7 @@
 - [2-sat](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/2sat.h)
 - [Chinese Remainder Theorem](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/CRT.h)
 - [Convex Hull Trick](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/LineContainer.h)
+- [Dinic](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/graphs/SebaDinic.h)
 - [Disjoint set](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/UnionFind.h)
 - [DSU with rollback](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/UnionFindRollback.h)
 - [Fast Fourier transform](https://github.com/kth-competitive-programming/kactl/blob/main/content/numerical/FastFourierTransform.h)
@@ -12,6 +13,7 @@
 - [Geometry](https://github.com/kth-competitive-programming/kactl/tree/main/content/geometry)
 - [Hilbert Mo](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/misc/HilbertMos.h)
 - [Interval container](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/IntervalContainer.h)
+- [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
 - [Manacher's](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Manacher.h)
 - [Matrix Operations](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/Matrix.h)
 - [Miller Rabin](https://github.com/kth-competitive-programming/kactl/blob/main/content/number-theory/MillerRabin.h)
@@ -25,8 +27,6 @@
 - [Suffix Array, LCP Array, Z function](https://github.com/atcoder/ac-library/blob/master/atcoder/string.hpp)
 - [Suffix Tree](https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/strings/SuffixTree.h)
 - [Sum Over Subsets with Convolution](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/numerical/SumOverSubsets.h)
-- [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
-- [Dinic](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/graphs/SebaDinic.h)
 - [SCC](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/SCC.h)
 
 ## Things to consider when adding a new alg to the library
