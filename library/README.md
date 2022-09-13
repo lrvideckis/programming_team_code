@@ -20,6 +20,7 @@
 - [Non-lazy seg tree](https://github.com/kth-competitive-programming/kactl/blob/main/content/data-structures/SegmentTree.h)
 - [polynomial stuff](https://cp-algorithms.com/algebra/polynomial.html)
 - [queue with get max](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/data-structures/MonotonicQueue.h)
+- [SCC](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/SCC.h)
 - [seg tree beats](https://codeforces.com/blog/entry/57319)
 - [sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc) (search buckets)
 - [string hashing](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Hashing.h)
@@ -27,7 +28,6 @@
 - [Suffix Array, LCP Array, Z function](https://github.com/atcoder/ac-library/blob/master/atcoder/string.hpp)
 - [Suffix Tree](https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/strings/SuffixTree.h)
 - [Sum Over Subsets with Convolution](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/numerical/SumOverSubsets.h)
-- [SCC](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/SCC.h)
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
