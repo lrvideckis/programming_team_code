@@ -64,14 +64,14 @@ struct seg_tree {
 		for (int lg = __builtin_ctz(r) + 1; lg <= lca_l_r; lg++) build(r >> lg);
 		for (int lg = __builtin_ctz(l) + 1; lg <= __lg(l); lg++) build(l >> lg);
 	}
-	void update(int v/* = 1*/, int l, int r, long long add) {
+	void update(int v/* = 1*/, int l, int r, ch change) {
 		if (r <= tree[v].l || tree[v].r <= l)
 			return;
 		if (l <= tree[v].l && tree[v].r <= r)
-			return apply(v, add);
+			return apply(v, change);
 		push(v);
-		update(2 * v, l, r, add);
-		update(2 * v + 1, l, r, add);
+		update(2 * v, l, r, change);
+		update(2 * v + 1, l, r, change);
 		build(v);
 	}
 	//query range [l, r)
