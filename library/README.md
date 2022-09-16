@@ -11,6 +11,7 @@
 - [fast IO](https://github.com/nealwu/competitive-programming/blob/master/io/io.cc) - I've never TLE'd specifically from IO slowness while using both  `cin.tie(0)->sync_with_stdio(0);` and `'\n'`
 - [Floyd Warshall](https://github.com/kth-competitive-programming/kactl/blob/main/content/graph/FloydWarshall.h)
 - [Geometry](https://github.com/kth-competitive-programming/kactl/tree/main/content/geometry)
+- [Half Plane Intersection](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/geometry/halfPlane.h)
 - [Hilbert Mo](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/misc/HilbertMos.h)
 - [Interval container](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/IntervalContainer.h)
 - [Longest Increasing Subsequence](https://github.com/kth-competitive-programming/kactl/blob/main/content/various/LIS.h)
