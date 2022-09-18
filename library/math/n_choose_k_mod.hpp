@@ -15,7 +15,7 @@ struct n_choose_k {
 		for (int i = 2; i * i <= mod; i++) assert(mod % i);
 		for (int i = 2; i < n; i++)
 			fact[i] = 1LL * fact[i - 1] * i % mod;
-		inv_fact.back() = pow(fact.back(), mod - 2, mod);
+		inv_fact.back() = bin_exp(fact.back(), mod - 2, mod);
 		for (int i = n - 2; i >= 2; i--)
 			inv_fact[i] = inv_fact[i + 1] * (i + 1LL) % mod;
 	}

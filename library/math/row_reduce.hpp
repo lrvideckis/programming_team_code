@@ -23,7 +23,7 @@ pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, int c
 		}
 		det = (1LL * det * mat[rank][col]) % mod;
 		//make pivot 1 by dividing row by inverse of pivot
-		int a_inv = pow(mat[rank][col], mod - 2, mod);
+		int a_inv = bin_exp(mat[rank][col], mod - 2, mod);
 		for (int j = 0; j < m; j++)
 			mat[rank][j] = (1LL * mat[rank][j] * a_inv) % mod;
 		//zero-out all numbers above & below pivot

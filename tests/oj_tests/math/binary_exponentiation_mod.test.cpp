@@ -7,6 +7,6 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int m, n;
 	cin >> m >> n;
-	cout << pow(m, n, 1e9 + 7) << '\n';
+	cout << bin_exp(m, n, 1e9 + 7) << '\n';
 	return 0;
 }
