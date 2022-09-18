@@ -44,5 +44,5 @@
 "tests/oj_tests/strings/longest_common_prefix_query.test.cpp": "2022-09-17 18:53:09 -0700",
 "tests/oj_tests/strings/palindrome_query.test.cpp": "2022-09-17 18:35:09 -0700",
 "tests/oj_tests/strings/prefix_function.test.cpp": "2022-09-14 13:51:32 -0700",
-"tests/oj_tests/strings/trie.test.cpp": "2022-09-05 18:11:57 -0700"
+"tests/oj_tests/strings/trie.test.cpp": "2022-09-17 18:57:30 -0700"
 }
