@@ -11,7 +11,7 @@ struct seg_tree {
 	static dt combine(const dt& l, const dt& r) {
 		return min(l, r);
 	}
-	static const dt INF = 1e18;
+	static const dt UNIT = 1e18;
 	struct node {
 		dt val;
 		ch lazy;
@@ -81,7 +81,7 @@ struct seg_tree {
 		int lca_l_r = __lg((l - 1) ^ r);
 		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
 		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
-		dt resl = INF, resr = INF;
+		dt resl = UNIT, resr = UNIT;
 		for (; l < r; l >>= 1, r >>= 1) {
 			if (l & 1) resl = combine(resl, tree[l++].val);
 			if (r & 1) resr = combine(tree[--r].val, resr);
@@ -90,7 +90,7 @@ struct seg_tree {
 	}
 	dt query(int v/* = 1*/, int l, int r) {
 		if (r <= tree[v].l || tree[v].r <= l)
-			return INF;
+			return UNIT;
 		if (l <= tree[v].l && tree[v].r <= r)
 			return tree[v].val;
 		push(v);
