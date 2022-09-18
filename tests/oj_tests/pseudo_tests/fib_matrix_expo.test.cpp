@@ -4,7 +4,7 @@
 
 #include "../../../kactl/content/data-structures/Matrix.h"
 #include "../../../ac-library/atcoder/modint.hpp"
-#include "../../../library/math/fib.hpp"
+#include "../../../library/math/fibonacci.hpp"
 
 void check(long long n) {
 	const int MOD = 1e9 + 7;
