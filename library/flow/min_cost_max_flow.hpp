@@ -1,7 +1,7 @@
 #pragma once
 //source: https://e-maxx.ru/algo/min_cost_flow
 const long long INF = 1e18;
-struct min_cost_max_flow {
+struct mcmf {
 	using ll = long long;
 	struct edge {
 		int a, b;
@@ -11,7 +11,7 @@ struct min_cost_max_flow {
 	const int N;
 	vector<edge> e;
 	vector<vector<int>> g;
-	min_cost_max_flow(int a_n) : N(a_n), g(N) {}
+	mcmf(int a_n) : N(a_n), g(N) {}
 	void add_edge(int a, int b, ll cap, ll cost) {
 		edge e1 = {a, b, cap, cost, 0, (int)g[b].size() };
 		edge e2 = {b, a, 0, -cost, 0, (int)g[a].size() };
