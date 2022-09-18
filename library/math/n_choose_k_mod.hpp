@@ -29,10 +29,10 @@ struct n_choose_k {
 	//lucas theorem to calculate n choose k in O(log(k))
 	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish prime mod (< 1e6 maybe)
 	//handles n >= mod correctly
-	int choose_with_lucas_theorem(long long n, long long k) const {
+	int choose_lucas(long long n, long long k) const {
 		if (k < 0 || k > n) return 0;
 		if (k == 0 || k == n) return 1;
-		return 1LL * choose_with_lucas_theorem(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
+		return 1LL * choose_lucas(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
 	//returns x such that x * n % mod == 1
 	int inv(int n) const {

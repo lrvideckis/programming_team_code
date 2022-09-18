@@ -4,7 +4,7 @@
 #include "../../../library/math/prime_sieve.hpp"
 
 int main() {
-	calc_seive();
+	calc_sieve();
 	int n;
 	cin >> n;
 	map<int, int> prime_to_max_exponent;

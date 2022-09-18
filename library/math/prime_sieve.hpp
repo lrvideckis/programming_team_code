@@ -12,7 +12,7 @@
 //	}
 const int N = 1e6 + 10;
 int a_prime[N];
-void calc_seive() {
+void calc_sieve() {
 	iota(a_prime, a_prime + N, 0);
 	for (int i = 2; i * i < N; i++)
 		if (a_prime[i] == i)

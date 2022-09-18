@@ -1,5 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_5_E"
 #include "../../template.hpp"
+#include "../../../library/math/prime_sieve.hpp"
 
 #include "../../../library/math/n_choose_k_mod.hpp"
 
@@ -16,6 +17,28 @@ int main() {
 			inverse[i] = 1LL * (MOD - MOD / i) * inverse[MOD % i] % MOD;
 		for (int i = 1; i < (int)inverse.size(); i ++)
 			assert(nk.inv(i) == inverse[i]);
+	}
+	{
+		//test choose with lucas theorem
+		calc_sieve();
+		vector<vector<int>> naive_choose(100, vector<int>(100, 0));
+		int num_primes = 0;
+		for (int mod = 2; mod < 100; mod++) {
+			if (a_prime[mod] == mod) {
+				n_choose_k choose_l(mod, mod);
+				num_primes++;
+				for (int n = 0; n < 100; n++) {
+					naive_choose[n][0] = 1;
+					for (int k = 1; k <= n; k++)
+						naive_choose[n][k] = (naive_choose[n - 1][k] + naive_choose[n - 1][k - 1]) % mod;
+				}
+				for (int n = 0; n < 100; n++) {
+					for (int k = 0; k < 100; k++)
+						assert(choose_l.choose_lucas(n, k) == naive_choose[n][k]);
+				}
+			}
+		}
+		assert(num_primes == 25);
 	}
 	int n, k;
 	cin >> n >> k;
