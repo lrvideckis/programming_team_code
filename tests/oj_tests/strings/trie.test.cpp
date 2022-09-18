@@ -12,9 +12,9 @@ int main() {
 		string type, s;
 		cin >> type >> s;
 		if (type == "insert")
-			tr.add_string(s);
+			tr.insert(s);
 		else
-			cout << (tr.find_string(s) ? "yes" : "no") << '\n';
+			cout << (tr.find(s) ? "yes" : "no") << '\n';
 	}
 	return 0;
 }

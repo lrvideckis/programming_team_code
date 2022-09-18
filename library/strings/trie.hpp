@@ -12,7 +12,7 @@ struct trie {
 	};
 	vector<node> t;
 	trie() : t(1) {}
-	void add_string(const string& s) {
+	void insert(const string& s) {
 		int v = 0;
 		for (char ch : s) {
 			int let = ch - MIN_CH;
@@ -24,7 +24,7 @@ struct trie {
 		}
 		t[v].cnt_words++;
 	}
-	bool find_string(const string& s) const {
+	bool find(const string& s) const {
 		int v = 0;
 		for (char ch : s) {
 			int let = ch - MIN_CH;
