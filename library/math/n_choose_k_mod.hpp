@@ -1,6 +1,6 @@
 #pragma once
 //for mod inverse
-#include "exp_mod.hpp"
+#include "binary_exponentiation_mod.hpp"
 // usage:
 //     n_choose_k nk(n, 1e9+7) to use `choose`, `inv` with inputs strictly < n
 // or:

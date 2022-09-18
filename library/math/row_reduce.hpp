@@ -1,6 +1,6 @@
 #pragma once
 //for mod inverse
-#include "exp_mod.hpp"
+#include "binary_exponentiation_mod.hpp"
 //First `cols` columns of mat represents a matrix to be left in reduced row echelon form
 //Row operations will be performed to all later columns
 //
