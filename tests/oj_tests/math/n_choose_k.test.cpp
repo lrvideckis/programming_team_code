@@ -40,8 +40,9 @@ int main() {
 		}
 		assert(num_primes == 25);
 	}
-	int n, k;
-	cin >> n >> k;
-	cout << nk.choose(k, n) << '\n';
+	int balls, boxes;
+	cin >> balls >> boxes;
+	//you have to choose the subset of boxes to place balls into
+	cout << nk.choose(boxes, balls) << '\n';
 	return 0;
 }
