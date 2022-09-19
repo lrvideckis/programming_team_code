@@ -19,9 +19,8 @@ int main() {
 	vector<long long> cnt_len = count_paths_per_length(adj);
 	if (n >= 2) {
 		int k = get_rand(1, n);
-		long long sum = 0;
-		for (long long num_paths : count_paths_per_node(adj, k))
-			sum += num_paths;
+		vector<long long> count_paths = count_paths_per_node(adj, k);
+		long long sum = accumulate(count_paths.begin(), count_paths.end(), 0LL);
 		assert(sum % (k + 1) == 0);
 		assert(sum / (k + 1) == cnt_len[k]);
 	}
