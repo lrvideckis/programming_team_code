@@ -26,7 +26,6 @@ int main() {
 	for (int n = 2; n <= 100; n++) {
 		vector<vector<int>> adj(n);
 		vector<vector<pair<int, long long>>> adj_weighted(n);
-
 		UF uf(n);
 		for (int q = n; q--;) {
 			int u = get_rand<int>(0, n);
