@@ -12,7 +12,7 @@ struct info {
 	vector<int> id; //id[u] == id[v] iff subtree u is isomorphic to subtree v
 };
 
-info subtree_iso(const vector<vector<int>>& adj, int root) {
+info subtree_iso(const vector<vector<int>>& adj) {
 	vector<int> id(adj.size(), -1);
 	map<vector<int>, int> hashes;
 	auto dfs = [&](auto self, int u, int p) -> int {

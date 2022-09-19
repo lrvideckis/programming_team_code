@@ -16,7 +16,7 @@ int main() {
 		adj[p + n].push_back(i + n);
 		adj[i + n].push_back(p + n);
 	}
-	auto [num_distinct_subtrees, id] = subtree_iso(adj, 0);
+	auto [num_distinct_subtrees, id] = subtree_iso(adj);
 	cout << num_distinct_subtrees << '\n';
 	for (int i = 0; i < n; i++) {
 		cout << id[i] << " ";
