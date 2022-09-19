@@ -34,6 +34,7 @@ then
 	exit 1
 fi
 
+#run cppcheck formatter before initializing git submodules to avoid warnings not in our code
 cppcheck oj_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inline-suppr --inconclusive --error-exitcode=1
 if (($? != 0))
 then
