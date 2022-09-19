@@ -47,10 +47,8 @@ git submodule update
 
 source scripts/add_symlink.sh
 
-test_files=$(find oj_tests/ -type f -name "*.test.cpp")
-
 #test compiles
-g++ $(cat scripts/compile_flags.txt) $test_files
+g++ $(find oj_tests/ -type f -name "*.test.cpp") $test_files
 if (($? != 0))
 then
 	echo "compilation failed"
@@ -58,7 +56,7 @@ then
 fi
 
 #check snake case & lint
-clang-tidy $test_files -- -std=c++17
+clang-tidy $(find ../library/ -type f -name "*.hpp") -- -std=c++17
 if (($? != 0))
 then
 	echo "clang-tidy failed"
