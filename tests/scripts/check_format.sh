@@ -34,17 +34,17 @@ then
 	exit 1
 fi
 
-git submodule init
-git submodule update
-
-source scripts/add_symlink.sh
-
 cppcheck oj_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inline-suppr --inconclusive --error-exitcode=1
 if (($? != 0))
 then
 	echo "cppcheck failed"
 	exit 1
 fi
+
+git submodule init
+git submodule update
+
+source scripts/add_symlink.sh
 
 #check snake case
 declare -i pass=0
