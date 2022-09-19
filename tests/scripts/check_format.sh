@@ -47,8 +47,9 @@ git submodule update
 
 source scripts/add_symlink.sh
 
-#test compiles
 test_files=$(find oj_tests/ -type f -name "*.test.cpp")
+
+#test compiles
 g++ $(cat scripts/compile_flags.txt) $test_files
 if (($? != 0))
 then
