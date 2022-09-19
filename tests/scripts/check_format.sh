@@ -23,8 +23,8 @@ then
 fi
 cd ..
 astyle_output=$(
-	$(echo $ASTYLE_COMMAND) --dry-run --formatted --recursive "*.test.cpp" &&
-	$(echo $ASTYLE_COMMAND) --dry-run --formatted --recursive "*.hpp"
+	$ASTYLE_COMMAND --dry-run --formatted --recursive "*.test.cpp" &&
+	$ASTYLE_COMMAND --dry-run --formatted --recursive "*.hpp"
 )
 cd tests/
 if grep --quiet "Formatted" <<< "$astyle_output"
