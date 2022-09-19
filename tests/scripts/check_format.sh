@@ -39,7 +39,7 @@ git submodule update
 
 source scripts/add_symlink.sh
 
-cppcheck oj_tests/ --file-filter="*test.cpp" --enable=all --suppress=noExplicitConstructor --inline-suppr --inconclusive --error-exitcode=1
+cppcheck oj_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inline-suppr --inconclusive --error-exitcode=1
 if (($? != 0))
 then
 	echo "cppcheck failed"
