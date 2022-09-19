@@ -10,7 +10,7 @@ struct matrix_info {
 //Returns rank of mat, determinant of mat, and x (solution vector to mat * x = b).
 //x is empty if no solution. If rank < m, there are multiple solutions and an arbitrary one is returned.
 //Leaves mat in reduced row echelon form (unlike kactl) with b appended.
-//Trick: Number of unique solutions = mod ^ (# of free variables).
+//Trick: Number of unique solutions = (size of domain) ^ (# of free variables).
 //# of free variables is generally equivalent to n - rank.
 //O(n * m * min(n,m))
 matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, int mod) {
