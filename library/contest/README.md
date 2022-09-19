@@ -1,7 +1,13 @@
 ## Tips and Tricks
 - [C++ tips and tricks](https://codeforces.com/blog/entry/74684)
-- use `#pragma GCC optimize "trapv"` to invoke RTE (Run Time Error) upon integer overflow
-- use `cin.exceptions(cin.failbit);` to invoke RTE for input error (e.g. reading a long long into an int)
+- invokes RTE (Run Time Error) upon integer overflow
+```
+#pragma GCC optimize "trapv"
+```
+- invoke RTE for input error (e.g. reading a long long into an int)
+```
+cin.exceptions(cin.failbit);
+```
 
 - use pramgas for C++ speed boost
 ```
