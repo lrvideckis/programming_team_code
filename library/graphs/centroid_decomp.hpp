@@ -15,8 +15,10 @@ struct centroid_decomp {
 
 	centroid_decomp(const vector<vector<int>>& a_adj,
 	                const function<void(const vector<vector<int>>&, int)>& a_func)
-		: adj(a_adj), func(a_func), sub_sz(adj.size()) {
-		decomp(find_centroid(0));
+		: adj(a_adj), func(a_func), sub_sz(adj.size(), -1) {
+		for (int i = 0; i < (int)adj.size(); i++)
+			if (sub_sz[i] == -1)
+				decomp(find_centroid(i));
 	}
 
 	void calc_subtree_sizes(int u, int p = -1) {
