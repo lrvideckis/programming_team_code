@@ -13,7 +13,7 @@ struct centroid_decomp {
 	function<void(const vector<vector<int>>&, int)> func;
 	vector<int> sub_sz;
 
-	centroid_decomp(const vector<vector<int>>& a_adj,
+	centroid_decomp(const vector<vector<int>>& a_adj, //undirected forest
 	                const function<void(const vector<vector<int>>&, int)>& a_func)
 		: adj(a_adj), func(a_func), sub_sz(adj.size(), -1) {
 		for (int i = 0; i < (int)adj.size(); i++)
