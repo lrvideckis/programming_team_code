@@ -16,7 +16,7 @@ int main() {
 		adj[v].emplace_back(u, i);
 		edges[i] = make_pair(u, v);
 	}
-	info cc = bridge_and_cut(adj, m);
+	graph_info cc = bridge_and_cut(adj, m);
 	vector<vector<int>> bvt = block_vertex_tree(adj, cc);
 	for (int i = 0; i < n; i++) {
 		//cut node if there exists a pair of adjacent edges belonging to different BCCs

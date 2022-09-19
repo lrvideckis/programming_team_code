@@ -7,12 +7,12 @@
 // Given an undirected or directed rooted forest
 // subtree_iso classifies each rooted subtree
 // minimum label of each tree becomes root
-struct info {
+struct iso_info {
 	int num_distinct_subtrees; //0 <= id[i] < num_distinct_subtrees for all i
 	vector<int> id; //id[u] == id[v] iff subtree u is isomorphic to subtree v
 };
 
-info subtree_iso(const vector<vector<int>>& adj) {
+iso_info subtree_iso(const vector<vector<int>>& adj) {
 	vector<int> id(adj.size(), -1);
 	map<vector<int>, int> hashes;
 	auto dfs = [&](auto self, int u, int p) -> int {
