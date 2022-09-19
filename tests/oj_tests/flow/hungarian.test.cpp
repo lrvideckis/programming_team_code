@@ -12,7 +12,7 @@ int main() {
 		for (int j = 1; j <= n; j++)
 			cin >> a[i][j];
 	}
-	match res = hungarian(a);
+	weighted_match res = hungarian(a);
 	cout << res.min_cost << endl;
 	for (int i = 1; i <= n; i++)
 		cout << res.matching[i] - 1 << " ";

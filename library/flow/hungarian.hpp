@@ -12,11 +12,11 @@
 //trick 2: `cost[i][j]` can be negative, so to instead find max total cost over all matchings: set all `cost[i][j]` to `-cost[i][j]`.
 //Now max total cost = - hungarian(cost).min_cost
 const long long INF = 1e18;
-struct match {
+struct weighted_match {
 	long long min_cost;
 	vector<int> matching;//worker `i` (1<=i<=n) is assigned to job `matching[i]` (1<=matching[i]<=m)
 };
-match hungarian(const vector<vector<long long>>& cost) {
+weighted_match hungarian(const vector<vector<long long>>& cost) {
 	int n = cost.size() - 1, m = cost[0].size() - 1;
 	assert(n <= m);
 	vector<int> p(m + 1), way(m + 1);
