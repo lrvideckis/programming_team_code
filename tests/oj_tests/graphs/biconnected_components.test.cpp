@@ -8,13 +8,13 @@ int main() {
 	int n, m;
 	cin >> n >> m;
 	vector<vector<pair<int, int>>> adj(n);
-	vector<pair<int, int>> edges(m);
+	vector<pair<int, int>> edges;
 	for (int i = 0; i < m; i++) {
 		int u, v;
 		cin >> u >> v;
 		adj[u].emplace_back(v, i);
 		adj[v].emplace_back(u, i);
-		edges[i] = make_pair(u, v);
+		edges.push_back(make_pair(u, v));
 	}
 	graph_info cc = bridge_and_cut(adj, m);
 	vector<vector<int>> bvt = block_vertex_tree(adj, cc);
