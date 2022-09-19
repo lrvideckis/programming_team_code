@@ -39,6 +39,12 @@ git submodule update
 
 source scripts/add_symlink.sh
 
+if cppcheck oj_tests/ --file-filter="*test.cpp" --enable=all --suppress=noExplicitConstructor --inline-suppr --inconclusive
+then
+	echo "cppcheck failed"
+	exit 1
+fi
+
 #check snake case
 declare -i pass=0
 declare -i fail=0
