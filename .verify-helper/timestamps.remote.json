@@ -33,7 +33,6 @@
 "tests/oj_tests/pseudo_tests/fib_matrix_expo.test.cpp": "2022-09-17 18:42:33 -0700",
 "tests/oj_tests/pseudo_tests/lca_hld_forest.test.cpp": "2022-09-17 18:35:09 -0700",
 "tests/oj_tests/pseudo_tests/mobius_inversion.test.cpp": "2022-09-19 11:34:55 -0700",
-"tests/oj_tests/pseudo_tests/subtree_iso_forest.test.cpp": "2022-09-19 12:25:59 -0700",
 "tests/oj_tests/range_data_structures/fenwick_tree.test.cpp": "2022-09-10 12:33:40 -0700",
 "tests/oj_tests/range_data_structures/fenwick_tree_lower_bound.test.cpp": "2022-09-10 12:33:40 -0700",
 "tests/oj_tests/range_data_structures/implicit_seg_tree.test.cpp": "2022-09-05 18:11:57 -0700",
