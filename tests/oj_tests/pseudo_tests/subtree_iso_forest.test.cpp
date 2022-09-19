@@ -18,7 +18,6 @@ int main() {
 				adj[v].push_back(u);
 			}
 		}
-
 	}
 	cout << "Hello World\n";
 	return 0;
