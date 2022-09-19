@@ -11,7 +11,7 @@
 //	adj[u].emplace_back(v, i);
 //	adj[v].emplace_back(u, i);
 //}
-struct info {
+struct graph_info {
 	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
 	int num_2_edge_ccs;
 	vector<bool> is_bridge;//edge id -> 1 iff bridge edge
@@ -21,7 +21,7 @@ struct info {
 	vector<bool> is_cut;//node -> 1 iff cut node
 	vector<int> bcc_id;//edge id -> id of bcc (which are labeled 0, 1, ..., `num_bccs`-1)
 };
-info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
+graph_info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
 	//stuff for both (always keep)
 	int n = adj.size(), timer = 1;
 	vector<int> tin(n, 0);

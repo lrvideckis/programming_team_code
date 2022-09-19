@@ -38,6 +38,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install astyle clang
+      run: sudo apt-get install astyle clang cppcheck
     - name: Check snake case and lint
       run: make --directory=tests/ check_format

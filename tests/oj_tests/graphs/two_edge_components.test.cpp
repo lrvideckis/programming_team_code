@@ -17,7 +17,7 @@ int main() {
 		adj[v].emplace_back(u, i);
 		edges[i] = {u, v};
 	}
-	info cc = bridge_and_cut(adj, m);
+	graph_info cc = bridge_and_cut(adj, m);
 	vector<vector<int>> bt = bridge_tree(adj, cc);
 	//check correctness of bridge tree
 	{

@@ -2,7 +2,7 @@
 #include "bridges_and_cuts.hpp"
 //returns adjacency list of block vertex tree
 //usage:
-//	info cc = bridge_and_cut(adj, m);
+//	graph_info cc = bridge_and_cut(adj, m);
 //	vector<vector<int>> bvt = block_vertex_tree(adj, cc);
 //to loop over each *unique* bcc containing a node v:
 //	for (int bccid : bvt[v]) {
@@ -13,7 +13,7 @@
 //	for (int v : bvt[bccid + n]) {
 //		...
 //	}
-vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const info& cc) {
+vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
 	int n = adj.size();
 	vector<vector<int>> bvt(n + cc.num_bccs);
 	vector<bool> vis(cc.num_bccs, 0);
