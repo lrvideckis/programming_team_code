@@ -5,6 +5,7 @@
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/graphs/count_paths_per_node.hpp"
+#include "../../../library/graphs/count_paths_per_length.hpp"
 
 vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted, UF& uf) {
 	int n = adj_weighted.size();
@@ -41,6 +42,15 @@ int main() {
 		vector<vector<long long>> cnts_naive = naive(adj_weighted, uf);
 		for (int k = 1; k <= n; k++)
 			assert(count_paths_per_node(adj, k) == cnts_naive[k]);
+		vector<long long> num_paths_len = count_paths_per_length(adj);
+		for (int k = 1; k < n; k++) {
+			long long total_paths = 0;
+			for (int num_paths : count_paths_per_node(adj, k))
+				total_paths += num_paths;
+			assert(total_paths % (k + 1) == 0);
+			total_paths /= k + 1;
+			assert(num_paths_len[k] == total_paths);
+		}
 	}
 	cout << "Hello World\n";
 	return 0;
