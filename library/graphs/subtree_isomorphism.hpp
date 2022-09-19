@@ -12,7 +12,7 @@ struct info {
 };
 
 info subtree_iso(const vector<vector<int>>& adj, int root) {
-	vector<int> id(adj.size());
+	vector<int> id(adj.size(), -1);
 	map<vector<int>, int> hashes;
 	auto dfs = [&](auto self, int u, int p) -> int {
 		vector<int> ch_ids;
@@ -27,6 +27,8 @@ info subtree_iso(const vector<vector<int>>& adj, int root) {
 			return id[u] = hashes[ch_ids] = hashes.size();
 		return id[u] = it->second;
 	};
-	dfs(dfs, root, root);
+	for (int i = 0; i < (int)adj.size(); i++)
+		if (id[i] == -1)
+			dfs(dfs, i, i);
 	return {(int)hashes.size(), id};
 }
