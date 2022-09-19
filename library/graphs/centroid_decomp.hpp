@@ -1,10 +1,10 @@
 #pragma once
 
-// Time and Space complexity are given in terms of n where n is the number of nodes in the tree
+// Time and Space complexity are given in terms of n where n is the number of nodes in the forest
 // Time complexity O(n log n)
 // Space complexity O(n)
 
-// Given an unweighted, undirected tree and a function,
+// Given an unweighted, undirected forest and a function,
 // centroid_decomp runs the function on every decomposition
 
 // see count_paths_per_node for example usage
