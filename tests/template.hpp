@@ -15,5 +15,5 @@
 #include <chrono>
 #include <random>
 #include <complex> //for kactl's FFT
-#include <functional>
+#include <functional> //for lambdas
 using namespace std;
