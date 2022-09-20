@@ -2,7 +2,7 @@
 //for mod inverse
 #include "binary_exponentiation_mod.hpp"
 // usage:
-//     n_choose_1e9+7) to use `choose`, `inv` with inputs strictly < n
+//     n_choose_k nk(n, 1e9+7) to use `choose`, `inv` with inputs strictly < n
 // or:
 //     n_choose_k nk(mod, mod) to use `choose_with_lucas_theorem` with arbitrarily large inputs
 struct n_choose_k {

@@ -3,7 +3,7 @@
 //up to a given integer n that are relatively prime to n.
 //
 //To improve, pre-calc prime factors or use Pollard-rho to find prime factors.
-string totient(int n) {
+int totient(int n) {
 	int res = n;
 	for (int i = 2; i * i <= n; i++) {
 		if (n % i == 0) {
