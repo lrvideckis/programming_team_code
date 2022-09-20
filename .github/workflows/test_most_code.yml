@@ -56,5 +56,5 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
         fetch-depth: 0
-    - name: Compile all tests
+    - name: order tests by git history
       run: make --directory=tests/ print_tests_by_git_modification
