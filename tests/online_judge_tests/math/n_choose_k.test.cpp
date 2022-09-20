@@ -24,7 +24,6 @@ int main() {
 		vector<vector<int>> naive_choose(100, vector<int>(100, 0));
 		int num_primes = 0;
 		for (int mod = 2; mod < 100; mod++) {
-			int mod;
 			if (a_prime[mod] == mod) {
 				n_choose_k choose_l(mod, mod);
 				num_primes++;
