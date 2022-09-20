@@ -11,7 +11,7 @@ do
 			case $dependency in *.hpp|*.test.cpp)
 				git log --max-count=1 --date=iso-local --format="%ad" $dependency
 			esac
-		done | sort | tail -1
+		done | sort | tail --lines=1
 	)
 	echo "$deps_with_update_time $file"
 done | sort --reverse
