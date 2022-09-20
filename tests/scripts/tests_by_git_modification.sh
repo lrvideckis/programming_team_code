@@ -1,5 +1,10 @@
 #!/bin/bash
 
+git submodule init
+git submodule update
+
+source scripts/add_symlink.sh
+
 #get all test files
 all_test_files=$(find online_judge_tests/ -type f -name "*.test.cpp")
 
