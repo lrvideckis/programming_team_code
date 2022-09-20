@@ -4,7 +4,7 @@
 #include "../../../library/range_data_structures/uncommon/merge_sort_tree.hpp"
 
 int main() {
-	cin.ti  e(0)->sync_with_stdio(0);
+	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
 	vector<int> arr(n);

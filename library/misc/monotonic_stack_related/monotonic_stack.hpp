@@ -14,6 +14,5 @@ template<class T> vector<int> monotonic_stack(const vector<T>& arr, const functi
 		int& j = left[i] = i - 1;
 		while (j >= 0 && op(arr[j], arr[i])) j = left[j];
 	}
-	//test comment
 	return left;
 }
