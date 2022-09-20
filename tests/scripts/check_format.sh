@@ -50,25 +50,27 @@ scripts/add_symlink.sh
 #lint code
 declare -i pass=0
 declare -i fail=0
-failTests=""
-for test in $(scripts/tests_by_git_modification.sh | awk '{print $NF}')
+fail_tests=""
+
+scripts/tests_by_git_modification.sh | while read test
 do
 	# run clang tidy one-by-one to get quicker output
-	echo "file is "$test
-	clang-tidy $test -- -std=c++17
+	echo "running clang-tidy on "$test
+	clang-tidy $(echo $test | awk '{print $NF}') -- -std=c++17
 	if (($? != 0))
 	then
 		fail+=1
-		failTests="$failTests$test\n"
+		fail_tests="$fail_tests$test_name\n"
 	else
 		pass+=1
 	fi
 done
+
 echo "$pass/$(($pass+$fail)) tests passed"
 if (($fail == 0)); then
 	echo "No tests failed"
 	exit 0
 else
-	echo -e "These tests failed: \n $failTests"
+	echo -e "These tests failed: \n $fail_tests"
 	exit 1
 fi
