@@ -34,4 +34,4 @@
 - How often have you seen it
 - No good implementation elsewhere (usually KACTL)
 - How hard to modify existing library code
-- Easily testable (preferably there is a problem to test, instead of [custom stress tests](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests/pseudo_tests))
+- Easily testable (preferably there is a problem to test, instead of [handmade tests](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests/handmade_tests))
