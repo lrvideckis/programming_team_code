@@ -15,4 +15,5 @@
 #include <chrono>
 #include <random>
 #include <complex> //for kactl's FFT
+#include <functional>
 using namespace std;
