@@ -55,6 +55,7 @@ fail_tests=""
 scripts/tests_by_git_modification.sh | while read test
 do
 	# run clang tidy one-by-one to get quicker output
+	# also running clang-tidy on all tests in a single command gives no speed-up
 	echo "running clang-tidy on "$test
 	clang-tidy $(echo $test | awk '{print $NF}') -- -std=c++17
 	if (($? != 0))
