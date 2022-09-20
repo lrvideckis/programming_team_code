@@ -48,7 +48,7 @@ git submodule update
 ./scripts/add_symlink.sh
 
 #check snake case & lint
-clang-tidy $(./scripts/tests_by_git_modification.sh | awk '{print $NF}') -- -std=c++17
+clang-tidy $(source scripts/tests_by_git_modification.sh | awk '{print $NF}') -- -std=c++17
 if (($? != 0))
 then
 	echo "clang-tidy failed"
