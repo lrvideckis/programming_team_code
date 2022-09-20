@@ -47,10 +47,8 @@ git submodule update
 
 ./scripts/add_symlink.sh
 
-./scripts/tests_by_git_modification.sh | awk '{print $NF}'
-
 #check snake case & lint
-clang-tidy $(find online_judge_tests/ -type f -name "*.test.cpp") -- -std=c++17
+clang-tidy $(./scripts/tests_by_git_modification.sh | awk '{print $NF}') -- -std=c++17
 if (($? != 0))
 then
 	echo "clang-tidy failed"
