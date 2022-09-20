@@ -27,7 +27,7 @@ cin.exceptions(cin.failbit);
 ```
 Author: Benq
 
-- refer to [KACTL Troubleshoot](../../kactl/content/contest/troubleshoot.txt)
+- refer to [KACTL Troubleshoot](https://github.com/kth-competitive-programming/kactl/blob/main/content/contest/troubleshoot.txt)
 
 ## Sources
 
