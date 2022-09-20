@@ -7,6 +7,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
+	//Test update
 	vector<int> arr(n);
 	vector<pair<int, int>> init(n);
 	for (int i = 0; i < n; i++) {
