@@ -1,11 +1,15 @@
 help:
 	@echo "Available commands                         | explanation"
 	@echo "------------------------------------------ | -----------"
-	@echo "make check_format                          | verify snake case, and Astyle format"
+	@echo "make compile_all                           | compile all tests with g++"
+	@echo "make check_format                          | runs Astyle, cppcheck, clang-tidy (verifies snake case)"
 	@echo "make print_untested_files                  | print list of all .h files with no tests"
 	@echo "make add_symlink                           | to fix ac-library includes"
 	@echo "make hackpack                              | build hackpack from .tex file"
 	@echo "make help                                  | to show this information"
+
+compile_all:
+	./scripts/compile_all_tests.sh .
 
 check_format:
 	./scripts/check_format.sh .

@@ -41,3 +41,10 @@ jobs:
       run: sudo apt-get install astyle clang cppcheck
     - name: Check snake case and lint
       run: make --directory=tests/ check_format
+
+  compile_all_tests:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Compile all tests
+      run: make --directory=tests/ compile_all_tests
