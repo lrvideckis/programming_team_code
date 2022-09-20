@@ -1,5 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_B"
-#include "../../../kactl/stress-tests/utilities/template.h"
+#include "../../template.hpp"
+#include "../../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/SubMatrix.h"
 #include "../../../library/misc/random.hpp"
 

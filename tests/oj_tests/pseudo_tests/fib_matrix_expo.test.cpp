@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../../kactl/stress-tests/utilities/template.h"
+#include "../../template.hpp"
+#include "../../kactl_macros.hpp"
 #include "../../../library/misc/random.hpp"
 
 #include "../../../kactl/content/data-structures/Matrix.h"
