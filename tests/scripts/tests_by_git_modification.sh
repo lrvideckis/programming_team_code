@@ -9,7 +9,7 @@ do
 		for dependency in $(g++ -MM $file)
 		do
 			case $dependency in *.hpp|*.test.cpp)
-				git log -n 1 --date=iso-local --format="%ad" $dependency
+				git log --max-count=1 --date=iso-local --format="%ad" $dependency
 			esac
 		done | sort | tail -1
 	)
