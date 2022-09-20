@@ -7,7 +7,9 @@
 #include <queue>
 #include <cassert>
 #include <string>
+#include <array>
+#include <numeric> //for iota
+//both for random numbers
 #include <chrono>
 #include <random>
-#include <array>
 using namespace std;
