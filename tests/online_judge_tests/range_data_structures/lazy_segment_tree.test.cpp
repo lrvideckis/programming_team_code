@@ -7,6 +7,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	{
 		//test empty seg tree
+		//change
 		seg_tree st(vector<long long>(0));
 		st.update(0, 0, 1);
 		assert(st.query(0, 0) == seg_tree::UNIT);
