@@ -6,8 +6,8 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	int n, q;
-	cin >> n >> q;
+	int n, Q;
+	cin >> n >> Q;
 	vector<int> values(n);
 	for (int i = 0; i < n; i++)
 		cin >> values[i];
@@ -23,7 +23,7 @@ int main() {
 	for (int i = 0; i < n; i++)
 		init[h.tree[i].time_in] = values[i];
 	BIT<long long> ft(init);
-	while (q--) {
+	while (Q--) {
 		int type;
 		cin >> type;
 		if (type == 0) {
