@@ -23,5 +23,5 @@ do
 
 	echo $deps_by_git_log
 
-	$deps_by_git_log | sort | tail -1
+	echo $deps_by_git_log | sort | tail -1
 done
