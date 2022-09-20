@@ -12,6 +12,7 @@ failTests=""
 for test in $(find oj_tests/ -type f -name '*.test.cpp')
 do
 	echo "file is "$test
+	#can't compile 2 files with main at the same time, so we need to compile each test separately
 	g++ $test $(cat scripts/compile_flags.txt)
 	if (($? != 0))
 	then
