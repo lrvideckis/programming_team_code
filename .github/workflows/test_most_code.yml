@@ -54,4 +54,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Compile all tests
-      run: ./tests/scripts/tests_by_git_modification.sh
+      run: make --directory=tests/ print_tests_by_git_modification
