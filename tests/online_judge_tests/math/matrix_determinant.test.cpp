@@ -13,6 +13,6 @@ int main() {
 			cin >> matrix[i][j];
 	}
 	auto [rank, det] = row_reduce(matrix, n, 998244353);
-	cout << det << endl;
+	cout << det << endl;//hi
 	return 0;
 }
