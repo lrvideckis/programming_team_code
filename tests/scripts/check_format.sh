@@ -45,7 +45,7 @@ fi
 git submodule init
 git submodule update
 
-source scripts/add_symlink.sh
+scripts/add_symlink.sh
 
 #lint code
 declare -i pass=0
