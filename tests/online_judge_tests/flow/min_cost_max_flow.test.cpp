@@ -10,7 +10,7 @@ int main() {
 	mcmf mf(n);
 	while (m--) {
 		int u, v, cap, cost;
-		cin >> u >> v >> cap >> co st;
+		cin >> u >> v >> cap >> cost;
 		mf.add_edge(u, v, cap, cost);
 	}
 	auto [flow, cost] = mf.get_flow(0, n - 1, f);
