@@ -45,7 +45,9 @@ fi
 git submodule init
 git submodule update
 
-source scripts/add_symlink.sh
+./scripts/add_symlink.sh
+
+./scripts/tests_by_git_modification.sh
 
 #check snake case & lint
 clang-tidy $(find online_judge_tests/ -type f -name "*.test.cpp") -- -std=c++17
