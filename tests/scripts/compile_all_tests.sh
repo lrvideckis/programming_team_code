@@ -3,7 +3,7 @@
 git submodule init
 git submodule update
 
-source scripts/add_symlink.sh
+#source scripts/add_symlink.sh
 
 #compile code
 declare -i pass=0
