@@ -16,5 +16,5 @@ do
 		case $dependency in *.hpp|*.test.cpp)
 			git log -n 1 --date=iso-local --format="%ad $dependency" $dependency
 		esac
-	done | sort
+	done | sort | tail -1
 done
