@@ -51,7 +51,7 @@ scripts/add_symlink.sh
 declare -i pass=0
 declare -i fail=0
 failTests=""
-for test in $(source scripts/tests_by_git_modification.sh | awk '{print $NF}')
+for test in $(scripts/tests_by_git_modification.sh | awk '{print $NF}')
 do
 	# run clang tidy one-by-one to get quicker output
 	echo "file is "$test
