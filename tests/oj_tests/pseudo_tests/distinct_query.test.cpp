@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../template.hpp"
 #include "../../../library/misc/random.hpp"
 
@@ -24,8 +24,6 @@ int main() {
 			}
 		}
 	}
-	int a, b;
-	cin >> a >> b;
-	cout << a + b << endl;
+	cout << "Hello World\n";
 	return 0;
 }

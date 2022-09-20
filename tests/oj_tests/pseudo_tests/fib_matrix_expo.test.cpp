@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../../../kactl/stress-tests/utilities/template.h"
 #include "../../../library/misc/random.hpp"
 
@@ -21,8 +21,6 @@ int main() {
 		auto pw = get_rand<long long>(0, 1e18);
 		check(pw);
 	}
-	int a, b;
-	cin >> a >> b;
-	cout << a + b << endl;
+	cout << "Hello World\n";
 	return 0;
 }
