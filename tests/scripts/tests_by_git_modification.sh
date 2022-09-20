@@ -1,4 +1,4 @@
-#!/bin/bash
+B#!/bin/bash
 
 git submodule init
 git submodule update
@@ -17,4 +17,4 @@ do
 		esac
 	done | sort | tail -1)
 	echo "$tmp $file"
-done
+done | sort --reverse
