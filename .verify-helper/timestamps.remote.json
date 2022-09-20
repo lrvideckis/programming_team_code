@@ -24,7 +24,6 @@
 "tests/online_judge_tests/math/partitions.test.cpp": "2022-09-19 21:49:30 -0700",
 "tests/online_judge_tests/math/prime_sieve.test.cpp": "2022-09-19 21:49:30 -0700",
 "tests/online_judge_tests/math/solve_linear_mod.test.cpp": "2022-09-20 00:46:11 -0700",
-"tests/online_judge_tests/math/totient.test.cpp": "2022-09-19 21:49:30 -0700",
 "tests/online_judge_tests/misc/cartesian_tree.test.cpp": "2022-09-20 00:35:03 -0700",
 "tests/online_judge_tests/misc/count_rectangles.test.cpp": "2022-09-20 00:35:03 -0700",
 "tests/online_judge_tests/misc/iterate_chooses.test.cpp": "2022-09-19 21:49:30 -0700",
