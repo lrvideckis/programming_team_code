@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#get all test files
+#get all test (*.test.cpp) files, ordered by most recently modified
+
 all_test_files=$(find online_judge_tests/ -type f -name "*.test.cpp")
 
 for file in $all_test_files
