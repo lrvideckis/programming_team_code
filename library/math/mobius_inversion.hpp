@@ -7,6 +7,6 @@ int mobius[MX_N];
 void calc_mobius() {
 	mobius[1] = 1;
 	for (int i = 1; i < MX_N; i++)
-		for (int j = i + i; j < MX_N; j += i)
-			mobius[j] -= mobius[i];
+		for (int J = i + i; J < MX_N; J += i)
+			mobius[J] -= mobius[i];
 }
