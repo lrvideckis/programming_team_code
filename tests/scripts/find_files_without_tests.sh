@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #get all test files
-all_test_files=$(find . -type f -name "*.test.cpp")
+all_test_files=$(find online_judge_tests/ -type f -name "*.test.cpp")
 
 #find dependencies of each test file (concatenate results)
 all_test_dependencies=$(
