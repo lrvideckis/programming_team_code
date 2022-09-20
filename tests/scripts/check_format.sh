@@ -53,6 +53,7 @@ declare -i fail=0
 failTests=""
 for test in $(source scripts/tests_by_git_modification.sh | awk '{print $NF}')
 do
+	# run clang tidy one-by-one to get quicker output
 	echo "file is "$test
 	clang-tidy $test -- -std=c++17
 	if (($? != 0))
