@@ -3,7 +3,7 @@ name: test_all_code
 on: push
 
 jobs:
-  oj_tests:
+  online_judge_tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

@@ -35,7 +35,7 @@ then
 fi
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
-cppcheck oj_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=5
+cppcheck online_judge_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=5
 if (($? != 0))
 then
 	echo "cppcheck failed"
@@ -48,7 +48,7 @@ git submodule update
 source scripts/add_symlink.sh
 
 #check snake case & lint
-clang-tidy $(find oj_tests/ -type f -name "*.test.cpp") -- -std=c++17
+clang-tidy $(find online_judge_tests/ -type f -name "*.test.cpp") -- -std=c++17
 if (($? != 0))
 then
 	echo "clang-tidy failed"
