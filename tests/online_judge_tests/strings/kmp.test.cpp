@@ -6,7 +6,7 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	string haystack, needle;
+	string haystack, needle, s;
 	cin >> haystack >> needle;
 	KMP kmp(needle);
 	for (int idx : kmp.find(haystack))
