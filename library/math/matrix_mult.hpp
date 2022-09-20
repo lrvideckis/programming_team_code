@@ -14,7 +14,7 @@ template<typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, c
 	for (int i = 0; i < n; i++) {
 		for (int k = 0; k < inner; k++) {
 			for (int j = 0; j < m; j++)
-				c[i][j] = c[i][j] + a[i][k] * b[k][j];
+				c[i][j] += a[i][k] * b[k][j];
 		}
 	}
 	return c;
