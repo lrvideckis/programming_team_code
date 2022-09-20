@@ -21,7 +21,7 @@ int main() {
 			int v = get_rand<int>(0, N);
 			if (u == v) continue;
 			if (uf.join(u, v)) {
-				auto w = get_rand<long long>(0, (long long)1e15);
+				long long w = get_rand<long long>(0, (long long)1e15);
 				edges++;
 				adj[u].push_back(v);
 				adj[v].push_back(u);
