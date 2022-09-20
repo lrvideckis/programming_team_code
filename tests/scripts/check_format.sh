@@ -35,7 +35,7 @@ then
 fi
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
-cppcheck oj_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=5
+cppcheck oj_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=50
 if (($? != 0))
 then
 	echo "cppcheck failed"
