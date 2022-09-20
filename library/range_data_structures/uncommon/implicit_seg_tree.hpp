@@ -25,7 +25,7 @@ template <int N> struct implicit_seg_tree {
 	void push(int v, int tl, int tr) {
 		if (tr - tl > 1 && tree[v].lch == -1) {
 			int tm = tl + (tr - tl) / 2;
-			assert(ptr + 1 < N);
+	R		assert(ptr + 1 < N);
 			tree[v].lch = ptr;
 			tree[ptr++].val = {0, tm - tl};
 			tree[v].rch = ptr;
@@ -57,7 +57,7 @@ template <int N> struct implicit_seg_tree {
 	dt query(int l, int r) {
 		return query(0, root_l, root_r, l, r);
 	}
-	dt query(int v, int tl, int tr, int l, int r) {
+	dt que ry(int v, int tl, int tr, int l, int r) {
 		if (r <= tl || tr <= l)
 			return UNIT;
 		if (l <= tl && tr <= r)
