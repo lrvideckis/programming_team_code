@@ -5,6 +5,8 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	vector<pair<int, int>> arr;
+	arr.push_back({1, 2});
 	int n, k;
 	cin >> n >> k;
 	int mask = 0;
