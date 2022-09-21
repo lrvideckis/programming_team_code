@@ -1,11 +1,8 @@
 #!/bin/bash
 
-#get all test files
-all_test_files=$(find online_judge_tests/ -type f -name "*.test.cpp")
-
 #find dependencies of each test file (concatenate results)
 all_test_dependencies=$(
-	for file in $all_test_files
+	for file in $(find online_judge_tests/ -type f -name "*.test.cpp")
 	do
 		g++ -MM $file
 	done
