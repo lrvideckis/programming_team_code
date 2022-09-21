@@ -1,0 +1,14 @@
+indent=tab
+style=attach
+remove-braces
+align-reference=type
+align-pointer=type
+delete-empty-lines
+attach-classes
+pad-oper
+pad-header
+unpad-paren
+close-templates
+indent-col1-comments
+suffix=none
+formatted
