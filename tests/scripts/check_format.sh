@@ -5,6 +5,7 @@ find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \
 	grep --invert-match "README" && exit 1
 
 #check files are formatted with astyle
+echo "run astyle on all files:"
 astyle_output=$(
 	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp" && \
 	astyle --options=.astylerc --recursive "../library/*.hpp"
@@ -12,6 +13,7 @@ astyle_output=$(
 echo "$astyle_output" | grep "Formatted" && exit 1
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
+echo "run cppcheck on all files:"
 cppcheck online_judge_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=50 || exit 1
 
 git submodule init
@@ -24,6 +26,7 @@ declare -i pass=0
 declare -i fail=0
 fail_tests=""
 
+echo "run clang-tidy on all files:"
 ./scripts/tests_by_git_modification.sh | while read test
 do
 	# run clang tidy one-by-one to get quicker output

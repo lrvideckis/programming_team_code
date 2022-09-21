@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 #adds hash code comments
-tests="$(find ../library -name "*.hpp") $(find ../ac-library/atcoder -name "*.hpp")"
+tests=$(find ../library/ ../ac-library/atcoder/ -name "*.hpp")
 for test in $tests
 do
 	hash=$(cat $test | ../library/contest/hash.sh)
 	comment="cat $(basename $test) | ./hash.sh"
 	sed --in-place "1s;^;//$comment\n//$hash\n;" $test
 done
-
 
 #needed to make boxes under headings empty, otherwise you get filler text
 touch NULL
