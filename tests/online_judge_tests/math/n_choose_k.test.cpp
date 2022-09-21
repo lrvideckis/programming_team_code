@@ -20,11 +20,11 @@ int main() {
 	}
 	{
 		//test choose with lucas theorem
-		calc_sieve();
+		vector<int> sieve = get_sieve(1001);
 		vector<vector<int>> naive_choose(100, vector<int>(100, 0));
 		int num_primes = 0;
 		for (int mod = 2; mod < 100; mod++) {
-			if (a_prime[mod] == mod) {
+			if (is_prime(mod, sieve)) {
 				n_choose_k choose_l(mod, mod);
 				num_primes++;
 				for (int n = 0; n < 100; n++) {
