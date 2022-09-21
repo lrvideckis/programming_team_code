@@ -27,7 +27,7 @@ declare -i fail=0
 fail_tests=""
 
 echo "run clang-tidy on all files:"
-./scripts/tests_by_git_modification.sh | while read test
+while read test
 do
 	# run clang tidy one-by-one to get quicker output
 	# also running clang-tidy on all tests in a single command gives no speed-up
@@ -37,9 +37,9 @@ do
 		pass+=1
 	else
 		fail+=1
-		fail_tests="$fail_tests$test_name\n"
+		fail_tests="$fail_tests$test\n"
 	fi
-done
+done < <(./scripts/tests_by_git_modification.sh)
 
 echo "$pass/$(($pass+$fail)) tests passed"
 if (($fail == 0))
