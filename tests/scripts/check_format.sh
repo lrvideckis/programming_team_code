@@ -1,22 +1,12 @@
 #!/usr/bin/env bash
 
-#check file names are snake case
-files_snake_case="find .. -name '*[A-Z]*' -or -name '*-*' | \
-	grep --invert-match '\.git' | \
-	grep --invert-match '\.verify-helper' | \
-	grep --invert-match 'ac-library' | \
-	grep --invert-match '\.clang-tidy' | \
-	grep --invert-match --extended-regexp '(LICENSE|Makefile|README)'"
-if eval $files_snake_case --quiet
-then
-	echo "these files/directories are not snake case:"
-	eval $files_snake_case
-	exit 1
-fi
+echo "check files and directories are snake_case:"
+find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \
+	grep --invert-match "README" && exit 1
 
 #check files are formatted with astyle
 astyle_output=$(
-	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp" &&
+	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp" && \
 	astyle --options=.astylerc --recursive "../library/*.hpp"
 )
 echo "$astyle_output" | grep "Formatted" && exit 1
