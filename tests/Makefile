@@ -5,7 +5,8 @@ help:
 	@echo
 	@echo "make check_format                    | runs Astyle, cppcheck, clang-tidy (verifies snake case)"
 	@echo
-	@echo "make print_untested_files            | print list of all .hpp files with no tests (these files also are not compiled)."
+	@echo "make print_untested_files            | print list of all .hpp files included by *no* .test.cpp files"
+	@echo "                                     |   - These files are not compiled nor linted as part of CI."
 	@echo "                                     |   - Need to add symlink first."
 	@echo
 	@echo "make print_tests_by_git_modification | print list of all .test.cpp files ordered by most recently modified."
