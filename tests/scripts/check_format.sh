@@ -2,6 +2,7 @@
 
 echo "check files and directories are snake_case:"
 find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \
+	grep --invert-match ".verify-helper" | \
 	grep --invert-match "README" && exit 1
 
 echo "run astyle on all files:"

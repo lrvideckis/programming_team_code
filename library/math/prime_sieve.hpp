@@ -1,21 +1,25 @@
 #pragma once
-//a_prime[val] = some random prime factor of `val`
-//
-//to check if `val` is prime:
-//	if (a_prime[val] == val)
-//
-//to get all prime factors of a number `val` in O(log(val)):
-//	while (val > 1) {
-//		int p = a_prime[val];
-//		//p is some prime factor of val
-//		val /= p;
-//	}
-const int N = 1e6 + 10;
-int a_prime[N];
-void calc_sieve() {
-	iota(a_prime, a_prime + N, 0);
-	for (int i = 2; i * i < N; i++)
-		if (a_prime[i] == i)
-			for (int j = i * i; j < N; j += i)
-				a_prime[j] = i;
+bool is_prime(int val, const vector<int>& sieve) {
+	assert(val < (int)sieve.size());
+	return val >= 2 && sieve[val] == val;
+}
+vector<int> get_prime_factors(int val, const vector<int>& sieve) {
+	assert(val < (int)sieve.size());
+	vector<int> factors;
+	while (val > 1) {
+		int p = sieve[val];
+		factors.push_back(p);
+		val /= p;
+	}
+	return factors;
+}
+//returns array `sieve` where `sieve[i]` = some prime factor of `i`
+vector<int> get_sieve(int n) {
+	vector<int> sieve(n);
+	iota(sieve.begin(), sieve.end(), 0);
+	for (int i = 2; i * i < n; i++)
+		if (sieve[i] == i)
+			for (int j = i * i; j < n; j += i)
+				sieve[j] = i;
+	return sieve;
 }

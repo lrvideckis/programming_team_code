@@ -1,21 +1,20 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
+#include "../kactl_macros.hpp"
+#include "../../../kactl/content/number-theory/MillerRabin.h"
 #include "../../../library/math/prime_sieve.hpp"
 
 #include "../../../library/math/mobius_inversion.hpp"
 
 int main() {
-	calc_sieve();
+	vector<int> sieve = get_sieve(N);
 	calc_mobius();
-	for (int i = 1; i < min(N, MX_N); i++) {
+	for (int i = 1; i < N; i++) {
+		assert(isPrime(i) == is_prime(i, sieve));
 		int val = i;
 		map<int, int> factors;
-		while (val > 1) {
-			int p = a_prime[val];
-			//p is some prime factor of val
-			factors[p]++;
-			val /= p;
-		}
+		for (int prime_factor : get_prime_factors(val, sieve))
+			factors[prime_factor]++;
 		{
 			bool found_square = 0;
 			for (auto [prime, exponent] : factors) {
