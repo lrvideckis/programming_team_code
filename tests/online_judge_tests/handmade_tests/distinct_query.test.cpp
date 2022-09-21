@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../template.hpp"
+#include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/range_data_structures/uncommon/distinct_query.hpp"

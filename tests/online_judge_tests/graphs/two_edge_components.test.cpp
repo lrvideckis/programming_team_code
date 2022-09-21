@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
-#include "../../template.hpp"
-#include "../../kactl_macros.hpp"
+#include "../template.hpp"
+#include "../kactl_macros.hpp"
 
 #include "../../../kactl/content/data-structures/UnionFind.h"
 #include "../../../library/graphs/bridge_tree.hpp"

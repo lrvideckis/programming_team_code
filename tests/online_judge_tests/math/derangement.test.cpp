@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/montmort_number_mod"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/math/derangements.hpp"
 

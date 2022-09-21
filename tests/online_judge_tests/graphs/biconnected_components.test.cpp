@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/biconnected_components"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/block_vertex_tree.hpp"
 

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
-#include "../../template.hpp"
+#include "../template.hpp"
 #include "../../../library/math/prime_sieve.hpp"
 
 #include "../../../library/math/mobius_inversion.hpp"

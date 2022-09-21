@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/subtree_isomorphism.hpp"
 

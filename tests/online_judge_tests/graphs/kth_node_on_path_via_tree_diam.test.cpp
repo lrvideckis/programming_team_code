@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/kth_node_on_path.hpp"
 

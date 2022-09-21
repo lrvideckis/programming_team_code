@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
-#include "../../template.hpp"
-#include "../../kactl_macros.hpp"
+#include "../template.hpp"
+#include "../kactl_macros.hpp"
 
 #include "../../../library/misc/random.hpp"
 #include "../../../library/strings/palindrome_query.hpp"

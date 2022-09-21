@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/range_data_structures/uncommon/kth_smallest.hpp"
 #include "../../../library/range_data_structures/uncommon/merge_sort_tree.hpp"

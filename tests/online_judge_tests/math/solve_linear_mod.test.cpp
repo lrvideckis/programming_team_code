@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/math/solve_linear_mod.hpp"
 

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/range_data_structures/rmq.hpp"
 

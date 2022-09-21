@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/partition_function"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/math/partitions.hpp"
 

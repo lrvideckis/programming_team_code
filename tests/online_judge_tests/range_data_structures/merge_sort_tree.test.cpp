@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_frequency"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/range_data_structures/uncommon/merge_sort_tree.hpp"
 
