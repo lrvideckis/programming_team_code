@@ -13,7 +13,7 @@ fail_tests=""
 ./scripts/tests_by_git_modification.sh | while read test
 do
 	#can't compile 2 files with main at the same time, so we need to compile each test separately
-	echo "compiling "$test
+	echo "last modified date; file to compile "$test
 	if g++ $(echo $test | awk '{print $NF}') $(cat scripts/compile_flags.txt)
 	then
 		pass+=1

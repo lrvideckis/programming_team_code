@@ -51,7 +51,7 @@ fail_tests=""
 do
 	# run clang tidy one-by-one to get quicker output
 	# also running clang-tidy on all tests in a single command gives no speed-up
-	echo "running clang-tidy on "$test
+	echo "last modified date; file to run clang-tidy "$test
 	if clang-tidy $(echo $test | awk '{print $NF}') -- -std=c++17
 	then
 		pass+=1
