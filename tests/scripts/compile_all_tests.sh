@@ -10,7 +10,7 @@ declare -i pass=0
 declare -i fail=0
 fail_tests=""
 
-./scripts/tests_by_git_modification.sh | while read test
+while read test
 do
 	#can't compile 2 files with main at the same time, so we need to compile each test separately
 	echo "last modified date; file to compile "$test
@@ -21,7 +21,7 @@ do
 		fail+=1
 		fail_tests="$fail_tests$test\n"
 	fi
-done
+done < <(./scripts/tests_by_git_modification.sh)
 
 echo "$pass/$(($pass+$fail)) tests passed"
 if (($fail == 0))
