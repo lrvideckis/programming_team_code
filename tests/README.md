@@ -12,7 +12,7 @@ oj-verify --config-file ~/programming_team_code/.verify-helper/config.toml run p
 
 
 All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests) (thus also *included* `*.hpp` files in [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library))
-  - Reason: try running linters on a `*.hpp` file :upside_down_face:. Also this way incentives adding tests. BTW kactl addresses this problem by [copying around / modifying](https://github.com/kth-competitive-programming/kactl/blob/main/doc/scripts/test-compiles.sh)  header files which I think is :vomiting_face:
+  - Reason: try running linters on a `*.hpp` file :upside_down_face:. Also this way incentivizes adding tests. BTW kactl addresses this problem by [copying around / modifying](https://github.com/kth-competitive-programming/kactl/blob/main/doc/scripts/test-compiles.sh)  header files which I think is :vomiting_face:
   - see `make print_untested_files` for `*.hpp` files which are not included by any `*.test.cpp` file
 
 
