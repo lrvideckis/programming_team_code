@@ -3,14 +3,14 @@
 git submodule init
 git submodule update
 
-scripts/add_symlink.sh
+./scripts/add_symlink.sh
 
 #compile code
 declare -i pass=0
 declare -i fail=0
 fail_tests=""
 
-scripts/tests_by_git_modification.sh | while read test
+./scripts/tests_by_git_modification.sh | while read test
 do
 	#can't compile 2 files with main at the same time, so we need to compile each test separately
 	echo "compiling "$test

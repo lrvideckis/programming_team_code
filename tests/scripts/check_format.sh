@@ -45,14 +45,14 @@ fi
 git submodule init
 git submodule update
 
-scripts/add_symlink.sh
+./scripts/add_symlink.sh
 
 #lint code
 declare -i pass=0
 declare -i fail=0
 fail_tests=""
 
-scripts/tests_by_git_modification.sh | while read test
+./scripts/tests_by_git_modification.sh | while read test
 do
 	# run clang tidy one-by-one to get quicker output
 	# also running clang-tidy on all tests in a single command gives no speed-up
