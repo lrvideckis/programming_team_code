@@ -15,24 +15,11 @@ then
 fi
 
 #check files are formatted with astyle
-ASTYLE_COMMAND="astyle --indent=tab --style=attach --remove-braces --align-reference=type --align-pointer=type --delete-empty-lines --attach-classes --pad-oper --pad-header --unpad-paren --close-templates --indent-col1-comments --suffix=none"
-if ! grep --quiet "$ASTYLE_COMMAND" ../README.md
-then
-	echo "command doesn't match what's in README.md. Maybe you changed the README's asyle command."
-	exit 1
-fi
-cd ..
 astyle_output=$(
-	$ASTYLE_COMMAND --dry-run --formatted --recursive "*.test.cpp" &&
-	$ASTYLE_COMMAND --dry-run --formatted --recursive "*.hpp"
+	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp" &&
+	astyle --options=.astylerc --recursive "../library/*.hpp"
 )
-cd tests/
-if grep --quiet "Formatted" <<< "$astyle_output"
-then
-	echo "some files are not formatted, output of astyle: "
-	echo "$astyle_output"
-	exit 1
-fi
+echo "$astyle_output" | grep "Formatted" && exit 1
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
 cppcheck online_judge_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=50 || exit 1
@@ -51,7 +38,7 @@ fail_tests=""
 do
 	# run clang tidy one-by-one to get quicker output
 	# also running clang-tidy on all tests in a single command gives no speed-up
-	echo "running clang-tidy on "$test
+	echo "last modified date; file to run clang-tidy "$test
 	if clang-tidy $(echo $test | awk '{print $NF}') -- -std=c++17
 	then
 		pass+=1

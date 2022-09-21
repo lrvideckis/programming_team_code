@@ -24,12 +24,4 @@
 "tests/online_judge_tests/math/n_choose_k.test.cpp": "2022-09-20 21:13:03 -0700",
 "tests/online_judge_tests/math/partitions.test.cpp": "2022-09-20 21:13:03 -0700",
 "tests/online_judge_tests/math/prime_sieve.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/math/solve_linear_mod.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/math/totient.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/misc/cartesian_tree.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/misc/count_rectangles.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/misc/iterate_chooses.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/misc/iterate_submasks.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/misc/iterate_supermasks.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/misc/max_rect_histogram.test.cpp": "2022-09-20 21:13:03 -0700"
 }
