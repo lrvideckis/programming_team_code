@@ -10,7 +10,7 @@ oj-verify --config-file ~/programming_team_code/.verify-helper/config.toml run p
 ## Linting
 
 
-All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests) (so also *included* `*.hpp` files)
+All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests) (thus also *included* `*.hpp` files in library/). Reason: try running linters on a `*.hpp` file :upside_down_face:
   - see `make print_untested_files` for `*.hpp` files which are not included by any `*.test.cpp` file
 
 
