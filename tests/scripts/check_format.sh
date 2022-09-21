@@ -4,7 +4,6 @@ echo "check files and directories are snake_case:"
 find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \
 	grep --invert-match "README" && exit 1
 
-#check files are formatted with astyle
 echo "run astyle on all files:"
 astyle_output=$(
 	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp" && \
