@@ -2,9 +2,7 @@
 
 #get all test (*.test.cpp) files, ordered by most recently modified
 
-all_test_files=$(find online_judge_tests/ -type f -name "*.test.cpp")
-
-for file in $all_test_files
+for file in $(find online_judge_tests/ -type f -name "*.test.cpp")
 do
 	# find the latest commit touching any dependency
 	deps_with_update_time=$(
