@@ -2,7 +2,7 @@
 - We rely on online-judge-tools ([github](https://github.com/online-judge-tools/verification-helper)) which tests code on either [Library Checker](https://judge.yosupo.jp/) or [Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list) problems
   - [steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html) for your own repo
 - See `*.test.cpp` files in [online_judge_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests) for the actual tests
-- Note: only 30 tests run at a time, and currently there are >40 tests. So if you have a big change (maybe code mod), only the first 30 tests will run. To fix, I make random commits which change effectively nothing until all tests run. See [timestamps.remote.json](https://github.com/lrvideckis/programming_team_code/blob/master/.verify-helper/timestamps.remote.json) to check for which tests ran
+- Note: at most 30 tests run per commit, and currently there are >40 tests. So for big changes (ex: code mod), CI may not test all changed files. To fix, I make random commits which change effectively nothing until all tests run. See [timestamps.remote.json](https://github.com/lrvideckis/programming_team_code/blob/master/.verify-helper/timestamps.remote.json) to see which tests ran
 - need to specify config file when running locally:
 ```
 oj-verify --config-file ~/programming_team_code/.verify-helper/config.toml run palindrome_query.test.cpp
