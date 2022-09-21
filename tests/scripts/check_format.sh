@@ -35,12 +35,7 @@ then
 fi
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
-cppcheck online_judge_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=50
-if (($? != 0))
-then
-	echo "cppcheck failed"
-	exit 1
-fi
+cppcheck online_judge_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=50 || exit 1
 
 git submodule init
 git submodule update
@@ -57,18 +52,18 @@ do
 	# run clang tidy one-by-one to get quicker output
 	# also running clang-tidy on all tests in a single command gives no speed-up
 	echo "running clang-tidy on "$test
-	clang-tidy $(echo $test | awk '{print $NF}') -- -std=c++17
-	if (($? != 0))
+	if clang-tidy $(echo $test | awk '{print $NF}') -- -std=c++17
 	then
+		pass+=1
+	else
 		fail+=1
 		fail_tests="$fail_tests$test_name\n"
-	else
-		pass+=1
 	fi
 done
 
 echo "$pass/$(($pass+$fail)) tests passed"
-if (($fail == 0)); then
+if (($fail == 0))
+then
 	echo "No tests failed"
 	exit 0
 else

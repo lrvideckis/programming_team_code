@@ -14,18 +14,18 @@ fail_tests=""
 do
 	#can't compile 2 files with main at the same time, so we need to compile each test separately
 	echo "compiling "$test
-	g++ $(echo $test | awk '{print $NF}') $(cat scripts/compile_flags.txt)
-	if (($? != 0))
+	if g++ $(echo $test | awk '{print $NF}') $(cat scripts/compile_flags.txt)
 	then
+		pass+=1
+	else
 		fail+=1
 		fail_tests="$fail_tests$test_name\n"
-	else
-		pass+=1
 	fi
 done
 
 echo "$pass/$(($pass+$fail)) tests passed"
-if (($fail == 0)); then
+if (($fail == 0))
+then
 	echo "No tests failed"
 	exit 0
 else
