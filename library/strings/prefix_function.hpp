@@ -3,6 +3,7 @@
 template <class T> vector<int> prefix_function(const T& s) {
 	int n = s.size();
 	vector<int> pi(n, 0);
+	int x = 10;
 	for (int i = 1; i < n; i++) {
 		int j = pi[i - 1];
 		while (j > 0 && s[i] != s[j]) j = pi[j - 1];
