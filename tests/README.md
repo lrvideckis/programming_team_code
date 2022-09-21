@@ -13,8 +13,8 @@ oj-verify --config-file ~/programming_team_code/.verify-helper/config.toml run p
 ## Linting
 tool | settings | notes | wiki
 --- | --- | --- | ---
-astyle | [.astylerc](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.astylerc) | | http://astyle.sourceforge.net/astyle.html
-clang-tidy | [.clang-tidy](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.clang-tidy) - checks variables for snake_case | | https://clang.llvm.org/extra/clang-tidy/checks/list.html
+astyle | [.astylerc](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.astylerc) | running `make check_format` locally will format files | http://astyle.sourceforge.net/astyle.html
+clang-tidy | [.clang-tidy](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.clang-tidy) | checks variables for snake_case | https://clang.llvm.org/extra/clang-tidy/checks/list.html
 cppcheck | see flags in cppcheck command in [check_format.sh](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/check_format.sh) | | https://cppcheck.sourceforge.io/
 g++ | [compile_flags.txt](https://github.com/lrvideckis/programming_team_code/blob/master/tests/scripts/compile_flags.txt) | |
 
