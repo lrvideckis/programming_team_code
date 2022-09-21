@@ -101,7 +101,7 @@ Checks: >
     readability-simplify-*,
     readability-container-contains
 WarningsAsErrors: "*"
-HeaderFilterRegex: "/library/[^.]+\\.h$"
+HeaderFilterRegex: "/library/[^.]+\\.hpp$"
 UseColor: true
 CheckOptions:
   - key:             readability-identifier-naming.StructCase
