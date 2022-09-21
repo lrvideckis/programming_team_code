@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/assignment"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/flow/hungarian.hpp"
 

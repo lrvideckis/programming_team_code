@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/lca.hpp"
 #include "../../../library/graphs/hld.hpp"

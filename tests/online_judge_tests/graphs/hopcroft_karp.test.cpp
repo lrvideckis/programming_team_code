@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/hopcroft_karp.hpp"
 

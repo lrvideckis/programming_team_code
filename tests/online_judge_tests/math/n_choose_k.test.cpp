@@ -1,5 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_5_E"
-#include "../../template.hpp"
+#include "../template.hpp"
 #include "../../../library/math/prime_sieve.hpp"
 
 #include "../../../library/math/n_choose_k_mod.hpp"

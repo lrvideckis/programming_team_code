@@ -1,5 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/problems/GRL_1_A"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/dijkstra.hpp"
 

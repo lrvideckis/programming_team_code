@@ -1,5 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_H"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/range_data_structures/lazy_segment_tree.hpp"
 

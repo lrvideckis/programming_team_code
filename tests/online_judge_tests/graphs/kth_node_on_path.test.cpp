@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/jump_on_tree"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/kth_node_on_path.hpp"
 

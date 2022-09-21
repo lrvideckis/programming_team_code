@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/math/matrix_mult.hpp"
 #include "../../../ac-library/atcoder/modint.hpp"

@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/graphs/hld.hpp"
 #include "../../../library/range_data_structures/bit.hpp"

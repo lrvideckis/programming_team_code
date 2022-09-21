@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/misc/monotonic_stack_related/cartesian_tree.hpp"
 

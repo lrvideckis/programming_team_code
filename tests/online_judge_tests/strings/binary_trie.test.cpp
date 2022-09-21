@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/strings/binary_trie.hpp"
 

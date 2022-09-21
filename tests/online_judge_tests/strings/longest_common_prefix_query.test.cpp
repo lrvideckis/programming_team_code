@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
-#include "../../template.hpp"
+#include "../template.hpp"
 
 #include "../../../library/strings/longest_common_prefix_query.hpp"
 
