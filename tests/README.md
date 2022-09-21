@@ -11,8 +11,8 @@ oj-verify --config-file ~/programming_team_code/.verify-helper/config.toml run p
 ```
 
 ## Linting
-
-- See [.clang-tidy](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.clang-tidy) for the list of lint-checks ([wiki](https://clang.llvm.org/extra/clang-tidy/checks/list.html)). Notable checks:
+- See [.astylerc](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.astylerc) for list of preferences for formatting ([astyle wiki](http://astyle.sourceforge.net/astyle.html))
+- See [.clang-tidy](https://github.com/lrvideckis/programming_team_code/blob/master/tests/.clang-tidy) for the list of lint-checks ([clang-tidy wiki](https://clang.llvm.org/extra/clang-tidy/checks/list.html)). Notable checks:
   - `readability-identifier-naming` to check for snake_case.
 
 ## Makefile
