@@ -41,10 +41,10 @@
 "tests/online_judge_tests/range_data_structures/merge_sort_tree.test.cpp": "2022-09-20 21:13:03 -0700",
 "tests/online_judge_tests/range_data_structures/sparse_table.test.cpp": "2022-09-21 02:14:46 -0700",
 "tests/online_judge_tests/strings/binary_trie.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/strings/kmp.test.cpp": "2022-09-21 01:32:03 -0700",
+"tests/online_judge_tests/strings/kmp.test.cpp": "2022-09-21 02:16:49 -0700",
 "tests/online_judge_tests/strings/lcp_query_palindrome.test.cpp": "2022-09-21 02:14:46 -0700",
 "tests/online_judge_tests/strings/longest_common_prefix_query.test.cpp": "2022-09-21 02:14:46 -0700",
 "tests/online_judge_tests/strings/palindrome_query.test.cpp": "2022-09-20 21:13:03 -0700",
-"tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-09-21 01:32:03 -0700",
+"tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-09-21 02:16:49 -0700",
 "tests/online_judge_tests/strings/trie.test.cpp": "2022-09-20 21:13:08 -0700"
 }
