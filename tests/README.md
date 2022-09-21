@@ -1,7 +1,7 @@
 ## Testing
 - We rely on online-judge-tools ([github](https://github.com/online-judge-tools/verification-helper)) which tests code on either [Library Checker](https://judge.yosupo.jp/) or [Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list) problems
   - [steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html) for your own repo
-- See all `*.test.cpp` files in [online_judge_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests).
+- See all `*.test.cpp` files in [online_judge_tests/](https://github.com/lrvideckis/programming_team_code/tree/master/tests/online_judge_tests)
 - Note: only 30 tests run at a time, and currently there are >40 tests. So if you have a big change (maybe code mod), only the first 30 tests will run. To fix, I make random commits which change effectively nothing until all tests run.
 - need to specify config file when running locally:
 ```
