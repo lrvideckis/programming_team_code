@@ -16,17 +16,17 @@
 template <class T> struct RMQ {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> op;
+	//inclusive-exclusive range [l, r)
+	T query(int l, int r) const {
+		assert(0 <= l && l < r && r <= (int)dp[0].size());
+		int LG = __lg(r - l);
+		return op(dp[LG][l], dp[LG][r - (1 << LG)]);
+	}
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : dp(1, arr), op(a_op) {
 		for (int pw = 1, k = 1, n = arr.size(); 2 * pw <= n; pw *= 2, k++) {
 			dp.emplace_back(n - 2 * pw + 1);
 			for (int j = 0; j < n - 2 * pw + 1; j++)
 				dp[k][j] = op(dp[k - 1][j], dp[k - 1][j + pw]);
 		}
-	}
-	//inclusive-exclusive range [l, r)
-	T query(int l, int r) const {
-		assert(0 <= l && l < r && r <= (int)dp[0].size());
-		int LG = __lg(r - l);
-		return op(dp[LG][l], dp[LG][r - (1 << LG)]);
 	}
 };
