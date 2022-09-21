@@ -4,13 +4,13 @@
 //
 //To improve, pre-calc prime factors or use Pollard-rho to find prime factors.
 int totient(int n) {
-	int res = n;
+	int RES = n;
 	for (int i = 2; i * i <= n; i++) {
 		if (n % i == 0) {
 			while (n % i == 0) n /= i;
-			res -= res / i;
+			RES -= RES / i;
 		}
 	}
-	if (n > 1) res -= res / n;
-	return res;
+	if (n > 1) RES -= RES / n;
+	return RES;
 }
