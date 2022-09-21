@@ -19,7 +19,7 @@ do
 		pass+=1
 	else
 		fail+=1
-		fail_tests="$fail_tests$test_name\n"
+		fail_tests="$fail_tests$test\n"
 	fi
 done
 
