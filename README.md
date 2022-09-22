@@ -2,14 +2,14 @@
 
 My library of algorithms for competitive programming. Quick links:
 
-- [library/](https://github.com/lrvideckis/programming_team_code/tree/master/library)
-- [template.cpp](https://github.com/lrvideckis/programming_team_code/blob/master/library/contest/template.cpp)
-- [hackpack.pdf](https://github.com/lrvideckis/programming_team_code/blob/master/hackpack.pdf)
+- [library/](library/)
+- [template.cpp](library/contest/template.cpp)
+- [hackpack.pdf](hackpack.pdf)
 
 ## Testing and Linting
 [![Actions Status](https://github.com/lrvideckis/programming_team_code/workflows/verify/badge.svg)](https://github.com/lrvideckis/programming_team_code/actions)
 
-see [tests/README.md](https://github.com/lrvideckis/programming_team_code/blob/master/tests/README.md)
+see [tests/README.md](tests/README.md)
 
 ## Contributing
 I appreciate all feedback. It can be anything from suggestions (please include your reason for the change), or importantly bugs! You can submit an issue or email me at
