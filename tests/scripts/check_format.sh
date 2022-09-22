@@ -39,6 +39,7 @@ do
 		fail+=1
 		fail_tests="$fail_tests$test\n"
 	fi
+	echo "$pass/$(($pass+$fail)) tests passed so far"
 done < <(./scripts/tests_by_git_modification.sh)
 
 echo "$pass/$(($pass+$fail)) tests passed"
