@@ -1,21 +1,27 @@
 help:
-	@echo "Available commands                   | explanation"
+	@echo "available commands                   | explanation"
 	@echo "------------------------------------ | -----------"
 	@echo "make compile_all_tests               | compile all tests with g++"
+	@echo "                                     |   - since g++ takes a full ~5 +-1 minutes to compile everything,"
+	@echo "                                     |     this will compile all *.test.cpp files in order of"
+	@echo "                                     |     latest git modification date. so you have to first"
+	@echo "                                     |               ***locally commit***"
+	@echo "                                     |     the file for it to be compiled first."
 	@echo
-	@echo "make check_format                    | runs Astyle, cppcheck, clang-tidy (verifies snake case)"
+	@echo "make check_format                    | runs astyle, cppcheck, clang-tidy (verifies snake case)"
+	@echo "                                     |   - ditto above but \`clang-tidy\` instead of \`g++\`"
 	@echo
 	@echo "make print_untested_files            | print list of all .hpp files included by *no* .test.cpp files"
-	@echo "                                     |   - These files are not compiled nor linted as part of CI."
-	@echo "                                     |   - Need to add symlink first."
+	@echo "                                     |   - these files are not compiled nor linted as part of ci."
+	@echo "                                     |   - need to add symlink first."
 	@echo
 	@echo "make print_tests_by_git_modification | print list of all .test.cpp files ordered by most recently modified."
-	@echo "                                     |   - Determines modified date from \"git log\". So when running locally,"
+	@echo "                                     |   - determines modified date from \`git log\`. so when running locally,"
 	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
-	@echo "                                     |   - Need to add symlink first."
+	@echo "                                     |   - need to add symlink first."
 	@echo
 	@echo "make add_symlink                     | to fix ac-library include paths."
-	@echo "                                     |   - Need to initialize git submodules first."
+	@echo "                                     |   - need to initialize git submodules first."
 	@echo
 	@echo "make hackpack                        | build hackpack from .tex file"
 	@echo
