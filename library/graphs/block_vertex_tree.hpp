@@ -14,7 +14,7 @@
 //		...
 //	}
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
-	int n = adj.size();
+	int n = ssize(adj);
 	vector<vector<int>> bvt(n + cc.num_bccs);
 	vector<bool> vis(cc.num_bccs, 0);
 	for (int v = 0; v < n; v++) {

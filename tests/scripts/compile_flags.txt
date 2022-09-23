@@ -3,7 +3,7 @@
 -Wextra
 -Wunused
 -DLOCAL
--std=c++17
+-std=c++2a
 -O2
 -Wshadow
 -Wformat=2

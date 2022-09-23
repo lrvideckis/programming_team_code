@@ -1,7 +1,7 @@
 #pragma once
 //source: https://cp-algorithms.com/string/prefix-function.html#implementation
 template <class T> vector<int> prefix_function(const T& s) {
-	int n = s.size();
+	int n = ssize(s);
 	vector<int> pi(n, 0);
 	for (int i = 1; i < n; i++) {
 		int j = pi[i - 1];

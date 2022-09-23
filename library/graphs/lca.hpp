@@ -8,7 +8,7 @@ struct LCA {
 		long long dist = 0LL;
 	};
 	vector<node> tree;
-	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(adj.size()) {
+	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(ssize(adj)) {
 		for (int i = 0; i < (int)adj.size(); i++) {
 			if (tree[i].jmp == -1) {//lowest indexed node in each tree becomes root
 				tree[i].jmp = i;
