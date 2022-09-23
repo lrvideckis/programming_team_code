@@ -12,13 +12,13 @@ int main() {
 	//prefix -> z func conversion
 	//source: https://codeforces.com/blog/entry/9612#comment-217621
 	vector<int> z(n, 0);
-	for (int i = 1; i < n; ++i) {
+	for (int i = 1; i < n; i++) {
 		if (pi[i])
 			z[i - pi[i] + 1] = pi[i];
 	}
 	for (int i = 1; i < n;) {
 		int j, v;
-		for (j = 1; j < z[i] && (v = min(z[j], z[i] - j)) >= z[i + j] ; ++j)
+		for (j = 1; j < z[i] && (v = min(z[j], z[i] - j)) >= z[i + j]; j++)
 			z[i + j] = v;
 		i += j;
 	}

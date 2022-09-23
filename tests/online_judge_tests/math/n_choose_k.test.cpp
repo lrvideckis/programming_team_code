@@ -11,17 +11,17 @@ int main() {
 	//test mod inverse
 	{
 		//source: https://codeforces.com/blog/entry/83075
-		vector<int> inverse(1001);
+		vector<long long> inverse(1001);
 		inverse[1] = 1;
-		for (int i = 2; i < ssize(inverse); i ++)
-			inverse[i] = 1LL * (MOD - MOD / i) * inverse[MOD % i] % MOD;
-		for (int i = 1; i < ssize(inverse); i ++)
+		for (int i = 2; i < ssize(inverse); i++)
+			inverse[i] = (MOD - MOD / i) * inverse[MOD % i] % MOD;
+		for (int i = 1; i < ssize(inverse); i++)
 			assert(nk.inv(i) == inverse[i]);
 	}
 	{
 		//test choose with lucas theorem
 		vector<int> sieve = get_sieve(1001);
-		vector<vector<int>> naive_choose(100, vector<int>(100, 0));
+		vector<vector<long long>> naive_choose(100, vector<long long>(100, 0));
 		int num_primes = 0;
 		for (int mod = 2; mod < 100; mod++) {
 			if (is_prime(mod, sieve)) {

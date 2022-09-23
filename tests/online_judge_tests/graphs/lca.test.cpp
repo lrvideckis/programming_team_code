@@ -11,7 +11,7 @@ int main() {
 	vector<vector<int>> adj(n);
 	vector<vector<pair<int, long long>>> adj_weighted(n);
 	vector<int> depth(n, 0);
-	for (int i = 1; i < n; ++i) {
+	for (int i = 1; i < n; i++) {
 		int par;
 		cin >> par;
 		depth[i] = 1 + depth[par];
@@ -22,7 +22,7 @@ int main() {
 	}
 	LCA h(adj_weighted);
 	HLD h2(adj);
-	for (int i = 0; i < n; ++i) {
+	for (int i = 0; i < n; i++) {
 		assert(0 == h.kth_par(i, depth[i]));
 		assert(0 == h.kth_par(i, 1e9));
 	}

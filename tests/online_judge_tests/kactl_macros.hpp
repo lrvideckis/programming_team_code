@@ -1,5 +1,5 @@
 //to avoid bits/stdc++.h include which slows down CI
-#define rep(i, a, b) for(int i = a; i < (b); ++i)
+#define rep(i, a, b) for(int i = a; i < (b); i++)
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 typedef long long ll;

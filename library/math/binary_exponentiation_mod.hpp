@@ -15,9 +15,9 @@
 //if pw >= log2(mod) then (base^pw)%mod == (base^(t+(pw%t)))%mod (proof https://cp-algorithms.com/algebra/phi-function.html#generalization)
 //so calculate pw under mod of `t`
 //incidentally, totient(p) = p - 1 for every prime p, making this a more generalized version of case 1
-int bin_exp(long long base, long long pw, int mod) {
+long long bin_exp(long long base, long long pw, long long mod) {
 	assert(0 <= pw && 0 <= base && 1 <= mod);
-	int res = 1;
+	long long res = 1;
 	base %= mod;
 	while (pw > 0) {
 		if (pw & 1) res = res * base % mod;
