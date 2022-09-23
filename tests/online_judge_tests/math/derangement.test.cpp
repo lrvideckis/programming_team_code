@@ -6,7 +6,7 @@
 int main() {
 	int n, mod;
 	cin >> n >> mod;
-	vector<int> der = derangements(n + 1, mod);
+	vector<long long> der = derangements(n + 1, mod);
 	for (int i = 1; i <= n; i++)
 		cout << der[i] << " ";
 	cout << endl;
