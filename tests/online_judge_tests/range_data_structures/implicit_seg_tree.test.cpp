@@ -29,7 +29,7 @@ int main() {
 			auto [curr_mn, cnt_mn] = ist.query(MN, MX);
 			long long num_pos = MX - MN;
 			if (curr_mn == 0) num_pos -= cnt_mn;
-			area += 1LL * (edges[i].x - edges[i - 1].x) * num_pos;
+			area += (edges[i].x - edges[i - 1].x) * num_pos;
 		}
 		int j = i;
 		while (j < ssize(edges) && edges[i].x == edges[j].x) {
