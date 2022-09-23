@@ -2,7 +2,7 @@
 #include "monotonic_stack.hpp"
 //min cartesian tree
 vector<int> cartesian_tree(const vector<int>& arr) {
-	int n = arr.size();
+	int n = ssize(arr);
 	auto rv /*reverse*/ = [&](int i) -> int {
 		return n - 1 - i;
 	};
