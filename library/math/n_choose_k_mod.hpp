@@ -32,7 +32,7 @@ struct n_choose_k {
 	long long choose_lucas(long long n, long long k) const {
 		if (k < 0 || k > n) return 0;
 		if (k == 0 || k == n) return 1;
-		return choose_lucas(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
+		return choose_lucas(n / mod, k / mod) * choose(int(n % mod), int(k % mod)) % mod;
 	}
 	//returns x such that x * n % mod == 1
 	long long inv(int n) const {
