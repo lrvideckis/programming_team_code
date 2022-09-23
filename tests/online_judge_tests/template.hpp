@@ -16,6 +16,7 @@
 #include <random>
 #include <complex> //for kactl's FFT
 #include <functional> //for lambdas
+#include <climits> // for INT_MAX, INT_MIN
 using namespace std;
 
 #define ssize(x) (int)(x).size()
