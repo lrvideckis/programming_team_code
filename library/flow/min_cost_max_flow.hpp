@@ -13,8 +13,8 @@ struct mcmf {
 	vector<vector<int>> g;
 	mcmf(int a_n) : N(a_n), g(N) {}
 	void add_edge(int a, int b, ll cap, ll cost) {
-		edge e1 = {a, b, cap, cost, 0, ssize(g[b]) };
-		edge e2 = {b, a, 0, -cost, 0, ssize(g[a]) };
+		edge e1 = {a, b, cap, cost, 0, ssize(g[b])};
+		edge e2 = {b, a, 0, -cost, 0, ssize(g[a])};
 		g[a].push_back(ssize(e));
 		e.push_back(e1);
 		g[b].push_back(ssize(e));
