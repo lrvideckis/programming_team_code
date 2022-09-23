@@ -22,11 +22,11 @@ int main() {
 	vector<vector<int>> bt = bridge_tree(adj, cc);
 	//check correctness of bridge tree
 	{
-		assert((int)bt.size() == cc.num_2_edge_ccs);
+		assert(ssize(bt) == cc.num_2_edge_ccs);
 		set<pair<int, int>> seen_edges;
 		int sum_deg = 0;
 		for (int v = 0; v < cc.num_2_edge_ccs; v++) {
-			sum_deg += bt[v].size();
+			sum_deg += ssize(bt[v]);
 			for (int to : bt[v]) {
 				assert(to != v); //didn't add any non-bridge
 				assert(!seen_edges.count({v, to}));//didn't add a bridge twice
@@ -40,7 +40,7 @@ int main() {
 		for (int i = 0; i < m; i++)
 			cnt_bridges += cc.is_bridge[i];
 		assert(sum_deg % 2 == 0 && sum_deg / 2 == cnt_bridges);
-		assert(seen_edges.size() % 2 == 0 && (int)seen_edges.size() / 2 == cnt_bridges);
+		assert(ssize(seen_edges) % 2 == 0 && ssize(seen_edges) / 2 == cnt_bridges);
 		for (int v = 0; v < cc.num_2_edge_ccs; v++)
 			sort(bt[v].begin(), bt[v].end());
 		for (int i = 0; i < m; i++) {
@@ -80,7 +80,7 @@ int main() {
 		ccs[cc.two_edge_ccid[i]].push_back(i);
 	cout << cc.num_2_edge_ccs << endl;
 	for (auto& curr_cc : ccs) {
-		cout << curr_cc.size() << " ";
+		cout << ssize(curr_cc) << " ";
 		for (int node : curr_cc) cout << node << " ";
 		cout << endl;
 	}

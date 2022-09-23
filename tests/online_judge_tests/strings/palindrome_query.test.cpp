@@ -9,7 +9,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	int n = s.size();
+	int n = ssize(s);
 	pal_query pal_q(s);
 	{
 		vector<pair<int, int>> tests;

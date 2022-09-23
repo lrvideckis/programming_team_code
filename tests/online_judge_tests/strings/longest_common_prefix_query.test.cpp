@@ -8,7 +8,7 @@ int main() {
 	string s;
 	cin >> s;
 	lcp_query<string> sq(s);
-	for (int i = 0; i < (int)s.size(); i++)
+	for (int i = 0; i < ssize(s); i++)
 		cout << sq.get_lcp(i, 0) << " ";
 	cout << endl;
 	return 0;

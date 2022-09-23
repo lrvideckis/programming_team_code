@@ -13,9 +13,9 @@ int main() {
 		//source: https://codeforces.com/blog/entry/83075
 		vector<int> inverse(1001);
 		inverse[1] = 1;
-		for (int i = 2; i < (int)inverse.size(); i ++)
+		for (int i = 2; i < ssize(inverse); i ++)
 			inverse[i] = 1LL * (MOD - MOD / i) * inverse[MOD % i] % MOD;
-		for (int i = 1; i < (int)inverse.size(); i ++)
+		for (int i = 1; i < ssize(inverse); i ++)
 			assert(nk.inv(i) == inverse[i]);
 	}
 	{

@@ -21,7 +21,7 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		//cut node if there exists a pair of adjacent edges belonging to different BCCs
 		bool is_cut = 0;
-		for (int j = 0; j < (int)adj[i].size(); j++) {
+		for (int j = 0; j < ssize(adj[i]); j++) {
 			if (cc.bcc_id[adj[i][0].second] != cc.bcc_id[adj[i][j].second])
 				is_cut = 1;
 		}
@@ -33,8 +33,8 @@ int main() {
 	}
 	//check correctness of block vertex tree
 	for (int i = 0; i < n; i++) {
-		assert(adj[i].size() >= bvt[i].size());//in particular, if adj[i].empty(), then bct[i].empty()
-		assert(cc.is_cut[i] == (bvt[i].size() > 1));//is cut means non-leaf in block vertex tree
+		assert(ssize(adj[i]) >= ssize(bvt[i]));//in particular, if adj[i].empty(), then bct[i].empty()
+		assert(cc.is_cut[i] == (ssize(bvt[i]) > 1));//is cut means non-leaf in block vertex tree
 	}
 	{
 		vector<set<int>> bcc_to_nodes(cc.num_bccs), node_to_bccs(n);
@@ -49,14 +49,14 @@ int main() {
 		}
 		// testing commented loops in block_vertex_tree
 		for (int v = 0; v < n; v++) {
-			assert(node_to_bccs[v].size() == bvt[v].size());
+			assert(ssize(node_to_bccs[v]) == ssize(bvt[v]));
 			for (int bccid : bvt[v]) {
 				bccid -= n;
 				assert(node_to_bccs[v].count(bccid));
 			}
 		}
 		for (int bccid = 0; bccid < cc.num_bccs; bccid++) {
-			assert(bcc_to_nodes[bccid].size() == bvt[bccid + n].size());
+			assert(ssize(bcc_to_nodes[bccid]) == ssize(bvt[bccid + n]));
 			for (int v : bvt[bccid + n])
 				assert(bcc_to_nodes[bccid].count(v));
 		}
@@ -64,9 +64,9 @@ int main() {
 	vector<int> lone_nodes;
 	for (int v = 0; v < n; v++)
 		if (bvt[v].empty()) lone_nodes.push_back(v);
-	cout << cc.num_bccs + lone_nodes.size() << endl;
+	cout << cc.num_bccs + ssize(lone_nodes) << endl;
 	for (int bccid = 0; bccid < cc.num_bccs; bccid++) {
-		cout << bvt[bccid + n].size() << " ";
+		cout << ssize(bvt[bccid + n]) << " ";
 		for (int v : bvt[bccid + n])
 			cout << v << " ";
 		cout << '\n';
