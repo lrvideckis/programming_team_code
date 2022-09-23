@@ -7,7 +7,7 @@ template<typename T> struct lcp_query {
 	const int N;
 	vector<int> sa, lcp, inv_sa;
 	RMQ<int> rmq;
-	lcp_query(const T& s) : N(s.size()), sa(atcoder::suffix_array(s)), lcp(atcoder::lcp_array(s, sa)), inv_sa(N), rmq(lcp, [](int x, int y) {
+	lcp_query(const T& s) : N(ssize(s)), sa(atcoder::suffix_array(s)), lcp(atcoder::lcp_array(s, sa)), inv_sa(N), rmq(lcp, [](int x, int y) {
 		return min(x, y);
 	}) {
 		for (int i = 0; i < N; i++) inv_sa[sa[i]] = i;
