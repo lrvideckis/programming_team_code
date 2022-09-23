@@ -14,17 +14,17 @@ struct n_choose_k {
 		//will take sqrt(2^31) time
 		for (int i = 2; i * i <= mod; i++) assert(mod % i);
 		for (int i = 2; i < n; i++)
-			fact[i] = 1LL * fact[i - 1] * i % mod;
+			fact[i] = fact[i - 1] * i % mod;
 		inv_fact.back() = bin_exp(fact.back(), mod - 2, mod);
 		for (int i = n - 2; i >= 2; i--)
-			inv_fact[i] = 1LL * inv_fact[i + 1] * (i + 1) % mod;
+			inv_fact[i] = inv_fact[i + 1] * (i + 1) % mod;
 	}
 	//classic n choose k
 	//fails when n >= mod
 	long long choose(int n, int k) const {
 		if (k < 0 || k > n) return 0;
 		//now we know 0 <= k <= n so 0 <= n
-		return 1LL * fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
+		return fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
 	}
 	//lucas theorem to calculate n choose k in O(log(k))
 	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish prime mod (< 1e6 maybe)
@@ -32,12 +32,12 @@ struct n_choose_k {
 	long long choose_lucas(long long n, long long k) const {
 		if (k < 0 || k > n) return 0;
 		if (k == 0 || k == n) return 1;
-		return 1LL * choose_lucas(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
+		return choose_lucas(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
 	//returns x such that x * n % mod == 1
 	long long inv(int n) const {
 		assert(1 <= n); //don't divide by 0 :)
-		return 1LL * fact[n - 1] * inv_fact[n] % mod;
+		return fact[n - 1] * inv_fact[n] % mod;
 	}
 	long long mod;
 	vector<long long> fact, inv_fact;
