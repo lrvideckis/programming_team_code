@@ -1,8 +1,8 @@
 #pragma once
 //https://oeis.org/A000041
 //O(n sqrt n) time, but small-ish constant factor (there does exist a O(n log n) solution as well)
-vector<int> partitions(int n, int mod) {
-	vector<int> dp(n, 1);
+vector<long long> partitions(int n, long long mod) {
+	vector<long long> dp(n, 1);
 	for (int i = 1; i < n; i++) {
 		long long sum = 0;
 		for (int j = 1, pent = 1, sign = 1; pent <= i; j++, pent += 3 * j - 2, sign = -sign) {
