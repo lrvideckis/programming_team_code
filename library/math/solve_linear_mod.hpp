@@ -1,8 +1,9 @@
 #pragma once
 #include "row_reduce.hpp"
 struct matrix_info {
-	int rank, det;
-	vector<int> x;
+	int rank;
+	long long det;
+	vector<long long> x;
 };
 //Solves mat * x = b under prime mod.
 //mat is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m vector.
@@ -13,7 +14,7 @@ struct matrix_info {
 //Trick: Number of unique solutions = (size of domain) ^ (# of free variables).
 //# of free variables is generally equivalent to n - rank.
 //O(n * m * min(n,m))
-matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, int mod) {
+matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b, long long mod) {
 	assert(ssize(mat) == ssize(b));
 	int n = ssize(mat), m = ssize(mat[0]);
 	for (int i = 0; i < n; i++)
@@ -24,7 +25,7 @@ matrix_info solve_linear_mod(vector<vector<int>>& mat, const vector<int>& b, int
 		if (mat[i].back() != 0) return {rank, det, {} }; //no solution exists
 	}
 	//initialize solution vector (`x`) from row-reduced matrix
-	vector<int> x(m, 0);
+	vector<long long> x(m, 0);
 	for (int i = 0, j = 0; i < rank; i++) {
 		while (mat[i][j] == 0) j++; //find pivot column
 		x[j] = mat[i].back();

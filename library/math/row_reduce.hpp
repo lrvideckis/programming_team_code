@@ -6,8 +6,9 @@
 //
 //example usage:
 //	row_reduce(mat, ssize(mat[0]), mod) //row reduce matrix with no extra columns
-pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, int cols, int mod) {
-	int n = ssize(mat), m = ssize(mat[0]), rank = 0, det = 1;
+pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>& mat, int cols, long long mod) {
+	int n = ssize(mat), m = ssize(mat[0]), rank = 0;
+	long long det = 1;
 	assert(cols <= m);
 	for (int col = 0; col < cols && rank < n; col++) {
 		//find arbitrary pivot and swap pivot to current row
@@ -21,17 +22,17 @@ pair<int/*rank*/, int/*determinant*/> row_reduce(vector<vector<int>>& mat, int c
 			det = 0;
 			continue;
 		}
-		det = (1LL * det * mat[rank][col]) % mod;
+		det = det * mat[rank][col] % mod;
 		//make pivot 1 by dividing row by inverse of pivot
-		int a_inv = bin_exp(mat[rank][col], mod - 2, mod);
+		long long a_inv = bin_exp(mat[rank][col], mod - 2, mod);
 		for (int j = 0; j < m; j++)
-			mat[rank][j] = (1LL * mat[rank][j] * a_inv) % mod;
+			mat[rank][j] = mat[rank][j] * a_inv % mod;
 		//zero-out all numbers above & below pivot
 		for (int i = 0; i < n; i++)
 			if (i != rank && mat[i][col] != 0) {
-				int val = mat[i][col];
+				long long val = mat[i][col];
 				for (int j = 0; j < m; j++) {
-					mat[i][j] -= 1LL * mat[rank][j] * val % mod;
+					mat[i][j] -= mat[rank][j] * val % mod;
 					if (mat[i][j] < 0) mat[i][j] += mod;
 				}
 			}
