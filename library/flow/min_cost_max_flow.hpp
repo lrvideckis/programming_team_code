@@ -1,49 +1,46 @@
 #pragma once
-//status: not tested
+//source: https://e-maxx.ru/algo/min_cost_flow
 const long long INF = 1e18;
-struct min_cost_max_flow {
-	typedef long long ll;
+struct mcmf {
+	using ll = long long;
 	struct edge {
-		ll a, b, cap, cost, flow;
+		int a, b;
+		ll cap, cost, flow;
 		int back;
 	};
+	const int N;
 	vector<edge> e;
-	vector<vector<ll>> g;
-	ll n, s, t;
-	ll k = INF; // max amount of flow allowed
-	min_cost_max_flow(int a_n, int a_s, int a_t) : n(a_n), s(a_s), t(a_t) {
-		g.resize(n);
-	}
-	void add_edge(ll a, ll b, ll cap, ll cost) {
-		edge e1 = {a, b, cap, cost, 0, (int)ssize(g[b]) };
-		edge e2 = {b, a, 0, -cost, 0, (int)ssize(g[a]) };
+	vector<vector<int>> g;
+	mcmf(int a_n) : N(a_n), g(N) {}
+	void add_edge(int a, int b, ll cap, ll cost) {
+		edge e1 = {a, b, cap, cost, 0, ssize(g[b]) };
+		edge e2 = {b, a, 0, -cost, 0, ssize(g[a]) };
 		g[a].push_back(ssize(e));
 		e.push_back(e1);
 		g[b].push_back(ssize(e));
 		e.push_back(e2);
 	}
-	// returns {flow, cost}
-	pair<ll, ll> get_flow() {
+	pair<ll, ll> get_flow(int s, int t, ll total_flow) {
 		ll flow = 0, cost = 0;
-		while (flow < k) {
-			vector<ll> id(n, 0), d(n, INF), q(n), p(n);
-			vector<int> p_edge(n);
-			ll qh = 0, qt = 0;
+		while (flow < total_flow) {
+			vector<ll> d(N, INF);
+			vector<int> p_edge(N), id(N, 0), q(N), p(N);
+			int qh = 0, qt = 0;
 			q[qt++] = s;
 			d[s] = 0;
 			while (qh != qt) {
-				ll v = q[qh++];
+				int v = q[qh++];
 				id[v] = 2;
-				if (qh == n) qh = 0;
+				if (qh == N) qh = 0;
 				for (int i = 0; i < ssize(g[v]); i++) {
-					edge& r = e[g[v][i]];
+					const edge& r = e[g[v][i]];
 					if (r.flow < r.cap && d[v] + r.cost < d[r.b]) {
 						d[r.b] = d[v] + r.cost;
 						if (id[r.b] == 0) {
 							q[qt++] = r.b;
-							if (qt == n) qt = 0;
+							if (qt == N) qt = 0;
 						} else if (id[r.b] == 2) {
-							if (--qh == -1) qh = n - 1;
+							if (--qh == -1) qh = N - 1;
 							q[qh] = r.b;
 						}
 						id[r.b] = 1;
@@ -53,15 +50,13 @@ struct min_cost_max_flow {
 				}
 			}
 			if (d[t] == INF) break;
-			ll addflow = k - flow;
-			for (ll v = t; v != s; v = p[v]) {
-				ll pv = p[v];
-				int pr = p_edge[v];
+			ll addflow = total_flow - flow;
+			for (int v = t; v != s; v = p[v]) {
+				int pv = p[v], pr = p_edge[v];
 				addflow = min(addflow, e[g[pv][pr]].cap - e[g[pv][pr]].flow);
 			}
-			for (ll v = t; v != s; v = p[v]) {
-				ll pv = p[v];
-				int pr = p_edge[v], r = e[g[pv][pr]].back;
+			for (int v = t; v != s; v = p[v]) {
+				int pv = p[v], pr = p_edge[v], r = e[g[pv][pr]].back;
 				e[g[pv][pr]].flow += addflow;
 				e[g[v][r]].flow -= addflow;
 				cost += e[g[pv][pr]].cost * addflow;
