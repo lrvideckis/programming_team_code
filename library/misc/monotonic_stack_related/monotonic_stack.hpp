@@ -8,9 +8,8 @@
 //or -1 if no index exists
 //O(n)
 template<class T> vector<int> monotonic_stack(const vector<T>& arr, const function<bool(const T&, const T&)>& op) {
-	int n = ssize(arr);
-	vector<int> left(n);
-	for (int i = 0; i < n; i++) {
+	vector<int> left(ssize(arr));
+	for (int i = 0; i < ssize(arr); i++) {
 		int& j = left[i] = i - 1;
 		while (j >= 0 && op(arr[j], arr[i])) j = left[j];
 	}
