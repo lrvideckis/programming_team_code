@@ -2,6 +2,7 @@
 -Wall
 -Wextra
 -Wunused
+-Wconversion
 -DLOCAL
 -std=c++17
 -O2

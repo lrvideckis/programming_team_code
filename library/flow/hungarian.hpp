@@ -17,7 +17,7 @@ struct weighted_match {
 	vector<int> matching;//worker `i` (1<=i<=n) is assigned to job `matching[i]` (1<=matching[i]<=m)
 };
 weighted_match hungarian(const vector<vector<long long>>& cost) {
-	int n = cost.size() - 1, m = cost[0].size() - 1;
+	int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;
 	assert(n <= m);
 	vector<int> p(m + 1), way(m + 1);
 	vector<long long> u(n + 1), v(m + 1);

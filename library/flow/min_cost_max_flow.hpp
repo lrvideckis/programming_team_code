@@ -13,11 +13,11 @@ struct mcmf {
 	vector<vector<int>> g;
 	mcmf(int a_n) : N(a_n), g(N) {}
 	void add_edge(int a, int b, ll cap, ll cost) {
-		edge e1 = {a, b, cap, cost, 0, (int)g[b].size() };
-		edge e2 = {b, a, 0, -cost, 0, (int)g[a].size() };
-		g[a].push_back(e.size());
+		edge e1 = {a, b, cap, cost, 0, ssize(g[b])};
+		edge e2 = {b, a, 0, -cost, 0, ssize(g[a])};
+		g[a].push_back(ssize(e));
 		e.push_back(e1);
-		g[b].push_back(e.size());
+		g[b].push_back(ssize(e));
 		e.push_back(e2);
 	}
 	pair<ll, ll> get_flow(int s, int t, ll total_flow) {
@@ -32,7 +32,7 @@ struct mcmf {
 				int v = q[qh++];
 				id[v] = 2;
 				if (qh == N) qh = 0;
-				for (int i = 0; i < (int)g[v].size(); i++) {
+				for (int i = 0; i < ssize(g[v]); i++) {
 					const edge& r = e[g[v][i]];
 					if (r.flow < r.cap && d[v] + r.cost < d[r.b]) {
 						d[r.b] = d[v] + r.cost;

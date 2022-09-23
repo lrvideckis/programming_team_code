@@ -4,7 +4,7 @@
 const long long INF = 1e18;
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj /*directed or undirected, weighted graph*/, int start) {
 	using node = pair<long long, int>;
-	vector<long long> len(adj.size(), INF);
+	vector<long long> len(ssize(adj), INF);
 	len[start] = 0;
 	priority_queue<node, vector<node>, greater<node>> q;
 	q.emplace(0, start);

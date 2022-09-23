@@ -7,7 +7,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	int n = s.size();
+	int n = ssize(s);
 	s = s + '$' + string(s.rbegin(), s.rend());
 	lcp_query lcp_q(s);
 	for (int i = 0; i < n; i++) {

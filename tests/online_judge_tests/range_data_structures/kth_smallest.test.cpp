@@ -21,7 +21,7 @@ int main() {
 		cin >> l >> r >> k;
 		int res = st.query(l, r, k);
 		cout << res << endl;
-		int start = 0, end = sorted.size();
+		int start = 0, end = ssize(sorted);
 		while (start + 1 < end) {
 			int mid = (start + end) / 2;
 			if (mst.query(l, r, sorted[mid]) <= k)

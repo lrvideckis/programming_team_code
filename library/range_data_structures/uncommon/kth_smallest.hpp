@@ -12,16 +12,16 @@ struct kth_smallest {
 	int mn = INT_MAX, mx = INT_MIN;
 	vector<int> roots;
 	deque<node> tree;
-	kth_smallest(const vector<int>& arr) : roots(arr.size() + 1, 0) {
+	kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1, 0) {
 		tree.emplace_back(0, 0, 0); //acts as null
 		for (int val : arr) mn = min(mn, val), mx = max(mx, val + 1);
-		for (int i = 0; i < (int)arr.size(); i++)
+		for (int i = 0; i < ssize(arr); i++)
 			roots[i + 1] = update(roots[i], mn, mx, arr[i]);
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tr - tl == 1) {
 			tree.emplace_back(tree[v].sum + 1, 0, 0);
-			return tree.size() - 1;
+			return ssize(tree) - 1;
 		}
 		int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
@@ -31,14 +31,14 @@ struct kth_smallest {
 		else
 			rch = update(rch, tm, tr, idx);
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
-		return tree.size() - 1;
+		return ssize(tree) - 1;
 	}
 	/* find (k+1)th smallest number in range [l, r)
 	 * k is 0-based, so query(l,r,0) returns the min
 	 */
 	int query(int l, int r, int k) const {
 		assert(0 <= k && k < r - l); //note this condition implies l < r
-		assert(0 <= l && r < (int)roots.size());
+		assert(0 <= l && r < ssize(roots));
 		return query(roots[l], roots[r], mn, mx, k);
 	}
 	int query(int vl, int vr, int tl, int tr, int k) const {

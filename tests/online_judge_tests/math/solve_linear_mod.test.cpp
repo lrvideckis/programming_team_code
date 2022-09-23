@@ -5,15 +5,15 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	const int MOD = 998244353;
+	const long long MOD = 998244353;
 	int n, m;
 	cin >> n >> m;
-	vector<vector<int>> mat(n, vector<int>(m));
+	vector<vector<long long>> mat(n, vector<long long>(m));
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++)
 			cin >> mat[i][j];
 	}
-	vector<int> b(n);
+	vector<long long> b(n);
 	for (int i = 0; i < n; i++)
 		cin >> b[i];
 	matrix_info info = solve_linear_mod(mat, b, MOD);
@@ -22,18 +22,18 @@ int main() {
 		return 0;
 	}
 	cout << m - info.rank << endl;
-	for (int val : info.x) cout << val << " ";
+	for (long long val : info.x) cout << val << " ";
 	cout << endl;
 	vector<int> pivot(m, -1);
-	for (int i = 0, j = 0; i < info.rank; ++i) {
-		while (mat[i][j] == 0) ++j;
+	for (int i = 0, j = 0; i < info.rank; i++) {
+		while (mat[i][j] == 0) j++;
 		pivot[j] = i;
 	}
-	for (int j = 0; j < m; ++j) if (pivot[j] == -1) {
-			vector<int> x(m, 0);
+	for (int j = 0; j < m; j++) if (pivot[j] == -1) {
+			vector<long long> x(m, 0);
 			x[j] = MOD - 1;
-			for (int k = 0; k < j; ++k) if (pivot[k] != -1) x[k] = mat[pivot[k]][j];
-			for (int k = 0; k < m; ++k) cout << x[k] << " ";
+			for (int k = 0; k < j; k++) if (pivot[k] != -1) x[k] = mat[pivot[k]][j];
+			for (int k = 0; k < m; k++) cout << x[k] << " ";
 			cout << endl;
 		}
 	return 0;

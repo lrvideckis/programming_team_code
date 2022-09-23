@@ -7,8 +7,8 @@ struct HLD {
 		int sub_sz = 1, par = -1, time_in = -1, next = -1;
 	};
 	vector<node> tree;
-	HLD(vector<vector<int>>& adj/*forest of unrooted trees*/) : tree(adj.size()) {
-		for (int i = 0, timer = 0; i < (int)adj.size(); i++) {
+	HLD(vector<vector<int>>& adj/*forest of unrooted trees*/) : tree(ssize(adj)) {
+		for (int i = 0, timer = 0; i < ssize(adj); i++) {
 			if (tree[i].next == -1) {//lowest indexed node in each tree becomes root
 				tree[i].next = i;
 				dfs1(i, adj);

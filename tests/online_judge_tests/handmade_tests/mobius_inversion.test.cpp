@@ -26,7 +26,7 @@ int main() {
 			}
 			if (found_square) continue;
 		}
-		assert(1 - 2 * (int(factors.size()) % 2) == mobius[i]);
+		assert(1 - 2 * (ssize(factors) % 2) == mobius[i]);
 	}
 	cout << "Hello World\n";
 	return 0;

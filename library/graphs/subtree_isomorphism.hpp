@@ -13,11 +13,11 @@ struct iso_info {
 };
 
 iso_info subtree_iso(const vector<vector<int>>& adj) {
-	vector<int> id(adj.size(), -1);
+	vector<int> id(ssize(adj), -1);
 	map<vector<int>, int> hashes;
 	auto dfs = [&](auto self, int u, int p) -> int {
 		vector<int> ch_ids;
-		ch_ids.reserve(adj[u].size());
+		ch_ids.reserve(ssize(adj[u]));
 		for (int v : adj[u]) {
 			if (v != p)
 				ch_ids.push_back(self(self, v, u));
@@ -25,11 +25,11 @@ iso_info subtree_iso(const vector<vector<int>>& adj) {
 		sort(ch_ids.begin(), ch_ids.end());
 		auto it = hashes.find(ch_ids);
 		if (it == hashes.end())
-			return id[u] = hashes[ch_ids] = hashes.size();
+			return id[u] = hashes[ch_ids] = ssize(hashes);
 		return id[u] = it->second;
 	};
-	for (int i = 0; i < (int)adj.size(); i++)
+	for (int i = 0; i < ssize(adj); i++)
 		if (id[i] == -1)
 			dfs(dfs, i, i);
-	return {(int)hashes.size(), id};
+	return {ssize(hashes), id};
 }

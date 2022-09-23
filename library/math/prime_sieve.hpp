@@ -1,10 +1,10 @@
 #pragma once
 bool is_prime(int val, const vector<int>& sieve) {
-	assert(val < (int)sieve.size());
+	assert(val < ssize(sieve));
 	return val >= 2 && sieve[val] == val;
 }
 vector<int> get_prime_factors(int val, const vector<int>& sieve) {
-	assert(val < (int)sieve.size());
+	assert(val < ssize(sieve));
 	vector<int> factors;
 	while (val > 1) {
 		int p = sieve[val];

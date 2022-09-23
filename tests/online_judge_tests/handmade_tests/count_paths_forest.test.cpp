@@ -9,7 +9,7 @@
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
 vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted, UF& uf) {
-	int n = adj_weighted.size();
+	int n = ssize(adj_weighted);
 	kth_node_on_path path(adj_weighted);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
