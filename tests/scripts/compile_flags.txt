@@ -17,4 +17,4 @@
 -fsanitize=undefined
 -fno-sanitize-recover=all
 -fstack-protector
--Wfatal-errors
+-Werrors
