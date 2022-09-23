@@ -6,7 +6,7 @@
 // or:
 //     n_choose_k nk(mod, mod) to use `choose_with_lucas_theorem` with arbitrarily large inputs
 struct n_choose_k {
-	n_choose_k(int n, int a_mod) : mod(a_mod), fact(n, 1), inv_fact(n, 1) {
+	n_choose_k(int n, long long a_mod) : mod(a_mod), fact(n, 1), inv_fact(n, 1) {
 		//this implementation doesn't work if n > mod because n! % mod = 0 when n >= mod. So `inv_fact` array will be all 0's
 		assert(max(n, 2) <= mod);
 		//assert mod is prime. mod is intended to fit inside an int so that
@@ -21,7 +21,7 @@ struct n_choose_k {
 	}
 	//classic n choose k
 	//fails when n >= mod
-	int choose(int n, int k) const {
+	long long choose(int n, int k) const {
 		if (k < 0 || k > n) return 0;
 		//now we know 0 <= k <= n so 0 <= n
 		return 1LL * fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
@@ -29,16 +29,16 @@ struct n_choose_k {
 	//lucas theorem to calculate n choose k in O(log(k))
 	//need to calculate all factorials in range [0,mod), so O(mod) time&space, so need smallish prime mod (< 1e6 maybe)
 	//handles n >= mod correctly
-	int choose_lucas(long long n, long long k) const {
+	long long choose_lucas(long long n, long long k) const {
 		if (k < 0 || k > n) return 0;
 		if (k == 0 || k == n) return 1;
 		return 1LL * choose_lucas(n / mod, k / mod) * choose(n % mod, k % mod) % mod;
 	}
 	//returns x such that x * n % mod == 1
-	int inv(int n) const {
+	long long inv(int n) const {
 		assert(1 <= n); //don't divide by 0 :)
 		return 1LL * fact[n - 1] * inv_fact[n] % mod;
 	}
-	int mod;
-	vector<int> fact, inv_fact;
+	long long mod;
+	vector<long long> fact, inv_fact;
 };
