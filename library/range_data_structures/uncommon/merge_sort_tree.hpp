@@ -15,7 +15,7 @@ struct merge_sort_tree {
 		}
 	}
 	int value(int v, int x) const {
-		return lower_bound(tree[v].begin(), tree[v].end(), x) - tree[v].begin();
+		return int(lower_bound(tree[v].begin(), tree[v].end(), x) - tree[v].begin());
 	}
 	int to_leaf(int i) const {
 		i += S;
