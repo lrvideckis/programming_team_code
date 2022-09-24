@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 echo "check files and directories are snake_case:"
 find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \

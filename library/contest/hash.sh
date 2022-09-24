@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 #Hashes a file, ignoring all:
 #	- whitespace
 #	- comments

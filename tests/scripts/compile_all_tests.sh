@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#! /bin/bash
 
 git submodule init
 git submodule update
