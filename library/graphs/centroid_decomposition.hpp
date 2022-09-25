@@ -8,13 +8,14 @@
 // centroid_decomp runs the function on every decomposition
 
 // see count_paths_per_node for example usage
+template<typename F = function<void(const vector<vector<int>>&, int)>>
 struct centroid_decomp {
 	vector<vector<int>> adj;
-	function<void(const vector<vector<int>>&, int)> func;
+	F func;
 	vector<int> sub_sz;
 
 	centroid_decomp(const vector<vector<int>>& a_adj, //undirected forest
-	                const function<void(const vector<vector<int>>&, int)>& a_func)
+	                const F& a_func)
 		: adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
 		for (int i = 0; i < ssize(adj); i++)
 			if (sub_sz[i] == -1)
