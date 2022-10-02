@@ -45,8 +45,6 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install astyle clang cppcheck
     - name: Check snake case and lint
-      env:
-        TOX_PARALLEL_NO_SPINNER: 1
       run: make --directory=tests/ check_format
 
   compile_all_tests:
@@ -57,6 +55,4 @@ jobs:
         ref: ${{ github.event.pull_request.head.sha }}
         fetch-depth: 0
     - name: Compile all tests
-      env:
-        TOX_PARALLEL_NO_SPINNER: 1
       run: make --directory=tests/ compile_all_tests
