@@ -6,11 +6,10 @@ find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \
 	grep --invert-match "README" && exit 1
 
 echo "run astyle on all files:"
-astyle_output=$(
-	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp" && \
+(
+	astyle --options=.astylerc --recursive "online_judge_tests/*.test.cpp"
 	astyle --options=.astylerc --recursive "../library/*.hpp"
-)
-echo "$astyle_output" | grep "Formatted" && exit 1
+) | grep "Formatted" && exit 1
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
 echo "run cppcheck on all files:"
