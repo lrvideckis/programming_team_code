@@ -18,8 +18,8 @@ template<typename T> struct lcp_query {
 	//r1-l1 == r2-l2 && longest_common_prefix(l1, l2) >= r1-l1
 	int get_lcp(int idx1, int idx2) const {
 		if (idx1 == idx2) return ssize(sa) - idx1;
-		auto [l, r] = minmax(inv_sa[idx1], inv_sa[idx2]);
-		return rmq.query(l, r);
+		auto [le, ri] = minmax(inv_sa[idx1], inv_sa[idx2]);
+		return rmq.query(le, ri);
 	}
 	//returns 1 if suffix s[idx1 ... n) < s[idx2 ... n)
 	//(so 0 if idx1 == idx2)
