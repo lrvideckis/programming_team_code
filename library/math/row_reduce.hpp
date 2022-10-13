@@ -5,7 +5,7 @@
 //Row operations will be performed to all later columns
 //
 //example usage:
-//	row_reduce(mat, ssize(mat[0]), mod) //row reduce matrix with no extra columns
+//	auto [rank, det] = row_reduce(mat, ssize(mat[0]), mod) //row reduce matrix with no extra columns
 pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>& mat, int cols, long long mod) {
 	int n = ssize(mat), m = ssize(mat[0]), rank = 0;
 	long long det = 1;
