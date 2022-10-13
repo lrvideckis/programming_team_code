@@ -8,14 +8,14 @@
 struct seg_tree {
 	using dt = long long;
 	using ch = long long;
-	static dt combine(const dt& l, const dt& r) {
-		return min(l, r);
+	static dt combine(const dt& le, const dt& ri) {
+		return min(le, ri);
 	}
 	static const dt UNIT = 1e18;
 	struct node {
 		dt val;
 		ch lazy;
-		int l, r;//[l, r)
+		int le, ri;//[le, ri)
 	};
 	const int N, S/*smallest power of 2 >= N*/;
 	vector<node> tree;
@@ -27,8 +27,8 @@ struct seg_tree {
 			tree[i] = {
 				combine(tree[2 * i].val, tree[2 * i + 1].val),
 				0,
-				tree[2 * i].l,
-				tree[2 * i + 1].r
+				tree[2 * i].le,
+				tree[2 * i + 1].ri
 			};
 		}
 	}
@@ -50,50 +50,50 @@ struct seg_tree {
 		i += S;
 		return i < 2 * N ? i : 2 * (i - N);
 	}
-	//update range [l, r)
-	void update(int l, int r, ch change) {
-		assert(0 <= l && l <= r && r <= N);
-		l = to_leaf(l), r = to_leaf(r);
-		int lca_l_r = __lg((l - 1) ^ r);
-		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
-		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
-		for (int x = l, y = r; x < y; x >>= 1, y >>= 1) {
+	//update range [le, ri)
+	void update(int le, int ri, ch change) {
+		assert(0 <= le && le <= ri && ri <= N);
+		le = to_leaf(le), ri = to_leaf(ri);
+		int lca_l_r = __lg((le - 1) ^ ri);
+		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--) push(le >> lg);
+		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--) push(ri >> lg);
+		for (int x = le, y = ri; x < y; x >>= 1, y >>= 1) {
 			if (x & 1) apply(x++, change);
 			if (y & 1) apply(--y, change);
 		}
-		for (int lg = __builtin_ctz(r) + 1; lg <= lca_l_r; lg++) build(r >> lg);
-		for (int lg = __builtin_ctz(l) + 1; lg <= __lg(l); lg++) build(l >> lg);
+		for (int lg = __builtin_ctz(ri) + 1; lg <= lca_l_r; lg++) build(ri >> lg);
+		for (int lg = __builtin_ctz(le) + 1; lg <= __lg(le); lg++) build(le >> lg);
 	}
-	void update(int v/* = 1*/, int l, int r, ch change) {
-		if (r <= tree[v].l || tree[v].r <= l)
+	void update(int v/* = 1*/, int le, int ri, ch change) {
+		if (ri <= tree[v].le || tree[v].ri <= le)
 			return;
-		if (l <= tree[v].l && tree[v].r <= r)
+		if (le <= tree[v].le && tree[v].ri <= ri)
 			return apply(v, change);
 		push(v);
-		update(2 * v, l, r, change);
-		update(2 * v + 1, l, r, change);
+		update(2 * v, le, ri, change);
+		update(2 * v + 1, le, ri, change);
 		build(v);
 	}
-	//query range [l, r)
-	dt query(int l, int r) {
-		assert(0 <= l && l <= r && r <= N);
-		l = to_leaf(l), r = to_leaf(r);
-		int lca_l_r = __lg((l - 1) ^ r);
-		for (int lg = __lg(l); lg > __builtin_ctz(l); lg--) push(l >> lg);
-		for (int lg = lca_l_r; lg > __builtin_ctz(r); lg--) push(r >> lg);
+	//query range [le, ri)
+	dt query(int le, int ri) {
+		assert(0 <= le && le <= ri && ri <= N);
+		le = to_leaf(le), ri = to_leaf(ri);
+		int lca_l_r = __lg((le - 1) ^ ri);
+		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--) push(le >> lg);
+		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--) push(ri >> lg);
 		dt resl = UNIT, resr = UNIT;
-		for (; l < r; l >>= 1, r >>= 1) {
-			if (l & 1) resl = combine(resl, tree[l++].val);
-			if (r & 1) resr = combine(tree[--r].val, resr);
+		for (; le < ri; le >>= 1, ri >>= 1) {
+			if (le & 1) resl = combine(resl, tree[le++].val);
+			if (ri & 1) resr = combine(tree[--ri].val, resr);
 		}
 		return combine(resl, resr);
 	}
-	dt query(int v/* = 1*/, int l, int r) {
-		if (r <= tree[v].l || tree[v].r <= l)
+	dt query(int v/* = 1*/, int le, int ri) {
+		if (ri <= tree[v].le || tree[v].ri <= le)
 			return UNIT;
-		if (l <= tree[v].l && tree[v].r <= r)
+		if (le <= tree[v].le && tree[v].ri <= ri)
 			return tree[v].val;
 		push(v);
-		return combine(query(2 * v, l, r), query(2 * v + 1, l, r));
+		return combine(query(2 * v, le, ri), query(2 * v + 1, le, ri));
 	}
 };

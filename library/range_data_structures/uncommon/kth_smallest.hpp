@@ -31,13 +31,13 @@ struct kth_smallest {
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
-	/* find (k+1)th smallest number in range [l, r)
-	 * k is 0-based, so query(l,r,0) returns the min
+	/* find (k+1)th smallest number in range [le, ri)
+	 * k is 0-based, so query(le,ri,0) returns the min
 	 */
-	int query(int l, int r, int k) const {
-		assert(0 <= k && k < r - l); //note this condition implies l < r
-		assert(0 <= l && r < ssize(roots));
-		return query(roots[l], roots[r], mn, mx, k);
+	int query(int le, int ri, int k) const {
+		assert(0 <= k && k < ri - le); //note this condition implies le < ri
+		assert(0 <= le && ri < ssize(roots));
+		return query(roots[le], roots[ri], mn, mx, k);
 	}
 	int query(int vl, int vr, int tl, int tr, int k) const {
 		assert(tree[vr].sum > tree[vl].sum);

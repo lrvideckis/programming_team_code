@@ -10,10 +10,10 @@ vector<int> cartesian_tree(const vector<int>& arr) {
 	vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), greater());
 	vector<int> par(n);
 	for (int i = 0; i < n; i++) {
-		int l = left[i], r = rv(right[rv(i)]);
-		if (l >= 0 && r < n) par[i] = arr[l] > arr[r] ? l : r;
-		else if (l >= 0) par[i] = l;
-		else if (r < n) par[i] = r;
+		int le = left[i], ri = rv(right[rv(i)]);
+		if (le >= 0 && ri < n) par[i] = arr[le] > arr[ri] ? le : ri;
+		else if (le >= 0) par[i] = le;
+		else if (ri < n) par[i] = ri;
 		else par[i] = i;
 	}
 	return par;

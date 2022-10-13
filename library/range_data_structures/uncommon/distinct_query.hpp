@@ -35,10 +35,10 @@ struct distinct_query {
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
-	//returns number of distinct elements in range [l,r)
-	int query(int l, int r) const {
-		assert(0 <= l && l <= r && r <= N);
-		return query(roots[l], roots[r], 0, N, l + 1);
+	//returns number of distinct elements in range [le,ri)
+	int query(int le, int ri) const {
+		assert(0 <= le && le <= ri && ri <= N);
+		return query(roots[le], roots[ri], 0, N, le + 1);
 	}
 	int query(int vl, int vr, int tl, int tr, int idx) const {
 		if (tree[vr].sum == 0 || idx <= tl)

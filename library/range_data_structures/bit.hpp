@@ -14,15 +14,15 @@ template<class T> struct BIT {
 		assert(0 <= i && i < ssize(bit));
 		for (; i < ssize(bit); i |= i + 1) bit[i] += d;
 	}
-	T sum(int r) const {//sum of range [0, r)
-		assert(0 <= r && r <= ssize(bit));
+	T sum(int ri) const {//sum of range [0, ri)
+		assert(0 <= ri && ri <= ssize(bit));
 		T ret = 0;
-		for (; r > 0; r &= r - 1) ret += bit[r - 1];
+		for (; ri > 0; ri &= ri - 1) ret += bit[ri - 1];
 		return ret;
 	}
-	T sum(int l, int r) const {//sum of range [l, r)
-		assert(0 <= l && l <= r && r <= ssize(bit));
-		return sum(r) - sum(l);
+	T sum(int le, int ri) const {//sum of range [le, ri)
+		assert(0 <= le && le <= ri && ri <= ssize(bit));
+		return sum(ri) - sum(le);
 	}
 	//Returns min pos (0<=pos<=ssize(bit)+1) such that sum of [0, pos) >= sum
 	//Returns ssize(bit) + 1 if no sum is >= sum, or 0 if empty sum is.

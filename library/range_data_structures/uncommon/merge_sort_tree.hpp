@@ -8,10 +8,10 @@ struct merge_sort_tree {
 			tree[i + N] = {arr[i]};
 		rotate(tree.rbegin(), tree.rbegin() + S - N, tree.rbegin() + N);
 		for (int i = N - 1; i >= 1; i--) {
-			const auto& l = tree[2 * i];
-			const auto& r = tree[2 * i + 1];
-			tree[i].reserve(ssize(l) + ssize(r));
-			merge(l.begin(), l.end(), r.begin(), r.end(), back_inserter(tree[i]));
+			const auto& le = tree[2 * i];
+			const auto& ri = tree[2 * i + 1];
+			tree[i].reserve(ssize(le) + ssize(ri));
+			merge(le.begin(), le.end(), ri.begin(), ri.end(), back_inserter(tree[i]));
 		}
 	}
 	int value(int v, int x) const {
@@ -21,13 +21,13 @@ struct merge_sort_tree {
 		i += S;
 		return i < 2 * N ? i : 2 * (i - N);
 	}
-	//How many values in range [l, r) are < x?
+	//How many values in range [le, ri) are < x?
 	//O(log^2(n))
-	int query(int l, int r, int x) const {
+	int query(int le, int ri, int x) const {
 		int res = 0;
-		for (l = to_leaf(l), r = to_leaf(r); l < r; l >>= 1, r >>= 1) {
-			if (l & 1) res += value(l++, x);
-			if (r & 1) res += value(--r, x);
+		for (le = to_leaf(le), ri = to_leaf(ri); le < ri; le >>= 1, ri >>= 1) {
+			if (le & 1) res += value(le++, x);
+			if (ri & 1) res += value(--ri, x);
 		}
 		return res;
 	}

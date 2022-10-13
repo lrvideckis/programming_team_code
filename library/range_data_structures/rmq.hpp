@@ -23,10 +23,10 @@ template <class T> struct RMQ {
 				dp[k][j] = op(dp[k - 1][j], dp[k - 1][j + pw]);
 		}
 	}
-	//inclusive-exclusive range [l, r)
-	T query(int l, int r) const {
-		assert(0 <= l && l < r && r <= ssize(dp[0]));
-		int lg = __lg(r - l);
-		return op(dp[lg][l], dp[lg][r - (1 << lg)]);
+	//inclusive-exclusive range [le, ri)
+	T query(int le, int ri) const {
+		assert(0 <= le && le < ri && ri <= ssize(dp[0]));
+		int lg = __lg(ri - le);
+		return op(dp[lg][le], dp[lg][ri - (1 << lg)]);
 	}
 };

@@ -17,10 +17,10 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 		vector<int> left = monotonic_stack<int>(arr, greater());
 		vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), greater_equal());
 		for (int j = 0; j < m; j++) {
-			int l = j - left[j] - 1, r = rv(right[rv(j)]) - j - 1;
-			cnt[arr[j]][l + r + 1]++;
-			cnt[arr[j]][l]--;
-			cnt[arr[j]][r]--;
+			int le = j - left[j] - 1, ri = rv(right[rv(j)]) - j - 1;
+			cnt[arr[j]][le + ri + 1]++;
+			cnt[arr[j]][le]--;
+			cnt[arr[j]][ri]--;
 		}
 	}
 	for (int i = 1; i <= n; i++)
