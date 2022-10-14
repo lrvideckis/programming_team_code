@@ -23,7 +23,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unroo
 				swap(q, new_q);
 			}
 		}
-		sort(child_depths.begin(), child_depths.end(), [&](const auto & x, const auto & y) {
+		sort(child_depths.begin(), child_depths.end(), [&](const auto& x, const auto& y) {
 			return x.size() < y.size();
 		});
 		vector<double> total_depth(1, 1.0);
@@ -31,8 +31,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unroo
 			vector<double> prod = conv(total_depth, cnt_depth);
 			for (int i = 1; i < ssize(prod); i++)
 				num_paths[i] += llround(prod[i]);
-			if (ssize(total_depth) < ssize(cnt_depth))
-				total_depth.resize(ssize(cnt_depth), 0.0);
+			total_depth.resize(ssize(cnt_depth), 0.0);
 			for (int i = 1; i < ssize(cnt_depth); i++)
 				total_depth[i] += cnt_depth[i];
 		}
