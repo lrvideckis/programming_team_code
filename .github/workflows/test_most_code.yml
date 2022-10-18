@@ -39,6 +39,9 @@ jobs:
     - uses: actions/checkout@v2
       # to access git history in CI scripts:
       # https://stackoverflow.com/a/62335935/18306912
+      # context: clang-tidy takes a while. To get quicker results, 
+      # let's lint files in order of most recently modified.
+      # Now how to determine "most recently modified"? - latest commit in git history
       with:
         ref: ${{ github.event.pull_request.head.sha }}
         fetch-depth: 0
