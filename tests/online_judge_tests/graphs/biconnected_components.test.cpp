@@ -27,10 +27,6 @@ int main() {
 		}
 		assert(is_cut == cc.is_cut[i]);
 	}
-	for (int i = 0; i < m; i++) {
-		auto [u, v] = edges[i];
-		assert(cc.is_bridge[i] == (cc.two_edge_ccid[u] != cc.two_edge_ccid[v]));
-	}
 	//check correctness of block vertex tree
 	for (int i = 0; i < n; i++) {
 		assert(ssize(adj[i]) >= ssize(bvt[i]));//in particular, if adj[i].empty(), then bct[i].empty()
