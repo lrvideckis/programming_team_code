@@ -3,6 +3,7 @@
   - [steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html) for your own repo
 - See `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) for the actual tests
 - Note: < 30 tests run per commit, and currently there are > 40 tests. So for big changes (ex: code mod), CI may not test all changed files. To fix, I make random commits which change effectively nothing until all tests run. Check [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to see which tests ran
+  - Trick: delete [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to re-run all tests
 
 ## Linting
 All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) (thus also *included* `*.hpp` files in [library/](../library/))
