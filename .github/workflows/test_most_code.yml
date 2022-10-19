@@ -24,8 +24,8 @@ jobs:
         toolchain: nightly-x86_64-unknown-linux-gnu
         default: true
         profile: minimal
-    - name: Set up kactl submodule
-      run: git submodule init && git submodule update && cd ac-library/atcoder && ln -s . atcoder
+    - name: Set up git submodules
+      run: git submodule init && git submodule update && make --directory=tests/ add_symlink
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,7 +39,7 @@ jobs:
     - uses: actions/checkout@v2
       # to access git history in CI scripts:
       # https://stackoverflow.com/a/62335935/18306912
-      # context: clang-tidy takes a while. To get quicker results, 
+      # context: clang-tidy takes a while. To get quicker results,
       # let's lint files in order of most recently modified.
       # Now how to determine "most recently modified"? - latest commit in git history
       with:
