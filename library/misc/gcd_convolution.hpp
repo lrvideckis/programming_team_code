@@ -9,7 +9,7 @@ template<int MOD> vector<int> gcd_convolution(const vector<int>& a, const vector
 			sum_a = (sum_a + a[i]) % MOD, sum_b = (sum_b + b[i]) % MOD;
 			c[gcd] = (c[gcd] - c[i] + MOD) % MOD;
 		}
-		c[gcd] = (c[gcd] + 1LL * sum_a * sum_b) % MOD;
+		c[gcd] = int((c[gcd] + 1LL * sum_a * sum_b) % MOD);
 	}
 	return c;
 }
