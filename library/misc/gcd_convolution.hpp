@@ -1,6 +1,7 @@
 #pragma once
 // c[k] = the sum for all pairs where gcd(i,j) == k of a[i] * b[j]
 template<int MOD> vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
+	assert(ssize(a) == ssize(b));
 	int n = ssize(a);
 	vector<int> c(n);
 	for (int gcd = n - 1; gcd >= 1; gcd--) {
