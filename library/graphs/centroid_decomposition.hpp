@@ -34,12 +34,12 @@ template<typename F> struct centroid_decomp {
 		for (int p = -1, sz_root = sub_sz[u];;) {
 			int big_ch = -1;
 			for (int v : adj[u]) {
-				if (v == p) continue;
-				if (big_ch == -1 || sub_sz[big_ch] < sub_sz[v])
+				if (v != p && 2 * sub_sz[v] > sz_root) {
 					big_ch = v;
+					break;
+				}
 			}
-			if (big_ch == -1 || 2 * sub_sz[big_ch] <= sz_root)
-				break;
+			if (big_ch == -1) break;
 			p = u;
 			u = big_ch;
 		}
