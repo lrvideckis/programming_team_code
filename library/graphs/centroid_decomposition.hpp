@@ -19,7 +19,7 @@ struct centroid_decomp {
 		: adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
 		for (int i = 0; i < ssize(adj); i++)
 			if (sub_sz[i] == -1)
-				decomp(find_centroid(i));
+				decomp(i);
 	}
 
 	void calc_subtree_sizes(int u, int p = -1) {
@@ -31,29 +31,25 @@ struct centroid_decomp {
 		}
 	}
 
-	int find_centroid(int root) {
-		calc_subtree_sizes(root);
-		int u = root, p = -1;
-		while (1) {
+	void decomp(int u) {
+		calc_subtree_sizes(u);
+		for(int p = -1, sz_root = sub_sz[u];;) {
 			int big_ch = -1;
 			for (int v : adj[u]) {
 				if (v == p) continue;
 				if (big_ch == -1 || sub_sz[big_ch] < sub_sz[v])
 					big_ch = v;
 			}
-			if (big_ch == -1 || 2 * sub_sz[big_ch] <= sub_sz[root])
-				return u;
+			if (big_ch == -1 || 2 * sub_sz[big_ch] <= sz_root)
+				break;
 			p = u;
 			u = big_ch;
 		}
-	}
-
-	void decomp(int root) {
-		func(adj, root);
-		for (int v : adj[root]) {
+		func(adj, u);
+		for (int v : adj[u]) {
 			//each node is adjacent to O(logn) centroids
-			adj[v].erase(find(adj[v].begin(), adj[v].end(), root));
-			decomp(find_centroid(v));
+			adj[v].erase(find(adj[v].begin(), adj[v].end(), u));
+			decomp(v);
 		}
 	}
 };
