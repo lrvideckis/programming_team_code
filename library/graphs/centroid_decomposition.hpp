@@ -8,9 +8,9 @@
 // centroid_decomp runs the function on every decomposition
 
 // Example usage:
-//centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_with_removed_edges, int centroid) -> void {
-//	...
-//});
+//	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_with_removed_edges, int centroid) -> void {
+//		...
+//	});
 template<typename F> struct centroid_decomp {
 	vector<vector<int>> adj;
 	F func;
