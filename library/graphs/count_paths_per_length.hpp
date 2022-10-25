@@ -5,7 +5,7 @@
 //O(n log^2 n)
 vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unrooted, connected tree*/) {
 	vector<long long> num_paths(ssize(a_adj), 0);
-	auto func = [&](const vector<vector<int>>& adj, int root) -> void {
+	centroid_decomp decomp(a_adj, [&](const vector<vector<int>>& adj, int root) -> void {
 		vector<vector<double>> child_depths;
 		for (int to : adj[root]) {
 			child_depths.emplace_back(1, 0.0);
@@ -35,7 +35,6 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& a_adj/*unroo
 			for (int i = 1; i < ssize(cnt_depth); i++)
 				total_depth[i] += cnt_depth[i];
 		}
-	};
-	centroid_decomp decomp(a_adj, func);
+	});
 	return num_paths;
 }
