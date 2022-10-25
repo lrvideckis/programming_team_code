@@ -32,16 +32,12 @@ template<typename F> struct centroid_decomp {
 	void decomp(int u) {
 		calc_subtree_sizes(u);
 		for (int p = -1, sz_root = sub_sz[u];;) {
-			int big_ch = -1;
-			for (int v : adj[u]) {
-				if (v != p && 2 * sub_sz[v] > sz_root) {
-					big_ch = v;
-					break;
-				}
-			}
-			if (big_ch == -1) break;
+			auto it = find_if(adj[u].begin(), adj[u].end(), [&](int v) -> bool {
+				return v != p && 2 * sub_sz[v] > sz_root;
+			});
+			if (it == adj[u].end()) break;
 			p = u;
-			u = big_ch;
+			u = *it;
 		}
 		func(adj, u);
 		for (int v : adj[u]) {
