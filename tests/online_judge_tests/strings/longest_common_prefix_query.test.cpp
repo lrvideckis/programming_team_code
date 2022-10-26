@@ -11,7 +11,7 @@ int main() {
 	lcp_query<string> sq(s);
 	//test `less` function
 	{
-		for (int numTests = 50; numTests--;) {
+		for (int num_tests = 50; num_tests--;) {
 			auto le = get_rand<int>(0, ssize(s));
 			auto ri = get_rand<int>(0, ssize(s));
 			if (le > ri) swap(le, ri);
