@@ -10,6 +10,7 @@ delete-empty-lines
 attach-classes
 pad-oper
 pad-header
+pad-comma
 unpad-paren
 close-templates
 indent-col1-comments
