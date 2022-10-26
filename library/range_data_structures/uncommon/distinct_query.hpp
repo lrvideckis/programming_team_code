@@ -47,6 +47,6 @@ struct distinct_query {
 			return tree[vr].sum - tree[vl].sum;
 		int tm = tl + (tr - tl) / 2;
 		return query(tree[vl].lch, tree[vr].lch, tl, tm, idx) +
-		       query(tree[vl].rch, tree[vr].rch, tm, tr, idx);
+			   query(tree[vl].rch, tree[vr].rch, tm, tr, idx);
 	}
 };

@@ -1,6 +1,9 @@
 indent=tab
+indent=force-tab
 style=attach
 remove-braces
+attach-return-type
+attach-closing-while
 align-reference=type
 align-pointer=type
 delete-empty-lines

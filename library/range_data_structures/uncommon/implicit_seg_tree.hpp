@@ -51,7 +51,7 @@ template <int N> struct implicit_seg_tree {
 		update(tree[v].lch, tl, tm, le, ri, add);
 		update(tree[v].rch, tm, tr, le, ri, add);
 		tree[v].val = combine(tree[tree[v].lch].val,
-		                      tree[tree[v].rch].val);
+							  tree[tree[v].rch].val);
 	}
 	//query range [le,ri)
 	dt query(int le, int ri) {
@@ -65,6 +65,6 @@ template <int N> struct implicit_seg_tree {
 		push(v, tl, tr);
 		int tm = tl + (tr - tl) / 2;
 		return combine(query(tree[v].lch, tl, tm, le, ri),
-		               query(tree[v].rch, tm, tr, le, ri));
+					   query(tree[v].rch, tm, tr, le, ri));
 	}
 };
