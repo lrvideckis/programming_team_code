@@ -1,6 +1,8 @@
 noExplicitConstructor
 missingIncludeSystem
+unusedStructMember
 functionConst:../kactl/content/data-structures/SubMatrix.h:24
 useStlAlgorithm:../kactl/content/numerical/FastFourierTransform.h:53
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
 useStlAlgorithm:../ac-library/atcoder/string.hpp:138
+passedByValue:../library/range_data_structures/uncommon/implicit_seg_tree.hpp
