@@ -65,11 +65,14 @@ int main() {
 	for (int i = 0; i < m; i++) {
 		if (cc.is_bridge[i]) {
 			auto [u, v] = edges[i];
-			assert(dsu.find(u) != dsu.find(v));
+			bool same_set = dsu.sameSet(u, v);
+			assert(!same_set);
 		}
 	}
-	for (int i = 0; i < n; i++)
-		assert(cc.two_edge_ccid[i] == cc.two_edge_ccid[dsu.find(i)]);
+	for (int i = 0; i < n; i++) {
+		int par_of_cc = dsu.find(i);
+		assert(cc.two_edge_ccid[i] == cc.two_edge_ccid[par_of_cc]);
+	}
 	for (int i = 0; i < m; i++) {
 		auto [u, v] = edges[i];
 		//bridge if nodes are from different 2-edge CCs

@@ -13,7 +13,7 @@ echo "run astyle on all files:"
 
 #run cppcheck formatter before initializing git submodules to avoid warnings not in our code
 echo "run cppcheck on all files:"
-cppcheck online_judge_tests/ --file-filter="*.test.cpp" --enable=all --suppress=noExplicitConstructor --suppress=assertWithSideEffect --inconclusive --error-exitcode=1 --std=c++17 --max-ctu-depth=50 || exit 1
+cppcheck online_judge_tests/ --enable=all --inconclusive --force --file-filter="*.test.cpp" --language=c++ --suppress=noExplicitConstructor --error-exitcode=1 --std=c++17 --max-ctu-depth=50 || exit 1
 
 git submodule init
 git submodule update
