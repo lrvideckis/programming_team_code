@@ -23,7 +23,7 @@ int main() {
 		cout << res << endl;
 		int start = 0, end = ssize(sorted);
 		while (start + 1 < end) {
-			int mid = (start + end) / 2;
+			int mid = start + (end - start) / 2;
 			if (mst.query(l, r, sorted[mid]) <= k)
 				start = mid;
 			else
