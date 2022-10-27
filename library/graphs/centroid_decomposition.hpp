@@ -19,7 +19,7 @@ template<typename F> struct centroid_decomp {
 		: adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
 		for (int i = 0; i < ssize(adj); i++)
 			if (sub_sz[i] == -1)
-				decomp(i);
+				dfs(i);
 	}
 	void calc_subtree_sizes(int u, int p = -1) {
 		sub_sz[u] = 1;
@@ -30,7 +30,7 @@ template<typename F> struct centroid_decomp {
 			sub_sz[u] += sub_sz[v];
 		}
 	}
-	void decomp(int u) {
+	void dfs(int u) {
 		calc_subtree_sizes(u);
 		for (int p = -1, sz_root = sub_sz[u];;) {
 			auto big_ch = find_if(adj[u].begin(), adj[u].end(), [&](int v) -> bool {
@@ -45,7 +45,7 @@ template<typename F> struct centroid_decomp {
 		for (int v : adj[u]) {
 			//each node is adjacent to O(logn) centroids
 			adj[v].erase(find(adj[v].begin(), adj[v].end(), u));
-			decomp(v);
+			dfs(v);
 		}
 	}
 };
