@@ -34,3 +34,4 @@ I've added links to sources when applicable. Everything is under the [CC0 licens
 - https://github.com/nealwu/competitive-programming
 - https://github.com/dacin21/dacin21_codebook
 - https://github.com/ucf-programming-team/hackpack-cpp
+- https://github.com/cheran-senthil/PyRival
