@@ -38,8 +38,7 @@ template<typename F> struct centroid_decomp {
 			});
 			if (big_ch == adj[u].end())
 				break;
-			p = u;
-			u = *big_ch;
+			p = u, u = *big_ch;
 		}
 		func(adj, u);
 		for (int v : adj[u]) {
