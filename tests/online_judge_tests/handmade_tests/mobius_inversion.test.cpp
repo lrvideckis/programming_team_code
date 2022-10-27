@@ -24,7 +24,8 @@ int main() {
 					break;
 				}
 			}
-			if (found_square) continue;
+			if (found_square)
+				continue;
 		}
 		assert(1 - 2 * (ssize(factors) % 2) == mobius[i]);
 	}

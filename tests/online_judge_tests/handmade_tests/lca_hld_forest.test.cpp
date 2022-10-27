@@ -19,7 +19,8 @@ int main() {
 		for (int q = N; q--;) {
 			int u = get_rand<int>(0, N);
 			int v = get_rand<int>(0, N);
-			if (u == v) continue;
+			if (u == v)
+				continue;
 			if (uf.join(u, v)) {
 				auto w = get_rand<long long>(0, (long long)1e15);
 				edges++;

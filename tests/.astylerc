@@ -7,6 +7,7 @@ attach-return-type
 attach-closing-while
 attach-classes
 remove-braces
+break-one-line-headers
 align-reference=type
 align-pointer=type
 delete-empty-lines

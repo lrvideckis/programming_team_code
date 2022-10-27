@@ -32,7 +32,8 @@ int main() {
 			int cnt = 0;
 			for (int i = 0; i + rows <= n; i++) {
 				for (int j = 0; j + cols <= m; j++) {
-					if (sm.sum(i, j, i + rows, j + cols) == rows * cols) cnt++;
+					if (sm.sum(i, j, i + rows, j + cols) == rows * cols)
+						cnt++;
 				}
 			}
 			assert(size_counts[rows][cols] == cnt);
@@ -41,7 +42,8 @@ int main() {
 	int res = 0;
 	for (int i = 1; i <= n; i++) {
 		for (int j = 1; j <= m; j++) {
-			if (size_counts[i][j]) res = max(res, i * j);
+			if (size_counts[i][j])
+				res = max(res, i * j);
 		}
 	}
 	cout << res << '\n';

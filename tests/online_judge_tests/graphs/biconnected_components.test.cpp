@@ -37,7 +37,8 @@ int main() {
 		for (int i = 0; i < m; i++) {
 			int bccid = cc.bcc_id[i];
 			for (int node : {
-					 edges[i].first, edges[i].second
+					 edges[i]
+					 .first, edges[i].second
 				 }) {
 				bcc_to_nodes[bccid].insert(node);
 				node_to_bccs[node].insert(bccid);
@@ -59,7 +60,8 @@ int main() {
 	}
 	vector<int> lone_nodes;
 	for (int v = 0; v < n; v++)
-		if (bvt[v].empty()) lone_nodes.push_back(v);
+		if (bvt[v].empty())
+			lone_nodes.push_back(v);
 	cout << cc.num_bccs + ssize(lone_nodes) << endl;
 	for (int bccid = 0; bccid < cc.num_bccs; bccid++) {
 		cout << ssize(bvt[bccid + n]) << " ";
@@ -67,6 +69,7 @@ int main() {
 			cout << v << " ";
 		cout << '\n';
 	}
-	for (int v : lone_nodes) cout << "1 " << v << '\n';
+	for (int v : lone_nodes)
+		cout << "1 " << v << '\n';
 	return 0;
 }

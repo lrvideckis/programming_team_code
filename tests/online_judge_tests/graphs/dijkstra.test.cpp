@@ -15,8 +15,10 @@ int main() {
 	}
 	vector<long long> len = dijkstra(adj, s);
 	for (int i = 0; i < n; i++) {
-		if (len[i] == INF) cout << "INF\n";
-		else cout << len[i] << '\n';
+		if (len[i] == INF)
+			cout << "INF\n";
+		else
+			cout << len[i] << '\n';
 	}
 	return 0;
 }

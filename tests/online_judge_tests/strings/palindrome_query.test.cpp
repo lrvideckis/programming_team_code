@@ -19,7 +19,8 @@ int main() {
 		}
 		for (int i = 0; i < int(1e7 / n); i++) {
 			int l = get_rand(0, n), r = get_rand(0, n);
-			if (l > r) swap(l, r);
+			if (l > r)
+				swap(l, r);
 			tests.emplace_back(min(l, r), max(l, r));
 		}
 		for (auto [l, r] : tests) {
@@ -29,7 +30,8 @@ int main() {
 	}
 	for (int i = 0; i < n; i++) {
 		cout << 2 * pal_q.pal_len[1][i] + 1 << " ";
-		if (i + 1 < n) cout << 2 * pal_q.pal_len[0][i + 1] << " ";
+		if (i + 1 < n)
+			cout << 2 * pal_q.pal_len[0][i + 1] << " ";
 	}
 	return 0;
 }

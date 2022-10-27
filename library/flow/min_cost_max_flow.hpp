@@ -31,16 +31,19 @@ struct mcmf {
 			while (qh != qt) {
 				int v = q[qh++];
 				id[v] = 2;
-				if (qh == N) qh = 0;
+				if (qh == N)
+					qh = 0;
 				for (int i = 0; i < ssize(g[v]); i++) {
 					const edge& r = e[g[v][i]];
 					if (r.flow < r.cap && d[v] + r.cost < d[r.b]) {
 						d[r.b] = d[v] + r.cost;
 						if (id[r.b] == 0) {
 							q[qt++] = r.b;
-							if (qt == N) qt = 0;
+							if (qt == N)
+								qt = 0;
 						} else if (id[r.b] == 2) {
-							if (--qh == -1) qh = N - 1;
+							if (--qh == -1)
+								qh = N - 1;
 							q[qh] = r.b;
 						}
 						id[r.b] = 1;
@@ -49,7 +52,8 @@ struct mcmf {
 					}
 				}
 			}
-			if (d[t] == INF) break;
+			if (d[t] == INF)
+				break;
 			ll addflow = total_flow - flow;
 			for (int v = t; v != s; v = p[v]) {
 				int pv = p[v], pr = p_edge[v];

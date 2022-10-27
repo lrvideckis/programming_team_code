@@ -18,7 +18,9 @@ int main() {
 	while (q--) {
 		int u, v, k;
 		cin >> u >> v >> k;
-		if (k > kpath.lca.dist_edges(u, v)) cout << -1 << '\n';
-		else cout << kpath.query(u, v, k) << '\n';
+		if (k > kpath.lca.dist_edges(u, v))
+			cout << -1 << '\n';
+		else
+			cout << kpath.query(u, v, k) << '\n';
 	}
 }

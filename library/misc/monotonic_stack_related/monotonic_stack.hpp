@@ -11,7 +11,8 @@ template<class T> vector<int> monotonic_stack(const vector<T>& arr, const functi
 	vector<int> le(ssize(arr));
 	for (int i = 0; i < ssize(arr); i++) {
 		le[i] = i - 1;
-		while (le[i] >= 0 && op(arr[le[i]], arr[i])) le[i] = le[le[i]];
+		while (le[i] >= 0 && op(arr[le[i]], arr[i]))
+			le[i] = le[le[i]];
 	}
 	return le;
 }

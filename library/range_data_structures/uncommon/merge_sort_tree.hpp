@@ -26,8 +26,10 @@ struct merge_sort_tree {
 	int query(int le, int ri, int x) const {
 		int res = 0;
 		for (le = to_leaf(le), ri = to_leaf(ri); le < ri; le >>= 1, ri >>= 1) {
-			if (le & 1) res += value(le++, x);
-			if (ri & 1) res += value(--ri, x);
+			if (le & 1)
+				res += value(le++, x);
+			if (ri & 1)
+				res += value(--ri, x);
 		}
 		return res;
 	}

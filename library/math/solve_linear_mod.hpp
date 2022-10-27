@@ -22,12 +22,14 @@ matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long l
 	auto [rank, det] = row_reduce(mat, m, mod);//row reduce not including the last column
 	//check if solution exists
 	for (int i = rank; i < n; i++) {
-		if (mat[i].back() != 0) return {rank, det, {} }; //no solution exists
+		if (mat[i].back() != 0)
+			return {rank, det, {} }; //no solution exists
 	}
 	//initialize solution vector (`x`) from row-reduced matrix
 	vector<long long> x(m, 0);
 	for (int i = 0, j = 0; i < rank; i++) {
-		while (mat[i][j] == 0) j++; //find pivot column
+		while (mat[i][j] == 0)
+			j++; //find pivot column
 		x[j] = mat[i].back();
 	}
 	return {rank, det, x};

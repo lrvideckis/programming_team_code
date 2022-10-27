@@ -19,7 +19,8 @@ int main() {
 	}
 	int res = 1;
 	for (auto [p, e] : prime_to_max_exponent) {
-		while (e--) res *= p;
+		while (e--)
+			res *= p;
 	}
 	cout << res << '\n';
 	return 0;

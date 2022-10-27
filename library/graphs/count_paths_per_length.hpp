@@ -16,7 +16,8 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj/*unroote
 					auto [curr, par] = q.front();
 					q.pop();
 					for (int ch : adj_removed_edges[curr]) {
-						if (ch == par) continue;
+						if (ch == par)
+							continue;
 						new_q.emplace(ch, curr);
 					}
 				}
@@ -28,7 +29,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj/*unroote
 		});
 		vector<double> total_depth(1, 1.0);
 		for (const auto& cnt_depth : child_depths) {
-			vector<double> prod = conv(total_depth, cnt_depth);
+			auto prod = conv(total_depth, cnt_depth);
 			for (int i = 1; i < ssize(prod); i++)
 				num_paths[i] += llround(prod[i]);
 			total_depth.resize(ssize(cnt_depth), 0.0);

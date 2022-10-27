@@ -37,11 +37,14 @@ template <class T> struct KMP {
 	vector<int> find(const T& haystack, bool all = 1) const {
 		vector<int> matches;
 		for (int i = 0, j = 0; i < ssize(haystack); i++) {
-			while (j > 0 && needle[j] != haystack[i]) j = pi[j - 1];
-			if (needle[j] == haystack[i]) j++;
+			while (j > 0 && needle[j] != haystack[i])
+				j = pi[j - 1];
+			if (needle[j] == haystack[i])
+				j++;
 			if (j == ssize(needle)) {
 				matches.push_back(i - ssize(needle) + 1);
-				if (!all) return matches;
+				if (!all)
+					return matches;
 				j = pi[j - 1];
 			}
 		}

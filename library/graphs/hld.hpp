@@ -18,7 +18,8 @@ struct HLD {
 	}
 	void dfs1(int v, vector<vector<int>>& adj) {
 		auto par = find(adj[v].begin(), adj[v].end(), tree[v].par);
-		if (par != adj[v].end()) adj[v].erase(par);
+		if (par != adj[v].end())
+			adj[v].erase(par);
 		for (int& to : adj[v]) {
 			tree[to].par = v;
 			dfs1(to, adj);
@@ -40,7 +41,8 @@ struct HLD {
 	vector<pair<int, int>> path(int u, int v) const {
 		vector<pair<int, int>> res;
 		for (;; v = tree[tree[v].next].par) {
-			if (tree[v].time_in < tree[u].time_in) swap(u, v);
+			if (tree[v].time_in < tree[u].time_in)
+				swap(u, v);
 			if (tree[tree[v].next].time_in <= tree[u].time_in) {
 				res.emplace_back(tree[u].time_in, tree[v].time_in + 1);
 				return res;
@@ -57,8 +59,10 @@ struct HLD {
 	// u, v must be in the same component
 	int lca(int u, int v) const {
 		for (;; v = tree[tree[v].next].par) {
-			if (tree[v].time_in < tree[u].time_in) swap(u, v);
-			if (tree[tree[v].next].time_in <= tree[u].time_in) return u;
+			if (tree[v].time_in < tree[u].time_in)
+				swap(u, v);
+			if (tree[tree[v].next].time_in <= tree[u].time_in)
+				return u;
 		}
 	}
 };

@@ -84,7 +84,8 @@ int main() {
 	cout << cc.num_2_edge_ccs << endl;
 	for (auto& curr_cc : ccs) {
 		cout << ssize(curr_cc) << " ";
-		for (int node : curr_cc) cout << node << " ";
+		for (int node : curr_cc)
+			cout << node << " ";
 		cout << endl;
 	}
 	return 0;

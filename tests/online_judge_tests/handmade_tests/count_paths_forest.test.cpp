@@ -32,7 +32,8 @@ int main() {
 		for (int q = n; q--;) {
 			int u = get_rand<int>(0, n);
 			int v = get_rand<int>(0, n);
-			if (u == v) continue;
+			if (u == v)
+				continue;
 			if (uf.join(u, v)) {
 				adj[u].push_back(v);
 				adj[v].push_back(u);

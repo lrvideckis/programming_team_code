@@ -22,18 +22,24 @@ int main() {
 		return 0;
 	}
 	cout << m - info.rank << endl;
-	for (long long val : info.x) cout << val << " ";
+	for (long long val : info.x)
+		cout << val << " ";
 	cout << endl;
 	vector<int> pivot(m, -1);
 	for (int i = 0, j = 0; i < info.rank; i++) {
-		while (mat[i][j] == 0) j++;
+		while (mat[i][j] == 0)
+			j++;
 		pivot[j] = i;
 	}
-	for (int j = 0; j < m; j++) if (pivot[j] == -1) {
+	for (int j = 0; j < m; j++)
+		if (pivot[j] == -1) {
 			vector<long long> x(m, 0);
 			x[j] = MOD - 1;
-			for (int k = 0; k < j; k++) if (pivot[k] != -1) x[k] = mat[pivot[k]][j];
-			for (int k = 0; k < m; k++) cout << x[k] << " ";
+			for (int k = 0; k < j; k++)
+				if (pivot[k] != -1)
+					x[k] = mat[pivot[k]][j];
+			for (int k = 0; k < m; k++)
+				cout << x[k] << " ";
 			cout << endl;
 		}
 	return 0;

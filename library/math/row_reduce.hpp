@@ -14,7 +14,8 @@ pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>
 		//find arbitrary pivot and swap pivot to current row
 		for (int i = rank; i < n; i++)
 			if (mat[i][col] != 0) {
-				if (rank != i) det = det == 0 ? 0 : mod - det;
+				if (rank != i)
+					det = det == 0 ? 0 : mod - det;
 				swap(mat[i], mat[rank]);
 				break;
 			}
@@ -33,7 +34,8 @@ pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>
 				long long val = mat[i][col];
 				for (int j = 0; j < m; j++) {
 					mat[i][j] -= mat[rank][j] * val % mod;
-					if (mat[i][j] < 0) mat[i][j] += mod;
+					if (mat[i][j] < 0)
+						mat[i][j] += mod;
 				}
 			}
 		rank++;

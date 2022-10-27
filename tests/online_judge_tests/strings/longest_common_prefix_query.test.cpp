@@ -14,7 +14,8 @@ int main() {
 		for (int num_tests = 50; num_tests--;) {
 			auto le = get_rand<int>(0, ssize(s));
 			auto ri = get_rand<int>(0, ssize(s));
-			if (le > ri) swap(le, ri);
+			if (le > ri)
+				swap(le, ri);
 			assert(sq.less(le, ri) == (s.substr(le) < s.substr(ri)));
 		}
 	}

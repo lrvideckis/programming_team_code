@@ -17,7 +17,8 @@ template<typename T> struct lcp_query {
 	//You can check if two substrings s[l1..r1), s[l2..r2) are equal in O(1) by:
 	//r1-l1 == r2-l2 && longest_common_prefix(l1, l2) >= r1-l1
 	int get_lcp(int idx1, int idx2) const {
-		if (idx1 == idx2) return ssize(sa) - idx1;
+		if (idx1 == idx2)
+			return ssize(sa) - idx1;
 		auto [le, ri] = minmax(inv_sa[idx1], inv_sa[idx2]);
 		return rmq.query(le, ri);
 	}

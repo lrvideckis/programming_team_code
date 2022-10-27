@@ -24,7 +24,8 @@ template<typename F> struct centroid_decomp {
 	void calc_subtree_sizes(int u, int p = -1) {
 		sub_sz[u] = 1;
 		for (int v : adj[u]) {
-			if (v == p) continue;
+			if (v == p)
+				continue;
 			calc_subtree_sizes(v, u);
 			sub_sz[u] += sub_sz[v];
 		}
@@ -35,7 +36,8 @@ template<typename F> struct centroid_decomp {
 			auto big_ch = find_if(adj[u].begin(), adj[u].end(), [&](int v) -> bool {
 				return v != p && 2 * sub_sz[v] > sz_root;
 			});
-			if (big_ch == adj[u].end()) break;
+			if (big_ch == adj[u].end())
+				break;
 			p = u;
 			u = *big_ch;
 		}

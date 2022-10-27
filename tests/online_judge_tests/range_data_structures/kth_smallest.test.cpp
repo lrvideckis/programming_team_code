@@ -26,7 +26,8 @@ int main() {
 			int mid = (start + end) / 2;
 			if (mst.query(l, r, sorted[mid]) <= k)
 				start = mid;
-			else end = mid;
+			else
+				end = mid;
 		}
 		assert(res == sorted[start]);
 	}
