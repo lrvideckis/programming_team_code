@@ -5,7 +5,7 @@
 //O(n log n)
 vector<long long> count_paths_per_node(const vector<vector<int>>& adj/*unrooted tree*/, int k) {
 	vector<long long> num_paths(ssize(adj));
-	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int root) -> void {
+	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
 		vector<int> pre_d(1, 1), cur_d(1);
 		auto dfs = [&](auto self, int u, int p, int d) -> long long {
 			if (d > k)
@@ -23,17 +23,17 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj/*unrooted 
 			return cnt;
 		};
 		auto dfs_child = [&](int child) -> long long {
-			long long cnt = dfs(dfs, child, root, 1);
+			long long cnt = dfs(dfs, child, cent, 1);
 			pre_d.resize(ssize(cur_d));
 			for (int i = 1; i < ssize(cur_d) && cur_d[i]; i++)
 				pre_d[i] += cur_d[i], cur_d[i] = 0;
 			return cnt;
 		};
-		for (int child : adj_removed_edges[root])
-			num_paths[root] += dfs_child(child);
+		for (int child : adj_removed_edges[cent])
+			num_paths[cent] += dfs_child(child);
 		pre_d = vector<int>(1);
 		cur_d = vector<int>(1);
-		for (auto it = adj_removed_edges[root].rbegin(); it != adj_removed_edges[root].rend(); it++)
+		for (auto it = adj_removed_edges[cent].rbegin(); it != adj_removed_edges[cent].rend(); it++)
 			dfs_child(*it);
 	});
 	return num_paths;

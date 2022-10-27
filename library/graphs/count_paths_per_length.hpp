@@ -5,11 +5,11 @@
 //O(n log^2 n)
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj/*unrooted, connected tree*/) {
 	vector<long long> num_paths(ssize(adj), 0);
-	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int root) -> void {
+	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
 		vector<vector<double>> child_depths;
-		for (int to : adj_removed_edges[root]) {
+		for (int to : adj_removed_edges[cent]) {
 			child_depths.emplace_back(1, 0.0);
-			for (queue<pair<int, int>> q({{to, root}}); !q.empty();) {
+			for (queue<pair<int, int>> q({{to, cent}}); !q.empty();) {
 				child_depths.back().push_back(ssize(q));
 				queue<pair<int, int>> new_q;
 				while (!q.empty()) {
