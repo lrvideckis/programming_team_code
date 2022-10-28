@@ -1,7 +1,7 @@
 #pragma once
 //mnemonic: Binary Indexed Tree
 //NOLINTNEXTLINE(readability-identifier-naming)
-template<class T> struct BIT {
+template <typename T> struct BIT {
 	vector<T> bit;
 	BIT(int n) : bit(n, 0) {}
 	BIT(const vector<T>& a) : bit(a) {

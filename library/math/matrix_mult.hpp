@@ -7,7 +7,7 @@
 // Time: O(n * m * inner)
 // Space: O(n * m)
 
-template<typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, const vector<vector<T>>& b) {
+template <typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, const vector<vector<T>>& b) {
 	assert(ssize(a[0]) == ssize(b));
 	int n = ssize(a), m = ssize(b[0]), inner = ssize(b);
 	vector<vector<T>> c(n, vector<T>(m));

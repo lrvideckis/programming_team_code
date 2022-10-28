@@ -30,7 +30,7 @@
 //
 // ssize(KMP::find(<haystack>,0)) > 0
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <class T> struct KMP {
+template <typename T> struct KMP {
 	T needle;
 	vector<int> pi;
 	KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {}

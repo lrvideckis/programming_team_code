@@ -3,7 +3,7 @@
 #include "../range_data_structures/rmq.hpp"
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
-template<typename T> struct lcp_query {
+template <typename T> struct lcp_query {
 	vector<int> sa, lcp, inv_sa;
 	RMQ<int> rmq;
 	lcp_query(const T& s) : sa(atcoder::suffix_array(s)), lcp(atcoder::lcp_array(s, sa)), inv_sa(ssize(s)), rmq(lcp, [](int x, int y) {

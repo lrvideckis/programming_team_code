@@ -11,7 +11,7 @@
 //	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
 //		...
 //	});
-template<typename F> struct centroid_decomp {
+template <typename F> struct centroid_decomp {
 	vector<vector<int>> adj;
 	F func;
 	vector<int> sub_sz;

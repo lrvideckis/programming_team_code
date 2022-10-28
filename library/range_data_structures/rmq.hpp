@@ -13,7 +13,7 @@
 //(left-most) one
 //mnemonic: Range Min/Max Query
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <class T> struct RMQ {
+template <typename T> struct RMQ {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> op;
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : dp(1, arr), op(a_op) {

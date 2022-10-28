@@ -11,6 +11,11 @@ find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" | \
 	astyle --options=.astylerc --recursive "../library/*.hpp"
 ) | grep "Formatted" && exit 1
 
+echo "check template<typename T> over template<class T>:"
+grep --recursive --extended-regexp "template\s?<class" ../library/ && exit 1
+echo "check formatting of template <typename T>:"
+grep --recursive --extended-regexp "template<typename" ../library/ && exit 1
+
 git submodule init
 git submodule update
 
