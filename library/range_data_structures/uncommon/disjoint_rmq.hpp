@@ -1,5 +1,13 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/87940
+//usage for # of mins:
+//	vector<pair<long long, int>> arr; //initialize arr[i].second = 1
+//	...
+//	disjoint_rmq<pair<long long, int>> rmq(arr, {LLONG_MAX, 0}, [&](auto x, auto y) {
+//		if (x.first == y.first)
+//			return make_pair(x.first, x.second + y.second);
+//		return min(x, y);
+//	});
 template <typename T> struct disjoint_rmq {
 	const int N;
 	vector<vector<T>> dp;
