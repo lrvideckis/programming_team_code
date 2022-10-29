@@ -5,7 +5,7 @@
 // Space complexity O(n)
 
 // Given an unweighted, undirected forest and a function,
-// centroid_decomp runs the function on every decomposition
+// centroid_decomp runs the function on the centroid of every decomposition
 
 // Example usage:
 //	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
