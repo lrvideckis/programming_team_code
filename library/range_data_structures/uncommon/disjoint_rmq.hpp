@@ -1,6 +1,6 @@
 #pragma once
 //sources: https://codeforces.com/blog/entry/87940, https://github.com/sgtlaugh/algovault/blob/ master/code_library/disjoint_sparse_table.cpp
-//Disjoint RMQ is like normal RMQ except these ranges don't overlap. So
+//Disjoint RMQ is like normal RMQ except these ranges never overlap. So
 //now, you can do a rmq with +, although it's overkill as you can do prefix sums
 //instead. Also note seg trees can do everything this can do. It is useful for:
 //	- min and # of mins.
