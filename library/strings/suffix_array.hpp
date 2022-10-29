@@ -1,6 +1,7 @@
 #pragma once
 //source: https://judge.yosupo.jp/submission/63467
 //time: O(n + max_val)
+//note O(n) is impossible because of O(nlogn) lower bound for comparison sorts
 //assumes 0 <= s[i] < max_val
 template <typename T> vector<int> suffix_array(const T& s, int max_val) {
 	int n = ssize(s);
