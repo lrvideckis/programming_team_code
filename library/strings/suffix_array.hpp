@@ -48,7 +48,7 @@ template <typename T> vector<int> suffix_array(const T& s, int max_val) {
 		for (int i = 1; i < ssize(lms); i++) {
 			int a = sorted_lms[i - 1], b = sorted_lms[i];
 			max_val2 += !equal(s.begin() + a, s.begin() + (lms_idx[a] + 1 == ssize(lms) ? n : lms[lms_idx[a] + 1]),
-							s.begin() + b, s.begin() + (lms_idx[b] + 1 == ssize(lms) ? n : lms[lms_idx[b] + 1]));
+							   s.begin() + b, s.begin() + (lms_idx[b] + 1 == ssize(lms) ? n : lms[lms_idx[b] + 1]));
 			s2[lms_idx[b]] = max_val2;
 		}
 		auto sa2 = suffix_array(s2, max_val2 + 1);
