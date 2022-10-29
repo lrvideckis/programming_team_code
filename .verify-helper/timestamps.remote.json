@@ -45,10 +45,10 @@
 "tests/online_judge_tests/range_data_structures/sparse_table.test.cpp": "2022-10-28 16:45:43 -0700",
 "tests/online_judge_tests/strings/binary_trie.test.cpp": "2022-10-26 17:08:37 -0700",
 "tests/online_judge_tests/strings/kmp.test.cpp": "2022-10-28 16:45:43 -0700",
-"tests/online_judge_tests/strings/lcp_query_palindrome.test.cpp": "2022-10-28 19:42:27 -0700",
-"tests/online_judge_tests/strings/longest_common_prefix_query.test.cpp": "2022-10-28 19:42:27 -0700",
+"tests/online_judge_tests/strings/lcp_query_palindrome.test.cpp": "2022-10-28 19:48:07 -0700",
+"tests/online_judge_tests/strings/longest_common_prefix_query.test.cpp": "2022-10-28 19:48:07 -0700",
 "tests/online_judge_tests/strings/palindrome_query.test.cpp": "2022-10-28 16:45:43 -0700",
 "tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-10-28 16:45:43 -0700",
-"tests/online_judge_tests/strings/suffix_array.test.cpp": "2022-10-28 19:42:27 -0700",
+"tests/online_judge_tests/strings/suffix_array.test.cpp": "2022-10-28 19:48:07 -0700",
 "tests/online_judge_tests/strings/trie.test.cpp": "2022-10-26 17:08:37 -0700"
 }
