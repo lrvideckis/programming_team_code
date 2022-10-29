@@ -5,6 +5,7 @@
 //instead. It is useful for:
 //	- min and # of mins.
 //	- product under composite mod
+//	- 2-by-2 matrix multiply
 //usage for min and # of mins:
 //	vector<pair<long long, int>> arr; //initialize arr[i].second = 1
 //	...
