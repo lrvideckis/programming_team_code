@@ -15,6 +15,10 @@ help:
 	@echo "                                     |   - these files are not compiled nor linted as part of ci."
 	@echo "                                     |   - need to add symlink first."
 	@echo
+	@echo "make print_files_not_in_pdf          | print list of all .hpp files *not* included by scripts/hackpack.tex"
+	@echo "                                     |   - these files are not included in the hackpack."
+	@echo "                                     |   - need to add symlink first."
+	@echo
 	@echo "make print_tests_by_git_modification | print list of all .test.cpp files ordered by most recently modified."
 	@echo "                                     |   - determines modified date from \`git log\`. so when running locally,"
 	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
@@ -35,6 +39,9 @@ check_format:
 
 print_untested_files:
 	./scripts/find_files_without_tests.sh
+
+print_files_not_in_pdf:
+	./scripts/find_files_not_in_pdf.sh
 
 print_tests_by_git_modification:
 	./scripts/tests_by_git_modification.sh
