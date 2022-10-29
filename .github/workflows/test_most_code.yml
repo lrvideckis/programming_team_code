@@ -59,3 +59,10 @@ jobs:
         fetch-depth: 0
     - name: Compile all tests
       run: make --directory=tests/ compile_all_tests
+      
+  check_hackpack_has_all_hpp_files:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check hackpack has all hpp files
+      run: make --directory=tests/ print_files_not_in_pdf
