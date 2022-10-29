@@ -1,4 +1,5 @@
 #pragma once
+//source: https://cp-algorithms.com/string/suffix-array.html
 template <typename T> vector<int> calc_lcp(const T& s, const vector<int>& sa) {
 	int n = ssize(s);
 	vector<int> inv_sa(n), lcp(n - 1, 0);
