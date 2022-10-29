@@ -19,13 +19,13 @@ template <typename T> struct disjoint_rmq {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> op; // any associative operation
 	disjoint_rmq(const vector<T>& arr, const T& identity, const function<T(const T&, const T&)>& a_op) : N(ssize(arr)), op(a_op) {
-		for (int lg = 0, len = 1; len <= N; lg++, len *= 2) {
+		for (int i = 0, len = 1; len <= N; i++, len *= 2) {
 			dp.emplace_back(N + 1, identity);
 			for (int center = len; center < N + len; center += 2 * len) {
-				for (int i = center + 1; i <= min(N, center + len); i++)
-					dp[lg][i] = op(dp[lg][i - 1], arr[i - 1]);
-				for (int i = min(N, center) - 1; i >= center - len; i--)
-					dp[lg][i] = op(arr[i], dp[lg][i + 1]);
+				for (int j = center + 1; j <= min(N, center + len); j++)
+					dp[i][j] = op(dp[i][j - 1], arr[j - 1]);
+				for (int j = min(N, center) - 1; j >= center - len; j--)
+					dp[i][j] = op(arr[j], dp[i][j + 1]);
 			}
 		}
 	}
