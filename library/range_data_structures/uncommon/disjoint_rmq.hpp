@@ -1,6 +1,9 @@
 #pragma once
 //source: https://codeforces.com/blog/entry/87940
-//usage for # of mins:
+//Disjoint RMQ is like normal RMQ except the ranges don't overlap. So
+//now, you can do a rmq with +, although it's overkill as you can do prefix sums
+//instead.
+//usage for min and # of mins:
 //	vector<pair<long long, int>> arr; //initialize arr[i].second = 1
 //	...
 //	disjoint_rmq<pair<long long, int>> rmq(arr, {LLONG_MAX, 0}, [&](auto x, auto y) {
