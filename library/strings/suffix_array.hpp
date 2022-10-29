@@ -1,7 +1,7 @@
 #pragma once
 //source: https://judge.yosupo.jp/submission/63467
-//time: O(n + alph)
-template <typename T> vector<int> suffix_array(const T& s, int alph) {
+//time: O(n + max_val)
+template <typename T> vector<int> suffix_array(const T& s, int max_val) {
 	int n = ssize(s);
 	if (n == 0)
 		return {};
@@ -12,13 +12,13 @@ template <typename T> vector<int> suffix_array(const T& s, int alph) {
 	vector<int> sa(n, 0), is_s(n, 0);
 	for (int i = n - 2; i >= 0; i--)
 		is_s[i] = (s[i] < s[i + 1] || (s[i] == s[i + 1] && is_s[i + 1]));
-	vector<int> head(alph + 1, 0), tail(alph + 1, 0);
+	vector<int> head(max_val + 1, 0), tail(max_val + 1, 0);
 	for (int i = 0; i < n; i++)
 		head[s[i] + 1]++, tail[s[i]] += !is_s[i];
 	partial_sum(head.begin(), head.end(), head.begin());
-	for (int i = 0; i <= alph; i++)
+	for (int i = 0; i <= max_val; i++)
 		tail[i] += head[i];
-	vector<int> tmp(alph + 1, 0);
+	vector<int> tmp(max_val + 1, 0);
 	auto induce = [&](const vector<int>& lms) {
 		fill(sa.begin(), sa.end(), -1);
 		copy(tail.begin(), tail.end(), tmp.begin());
@@ -44,14 +44,14 @@ template <typename T> vector<int> suffix_array(const T& s, int alph) {
 		copy_if(sa.begin(), sa.end(), back_inserter(sorted_lms), [&](int i) -> bool {
 			return lms_idx[i] != -1;
 		});
-		int alph2 = 0;
+		int max_val2 = 0;
 		for (int i = 1; i < ssize(lms); i++) {
 			int a = sorted_lms[i - 1], b = sorted_lms[i];
-			alph2 += !equal(s.begin() + a, s.begin() + (lms_idx[a] + 1 == ssize(lms) ? n : lms[lms_idx[a] + 1]),
+			max_val2 += !equal(s.begin() + a, s.begin() + (lms_idx[a] + 1 == ssize(lms) ? n : lms[lms_idx[a] + 1]),
 							s.begin() + b, s.begin() + (lms_idx[b] + 1 == ssize(lms) ? n : lms[lms_idx[b] + 1]));
-			s2[lms_idx[b]] = alph2;
+			s2[lms_idx[b]] = max_val2;
 		}
-		auto sa2 = suffix_array(s2, alph2 + 1);
+		auto sa2 = suffix_array(s2, max_val2 + 1);
 		for (int i = 0; i < ssize(lms); i++)
 			sorted_lms[i] = lms[sa2[i]];
 		induce(sorted_lms);
