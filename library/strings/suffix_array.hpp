@@ -3,8 +3,10 @@
 //time: O(n + alph)
 template <typename T> vector<int> suffix_array(const T& s, int alph) {
 	int n = ssize(s);
-	if (n <= 1)
-		return vector<int>(n, 0);
+	if (n == 0)
+		return {};
+	if (n == 1)
+		return {0};
 	if (n == 2)
 		return {(s[0] >= s[1]), (s[0] < s[1])};
 	vector<int> sa(n, 0), is_s(n, 0);
@@ -12,7 +14,7 @@ template <typename T> vector<int> suffix_array(const T& s, int alph) {
 		is_s[i] = (s[i] < s[i + 1] || (s[i] == s[i + 1] && is_s[i + 1]));
 	vector<int> head(alph + 1, 0), tail(alph + 1, 0);
 	for (int i = 0; i < n; i++)
-		++head[s[i] + 1], tail[s[i]] += !is_s[i];
+		head[s[i] + 1]++, tail[s[i]] += !is_s[i];
 	partial_sum(head.begin(), head.end(), head.begin());
 	for (int i = 0; i <= alph; i++)
 		tail[i] += head[i];
