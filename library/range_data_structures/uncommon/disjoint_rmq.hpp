@@ -2,7 +2,9 @@
 //source: https://codeforces.com/blog/entry/87940
 //Disjoint RMQ is like normal RMQ except the ranges don't overlap. So
 //now, you can do a rmq with +, although it's overkill as you can do prefix sums
-//instead.
+//instead. It is useful for:
+//	- min and # of mins.
+//	- product under composite mod
 //usage for min and # of mins:
 //	vector<pair<long long, int>> arr; //initialize arr[i].second = 1
 //	...
