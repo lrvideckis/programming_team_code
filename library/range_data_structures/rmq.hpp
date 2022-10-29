@@ -17,10 +17,10 @@ template <typename T> struct RMQ {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> op;
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : dp(1, arr), op(a_op) {
-		for (int pw = 1, k = 1; 2 * pw <= ssize(arr); pw *= 2, k++) {
-			dp.emplace_back(ssize(arr) - 2 * pw + 1);
+		for (int k = 0; (2 << k) <= ssize(arr); k++) {
+			dp.emplace_back(ssize(arr) - (2 << k) + 1);
 			for (int j = 0; j < ssize(dp.back()); j++)
-				dp[k][j] = op(dp[k - 1][j], dp[k - 1][j + pw]);
+				dp[k + 1][j] = op(dp[k][j], dp[k][j + (1 << k)]);
 		}
 	}
 	//inclusive-exclusive range [le, ri)
