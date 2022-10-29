@@ -23,7 +23,7 @@ void check(long long n, bool is_small) {
 		disjoint_rmq<mat_2_by_2> rmq(vector<mat_2_by_2>(n + 5, mat), identity, [](const auto & x, const auto & y) {
 			return x * y;
 		});
-		for (int le = 0, ri = n; ri <= n + 5; le++, ri++)
+		for (int le = 0, ri = int(n); ri <= int(n) + 5; le++, ri++)
 			assert(res == (rmq.query(le, ri) * vec)[0]);
 	}
 }
