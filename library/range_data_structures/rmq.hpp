@@ -7,7 +7,7 @@
 //	RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x,y); });
 //
 //to also get index of min element, do:
-//	RMQ<pair<T, int>> rmq(arr, [&](auto x, auto y) { return min(x,y); });
+//	RMQ<pair<long long, int>> rmq(arr, [&](auto x, auto y) { return min(x,y); });
 //and initialize arr[i].second = i (0<=i<n)
 //If there are multiple indexes of min element, it'll return the smallest
 //(left-most) one
