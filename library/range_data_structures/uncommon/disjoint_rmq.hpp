@@ -20,8 +20,7 @@ template <typename T> struct disjoint_rmq {
 	function<T(const T&, const T&)> op; // any associative operation
 	disjoint_rmq(const vector<T>& arr, const T& identity, const function<T(const T&, const T&)>& a_op) : N(ssize(arr)), dp(__lg(N) + 1, vector<T>(N + 1, identity)), op(a_op) {
 		for (int lg = 0; lg < ssize(dp); lg++) {
-			int len = (1 << lg);
-			for (int center = len; center < N + len; center += 2 * len) {
+			for (int len = (1 << lg), center = len; center < N + len; center += 2 * len) {
 				for (int i = center + 1; i <= min(N, center + len); i++)
 					dp[lg][i] = op(dp[lg][i - 1], arr[i - 1]);
 				for (int i = min(N, center) - 1; i >= center - len; i--)
