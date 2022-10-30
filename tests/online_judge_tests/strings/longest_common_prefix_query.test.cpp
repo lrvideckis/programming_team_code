@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 #include "../template.hpp"
+#include "../kactl_macros.hpp"
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/strings/longest_common_prefix_query.hpp"
@@ -8,7 +9,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	lcp_query<string> sq(s, 256);
+	lcp_query sq(s);
 	//test `less` function
 	{
 		for (int num_tests = 50; num_tests--;) {
