@@ -25,14 +25,13 @@ struct lcp_query {
 	}
 	//returns range [le, ri) such that:
 	//	- for all i ∈ [le, ri): t == s.substr(info.sa[i], ssize(t))
-	//	- `ri - le` is the # of matches
+	//	- `ri - le` is the # of matches of t in s
 	pair<int, int> find(const string& t) const {
-		auto le = lower_bound(info.sa.begin(), info.sa.end(), t, [&](int i, const string & a_t) -> bool {
-			return s.compare(i, ssize(a_t), a_t) < 0;
-		});
-		auto ri = upper_bound(info.sa.begin(), info.sa.end(), t, [&](const string & a_t, int i) -> bool {
-			return s.compare(i, ssize(a_t), a_t) > 0;
-		});
+		auto cmp = [&](int i, int cmp_val) -> bool {
+			return s.compare(i, ssize(t), t) < cmp_val;
+		};
+		auto le = lower_bound(info.sa.begin(), info.sa.end(), 0, cmp);
+		auto ri = lower_bound(info.sa.begin(), info.sa.end(), 1, cmp);
 		return {le - info.sa.begin(), ri - info.sa.begin()};
 	}
 };
