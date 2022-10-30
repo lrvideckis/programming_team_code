@@ -1,7 +1,7 @@
 #! /bin/bash
 
 #adds hash code comments
-tests=$(find ../library/ ../ac-library/atcoder/ -name "*.hpp")
+tests=$(find ../library/ -name "*.hpp")
 for test in $tests
 do
 	hash=$(cat $test | ../library/contest/hash.sh)

@@ -19,8 +19,6 @@ grep --recursive --extended-regexp "template<typename" ../library/ && exit 1
 git submodule init
 git submodule update
 
-./scripts/add_symlink.sh
-
 cppcheck --enable=all --inconclusive --suppressions-list=.cppcheck_suppression_list \
 	--force --language=c++ --error-exitcode=1 --std=c++17 --max-ctu-depth=50 \
 	$(find online_judge_tests/ -type f -name "*.test.cpp" && find ../library/ -type f -name "*.hpp") \

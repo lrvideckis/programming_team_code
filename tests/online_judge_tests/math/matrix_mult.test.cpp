@@ -3,7 +3,6 @@
 #include "../kactl_macros.hpp"
 
 #include "../../../library/math/matrix_mult.hpp"
-#include "../../../ac-library/atcoder/modint.hpp"
 
 const int MOD = 998'244'353;
 

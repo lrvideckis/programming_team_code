@@ -11,6 +11,5 @@ unusedStructMember:../library/flow/hungarian.hpp:16
 functionConst:../kactl/content/data-structures/SubMatrix.h:24
 useStlAlgorithm:../kactl/content/numerical/FastFourierTransform.h:53
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
-useStlAlgorithm:../ac-library/atcoder/string.hpp:138
 passedByValue:../library/range_data_structures/uncommon/implicit_seg_tree.hpp
 constParameter:../hackpack-cpp/content/number-theory/ModInt.h:29

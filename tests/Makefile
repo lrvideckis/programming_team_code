@@ -11,20 +11,17 @@ help:
 	@echo "make check_format                    | runs astyle, cppcheck, clang-tidy (verifies snake case)"
 	@echo "                                     |   - ditto above but \`clang-tidy\` instead of \`g++\`"
 	@echo
-	@echo "make print_untested_files            | print list of all .hpp files included by *no* .test.cpp files"
+	@echo "make find_files_without_tests        | print list of all .hpp files included by *no* .test.cpp files"
 	@echo "                                     |   - these files are not compiled nor linted as part of ci."
-	@echo "                                     |   - need to add symlink first."
+	@echo "                                     |   - need to initialize git submodules first."
 	@echo
-	@echo "make print_files_not_in_pdf          | print list of all .hpp files *not* included by scripts/hackpack.tex"
+	@echo "make find_files_not_in_pdf           | print list of all .hpp files *not* included by scripts/hackpack.tex"
 	@echo "                                     |   - these files are not included in the hackpack."
-	@echo "                                     |   - need to add symlink first."
+	@echo "                                     |   - need to initialize git submodules first."
 	@echo
-	@echo "make print_tests_by_git_modification | print list of all .test.cpp files ordered by most recently modified."
+	@echo "make tests_by_git_modification       | print list of all .test.cpp files ordered by most recently modified."
 	@echo "                                     |   - determines modified date from \`git log\`. so when running locally,"
 	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
-	@echo "                                     |   - need to add symlink first."
-	@echo
-	@echo "make add_symlink                     | to fix ac-library include paths."
 	@echo "                                     |   - need to initialize git submodules first."
 	@echo
 	@echo "make hackpack                        | build hackpack from .tex file"
@@ -37,17 +34,14 @@ compile_all_tests:
 check_format:
 	./scripts/check_format.sh
 
-print_untested_files:
+find_files_without_tests:
 	./scripts/find_files_without_tests.sh
 
-print_files_not_in_pdf:
+find_files_not_in_pdf:
 	./scripts/find_files_not_in_pdf.sh
 
-print_tests_by_git_modification:
+tests_by_git_modification:
 	./scripts/tests_by_git_modification.sh
 
-add_symlink:
-	./scripts/add_symlink.sh
-
 hackpack:
-	./scripts/make_hackpack.sh
+	./scripts/hackpack.sh
