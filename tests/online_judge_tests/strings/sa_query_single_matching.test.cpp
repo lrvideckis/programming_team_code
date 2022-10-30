@@ -11,11 +11,10 @@ int main() {
 	sa_query sq(s);
 	auto [le, ri] = sq.find(t);
 	vector<int> matches;
-	for(int i = le; i < ri; i++) {
+	for (int i = le; i < ri; i++)
 		matches.push_back(sq.info.sa[i]);
-	}
 	sort(matches.begin(), matches.end());
-	for(int match : matches)
+	for (int match : matches)
 		cout << match << '\n';
 	return 0;
 }
