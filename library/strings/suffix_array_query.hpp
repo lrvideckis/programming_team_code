@@ -6,8 +6,12 @@
 struct sa_query {
 	string s;
 	SuffixArray info;
-	RMQ<int> rmq;
-	sa_query(string& a_s) : s(a_s), info(SuffixArray(s)), rmq(vi(info.lcp.begin() + 1, info.lcp.end()), [](int i, int j) -> int {return min(i, j);}) {}
+	RMQ<int> rmq_lcp, rmq_sa;
+	sa_query(string& a_s) :
+		s(a_s),
+		info(SuffixArray(s)),
+		rmq_lcp(vi(info.lcp.begin() + 1, info.lcp.end()), [](int i, int j) -> int {return min(i, j);}),
+		rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}) {}
 	//length of longest common prefix of suffixes s[idx1 ... N), s[idx2 ... N), 0-based indexing
 	//
 	//You can check if two substrings s[l1..r1), s[l2..r2) are equal in O(1) by:
@@ -16,7 +20,7 @@ struct sa_query {
 		if (idx1 == idx2)
 			return ssize(s) - idx1;
 		auto [le, ri] = minmax(info.rank[idx1], info.rank[idx2]);
-		return rmq.query(le, ri);
+		return rmq_lcp.query(le, ri);
 	}
 	//returns 1 if suffix s[idx1 ... N) < s[idx2 ... N)
 	//(so 0 if idx1 == idx2)
@@ -34,5 +38,13 @@ struct sa_query {
 		auto le = lower_bound(info.sa.begin(), info.sa.end(), 0, cmp);
 		auto ri = lower_bound(info.sa.begin(), info.sa.end(), 1, cmp);
 		return {le - info.sa.begin(), ri - info.sa.begin()};
+	}
+	//returns min i such that t == s.substr(i, ssize(t)) or -1
+	//O(|t| * log(|s|))
+	int find_first(const string& t) const {
+		auto [le, ri] = find(t);
+		if (le == ri)
+			return -1;
+		return rmq_sa.query(le, ri);
 	}
 };
