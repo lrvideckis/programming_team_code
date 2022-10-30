@@ -25,7 +25,7 @@ jobs:
         default: true
         profile: minimal
     - name: Set up git submodules
-      run: git submodule init && git submodule update && make --directory=tests/ add_symlink
+      run: git submodule init && git submodule update
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,4 +65,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Check hackpack has all hpp files
-      run: make --directory=tests/ print_files_not_in_pdf
+      run: make --directory=tests/ find_files_not_in_pdf
