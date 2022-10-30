@@ -3,11 +3,11 @@
 #include "../range_data_structures/rmq.hpp"
 //computes suffix array, lcp array, and then sparse table over lcp array
 //O(n log n)
-struct str_query {
+struct sa_query {
 	string s;
 	SuffixArray info;
 	RMQ<int> rmq;
-	str_query(string& a_s) : s(a_s), info(SuffixArray(s)), rmq(vi(info.lcp.begin() + 1, info.lcp.end()), [](int i, int j) -> int {return min(i, j);}) {}
+	sa_query(string& a_s) : s(a_s), info(SuffixArray(s)), rmq(vi(info.lcp.begin() + 1, info.lcp.end()), [](int i, int j) -> int {return min(i, j);}) {}
 	//length of longest common prefix of suffixes s[idx1 ... N), s[idx2 ... N), 0-based indexing
 	//
 	//You can check if two substrings s[l1..r1), s[l2..r2) are equal in O(1) by:

@@ -2,13 +2,13 @@
 #include "../template.hpp"
 #include "../kactl_macros.hpp"
 
-#include "../../../library/strings/longest_common_prefix_query.hpp"
+#include "../../../library/strings/suffix_array_query.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	str_query sq(s);
+	sa_query sq(s);
 	int q;
 	cin >> q;
 	while (q--) {
