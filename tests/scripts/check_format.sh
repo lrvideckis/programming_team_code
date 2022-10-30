@@ -26,4 +26,4 @@ cppcheck --enable=all --inconclusive --suppressions-list=.cppcheck_suppression_l
 
 ./scripts/tests_by_git_modification.sh | \
 	awk '{print $NF}' | \
-	parallel --bar clang-tidy {} -- -std=c++17
+	parallel clang-tidy {} -- -std=c++17

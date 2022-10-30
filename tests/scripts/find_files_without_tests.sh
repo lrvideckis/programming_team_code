@@ -11,7 +11,7 @@ all_test_dependencies=$(
 	for dependency in $all_test_dependencies
 	do
 		echo $(basename $dependency)
-	done | grep "\.hpp" | sort | uniq
+	done | grep --fixed-strings ".hpp" | sort | uniq
 )
 
 #find all headers in library/
