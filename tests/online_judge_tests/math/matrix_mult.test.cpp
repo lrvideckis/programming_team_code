@@ -1,31 +1,24 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_product"
 #include "../template.hpp"
+#include "../kactl_macros.hpp"
 
 #include "../../../library/math/matrix_mult.hpp"
 #include "../../../ac-library/atcoder/modint.hpp"
 
 const int MOD = 998'244'353;
-istream& operator >> (istream& is, atcoder::static_modint<MOD>& mint) {
-	int x;
-	is >> x;
-	mint = x;
-	return is;
-}
 
-ostream& operator << (ostream& os, atcoder::static_modint<MOD> mint) {
-	return os << mint.val();
-}
+#include "../../../hackpack-cpp/content/number-theory/ModInt.h"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, m, k;
 	cin >> n >> m >> k;
-	vector<vector<atcoder::static_modint<MOD>>> m1(n, vector<atcoder::static_modint<MOD>>(m));
+	vector<vector<mi>> m1(n, vector<mi>(m));
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++)
 			cin >> m1[i][j];
 	}
-	vector<vector<atcoder::static_modint<MOD>>> m2(m, vector<atcoder::static_modint<MOD>>(k));
+	vector<vector<mi>> m2(m, vector<mi>(k));
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < k; j++)
 			cin >> m2[i][j];
