@@ -2,6 +2,37 @@
 #include "../../hackpack-cpp/content/strings/SuffixArray.h"
 #include "../range_data_structures/rmq.hpp"
 //various queries you can do based on Suffix Array
+/*
+suffixes of "bananas":
+
+0 bananas
+1 ananas
+2 nanas
+3 anas
+4 nas
+5 as
+6 s
+
+sorted:
+
+  0
+1 ananas
+  3
+3 anas
+  1
+5 as
+  0
+0 bananas
+  0
+2 nanas
+  2
+4 nas
+  0
+6 s
+
+suffix array = [1, 3, 5, 0, 2, 4, 6]
+lcp array = [0, 3, 1, 0, 0, 2, 0]
+*/
 struct sa_query {
 	string s;
 	SuffixArray info;
@@ -39,7 +70,7 @@ struct sa_query {
 		return {le - info.sa.begin(), ri - info.sa.begin()};
 	}
 	//returns min i such that t == s.substr(i, ssize(t)) or -1
-	//for example, replace RMQ with kth-smallest PST to solve https://open.kattis.com/problems/anothersubstringqueryproblem 
+	//for example, replace RMQ with kth-smallest PST/Wavelet to solve https://open.kattis.com/problems/anothersubstringqueryproblem
 	//O(|t| * log(|s|))
 	int find_first(const string& t) const {
 		auto [le, ri] = find(t);
