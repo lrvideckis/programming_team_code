@@ -3,35 +3,35 @@
 #include "../range_data_structures/rmq.hpp"
 //various queries you can do based on Suffix Array
 /*
-suffixes of "bananas":
+suffixes of "banana":
 
-0 bananas
-1 ananas
-2 nanas
-3 anas
-4 nas
-5 as
-6 s
+0 banana$
+1 anana$
+2 nana$
+3 ana$
+4 na$
+5 a$
+6 $
 
 sorted:
+          lcp
+          0
+6 $
+          0
+5 a$
+  |       1
+3 ana$
+  |||     3
+1 anana$
+          0
+0 banana$
+          0
+4 na$
+  ||      2
+2 nana$
 
-  0
-1 ananas
-  3
-3 anas
-  1
-5 as
-  0
-0 bananas
-  0
-2 nanas
-  2
-4 nas
-  0
-6 s
-
-suffix array = [1, 3, 5, 0, 2, 4, 6]
-lcp array = [0, 3, 1, 0, 0, 2, 0]
+suffix array = [6, 5, 3, 1, 0, 4, 2]
+lcp array = [0, 0, 1, 3, 0, 0, 2]
 */
 struct sa_query {
 	string s;
