@@ -1,8 +1,7 @@
 #pragma once
 #include "../../hackpack-cpp/content/strings/SuffixArray.h"
 #include "../range_data_structures/rmq.hpp"
-//computes suffix array, lcp array, and then sparse table over lcp array
-//O(n log n)
+//various queries you can do based on Suffix Array
 struct sa_query {
 	string s;
 	SuffixArray info;
