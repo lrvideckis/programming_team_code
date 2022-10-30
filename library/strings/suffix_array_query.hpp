@@ -39,6 +39,7 @@ struct sa_query {
 		return {le - info.sa.begin(), ri - info.sa.begin()};
 	}
 	//returns min i such that t == s.substr(i, ssize(t)) or -1
+	//for example, replace RMQ with kth-smallest PST to solve https://open.kattis.com/problems/anothersubstringqueryproblem 
 	//O(|t| * log(|s|))
 	int find_first(const string& t) const {
 		auto [le, ri] = find(t);
