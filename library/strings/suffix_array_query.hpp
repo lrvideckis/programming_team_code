@@ -24,7 +24,7 @@ struct sa_query {
 		return info.rank[idx1] < info.rank[idx2];
 	}
 	//returns range [le, ri) such that:
-	//	- for all i ∈ [le, ri): t == s.substr(info.sa[i], ssize(t))
+	//	- for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
 	//	- `ri - le` is the # of matches of t in s
 	//O(|t| * log(|s|))
 	pair<int, int> find(const string& t) const {
