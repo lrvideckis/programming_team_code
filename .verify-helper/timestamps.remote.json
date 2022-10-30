@@ -52,6 +52,6 @@
 "tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-10-28 16:45:43 -0700",
 "tests/online_judge_tests/strings/sa_query_multi_matching.test.cpp": "2022-10-30 01:07:55 -0700",
 "tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2022-10-30 01:07:55 -0700",
-"tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2022-10-30 01:08:15 -0700",
+"tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2022-10-30 01:15:48 -0700",
 "tests/online_judge_tests/strings/trie.test.cpp": "2022-10-26 17:08:37 -0700"
 }
