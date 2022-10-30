@@ -4,3 +4,6 @@
 [submodule "ac-library"]
 	path = ac-library
 	url = https://github.com/atcoder/ac-library
+[submodule "hackpack-cpp"]
+	path = hackpack-cpp
+	url = https://github.com/ucf-programming-team/hackpack-cpp
