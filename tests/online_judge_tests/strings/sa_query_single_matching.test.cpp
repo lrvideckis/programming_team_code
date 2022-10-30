@@ -14,6 +14,15 @@ int main() {
 	for (int i = le; i < ri; i++)
 		matches.push_back(sq.info.sa[i]);
 	sort(matches.begin(), matches.end());
+	{
+		int first_match = sq.find_first(t);
+		if (matches.empty())
+			assert(first_match == -1);
+		else {
+			assert(first_match == matches[0]);
+			assert(t == s.substr(first_match, ssize(t)));
+		}
+	}
 	for (int match : matches)
 		cout << match << '\n';
 	return 0;
