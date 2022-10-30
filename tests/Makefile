@@ -17,7 +17,6 @@ help:
 	@echo
 	@echo "make find_files_not_in_pdf           | print list of all .hpp files *not* included by scripts/hackpack.tex"
 	@echo "                                     |   - these files are not included in the hackpack."
-	@echo "                                     |   - need to initialize git submodules first."
 	@echo
 	@echo "make tests_by_git_modification       | print list of all .test.cpp files ordered by most recently modified."
 	@echo "                                     |   - determines modified date from \`git log\`. so when running locally,"
