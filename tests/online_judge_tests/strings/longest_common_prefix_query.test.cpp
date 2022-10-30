@@ -9,7 +9,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	lcp_query sq(s);
+	str_query sq(s);
 	//test `less` function
 	{
 		for (int num_tests = 50; num_tests--;) {

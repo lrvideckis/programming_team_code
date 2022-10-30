@@ -10,10 +10,10 @@ int main() {
 	cin >> s;
 	int n = ssize(s);
 	s = s + '$' + string(s.rbegin(), s.rend());
-	lcp_query lcp_q(s);
+	str_query sq(s);
 	for (int i = 0; i < n; i++) {
 		for (int j = i; j < min(i + 2, n); j++)
-			cout << lcp_q.get_lcp(j, (n - i - 1) + n + 1) * 2 - (i == j) << " ";
+			cout << sq.get_lcp(j, (n - i - 1) + n + 1) * 2 - (i == j) << " ";
 	}
 	cout << endl;
 	return 0;

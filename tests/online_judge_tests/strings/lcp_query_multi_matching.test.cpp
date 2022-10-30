@@ -8,13 +8,13 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
-	lcp_query lcp_q(s);
+	str_query sq(s);
 	int q;
 	cin >> q;
 	while (q--) {
 		string t;
 		cin >> t;
-		auto [le, ri] = lcp_q.find(t);
+		auto [le, ri] = sq.find(t);
 		cout << (!!(ri - le > 0)) << '\n';
 	}
 	return 0;
