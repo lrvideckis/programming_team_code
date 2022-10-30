@@ -4,19 +4,20 @@
 #include "../../../library/misc/random.hpp"
 
 #include "../../../kactl/content/data-structures/Matrix.h"
-#include "../../../ac-library/atcoder/modint.hpp"
 #include "../../../library/math/fibonacci.hpp"
 #include "../../../library/range_data_structures/uncommon/disjoint_rmq.hpp"
 
-void check(long long n, bool is_small) {
-	const int MOD = 1e9 + 7;
-	using mod_int = atcoder::static_modint<MOD>;
-	using mat_2_by_2 = Matrix<mod_int, 2>;
+const int MOD = 1'000'000'007;
+
+#include "../../../hackpack-cpp/content/number-theory/ModInt.h"
+
+void check(ll n, bool is_small) {
+	using mat_2_by_2 = Matrix<mi, 2>;
 	mat_2_by_2 mat;
 	mat.d = {{{{1, 1}}, {{1, 0}}}};
-	vector<mod_int> vec = {1, 0};
-	long long res = fib(n, MOD);
-	assert(res == ((mat ^ n) * vec)[0]);
+	vector<mi> vec = {1, 0};
+	ll res = fib(n, MOD);
+	assert(res == int(((mat ^ n) * vec)[0]));
 	if (is_small && n > 0) {
 		mat_2_by_2 identity;
 		identity.d = {{{{1, 0}}, {{0, 1}}}};
@@ -24,7 +25,7 @@ void check(long long n, bool is_small) {
 			return x * y;
 		});
 		for (int le = 0, ri = int(n); ri <= int(n) + 5; le++, ri++)
-			assert(res == (rmq.query(le, ri) * vec)[0]);
+			assert(res == int((rmq.query(le, ri) * vec)[0]));
 	}
 }
 
