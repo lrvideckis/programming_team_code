@@ -16,7 +16,7 @@ tool | settings | notes | wiki
 astyle | [.astylerc](.astylerc) | running `make check_format` locally will format files | http://astyle.sourceforge.net/astyle.html
 cppcheck | [.cppcheck_suppression_list](.cppcheck_suppression_list), also see flags in cppcheck command in [scripts/check_format.sh](scripts/check_format.sh) | | https://cppcheck.sourceforge.io/
 clang-tidy | [.clang-tidy](.clang-tidy) | checks variables for snake_case | https://clang.llvm.org/extra/clang-tidy/checks/list.html
-g++ | [scripts/compile_flags.txt](scripts/compile_flags.txt) | `-std=c++17` since some judges still have this version; `-Werror` treats warnings as errors to make CI fail; inspiration: [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547) |
+g++ | [.gcc_compile_flags](.gcc_compile_flags) | `-std=c++17` since some judges still have this version; `-Werror` treats warnings as errors to make CI fail; inspiration: [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547) |
 
 ## Makefile
 to see commands:
