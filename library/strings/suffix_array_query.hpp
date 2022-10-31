@@ -66,7 +66,7 @@ struct sa_query {
 			return s.compare(i, ssize(t), t) < cmp_val;
 		};
 		auto le = lower_bound(info.sa.begin(), info.sa.end(), 0, cmp);
-		auto ri = lower_bound(info.sa.begin(), info.sa.end(), 1, cmp);
+		auto ri = lower_bound(le, info.sa.end(), 1, cmp);
 		return {le - info.sa.begin(), ri - info.sa.begin()};
 	}
 	//returns min i such that t == s.substr(i, ssize(t)) or -1
