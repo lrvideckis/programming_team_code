@@ -33,6 +33,8 @@
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
-- No good implementation elsewhere (usually KACTL)
+- No good type-2 implementation elsewhere (usually KACTL)
+    1. Longer codes for online contests like codeforces where you can copy paste
+    2. Shorter codes for ICPC where you can't copy paste
 - How hard to modify existing library code
 - Easily testable (preferably there is a problem to test, instead of [handmade tests](../tests/online_judge_tests/handmade_tests)). These are the only judges whose problems can be used in CI: [library checker](https://judge.yosupo.jp/), [aizu judge](https://onlinejudge.u-aizu.ac.jp/courses/list)
