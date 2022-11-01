@@ -33,7 +33,7 @@
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
-- No good type-`ii` implementation elsewhere (usually KACTL)
+- No good `type-ii` implementation elsewhere (usually KACTL)
     1. Longer codes for online contests like codeforces where you can copy paste
     2. Shorter codes for ICPC where you can't copy paste
 - How hard to modify existing library code
