@@ -33,7 +33,7 @@
 
 ## Doxygen Format Guide
 
-file header
+file comment
 ```
 /**
  * @file
@@ -43,11 +43,27 @@ file header
  * @endcode
  * @note Some note.
  * @trick Some trick.
+ * @invariant Some invariant.
  * @see link to some source
  * @time O(n log n)
  * @memory O(n + m)
  */
 ```
+function comment
+```
+/**
+ * @brief For functions, usually this describes what the return value is. That
+ * is okay. Let's not also include '@return' tag to be concise.
+ * @time O(n log n)
+ * @memory O(n + m)
+ */
+```
+
+Notes:
+- The only thing enforced by CI is the existance of a file comment for each
+.hpp file. I may change this to also check each function also has a comment.
+Not all fields are needed.
+- No @author or @date tags: git history already stores this, so let's spend any effort maintaining this also in a comment.
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
