@@ -61,8 +61,8 @@ function comment
 
 Notes:
 - The only thing enforced by CI is the existance of a file comment for each
-.hpp file. I may change this to also check each function also has a comment.
-Not all fields are needed.
+.hpp file. (I can change this to also verify function comments, but not for now.)
+So not all tags are needed, and also it's up to us to stick to this style.
 - No @author or @date tags: git history already stores this, so let's spend any effort maintaining this also in a comment.
 
 ## Things to consider when adding a new alg to the library
