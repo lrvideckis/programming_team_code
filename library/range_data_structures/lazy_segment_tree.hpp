@@ -2,6 +2,7 @@
 /**
  * @file
  * @brief Lazy Segment Tree
+ * @note Internal nodes are [1, n), leaf nodes are [n, 2 * n).
  * @note Rotating leaves makes it a single complete binary tree (instead of a
  * set of perfect binary trees). So now, even for non-power of 2 size:
  *   - recursive seg tree works
