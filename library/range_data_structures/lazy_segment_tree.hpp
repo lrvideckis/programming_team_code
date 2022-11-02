@@ -1,10 +1,15 @@
 #pragma once
-//source: https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp, https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
-//rotating leaves makes it a single complete binary tree (instead of a set of perfect binary trees)
-//so standard implementations of
-//	- recursive seg tree
-//	- tree walks AKA binary search
-//still work
+/**
+ * @file
+ * @brief Lazy Segment Tree
+ * @note Rotating leaves makes it a single complete binary tree (instead of a
+ * set of perfect binary trees). So now, even for non-power of 2 size:
+ *   - recursive seg tree works
+ *   - recursive tree walks AKA binary search works
+ *   - root is at tree[1]
+ * @see https://codeforces.com/blog/entry/18051, https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp, https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
+ * @memory O(n)
+ */
 struct seg_tree {
 	using dt = long long;
 	using ch = long long;

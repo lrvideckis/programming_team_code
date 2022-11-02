@@ -7,8 +7,8 @@
  *     RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
  *
- * Trick to get index of min element. If there are multiple indexes of min
- * element, it'll return the smallest (left-most) one.
+ * @trick To get index of min element, see below. If there are multiple indexes
+ * of min element, it'll return the smallest (left-most) one.
  * @code{.cpp}
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = i
  *     RMQ<pair<long long, int>> rmq(arr, [&](auto x, auto y) { return min(x, y); });
