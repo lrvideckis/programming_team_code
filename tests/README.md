@@ -13,8 +13,8 @@ All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](online_ju
 
 tool | settings | notes | wiki
 --- | --- | --- | ---
-astyle | [.astylerc](.astylerc) | running `make check_format` locally will format files | http://astyle.sourceforge.net/astyle.html
-cppcheck | [.cppcheck_suppression_list](.cppcheck_suppression_list), also see flags in cppcheck command in [scripts/check_format.sh](scripts/check_format.sh) | | https://cppcheck.sourceforge.io/
+astyle | [.astylerc](.astylerc) | running `make astyle_cppcheck_clangtidy` locally will format files | http://astyle.sourceforge.net/astyle.html
+cppcheck | [.cppcheck_suppression_list](.cppcheck_suppression_list), also see flags in cppcheck command in [scripts/astyle_cppcheck_clangtidy.sh](scripts/astyle_cppcheck_clangtidy.sh) | | https://cppcheck.sourceforge.io/
 clang-tidy | [.clang-tidy](.clang-tidy) | checks variables for snake_case | https://clang.llvm.org/extra/clang-tidy/checks/list.html
 g++ | [.gcc_compile_flags](.gcc_compile_flags) | `-std=c++17` since some judges still have this version; `-Werror` treats warnings as errors to make CI fail; inspiration: [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547) |
 

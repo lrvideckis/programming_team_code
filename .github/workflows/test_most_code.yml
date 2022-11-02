@@ -33,7 +33,7 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
 
-  check_format:
+  astyle_cppcheck_clangtidy:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install astyle clang cppcheck
     - name: Check snake case and lint
-      run: make --directory=tests/ check_format
+      run: make --directory=tests/ astyle_cppcheck_clangtidy
 
   compile_all_tests:
     runs-on: ubuntu-22.04

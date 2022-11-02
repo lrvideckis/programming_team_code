@@ -8,7 +8,7 @@ help:
 	@echo "                                     |               ***locally commit***"
 	@echo "                                     |     the file for it to be compiled first."
 	@echo
-	@echo "make check_format                    | runs astyle, cppcheck, clang-tidy (verifies snake case)"
+	@echo "make astyle_cppcheck_clangtidy       | runs astyle, cppcheck, clang-tidy (verifies snake case)"
 	@echo "                                     |   - ditto above but \`clang-tidy\` instead of \`g++\`"
 	@echo
 	@echo "make find_files_without_tests        | print list of all .hpp files included by *no* .test.cpp files"
@@ -30,8 +30,8 @@ help:
 compile_all_tests:
 	./scripts/compile_all_tests.sh
 
-check_format:
-	./scripts/check_format.sh
+astyle_cppcheck_clangtidy:
+	./scripts/astyle_cppcheck_clangtidy.sh
 
 find_files_without_tests:
 	./scripts/find_files_without_tests.sh
