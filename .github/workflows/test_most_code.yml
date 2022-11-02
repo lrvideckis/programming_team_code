@@ -71,5 +71,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt-get install doxygen
     - name: Run doxygen
       run: doxygen tests/Doxyfile
