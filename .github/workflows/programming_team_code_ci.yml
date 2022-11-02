@@ -1,4 +1,4 @@
-name: programming team code ci
+name: programming team code CI
 
 on: push
 
