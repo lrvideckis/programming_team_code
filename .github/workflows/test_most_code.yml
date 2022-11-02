@@ -71,5 +71,5 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-    - name: Check hackpack has all hpp files
+    - name: Run doxygen
       run: doxygen tests/Doxyfile
