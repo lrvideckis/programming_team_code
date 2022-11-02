@@ -46,7 +46,7 @@ file comment
  * @trick Another trick.
  * @invariant Some invariant.
  * @see <link to some source>
- * @time O(n log n)
+ * @time O(n ^ (3/2))
  * @memory O(n + m)
  */
 ```
@@ -55,8 +55,8 @@ function comment
 /**
  * @brief For functions, usually this describes what the return value is. That
  * is okay. Let's not also include '@return' tag to be concise.
- * @time O(n log n)
- * @memory O(n + m)
+ * @time O(n * sqrt(n log n))
+ * @memory O(n * sqrt(n) * log(n))
  */
 ```
 
