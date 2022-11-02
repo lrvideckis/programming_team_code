@@ -1,4 +1,4 @@
-name: programming_team_code_ci
+name: programming team code ci
 
 on: push
 
@@ -72,6 +72,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install doxygen
+      run: sudo add-apt-repository ppa:psycofdj/coverxygen && sudo apt-get update && sudo apt-get install doxygen python3-coverxygen
     - name: Run doxygen
       run: make --directory=tests/ doxygen
