@@ -1,22 +1,28 @@
 #pragma once
-//O(n+m) time & space
-//2 edge cc and bcc stuff doesn't depend on each other, so delete whatever is not needed
-//handles multiple edges
-//
-//example initialization of `adj`:
-//for (int i = 0; i < m; i++) {
-//	int u, v;
-//	cin >> u >> v;
-//	u--, v--;
-//	adj[u].emplace_back(v, i);
-//	adj[v].emplace_back(u, i);
-//}
+/**
+ * @file
+ * @author lrvideckis
+ * @brief Calculates bridge edges and cut nodes. Handles multiple edges.
+ * @code{.cpp}
+ *	//example initialization of `adj`:
+ *	for (int i = 0; i < m; i++) {
+ *		int u, v;
+ *		cin >> u >> v;
+ *		u--, v--;
+ *		adj[u].emplace_back(v, i);
+ *		adj[v].emplace_back(u, i);
+ *	}
+ * @endcode
+ * @see https://cp-algorithms.com/graph/bridge-searching.html https://cp-algorithms.com/graph/cutpoints.html
+ * @time O(n + m)
+ * @memory O(n + m)
+ */
 struct graph_info {
-	//2 edge connected component stuff (e.g. components split by bridge edges) https://cp-algorithms.com/graph/bridge-searching.html
+	//2 edge connected component stuff (e.g. components split by bridge edges)
 	int num_2_edge_ccs;
 	vector<bool> is_bridge;//edge id -> 1 iff bridge edge
 	vector<int> two_edge_ccid;//node -> id of 2 edge component (which are labeled 0, 1, ..., `num_2_edge_ccs`-1)
-	//bi connected component stuff (e.g. components split by cut/articulation nodes) https://cp-algorithms.com/graph/cutpoints.html
+	//bi connected component stuff (e.g. components split by cut/articulation nodes)
 	int num_bccs;
 	vector<bool> is_cut;//node -> 1 iff cut node
 	vector<int> bcc_id;//edge id -> id of bcc (which are labeled 0, 1, ..., `num_bccs`-1)
