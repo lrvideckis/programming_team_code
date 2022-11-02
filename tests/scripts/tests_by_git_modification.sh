@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 #get all test (*.test.cpp) files, ordered by most recently modified
 

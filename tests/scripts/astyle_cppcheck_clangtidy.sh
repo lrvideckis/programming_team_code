@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 #check snake case && astyle *before* initializing git submodules to avoid warnings not in our code
 echo "check files and directories are snake_case:"

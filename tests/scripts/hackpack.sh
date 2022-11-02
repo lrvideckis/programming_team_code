@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 #adds hash code comments
 tests=$(find ../library/ -name "*.hpp")

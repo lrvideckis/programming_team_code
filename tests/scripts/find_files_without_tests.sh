@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 #find dependencies of each test file (concatenate results)
 all_test_dependencies=$(
