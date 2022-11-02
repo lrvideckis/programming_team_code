@@ -65,4 +65,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Check hackpack has all hpp files
-      run: make --directory=tests/ find_files_not_in_pdf
+      run: make --directory=tests/ find_files_not_in_pdfs
+      
+  doxygen:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check hackpack has all hpp files
+      run: doxygen tests/Doxyfile
