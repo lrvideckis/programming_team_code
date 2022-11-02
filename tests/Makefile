@@ -23,6 +23,8 @@ help:
 	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
 	@echo "                                     |   - need to initialize git submodules first."
 	@echo
+	@echo "make doxygen                         | print list of all .test.cpp files ordered by most recently modified."
+	@echo
 	@echo "make hackpack                        | build hackpack from .tex file"
 	@echo
 	@echo "make help                            | to show this information"
@@ -41,6 +43,9 @@ find_files_not_in_pdf:
 
 tests_by_git_modification:
 	./scripts/tests_by_git_modification.sh
+
+doxygen:
+	./scripts/doxygen.sh
 
 hackpack:
 	./scripts/hackpack.sh
