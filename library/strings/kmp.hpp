@@ -21,28 +21,13 @@
 template <typename T> struct KMP {
 	T needle;
 	vector<int> pi;
-	KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {} ///< @time O(|needle|)
+	KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {}
 	/**
-	 * @brief Matches `needle` into `haystack`.
-	 *
-	 * Let haystack = "bananas",
-	 * needle = "ana". Then we find 2 matches:
-	 * @code{.unparsed}
-	 *     bananas
-	 *     _ana___
-	 *     ___ana_
-	 *     0123456 (indexes)
-	 * @endcode
-	 * and `find` will return {1, 3} - the indexes in haystack where each match
-	 * starts.
-	 *
-	 * @trick To check if there exists some match: pass in `0` for `all` and
-	 * `find` will only return the first match: {1}. Useful for checking if
-	 * there exists some match: `ssize(kmp.find("some string", 0)) > 0`.
-	 *
+	 * @brief Returns array `matches` where:
+	 * haystack.substr(matches[i], ssize(needle)) == needle
 	 * @time O(|needle| + |haystack|)
 	 */
-	vector<int> find(const T& haystack, bool all = 1) const {
+	vector<int> find(const T& haystack) const {
 		vector<int> matches;
 		for (int i = 0, j = 0; i < ssize(haystack); i++) {
 			while (j > 0 && needle[j] != haystack[i])
@@ -51,8 +36,6 @@ template <typename T> struct KMP {
 				j++;
 			if (j == ssize(needle)) {
 				matches.push_back(i - ssize(needle) + 1);
-				if (!all)
-					return matches;
 				j = pi[j - 1];
 			}
 		}
