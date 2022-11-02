@@ -72,6 +72,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt-get install doxygen python3-coverxygen
+      run: sudo apt-get install doxygen && pip3 install coverxygen
     - name: Run doxygen
       run: make --directory=tests/ doxygen
