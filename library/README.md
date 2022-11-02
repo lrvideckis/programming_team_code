@@ -43,6 +43,7 @@ file comment
  * @endcode
  * @note Some note.
  * @trick Some trick.
+ * @trick Another trick.
  * @invariant Some invariant.
  * @see <link to some source>
  * @time O(n log n)
