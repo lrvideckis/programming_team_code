@@ -74,4 +74,4 @@ jobs:
     - name: Install dependencies
       run: sudo apt-get install doxygen
     - name: Run doxygen
-      run: doxygen tests/Doxyfile
+      run: cd library/ && doxygen ../tests/Doxyfile
