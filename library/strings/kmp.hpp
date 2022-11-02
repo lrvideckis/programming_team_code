@@ -1,4 +1,5 @@
 #pragma once
+#include "prefix_function.hpp"
 /**
  * @file
  * @brief Knuth Morris Pratt
@@ -16,7 +17,6 @@
  *
  * @memory O(|needle|)
  */
-#include "prefix_function.hpp"
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T> struct KMP {
 	T needle;
