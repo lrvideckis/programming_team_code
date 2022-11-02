@@ -31,6 +31,24 @@
 - [Suffix Tree](https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/strings/SuffixTree.h)
 - [Sum Over Subsets with Convolution](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/numerical/SumOverSubsets.h)
 
+## Doxygen Format Guide
+
+file header
+```
+/**
+ * @file
+ * @brief Name or description.
+ * @code{.cpp}
+ *     //example usage or initialization
+ * @endcode
+ * @note Some note.
+ * @trick Some trick.
+ * @see link to some source
+ * @time O(n log n)
+ * @memory O(n + m)
+ */
+```
+
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
 - No good `type-ii` implementation elsewhere (usually KACTL), types:
