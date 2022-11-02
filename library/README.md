@@ -44,7 +44,7 @@ file comment
  * @note Some note.
  * @trick Some trick.
  * @invariant Some invariant.
- * @see link to some source
+ * @see <link to some source>
  * @time O(n log n)
  * @memory O(n + m)
  */
