@@ -1,7 +1,6 @@
 #pragma once
 /**
  * @file
- * @author lrvideckis
  * @brief Calculates bridge edges and cut nodes. Handles multiple edges.
  * @code{.cpp}
  *	//example initialization of `adj`:
