@@ -1,9 +1,13 @@
 #pragma once
 #include "monotonic_stack.hpp"
-//given a 2D boolean matrix, calculate cnt[i][j]
-//cnt[i][j] = the number of times an i-by-j rectangle appears in the matrix such that all i*j cells in the rectangle are 1
-//Note cnt[0][j] and cnt[i][0] will contain garbage values
-//O(n*m)
+/**
+ * @brief Given a n-by-m boolean matrix, calculate cnt[i][j]. cnt[i][j] = the
+ *     number of times an i-by-j sub rectangle appears in the matrix such that
+ *     all i*j cells in the sub rectangle are 1.
+ * @note cnt[0][j] and cnt[i][0] will contain garbage values.
+ * @time O(n * m)
+ * @memory O(n * m)
+ */
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 	int n = ssize(grid), m = ssize(grid[0]);
 	vector<vector<int>> cnt(n + 1, vector<int>(m + 1, 0));

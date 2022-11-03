@@ -1,6 +1,10 @@
 #pragma once
 #include "monotonic_stack.hpp"
-//min cartesian tree
+/**
+ * @brief Min cartesian tree - root stores min.
+ * @time O(n)
+ * @memory O(n)
+ */
 vector<int> cartesian_tree(const vector<int>& arr) {
 	int n = ssize(arr);
 	auto rv /*reverse*/ = [&](int i) -> int {
@@ -18,7 +22,7 @@ vector<int> cartesian_tree(const vector<int>& arr) {
 		else if (ri < n)
 			par[i] = ri;
 		else
-			par[i] = i;
+			par[i] = i; //true only for root
 	}
 	return par;
 }
