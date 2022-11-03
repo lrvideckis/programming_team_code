@@ -7,7 +7,7 @@ unusedStructMember:../library/graphs/subtree_isomorphism.hpp:11
 unusedStructMember:../library/graphs/hopcroft_karp.hpp:7
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
 unusedStructMember:../library/graphs/bridges_and_cuts.hpp
-unusedStructMember:../library/flow/hungarian.hpp:16
+unusedStructMember:../library/flow/hungarian.hpp:4
 functionConst:../kactl/content/data-structures/SubMatrix.h:24
 useStlAlgorithm:../kactl/content/numerical/FastFourierTransform.h:53
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
