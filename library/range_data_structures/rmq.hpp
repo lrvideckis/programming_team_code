@@ -5,12 +5,14 @@
  *     vector<long long> arr;
  *     RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
+ *
  * @trick To get index of min element, see below. If there are multiple indexes
  *     of min element, it'll return the smallest (left-most) one.
  * @code{.cpp}
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = i
  *     RMQ<pair<long long, int>> rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
+ *
  * @see https://github.com/kth-competitive-programming/
  *     kactl/blob/main/content/data-structures/RMQ.h
  * @time O(n log n) precomp, O(1) per query
