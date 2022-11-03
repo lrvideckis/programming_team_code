@@ -33,7 +33,7 @@
 
 ## Doxygen Format Guide
 
-file comment
+struct
 ```
 /**
  * @file
@@ -48,13 +48,21 @@ file comment
  * @see <link to some source>
  */
 ```
-function comment
+global/member function
 ```
 /**
  * @brief For functions, usually this describes what the return value is. That
  *     is okay. Let's not use the '@return' tag to be concise. It's okay if the
  *     description is multiple lines. Let's indent like this with 4 spaces.
  * @note Some note.
+ * @time O(n * sqrt(n log n)) Some note about the complexity.
+ * @memory O(n * sqrt(n) * log(n)) Usually not needed.
+ */
+```
+constructor
+```
+/**
+ * @note The struct comment already describes what the class does, so let's not duplicate this in a `@brief` here.
  * @time O(n * sqrt(n log n)) Some note about the complexity.
  * @memory O(n * sqrt(n) * log(n)) Usually not needed.
  */
