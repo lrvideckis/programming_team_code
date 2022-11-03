@@ -1,6 +1,10 @@
 #pragma once
-//returns number of distinct subsequences
-//the empty subsequence is counted
+/**
+ * @brief Returns the number of distinct subsequences of `arr`. The empty
+ *     subsequence is counted.
+ * @time O(n log n)
+ * @memory O(n)
+ */
 int num_subsequences(const vector<int>& arr, int mod) {
 	vector<int> dp(ssize(arr) + 1, 1);
 	map<int, int> last;
