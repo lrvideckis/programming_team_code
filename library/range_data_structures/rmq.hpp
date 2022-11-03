@@ -15,13 +15,15 @@
  *
  * @see https://github.com/kth-competitive-programming/
  *     kactl/blob/main/content/data-structures/RMQ.h
- * @time O(n log n) precomp, O(1) per query
- * @memory O(n log n)
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T> struct RMQ {
 	vector<vector<T>> dp;
 	function<T(const T&, const T&)> op;
+	/**
+	 * @time O(n log n)
+	 * @memory O(n log n)
+	 */
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : dp(1, arr), op(a_op) {
 		for (int i = 0; (2 << i) <= ssize(arr); i++) {
 			dp.emplace_back(ssize(arr) - (2 << i) + 1);
