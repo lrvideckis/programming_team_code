@@ -1,21 +1,22 @@
 #pragma once
-//source: https://e-maxx.ru/algo/assignment_hungary
-//
-//input: cost[1...n][1...m] with 1 <= n <= m
-//n workers, indexed 1, 2, ..., n
-//m jobs, indexed 1, 2, ..., m
-//it costs `cost[i][j]` to assign worker i to job j (1<=i<=n, 1<=j<=m)
-//this returns *min* total cost to assign each worker to some distinct job
-//O(n^2 * m)
-//
-//trick 1: set `cost[i][j]` to INF to say: "worker `i` cannot be assigned job `j`"
-//trick 2: `cost[i][j]` can be negative, so to instead find max total cost over all matchings: set all `cost[i][j]` to `-cost[i][j]`.
-//Now max total cost = - hungarian(cost).min_cost
 const long long INF = 1e18;
 struct weighted_match {
 	long long min_cost;
 	vector<int> matching;//worker `i` (1<=i<=n) is assigned to job `matching[i]` (1<=matching[i]<=m)
 };
+/**
+ * @brief Given cost[1...n][1...m] with 1 <= n <= m.
+ *     n workers, indexed 1, 2, ..., n
+ *     m jobs, indexed 1, 2, ..., m
+ *     It costs `cost[i][j]` to assign worker i to job j (1<=i<=n, 1<=j<=m).
+ *     This returns *min* sum of costs to assign each worker to some distinct
+ *     job.
+ * @trick Set `cost[i][j]` to INF to say: "worker i cannot be assigned job j"
+ * @trick This works for negatives, so negating cost gives max matching.
+ * @see https://e-maxx.ru/algo/assignment_hungary
+ * @time O(n^2 * m)
+ * @memory
+ */
 weighted_match hungarian(const vector<vector<long long>>& cost) {
 	int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;
 	assert(n <= m);
