@@ -1,5 +1,10 @@
 #pragma once
-// c[k] = the sum for all pairs where gcd(i,j) == k of a[i] * b[j]
+/**
+ * @brief Returns array `c` where `c[k]` = the sum for all pairs where
+ *     gcd(i,j) == k of a[i] * b[j].
+ * @time O(n log n)
+ * @memory O(n)
+ */
 template<int MOD> vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
 	assert(ssize(a) == ssize(b));
 	int n = ssize(a);
