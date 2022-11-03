@@ -62,7 +62,7 @@ global/member function
 constructor
 ```
 /**
- * @note The struct comment already describes what the class does, so let's not
+ * @note The struct comment already describes what it does, so let's not
  *     duplicate this in a `@brief` here.
  * @time O(n * sqrt(n log n)) Some note about the complexity.
  * @memory O(n * sqrt(n) * log(n)) Usually not needed.
