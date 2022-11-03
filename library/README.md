@@ -36,7 +36,6 @@
 struct
 ```
 /**
- * @file
  * @brief Name or description.
  * @code{.cpp}
  *     //example usage or initialization
