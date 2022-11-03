@@ -1,8 +1,9 @@
 #pragma once
-//source: https://cp-algorithms.com/data_structures/segment_tree.html
-//	#preserving-the-history-of-its-values-persistent-segment-tree
-//works with negatives
-//O(n log n) time and space
+/**
+ * @note No updates; works with negatives.
+ * @see https://cp-algorithms.com/data_structures/segment_tree.html
+ *     #preserving-the-history-of-its-values-persistent-segment-tree
+ */
 struct distinct_query {
 	struct node {
 		int sum;
@@ -12,6 +13,10 @@ struct distinct_query {
 	const int N;
 	vector<int> roots;
 	deque<node> tree;
+	/**
+	 * @time O(n log n)
+	 * @memory O(n log n)
+	 */
 	distinct_query(const vector<int>& arr) : N(ssize(arr)), roots(N + 1, 0) {
 		tree.emplace_back(0, 0, 0); //acts as null
 		map<int, int> last_idx;
@@ -35,7 +40,10 @@ struct distinct_query {
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
-	//returns number of distinct elements in range [le,ri)
+	/**
+	 * @brief Returns number of distinct elements in range [le, ri).
+	 * @time O(log n)
+	 */
 	int query(int le, int ri) const {
 		assert(0 <= le && le <= ri && ri <= N);
 		return query(roots[le], roots[ri], 0, N, le + 1);
