@@ -1,6 +1,5 @@
 #pragma once
 #include "bridges_and_cuts.hpp"
-
 /**
  * @note Never adds multiple edges as bridges_and_cuts.hpp correctly marks them
  *     as non-bridges.
