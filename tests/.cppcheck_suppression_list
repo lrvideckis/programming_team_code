@@ -3,8 +3,8 @@ missingIncludeSystem
 unusedStructMember:../library/range_data_structures/lazy_segment_tree.hpp
 unusedStructMember:../library/math/solve_linear_mod.hpp
 unusedStructMember:../library/graphs/strongly_connected_components.hpp:5
-unusedStructMember:../library/graphs/subtree_isomorphism.hpp:11
-unusedStructMember:../library/graphs/hopcroft_karp.hpp:7
+unusedStructMember:../library/graphs/subtree_isomorphism.hpp:3
+unusedStructMember:../library/graphs/hopcroft_karp.hpp:4
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
 unusedStructMember:../library/graphs/bridges_and_cuts.hpp
 unusedStructMember:../library/flow/hungarian.hpp:4
