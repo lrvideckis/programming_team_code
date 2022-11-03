@@ -66,6 +66,7 @@ Notes:
 .hpp file. (I can change this to also verify function comments, but not for now.)
 So not all tags are needed, and also it's up to us to stick to this style.
 - No `@author` or `@date` tags: git history already stores this, so let's spend any effort maintaining this also in a comment.
+- Reason for spaces in comments: easier to format, since comment prefix ` * ` is not a multiple of 4.
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
