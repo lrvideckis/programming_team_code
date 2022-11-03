@@ -1,21 +1,4 @@
 #pragma once
-/**
- * @file
- * @brief Calculates bridge edges and cut nodes. Handles multiple edges.
- * @code{.cpp}
- *	//example initialization of `adj`:
- *	for (int i = 0; i < m; i++) {
- *		int u, v;
- *		cin >> u >> v;
- *		u--, v--;
- *		adj[u].emplace_back(v, i);
- *		adj[v].emplace_back(u, i);
- *	}
- * @endcode
- * @see https://cp-algorithms.com/graph/bridge-searching.html https://cp-algorithms.com/graph/cutpoints.html
- * @time O(n + m)
- * @memory O(n + m)
- */
 struct graph_info {
 	//2 edge connected component stuff (e.g. components split by bridge edges)
 	int num_2_edge_ccs;
@@ -26,6 +9,23 @@ struct graph_info {
 	vector<bool> is_cut;//node -> 1 iff cut node
 	vector<int> bcc_id;//edge id -> id of bcc (which are labeled 0, 1, ..., `num_bccs`-1)
 };
+/**
+ * @brief Calculates bridge edges and cut nodes. Handles multiple edges.
+ * @code{.cpp}
+ *     //example initialization of `adj`:
+ *     for (int i = 0; i < m; i++) {
+ *         int u, v;
+ *         cin >> u >> v;
+ *         u--, v--;
+ *         adj[u].emplace_back(v, i);
+ *         adj[v].emplace_back(u, i);
+ *     }
+ * @endcode
+ * @see https://cp-algorithms.com/graph/bridge-searching.html
+ *     https://cp-algorithms.com/graph/cutpoints.html
+ * @time O(n + m)
+ * @memory O(n + m)
+ */
 graph_info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id*/>>>& adj/*undirected graph*/, int m/*number of edges*/) {
 	//stuff for both (always keep)
 	int n = ssize(adj), timer = 1;
