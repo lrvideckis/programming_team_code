@@ -1,7 +1,6 @@
 #pragma once
 #include "binary_exponentiation_mod.hpp"
 /**
- * @file
  * @brief N Choose K
  * @code{.cpp}
  *     n_choose_k nk(n, 1e9+7); // to use `choose`, `inv` with inputs strictly < n
@@ -9,7 +8,13 @@
  * @endcode
  */
 struct n_choose_k {
+	long long mod;
+	vector<long long> fact, inv_fact;
 	/**
+	 * @brief Name or description. It's okay if this is multiple lines. To be
+	 *     more readable, let's indent like this with 4 spaces. Reason for
+	 *     spaces: easier to format, since comment prefix " * " length is not a
+	 *     multiple of 4.
 	 * @note Only works for `n <= mod` and prime mod.
 	 * @time O(n + sqrt(mod))
 	 * @memory O(n)
@@ -35,8 +40,8 @@ struct n_choose_k {
 		return fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
 	}
 	/**
-	 * @brief Lucas theorem - n choose k for n, k up to LLONG_MAX. Handles n >=
-	 *     mod correctly.
+	 * @brief text Lucas theorem - n choose k for n, k up to LLONG_MAX. Handles
+	 *     n >= mod correctly.
 	 * @time O(log(k))
 	 * @memory O(mod) precomp needed, so can't use 1e9 + 7.
 	 */
@@ -55,6 +60,4 @@ struct n_choose_k {
 		assert(1 <= n); //don't divide by 0 :)
 		return fact[n - 1] * inv_fact[n] % mod;
 	}
-	long long mod;
-	vector<long long> fact, inv_fact;
 };
