@@ -11,12 +11,13 @@ All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](online_ju
   - see `make print_untested_files` for `*.hpp` files which are not included by any `*.test.cpp` file
 
 
-tool | settings | notes | wiki
+command | settings | notes | wiki
 --- | --- | --- | ---
 astyle | [.astylerc](.astylerc) | running `make astyle_cppcheck_clangtidy` locally will format files | http://astyle.sourceforge.net/astyle.html
 cppcheck | [.cppcheck_suppression_list](.cppcheck_suppression_list), also see flags in cppcheck command in [scripts/astyle_cppcheck_clangtidy.sh](scripts/astyle_cppcheck_clangtidy.sh) | | https://cppcheck.sourceforge.io/
 clang-tidy | [.clang-tidy](.clang-tidy) | checks variables for snake_case | https://clang.llvm.org/extra/clang-tidy/checks/list.html
 g++ | [.gcc_compile_flags](.gcc_compile_flags) | `-std=c++17` since some judges still have this version; `-Werror` treats warnings as errors to make CI fail; inspiration: [Catching silly mistakes with GCC](https://codeforces.com/blog/entry/15547) |
+doxygen | [Doxyfile](Doxyfile) | Used mainly as a style guide (not enforced by CI), and to check percentage of documented code (enforced by CI). | https://www.doxygen.nl/manual/commands.html
 
 ## Makefile
 to see commands:
