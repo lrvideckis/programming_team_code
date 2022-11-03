@@ -1,7 +1,6 @@
 #pragma once
 #include "prefix_function.hpp"
 /**
- * @file
  * @brief Knuth Morris Pratt
  * @code{.cpp}
  *     string s;
@@ -9,22 +8,23 @@
  *     vector<int> a;
  *     KMP kmp_a(a);
  * @endcode
- *
  * @trick KMP doubling trick: to check if 2 arrays are rotationally equivalent:
- * run kmp with one array as the needle and the other array doubled (excluding
- * the first & last characters) as the haystack or just use kactl's min
- * rotation code
- *
- * @memory O(|needle|)
+ *     run kmp with one array as the needle and the other array doubled
+ *     (excluding the first & last characters) as the haystack or just use
+ *     kactl's min rotation code.
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T> struct KMP {
 	T needle;
 	vector<int> pi;
+	/**
+	 * @time O(|needle|)
+	 * @memory O(|needle|)
+	 */
 	KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {}
 	/**
 	 * @brief Returns array `matches` where:
-	 * haystack.substr(matches[i], ssize(needle)) == needle
+	 *     haystack.substr(matches[i], ssize(needle)) == needle
 	 * @time O(|needle| + |haystack|)
 	 */
 	vector<int> find(const T& haystack) const {
