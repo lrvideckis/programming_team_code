@@ -4,9 +4,9 @@
  * @brief Knuth Morris Pratt
  * @code{.cpp}
  *     string s;
- *     KMP kmp_s(s);
+ *     KMP kmp(s);
  *     vector<int> a;
- *     KMP kmp_a(a);
+ *     KMP kmp(a);
  * @endcode
  * @trick KMP doubling trick: to check if 2 arrays are rotationally equivalent:
  *     run kmp with one array as the needle and the other array doubled
