@@ -1,6 +1,9 @@
 #pragma once
-//source: https://cp-algorithms.com/data_structures/segment_tree.html
-//	#preserving-the-history-of-its-values-persistent-segment-tree
+/**
+ * @note no updates
+ * @see https://cp-algorithms.com/data_structures/segment_tree.html
+ *     preserving-the-history-of-its-values-persistent-segment-tree
+ */
 struct kth_smallest {
 	struct node {
 		int sum;
@@ -10,6 +13,10 @@ struct kth_smallest {
 	int mn = INT_MAX, mx = INT_MIN;
 	vector<int> roots;
 	deque<node> tree;
+	/**
+	 * @time O(n log max)
+	 * @memory O(n log max)
+	 */
 	kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1, 0) {
 		tree.emplace_back(0, 0, 0); //acts as null
 		for (int val : arr)
@@ -32,8 +39,10 @@ struct kth_smallest {
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
-	/* find (k+1)th smallest number in range [le, ri)
-	 * k is 0-based, so query(le,ri,0) returns the min
+	/**
+	 * @brief Returns (k+1)th smallest number in range [le, ri). k is 0-based,
+	 *     so query(le,ri,0) returns the min.
+	 * @time O(log max)
 	 */
 	int query(int le, int ri, int k) const {
 		assert(0 <= k && k < ri - le); //note this condition implies le < ri
