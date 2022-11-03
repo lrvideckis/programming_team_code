@@ -62,6 +62,7 @@ function comment
 ```
 
 Notes:
+- Let's use proper capitalization and punctuation.
 - The only thing enforced by CI is the existance of a file comment for each
 .hpp file. (I can change this to also verify function comments, but not for now.)
 So not all tags are needed, and also it's up to us to stick to this style.
