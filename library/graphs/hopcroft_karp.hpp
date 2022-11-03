@@ -1,7 +1,4 @@
 #pragma once
-//source: https://github.com/foreverbell/acm-icpc-cheat-sheet/
-//	blob/master/src/graph-algorithm/hopcroft-karp.cpp
-//Worst case O(E*sqrt(V)) but faster in practice
 struct match {
 	//# of edges in matching (which = size of min vertex cover by König's theorem)
 	int size_of_matching;
@@ -19,12 +16,19 @@ struct match {
 	//if mvc_l[node_left] is 0, then node_left is in the corresponding maximal independent set
 	vector<bool> mvc_l, mvc_r;
 };
-//Think of the bipartite graph as having a left side (with size lsz) and a right side (with size rsz).
-//Nodes on left side are indexed 0,1,...,lsz-1
-//Nodes on right side are indexed 0,1,...,rsz-1
-//
-//`adj` is like a directed adjacency list containing edges from left side -> right side:
-//To initialize `adj`: For every edge node_left <=> node_right, do: adj[node_left].push_back(node_right)
+/**
+ * Think of the bipartite graph as having a left side (with size lsz) and a
+ * right side (with size rsz).
+ * Nodes on left side are indexed 0,1,...,lsz-1.
+ * Nodes on right side are indexed 0,1,...,rsz-1.
+ * To initialize `adj`: For every edge node_left <=> node_right, do:
+ * adj[node_left].push_back(node_right)
+ *
+ * @see https://github.com/foreverbell/acm-icpc-cheat-sheet/
+ *     blob/master/src/graph-algorithm/hopcroft-karp.cpp
+ * @time O(m * sqrt(n))
+ * @memory O(n ^ (3/2)) Some note about the complexity.
+ */
 match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*number of nodes on right side*/) {
 	int size_of_matching = 0, lsz = ssize(adj);
 	vector<int> l_to_r(lsz, -1), r_to_l(rsz, -1);
