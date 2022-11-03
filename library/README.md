@@ -55,8 +55,8 @@ function comment
 /**
  * @brief For functions, usually this describes what the return value is. That
  * is okay. Let's not also include '@return' tag to be concise.
- * @time O(n * sqrt(n log n))
- * @memory O(n * sqrt(n) * log(n))
+ * @time O(n * sqrt(n log n)) Some note about the complexity.
+ * @memory O(n * sqrt(n) * log(n)) Usually not needed.
  */
 ```
 
