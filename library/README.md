@@ -54,7 +54,8 @@ function comment
 ```
 /**
  * @brief For functions, usually this describes what the return value is. That
- * is okay. Let's not use the '@return' tag to be concise.
+ *     is okay. Let's not use the '@return' tag to be concise. It's okay if the
+ *     description is multiple lines. Let's indent like this with 4 spaces.
  * @time O(n * sqrt(n log n)) Some note about the complexity.
  * @memory O(n * sqrt(n) * log(n)) Usually not needed.
  */
