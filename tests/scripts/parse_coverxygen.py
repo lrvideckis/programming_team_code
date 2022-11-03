@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 import sys, json;
-data = json.load(sys.stdin)
-cnt_documented_files = data["total"]["documented_symbol_count"]
-total_files = data["total"]["symbol_count"]
-print("number of documented files: " + str(cnt_documented_files))
-print("total files: " + str(total_files))
-print("asserting these are equal")
-print(".")
-print(".")
-print(".")
-assert(cnt_documented_files == total_files)
+data = json.load(sys.stdin)["kinds"]
+
+print()
+print("asserting all functions are documented")
+assert(data["function"]["documented_symbol_count"] == data["function"]["symbol_count"])
+
+print("asserting all structs are documented")
+assert(data["struct"]["documented_symbol_count"] == data["struct"]["symbol_count"])
