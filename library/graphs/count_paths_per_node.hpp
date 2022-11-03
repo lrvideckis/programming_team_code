@@ -1,8 +1,10 @@
 #pragma once
 #include "centroid_decomposition.hpp"
-//0-based nodes
-//returns array `num_paths` where `num_paths[i]` = number of paths with k edges where node `i` is on the path
-//O(n log n)
+/**
+ * @brief Returns array `num_paths` where `num_paths[i]` = number of paths with
+ *     k edges where node `i` is on the path. 0-based nodes.
+ * @time O(n log n)
+ */
 vector<long long> count_paths_per_node(const vector<vector<int>>& adj/*unrooted tree*/, int k) {
 	vector<long long> num_paths(ssize(adj));
 	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {

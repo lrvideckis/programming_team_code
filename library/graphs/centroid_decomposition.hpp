@@ -1,16 +1,16 @@
 #pragma once
-
-// Time and Space complexity are given in terms of n where n is the number of nodes in the forest
-// Time complexity O(n log n)
-// Space complexity O(n)
-
-// Given an unweighted, undirected forest and a function,
-// centroid_decomp runs the function on the centroid of every decomposition
-
-// Example usage:
-//	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
-//		...
-//	});
+/**
+ * @brief Given an unweighted, undirected forest and a function,
+ *     centroid_decomp runs the function on the centroid of every
+ *     decomposition.
+ * @code{.cpp}
+ *     //example usage
+ *     centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+ *     });
+ * @endcode
+ * @time O(n log n)
+ * @memory O(n)
+ */
 template <typename F> struct centroid_decomp {
 	vector<vector<int>> adj;
 	F func;
