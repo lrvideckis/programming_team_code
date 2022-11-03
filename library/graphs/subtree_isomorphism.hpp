@@ -1,17 +1,13 @@
 #pragma once
-
-// Complexity given in terms of n where n is the number of nodes in the forest
-// Time complexity O(n log n)
-// Space complexity O(n)
-
-// Given an undirected or directed rooted forest
-// subtree_iso classifies each rooted subtree
-// minimum label of each tree becomes root
 struct iso_info {
-	int num_distinct_subtrees; //0 <= id[i] < num_distinct_subtrees for all i
-	vector<int> id; //id[u] == id[v] iff subtree u is isomorphic to subtree v
+	int num_distinct_subtrees; //0 <= id[i] < num_distinct_subtrees
+	vector<int> id; //id[u] == id[v] iff rooted subtree u is isomorphic to rooted subtree v
 };
-
+/**
+ * @brief Rooted Tree Isomorphism
+ * @time O(n log n)
+ * @memory O(n)
+ */
 iso_info subtree_iso(const vector<vector<int>>& adj) {
 	vector<int> id(ssize(adj), -1);
 	map<vector<int>, int> hashes;
