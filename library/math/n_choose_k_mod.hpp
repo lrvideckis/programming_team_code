@@ -7,16 +7,15 @@
  *     n_choose_k nk(n, 1e9+7); // to use `choose`, `inv` with inputs strictly < n
  *     n_choose_k nk(mod, mod); // to use `choose_lucas` with arbitrarily large inputs
  * @endcode
- * @memory O(n) precomp
  */
 struct n_choose_k {
+	/**
+	 * @note Only works for `n <= mod` and prime mod.
+	 * @time O(n + sqrt(mod))
+	 * @memory O(n)
+	 */
 	n_choose_k(int n, long long a_mod) : mod(a_mod), fact(n, 1), inv_fact(n, 1) {
-		//this implementation doesn't work if n > mod because n! % mod = 0 when
-		//n >= mod. So `inv_fact` array will be all 0's
 		assert(max(n, 2) <= mod);
-		//assert mod is prime. mod is intended to fit inside an int so that
-		//multiplications fit in a longlong before being modded down. So this
-		//will take sqrt(2^31) time
 		for (int i = 2; i * i <= mod; i++)
 			assert(mod % i);
 		for (int i = 2; i < n; i++)
@@ -26,7 +25,7 @@ struct n_choose_k {
 			inv_fact[i] = inv_fact[i + 1] * (i + 1) % mod;
 	}
 	/**
-	 * @brief Classic n choose k; fails when n >= mod.
+	 * @brief Classic n choose k, fails when n >= mod.
 	 * @time O(1)
 	 */
 	long long choose(int n, int k) const {
