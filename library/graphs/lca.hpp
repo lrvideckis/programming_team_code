@@ -1,6 +1,8 @@
 #pragma once
-//https://codeforces.com/blog/entry/74847
-//mnemonic: Least/Lowest Common Ancestor
+/**
+ * @brief Least/Lowest Common Ancestor
+ * @see https://codeforces.com/blog/entry/74847
+ */
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
 	struct node {
@@ -8,6 +10,10 @@ struct LCA {
 		long long dist = 0LL;
 	};
 	vector<node> tree;
+	/**
+	 * @time O(n)
+	 * @memory O(n)
+	 */
 	LCA(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : tree(ssize(adj)) {
 		for (int i = 0; i < ssize(adj); i++) {
 			if (tree[i].jmp == -1) {//lowest indexed node in each tree becomes root
@@ -35,7 +41,10 @@ struct LCA {
 			dfs(ch, adj);
 		}
 	}
-	//traverse up k edges in O(log(k)). So with k=1 this returns `v`'s parent
+	/**
+	 * @brief Traverse up k edges. So with k=1 this returns v's parent.
+	 * @time O(log k)
+	 */
 	int kth_par(int v, int k) const {
 		k = min(k, tree[v].depth);
 		while (k > 0) {
@@ -49,7 +58,10 @@ struct LCA {
 		}
 		return v;
 	}
-	// x, y must be in the same component
+	/**
+	 * @note x, y must be in the same component.
+	 * @time O(log n)
+	 */
 	int get_lca(int x, int y) const {
 		if (tree[x].depth < tree[y].depth)
 			swap(x, y);
