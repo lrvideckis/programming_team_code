@@ -36,7 +36,7 @@ struct n_choose_k {
 	}
 	/**
 	 * @brief Lucas theorem - n choose k for n, k up to LLONG_MAX. Handles n >=
-	 * mod correctly.
+	 *     mod correctly.
 	 * @time O(log(k))
 	 * @memory O(mod) precomp needed, so can't use 1e9 + 7.
 	 */
