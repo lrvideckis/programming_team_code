@@ -13,7 +13,10 @@ vector<int> get_prime_factors(int val, const vector<int>& sieve) {
 	}
 	return factors;
 }
-//returns array `sieve` where `sieve[i]` = some prime factor of `i`
+/**
+ * Returns array `sieve` where `sieve[i]` = some prime factor of `i`.
+ * @time O(n * log(logn))
+ */
 vector<int> get_sieve(int n) {
 	vector<int> sieve(n);
 	iota(sieve.begin(), sieve.end(), 0);
