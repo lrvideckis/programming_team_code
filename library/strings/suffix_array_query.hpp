@@ -46,10 +46,10 @@ template <typename T> struct sa_query {
 	/**
 	 * Returns range [le, ri) such that:
 	 * - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
-	 * - `ri - le` is the # of matches of t in s is okay.
+	 * - `ri - le` is the # of matches of t in s.
 	 * @time O(|t| * log(|s|))
 	 */
-	pair<int, int> find(const string& t) const {
+	pair<int, int> find(const T& t) const {
 		auto cmp = [&](int i, int cmp_val) -> bool {
 			return s.compare(i, ssize(t), t) < cmp_val;
 		};
@@ -63,7 +63,7 @@ template <typename T> struct sa_query {
 	 * https://open.kattis.com/problems/anothersubstringqueryproblem
 	 * @time O(|t| * log(|s|))
 	 */
-	int find_first(const string& t) const {
+	int find_first(const T& t) const {
 		auto [le, ri] = find(t);
 		if (le == ri) return -1;
 		return rmq_sa.query(le, ri);
