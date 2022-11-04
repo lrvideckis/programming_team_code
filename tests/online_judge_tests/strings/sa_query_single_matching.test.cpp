@@ -8,7 +8,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s, t;
 	cin >> s >> t;
-	sa_query sq(s);
+	sa_query sq(s, 128);
 	auto [le, ri] = sq.find(t);
 	vector<int> matches;
 	for (int i = le; i < ri; i++)

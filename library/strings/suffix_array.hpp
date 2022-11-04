@@ -25,6 +25,12 @@
  * rank array satisfies sa[rank[i]] == i and rank[sa[i]] == i
  * lcp array = [1, 3, 0, 0, 2, 0] - last 0 is a dummy value
  *
+ * @code{.cpp}
+ *     string s;
+ *     suffix_array info(s, 128);
+ *     vector<int> arr;
+ *     suffix_array info(arr, 1e5 + 1);
+ * @endcode
  * @see https://github.com/kth-competitive-programming/kactl
  * /blob/main/content/strings/SuffixArray.h
  */
