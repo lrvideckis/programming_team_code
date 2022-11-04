@@ -59,7 +59,8 @@ template <typename T> struct suffix_array {
 			max_val = 1, rank[sa[0]] = 0;
 			for (int i = 1; i < N; i++) {
 				int a = sa[i - 1], b = sa[i];
-				rank[b] = (tmp[a] == tmp[b] && tmp[a + len] == tmp[b + len]) ? max_val - 1 : max_val++;
+				max_val += (tmp[a] != tmp[b] || tmp[a + len] != tmp[b + len]);
+				rank[b] = max_val - 1;
 			}
 			if (max_val == N) break;
 		}
