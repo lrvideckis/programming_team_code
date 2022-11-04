@@ -1,12 +1,11 @@
 #pragma once
-
-// source: https://codeforces.com/blog/entry/80195
-
-// generic matrix multiplication (not overflow safe)
-// will RTE if the given matricies are not compatible
-// Time: O(n * m * inner)
-// Space: O(n * m)
-
+/**
+ * Generic matrix multiplication (not overflow safe). This will RTE if the
+ * given matricies are not compatible.
+ * @see https://codeforces.com/blog/entry/80195
+ * @time O(n * m * inner)
+ * @memory O(n * m)
+ */
 template <typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, const vector<vector<T>>& b) {
 	assert(ssize(a[0]) == ssize(b));
 	int n = ssize(a), m = ssize(b[0]), inner = ssize(b);
