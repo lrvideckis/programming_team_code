@@ -1,5 +1,8 @@
 #pragma once
-//source: https://cp-algorithms.com/string/prefix-function.html#implementation
+/**
+ * @see https://cp-algorithms.com/string/prefix-function.html#implementation
+ * @time O(n)
+ */
 template <typename T> vector<int> prefix_function(const T& s) {
 	vector<int> pi(ssize(s), 0);
 	for (int i = 1; i < ssize(s); i++) {

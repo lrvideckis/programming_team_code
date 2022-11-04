@@ -1,6 +1,8 @@
 #pragma once
-//source: https://e-maxx.ru/algo/min_cost_flow
 const long long INF = 1e18;
+/**
+ * @see https://e-maxx.ru/algo/min_cost_flow
+ */
 struct mcmf {
 	using ll = long long;
 	struct edge {
