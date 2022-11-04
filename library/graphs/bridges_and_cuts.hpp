@@ -10,7 +10,6 @@ struct graph_info {
 	vector<int> bcc_id;//edge id -> id of bcc (which are labeled 0, 1, ..., `num_bccs`-1)
 };
 /**
- * @brief Calculates bridge edges and cut nodes. Handles multiple edges.
  * @code{.cpp}
  *     //example initialization of `adj`:
  *     for (int i = 0; i < m; i++) {

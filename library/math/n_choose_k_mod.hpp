@@ -45,7 +45,7 @@ struct n_choose_k {
 		return choose_lucas(n / mod, k / mod) * choose(int(n % mod), int(k % mod)) % mod;
 	}
 	/**
-	 * @brief Returns x such that x * n % mod == 1.
+	 * Returns x such that x * n % mod == 1.
 	 * @time O(1)
 	 */
 	long long inv(int n) const {

@@ -1,8 +1,7 @@
 #pragma once
 /**
- * @brief Given an unweighted, undirected forest and a function,
- *     centroid_decomp runs the function on the centroid of every
- *     decomposition.
+ * Given an unweighted, undirected forest and a function, centroid_decomp runs
+ * the function on the centroid of every decomposition.
  * @code{.cpp}
  *     //example usage
  *     centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {

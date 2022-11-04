@@ -14,7 +14,7 @@ template <typename T> struct BIT {
 		for (; i < ssize(bit); i |= i + 1) bit[i] += d;
 	}
 	/**
-	 * @brief Returns sum of range [0, ri)
+	 * sum of range [0, ri)
 	 * @time O(log n)
 	 */
 	T sum(int ri) const {
@@ -24,7 +24,7 @@ template <typename T> struct BIT {
 		return ret;
 	}
 	/**
-	 * @brief Returns sum of range [le, ri)
+	 * sum of range [le, ri)
 	 * @time O(log n)
 	 */
 	T sum(int le, int ri) const {
@@ -32,9 +32,9 @@ template <typename T> struct BIT {
 		return sum(ri) - sum(le);
 	}
 	/**
-	 * @brief Returns min pos such that sum of [0, pos) >= sum. Returns
-	 *     ssize(bit) + 1 if no sum is >= sum.
-	 * @note Doesn't work if BIT::sum(i, i + 1) < 0
+	 * Returns min pos such that sum of range [0, pos) >= sum. Returns
+	 * ssize(bit) + 1 if no sum is >= sum.
+	 * Doesn't work if BIT::sum(i, i + 1) < 0
 	 * @time O(log n)
 	 */
 	int lower_bound(T sum) const {

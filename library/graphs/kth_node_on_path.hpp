@@ -4,9 +4,9 @@ struct kth_node_on_path {
 	LCA lca;
 	kth_node_on_path(const vector<vector<pair<int, long long>>>& adj/*forest of weighted trees*/) : lca(adj) {}
 	/**
-	 * @brief Consider path {u, u's par, ..., LCA(u,v), ..., v's par, v}. This
-	 *     returns the node at index k. k=0 returns u; k=#path_edges returns v.
-	 * @note u, v must be in the same component.
+	 * Consider path {u, u's par, ..., LCA(u,v), ..., v's par, v}. This returns
+	 * the node at index k. So k=0 returns u, k=#path_edges returns v.
+	 * u, v must be in the same component.
 	 * @time O(log n)
 	 */
 	int query(int u, int v, int k) const {

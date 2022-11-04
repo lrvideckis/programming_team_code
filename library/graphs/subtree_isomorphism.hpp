@@ -4,7 +4,7 @@ struct iso_info {
 	vector<int> id; //id[u] == id[v] iff rooted subtree u is isomorphic to rooted subtree v
 };
 /**
- * @brief Rooted Tree Isomorphism
+ * Classifies each rooted subtree by isomorphism.
  * @time O(n log n)
  * @memory O(n)
  */

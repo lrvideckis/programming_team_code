@@ -1,7 +1,7 @@
 #pragma once
 #include "bridges_and_cuts.hpp"
 /**
- * @brief Returns adjacency list of block vertex tree.
+ * Returns adjacency list of block vertex tree.
  * @code{.cpp}
  *     graph_info cc = bridge_and_cut(adj, m);
  *     vector<vector<int>> bvt = block_vertex_tree(adj, cc);

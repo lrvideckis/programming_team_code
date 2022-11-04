@@ -1,6 +1,5 @@
 #pragma once
 /**
- * @brief Heavy Light Decomposition
  * @see https://codeforces.com/blog/entry/53170
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
@@ -41,9 +40,9 @@ struct HLD {
 		}
 	}
 	/**
-	 * @brief Returns inclusive-exclusive intervals (of time_in's)
-	 *     corresponding to the path between u and v, not necessarily in order.
-	 * @note u, v must be in the same component.
+	 * Returns inclusive-exclusive intervals (of time_in's) corresponding to
+	 * the path between u and v, not necessarily in order. u, v must be in the
+	 * same component.
 	 * @time O(log n)
 	 * @memory O(log n)
 	 */
@@ -62,8 +61,9 @@ struct HLD {
 		return {tree[i].time_in, tree[i].time_in + tree[i].sub_sz};
 	}
 	/**
-	 * @note u, v must be in the same component.
+	 * u, v must be in the same component.
 	 * @time O(log n)
+	 * @memory O(1)
 	 */
 	int lca(int u, int v) const {
 		for (;; v = tree[tree[v].next].par) {
