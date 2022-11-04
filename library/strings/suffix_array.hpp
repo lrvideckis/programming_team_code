@@ -1,7 +1,41 @@
 #pragma once
+/**
+ * suffixes of "banana":
+ * 0 banana
+ * 1 anana
+ * 2 nana
+ * 3 ana
+ * 4 na
+ * 5 a
+ *
+ * sorted,  lcp
+ * 5 a
+ *   |      1
+ * 3 ana
+ *   |||    3
+ * 1 anana
+ *          0
+ * 0 banana
+ *          0
+ * 4 na
+ *   ||     2
+ * 2 nana
+ *
+ * suffix array = [5, 3, 1, 0, 4, 2]
+ * rank array satisfies sa[rank[i]] == i and rank[sa[i]] == i
+ * lcp array = [1, 3, 0, 0, 2, 0] - last 0 is a dummy value
+ *
+ * @see https://github.com/kth-competitive-programming/kactl
+ * /blob/main/content/strings/SuffixArray.h
+ */
 template <typename T> struct suffix_array {
 	const int N;
 	vector<int> sa, rank, lcp;
+	/**
+	 * Assumes 0 <= s[i] < max_val.
+	 * @time O((nlogn) + max_val)
+	 * @memory O(n + max_val)
+	 */
 	suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(s.begin(), s.end()), lcp(N) {
 		iota(sa.begin(), sa.end(), 0);
 		vector<int> tmp(N + 1, -1);

@@ -1,50 +1,26 @@
 #pragma once
-#include "../../hackpack-cpp/content/strings/SuffixArray.h"
+#include "suffix_array.hpp"
 #include "../range_data_structures/rmq.hpp"
-//various queries you can do based on Suffix Array
-/*
-suffixes of "banana":
-
-0 banana$
-1 anana$
-2 nana$
-3 ana$
-4 na$
-5 a$
-6 $
-
-sorted:
-          lcp
-          0
-6 $
-          0
-5 a$
-  |       1
-3 ana$
-  |||     3
-1 anana$
-          0
-0 banana$
-          0
-4 na$
-  ||      2
-2 nana$
-
-suffix array = [6, 5, 3, 1, 0, 4, 2]
-lcp array = [0, 0, 1, 3, 0, 0, 2]
-*/
-struct sa_query {
-	string s;
+/**
+ * Various queries you can do based on suffix array.
+ * @see https://github.com/yosupo06/Algorithm/blob
+ * /master/src/string/suffixarray.hpp
+ */
+template <typename T> struct sa_query {
+	T s;
 	SuffixArray info;
 	RMQ<int> rmq_lcp, rmq_sa;
 	/**
-	 * @time O(n log n)
-	 * @memory O(n log n) - because of RMQ
+	 * Assumes 0 <= s[i] < max_val.
+	 * @time O((nlogn) + max_val)
+	 * @memory O((nlogn) + max_val) An O(max_val) size freq array is used
+	 * temporarily during suffix array construction. Only O(n log n) memory is
+	 * permanently stored by this struct.
 	 */
-	sa_query(string& a_s) :
+	sa_query(const T& a_s, int max_val) :
 		s(a_s),
-		info(SuffixArray(s)),
-		rmq_lcp(vi(info.lcp.begin() + 1, info.lcp.end()), [](int i, int j) -> int {return min(i, j);}),
+		info(suffix_array(s, max_val)),
+		rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
 		rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}) {}
 	/**
 	 * Returns length of longest common prefix of suffixes s[idx1...N),
