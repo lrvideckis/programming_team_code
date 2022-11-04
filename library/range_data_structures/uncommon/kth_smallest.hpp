@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @note no updates
+ * Can't handle updates.
  * @see https://cp-algorithms.com/data_structures/segment_tree.html
  *     preserving-the-history-of-its-values-persistent-segment-tree
  */
@@ -37,8 +37,8 @@ struct kth_smallest {
 		return ssize(tree) - 1;
 	}
 	/**
-	 * @brief Returns (k+1)th smallest number in range [le, ri). k is 0-based,
-	 *     so query(le,ri,0) returns the min.
+	 * Returns (k+1)th smallest number in range [le, ri). k is 0-based, so
+	 * query(le,ri,0) returns the min.
 	 * @time O(log max)
 	 */
 	int query(int le, int ri, int k) const {

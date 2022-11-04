@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @note No updates; works with negatives.
+ * Can't handle updates; works with negatives.
  * @see https://cp-algorithms.com/data_structures/segment_tree.html
  *     #preserving-the-history-of-its-values-persistent-segment-tree
  */
@@ -39,7 +39,7 @@ struct distinct_query {
 		return ssize(tree) - 1;
 	}
 	/**
-	 * @brief Returns number of distinct elements in range [le, ri).
+	 * Returns number of distinct elements in range [le, ri).
 	 * @time O(log n)
 	 */
 	int query(int le, int ri) const {

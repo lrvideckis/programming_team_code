@@ -1,10 +1,10 @@
 #pragma once
 /**
- * @brief Disjoint RMQ is like normal RMQ except these ranges never overlap. It
- *     is useful for:
- *     - min and # of mins.
- *     - product under composite mod
- *     - 2-by-2 matrix multiply
+ * Disjoint RMQ is like normal RMQ except these ranges never overlap. It is
+ * useful for:
+ * - min and # of mins.
+ * - product under composite mod
+ * - 2-by-2 matrix multiply
  * @code{.cpp}
  *     //usage for min and # of mins:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = 1
@@ -37,7 +37,7 @@ template <typename T> struct disjoint_rmq {
 		}
 	}
 	/**
-	 * @note range [le, ri)
+	 * range [le, ri)
 	 * @time O(1)
 	 */
 	T query(int le, int ri) const {
