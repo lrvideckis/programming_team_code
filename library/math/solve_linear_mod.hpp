@@ -3,17 +3,23 @@
 struct matrix_info {
 	int rank;
 	long long det;
+	//solution vector
+	//empty if no solution exists
+	//if there are multiple solutions, this is an arbitrary one
 	vector<long long> x;
 };
-//Solves mat * x = b under prime mod.
-//mat is a n (rows) by m (cols) matrix, b is a length n column vector, x is a length m vector.
-//assumes n,m >= 1, else RTE
-//Returns rank of mat, determinant of mat, and x (solution vector to mat * x = b).
-//x is empty if no solution. If rank < m, there are multiple solutions and an arbitrary one is returned.
-//Leaves mat in reduced row echelon form (unlike kactl) with b appended.
-//Trick: Number of unique solutions = (size of domain) ^ (# of free variables).
-//# of free variables is generally equivalent to n - rank.
-//O(n * m * min(n,m))
+/**
+ * Solves mat * x = b under prime mod.
+ * `mat` is a n (rows) by m (cols) matrix, b is a length n column vector, x is
+ * a length m vector.
+ * Assumes n,m >= 1, else RTE. Leaves mat in reduced row echelon form with b
+ * appended.
+ *
+ * Number of unique solutions = (size of domain) ^ (# of free variables).
+ * (# of free variables) is generally equivalent to n - rank.
+ * @time O(n * m * min(n, m))
+ * @memory O(n * m)
+ */
 matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b, long long mod) {
 	assert(ssize(mat) == ssize(b));
 	int n = ssize(mat), m = ssize(mat[0]);
