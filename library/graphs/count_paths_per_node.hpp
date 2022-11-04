@@ -10,14 +10,11 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj/*unrooted 
 	centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
 		vector<int> pre_d(1, 1), cur_d(1);
 		auto dfs = [&](auto self, int u, int p, int d) -> long long {
-			if (d > k)
-				return 0;
-			if (ssize(cur_d) <= d)
-				cur_d.push_back(0);
+			if (d > k) return 0;
+			if (ssize(cur_d) <= d) cur_d.push_back(0);
 			cur_d[d]++;
 			long long cnt = 0;
-			if (k - d < ssize(pre_d))
-				cnt += pre_d[k - d];
+			if (k - d < ssize(pre_d)) cnt += pre_d[k - d];
 			for (int v : adj_removed_edges[u])
 				if (v != p)
 					cnt += self(self, v, u, d + 1);

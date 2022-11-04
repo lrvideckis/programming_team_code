@@ -5,8 +5,7 @@ template <int N> struct implicit_seg_tree {
 	using dt = array<long long, 2>;//min, number of mins
 	using ch = long long;
 	static dt combine(const dt& le, const dt& ri) {
-		if (le[0] == ri[0])
-			return {le[0], le[1] + ri[1]};
+		if (le[0] == ri[0]) return {le[0], le[1] + ri[1]};
 		return min(le, ri);
 	}
 	static constexpr dt UNIT{(long long)1e18, 0LL};

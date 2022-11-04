@@ -29,8 +29,7 @@ struct LCA {
 		else
 			jmp = v, jmp_edges = 1;
 		for (auto [ch, w] : adj[v]) {
-			if (ch == tree[v].par)
-				continue;
+			if (ch == tree[v].par) continue;
 			tree[ch] = {
 				jmp,
 				jmp_edges,
@@ -63,8 +62,7 @@ struct LCA {
 	 * @time O(log n)
 	 */
 	int get_lca(int x, int y) const {
-		if (tree[x].depth < tree[y].depth)
-			swap(x, y);
+		if (tree[x].depth < tree[y].depth) swap(x, y);
 		x = kth_par(x, tree[x].depth - tree[y].depth);
 		while (x != y) {
 			if (tree[x].jmp != tree[y].jmp)

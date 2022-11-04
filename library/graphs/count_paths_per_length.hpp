@@ -19,8 +19,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj/*unroote
 					auto [curr, par] = q.front();
 					q.pop();
 					for (int ch : adj_removed_edges[curr]) {
-						if (ch == par)
-							continue;
+						if (ch == par) continue;
 						new_q.emplace(ch, curr);
 					}
 				}

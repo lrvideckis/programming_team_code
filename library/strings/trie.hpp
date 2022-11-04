@@ -28,8 +28,7 @@ struct trie {
 		int v = 0;
 		for (char ch : s) {
 			int let = ch - MIN_CH;
-			if (t[v].next[let] == -1)
-				return 0;
+			if (t[v].next[let] == -1) return 0;
 			v = t[v].next[let];
 		}
 		return t[v].cnt_words;

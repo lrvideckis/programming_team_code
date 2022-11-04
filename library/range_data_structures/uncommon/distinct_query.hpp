@@ -33,10 +33,8 @@ struct distinct_query {
 		int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
 		int rch = tree[v].rch;
-		if (idx < tm)
-			lch = update(lch, tl, tm, idx);
-		else
-			rch = update(rch, tm, tr, idx);
+		if (idx < tm) lch = update(lch, tl, tm, idx);
+		else rch = update(rch, tm, tr, idx);
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
@@ -49,10 +47,8 @@ struct distinct_query {
 		return query(roots[le], roots[ri], 0, N, le + 1);
 	}
 	int query(int vl, int vr, int tl, int tr, int idx) const {
-		if (tree[vr].sum == 0 || idx <= tl)
-			return 0;
-		if (tr <= idx)
-			return tree[vr].sum - tree[vl].sum;
+		if (tree[vr].sum == 0 || idx <= tl) return 0;
+		if (tr <= idx) return tree[vr].sum - tree[vl].sum;
 		int tm = tl + (tr - tl) / 2;
 		return query(tree[vl].lch, tree[vr].lch, tl, tm, idx) +
 			   query(tree[vl].rch, tree[vr].rch, tm, tr, idx);

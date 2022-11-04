@@ -54,8 +54,7 @@ struct sa_query {
 	 * @time O(1)
 	 */
 	int get_lcp(int idx1, int idx2) const {
-		if (idx1 == idx2)
-			return ssize(s) - idx1;
+		if (idx1 == idx2) return ssize(s) - idx1;
 		auto [le, ri] = minmax(info.rank[idx1], info.rank[idx2]);
 		return rmq_lcp.query(le, ri);
 	}
@@ -89,8 +88,7 @@ struct sa_query {
 	 */
 	int find_first(const string& t) const {
 		auto [le, ri] = find(t);
-		if (le == ri)
-			return -1;
+		if (le == ri) return -1;
 		return rmq_sa.query(le, ri);
 	}
 };

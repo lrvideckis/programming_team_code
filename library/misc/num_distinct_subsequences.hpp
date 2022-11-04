@@ -10,16 +10,13 @@ int num_subsequences(const vector<int>& arr, int mod) {
 	map<int, int> last;
 	for (int i = 0; i < ssize(arr); i++) {
 		int& curr = dp[i + 1] = 2 * dp[i];
-		if (curr >= mod)
-			curr -= mod;
+		if (curr >= mod) curr -= mod;
 		auto it = last.find(arr[i]);
 		if (it != last.end()) {
 			curr -= dp[it->second];
-			if (curr < 0)
-				curr += mod;
+			if (curr < 0) curr += mod;
 			it->second = i;
-		} else
-			last[arr[i]] = i;
+		} else last[arr[i]] = i;
 	}
 	return dp.back();
 }

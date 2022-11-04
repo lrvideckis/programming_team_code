@@ -19,8 +19,7 @@ struct kth_smallest {
 	 */
 	kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1, 0) {
 		tree.emplace_back(0, 0, 0); //acts as null
-		for (int val : arr)
-			mn = min(mn, val), mx = max(mx, val + 1);
+		for (int val : arr) mn = min(mn, val), mx = max(mx, val + 1);
 		for (int i = 0; i < ssize(arr); i++)
 			roots[i + 1] = update(roots[i], mn, mx, arr[i]);
 	}
@@ -32,10 +31,8 @@ struct kth_smallest {
 		int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
 		int rch = tree[v].rch;
-		if (idx < tm)
-			lch = update(lch, tl, tm, idx);
-		else
-			rch = update(rch, tm, tr, idx);
+		if (idx < tm) lch = update(lch, tl, tm, idx);
+		else rch = update(rch, tm, tr, idx);
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
@@ -55,8 +52,7 @@ struct kth_smallest {
 			return tl;
 		int tm = tl + (tr - tl) / 2;
 		int left_count = tree[tree[vr].lch].sum - tree[tree[vl].lch].sum;
-		if (left_count > k)
-			return query(tree[vl].lch, tree[vr].lch, tl, tm, k);
+		if (left_count > k) return query(tree[vl].lch, tree[vr].lch, tl, tm, k);
 		return query(tree[vl].rch, tree[vr].rch, tm, tr, k - left_count);
 	}
 };

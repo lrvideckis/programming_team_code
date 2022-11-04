@@ -14,8 +14,7 @@ long long bin_exp(long long base, long long pw, long long mod) {
 	long long res = 1;
 	base %= mod;
 	while (pw > 0) {
-		if (pw & 1)
-			res = res * base % mod;
+		if (pw & 1) res = res * base % mod;
 		base = base * base % mod;
 		pw >>= 1;
 	}

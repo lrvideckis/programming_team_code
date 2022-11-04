@@ -16,25 +16,22 @@ scc_info SCC(const vector<vector<int>>& adj/*directed, unweighted graph*/) {
 	auto dfs = [&](auto self, int v) -> int {
 		int low = tin[v] = timer++;
 		node_stack.push_back(v);
-		for (int to : adj[v]) {
+		for (int to : adj[v])
 			if (scc_id[to] < 0)
 				low = min(low, tin[to] ? tin[to] : self(self, to));
-		}
 		if (tin[v] == low) {
 			while (1) {
 				int node = node_stack.back();
 				node_stack.pop_back();
 				scc_id[node] = num_sccs;
-				if (node == v)
-					break;
+				if (node == v) break;
 			}
 			num_sccs++;
 		}
 		return low;
 	};
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		if (!tin[i])
 			dfs(dfs, i);
-	}
 	return {num_sccs, scc_id};
 }

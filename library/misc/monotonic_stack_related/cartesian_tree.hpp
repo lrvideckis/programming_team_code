@@ -15,14 +15,10 @@ vector<int> cartesian_tree(const vector<int>& arr) {
 	vector<int> par(n);
 	for (int i = 0; i < n; i++) {
 		int le = left[i], ri = rv(right[rv(i)]);
-		if (le >= 0 && ri < n)
-			par[i] = arr[le] > arr[ri] ? le : ri;
-		else if (le >= 0)
-			par[i] = le;
-		else if (ri < n)
-			par[i] = ri;
-		else
-			par[i] = i; //true only for root
+		if (le >= 0 && ri < n) par[i] = arr[le] > arr[ri] ? le : ri;
+		else if (le >= 0) par[i] = le;
+		else if (ri < n) par[i] = ri;
+		else par[i] = i; //true only for root
 	}
 	return par;
 }

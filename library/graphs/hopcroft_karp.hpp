@@ -47,16 +47,14 @@ match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*
 			for (int x : adj[u]) {
 				mvc_r[x] = 1;
 				int v = r_to_l[x];
-				if (v == -1)
-					found = 1;
+				if (v == -1) found = 1;
 				else if (level[v] == -1) {
 					level[v] = level[u] + 1;
 					q.push(v);
 				}
 			}
 		}
-		if (!found)
-			return {size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r};
+		if (!found) return {size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r};
 		auto dfs = [&](auto self, int u) -> bool {
 			for (int x : adj[u]) {
 				int v = r_to_l[x];

@@ -21,8 +21,7 @@ struct n_choose_k {
 	 */
 	n_choose_k(int n, long long a_mod) : mod(a_mod), fact(n, 1), inv_fact(n, 1) {
 		assert(max(n, 2) <= mod);
-		for (int i = 2; i * i <= mod; i++)
-			assert(mod % i);
+		for (int i = 2; i * i <= mod; i++) assert(mod % i);
 		for (int i = 2; i < n; i++)
 			fact[i] = fact[i - 1] * i % mod;
 		inv_fact.back() = bin_exp(fact.back(), mod - 2, mod);
@@ -34,8 +33,7 @@ struct n_choose_k {
 	 * @time O(1)
 	 */
 	long long choose(int n, int k) const {
-		if (k < 0 || k > n)
-			return 0;
+		if (k < 0 || k > n) return 0;
 		//now we know 0 <= k <= n so 0 <= n
 		return fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
 	}
@@ -46,10 +44,8 @@ struct n_choose_k {
 	 * @memory O(mod) precomp needed, so can't use 1e9 + 7.
 	 */
 	long long choose_lucas(long long n, long long k) const {
-		if (k < 0 || k > n)
-			return 0;
-		if (k == 0 || k == n)
-			return 1;
+		if (k < 0 || k > n) return 0;
+		if (k == 0 || k == n) return 1;
 		return choose_lucas(n / mod, k / mod) * choose(int(n % mod), int(k % mod)) % mod;
 	}
 	/**

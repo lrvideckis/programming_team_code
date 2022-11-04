@@ -44,8 +44,7 @@ graph_info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id
 		int low = tin[v] = timer++, deg = 0;
 		node_stack.push_back(v);
 		for (auto [to, e_id] : adj[v]) {
-			if (e_id == p_id)
-				continue;
+			if (e_id == p_id) continue;
 			if (!tin[to]) {
 				edge_stack.push_back(e_id);
 				int low_ch = self(self, to, e_id);
@@ -55,8 +54,7 @@ graph_info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id
 						int edge = edge_stack.back();
 						edge_stack.pop_back();
 						bcc_id[edge] = num_bccs;
-						if (edge == e_id)
-							break;
+						if (edge == e_id) break;
 					}
 					num_bccs++;
 				}
@@ -67,17 +65,14 @@ graph_info bridge_and_cut(const vector<vector<pair<int/*neighbor*/, int/*edge id
 				low = min(low, tin[to]);
 			}
 		}
-		if (p_id == -1)
-			is_cut[v] = (deg > 1);
+		if (p_id == -1) is_cut[v] = (deg > 1);
 		if (tin[v] == low) {
-			if (p_id != -1)
-				is_bridge[p_id] = 1;
+			if (p_id != -1) is_bridge[p_id] = 1;
 			while (1) {
 				int node = node_stack.back();
 				node_stack.pop_back();
 				two_edge_ccid[node] = num_2_edge_ccs;
-				if (node == v)
-					break;
+				if (node == v) break;
 			}
 			num_2_edge_ccs++;
 		}

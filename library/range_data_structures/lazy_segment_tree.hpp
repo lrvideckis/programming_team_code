@@ -62,26 +62,18 @@ struct seg_tree {
 		assert(0 <= le && le <= ri && ri <= N);
 		le = to_leaf(le), ri = to_leaf(ri);
 		int lca_l_r = __lg((le - 1) ^ ri);
-		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--)
-			push(le >> lg);
-		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--)
-			push(ri >> lg);
+		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--) push(le >> lg);
+		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--) push(ri >> lg);
 		for (int x = le, y = ri; x < y; x >>= 1, y >>= 1) {
-			if (x & 1)
-				apply(x++, change);
-			if (y & 1)
-				apply(--y, change);
+			if (x & 1) apply(x++, change);
+			if (y & 1) apply(--y, change);
 		}
-		for (int lg = __builtin_ctz(ri) + 1; lg <= lca_l_r; lg++)
-			build(ri >> lg);
-		for (int lg = __builtin_ctz(le) + 1; lg <= __lg(le); lg++)
-			build(le >> lg);
+		for (int lg = __builtin_ctz(ri) + 1; lg <= lca_l_r; lg++) build(ri >> lg);
+		for (int lg = __builtin_ctz(le) + 1; lg <= __lg(le); lg++) build(le >> lg);
 	}
 	void update(int v/* = 1*/, int le, int ri, ch change) {
-		if (ri <= tree[v].le || tree[v].ri <= le)
-			return;
-		if (le <= tree[v].le && tree[v].ri <= ri)
-			return apply(v, change);
+		if (ri <= tree[v].le || tree[v].ri <= le) return;
+		if (le <= tree[v].le && tree[v].ri <= ri) return apply(v, change);
 		push(v);
 		update(2 * v, le, ri, change);
 		update(2 * v + 1, le, ri, change);
@@ -92,24 +84,18 @@ struct seg_tree {
 		assert(0 <= le && le <= ri && ri <= N);
 		le = to_leaf(le), ri = to_leaf(ri);
 		int lca_l_r = __lg((le - 1) ^ ri);
-		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--)
-			push(le >> lg);
-		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--)
-			push(ri >> lg);
+		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--) push(le >> lg);
+		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--) push(ri >> lg);
 		dt resl = UNIT, resr = UNIT;
 		for (; le < ri; le >>= 1, ri >>= 1) {
-			if (le & 1)
-				resl = combine(resl, tree[le++].val);
-			if (ri & 1)
-				resr = combine(tree[--ri].val, resr);
+			if (le & 1) resl = combine(resl, tree[le++].val);
+			if (ri & 1) resr = combine(tree[--ri].val, resr);
 		}
 		return combine(resl, resr);
 	}
 	dt query(int v/* = 1*/, int le, int ri) {
-		if (ri <= tree[v].le || tree[v].ri <= le)
-			return UNIT;
-		if (le <= tree[v].le && tree[v].ri <= ri)
-			return tree[v].val;
+		if (ri <= tree[v].le || tree[v].ri <= le) return UNIT;
+		if (le <= tree[v].le && tree[v].ri <= ri) return tree[v].val;
 		push(v);
 		return combine(query(2 * v, le, ri), query(2 * v + 1, le, ri));
 	}
