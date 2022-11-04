@@ -1,10 +1,8 @@
 #pragma once
-//https://oeis.org/A000166
-//
-//for a permutation of size i:
-//there are (i-1) places to move 0 to not be at index 0. Let's say we moved 0 to index j (j>0).
-//If we move value j to index 0 (forming a cycle of length 2), then there are dp[i-2] derangements of the remaining i-2 elements
-//else there are dp[i-1] derangements of the remaining i-1 elements (including j)
+/**
+ * @see https://oeis.org/A000166
+ * @time O(n)
+ */
 vector<long long> derangements(int n, long long mod) {
 	vector<long long> dp(n, 0);
 	dp[0] = 1;
