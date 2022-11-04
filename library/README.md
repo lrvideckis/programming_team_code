@@ -33,50 +33,19 @@
 
 ## Doxygen Format Guide
 
-struct
 ```
 /**
- * @brief Name or description. It's okay if this is multiple lines. To be more
- *     readable, let's indent like this with 4 spaces. Reason for spaces:
- *     easier to format, since comment prefix " * " length is not a multiple of
- *     4.
+ * Name, description, and/or any notes/tricks. It's okay if this is multiple
+ * lines; wrap like this.
  * @code{.cpp}
  *     //example usage or initialization
+ *     vector<int> arr;
  * @endcode
- * @note Time and memory are documented in constructor comment.
- * @note No `@author`/`@date` as let's use git history for this.
- * @trick Some trick, usually a non-obvious way to use the struct to solve some
- *     problem.
- * @invariant Some invariant about the struct.
  * @see <link to some source>
+ * @time O(n * sqrt(n log n)) Optional note about the complexity.
+ * @memory O(n ^ (3/2)) Optional note about the complexity.
  */
 ```
-global/member function
-```
-/**
- * @brief For functions, usually this describes what the return value is. That
- *     is okay. Let's not use the '@return' tag to be concise.
- * @note Some note.
- * @time O(n * sqrt(n log n))
- * @memory O(n ^ (3/2)) Some note about the complexity.
- */
-```
-constructor
-```
-/**
- * @note The struct comment already describes what it does, so let's not
- *     duplicate this in a `@brief` here. Rather, only optional notes.
- * @time O(n * sqrt(n log n)) Some note about the complexity.
- * @memory O(n * sqrt(n) * log(n)) This usually describes the memory used by
- *     all member vars.
- */
-```
-
-Notes:
-- Let's use proper capitalization and punctuation.
-- The only thing enforced by CI is the existance of a file comment for each
-.hpp file. (I can change this to also verify function comments, but not for now.)
-So not all tags are needed, and also it's up to us to stick to this style.
 
 ## Things to consider when adding a new alg to the library
 - How often have you seen it
