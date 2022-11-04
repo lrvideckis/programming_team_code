@@ -32,6 +32,7 @@
 - [Sum Over Subsets with Convolution](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/numerical/SumOverSubsets.h)
 
 ## Doxygen Format Guide
+Place this directly before a struct or function.
 
 ```
 /**
