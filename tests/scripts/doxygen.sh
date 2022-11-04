@@ -11,4 +11,4 @@ run_coverxygen() {
 }
 
 run_coverxygen # to show output in CI
-run_coverxygen | ./../tests/scripts/parse_coverxygen.py # now parse it
+#run_coverxygen | ./../tests/scripts/parse_coverxygen.py # now parse it
