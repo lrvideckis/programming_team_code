@@ -1,12 +1,14 @@
 #pragma once
 #include "binary_exponentiation_mod.hpp"
 #include "totient.hpp"
-//to calculate (base^pw)%mod with huge pw and non-prime mod:
-//let t = totient(mod)
-//if log2(mod) <= pw then (base^pw)%mod == (base^(t+(pw%t)))%mod
-//source: https://cp-algorithms.com/algebra/phi-function.html#generalization
-//
-//returns base ^ (base ^ (base ^ ... )) % mod, where the height of the tower is pw
+/**
+ * Returns base ^ (base ^ (base ^ ... )) % mod, where the height of the tower
+ * is pw.
+ * Let t = totient(mod).
+ * If log2(mod) <= pw then (base^pw)%mod == (base^(t+(pw%t)))%mod
+ * @see https://cp-algorithms.com/algebra/phi-function.html#generalization
+ * @time O(sqrt(mod) * log(mod))
+ */
 long long tetration(long long base, long long pw, long long mod) {
 	if (mod == 1)
 		return 0;
