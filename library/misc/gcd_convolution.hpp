@@ -1,7 +1,7 @@
 #pragma once
 /**
- * @brief Returns array `c` where `c[k]` = the sum for all pairs where
- *     gcd(i,j) == k of a[i] * b[j].
+ * Returns array `c` where `c[k]` = the sum for all pairs where gcd(i,j) == k
+ * of a[i] * b[j].
  * @time O(n log n)
  * @memory O(n)
  */

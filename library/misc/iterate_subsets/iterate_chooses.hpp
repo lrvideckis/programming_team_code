@@ -5,7 +5,7 @@ int next_subset(int mask) {
 	return r | (((r ^ mask) >> 2) / c);
 }
 /**
- * @brief Iterates over all bitmasks of size n with k bits set.
+ * Iterates over all bitmasks of size n with k bits set.
  * @see https://github.com/kth-competitive-programming/
  *     kactl/blob/main/content/various/chapter.tex
  * @time O(n choose k)

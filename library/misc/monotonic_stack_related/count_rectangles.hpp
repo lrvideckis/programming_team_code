@@ -1,10 +1,11 @@
 #pragma once
 #include "monotonic_stack.hpp"
 /**
- * @brief Given a n-by-m boolean matrix, calculate cnt[i][j]. cnt[i][j] = the
- *     number of times an i-by-j sub rectangle appears in the matrix such that
- *     all i*j cells in the sub rectangle are 1.
- * @note cnt[0][j] and cnt[i][0] will contain garbage values.
+ * Given a n-by-m boolean matrix, calculate cnt[i][j]. cnt[i][j] = the number
+ * of times an i-by-j sub rectangle appears in the matrix such that all i*j
+ * cells in the sub rectangle are 1.
+ *
+ * cnt[0][j] and cnt[i][0] will contain garbage values.
  * @time O(n * m)
  * @memory O(n * m)
  */

@@ -1,7 +1,6 @@
 #pragma once
 #include "binary_exponentiation_mod.hpp"
 /**
- * @brief N Choose K
  * @code{.cpp}
  *     n_choose_k nk(n, 1e9+7); // to use `choose`, `inv` with inputs strictly < n
  *     n_choose_k nk(mod, mod); // to use `choose_lucas` with arbitrarily large inputs
@@ -11,12 +10,8 @@ struct n_choose_k {
 	long long mod;
 	vector<long long> fact, inv_fact;
 	/**
-	 * @brief Name or description. It's okay if this is multiple lines. To be
-	 *     more readable, let's indent like this with 4 spaces. Reason for
-	 *     spaces: easier to format, since comment prefix " * " length is not a
-	 *     multiple of 4.
-	 * @note Only works for `n <= mod` and prime mod.
-	 * @time O(n + sqrt(mod))
+	 * Only works for `n <= mod` and prime mod.
+	 * @time O(n + sqrt(mod)) The sqrt is only to assert mod is prime.
 	 * @memory O(n)
 	 */
 	n_choose_k(int n, long long a_mod) : mod(a_mod), fact(n, 1), inv_fact(n, 1) {
@@ -29,8 +24,9 @@ struct n_choose_k {
 			inv_fact[i] = inv_fact[i + 1] * (i + 1) % mod;
 	}
 	/**
-	 * @brief Classic n choose k, fails when n >= mod.
+	 * n choose k for n,k < ssize(fact). Fails when n >= mod.
 	 * @time O(1)
+	 * @memory O(n) precomp
 	 */
 	long long choose(int n, int k) const {
 		if (k < 0 || k > n) return 0;
@@ -38,10 +34,10 @@ struct n_choose_k {
 		return fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
 	}
 	/**
-	 * @brief text Lucas theorem - n choose k for n, k up to LLONG_MAX. Handles
-	 *     n >= mod correctly.
+	 * Lucas theorem - n choose k for n, k up to LLONG_MAX. Handles n>=mod
+	 * correctly.
 	 * @time O(log(k))
-	 * @memory O(mod) precomp needed, so can't use 1e9 + 7.
+	 * @memory O(mod) precomp, so can't use 1e9 + 7.
 	 */
 	long long choose_lucas(long long n, long long k) const {
 		if (k < 0 || k > n) return 0;

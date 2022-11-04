@@ -1,7 +1,7 @@
 #pragma once
 /**
- * @brief Returns the number of distinct subsequences of `arr`. The empty
- *     subsequence is counted.
+ * Returns the number of distinct subsequences of `arr`. The empty subsequence
+ * is counted.
  * @time O(n log n)
  * @memory O(n)
  */

@@ -1,7 +1,7 @@
 #pragma once
 /**
- * @brief Returns array `le` where `le[i]` = max number such that: `le[i]` < i
- *     and !op(arr[le[i]], arr[i]). Returns -1 if no number exists.
+ * Returns array `le` where `le[i]` = max number such that: `le[i]` < i and
+ * !op(arr[le[i]], arr[i]). Returns -1 if no number exists.
  * @code{.cpp}
  *     vector<int> le = monotonic_stack<int>(arr, less()); //(or replace `less` with: less_equal, greater, greater_equal
  *     vector<int> le = monotonic_stack<int>(arr, [&](int x, int y) {return x < y;});

@@ -1,7 +1,7 @@
 #pragma once
 #include "monotonic_stack.hpp"
 /**
- * @brief Min cartesian tree - root stores min.
+ * Min cartesian tree - root stores min.
  * @time O(n)
  * @memory O(n)
  */

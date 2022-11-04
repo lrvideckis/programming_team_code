@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @brief Iterates over all supermasks of mask.
+ * Iterates over all supermasks of mask.
  * @time O(3^n) to iterate every supermask of every mask of size n
  * @memory O(1)
  */

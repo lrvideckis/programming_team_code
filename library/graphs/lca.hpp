@@ -1,6 +1,5 @@
 #pragma once
 /**
- * @brief Least/Lowest Common Ancestor
  * @see https://codeforces.com/blog/entry/74847
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
@@ -41,7 +40,7 @@ struct LCA {
 		}
 	}
 	/**
-	 * @brief Traverse up k edges. So with k=1 this returns v's parent.
+	 * Traverse up k edges. So with k=1 this returns v's parent.
 	 * @time O(log k)
 	 */
 	int kth_par(int v, int k) const {
@@ -58,7 +57,7 @@ struct LCA {
 		return v;
 	}
 	/**
-	 * @note x, y must be in the same component.
+	 * x, y must be in the same component.
 	 * @time O(log n)
 	 */
 	int get_lca(int x, int y) const {
