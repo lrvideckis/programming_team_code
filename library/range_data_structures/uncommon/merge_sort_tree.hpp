@@ -21,8 +21,10 @@ struct merge_sort_tree {
 		i += S;
 		return i < 2 * N ? i : 2 * (i - N);
 	}
-	//How many values in range [le, ri) are < x?
-	//O(log^2(n))
+	/**
+	 * Returns the number of values in range [le, ri) which are < x.
+	 * @time O(log^2(n))
+	 */
 	int query(int le, int ri, int x) const {
 		int res = 0;
 		for (le = to_leaf(le), ri = to_leaf(ri); le < ri; le >>= 1, ri >>= 1) {
