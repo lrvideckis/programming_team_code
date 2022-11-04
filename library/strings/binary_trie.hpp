@@ -9,8 +9,8 @@ struct binary_trie {
 	vector<node> t;
 	binary_trie() : t(1) {}
 	/**
-	 * @note Pass delta = 1 to insert val, -1 to remove val, 0 to get the # of
-	 *     val's in this data structure.
+	 * Pass delta = 1 to insert val, -1 to remove val, 0 to get the # of val's
+	 * in this data structure.
 	 * @time O(MX_BIT)
 	 */
 	int update(long long val, int delta) {
@@ -32,8 +32,8 @@ struct binary_trie {
 		return t[0].sub_sz;
 	}
 	/**
-	 * @brief Returns x such that x is in this data structure, and the value of
-	 *     (x ^ val) is minimum.
+	 * Returns x such that x is in this data structure, and the value of
+	 * (x^val) is minimum.
 	 * @time O(MX_BIT)
 	 */
 	long long min_xor(long long val) const {

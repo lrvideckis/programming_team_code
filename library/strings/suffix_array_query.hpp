@@ -47,10 +47,11 @@ struct sa_query {
 		rmq_lcp(vi(info.lcp.begin() + 1, info.lcp.end()), [](int i, int j) -> int {return min(i, j);}),
 		rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}) {}
 	/**
-	 * @brief Returns length of longest common prefix of suffixes s[idx1...N),
-	 *     s[idx2...N), 0-based indexing.
-	 * @trick To check if two substrings s[l1..r1), s[l2..r2) are equal:
-	 *     r1-l1 == r2-l2 && longest_common_prefix(l1, l2) >= r1-l1
+	 * Returns length of longest common prefix of suffixes s[idx1...N),
+	 * s[idx2...N), 0-based indexing.
+	 *
+	 * To check if two substrings s[l1..r1), s[l2..r2) are equal:
+	 * r1-l1 == r2-l2 && get_lcp(l1, l2) >= r1-l1
 	 * @time O(1)
 	 */
 	int get_lcp(int idx1, int idx2) const {
@@ -59,17 +60,17 @@ struct sa_query {
 		return rmq_lcp.query(le, ri);
 	}
 	/**
-	 * @brief Returns 1 if suffix s[idx1 ... N) < s[idx2 ... N) (so 0 if
-	 *     idx1 == idx2).
+	 * Returns 1 if suffix s[idx1 ... N) < s[idx2 ... N).
+	 * Returns 0 if idx1 == idx2.
 	 * @time O(1)
 	 */
 	bool less(int idx1, int idx2) const {
 		return info.rank[idx1] < info.rank[idx2];
 	}
 	/**
-	 * @brief Returns range [le, ri) such that:
-	 *   - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
-	 *   - `ri - le` is the # of matches of t in s is okay.
+	 * Returns range [le, ri) such that:
+	 * - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
+	 * - `ri - le` is the # of matches of t in s is okay.
 	 * @time O(|t| * log(|s|))
 	 */
 	pair<int, int> find(const string& t) const {
@@ -81,9 +82,9 @@ struct sa_query {
 		return {le - info.sa.begin(), ri - info.sa.begin()};
 	}
 	/**
-	 * @brief Returns min i such that t == s.substr(i, ssize(t)) or -1. For
-	 *     example, replace RMQ with kth-smallest PST/Wavelet to solve
-	 *     https://open.kattis.com/problems/anothersubstringqueryproblem
+	 * Returns min i such that t == s.substr(i, ssize(t)) or -1. For example,
+	 * replace RMQ with kth-smallest PST/Wavelet to solve
+	 * https://open.kattis.com/problems/anothersubstringqueryproblem
 	 * @time O(|t| * log(|s|))
 	 */
 	int find_first(const string& t) const {
