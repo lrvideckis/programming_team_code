@@ -8,7 +8,7 @@
  */
 template <typename T> struct sa_query {
 	T s;
-	SuffixArray info;
+	suffix_array<T> info;
 	RMQ<int> rmq_lcp, rmq_sa;
 	/**
 	 * Assumes 0 <= s[i] < max_val.
