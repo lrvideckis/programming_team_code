@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-#takes in file name
-remove_pragma_add_hash() {
-	hash=$(cat $1 | ../library/contest/hash.sh)
-	comment="cat $(basename $1) | ./hash.sh"
-	sed --in-place --expression='/#pragma once/d' --expression="1s;^;//$comment\n//$hash\n;" $1
-}
-find ../library/ -type f -name "*.hpp" -exec remove_pragma_add_hash --newline {} \;
+#remove pragma once
+find ../library/ -type f -name "*.hpp" | xargs \
+	sed --in-place '/#pragma once/d'
+
+#adds hash code comments
+for test in $(find ../library/ -type f -name "*.hpp")
+do
+	hash=$(cat $test | ../library/contest/hash.sh)
+	comment="cat $(basename $test) | ./hash.sh"
+	sed --in-place "1s;^;//$comment\n//$hash\n;" $test
+done
 
 #needed to make boxes under headings empty, otherwise you get filler text
 touch NULL
@@ -18,7 +22,8 @@ pdflatex scripts/hackpack.tex
 
 mv hackpack.pdf ../
 
-find ../library/ -type f -name "*.hpp" \
-	-exec sed --in-place --expression='1,2d' --expression='3i\#pragma once' {} \;
+#removes hash code comments and adds back pragma once
+find ../library/ -type f -name "*.hpp" | xargs \
+	sed --in-place --expression='1,2d' --expression='3i\#pragma once'
 
 rm NULL hackpack.aux hackpack.lol hackpack.log
