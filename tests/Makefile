@@ -23,7 +23,7 @@ help:
 	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
 	@echo "                                     |   - need to initialize git submodules first."
 	@echo
-	@echo "make doxygen                         | print list of all .test.cpp files ordered by most recently modified."
+	@echo "make doxygen                         | Print percentage of documented functions and structs."
 	@echo
 	@echo "make hackpack                        | build hackpack from .tex file"
 	@echo
