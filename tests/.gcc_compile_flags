@@ -3,6 +3,7 @@
 -Wextra
 -Wunused
 -Wconversion
+-Wpedantic
 -DLOCAL
 -std=c++17
 -O2
