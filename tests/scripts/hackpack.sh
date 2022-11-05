@@ -2,13 +2,11 @@
 
 #takes in file name
 remove_pragma_add_hash() {
-	sed --in-place '/#pragma once/d' $1
-
 	hash=$(cat $1 | ../library/contest/hash.sh)
 	comment="cat $(basename $1) | ./hash.sh"
-	sed --in-place "1s;^;//$comment\n//$hash\n;" $1
+	sed --in-place --expression='/#pragma once/d' --expression="1s;^;//$comment\n//$hash\n;" $1
 }
-find ../library/ -type f -name "*.hpp" -exec remove_pragma_add_hash {} \;
+find ../library/ -type f -name "*.hpp" -exec remove_pragma_add_hash --newline {} \;
 
 #needed to make boxes under headings empty, otherwise you get filler text
 touch NULL
@@ -20,11 +18,7 @@ pdflatex scripts/hackpack.tex
 
 mv hackpack.pdf ../
 
-#takes in file name
-remove_hash_add_pragma() {
-	sed --in-place '1,2d' $1
-	sed --in-place '1 i\#pragma once' $1
-}
-find ../library/ -type f -name "*.hpp" -exec remove_hash_add_pragma {} \;
+find ../library/ -type f -name "*.hpp" \
+	-exec sed --in-place --expression='1,2d' --expression='3i\#pragma once' {} \;
 
 rm NULL hackpack.aux hackpack.lol hackpack.log
