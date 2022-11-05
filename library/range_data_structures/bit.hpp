@@ -3,12 +3,18 @@
 template <typename T> struct BIT {
 	vector<T> bit;
 	BIT(int n) : bit(n, 0) {}
+	/**
+	 * @time O(n)
+	 */
 	BIT(const vector<T>& a) : bit(a) {
 		for (int i = 0; i < ssize(a); i++) {
 			int j = i | (i + 1);
 			if (j < ssize(a)) bit[j] += bit[i];
 		}
 	}
+	/**
+	 * @time O(log n)
+	 */
 	void update(int i, const T& d) {
 		assert(0 <= i && i < ssize(bit));
 		for (; i < ssize(bit); i |= i + 1) bit[i] += d;
