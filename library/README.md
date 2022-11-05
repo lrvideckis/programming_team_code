@@ -26,7 +26,6 @@
 - [sqrt decomposition](https://github.com/nealwu/competitive-programming/blob/master/sqrt/search_buckets.cc) (search buckets)
 - [string hashing](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Hashing.h)
 - [string rotational equivalence](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/MinRotation.h)
-- [Suffix Array, LCP Array](https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/strings/SuffixArray.h)
 - [Z function](https://github.com/kth-competitive-programming/kactl/blob/main/content/strings/Zfunc.h)
 - [Suffix Tree](https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/strings/SuffixTree.h)
 - [Sum Over Subsets with Convolution](https://github.com/ucf-programming-team/hackpack-cpp/blob/lightseba-general-changes/content/numerical/SumOverSubsets.h)
