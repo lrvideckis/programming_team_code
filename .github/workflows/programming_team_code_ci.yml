@@ -66,12 +66,3 @@ jobs:
     - uses: actions/checkout@v2
     - name: Check hackpack has all hpp files
       run: make --directory=tests/ find_files_not_in_pdf
-
-  doxygen:
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: sudo apt-get install doxygen && pip3 install coverxygen
-    - name: Run doxygen
-      run: make --directory=tests/ doxygen
