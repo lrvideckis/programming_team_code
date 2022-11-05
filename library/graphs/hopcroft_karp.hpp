@@ -21,13 +21,14 @@ struct match {
  * right side (with size rsz).
  * Nodes on left side are indexed 0,1,...,lsz-1.
  * Nodes on right side are indexed 0,1,...,rsz-1.
- * To initialize `adj`: For every edge node_left <=> node_right, do:
- * adj[node_left].push_back(node_right)
- *
+ * @code{.cpp}
+ *     //for every edge node_left <=> node_right
+ *     adj[node_left].push_back(node_right);
+ * @endcode
  * @see https://github.com/foreverbell/acm-icpc-cheat-sheet/
  *     blob/master/src/graph-algorithm/hopcroft-karp.cpp
- * @time O(m * sqrt(n))
- * @memory O(n ^ (3/2)) Some note about the complexity.
+ * @time O(m * sqrt(n)) n = lsz + rsz
+ * @memory O(n + m)
  */
 match hopcroft_karp(const vector<vector<int>>& adj/*bipartite graph*/, int rsz/*number of nodes on right side*/) {
 	int size_of_matching = 0, lsz = ssize(adj);
