@@ -10,7 +10,7 @@ struct kth_smallest {
 		int lch, rch;//children, indexes into `tree`
 		node(int a_sum, int a_lch, int a_rch) : sum(a_sum), lch(a_lch), rch(a_rch) {}
 	};
-	int mn = INT_MAX, mx = INT_MIN;
+	int mn, mx;
 	vector<int> roots;
 	deque<node> tree;
 	/**
@@ -18,8 +18,9 @@ struct kth_smallest {
 	 * @memory O(n log max)
 	 */
 	kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1, 0) {
+		auto [mn_iter, mx_iter] = minmax_element(arr.begin(), arr.end());
+		mn = *mn_iter, mx = *mx_iter + 1;
 		tree.emplace_back(0, 0, 0); //acts as null
-		for (int val : arr) mn = min(mn, val), mx = max(mx, val + 1);
 		for (int i = 0; i < ssize(arr); i++)
 			roots[i + 1] = update(roots[i], mn, mx, arr[i]);
 	}
@@ -48,8 +49,7 @@ struct kth_smallest {
 	}
 	int query(int vl, int vr, int tl, int tr, int k) const {
 		assert(tree[vr].sum > tree[vl].sum);
-		if (tr - tl == 1)
-			return tl;
+		if (tr - tl == 1) return tl;
 		int tm = tl + (tr - tl) / 2;
 		int left_count = tree[tree[vr].lch].sum - tree[tree[vl].lch].sum;
 		if (left_count > k) return query(tree[vl].lch, tree[vr].lch, tl, tm, k);
