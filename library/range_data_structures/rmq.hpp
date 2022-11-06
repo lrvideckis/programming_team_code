@@ -22,8 +22,7 @@ template <typename T> struct RMQ {
 	RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : dp(1, arr), op(a_op) {
 		for (int i = 0; (2 << i) <= ssize(arr); i++) {
 			dp.emplace_back(ssize(arr) - (2 << i) + 1);
-			for (int j = 0; j < ssize(dp.back()); j++)
-				dp[i + 1][j] = op(dp[i][j], dp[i][j + (1 << i)]);
+			transform(dp[i].begin() + (1 << i), dp[i].end(), dp[i].begin(), dp[i + 1].begin(), op);
 		}
 	}
 	/**
