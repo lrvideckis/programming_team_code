@@ -26,10 +26,9 @@ matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long l
 	for (int i = 0; i < n; i++)
 		mat[i].push_back(b[i]);
 	auto [rank, det] = row_reduce(mat, m, mod);//row reduce not including the last column
-	//check if solution exists
-	for (int i = rank; i < n; i++)
-		if (mat[i].back() != 0)
-			return {rank, det, {} }; //no solution exists
+	if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
+		return {rank, det, {} }; //no solution exists
+	}
 	//initialize solution vector (`x`) from row-reduced matrix
 	vector<long long> x(m, 0);
 	for (int i = 0, j = 0; i < rank; i++) {

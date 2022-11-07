@@ -2,6 +2,7 @@ indent=tab
 indent=force-tab
 indent-col1-comments
 min-conditional-indent=0
+keep-one-line-blocks
 style=attach
 attach-return-type
 attach-closing-while
