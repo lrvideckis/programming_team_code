@@ -31,9 +31,10 @@ matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long l
 	}
 	//initialize solution vector (`x`) from row-reduced matrix
 	vector<long long> x(m, 0);
-	for (int i = 0, j = 0; i < rank; i++) {
-		while (mat[i][j] == 0) j++; //find pivot column
-		x[j] = mat[i].back();
-	}
+	int j = 0;
+	for_each(mat.begin(), mat.begin() + rank, [&](const auto & v) {
+		while (v[j] == 0) j++; //find pivot column
+		x[j] = v.back();
+	});
 	return {rank, det, x};
 }
