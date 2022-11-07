@@ -15,15 +15,14 @@ pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>
 	assert(cols <= m);
 	for (int col = 0; col < cols && rank < n; col++) {
 		//find arbitrary pivot and swap pivot to current row
-		for (int i = rank; i < n; i++)
-			if (mat[i][col] != 0) {
-				if (rank != i) det = det == 0 ? 0 : mod - det;
-				swap(mat[i], mat[rank]);
-				break;
-			}
-		if (mat[rank][col] == 0) {
+		auto it = find_if(mat.begin() + rank, mat.end(), [&](const auto & v) {return v[col];});
+		if (it == mat.end()) {
 			det = 0;
 			continue;
+		}
+		if (it != mat.begin() + rank) {
+			det = det == 0 ? 0 : mod - det;
+			iter_swap(mat.begin() + rank, it);
 		}
 		det = det * mat[rank][col] % mod;
 		//make pivot 1 by dividing row by inverse of pivot
