@@ -44,7 +44,7 @@ template <typename T> struct suffix_array {
 	 */
 	suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(s.begin(), s.end()), lcp(N) {
 		iota(sa.begin(), sa.end(), 0);
-		vector<int> tmp(N + 1, -1);
+		vector<int> tmp(N);
 		for (int len = 0; len < N; len = max(1, 2 * len)) {//suffix array
 			iota(tmp.begin(), tmp.begin() + len, N - len);
 			for (int i = 0, j = len; i < N; i++)
@@ -55,12 +55,12 @@ template <typename T> struct suffix_array {
 			partial_sum(freq.begin(), freq.end(), freq.begin());
 			for (int i = N - 1; i >= 0; i--)
 				sa[--freq[rank[tmp[i]]]] = tmp[i];
-			copy(rank.begin(), rank.end(), tmp.begin());
+			swap(rank, tmp);
 			max_val = 1, rank[sa[0]] = 0;
+			auto get_rank = [&](int i) {return pair(tmp[i], i + len == N ? -1 : tmp[i + len]);};
 			for (int i = 1; i < N; i++) {
-				int a = sa[i - 1], b = sa[i];
-				max_val += (tmp[a] != tmp[b] || tmp[a + len] != tmp[b + len]);
-				rank[b] = max_val - 1;
+				max_val += get_rank(sa[i - 1]) != get_rank(sa[i]);
+				rank[sa[i]] = max_val - 1;
 			}
 			if (max_val == N) break;
 		}
