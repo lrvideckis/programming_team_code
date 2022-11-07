@@ -32,8 +32,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj/*unrooted 
 			num_paths[cent] += dfs_child(child);
 		pre_d = vector<int>(1);
 		cur_d = vector<int>(1);
-		for (auto it = adj_removed_edges[cent].rbegin(); it != adj_removed_edges[cent].rend(); it++)
-			dfs_child(*it);
+		for_each(adj_removed_edges[cent].rbegin(), adj_removed_edges[cent].rend(), dfs_child);
 	});
 	return num_paths;
 }
