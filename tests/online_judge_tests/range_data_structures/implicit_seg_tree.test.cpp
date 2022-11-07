@@ -1,4 +1,4 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_4_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/area_of_union_of_rectangles"
 #include "../template.hpp"
 
 #include "../../../library/range_data_structures/uncommon/implicit_seg_tree.hpp"
@@ -20,8 +20,8 @@ int main() {
 	sort(edges.begin(), edges.end(), [&](const vertical_edge & a, const vertical_edge & b) -> bool {
 		return a.x < b.x;
 	});
-	const int MN = -1e9, MX = 1e9;
-	implicit_seg_tree < 2000 * 31 * 2 * 2 + 100 > ist(MN, MX);
+	const int MN = 0, MX = int(1e9) + 1;
+	implicit_seg_tree < 500'000 * 31 * 2 * 2 + 100 > ist(MN, MX);
 	long long area = 0;
 	//sweepline
 	for (int i = 0; i < ssize(edges);) {
