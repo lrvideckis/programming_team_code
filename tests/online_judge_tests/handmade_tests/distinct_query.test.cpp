@@ -17,6 +17,7 @@ int main() {
 				arr[i] = get_rand<int>(-2, 3);
 		}
 		distinct_query pst(arr);
+		for (int i = 0; i <= n; i++) assert(pst.query(i, i) == 0);
 		for (int l = 0; l < n; l++) {
 			for (int r = l; r <= n; r++) {
 				set<int> copy_arr(arr.begin() + l, arr.begin() + r);

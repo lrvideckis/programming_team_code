@@ -40,6 +40,7 @@ struct distinct_query {
 	}
 	/**
 	 * Returns number of distinct elements in range [le, ri).
+	 * query(i, i) returns 0.
 	 * @time O(log n)
 	 */
 	int query(int le, int ri) const {
