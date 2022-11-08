@@ -9,8 +9,7 @@ int main() {
 	cin >> s;
 	int n = ssize(s);
 	suffix_array str_info(s, 128);
-	assert(ssize(str_info.lcp) == n);
-	assert(str_info.lcp.back() == 0);
+	assert(ssize(str_info.lcp) == n - 1);
 	long long res = 1LL * n * (n + 1) / 2;
 	for (int i = 0; i < n - 1; i++)
 		res -= str_info.lcp[i];
