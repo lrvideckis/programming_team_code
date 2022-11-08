@@ -7,7 +7,6 @@
  * 3 ana
  * 4 na
  * 5 a
- *
  * sorted,  lcp
  * 5 a
  *   |      1
@@ -23,8 +22,7 @@
  *
  * suffix array = [5, 3, 1, 0, 4, 2]
  * rank array satisfies sa[rank[i]] == i and rank[sa[i]] == i
- * lcp array = [1, 3, 0, 0, 2, 0] - last 0 is a dummy value
- *
+ * lcp array = [1, 3, 0, 0, 2]
  * @code{.cpp}
  *     string s;
  *     suffix_array info(s, 128);
@@ -42,7 +40,7 @@ template <typename T> struct suffix_array {
 	 * @time O((nlogn) + max_val)
 	 * @memory O(n + max_val)
 	 */
-	suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(s.begin(), s.end()), lcp(N) {
+	suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(s.begin(), s.end()), lcp(max(0, N - 1)) {
 		iota(sa.begin(), sa.end(), 0);
 		vector<int> tmp(N);
 		for (int len = 0; len < N; len = max(1, 2 * len)) {//suffix array
