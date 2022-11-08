@@ -66,7 +66,7 @@ template <typename T> struct suffix_array {
 			if (k > 0) k--;
 			if (rank[i] == 0) continue;
 			int j = sa[rank[i] - 1];
-			while (max(i, j) + k < N && s[j + k] == s[i + k]) k++;
+			while (max(i, j) + k < N && s[i + k] == s[j + k]) k++;
 			lcp[rank[i] - 1] = k;
 		}
 	}
