@@ -39,7 +39,7 @@ struct kth_smallest {
 	}
 	/**
 	 * Returns (k+1)th smallest number in range [le, ri). k is 0-based, so
-	 * query(le,ri,0) returns the min.
+	 * query(le,ri,0) returns the min; query(le,ri,ri-le-1) returns the max.
 	 * @time O(log max)
 	 */
 	int query(int le, int ri, int k) const {
