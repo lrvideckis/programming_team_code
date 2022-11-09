@@ -18,8 +18,8 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		int mx = arr[i];
 		for (int j = i + 1; j <= min(i + 5, n); j++) {
+			mx = max(mx, arr[j - 1]);
 			assert(st.query(i, j, j - i - 1) == mx);
-			mx = max(mx, arr[j]);
 		}
 	}
 	merge_sort_tree mst(arr);
