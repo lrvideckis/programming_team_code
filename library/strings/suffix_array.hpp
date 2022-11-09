@@ -54,7 +54,7 @@ template <typename T> struct suffix_array {
 				sa[--freq[rank[tmp[i]]]] = tmp[i];
 			swap(rank, tmp);
 			max_val = 1, rank[sa[0]] = 0;
-			auto prev_rank = [&](int i) {return pair(tmp[i], i + len == N ? -1 : tmp[i + len]);};
+			auto prev_rank = [&](int i) {return pair(tmp[i], i + len < N ? tmp[i + len] : -1);};
 			for (int i = 1; i < N; i++) {
 				max_val += prev_rank(sa[i - 1]) != prev_rank(sa[i]);
 				rank[sa[i]] = max_val - 1;
