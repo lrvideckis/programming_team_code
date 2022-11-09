@@ -52,5 +52,6 @@
 "tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-11-04 03:33:48 -0700",
 "tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2022-11-08 23:03:30 -0800",
 "tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2022-11-08 23:03:30 -0800",
+"tests/online_judge_tests/strings/sa_query_zfunc.test.cpp": "2022-11-08 23:03:30 -0800",
 "tests/online_judge_tests/strings/trie.test.cpp": "2022-11-04 01:38:53 -0700"
 }
