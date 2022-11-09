@@ -7,6 +7,8 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s, t;
+	s.reserve(1'000'000);
+	t.reserve(10'000);
 	cin >> s >> t;
 	sa_query sq(s, 128);
 	auto [le, ri] = sq.find(t);

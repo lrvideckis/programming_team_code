@@ -7,6 +7,7 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
+	s.reserve(1'000'000);
 	cin >> s;
 	sa_query sq(s, 128);
 	int q;
