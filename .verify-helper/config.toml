@@ -5,6 +5,4 @@ CXXFLAGS = [
 	"-std=c++17",
 	"-D_GLIBCXX_DEBUG",
 	"-D_GLIBCXX_DEBUG_PEDANTIC",
-	"-fstack-protector",
-	"-D_FORTIFY_SOURCE=2",
 ]
