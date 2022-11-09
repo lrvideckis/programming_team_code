@@ -19,7 +19,6 @@
  * 4 na
  *   ||     2
  * 2 nana
- *
  * suffix array = [5, 3, 1, 0, 4, 2]
  * rank array = [3, 2, 5, 1, 4, 0] (sa[rank[i]] == i, rank[sa[i]] == i)
  * lcp array = [1, 3, 0, 0, 2]
