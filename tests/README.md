@@ -2,7 +2,7 @@
 - We rely on online-judge-tools ([github](https://github.com/online-judge-tools/verification-helper)) which tests code on either [Library Checker](https://judge.yosupo.jp/) or [Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list) problems.
   - [steps to setup](https://online-judge-tools.github.io/verification-helper/installer.html) for your own repo.
 - See `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) for the actual tests.
-  - Note: `string s; cin >> s` will TLE since we compile with `-D_GLIBCXX_DEBUG`. You need to **reserve**.
+  - Note: we don't compile with `-D_GLIBCXX_DEBUG` as it causes `string s; cin >> s` to TLE (compiler bug).
 - Note: < 30 tests run per commit, and currently there are > 40 tests. So for big changes (ex: code mod), CI may not test all changed files. To fix, I make random commits which change effectively nothing until all tests run. Check [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to see which tests ran.
   - Trick: delete [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to re-run all tests.
 
