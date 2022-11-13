@@ -22,8 +22,7 @@ struct HLD {
 		}
 	}
 	void dfs1(int v, vector<vector<int>>& adj) {
-		auto par = find(adj[v].begin(), adj[v].end(), tree[v].par);
-		if (par != adj[v].end()) adj[v].erase(par);
+		adj[v].erase(remove(adj[v].begin(), adj[v].end(), tree[v].par), adj[v].end());
 		for (int& to : adj[v]) {
 			tree[to].par = v;
 			dfs1(to, adj);
