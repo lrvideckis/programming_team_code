@@ -6,6 +6,7 @@ CXXFLAGS = [
 	"-fsanitize=undefined",
 	"-std=c++17",
 	"-D_GLIBCXX_DEBUG_PEDANTIC",
+	"-D_GLIBCXX_ASSERTIONS",
 	"-fstack-protector",
 	"-D_FORTIFY_SOURCE=2",
 	"-g",
