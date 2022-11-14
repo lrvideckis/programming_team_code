@@ -11,7 +11,9 @@ int main() {
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
 	vector<int> par = cartesian_tree(arr);
-	for (int i = 0; i < n; i++)
-		cout << par[i] << " ";
+	for (int i = 0; i < n; i++) {
+		if (par[i] == -1) cout << i << " ";
+		else cout << par[i] << " ";
+	}
 	return 0;
 }
