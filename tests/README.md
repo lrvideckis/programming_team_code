@@ -1,6 +1,5 @@
 ## Testing
 - See `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) for the actual tests.
-- Note: 
 
 ## Linting
 All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) (thus also *included* `*.hpp` files in [library/](../library/)).
