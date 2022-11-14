@@ -34,10 +34,9 @@ pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>
 		for (int i = 0; i < n; i++)
 			if (i != rank && mat[i][col] != 0) {
 				long long val = mat[i][col];
-				for (int j = 0; j < m; j++) {
-					mat[i][j] -= mat[rank][j] * val % mod;
-					if (mat[i][j] < 0) mat[i][j] += mod;
-				}
+				transform(mat[i].begin(), mat[i].end(), mat[rank].begin(), mat[i].begin(), [&](auto x, auto y) {
+					return (x + (mod - y) * val) % mod;
+				});
 			}
 		rank++;
 	}
