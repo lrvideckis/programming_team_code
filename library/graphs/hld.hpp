@@ -22,8 +22,8 @@ struct HLD {
 		}
 	}
 	void dfs1(int v, vector<vector<int>>& adj) {
-		adj[v].erase(remove(adj[v].begin(), adj[v].end(), tree[v].par), adj[v].end());
 		for (int& to : adj[v]) {
+			adj[to].erase(find(adj[to].begin(), adj[to].end(), v));
 			tree[to].par = v;
 			dfs1(to, adj);
 			tree[v].sub_sz += tree[to].sub_sz;
