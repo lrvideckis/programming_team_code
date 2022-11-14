@@ -27,8 +27,9 @@ pair<int/*rank*/, long long/*determinant*/> row_reduce(vector<vector<long long>>
 		det = det * mat[rank][col] % mod;
 		//make pivot 1 by dividing row by inverse of pivot
 		long long a_inv = bin_exp(mat[rank][col], mod - 2, mod);
-		for (int j = 0; j < m; j++)
-			mat[rank][j] = mat[rank][j] * a_inv % mod;
+		transform(mat[rank].begin(), mat[rank].end(), mat[rank].begin(), [&](auto val) {
+			return val * a_inv % mod;
+		});
 		//zero-out all numbers above & below pivot
 		for (int i = 0; i < n; i++)
 			if (i != rank && mat[i][col] != 0) {
