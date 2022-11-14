@@ -1,7 +1,6 @@
 ## Testing
 - See `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) for the actual tests.
-- Note: < 30 tests run per commit, and currently there are > 40 tests. So for big changes (ex: code mod), CI may not test all changed files. To fix, I make random commits which change effectively nothing until all tests run. Check [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to see which tests ran.
-  - Trick: delete [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to re-run all tests.
+- Note: 
 
 ## Linting
 All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) (thus also *included* `*.hpp` files in [library/](../library/)).
@@ -11,7 +10,7 @@ All of this *only* runs on `*.test.cpp` files in [online_judge_tests/](online_ju
 
 command | settings | notes | see
 --- | --- | --- | ---
-oj-verify | [config.toml](../.verify-helper/config.toml) | Note: we don't compile with `-D_GLIBCXX_DEBUG` as it causes `string s; cin >> s;` to TLE (compiler bug). | <ul><li>https://github.com/online-judge-tools/verification-helper</li><li>https://online-judge-tools.github.io/verification-helper/installer.html</li><li>[Library Checker](https://judge.yosupo.jp/)</li><li>[Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list)</li></ul>
+oj-verify | [config.toml](../.verify-helper/config.toml) | <ul><li>Note: we don't compile with `-D_GLIBCXX_DEBUG` as it causes `string s; cin >> s;` to TLE ([compiler bug](https://codeforces.com/blog/entry/15547?#comment-215143)).</li><li>Only < 30 tests run per commit. So for big changes (ex: code mod), CI may not re-test all changed files. To fix, I make random commits which change effectively nothing until all tests run.</li><li>Check [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to see which tests ran.</li><li>Delete [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to re-run all tests.</li></ul> | <ul><li>https://github.com/online-judge-tools/verification-helper</li><li>https://online-judge-tools.github.io/verification-helper/installer.html</li><li>[Library Checker](https://judge.yosupo.jp/)</li><li>[Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list)</li></ul>
 g++ | [.gcc_compile_flags](.gcc_compile_flags) | <ul><li>`-std=c++17` since some judges still have this version</li><li>`-Werror` treats warnings as errors to make CI fail</li></ul> | https://codeforces.com/blog/entry/15547
 astyle | [.astylerc](.astylerc) | running `make astyle_cppcheck_clangtidy` locally will format files | http://astyle.sourceforge.net/astyle.html
 cppcheck | [.cppcheck_suppression_list](.cppcheck_suppression_list), also see flags in cppcheck command in [scripts/astyle_cppcheck_clangtidy.sh](scripts/astyle_cppcheck_clangtidy.sh) | | https://cppcheck.sourceforge.io/
