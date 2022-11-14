@@ -17,8 +17,9 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 		return m - 1 - j;
 	};
 	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++)
-			arr[j] = grid[i][j] * (arr[j] + 1);
+		transform(arr.begin(), arr.end(), grid[i].begin(), arr.begin(), [](int a, bool g) {
+			return g * (a + 1);
+		});
 		vector<int> left = monotonic_stack<int>(arr, greater());
 		vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), greater_equal());
 		for (int j = 0; j < m; j++) {
