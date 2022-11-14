@@ -51,8 +51,9 @@ template <typename T> struct suffix_array {
 			vector<int> freq(max_val, 0);
 			for (int val : rank) freq[val]++;
 			partial_sum(freq.begin(), freq.end(), freq.begin());
-			for (int i = N - 1; i >= 0; i--)
-				sa[--freq[rank[tmp[i]]]] = tmp[i];
+			for_each(tmp.rbegin(), tmp.rend(), [&](int t) {
+				sa[--freq[rank[t]]] = t;
+			});
 			swap(rank, tmp);
 			max_val = 1, rank[sa[0]] = 0;
 			auto prev_rank = [&](int i) {return pair(tmp[i], i + len < N ? tmp[i + len] : -1);};
