@@ -16,7 +16,7 @@ g++ | [.gcc_compile_flags](.gcc_compile_flags) | <ul><li>`-std=c++17` since some
 astyle | [.astylerc](.astylerc) | running `make astyle_cppcheck_clangtidy` locally will format files | http://astyle.sourceforge.net/astyle.html
 cppcheck | [.cppcheck_suppression_list](.cppcheck_suppression_list), also see flags in cppcheck command in [scripts/astyle_cppcheck_clangtidy.sh](scripts/astyle_cppcheck_clangtidy.sh) | | https://cppcheck.sourceforge.io/
 clang-tidy | [.clang-tidy](.clang-tidy) | checks variables for snake_case | https://clang.llvm.org/extra/clang-tidy/checks/list.html
-doxygen | [Doxyfile](Doxyfile) | <ul><li>*Not enforced by CI*. Used mainly as a style guide.</li><li>The generated docs are not useful in CP and unavaliable in ICPC contests, so I don't generate them.</li></ul> | https://www.doxygen.nl/manual/commands.html
+doxygen | [Doxyfile](Doxyfile) | <ul><li>*Not enforced by CI*. Used mainly as a style guide.</li><li>The generated docs are not useful in CP and unavaliable in ICPC contests, so I don't generate them.</li></ul> | <ul><li>https://www.doxygen.nl/manual/commands.html</li><li>https://www.doxygen.nl/manual/docblocks.html</li></ul> 
 
 ## Makefile
 to see commands:
