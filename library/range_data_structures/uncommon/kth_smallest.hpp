@@ -21,8 +21,9 @@ struct kth_smallest {
 		auto [mn_iter, mx_iter] = minmax_element(arr.begin(), arr.end());
 		mn = *mn_iter, mx = *mx_iter + 1;
 		tree.emplace_back(0, 0, 0); //acts as null
-		for (int i = 0; i < ssize(arr); i++)
-			roots[i + 1] = update(roots[i], mn, mx, arr[i]);
+		transform(arr.begin(), arr.end(), roots.begin(), roots.begin() + 1, [&](int val, int root) {
+			return update(root, mn, mx, val);
+		});
 	}
 	int update(int v, int tl, int tr, int idx) {
 		if (tr - tl == 1) {
