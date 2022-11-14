@@ -44,9 +44,10 @@ template <typename T> struct suffix_array {
 		vector<int> tmp(N);
 		for (int len = 0; len < N; len = max(1, 2 * len)) {//suffix array
 			iota(tmp.begin(), tmp.begin() + len, N - len);
-			for (int i = 0, j = len; i < N; i++)
-				if (sa[i] >= len)
-					tmp[j++] = sa[i] - len;
+			copy_if(sa.begin(), sa.end(), tmp.begin() + len, [&](int& val) {
+				val -= len;
+				return val >= 0;
+			});
 			vector<int> freq(max_val, 0);
 			for (int val : rank) freq[val]++;
 			partial_sum(freq.begin(), freq.end(), freq.begin());
