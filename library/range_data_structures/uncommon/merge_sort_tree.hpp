@@ -4,8 +4,9 @@ struct merge_sort_tree {
 	const int N, S/*smallest power of 2 >= N*/;
 	vector<vector<int>> tree;
 	merge_sort_tree(const vector<int>& arr) : N(ssize(arr)),  S(N ? 1 << __lg(2 * N - 1) : 0), tree(2 * N) {
-		for (int i = 0; i < N; i++)
-			tree[i + N] = {arr[i]};
+		transform(arr.begin(), arr.end(), tree.begin() + N, [](int val) -> vector<int> {
+			return {val};
+		});
 		rotate(tree.rbegin(), tree.rbegin() + S - N, tree.rbegin() + N);
 		for (int i = N - 1; i >= 1; i--) {
 			const auto& le = tree[2 * i];
