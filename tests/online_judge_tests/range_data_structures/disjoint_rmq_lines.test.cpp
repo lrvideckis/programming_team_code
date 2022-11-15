@@ -23,7 +23,7 @@ int main() {
 		} else if (queries[i].type == 2)
 			cin >> queries[i].x;
 	}
-	disjoint_rmq<pair<ll, ll>> rmq(lines, pair(1, 0), [](const auto & x, const auto & y) {
+	disjoint_rmq<pair<ll, ll>> rmq(lines, [](const auto & x, const auto & y) {
 		return pair(x.first * y.first % MOD, (y.first * x.second + y.second) % MOD);
 	});
 	int le = 0, ri = 0;//range [le, ri)

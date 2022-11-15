@@ -10,7 +10,7 @@ int main() {
 	vector<long long> arr(n);
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	disjoint_rmq<long long> rmq(arr, 0, [](auto x, auto y) {
+	disjoint_rmq<long long> rmq(arr, [](auto x, auto y) {
 		return x + y;
 	});
 	while (q--) {

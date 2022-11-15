@@ -10,7 +10,7 @@ int main() {
 	vector<int> arr(n);
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
-	disjoint_rmq<int> rmq(arr, INT_MAX, [](int x, int y) {
+	disjoint_rmq<int> rmq(arr, [](int x, int y) {
 		return min(x, y);
 	});
 	while (q--) {
