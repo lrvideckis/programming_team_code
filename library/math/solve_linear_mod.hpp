@@ -27,7 +27,7 @@ matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long l
 		mat[i].push_back(b[i]);
 	auto [rank, det] = row_reduce(mat, m, mod);//row reduce not including the last column
 	if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
-		return {rank, det, {} }; //no solution exists
+		return {rank, det, {}}; //no solution exists
 	}
 	//initialize solution vector (`x`) from row-reduced matrix
 	vector<long long> x(m, 0);
