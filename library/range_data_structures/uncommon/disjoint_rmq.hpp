@@ -25,12 +25,12 @@ template <typename T> struct disjoint_rmq {
 	 * @memory O(n log n)
 	 */
 	disjoint_rmq(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : N(ssize(arr)), op(a_op) {
-		for (int i = 0; (1 << i) <= N; i++) {
+		for (int len = 1; len <= N; len *= 2) {
 			dp.emplace_back(N);
-			for (int le = 0; le < N; le += (2 << i)) {
-				int mi = min(N, le + (1 << i)), ri = min(N, le + (2 << i));
-				partial_sum(arr.rend() - mi, arr.rend() - le, dp[i].rend() - mi, [&](const T & x, const T & y) {return op(y, x);});
-				partial_sum(arr.begin() + mi, arr.begin() + ri, dp[i].begin() + mi, op);
+			for (int le = 0; le < N; le += 2 * len) {
+				int mi = min(N, le + len), ri = min(N, le + 2 * len);
+				partial_sum(arr.rend() - mi, arr.rend() - le, dp.back().rend() - mi, [&](const T & x, const T & y) {return op(y, x);});
+				partial_sum(arr.begin() + mi, arr.begin() + ri, dp.back().begin() + mi, op);
 			}
 		}
 	}

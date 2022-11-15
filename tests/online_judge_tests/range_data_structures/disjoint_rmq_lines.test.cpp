@@ -23,8 +23,12 @@ int main() {
 		} else if (queries[i].type == 2)
 			cin >> queries[i].x;
 	}
-	disjoint_rmq<pair<ll, ll>> rmq(lines, [](const auto & x, const auto & y) {
-		return pair(x.first * y.first % MOD, (y.first * x.second + y.second) % MOD);
+	disjoint_rmq<pair<ll, ll>> rmq(lines, [](const auto & a, const auto & b) {
+		//f1(x) = a.first * x + a.second
+		//f2(x) = b.first * x + b.second
+		//f2(f1(x)) = b.first * (a.first * x + a.second) + b.second
+		//          = (a.first * b.first) * x + (b.first * a.second + b.second)
+		return pair(a.first * b.first % MOD, (b.first * a.second + b.second) % MOD);
 	});
 	int le = 0, ri = 0;//range [le, ri)
 	for (const query& curr : queries) {
