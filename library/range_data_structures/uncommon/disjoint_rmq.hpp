@@ -14,9 +14,7 @@
  *         return min(x, y);
  *     });
  * @endcode
- * @see https://codeforces.com/blog/entry/87940,
- *     https://github.com/sgtlaugh/algovault/blob/
- *     master/code_library/disjoint_sparse_table.cpp
+ * @see https://codeforces.com/blog/entry/87940
  */
 template <typename T> struct disjoint_rmq {
 	const int N;
