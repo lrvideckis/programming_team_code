@@ -20,6 +20,6 @@ make help
 ## Steps to add code from other repos to PDF
 1. add other repo as a submodule
 2. Include new file(s) in [scripts/hackpack.tex](scripts/hackpack.tex)
-3. Add new file path(s) to [scripts/make_hackpack.sh](scripts/make_hackpack.sh) to include hash codes in PDF
+3. Add new file path(s) to [scripts/hackpack.sh](scripts/hackpack.sh) to include hash codes in PDF
 4. build pdf
 5. profit!
