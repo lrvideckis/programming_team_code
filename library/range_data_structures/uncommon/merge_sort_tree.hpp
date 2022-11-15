@@ -11,8 +11,8 @@ struct merge_sort_tree {
 		for (int i = N - 1; i >= 1; i--) {
 			const auto& le = tree[2 * i];
 			const auto& ri = tree[2 * i + 1];
-			tree[i].reserve(ssize(le) + ssize(ri));
-			merge(le.begin(), le.end(), ri.begin(), ri.end(), back_inserter(tree[i]));
+			tree[i].resize(ssize(le) + ssize(ri));
+			merge(le.begin(), le.end(), ri.begin(), ri.end(), tree[i].begin());
 		}
 	}
 	int value(int v, int x) const {
