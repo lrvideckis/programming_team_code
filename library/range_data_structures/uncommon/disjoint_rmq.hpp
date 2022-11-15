@@ -4,7 +4,7 @@
  * useful for:
  * - min and # of mins.
  * - product under composite mod
- * - 2-by-2 matrix multiply
+ * - matrix multiply
  * - function composition
  * @code{.cpp}
  *     //usage for min and # of mins:
