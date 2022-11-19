@@ -14,7 +14,7 @@ int main() {
 	for (auto & [u, v] : edges)
 		cin >> u >> v;
 	const int MOD = 998'244'353;
-	int sum = 0;
+	long long sum = 0;
 	auto enumerate = [&](int u, int v, int w) {
 		sum = (sum + 1LL * vals[u] * vals[v] % MOD * vals[w] % MOD) % MOD;
 	};
