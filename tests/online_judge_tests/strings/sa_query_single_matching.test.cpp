@@ -8,7 +8,7 @@
 #include "../../../library/strings/suffix_array_query.hpp"
 
 int main() {
-	cin.tie(0)->sy nc_with_stdio(0);
+	cin.tie(0)->sync_with_stdio(0);
 	string s, t;
 	cin >> s >> t;
 	sa_query sq(s, 128);
