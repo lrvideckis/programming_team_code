@@ -1,0 +1,77 @@
+name: programming team code CI
+
+on: push
+
+jobs:
+  online_judge_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip3 install -U online-judge-verify-helper
+    - name: Set up Rust (1.42.0)
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: 1.42.0-x86_64-unknown-linux-gnu
+        default: true
+        profile: minimal
+    # required by cargo-udeps
+    - name: Set up Rust (nightly)
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly-x86_64-unknown-linux-gnu
+        default: true
+        profile: minimal
+    - name: Set up git submodules
+      run: git submodule init && git submodule update && rm -rf hackpack-cpp/tests/
+    - name: Run tests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
+        GH_PAT: ${{ secrets.GH_PAT }}
+      run: oj-verify all
+
+  astyle_cppcheck_clangtidy:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+      # to access git history in CI scripts:
+      # https://stackoverflow.com/a/62335935/18306912
+      # context: clang-tidy takes a while. To get quicker results,
+      # let's lint files in order of most recently modified.
+      # Now how to determine "most recently modified"? - latest commit in git history
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 0
+    - name: Install dependencies
+      run: sudo apt-get install astyle clang cppcheck
+    - name: Astyle, cppcheck, clang-tidy
+      run: make --directory=tests/ astyle_cppcheck_clangtidy
+
+  compile_all_tests:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 0
+    - name: Compile all tests
+      run: make --directory=tests/ compile_all_tests
+
+  check_hackpack_has_all_hpp_files:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check hackpack has all hpp files
+      run: make --directory=tests/ find_files_not_in_pdf
+
+  doxygen:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install doxygen
+      run: sudo apt-get install doxygen
+    - name: Check correctness, completeness of doxygen comments
+      run: cd library/ && doxygen ../tests/Doxyfile

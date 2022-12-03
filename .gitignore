@@ -1,0 +1,8 @@
+xml/
+*.gch
+*.aux
+*.log
+*.lol
+*.out
+*.tmp
+tmp

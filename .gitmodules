@@ -1,0 +1,6 @@
+[submodule "kactl"]
+	path = kactl
+	url = https://github.com/kth-competitive-programming/kactl
+[submodule "hackpack-cpp"]
+	path = hackpack-cpp
+	url = https://github.com/ucf-programming-team/hackpack-cpp
