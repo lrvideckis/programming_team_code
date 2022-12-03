@@ -53,5 +53,9 @@
 "tests/online_judge_tests/strings/palindrome_query.test.cpp": "2022-12-02 16:15:51 -0800",
 "tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-12-02 16:15:51 -0800",
 "tests/online_judge_tests/strings/sa_query_multi_matching.test.cpp": "2022-12-02 16:15:51 -0800",
-"tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2022-12-02 17:15:47 -0800"
+"tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2022-12-02 17:15:47 -0800",
+"tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2022-12-02 18:01:02 -0800",
+"tests/online_judge_tests/strings/sa_query_zfunc.test.cpp": "2022-12-02 17:15:47 -0800",
+"tests/online_judge_tests/strings/suffix_array.test.cpp": "2022-12-02 17:15:47 -0800",
+"tests/online_judge_tests/strings/trie.test.cpp": "2022-12-02 16:15:51 -0800"
 }
