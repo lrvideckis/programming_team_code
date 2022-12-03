@@ -31,7 +31,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: cd tests/ && oj-verify all
+      run: oj-verify all
 
   astyle_cppcheck_clangtidy:
     runs-on: ubuntu-22.04
