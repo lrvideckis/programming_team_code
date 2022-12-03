@@ -9,13 +9,10 @@ int main() {
 	for (int tests = 10; tests--;) {
 		int n = get_rand(1, 100);
 		vector<int> arr(n);
-		if (get_rand(0, 2) == 1) {
-			for (int i = 0; i < n; i++)
-				arr[i] = get_rand<int>(-1e9, 1e9);
-		} else {
-			for (int i = 0; i < n; i++)
-				arr[i] = get_rand<int>(-2, 3);
-		}
+		if (get_rand(0, 2) == 1)
+			generate(arr.begin(), arr.end(), []() {return get_rand<int>(-1e9, 1e9);});
+		else
+			generate(arr.begin(), arr.end(), []() {return get_rand<int>(-2, 3);});
 		distinct_query pst(arr);
 		for (int i = 0; i <= n; i++) assert(pst.query(i, i) == 0);
 		for (int l = 0; l < n; l++) {
