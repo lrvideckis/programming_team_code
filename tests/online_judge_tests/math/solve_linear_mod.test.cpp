@@ -27,8 +27,7 @@ int main() {
 	cout << '\n';
 	vector<int> pivot(m, -1);
 	for (int i = 0, j = 0; i < info.rank; i++) {
-		while (mat[i][j] == 0)
-			j++;
+		while (mat[i][j] == 0) j++;
 		pivot[j] = i;
 	}
 	for (int j = 0; j < m; j++)
