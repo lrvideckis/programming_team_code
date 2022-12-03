@@ -12,7 +12,7 @@ My library of algorithms for competitive programming. Quick links:
 see [tests/README.md](tests/README.md)
 
 ## Contributing
-We appreciate all feedback. It can be anything from suggestions (please include your reason for the change), or importantly bugs! You can submit an issue or email us at:
+We appreciate all feedback. It can be anything from suggestions (please include your reason for the change), or importantly bugs! You can submit an issue or email us at
 ```
 lukevideckis@gmail.com
 ```
