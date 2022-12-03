@@ -4,7 +4,7 @@
 #include "../../../library/math/binary_exponentiation_mod.hpp"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(0);
+	ci n.tie(0)->sync_with_stdio(0);
 	int m, n;
 	cin >> m >> n;
 	cout << bin_exp(m, n, 1e9 + 7) << '\n';
