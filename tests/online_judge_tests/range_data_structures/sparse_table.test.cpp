@@ -20,7 +20,7 @@ int main() {
 		int l, r;
 		cin >> l >> r;
 		auto [mn, idxMn] = rmq.query(l, r);
-		assert(arr[idxMn] == mn);
+		assert(l <= idxMn && idxMn < r && arr[idxMn] == mn);
 		cout << mn << '\n';
 	}
 }
