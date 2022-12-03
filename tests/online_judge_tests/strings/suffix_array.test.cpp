@@ -11,7 +11,6 @@ int main() {
 		assert(sa.lcp.empty());
 	}
 	string s;
-	s.reserve(500'000);
 	cin >> s;
 	int n = ssize(s);
 	suffix_array str_info(s, 128);

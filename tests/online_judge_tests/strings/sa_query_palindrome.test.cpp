@@ -7,7 +7,6 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
-	s.reserve(500'000);
 	cin >> s;
 	int n = ssize(s);
 	s = s + '$' + string(s.rbegin(), s.rend());
