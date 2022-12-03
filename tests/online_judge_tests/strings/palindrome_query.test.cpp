@@ -19,9 +19,8 @@ int main() {
 		}
 		for (int i = 0; i < int(1e7 / n); i++) {
 			int l = get_rand(0, n), r = get_rand(0, n);
-			if (l > r)
-				swap(l, r);
-			tests.emplace_back(min(l, r), max(l, r));
+			if (l > r) swap(l, r);
+			tests.emplace_back(l, r);
 		}
 		for (auto [l, r] : tests) {
 			string substr = s.substr(l, r - l);
