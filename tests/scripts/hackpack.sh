@@ -19,7 +19,7 @@ pdflatex scripts/hackpack.tex
 mv hackpack.pdf ../
 
 #removes hash code comments
-find ../library/ -type f -name "*.hpp" | xargs \
-	sed --in-place "1,2d"
+find ../library/ -type f -name "*.hpp" \
+	| xargs sed --in-place "1,2d"
 
 rm NULL hackpack.aux hackpack.lol hackpack.log
