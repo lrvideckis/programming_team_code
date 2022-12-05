@@ -68,6 +68,11 @@ jobs:
       run: sudo apt install texlive-latex-base texlive-fonts-extra
     - name: build hackpack
       run: make --directory=tests/ hackpack
+  publish_hackpack_as_release:
+    runs-on: ubuntu-22.04
+    needs: build_hackpack
+    if: github.ref == 'refs/heads/main'
+    steps:
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
