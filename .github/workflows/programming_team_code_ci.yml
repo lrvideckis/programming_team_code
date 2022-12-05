@@ -46,7 +46,7 @@ jobs:
         ref: ${{ github.event.pull_request.head.sha }}
         fetch-depth: 0
     - name: Install dependencies
-      run: sudo apt-get install astyle clang cppcheck
+      run: sudo apt install astyle clang cppcheck
     - name: Astyle, cppcheck, clang-tidy
       run: make --directory=tests/ astyle_cppcheck_clangtidy
 
@@ -67,7 +67,7 @@ jobs:
     - name: Check hackpack has all hpp files
       run: make --directory=tests/ find_files_not_in_pdf
     - name: Install dependencies
-      run: sudo apt-get install pdflatex
+      run: sudo apt install texlive-latex-base
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3
@@ -80,6 +80,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install doxygen
-      run: sudo apt-get install doxygen
+      run: sudo apt install doxygen
     - name: Check correctness, completeness of doxygen comments
       run: cd library/ && doxygen ../tests/Doxyfile
