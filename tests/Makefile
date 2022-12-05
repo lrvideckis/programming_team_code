@@ -15,9 +15,6 @@ help:
 	@echo "                                     |   - these files are not compiled nor linted as part of ci."
 	@echo "                                     |   - need to initialize git submodules first."
 	@echo
-	@echo "make find_files_not_in_pdf           | print list of all .hpp files *not* included by scripts/hackpack.tex"
-	@echo "                                     |   - these files are not included in the hackpack."
-	@echo
 	@echo "make tests_by_git_modification       | print list of all .test.cpp files ordered by most recently modified."
 	@echo "                                     |   - determines modified date from \`git log\`. so when running locally,"
 	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
@@ -35,9 +32,6 @@ astyle_cppcheck_clangtidy:
 
 find_files_without_tests:
 	./scripts/find_files_without_tests.sh
-
-find_files_not_in_pdf:
-	./scripts/find_files_not_in_pdf.sh
 
 tests_by_git_modification:
 	./scripts/tests_by_git_modification.sh
