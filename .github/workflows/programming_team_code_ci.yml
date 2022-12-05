@@ -83,6 +83,7 @@ jobs:
         path: tests/hackpack.pdf
 
   publish_pdf:
+    runs-on: ubuntu-22.04
     needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen]
     if: github.ref == 'refs/heads/main'
     steps:
