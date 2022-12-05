@@ -69,7 +69,7 @@ jobs:
     - name: Check correctness, completeness of doxygen comments
       run: cd library/ && doxygen ../tests/Doxyfile
 
-  build_hackpack:
+  run_pdflatex:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
@@ -77,12 +77,19 @@ jobs:
       run: sudo apt install texlive-latex-base texlive-fonts-extra
     - name: build hackpack
       run: make --directory=tests/ hackpack
+    - uses: actions/upload-artifact@v3
+      with:
+        name: hackpack
+        path: tests/hackpack.pdf
+
+  publish_pdf:
+    needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen]
+    if: github.ref == 'refs/heads/main'
+    steps:
     - uses: marvinpinto/action-automatic-releases@latest
-      needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen]
-      if: github.ref == 'refs/heads/main'
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: hackpack
         prerelease: false
         title: hackpack
-        files: hackpack.pdf
+        files: tests/hackpack.pdf

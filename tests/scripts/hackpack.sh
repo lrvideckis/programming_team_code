@@ -16,8 +16,6 @@ touch NULL
 pdflatex -halt-on-error scripts/hackpack.tex || exit 1
 pdflatex -halt-on-error scripts/hackpack.tex || exit 1
 
-mv hackpack.pdf ../
-
 #removes hash code comments
 find ../library/ -type f -name "*.hpp" \
 	| xargs sed --in-place "1,2d"
