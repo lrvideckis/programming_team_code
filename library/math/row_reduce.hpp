@@ -40,6 +40,5 @@ pair<int, long long> row_reduce(vector<vector<long long>>& mat, int cols, long l
 			}
 		rank++;
 	}
-	assert(rank <= min(n, cols));
 	return {rank, det};
 }
