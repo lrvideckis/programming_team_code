@@ -87,6 +87,11 @@ jobs:
     needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen, run_pdflatex]
     if: github.ref == 'refs/heads/main'
     steps:
+    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v3
+      with:
+        name: hackpack
+        path: tests/hackpack.pdf
     - uses: marvinpinto/action-automatic-releases@latest
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
