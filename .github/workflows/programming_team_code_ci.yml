@@ -68,8 +68,8 @@ jobs:
       run: sudo apt install texlive-latex-base texlive-fonts-extra
     - name: build hackpack
       run: make --directory=tests/ hackpack
-      if: github.ref == 'refs/heads/main'
     - uses: marvinpinto/action-automatic-releases@latest
+      if: github.ref == 'refs/heads/main'
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: hackpack
