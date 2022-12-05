@@ -70,10 +70,13 @@ jobs:
       run: sudo apt install texlive-latex-base texlive-fonts-extra
     - name: build hackpack
       run: make --directory=tests/ hackpack
-    - uses: actions/upload-artifact@v3
+    - uses: marvinpinto/action-automatic-releases@latest
       with:
-        name: hackpack
-        path: hackpack.pdf
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: latest
+        prerelease: true
+        title: hackpack
+        files: hackpack.pdf
 
   doxygen:
     runs-on: ubuntu-22.04
