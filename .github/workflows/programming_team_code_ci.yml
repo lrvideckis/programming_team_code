@@ -60,6 +60,15 @@ jobs:
     - name: Compile all tests
       run: make --directory=tests/ compile_all_tests
 
+  doxygen:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install doxygen
+      run: sudo apt install doxygen
+    - name: Check correctness, completeness of doxygen comments
+      run: cd library/ && doxygen ../tests/Doxyfile
+
   build_hackpack:
     runs-on: ubuntu-22.04
     steps:
@@ -69,6 +78,7 @@ jobs:
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: marvinpinto/action-automatic-releases@latest
+      needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen]
       if: github.ref == 'refs/heads/main'
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -76,12 +86,3 @@ jobs:
         prerelease: false
         title: hackpack
         files: hackpack.pdf
-
-  doxygen:
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install doxygen
-      run: sudo apt install doxygen
-    - name: Check correctness, completeness of doxygen comments
-      run: cd library/ && doxygen ../tests/Doxyfile
