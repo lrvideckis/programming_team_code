@@ -56,7 +56,6 @@ struct kth_smallest {
 		return query_impl(roots[le], roots[ri], mn, mx, k);
 	}
 	int query_impl(int vl, int vr, int tl, int tr, int k) const {
-		assert(tree[vr].sum > tree[vl].sum);
 		if (tr - tl == 1) return tl;
 		int tm = tl + (tr - tl) / 2;
 		int left_count = tree[tree[vr].lch].sum - tree[tree[vl].lch].sum;
