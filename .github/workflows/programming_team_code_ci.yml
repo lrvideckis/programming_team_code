@@ -84,7 +84,7 @@ jobs:
 
   publish_pdf:
     runs-on: ubuntu-22.04
-    needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen]
+    needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen, run_pdflatex]
     if: github.ref == 'refs/heads/main'
     steps:
     - uses: marvinpinto/action-automatic-releases@latest
