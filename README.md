@@ -1,10 +1,7 @@
 # programming_team_code
 
-My library of algorithms for competitive programming. Quick links:
-
-- [library/](library/)
+- PDF download: [hackpack.pdf](https://github.com/lrvideckis/programming_team_code/releases/download/hackpack/hackpack.pdf)
 - [template.cpp](library/contest/template.cpp)
-- [hackpack.pdf](https://github.com/lrvideckis/programming_team_code/releases/download/hackpack/hackpack.pdf)
 
 ## Testing and Linting
 [![Actions Status](https://github.com/lrvideckis/programming_team_code/workflows/verify/badge.svg)](https://github.com/lrvideckis/programming_team_code/actions)
