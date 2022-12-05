@@ -17,7 +17,7 @@ find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" \
 	| grep --invert-match "README" \
 	&& exit 1
 
-WORD_LENGTH_THRESHOLD=70
+WORD_LENGTH_THRESHOLD=80
 echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
 find ../library/ -type f -name "*.hpp" \
 	| xargs cat \
