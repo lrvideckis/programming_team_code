@@ -13,8 +13,8 @@ touch NULL
 
 #need to compile twice for it to generate the table of contents
 #I think it's related to not knowing page numbers until after first pdf generation
-pdflatex -halt-on-error scripts/hackpack.tex
-pdflatex -halt-on-error scripts/hackpack.tex
+pdflatex -halt-on-error scripts/hackpack.tex || exit 1
+pdflatex -halt-on-error scripts/hackpack.tex || exit 1
 
 mv hackpack.pdf ../
 
