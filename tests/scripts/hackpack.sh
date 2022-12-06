@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 #adds hash code comments
-for test in $(find ../library/ -type f -name "*.hpp")
+for header in $(find ../library/ -type f -name "*.hpp")
 do
-	hash=$(cat $test | ../library/contest/hash.sh)
-	comment="cat $(basename $test) | ./hash.sh"
-	sed --in-place "1s;^;//$comment\n//$hash\n;" $test
+	hash=$(cat $header | ../library/contest/hash.sh)
+	comment="cat $(basename $header) | ./hash.sh"
+	sed --in-place "1s;^;//$comment\n//$hash\n;" $header
 done
 
 #needed to make boxes under headings empty, otherwise you get filler text
