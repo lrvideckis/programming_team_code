@@ -39,7 +39,6 @@ cppcheck --enable=all --inconclusive --suppressions-list=.cppcheck_suppression_l
 	$(find online_judge_tests/ -type f -name "*.test.cpp" && find ../library/ -type f -name "*.hpp") \
 	|| exit 1
 
-./scripts/tests_by_git_modification.sh \
-	| awk '{print $NF}' \
+find online_judge_tests/ -type f -name "*.test.cpp" \
 	| parallel clang-tidy {} -- -std=c++17 \
 	|| exit 1

@@ -3,6 +3,5 @@
 git submodule init
 git submodule update
 
-./scripts/tests_by_git_modification.sh \
-	| awk '{print $NF}' \
+find online_judge_tests/ -type f -name "*.test.cpp" \
 	| parallel g++ {} $(cat .gcc_compile_flags)

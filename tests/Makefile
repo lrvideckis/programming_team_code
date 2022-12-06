@@ -15,11 +15,6 @@ help:
 	@echo "                                     |   - these files are not compiled nor linted as part of ci."
 	@echo "                                     |   - need to initialize git submodules first."
 	@echo
-	@echo "make tests_by_git_modification       | print list of all .test.cpp files ordered by most recently modified."
-	@echo "                                     |   - determines modified date from \`git log\`. so when running locally,"
-	@echo "                                     |       you need to locally commit any file for it to appear first on this list."
-	@echo "                                     |   - need to initialize git submodules first."
-	@echo
 	@echo "make hackpack                        | build hackpack from .tex file"
 	@echo
 	@echo "make help                            | to show this information"
@@ -32,9 +27,6 @@ astyle_cppcheck_clangtidy:
 
 find_files_without_tests:
 	./scripts/find_files_without_tests.sh
-
-tests_by_git_modification:
-	./scripts/tests_by_git_modification.sh
 
 hackpack:
 	./scripts/hackpack.sh
