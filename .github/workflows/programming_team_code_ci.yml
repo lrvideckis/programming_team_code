@@ -37,14 +37,6 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-      # to access git history in CI scripts:
-      # https://stackoverflow.com/a/62335935/18306912
-      # context: clang-tidy takes a while. To get quicker results,
-      # let's lint files in order of most recently modified.
-      # Now how to determine "most recently modified"? - latest commit in git history
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: 0
     - name: Install dependencies
       run: sudo apt install astyle clang cppcheck
     - name: Astyle, cppcheck, clang-tidy
@@ -54,9 +46,6 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: 0
     - name: Compile all tests
       run: make --directory=tests/ compile_all_tests
 
