@@ -1,6 +1,7 @@
 # programming_team_code
 
 - PDF download: [hackpack.pdf](https://github.com/lrvideckis/programming_team_code/releases/download/hackpack/hackpack.pdf)
+- [release status](https://github.com/lrvideckis/programming_team_code/releases/)
 - [template.cpp](library/contest/template.cpp)
 
 ## Testing and Linting
