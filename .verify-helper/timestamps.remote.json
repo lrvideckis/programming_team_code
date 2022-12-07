@@ -37,5 +37,11 @@
 "tests/online_judge_tests/misc/iterate_supermasks.test.cpp": "2022-12-06 20:58:45 -0800",
 "tests/online_judge_tests/misc/max_rect_histogram.test.cpp": "2022-12-06 20:58:45 -0800",
 "tests/online_judge_tests/misc/num_subsequences.test.cpp": "2022-12-06 20:58:45 -0800",
-"tests/online_judge_tests/range_data_structures/disjoint_rmq_lines.test.cpp": "2022-12-06 20:58:45 -0800"
+"tests/online_judge_tests/range_data_structures/disjoint_rmq_lines.test.cpp": "2022-12-06 20:58:45 -0800",
+"tests/online_judge_tests/range_data_structures/disjoint_rmq_min.test.cpp": "2022-12-06 20:58:45 -0800",
+"tests/online_judge_tests/range_data_structures/disjoint_rmq_sum.test.cpp": "2022-12-06 20:58:45 -0800",
+"tests/online_judge_tests/range_data_structures/fenwick_tree.test.cpp": "2022-12-06 20:58:45 -0800",
+"tests/online_judge_tests/range_data_structures/fenwick_tree_lower_bound.test.cpp": "2022-12-06 20:58:45 -0800",
+"tests/online_judge_tests/range_data_structures/implicit_seg_tree.test.cpp": "2022-12-06 20:58:45 -0800",
+"tests/online_judge_tests/range_data_structures/kth_smallest.test.cpp": "2022-12-06 20:58:45 -0800"
 }
