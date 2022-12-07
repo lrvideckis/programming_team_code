@@ -1,0 +1,15 @@
+noExplicitConstructor
+missingIncludeSystem
+unusedStructMember:../library/range_data_structures/lazy_segment_tree.hpp
+unusedStructMember:../library/math/solve_linear_mod.hpp
+unusedStructMember:../library/graphs/strongly_connected_components.hpp:7
+unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
+unusedStructMember:../library/graphs/hopcroft_karp.hpp:7
+unusedStructMember:../library/flow/min_cost_max_flow.hpp
+unusedStructMember:../library/graphs/bridges_and_cuts.hpp
+unusedStructMember:../library/flow/hungarian.hpp:9
+functionConst:../kactl/content/data-structures/SubMatrix.h:24
+useStlAlgorithm:../kactl/content/numerical/FastFourierTransform.h:53
+constVariable:../kactl/content/number-theory/MillerRabin.h:17
+passedByValue:../library/range_data_structures/uncommon/implicit_seg_tree.hpp
+constParameter:../hackpack-cpp/content/number-theory/ModInt.h:29

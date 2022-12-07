@@ -1,0 +1,99 @@
+name: programming team code CI
+
+on: push
+
+jobs:
+  online_judge_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip3 install -U online-judge-verify-helper
+    - name: Set up Rust (1.42.0)
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: 1.42.0-x86_64-unknown-linux-gnu
+        default: true
+        profile: minimal
+    # required by cargo-udeps
+    - name: Set up Rust (nightly)
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly-x86_64-unknown-linux-gnu
+        default: true
+        profile: minimal
+    - name: Set up git submodules
+      run: git submodule init && git submodule update && rm -rf hackpack-cpp/tests/
+    - name: Run tests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
+        GH_PAT: ${{ secrets.GH_PAT }}
+      run: oj-verify all
+
+  astyle_cppcheck_clangtidy:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install astyle clang cppcheck
+    - name: Astyle, cppcheck, clang-tidy
+      run: make --directory=tests/ astyle_cppcheck_clangtidy
+
+  compile_all_tests:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Compile all tests
+      run: make --directory=tests/ compile_all_tests
+
+  doxygen:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install doxygen
+      run: sudo apt install doxygen
+    - name: Check correctness, completeness of doxygen comments
+      run: make --directory=tests/ doxygen
+
+  build_pdf:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install texlive-latex-base texlive-fonts-extra
+    - name: build hackpack
+      run: make --directory=tests/ hackpack
+    - uses: actions/upload-artifact@v3
+      with:
+        name: hackpack
+        path: tests/hackpack.pdf
+
+  publish_pdf:
+    runs-on: ubuntu-22.04
+    needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen, build_pdf]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v3
+      with:
+        name: hackpack
+        path: tests/hackpack.pdf
+    - uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: hackpack
+        prerelease: false
+        title: hackpack
+        files: tests/hackpack.pdf
+
+  format_bash_scripts:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install shfmt
+    - name: format scripts
+      run: make --directory=tests/ format_bash_scripts
