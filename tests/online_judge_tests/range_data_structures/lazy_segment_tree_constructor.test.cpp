@@ -1,42 +1,33 @@
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_G"
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include "../template.hpp"
 
 #include "../../../library/range_data_structures/lazy_segment_tree.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	{
-		//test empty seg tree
-		seg_tree st(vector<long long>(0));
-		st.update(0, 0, 1);
-		long long res = st.query(0, 0);
-		assert(res == 0);
-		/*
-		st.update_iter(0, 0, 1);
-		res = st.query_iter(0, 0);
-		assert(res == 0);
-		*/
-	}
 	int n, q;
 	cin >> n >> q;
-	seg_tree st(vector<long long>(n, 0));
+	vector<long long> arr(n);
+	for(int i = 0; i < n; i++) cin >> arr[i];
+	seg_tree st(arr);
 	while (q--) {
-		int type, l, r;
-		cin >> type >> l >> r;
-		l--;
+		int type;
+		cin >> type;
 		if (type == 0) {
+			int idx;
 			long long x;
-			cin >> x;
+			cin >> idx >> x;
 			//if (q % 2)
 				//st.update_iter(l, r, x);
 			//else
-				st.update(l, r, x);
+				st.update(idx, idx + 1, x);
 			//st.update_iter(l, l, 1);
 			//st.update_iter(r, r, 1);
-			st.update(l, l, 1);
-			st.update(r, r, 1);
+			st.update(idx, idx, 1);
 		} else {
 			assert(type == 1);
+			int l, r;
+			cin >> l >> r;
 			//if (q % 2)
 				//cout << st.query_iter(l, r) << '\n';
 			//else
