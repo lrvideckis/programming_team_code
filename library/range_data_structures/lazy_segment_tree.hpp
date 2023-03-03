@@ -19,11 +19,12 @@ long long op(long long vl, long long vr) {
 struct seg_tree {
 	const int N;
 	vector<long long> tree, lazy;
+	seg_tree(int n) : N(n), tree(2 * N), lazy(N) {}
 	seg_tree(const vector<long long>& arr) : N(ssize(arr)), tree(2 * N), lazy(N) {
-		rotate_copy(arr.begin(), arr.begin() + (N ? 2 * N - (1 << __lg(2 * N - 1)) : 0), arr.end(), tree.begin() + N);
-		for (int i = N - 1; i >= 1; i--) build(i);
+		rotate_copy(arr.begin(), arr.begin() + (N ? 2 * N - (2 << __lg(N)) : 0), arr.end(), tree.begin() + N);
+		for (int i = N - 1; i >= 1; i--) pull(i);
 	}
-	void build(int v) {tree[v] = op(tree[2 * v], tree[2 * v + 1]);}
+	void pull(int v) {tree[v] = op(tree[2 * v], tree[2 * v + 1]);}
 	void apply(int v, int tl, int tr, long long change) {
 		tree[v] += (tr - tl) * change;
 		if (v < N) lazy[v] += change;
@@ -46,7 +47,7 @@ struct seg_tree {
 		push(v, tl, tm, tr);
 		update(2 * v, tl, tm, le, ri, change);
 		update(2 * v + 1, tm, tr, le, ri, change);
-		build(v);
+		pull(v);
 	}
 	/**
 	 * @param le,ri defines range [le, ri)

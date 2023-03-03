@@ -19,7 +19,7 @@ int main() {
 	}
 	int n, q;
 	cin >> n >> q;
-	seg_tree st(vector<long long>(n, 0));
+	seg_tree st(n);
 	while (q--) {
 		int type, l, r;
 		cin >> type >> l >> r;
