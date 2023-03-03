@@ -10,8 +10,6 @@ long long op(long long vl, long long vr) {
 /**
  * @see https://codeforces.com/blog/entry/112755
  *
- * update: range add, query: range sum
- *
  * internal nodes are [1, n)
  * leaf nodes are [n, 2 * n)
  * root is at tree[1]
