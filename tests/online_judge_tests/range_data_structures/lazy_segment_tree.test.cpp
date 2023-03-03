@@ -28,9 +28,9 @@ int main() {
 			long long x;
 			cin >> x;
 			//if (q % 2)
-				//st.update_iter(l, r, x);
+			//st.update_iter(l, r, x);
 			//else
-				st.update(l, r, x);
+			st.update(l, r, x);
 			//st.update_iter(l, l, 1);
 			//st.update_iter(r, r, 1);
 			st.update(l, l, 1);
@@ -38,17 +38,17 @@ int main() {
 		} else {
 			assert(type == 1);
 			//if (q % 2)
-				//cout << st.query_iter(l, r) << '\n';
+			//cout << st.query_iter(l, r) << '\n';
 			//else
-				cout << st.query(l, r) << '\n';
-				/*
+			cout << st.query(l, r) << '\n';
+			/*
 			{
-				long long res = st.query_iter(l, l);
-				assert(res == 0);
+			long long res = st.query_iter(l, l);
+			assert(res == 0);
 			}
 			{
-				long long res = st.query_iter(r, r);
-				assert(res == 0);
+			long long res = st.query_iter(r, r);
+			assert(res == 0);
 			}
 			*/
 			{
