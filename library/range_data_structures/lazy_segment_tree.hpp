@@ -57,9 +57,7 @@ struct seg_tree {
 		if (le <= tl && tr <= ri) return tree[v];
 		int tm = split(tl, tr);
 		push(v, tl, tm, tr);
-		return op(
-				   query(2 * v, tl, tm, le, ri),
-				   query(2 * v + 1, tm, tr, le, ri)
-			   );
+		return op(query(2 * v, tl, tm, le, ri),
+				  query(2 * v + 1, tm, tr, le, ri));
 	}
 };

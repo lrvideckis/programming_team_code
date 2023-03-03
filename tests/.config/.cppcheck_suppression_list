@@ -1,6 +1,5 @@
 noExplicitConstructor
 missingIncludeSystem
-unusedStructMember:../library/range_data_structures/lazy_segment_tree.hpp
 unusedStructMember:../library/math/solve_linear_mod.hpp
 unusedStructMember:../library/graphs/strongly_connected_components.hpp:7
 unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
