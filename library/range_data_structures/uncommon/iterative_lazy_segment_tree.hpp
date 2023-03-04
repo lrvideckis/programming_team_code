@@ -45,6 +45,7 @@ struct iter_seg_tree {
 	 */
 	void update_iter(int le, int ri, long long change) {
 		assert(0 <= le && le <= ri && ri <= st.N);
+		if (le == ri) return;
 		le = to_leaf(le), ri = to_leaf(ri);
 		push_parents(le, ri);
 		for (int x = le, y = ri; x < y; x >>= 1, y >>= 1) {
@@ -66,6 +67,7 @@ struct iter_seg_tree {
 	 */
 	long long query_iter(int le, int ri) {
 		assert(0 <= le && le <= ri && ri <= st.N);
+		if (le == ri) return 0;
 		le = to_leaf(le), ri = to_leaf(ri);
 		push_parents(le, ri);
 		long long resl = 0, resr = 0;
