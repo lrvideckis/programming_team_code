@@ -963,6 +963,9 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          calc_subtree_sizes \
                          INF \
                          seg_tree \
+                         iter_seg_tree \
+                         op \
+                         split \
                          implicit_seg_tree \
                          bit \
                          trie \
