@@ -3,8 +3,6 @@
 #include "../lazy_segment_tree.hpp"
 /**
  * @see https://codeforces.com/blog/entry/18051
- *     https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
- *     https://github.com/yosupo06/Algorithm/blob/master/src/datastructure/segtree.hpp
  *
  * Iterative query and update functions access the exact same set of indexes as
  * their recursive counterparts.
@@ -14,10 +12,16 @@ struct iter_seg_tree {
 	seg_tree st;
 	iter_seg_tree(int n) : S(1 << __lg(2 * n - 1)), st(n) {}
 	iter_seg_tree(const vector<long long>& arr) : S(1 << __lg(2 * ssize(arr) - 1)), st(arr) {}
+	/**
+	 * @see https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
+	 */
 	int to_leaf(int i) const {
 		i += S;
 		return i < 2 * st.N ? i : 2 * (i - st.N);
 	}
+	/**
+	 * @see https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
+	 */
 	pair<int, int> get_node_bounds(int a) const {
 		assert(1 <= a && a < 2 * st.N);
 		int l = __builtin_clz(a) - __builtin_clz(2 * st.N - 1);
