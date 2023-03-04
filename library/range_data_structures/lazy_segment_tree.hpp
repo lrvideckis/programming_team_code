@@ -1,8 +1,8 @@
 /** @file */
 #pragma once
 int split(int tl, int tr) {
-	int pow_2 = 1 << __lg(tr - tl);
-	return min(tl + pow_2, tr - pow_2 / 2);
+	int pw2 = 1 << __lg(tr - tl);
+	return min(tl + pw2, tr - pw2 / 2);
 }
 long long op(long long vl, long long vr) {
 	return vl + vr;
@@ -11,7 +11,7 @@ long long op(long long vl, long long vr) {
  * @see https://codeforces.com/blog/entry/112755
  *
  * internal nodes are [1, n)
- * leaf nodes are [n, 2 * n)
+ * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[bit_ceil(unsigned(n))]
  * root is at tree[1]
  */
 struct seg_tree {
