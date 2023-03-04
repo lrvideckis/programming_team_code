@@ -10,6 +10,8 @@ long long op(long long vl, long long vr) {
 /**
  * @see https://codeforces.com/blog/entry/112755
  *
+ * By default: range add, range sum
+ *
  * internal nodes are [1, n)
  * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[bit_ceil(unsigned(n))]
  * root is at tree[1]
