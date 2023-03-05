@@ -1,5 +1,11 @@
 /** @file */
 #pragma once
+/**
+ * @see https://codeforces.com/blog/entry/112755
+ * @param tl,tr defines range [tl, tr)
+ * @returns split point of range which makes the segment tree a complete
+ * binary tree
+ */
 int split(int tl, int tr) {
 	int pw2 = 1 << __lg(tr - tl);
 	return min(tl + pw2, tr - pw2 / 2);
@@ -8,9 +14,7 @@ long long op(long long vl, long long vr) {
 	return vl + vr;
 }
 /**
- * @see https://codeforces.com/blog/entry/112755
- *
- * By default: range add, range sum
+ * By default, update: range add, query: range sum
  *
  * internal nodes are [1, n)
  * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[bit_ceil(unsigned(n))]

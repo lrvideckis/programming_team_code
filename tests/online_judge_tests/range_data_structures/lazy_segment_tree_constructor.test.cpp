@@ -20,6 +20,11 @@ int main() {
 	vector<long long> arr(n);
 	for (int i = 0; i < n; i++) cin >> arr[i];
 	iter_seg_tree ist(arr);
+	{
+		int pw2 = 1;
+		while (pw2 < n) pw2 *= 2;
+		assert(arr[0] == ist.st.tree[pw2]);
+	}
 	while (q--) {
 		int type;
 		cin >> type;
