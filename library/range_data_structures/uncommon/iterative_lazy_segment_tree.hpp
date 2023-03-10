@@ -12,6 +12,7 @@ struct iter_seg_tree {
 	seg_tree st;
 	iter_seg_tree(int n) : S(1 << __lg(2 * n - 1)), st(n) {}
 	iter_seg_tree(const vector<long long>& arr) : S(1 << __lg(2 * ssize(arr) - 1)), st(arr) {}
+	void pull(int v) {st.tree[v] = op(st.tree[2 * v], st.tree[2 * v + 1]);}
 	/**
 	 * @see https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
 	 */
@@ -59,8 +60,8 @@ struct iter_seg_tree {
 			}
 		}
 		int lca_l_r = __lg((le - 1) ^ ri);
-		for (int lg = __builtin_ctz(ri) + 1; lg <= lca_l_r; lg++) st.pull(ri >> lg);
-		for (int lg = __builtin_ctz(le) + 1; lg <= __lg(le); lg++) st.pull(le >> lg);
+		for (int lg = __builtin_ctz(ri) + 1; lg <= lca_l_r; lg++) pull(ri >> lg);
+		for (int lg = __builtin_ctz(le) + 1; lg <= __lg(le); lg++) pull(le >> lg);
 	}
 	/**
 	 * @param le,ri defines range [le, ri)
