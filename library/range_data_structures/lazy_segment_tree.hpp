@@ -28,40 +28,40 @@ struct seg_tree {
 		rotate_copy(arr.begin(), arr.begin() + (N ? 2 * N - (2 << __lg(N)) : 0), arr.end(), tree.begin() + N);
 		for (int i = N - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
 	}
-	void apply(int v, int tl, int tr, long long change) {
+	void apply(long long change, int tl, int tr, int v) {
 		tree[v] += (tr - tl) * change;
 		if (v < N) lazy[v] += change;
 	}
-	void push(int v, int tl, int tm, int tr) {
+	void push(int tl, int tm, int tr, int v) {
 		if (lazy[v]) {
-			apply(2 * v, tl, tm, lazy[v]);
-			apply(2 * v + 1, tm, tr, lazy[v]);
+			apply(lazy[v], tl, tm, 2 * v);
+			apply(lazy[v], tm, tr, 2 * v + 1);
 			lazy[v] = 0;
 		}
 	}
 	/**
 	 * @param le,ri defines range [le, ri)
 	 */
-	void update(int le, int ri, long long change) {update(1, 0, N, le, ri, change);}
-	void update(int v, int tl, int tr, int le, int ri, long long change) {
+	void update(int le, int ri, long long change) {update(le, ri, change, 0, N, 1);}
+	void update(int le, int ri, long long change, int tl, int tr, int v) {
 		if (ri <= tl || tr <= le) return;
-		if (le <= tl && tr <= ri) return apply(v, tl, tr, change);
+		if (le <= tl && tr <= ri) return apply(change, tl, tr, v);
 		int tm = split(tl, tr);
-		push(v, tl, tm, tr);
-		update(2 * v, tl, tm, le, ri, change);
-		update(2 * v + 1, tm, tr, le, ri, change);
+		push(tl, tm, tr, v);
+		update(le, ri, change, tl, tm, 2 * v);
+		update(le, ri, change, tm, tr, 2 * v + 1);
 		tree[v] = op(tree[2 * v], tree[2 * v + 1]);
 	}
 	/**
 	 * @param le,ri defines range [le, ri)
 	 */
-	long long query(int le, int ri) {return query(1, 0, N, le, ri);}
-	long long query(int v, int tl, int tr, int le, int ri) {
+	long long query(int le, int ri) {return query(le, ri, 0, N, 1);}
+	long long query(int le, int ri, int tl, int tr, int v) {
 		if (ri <= tl || tr <= le) return 0;
 		if (le <= tl && tr <= ri) return tree[v];
 		int tm = split(tl, tr);
-		push(v, tl, tm, tr);
-		return op(query(2 * v, tl, tm, le, ri),
-				  query(2 * v + 1, tm, tr, le, ri));
+		push(tl, tm, tr, v);
+		return op(query(le, ri, tl, tm, 2 * v),
+				  query(le, ri, tm, tr, 2 * v + 1));
 	}
 };

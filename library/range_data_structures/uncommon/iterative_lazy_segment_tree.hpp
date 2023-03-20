@@ -34,11 +34,11 @@ struct iter_seg_tree {
 		int lca_l_r = __lg((le - 1) ^ ri);
 		for (int lg = __lg(le); lg > __builtin_ctz(le); lg--) {
 			auto [tl, tr] = get_node_bounds(le >> lg);
-			st.push(le >> lg, tl, split(tl, tr), tr);
+			st.push(tl, split(tl, tr), tr, le >> lg);
 		}
 		for (int lg = lca_l_r; lg > __builtin_ctz(ri); lg--) {
 			auto [tl, tr] = get_node_bounds(ri >> lg);
-			st.push(ri >> lg, tl, split(tl, tr), tr);
+			st.push(tl, split(tl, tr), tr, ri >> lg);
 		}
 	}
 	/**
@@ -52,11 +52,11 @@ struct iter_seg_tree {
 		for (int x = le, y = ri; x < y; x >>= 1, y >>= 1) {
 			if (x & 1) {
 				auto [tl, tr] = get_node_bounds(x);
-				st.apply(x++, tl, tr, change);
+				st.apply(change, tl, tr, x++);
 			}
 			if (y & 1) {
 				auto [tl, tr] = get_node_bounds(--y);
-				st.apply(y, tl, tr, change);
+				st.apply(change, tl, tr, y);
 			}
 		}
 		int lca_l_r = __lg((le - 1) ^ ri);
