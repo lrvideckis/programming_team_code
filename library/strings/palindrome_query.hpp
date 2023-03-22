@@ -2,7 +2,7 @@
 #pragma once
 #include "../../kactl/content/strings/Manacher.h"
 /**
- * More intuitive interface to manacher than raw array.
+ * Interface on top of manacher array
  */
 struct pal_query {
 	const int N;
@@ -15,7 +15,7 @@ struct pal_query {
 	pal_query(const string& s) : N(ssize(s)), pal_len(manacher(s)) {}
 	/**
 	 * @param le,ri defines substring [le,ri)
-	 * @returns 1 iff the substring is a palindrome (so 1 when le == ri)
+	 * @returns 1 iff s.substr(le, ri - le) is a palindrome (so 1 when le == ri)
 	 * @time O(1)
 	 */
 	bool is_pal(int le, int ri) const {

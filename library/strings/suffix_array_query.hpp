@@ -29,8 +29,7 @@ template <typename T> struct sa_query {
 		rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}) {}
 	/**
 	 * @param idx1,idx2 starting 0-based-indexes of suffixes
-	 * @returns length of longest common prefix of suffixes s[idx1..N),
-	 * s[idx2..N).
+	 * @returns max integer k such that s.substr(idx1, k) == s.substr(idx2, k)
 	 * @time O(1)
 	 */
 	int get_lcp(int idx1, int idx2) const {
@@ -40,7 +39,7 @@ template <typename T> struct sa_query {
 	}
 	/**
 	 * @param idx1,idx2 starting 0-based-indexes of suffixes
-	 * @returns 1 if suffix s[idx1..N) < s[idx2..N).
+	 * @returns 1 iff suffix s.substr(idx1) < s.substr(idx2)
 	 * @time O(1)
 	 */
 	bool less(int idx1, int idx2) const {
