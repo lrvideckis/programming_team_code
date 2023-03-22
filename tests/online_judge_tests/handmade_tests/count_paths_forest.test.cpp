@@ -11,20 +11,28 @@
 
 vector<vector<long long>> naive(vector<vector<int>>& adj, UF& uf) {
 	int n = ssize(adj);
-	lift lft(adj);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
 			if (uf.sameSet(u, v)) {
-				int curr_lca = lft.lca(u, v);
-				vector<int> nodes = {curr_lca};
-				for(int node : {u, v}) {
-					while (node != curr_lca) {
+				vector<int> nodes;
+				auto dfs = [&](auto&& self, int node, int par, int end_node) -> bool {
+					if (node == end_node) {
 						nodes.push_back(node);
-						node = lft.kth(node, 1);
+						return 1;
 					}
-				}
-				for(int node : nodes)
+					for (int to : adj[node]) {
+						if (to == par) continue;
+						if (self(self, to, node, end_node)) {
+							nodes.push_back(node);
+							return 1;
+						}
+					}
+					return 0;
+				};
+				bool found_v = dfs(dfs, u, -1, v);
+				assert(found_v);
+				for (int node : nodes)
 					cnts_naive[ssize(nodes) - 1][node]++;
 			}
 		}
