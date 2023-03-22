@@ -37,9 +37,9 @@ int main() {
 		for (int i = 0; i < m; i++) {
 			int bccid = cc.bcc_id[i];
 			for (int node : {
-					 edges[i]
-					 .first, edges[i].second
-				 }) {
+					edges[i]
+					.first, edges[i].second
+				}) {
 				bcc_to_nodes[bccid].insert(node);
 				node_to_bccs[node].insert(bccid);
 			}

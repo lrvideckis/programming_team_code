@@ -1,6 +1,7 @@
 indent=tab
 indent=force-tab
 indent-col1-comments
+indent-after-parens
 min-conditional-indent=0
 keep-one-line-blocks
 style=attach
