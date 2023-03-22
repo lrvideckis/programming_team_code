@@ -9,9 +9,9 @@
 #include "../../../library/graphs/count_paths_per_node.hpp"
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
-vector<vector<long long>> naive(const vector<vector<int>>& adj, UF& uf) {
+vector<vector<long long>> naive(vector<vector<int>>& adj, UF& uf) {
 	int n = ssize(adj);
-	lift lft(0, adj);
+	lift lft(adj);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
