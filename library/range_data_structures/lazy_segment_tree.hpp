@@ -63,7 +63,6 @@ struct seg_tree {
 		push(tl, tm, tr, v);
 		return op(
 				query(le, ri, tl, tm, 2 * v),
-				query(le, ri, tm, tr, 2 * v + 1)
-			);
+				query(le, ri, tm, tr, 2 * v + 1));
 	}
 };
