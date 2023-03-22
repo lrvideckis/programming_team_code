@@ -62,7 +62,7 @@ match hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
 			}
 		}
 		if (!found) return {size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r};
-		auto dfs = [&](auto self, int u) -> bool {
+		auto dfs = [&](auto&& self, int u) -> bool {
 			for (auto x : adj[u]) {
 				int v = r_to_l[x];
 				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {

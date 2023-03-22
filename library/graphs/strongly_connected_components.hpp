@@ -26,7 +26,7 @@ scc_info SCC(const vector<vector<int>>& adj) {
 	int n = ssize(adj), timer = 1, num_sccs = 0;
 	vector<int> tin(n, 0), scc_id(n, -1), node_stack;
 	node_stack.reserve(n);
-	auto dfs = [&](auto self, int v) -> int {
+	auto dfs = [&](auto&& self, int v) -> int {
 		int low = tin[v] = timer++;
 		node_stack.push_back(v);
 		for (auto to : adj[v])
