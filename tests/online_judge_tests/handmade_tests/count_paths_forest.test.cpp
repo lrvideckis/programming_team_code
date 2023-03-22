@@ -2,7 +2,8 @@
 #include "../template.hpp"
 #include "../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/UnionFind.h"
-#include "../../../library/graphs/lowest_common_ancestor.hpp"
+#include "../../../hackpack-cpp/content/graphs/LCA.h"
+
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/graphs/count_paths_per_node.hpp"
@@ -10,12 +11,13 @@
 
 vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted, UF& uf) {
 	int n = ssize(adj_weighted);
-	LCA lca(adj_weighted);
+	LCA lc(adj_weighted);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
 			if (uf.sameSet(u, v)) {
-				int path_length_edges = lca.dist_edges(u, v);
+				int curr_lca = lc.lca(u, v);
+				while(
 				for (int i = 0; i <= path_length_edges; i++)
 					cnts_naive[path_length_edges][lca.kth_path(u, v, i)]++;
 			}
