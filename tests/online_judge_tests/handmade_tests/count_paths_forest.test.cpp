@@ -2,22 +2,38 @@
 #include "../template.hpp"
 #include "../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/UnionFind.h"
-#include "../../../library/graphs/lowest_common_ancestor.hpp"
+#include "../../../hackpack-cpp/content/graphs/TreeLifting.h"
+
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/graphs/count_paths_per_node.hpp"
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
-vector<vector<long long>> naive(const vector<vector<pair<int, long long>>>& adj_weighted, UF& uf) {
-	int n = ssize(adj_weighted);
-	LCA lca(adj_weighted);
+vector<vector<long long>> naive(vector<vector<int>>& adj, UF& uf) {
+	int n = ssize(adj);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
 			if (uf.sameSet(u, v)) {
-				int path_length_edges = lca.dist_edges(u, v);
-				for (int i = 0; i <= path_length_edges; i++)
-					cnts_naive[path_length_edges][lca.kth_path(u, v, i)]++;
+				vector<int> nodes;
+				auto dfs = [&](auto&& self, int node, int par, int end_node) -> bool {
+					if (node == end_node) {
+						nodes.push_back(node);
+						return 1;
+					}
+					for (int to : adj[node]) {
+						if (to == par) continue;
+						if (self(self, to, node, end_node)) {
+							nodes.push_back(node);
+							return 1;
+						}
+					}
+					return 0;
+				};
+				bool found_v = dfs(dfs, u, -1, v);
+				assert(found_v);
+				for (int node : nodes)
+					cnts_naive[ssize(nodes) - 1][node]++;
 			}
 		}
 	}
@@ -41,7 +57,7 @@ int main() {
 				adj_weighted[v].emplace_back(u, 1LL);
 			}
 		}
-		vector<vector<long long>> cnts_naive = naive(adj_weighted, uf);
+		vector<vector<long long>> cnts_naive = naive(adj, uf);
 		for (int k = 1; k <= n; k++)
 			assert(count_paths_per_node(adj, k) == cnts_naive[k]);
 		vector<long long> num_paths_len = count_paths_per_length(adj);
