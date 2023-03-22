@@ -20,7 +20,7 @@ struct pal_query {
 	 */
 	bool is_pal(int le, int ri) const {
 		assert(0 <= le && le <= ri && ri <= N);
-		int len = ri - le;
-		return pal_len[len & 1][le + len / 2] >= len / 2;
+		auto [quot, rem] = div(ri - le, 2);
+		return pal_len[rem][le + quot] >= quot;
 	}
 };
