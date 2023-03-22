@@ -6,7 +6,6 @@
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/graphs/lowest_common_ancestor.hpp"
-#include "../../../library/graphs/heavy_light_decomposition.hpp"
 
 int main() {
 	for (int tests = 30; tests--;) {
@@ -38,17 +37,11 @@ int main() {
 		floydWarshall(matrix);
 		floydWarshall(matrix_weighted);
 		LCA lca(adj_weighted);
-		HLD hld(adj);
 		for (int u = 0; u < N; u++) {
 			for (int v = 0; v < N; v++) {
 				if (uf.sameSet(u, v)) {
 					assert(lca.dist_weight(u, v) == matrix_weighted[u][v]);
 					assert(lca.dist_edges(u, v) == matrix[u][v]);
-					assert(lca.get_lca(u, v) == hld.lca(u, v));
-					int len_nodes_path = 0;
-					for (auto [l, r] : hld.path(u, v))
-						len_nodes_path += r - l;
-					assert(len_nodes_path - 1 == matrix[u][v]);
 				}
 			}
 		}

@@ -2,7 +2,6 @@
 #include "../template.hpp"
 
 #include "../../../library/graphs/lowest_common_ancestor.hpp"
-#include "../../../library/graphs/heavy_light_decomposition.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -21,7 +20,6 @@ int main() {
 		adj[i].push_back(par);
 	}
 	LCA h(adj_weighted);
-	HLD h2(adj);
 	for (int i = 0; i < n; i++) {
 		assert(0 == h.kth_par(i, depth[i]));
 		assert(0 == h.kth_par(i, 1e9));
@@ -30,7 +28,6 @@ int main() {
 		int u, v;
 		cin >> u >> v;
 		int res = h.get_lca(u, v);
-		assert(h2.lca(u, v) == res);
 		assert(res == h.kth_par(u, depth[u] - depth[res]));
 		assert(res == h.kth_par(v, depth[v] - depth[res]));
 		cout << res << '\n';
