@@ -51,12 +51,12 @@
 "tests/online_judge_tests/strings/binary_trie.test.cpp": "2022-12-06 20:58:45 -0800",
 "tests/online_judge_tests/strings/kmp.test.cpp": "2022-12-06 20:58:45 -0800",
 "tests/online_judge_tests/strings/lcp_array.test.cpp": "2022-12-06 20:58:45 -0800",
-"tests/online_judge_tests/strings/palindrome_query.test.cpp": "2023-03-22 11:44:50 -0500",
+"tests/online_judge_tests/strings/palindrome_query.test.cpp": "2023-03-22 11:58:34 -0500",
 "tests/online_judge_tests/strings/prefix_function.test.cpp": "2022-12-06 20:58:45 -0800",
-"tests/online_judge_tests/strings/sa_query_multi_matching.test.cpp": "2023-03-22 11:44:50 -0500",
-"tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2023-03-22 11:44:50 -0500",
-"tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2023-03-22 11:44:50 -0500",
-"tests/online_judge_tests/strings/sa_query_zfunc.test.cpp": "2023-03-22 11:44:50 -0500",
+"tests/online_judge_tests/strings/sa_query_multi_matching.test.cpp": "2023-03-22 11:58:34 -0500",
+"tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2023-03-22 11:58:34 -0500",
+"tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2023-03-22 11:58:34 -0500",
+"tests/online_judge_tests/strings/sa_query_zfunc.test.cpp": "2023-03-22 11:58:34 -0500",
 "tests/online_judge_tests/strings/suffix_array.test.cpp": "2022-12-06 20:58:45 -0800",
 "tests/online_judge_tests/strings/trie.test.cpp": "2022-12-06 20:58:45 -0800"
 }
