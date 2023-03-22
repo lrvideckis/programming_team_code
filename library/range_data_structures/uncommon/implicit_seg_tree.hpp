@@ -23,13 +23,12 @@ template <int N> struct implicit_seg_tree {
 	implicit_seg_tree(int le, int ri) : root_l(le), root_r(ri) {
 		tree[ptr++].val = {0, ri - le};
 	}
-	void apply(int v, ch add) {
+	void apply(ch add, int v) {
 		tree[v].val[0] += add;
 		tree[v].lazy += add;
 	}
-	void push(int v, int tl, int tr) {
+	void push(int tl, int tm, int tr, int v) {
 		if (tr - tl > 1 && tree[v].lch == -1) {
-			int tm = tl + (tr - tl) / 2;
 			assert(ptr + 1 < N);
 			tree[v].lch = ptr;
 			tree[ptr++].val = {0, tm - tl};
@@ -37,43 +36,41 @@ template <int N> struct implicit_seg_tree {
 			tree[ptr++].val = {0, tr - tm};
 		}
 		if (tree[v].lazy) {
-			apply(tree[v].lch, tree[v].lazy);
-			apply(tree[v].rch, tree[v].lazy);
+			apply(tree[v].lazy, tree[v].lch);
+			apply(tree[v].lazy, tree[v].rch);
 			tree[v].lazy = 0;
 		}
 	}
 	/**
 	 * @param le,ri defines range [le, ri)
 	 */
-	void update(int le, int ri, ch add) {
-		update(0, root_l, root_r, le, ri, add);
-	}
-	void update(int v, int tl, int tr, int le, int ri, ch add) {
+	void update(int le, int ri, ch add) {update(le, ri, add, root_l, root_r, 0);}
+	void update(int le, int ri, ch add, int tl, int tr, int v) {
 		if (ri <= tl || tr <= le)
 			return;
 		if (le <= tl && tr <= ri)
-			return apply(v, add);
-		push(v, tl, tr);
+			return apply(add, v);
 		int tm = tl + (tr - tl) / 2;
-		update(tree[v].lch, tl, tm, le, ri, add);
-		update(tree[v].rch, tm, tr, le, ri, add);
-		tree[v].val = combine(tree[tree[v].lch].val,
+		push(tl, tm, tr, v);
+		update(le, ri, add, tl, tm, tree[v].lch);
+		update(le, ri, add, tm, tr, tree[v].rch);
+		tree[v].val = combine(
+				tree[tree[v].lch].val,
 				tree[tree[v].rch].val);
 	}
 	/**
 	 * @param le,ri defines range [le, ri)
 	 */
-	dt query(int le, int ri) {
-		return query(0, root_l, root_r, le, ri);
-	}
-	dt query(int v, int tl, int tr, int le, int ri) {
+	dt query(int le, int ri) {return query(le, ri, root_l, root_r, 0);}
+	dt query(int le, int ri, int tl, int tr, int v) {
 		if (ri <= tl || tr <= le)
 			return UNIT;
 		if (le <= tl && tr <= ri)
 			return tree[v].val;
-		push(v, tl, tr);
 		int tm = tl + (tr - tl) / 2;
-		return combine(query(tree[v].lch, tl, tm, le, ri),
-				query(tree[v].rch, tm, tr, le, ri));
+		push(tl, tm, tr, v);
+		return combine(
+				query(le, ri, tl, tm, tree[v].lch),
+				query(le, ri, tm, tr, tree[v].rch));
 	}
 };
