@@ -9,7 +9,7 @@
 template <int N> struct implicit_seg_tree {
 	using dt = array<long long, 2>; /**< min, number of mins */
 	using ch = long long;
-	static dt combine(const dt& le, const dt& ri) {
+	static dt op(const dt& le, const dt& ri) {
 		if (le[0] == ri[0]) return {le[0], le[1] + ri[1]};
 		return min(le, ri);
 	}
@@ -54,7 +54,7 @@ template <int N> struct implicit_seg_tree {
 		push(tl, tm, tr, v);
 		update(le, ri, add, tl, tm, tree[v].lch);
 		update(le, ri, add, tm, tr, tree[v].rch);
-		tree[v].val = combine(
+		tree[v].val = op(
 				tree[tree[v].lch].val,
 				tree[tree[v].rch].val);
 	}
@@ -69,7 +69,7 @@ template <int N> struct implicit_seg_tree {
 			return tree[v].val;
 		int tm = tl + (tr - tl) / 2;
 		push(tl, tm, tr, v);
-		return combine(
+		return op(
 				query(le, ri, tl, tm, tree[v].lch),
 				query(le, ri, tm, tr, tree[v].rch));
 	}

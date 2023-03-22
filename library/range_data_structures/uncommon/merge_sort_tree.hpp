@@ -28,7 +28,7 @@ struct merge_sort_tree {
 	 * @returns number of values equal to x in v's corresponding array
 	 * @time O(log n)
 	 */
-	int value(int v, int x) const {
+	int value(int x, int v) const {
 		auto [le, ri] = equal_range(tree[v].begin(), tree[v].end(), x);
 		return int(ri - le);
 	}
@@ -49,8 +49,8 @@ struct merge_sort_tree {
 	int query(int le, int ri, int x) const {
 		int res = 0;
 		for (le = to_leaf(le), ri = to_leaf(ri); le < ri; le >>= 1, ri >>= 1) {
-			if (le & 1) res += value(le++, x);
-			if (ri & 1) res += value(--ri, x);
+			if (le & 1) res += value(x, le++);
+			if (ri & 1) res += value(x, --ri);
 		}
 		return res;
 	}
