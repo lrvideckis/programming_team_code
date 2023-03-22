@@ -28,9 +28,9 @@ struct kth_smallest {
 		mn = *mn_iter, mx = *mx_iter + 1;
 		tree.emplace_back(0, 0, 0); //acts as null
 		for (int i = 0; i < ssize(arr); i++)
-			roots[i + 1] = update_impl(roots[i], mn, mx, arr[i]);
+			roots[i + 1] = update_impl(arr[i], mn, mx, roots[i]);
 	}
-	int update_impl(int v, int tl, int tr, int idx) {
+	int update_impl(int idx, int tl, int tr, int v) {
 		if (tr - tl == 1) {
 			tree.emplace_back(tree[v].sum + 1, 0, 0);
 			return ssize(tree) - 1;
@@ -38,8 +38,10 @@ struct kth_smallest {
 		int tm = tl + (tr - tl) / 2;
 		int lch = tree[v].lch;
 		int rch = tree[v].rch;
-		if (idx < tm) lch = update_impl(lch, tl, tm, idx);
-		else rch = update_impl(rch, tm, tr, idx);
+		if (idx < tm)
+			lch = update_impl(idx, tl, tm, lch);
+		else
+			rch = update_impl(idx, tm, tr, rch);
 		tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
 		return ssize(tree) - 1;
 	}
@@ -53,13 +55,13 @@ struct kth_smallest {
 	int query(int le, int ri, int k) const {
 		assert(0 <= k && k < ri - le);
 		assert(0 <= le && ri < ssize(roots));
-		return query_impl(roots[le], roots[ri], mn, mx, k);
+		return query_impl(k, mn, mx, roots[le], roots[ri]);
 	}
-	int query_impl(int vl, int vr, int tl, int tr, int k) const {
+	int query_impl(int k, int tl, int tr, int vl, int vr) const {
 		if (tr - tl == 1) return tl;
 		int tm = tl + (tr - tl) / 2;
 		int left_count = tree[tree[vr].lch].sum - tree[tree[vl].lch].sum;
-		if (left_count > k) return query_impl(tree[vl].lch, tree[vr].lch, tl, tm, k);
-		return query_impl(tree[vl].rch, tree[vr].rch, tm, tr, k - left_count);
+		if (left_count > k) return query_impl(k, tl, tm, tree[vl].lch, tree[vr].lch);
+		return query_impl(k - left_count, tm, tr, tree[vl].rch, tree[vr].rch);
 	}
 };
