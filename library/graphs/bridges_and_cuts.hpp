@@ -45,7 +45,7 @@ graph_info bridge_and_cut(const vector<vector<pair<int, int>>>& adj, int m) {
 	vector<bool> is_cut(n, 0);
 	vector<int> bcc_id(m), edge_stack;
 	edge_stack.reserve(m);
-	auto dfs = [&](auto self, int v, int p_id) -> int {
+	auto dfs = [&](auto&& self, int v, int p_id) -> int {
 		int low = tin[v] = timer++, deg = 0;
 		node_stack.push_back(v);
 		for (auto [to, e_id] : adj[v]) {

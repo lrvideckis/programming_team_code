@@ -20,7 +20,7 @@ struct iso_info {
 iso_info subtree_iso(const vector<vector<int>>& adj) {
 	vector<int> id(ssize(adj), -1);
 	map<vector<int>, int> hashes;
-	auto dfs = [&](auto self, int u, int p) -> int {
+	auto dfs = [&](auto&& self, int u, int p) -> int {
 		vector<int> ch_ids;
 		ch_ids.reserve(ssize(adj[u]));
 		for (auto v : adj[u]) {
