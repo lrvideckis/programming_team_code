@@ -15,7 +15,7 @@ int main() {
 		adj[u].push_back(v);
 		edges.emplace_back(u, v);
 	}
-	match res = hopcroft_karp(adj, r);
+	match_info res = hopcroft_karp(adj, r);
 	cout << res.size_of_matching << '\n';
 	//asserting correctness of both l_to_r, and r_to_l (as well as printing answer)
 	int size_l = 0;

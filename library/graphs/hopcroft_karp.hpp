@@ -1,9 +1,10 @@
 /** @file */
 #pragma once
 /**
- * The stuff calculated by hopcroft_karp.
+ * Info about which edges are in a max matching, and which nodes are in a min
+ * vertex cover
  */
-struct match {
+struct match_info {
 	int size_of_matching; /**< # of edges in max matching (which = size of min vertex cover by König's theorem) */
 	/**
 	 * edge node_left <=> l_to_r[node_left] in matching iff l_to_r[node_left] != -1
@@ -36,7 +37,7 @@ struct match {
  * @time O(m * sqrt(n)) n = lsz + rsz
  * @memory O(n + m)
  */
-match hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
+match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
 	int size_of_matching = 0, lsz = ssize(adj);
 	vector<int> l_to_r(lsz, -1), r_to_l(rsz, -1);
 	while (1) {

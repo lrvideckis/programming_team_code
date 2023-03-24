@@ -2,7 +2,7 @@
 #pragma once
 #include "row_reduce.hpp"
 /**
- * The stuff calculated by solve_linear_mod.
+ * Info about matrix and solution vector
  */
 struct matrix_info {
 	int rank; /**< max number of linearly independent vectors */

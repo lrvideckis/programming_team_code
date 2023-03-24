@@ -3,7 +3,7 @@ missingIncludeSystem
 unusedStructMember:../library/math/solve_linear_mod.hpp
 unusedStructMember:../library/graphs/strongly_connected_components.hpp:7
 unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
-unusedStructMember:../library/graphs/hopcroft_karp.hpp:7
+unusedStructMember:../library/graphs/hopcroft_karp.hpp:8
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
 unusedStructMember:../library/graphs/bridges_and_cuts.hpp
 unusedStructMember:../library/flow/hungarian.hpp:9
