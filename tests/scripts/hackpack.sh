@@ -15,3 +15,6 @@ touch NULL
 #I think it's related to not knowing page numbers until after first pdf generation
 pdflatex -halt-on-error .config/hackpack.tex || exit 1
 pdflatex -halt-on-error .config/hackpack.tex || exit 1
+
+#remove hash code comments
+sed -i '1,2d' ../library/**/*.hpp
