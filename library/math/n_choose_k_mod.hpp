@@ -2,26 +2,26 @@
 #pragma once
 /**
  * @code{.cpp}
- *     n_choose_k nk(n, 1e9+7); // to use `choose` with inputs strictly < n
- *     n_choose_k nk(mod, mod); // to use `choose_lucas` with arbitrarily large inputs
+ *     n_choose_k<1'000'000'007> nk(n); // to use `choose` with inputs strictly < n
+ *     n_choose_k<1'000'003> nk(1'000'003); // to use `choose_lucas` with arbitrarily large inputs
  * @endcode
+ *
+ * @tparam MOD a prime >= n
  */
-struct n_choose_k {
-	long long mod;
+template<int MOD> struct n_choose_k {
 	vector<long long> inv, fact, inv_fact;
 	/**
 	 * @param n size
-	 * @param a_mod a prime such that n <= a_mod
-	 * @time O(n + sqrt(mod))
+	 * @time O(n + sqrt(MOD))
 	 * @memory O(n)
 	 */
-	n_choose_k(int n, long long a_mod) : mod(a_mod), inv(n, 1), fact(n, 1), inv_fact(n, 1) {
-		assert(max(n, 2) <= mod);
-		for (int i = 2; i * i <= mod; i++) assert(mod % i);
+	n_choose_k(int n) : inv(n, 1), fact(n, 1), inv_fact(n, 1) {
+		assert(max(n, 2) <= MOD);
+		for (int i = 2; i * i <= MOD; i++) assert(MOD % i);
 		for (int i = 2; i < n; i++) {
-			inv[i] = mod - (mod / i) * inv[mod % i] % mod;
-			fact[i] = fact[i - 1] * i % mod;
-			inv_fact[i] = inv_fact[i - 1] * inv[i] % mod;
+			inv[i] = MOD - (MOD / i) * inv[MOD % i] % MOD;
+			fact[i] = fact[i - 1] * i % MOD;
+			inv_fact[i] = inv_fact[i - 1] * inv[i] % MOD;
 		}
 	}
 	/**
@@ -31,7 +31,7 @@ struct n_choose_k {
 	 */
 	long long choose(int n, int k) const {
 		if (k < 0 || n < k) return 0;
-		return fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
+		return fact[n] * inv_fact[k] % MOD * inv_fact[n - k] % MOD;
 	}
 	/**
 	 * @param n,k arbitrarily large integers
@@ -41,8 +41,8 @@ struct n_choose_k {
 	long long choose_lucas(long long n, long long k) const {
 		if (k < 0 || n < k) return 0;
 		long long res = 1;
-		for (; k && k < n && res; n /= mod, k /= mod)
-			res = res * choose(int(n % mod), int(k % mod)) % mod;
+		for (; k && k < n && res; n /= MOD, k /= MOD)
+			res = res * choose(int(n % MOD), int(k % MOD)) % MOD;
 		return res;
 	}
 };
