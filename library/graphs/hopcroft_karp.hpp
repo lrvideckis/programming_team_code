@@ -51,7 +51,7 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
 		while (!q.empty()) {
 			int u = q.front();
 			q.pop();
-			mvc_l[u] = false;
+			mvc_l[u] = 0;
 			for (auto x : adj[u]) {
 				mvc_r[x] = 1;
 				int v = r_to_l[x];
