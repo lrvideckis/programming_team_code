@@ -1,37 +1,38 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_5_E"
 #include "../template.hpp"
-#include "../../../library/math/prime_sieve.hpp"
 #include "../../../library/math/binary_exponentiation_mod.hpp"
 
 #include "../../../library/math/n_choose_k_mod.hpp"
 
+template<int N> void test_lucas(const n_choose_k<N>& choose_l) {
+	const int MAX_N = 1000;
+	assert(N < MAX_N);
+	vector<vector<long long>> naive_choose(MAX_N, vector<long long>(MAX_N, 0));
+	for (int i = 0; i < MAX_N; i++) {
+		naive_choose[i][0] = 1;
+		for (int j = 1; j <= i; j++)
+			naive_choose[i][j] = (naive_choose[i - 1][j] + naive_choose[i - 1][j - 1]) % N;
+	}
+	for (int i = 0; i < MAX_N; i++) {
+		assert(choose_l.choose_lucas(i, -1) == 0);
+		assert(choose_l.choose_lucas(i, i + 1) == 0);
+		assert(choose_l.choose_lucas(-1, i) == 0);
+		assert(choose_l.choose_lucas(i, i - 1) == i % N);
+		for (int j = 0; j < MAX_N; j++)
+			assert(choose_l.choose_lucas(i, j) == naive_choose[i][j]);
+	}
+}
+
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
+	//test choose with lucas theorem
+	test_lucas<2>(n_choose_k<2>(2));
+	test_lucas<3>(n_choose_k<3>(3));
+	test_lucas<5>(n_choose_k<5>(5));
+	test_lucas<7>(n_choose_k<7>(7));
+	test_lucas<11>(n_choose_k<11>(11));
+	test_lucas<13>(n_choose_k<13>(13));
 	const int N = 1001, MOD = 1e9 + 7;
-	{
-		//test choose with lucas theorem
-		vector<int> sieve = get_sieve(N);
-		vector<vector<long long>> naive_choose(100, vector<long long>(100, 0));
-		int num_primes = 0;
-		for (int mod = 2; mod < 100; mod++) {
-			if (!is_prime(mod, sieve)) continue;
-			n_choose_k<mod> choose_l(mod);
-			num_primes++;
-			for (int n = 0; n < 100; n++) {
-				naive_choose[n][0] = 1;
-				for (int k = 1; k <= n; k++)
-					naive_choose[n][k] = (naive_choose[n - 1][k] + naive_choose[n - 1][k - 1]) % mod;
-			}
-			for (int n = 0; n < 100; n++) {
-				assert(choose_l.choose_lucas(n, -1) == 0);
-				assert(choose_l.choose_lucas(n, n + 1) == 0);
-				assert(choose_l.choose_lucas(-1, n) == 0);
-				for (int k = 0; k < 100; k++)
-					assert(choose_l.choose_lucas(n, k) == naive_choose[n][k]);
-			}
-		}
-		assert(num_primes == 25);
-	}
 	n_choose_k<MOD> nk(N);
 	//test mod inverse
 	for (int i = 1; i < N; i++)
