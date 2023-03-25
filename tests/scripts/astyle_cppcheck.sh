@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -euo pipefail
 
 # miscellaneous checks - done before initializing git submodules to avoid checking stuff not in our code

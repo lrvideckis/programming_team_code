@@ -1,10 +1,9 @@
-#!/usr/bin/env bash
 set -euo pipefail
 
 cd ../library/
 
 echo ".hpp files missing the @file tag:"
-comm -23 <(
+comm -23 --check-order <(
 	find . -type f -name "*.hpp" |
 		sort |
 		uniq
