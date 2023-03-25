@@ -6,7 +6,7 @@
  * @returns split point of range which makes the segment tree a complete
  * binary tree
  */
-int split(int tl, int tr) {
+int spl it(int tl, int tr) {
 	int pw2 = 1 << __lg(tr - tl);
 	return min(tl + pw2, tr - pw2 / 2);
 }
