@@ -104,5 +104,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: sudo apt install shfmt shellcheck
-    - name: format scripts
+    - name: format and check scripts
       run: make --directory=tests/ format_and_check_bash_scripts
