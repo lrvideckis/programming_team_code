@@ -1,17 +1,16 @@
-#!/usr/bin/env bash
+#!/bin/bash
+set -euo pipefail
 
 git submodule init
 git submodule update
 
 echo ".hpp files included by no .test.cpp file:"
-comm -23 <(
-	find ../library/ -type f -name "*.hpp" |
-		xargs basename --multiple |
+comm -23 --check-order <(
+	basename --multiple ../library/**/*.hpp |
 		sort |
 		uniq
 ) <(
-	find online_judge_tests/ -type f -name "*.test.cpp" |
-		xargs g++ -MM |
+	g++ -MM online_judge_tests/**/*.test.cpp |
 		xargs basename --multiple |
 		grep "\.hpp$" |
 		sort |
