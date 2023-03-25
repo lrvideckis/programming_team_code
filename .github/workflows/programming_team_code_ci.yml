@@ -82,7 +82,7 @@ jobs:
 
   publish_pdf:
     runs-on: ubuntu-22.04
-    needs: [online_judge_tests, astyle_cppcheck_clangtidy, compile_all_tests, doxygen, build_pdf]
+    needs: [online_judge_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_pdf]
     if: github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v2
