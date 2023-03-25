@@ -32,10 +32,8 @@ cat ../library/**/*.hpp |
 	grep . &&
 	exit 1
 
-(
-	astyle --options=.config/.astylerc --recursive "online_judge_tests/*.test.cpp"
-	astyle --options=.config/.astylerc --recursive "../library/*.hpp"
-) | grep "Formatted" && exit 1
+astyle --options=.config/.astylerc --recursive "online_judge_tests/*.test.cpp" "../library/*.hpp" |
+	grep "Formatted" && exit 1
 
 git submodule init
 git submodule update
