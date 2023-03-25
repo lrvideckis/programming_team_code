@@ -14,3 +14,5 @@ passedByValue:../library/range_data_structures/uncommon/implicit_seg_tree.hpp
 constParameter:../hackpack-cpp/content/number-theory/ModInt.h:29
 functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:22
 functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:31
+unusedScopedObject:../library/graphs/count_paths_per_length.hpp:14
+unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14
