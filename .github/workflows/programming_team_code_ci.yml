@@ -89,11 +89,11 @@ jobs:
         title: hackpack
         files: tests/hackpack.pdf
 
-  format_bash_scripts:
+  format_and_check_bash_scripts:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt install shfmt
+      run: sudo apt install shfmt shellcheck
     - name: format scripts
-      run: make --directory=tests/ format_bash_scripts
+      run: make --directory=tests/ format_and_check_bash_scripts
