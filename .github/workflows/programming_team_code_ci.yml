@@ -33,14 +33,23 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: oj-verify all
 
-  astyle_cppcheck_clangtidy:
+  astyle_cppcheck:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: sudo apt install astyle clang cppcheck
-    - name: Astyle, cppcheck, clang-tidy
-      run: make --directory=tests/ astyle_cppcheck_clangtidy
+      run: sudo apt install astyle cppcheck
+    - name: Astyle, cppcheck
+      run: make --directory=tests/ astyle_cppcheck
+
+  clangtidy:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install clang
+    - name: clang-tidy
+      run: make --directory=tests/ clangtidy
 
   compile_all_tests:
     runs-on: ubuntu-22.04

@@ -3,7 +3,9 @@ help:
 	@echo "---------------------------------- | -----------"
 	@echo "make compile_all_tests             | compile all tests with g++ for warnings"
 	@echo
-	@echo "make astyle_cppcheck_clangtidy     | runs astyle, cppcheck, clang-tidy (verifies snake case)"
+	@echo "make astyle_cppcheck               | runs astyle, cppcheck"
+	@echo
+	@echo "make clangtidy                     | runs clang-tidy (verifies snake case)"
 	@echo
 	@echo "make find_files_without_tests      | print list of all .hpp files included by *no* .test.cpp files"
 	@echo "                                   |   - these files are not compiled nor linted as part of ci"
@@ -17,8 +19,11 @@ help:
 compile_all_tests:
 	./scripts/compile_all_tests.sh
 
-astyle_cppcheck_clangtidy:
-	./scripts/astyle_cppcheck_clangtidy.sh
+astyle_cppcheck:
+	./scripts/astyle_cppcheck.sh
+
+clangtidy:
+	./scripts/clangtidy.sh
 
 find_files_without_tests:
 	./scripts/find_files_without_tests.sh

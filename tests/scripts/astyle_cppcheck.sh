@@ -42,7 +42,3 @@ cppcheck --enable=all --inconclusive --suppressions-list=.config/.cppcheck_suppr
 	--force --language=c++ --error-exitcode=1 --std=c++17 --max-ctu-depth=50 \
 	../library/**/*.hpp online_judge_tests/**/*.test.cpp ||
 	exit 1
-
-find online_judge_tests/ -type f -name "*.test.cpp" |
-	parallel clang-tidy --config-file=.config/.clang-tidy {} -- -std=c++17 ||
-	exit 1
