@@ -12,6 +12,12 @@ grep --extended-regexp "template\s?<class" --recursive ../library/ && exit 1
 echo "check formatting of template <typename T>:"
 grep --extended-regexp "template<typename" --recursive ../library/ && exit 1
 
+echo "check 1 instead of true"
+grep --extended-regexp "true" --recursive ../library/ && exit 1
+
+echo "check 0 instead of false"
+grep --extended-regexp "false" --recursive ../library/ && exit 1
+
 echo "check files and directories are snake_case:"
 find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" |
 	grep --invert-match ".verify-helper" |
