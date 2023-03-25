@@ -12,8 +12,14 @@ int main() {
 		int val;
 		cin >> val;
 		map<int, int> curr;
-		for (int prime_factor : get_prime_factors(val, sieve))
-			curr[prime_factor]++;
+		{
+			int prev_prime = -1;
+			for (int prime_factor : get_prime_factors(val, sieve)) {
+				assert(prime_factor >= prev_prime);
+				prev_prime = prime_factor;
+				curr[prime_factor]++;
+			}
+		}
 		for (auto [p, e] : curr)
 			prime_to_max_exponent[p] = max(prime_to_max_exponent[p], e);
 	}

@@ -38,6 +38,6 @@ vector<int> get_sieve(int n) {
 	for (int i = 2; i * i < n; i++)
 		if (sieve[i] == i)
 			for (int j = i * i; j < n; j += i)
-				sieve[j] = i;
+				sieve[j] = min(sieve[j], i);
 	return sieve;
 }
