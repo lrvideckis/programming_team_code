@@ -26,7 +26,7 @@ find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" |
 
 WORD_LENGTH_THRESHOLD=80
 echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
-find ../library/ -type f -name "*.hpp" |
+find ../library/ -type f -name "*.hpp" -print0 |
 	xargs cat |
 	tr '[:blank:]' '\n' |
 	awk --assign=max_len=$WORD_LENGTH_THRESHOLD '{if(length>max_len)print$0}' |
@@ -43,7 +43,7 @@ git submodule update
 
 cppcheck --enable=all --inconclusive --suppressions-list=.config/.cppcheck_suppression_list \
 	--force --language=c++ --error-exitcode=1 --std=c++17 --max-ctu-depth=50 \
-	$(find online_judge_tests/ -type f -name "*.test.cpp" && find ../library/ -type f -name "*.hpp") ||
+	"$(find online_judge_tests/ -type f -name '*.test.cpp' && find ../library/ -type f -name '*.hpp')" ||
 	exit 1
 
 find online_judge_tests/ -type f -name "*.test.cpp" |
