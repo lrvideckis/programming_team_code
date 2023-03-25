@@ -12,7 +12,9 @@ comm -23 --check-order <(
 	grep --recursive --fixed-strings --files-with-matches "#!/bin/bash" . |
 		sort |
 		uniq
-)
+) |
+	grep . &&
+	exit 1
 
 shellcheck --shell=bash --check-sourced --enable=check-set-e-suppressed,quote-safe-variables ./**/*.sh || exit 1
 
