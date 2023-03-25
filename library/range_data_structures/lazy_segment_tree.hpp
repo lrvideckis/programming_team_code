@@ -46,7 +46,7 @@ struct seg_tree {
 	void update(int le, int ri, long long change, int tl, int tr, int v) {
 		if (ri <= tl || tr <= le) return;
 		if (le <= tl && tr <= ri) return apply(change, tl, tr, v);
-		int tm = split (tl, tr);
+		int tm = split(tl, tr);
 		push(tl, tm, tr, v);
 		update(le, ri, change, tl, tm, 2 * v);
 		update(le, ri, change, tm, tr, 2 * v + 1);
