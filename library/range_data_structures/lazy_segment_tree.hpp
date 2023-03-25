@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 /**
- * @see https://codeforces.com/blog/entry/112755
+ * @see https://codeforces.com/blog/entry/112755ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
  * @param tl,tr defines range [tl, tr)
  * @returns split point of range which makes the segment tree a complete
  * binary tree
