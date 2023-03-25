@@ -15,7 +15,7 @@ int main() {
 		int num_primes = 0;
 		for (int mod = 2; mod < 100; mod++) {
 			if (!is_prime(mod, sieve)) continue;
-			n_choose_k<mod> choose_l(mod);
+			n_choose_k choose_l(mod, mod);
 			num_primes++;
 			for (int n = 0; n < 100; n++) {
 				naive_choose[n][0] = 1;
@@ -32,7 +32,7 @@ int main() {
 		}
 		assert(num_primes == 25);
 	}
-	n_choose_k<MOD> nk(N);
+	n_choose_k nk(N, MOD);
 	//test mod inverse
 	for (int i = 1; i < N; i++)
 		assert(nk.inv[i] == bin_exp(i, MOD - 2, MOD));
