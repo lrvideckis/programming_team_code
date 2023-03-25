@@ -28,7 +28,7 @@ WORD_LENGTH_THRESHOLD=80
 echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
 cat ../library/**/*.hpp |
 	tr '[:blank:]' '\n' |
-	awk --assign=max_len=$WORD_LENGTH_THRESHOLD '{if(length>max_len)print$0}' |
+	awk --assign=max_len="$WORD_LENGTH_THRESHOLD" '{if(length>max_len)print$0}' |
 	grep . &&
 	exit 1
 
