@@ -13,7 +13,7 @@ bool is_prime(int val, const vector<int>& sieve) {
 /**
  * @param val an integer
  * @param sieve prime sieve
- * @returns all prime factors of val
+ * @returns all prime factors of val (sorted)
  * @time O(log(val))
  */
 vector<int> get_prime_factors(int val, const vector<int>& sieve) {
@@ -28,7 +28,7 @@ vector<int> get_prime_factors(int val, const vector<int>& sieve) {
 }
 /**
  * @param n size
- * @returns array `sieve` where `sieve[i]` = some prime factor of `i`.
+ * @returns array `sieve` where `sieve[i]` = min prime factor of `i`.
  * @time O(n * log(logn))
  * @memory O(n)
  */
@@ -38,6 +38,7 @@ vector<int> get_sieve(int n) {
 	for (int i = 2; i * i < n; i++)
 		if (sieve[i] == i)
 			for (int j = i * i; j < n; j += i)
-				sieve[j] = min(sieve[j], i);
+				if (sieve[j] == j)
+					sieve[j] = i;
 	return sieve;
 }
