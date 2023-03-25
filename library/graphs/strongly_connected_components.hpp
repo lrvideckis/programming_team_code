@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 /**
- * The stuff calculated by SCC.
+ * Info about strongly connected components in the directed graph
  */
 struct scc_info {
 	int num_sccs; /**< number of SCCs */
@@ -16,13 +16,16 @@ struct scc_info {
  * @see https://github.com/kth-competitive-programming/
  * kactl/blob/main/content/graph/SCC.h
  *
+ * @code{.cpp}
+ *     //example usage
+ *     auto [num_sccs, scc_id] = scc(adj);
+ * @endcode
  * @param adj directed, unweighted graph
  * @returns the SCCs
  * @time O(n + m)
  * @memory O(n + m)
  */
-//NOLINTNEXTLINE(readability-identifier-naming)
-scc_info SCC(const vector<vector<int>>& adj) {
+scc_info scc(const vector<vector<int>>& adj) {
 	int n = ssize(adj), timer = 1, num_sccs = 0;
 	vector<int> tin(n, 0), scc_id(n, -1), node_stack;
 	node_stack.reserve(n);

@@ -3,7 +3,7 @@
 /**
  * @code{.cpp}
  *     //example usage
- *     centroid_decomp decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+ *     centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
  *     });
  * @endcode
  */
