@@ -3,7 +3,7 @@ missingIncludeSystem
 unusedStructMember:../library/math/solve_linear_mod.hpp
 unusedStructMember:../library/graphs/strongly_connected_components.hpp:7
 unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
-unusedStructMember:../library/graphs/hopcroft_karp.hpp:7
+unusedStructMember:../library/graphs/hopcroft_karp.hpp:8
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
 unusedStructMember:../library/graphs/bridges_and_cuts.hpp
 unusedStructMember:../library/flow/hungarian.hpp:9
@@ -14,3 +14,5 @@ passedByValue:../library/range_data_structures/uncommon/implicit_seg_tree.hpp
 constParameter:../hackpack-cpp/content/number-theory/ModInt.h:29
 functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:22
 functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:31
+unusedScopedObject:../library/graphs/count_paths_per_length.hpp:14
+unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14

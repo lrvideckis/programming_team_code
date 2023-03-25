@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 /**
- * The stuff calculated by bridge_and_cut.
+ * Info about the connectivity of each node and edge
  */
 struct graph_info {
 	int num_2_edge_ccs; /**< number of components in bridge tree */
@@ -24,6 +24,7 @@ struct graph_info {
  *         adj[u].emplace_back(v, i);
  *         adj[v].emplace_back(u, i);
  *     }
+ *     auto [num_bccs, is_cut, bcc_id] = bridge_and_cut(adj, m);
  * @endcode
  * @param adj undirected graph; possibly with multiple edges
  * @param m number of edges

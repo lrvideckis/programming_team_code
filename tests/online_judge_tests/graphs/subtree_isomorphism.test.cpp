@@ -16,11 +16,11 @@ int main() {
 		adj[p + n].push_back(i + n);
 		adj[i + n].push_back(p + n);
 	}
-	auto [num_distinct_subtrees, id] = subtree_iso(adj);
+	auto [num_distinct_subtrees, iso_id] = subtree_iso(adj);
 	cout << num_distinct_subtrees << '\n';
 	for (int i = 0; i < n; i++) {
-		cout << id[i] << " ";
-		assert(id[i] == id[i + n]);
+		cout << iso_id[i] << " ";
+		assert(iso_id[i] == iso_id[i + n]);
 	}
 	cout << '\n';
 	return 0;
