@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 #adds hash code comments
 for header in $(find ../library/ -type f -name "*.hpp"); do
