@@ -1,3 +1,4 @@
+#!/bin/bash
 set -euo pipefail
 
 cd ../library/
