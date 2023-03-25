@@ -16,6 +16,6 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
-shellcheck --shell=bash --check-sourced --enable=check-set-e-suppressed,quote-safe-variables ./**/*.sh || exit 1
+shellcheck --shell=bash --check-sourced --enable=check-set-e-suppressed,quote-safe-variables ./library/**/*.sh || exit 1
 
-shfmt -ln=bash -s -d -w ./**/*.sh || exit 1
+shfmt -ln=bash -s -d -w ./tests/**/*.sh || exit 1
