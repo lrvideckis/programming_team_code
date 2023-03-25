@@ -5,7 +5,7 @@ help:
 	@echo
 	@echo "make astyle_cppcheck               | runs astyle, cppcheck"
 	@echo
-	@echo "make clangtidy                     | runs clang-tidy (verifies snake case)"
+	@echo "make clangtidy                     | runs clang-tidy (mainly to verify snake case)"
 	@echo
 	@echo "make find_files_without_tests      | print list of all .hpp files included by *no* .test.cpp files"
 	@echo "                                   |   - these files are not compiled nor linted as part of ci"
@@ -14,7 +14,7 @@ help:
 	@echo
 	@echo "make hackpack                      | build hackpack.pdf from .tex file"
 	@echo
-	@echo "make format_and_check_bash_scripts | format & check bash scripts"
+	@echo "make format_and_check_bash_scripts | runs shfmt and shellcheck"
 
 compile_all_tests:
 	./scripts/compile_all_tests.sh
