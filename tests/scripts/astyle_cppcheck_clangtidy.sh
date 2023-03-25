@@ -42,7 +42,7 @@ git submodule update
 
 cppcheck --enable=all --inconclusive --suppressions-list=.config/.cppcheck_suppression_list \
 	--force --language=c++ --error-exitcode=1 --std=c++17 --max-ctu-depth=50 \
-	"$(find online_judge_tests/ -type f -name '*.test.cpp' && find ../library/ -type f -name '*.hpp')" ||
+	../library/**/*.hpp online_judge_tests/**/*.test.cpp ||
 	exit 1
 
 find online_judge_tests/ -type f -name "*.test.cpp" |
