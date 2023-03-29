@@ -9,6 +9,7 @@ Place this directly before a struct or function.
 
 ```
 /**
+ * @author name or codeforces handle
  * @see <link to some source>
  *
  * Name, description, and/or any notes/tricks. It's okay if this is multiple
