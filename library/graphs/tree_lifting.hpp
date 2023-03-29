@@ -51,10 +51,10 @@ struct tree_lift {
 		if (d[u] < d[v]) swap(u, v);
 		u = kth(u, d[u] - d[v]);
 		if (u == v) return u;
-		while (p[u] != p[v])
+		while (u != v)
 			if (j[u] != j[v]) u = j[u], v = j[v];
 			else u = p[u], v = p[v];
-		return p[u];
+		return u;
 	}
 	/**
 	 * @param u,v endpoint nodes of path
