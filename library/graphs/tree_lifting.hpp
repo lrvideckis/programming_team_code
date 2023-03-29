@@ -69,9 +69,9 @@ struct tree_lift {
 	 * @time O(log n)
 	 */
 	int kth_path(int u, int v, int k) const {
-		int lca_uv = lca(u, v);
-		int u_lca = d[u] - d[lca_uv];
-		int v_lca = d[v] - d[lca_uv];
+		int lca_d = d[lca(u, v)];
+		int u_lca = d[u] - lca_d;
+		int v_lca = d[v] - lca_d;
 		return k <= u_lca ? kth(u, k) : kth(v, u_lca + v_lca - k);
 	}
 };
