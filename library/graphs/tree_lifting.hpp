@@ -10,8 +10,8 @@ struct tree_lift {
 	const int N;
 	/**
 	 * d = depth, p = parent, j = jump
+	 * @{
 	 */
-	/** @{ */
 	vector<int> d, p, j;
 	/** @} */
 	/**

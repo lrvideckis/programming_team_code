@@ -12,6 +12,7 @@ struct iso_info {
 	vector<int> iso_id;
 };
 /**
+ * @author camc
  * @code{.cpp}
  *     //example usage
  *     auto [num_distinct_subtrees, iso_id] = subtree_iso(adj);

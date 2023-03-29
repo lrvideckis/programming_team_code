@@ -2,6 +2,7 @@
 #pragma once
 #include "centroid_decomposition.hpp"
 /**
+ * @author camc
  * @param adj unrooted, connected forest
  * @param k number of edges
  * @returns array `num_paths` where `num_paths[i]` = number of paths with k

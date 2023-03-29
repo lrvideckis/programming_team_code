@@ -12,8 +12,8 @@ struct kth_smallest {
 	};
 	/**
 	 * calculated such that: mn <= arr[i] < mx
+	 * @{
 	 */
-	/** @{ */
 	int mn, mx;
 	/** @} */
 	vector<int> roots; /**< roots[i] corresponds to prefix arr[0, i) */

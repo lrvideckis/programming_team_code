@@ -9,15 +9,15 @@ struct match_info {
 	/**
 	 * edge node_left <=> l_to_r[node_left] in matching iff l_to_r[node_left] != -1
 	 * ditto r_to_l[node_right] <=> node_right
+	 * @{
 	 */
-	/** @{ */
 	vector<int> l_to_r, r_to_l;
 	/** @} */
 	/**
 	 * mvc_l[node_left] = 1 iff node_left is in the min vertex cover; ditto mvc_r[node_right]
 	 * mvc_l[node_left] = 0 iff node_left is in the max independent set
+	 * @{
 	 */
-	/** @{ */
 	vector<bool> mvc_l, mvc_r;
 	/** @} */
 };

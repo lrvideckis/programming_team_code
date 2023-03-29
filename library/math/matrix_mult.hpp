@@ -1,6 +1,7 @@
 /** @file */
 #pragma once
 /**
+ * @author camc
  * @see https://codeforces.com/blog/entry/80195
  *
  * @param a,b matrices

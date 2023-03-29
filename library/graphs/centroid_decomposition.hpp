@@ -1,6 +1,7 @@
 /** @file */
 #pragma once
 /**
+ * @author camc
  * @code{.cpp}
  *     //example usage
  *     centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
