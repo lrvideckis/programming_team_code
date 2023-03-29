@@ -50,7 +50,6 @@ struct tree_lift {
 	int lca(int u, int v) const {
 		if (d[u] < d[v]) swap(u, v);
 		u = kth(u, d[u] - d[v]);
-		if (u == v) return u;
 		while (u != v)
 			if (j[u] != j[v]) u = j[u], v = j[v];
 			else u = p[u], v = p[v];
