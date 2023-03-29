@@ -1,3 +1,5 @@
+/** @file */
+#pragma once
 /**
  * @param a,b arrays of the same length
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
