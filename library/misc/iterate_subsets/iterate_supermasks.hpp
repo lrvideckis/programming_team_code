@@ -1,6 +1,7 @@
 /** @file */
 #pragma once
 /**
+ * @author camc
  * @param mask a submask of (-1+2^n)
  * @param n total number of bits
  * @param func called on all supermasks of mask

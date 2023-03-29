@@ -1,6 +1,7 @@
 /** @file */
 #pragma once
 /**
+ * @author camc
  * @param edges simple undirected graph
  * @param n number of nodes
  * @param f a function run on all length-3-cycles exactly once
