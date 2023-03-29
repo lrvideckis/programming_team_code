@@ -7,6 +7,7 @@
  * Calculate jumps up a tree, to support fast upward jumps and LCAs.
  */
 struct tree_lift {
+	const int N;
 	/**
 	 * d = depth, p = parent, j = jump
 	 */
@@ -18,8 +19,10 @@ struct tree_lift {
 	 * @time O(n)
 	 * @memory O(n)
 	 */
-	tree_lift(const vector<vector<int>>& adj): d(ssize(adj)), p(d), j(d) {
-		dfs(0, adj);//TODO make it work on a forest
+	tree_lift(const vector<vector<int>>& adj): N(ssize(adj)), d(N), p(N, -1), j(N, -1) {
+		for (int i = 0; i < N; i++)
+			if (j[i] == -1)
+				j[i] = i, dfs(i, adj);
 	}
 	void dfs(int u, const vector<vector<int>>& adj) {
 		int jmp = (d[u] + d[j[j[u]]] == 2 * d[j[u]]) ? j[j[u]] : u;
@@ -69,7 +72,6 @@ struct tree_lift {
 		int lca_uv = lca(u, v);
 		int u_lca = d[u] - d[lca_uv];
 		int v_lca = d[v] - d[lca_uv];
-		assert(0 <= k && k <= u_lca + v_lca);
 		return k <= u_lca ? kth(u, k) : kth(v, u_lca + v_lca - k);
 	}
 };
