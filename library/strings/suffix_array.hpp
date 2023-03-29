@@ -36,8 +36,8 @@ template <typename T> struct suffix_array {
 	 * sa = [5, 3, 1, 0, 4, 2]
 	 * rank = [3, 2, 5, 1, 4, 0] (sa[rank[i]] == i, rank[sa[i]] == i)
 	 * lcp = [1, 3, 0, 0, 2]
+	 * @{
 	 */
-	/** @{ */
 	vector<int> sa, rank, lcp;
 	/** @} */
 	/**

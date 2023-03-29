@@ -13,8 +13,8 @@ template <typename T> struct sa_query {
 	suffix_array<T> info; /**< stores raw arrays */
 	/**
 	 * needed for various queries
+	 * @{
 	 */
-	/** @{ */
 	RMQ<int> rmq_lcp, rmq_sa;
 	/** @} */
 	/**
