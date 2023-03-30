@@ -38,8 +38,8 @@ struct tree_lift {
 	 */
 	int kth(int u, int k) const {
 		if (k > d[u]) return -1;
-		k = d[u] - k;
-		while (d[u] > k) u = d[j[u]] >= k ? j[u] : p[u];
+		int anc_d = d[u] - k;
+		while (d[u] > anc_d) u = d[j[u]] >= anc_d ? j[u] : p[u];
 		return u;
 	}
 	/**
