@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 #include "../template.hpp"
-#include "../kactl_macros.hpp"
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/strings/suffix_array_query.hpp"

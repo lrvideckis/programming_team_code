@@ -3,7 +3,6 @@
 //causing TLE.
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
-#include "../kactl_macros.hpp"
 
 #include "../../../library/strings/suffix_array_query.hpp"
 
