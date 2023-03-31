@@ -33,6 +33,20 @@ cat ../library/**/*.hpp |
 	grep . &&
 	exit 1
 
+echo ".hpp files missing pragma once:"
+comm -23 --check-order <(
+	find ../library/ -type f -name "*.hpp" |
+		sort |
+		uniq
+) <(
+	grep --fixed-strings "#pragma once" --recursive ../library/ --files-with-matches |
+		sort |
+		uniq
+) |
+	grep . &&
+	exit 1
+
+
 astyle --options=.config/.astylerc --recursive "online_judge_tests/*.test.cpp" "../library/*.hpp" |
 	grep "Formatted" && exit 1
 
