@@ -4,21 +4,28 @@
  * @see https://codeforces.com/blog/entry/111117
  * @code{.cpp}
  *     pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
- *     int sum = pq.ds.sum(u);
+ *     for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
+ *     pq.push_update(u, v, curr_pri);
+ *     cout << pq.ds.sum(v) << '\n';
  * @endcode
+ * @time n interweaved calls to pop_update, push_update take O(T(n)*nlogn)
+ * where O(T(n)) = time complexity of DS::update and DS::undo
  */
 template <typename DS, typename... ARGS> struct pq_updates {
-
-	DS ds;//any data structure with member functions `update` and `undo`
-
-	using upd = pair<tuple<ARGS...>, map<int, int>::iterator>;
-	vector<upd> upd_st;
-	map<int/*priority*/, int/*index into update stack*/> mp;
-
+	DS ds; /**< arbitrary data structure */
+	using upd = pair<tuple<ARGS...>, map<int, int>::iterator>; /**< update */
+	vector<upd> upd_st; /**< stack of updates */
+	map<int, int> mp; /**< priority -> index into update stack */
+	/**
+	 * @param a_ds any data structure with member functions `update` and `undo`
+	 */
 	pq_updates(const DS& a_ds) : ds(a_ds) {}
-
-	void pop_update() {//remove update with max priority
-		assert(!upd_st.empty() && ssize(upd_st) == ssize(mp));
+	/**
+	 * Remove update with max priority
+	 * @time O(log(n) + k*T(n)) where k = # of pops off the update stack
+	 */
+	void pop_update() {
+		assert(!upd_st.empty());
 		vector<upd> extra;
 		int idx = ssize(upd_st) - 1, lowest_pri = INT_MAX;
 		for (auto it = mp.rbegin(); 2 * ssize(extra) < ssize(upd_st) - idx; it++) {
@@ -39,7 +46,11 @@ template <typename DS, typename... ARGS> struct pq_updates {
 			upd_st[i].second->second = i;
 		}
 	}
-
+	/**
+	 * @param args arguments to DS::update
+	 * @param priority associated with the update
+	 * @time O(log(n) + T(n))
+	 */
 	void push_update(ARGS... args, int priority) {
 		ds.update(args...);
 		auto [it, ins] = mp.emplace(priority, ssize(upd_st));
