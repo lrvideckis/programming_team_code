@@ -60,9 +60,9 @@ int main() {
 		int type = queries[i].type;
 		if(type == 0) {
 			int u = queries[i].u, v = queries[i].v;
-			pq.push_update(u, v, -time_remove[i]);
+			pq.update(u, v, time_remove[i]);
 		} else if(type == 1) {
-			pq.pop_update();
+			pq.pop
 		} else if(type == 2) {
 			int v = queries[i].v, x = queries[i].x;
 			pq.ds.add(v, x);
@@ -72,6 +72,5 @@ int main() {
 			cout << pq.ds.sum(v) << '\n';
 		}
 	}
-
 	return 0;
 }
