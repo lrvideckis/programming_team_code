@@ -34,14 +34,14 @@ int main() {
 				cin >> u >> v;
 				if (u > v) swap(u, v);
 				assert(!insert_time.count({u, v}));
-				insert_time[{u, v}] = i;
+				insert_time[ {u, v} ] = i;
 				queries[i] = {type, u, v, -1};
 			} else if (type == 1) {
 				int u, v;
 				cin >> u >> v;
 				if (u > v) swap(u, v);
 				assert(insert_time.count({u, v}));
-				time_remove[insert_time[{u, v}]] = i;
+				time_remove[insert_time[ {u, v} ]] = i;
 				insert_time.erase({u, v});
 				queries[i] = {type, -1, -1, -1};
 			} else if (type == 2) {
