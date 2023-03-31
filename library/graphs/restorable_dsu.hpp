@@ -22,17 +22,14 @@ struct restorable_dsu {
 		if (u == v) return 0;
 		if (p[u] > p[v]) swap(u, v);
 		st.back().emplace(u, v, p[v]);
-		subtree[u] += subtree[v];
-		p[u] += p[v], p[v] = u;
+		subtree[u] += subtree[v], p[u] += p[v], p[v] = u;
 		return 1;
 	}
 	void undo() {
 		assert(!st.empty());
 		if (st.back()) {
 			auto [u, v, sz_v] = st.back().value();
-			p[v] = sz_v;
-			p[u] -= p[v];
-			subtree[u] -= subtree[v];
+			p[v] = sz_v, p[u] -= p[v], subtree[u] -= subtree[v];
 		}
 		st.pop_back();
 	}
