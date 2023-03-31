@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 #include "suffix_array.hpp"
-#include "../range_data_structures/sparse_table.hpp"
+#include "../data_structures/sparse_table.hpp"
 /**
  * @see https://github.com/yosupo06/Algorithm/blob
  * /master/src/string/suffixarray.hpp
