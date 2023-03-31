@@ -41,9 +41,9 @@ template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
 
 	//assumes distinct priorities
 	void push_update(UPDATE_ARGS... args, int priority) {
-		assert(mp.find(priority) == mp.end());//enforce distinct priorities
 		ds.update(args...);
-		auto it = mp.emplace(priority, ssize(upd_st)).first;
+		auto [it, ins] = mp.emplace(priority, ssize(upd_st));
+		assert(ins);//enforce distinct priorities
 		upd_st.emplace_back(make_tuple(args...), it);
 	}
 };
