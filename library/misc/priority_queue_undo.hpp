@@ -4,7 +4,7 @@ template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
 	DS ds;//any data structure with member functions `update` and `undo`
 
 	//TODO: maybe add a `using` statement here to shorten the type
-	vector<pair<tuple<UPDATE_ARGS...>, std::map<int, int>::iterator>> upd_st;//TODO: test if deque is faster
+	vector<pair<tuple<UPDATE_ARGS...>, std::map<int, int>::iterator>> upd_st;
 	map<int/*priority*/, int/*index into update stack*/> mp;
 
 	update_priority_queue(const DS& a_ds) : ds(a_ds) {}
