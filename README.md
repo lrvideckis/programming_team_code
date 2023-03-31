@@ -33,4 +33,5 @@ I've added links to sources when applicable. Everything is under the [CC0 licens
 - https://github.com/ucf-programming-team/hackpack-cpp
 - https://github.com/foreverbell/acm-icpc-cheat-sheet
 - https://github.com/koosaga/olympiad/tree/master/Library/codes
+- https://github.com/brunomaletta/Biblioteca
 - https://github.com/cheran-senthil/PyRival
