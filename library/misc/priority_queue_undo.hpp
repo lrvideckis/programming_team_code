@@ -1,3 +1,4 @@
+#pragma once
 template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
 
 	DS ds;//any data structure with member functions `update` and `undo`
