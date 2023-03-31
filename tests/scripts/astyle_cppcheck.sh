@@ -1,4 +1,5 @@
 #!/bin/bash
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 
 # miscellaneous checks - done before initializing git submodules to avoid checking stuff not in our code
