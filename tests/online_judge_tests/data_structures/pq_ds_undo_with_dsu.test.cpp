@@ -4,7 +4,7 @@
 #include "../template.hpp"
 
 #include "../../../library/data_structures/dsu_restorable.hpp"
-#include "../../../library/data_structures/priority_queue_undo.hpp"
+#include "../../../library/data_structures/priority_queue_of_updates.hpp"
 
 dsu_restorable init_dsu(const vector<int>& initial_values) {
 	int n = ssize(initial_values);
@@ -56,7 +56,7 @@ int main() {
 			}
 		}
 	}
-	update_pq<dsu_restorable, int, int> pq(init_dsu(initial_values));
+	pq_updates<dsu_restorable, int, int> pq(init_dsu(initial_values));
 	int curr_priority_counter = -q;
 	for (int i = 0; i < q; i++) {
 		int type = queries[i].type;
