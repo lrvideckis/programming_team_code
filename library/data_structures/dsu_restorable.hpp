@@ -4,11 +4,11 @@
  * @see https://github.com/ucf-programming-team/hackpack-cpp/
  * blob/master/content/data-structures/DSURestorable.h
  */
-struct restorable_dsu {
+struct dsu_restorable {
 	vector<int> p/*parent*/;
 	vector<long long> subtree;
-	vector<optional<tuple<int, int, int>>> st;
-	restorable_dsu(int n): p(n, -1), subtree(n) {}
+	vector<optional<array<int, 3>>> st;
+	dsu_restorable(int n): p(n, -1), subtree(n) {}
 	int find(int u) const {
 		while (p[u] >= 0) u = p[u];
 		return u;
@@ -21,15 +21,15 @@ struct restorable_dsu {
 		u = find(u), v = find(v);
 		if (u == v) return 0;
 		if (p[u] > p[v]) swap(u, v);
-		st.back().emplace(u, v, p[v]);
-		subtree[u] += subtree[v], p[u] += p[v], p[v] = u;
+		st.back() = {u, v, p[v]};
+		p[u] += p[v], p[v] = u, subtree[u] += subtree[v];
 		return 1;
 	}
 	void undo() {
 		assert(!st.empty());
 		if (st.back()) {
 			auto [u, v, sz_v] = st.back().value();
-			p[v] = sz_v, p[u] -= p[v], subtree[u] -= subtree[v];
+			subtree[u] -= subtree[v], p[v] = sz_v, p[u] -= p[v];
 		}
 		st.pop_back();
 	}

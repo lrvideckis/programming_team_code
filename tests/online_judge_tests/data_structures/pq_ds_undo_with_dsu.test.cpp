@@ -1,14 +1,14 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum"
-//since this causes std::map insert/erase operations to be O(n)
+//since _GLIBCXX_DEBUG causes std::map insert/erase operations to be O(n)
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/graphs/restorable_dsu.hpp"
-#include "../../../library/misc/priority_queue_undo.hpp"
+#include "../../../library/data_structures/dsu_restorable.hpp"
+#include "../../../library/data_structures/priority_queue_undo.hpp"
 
-restorable_dsu init_dsu(const vector<int>& initial_values) {
+dsu_restorable init_dsu(const vector<int>& initial_values) {
 	int n = ssize(initial_values);
-	restorable_dsu dsu(n);
+	dsu_restorable dsu(n);
 	for (int i = 0; i < n; i++) dsu.add(i, initial_values[i]);
 	return dsu;
 }
@@ -56,7 +56,7 @@ int main() {
 			}
 		}
 	}
-	update_priority_queue<restorable_dsu, int, int> pq(init_dsu(initial_values));
+	update_pq<dsu_restorable, int, int> pq(init_dsu(initial_values));
 	int curr_priority_counter = -q;
 	for (int i = 0; i < q; i++) {
 		int type = queries[i].type;

@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-template <typename DS, typename... ARGS> struct update_priority_queue {
+template <typename DS, typename... ARGS> struct update_pq {
 
 	DS ds;//any data structure with member functions `update` and `undo`
 
@@ -8,7 +8,7 @@ template <typename DS, typename... ARGS> struct update_priority_queue {
 	vector<upd> upd_st;
 	map<int/*priority*/, int/*index into update stack*/> mp;
 
-	update_priority_queue(const DS& a_ds) : ds(a_ds) {}
+	update_pq(const DS& a_ds) : ds(a_ds) {}
 
 	void pop_update() {//remove update with max priority
 		assert(!upd_st.empty() && ssize(upd_st) == ssize(mp));
