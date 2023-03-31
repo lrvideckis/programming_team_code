@@ -8,7 +8,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	update_priority_queue<update_priority_queue, int, int> upq(RestorableDSU(n));
+	update_priority_queue<RestorableDSU, int, int> upq{RestorableDSU(n)};
 	for(int i = 0; i < n; i++) {
 		int val;
 		cin >> val;

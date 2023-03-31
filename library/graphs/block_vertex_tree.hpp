@@ -1,5 +1,4 @@
 /** @file */
-#pragma once
 #include "bridges_and_cuts.hpp"
 /**
  * @code{.cpp}

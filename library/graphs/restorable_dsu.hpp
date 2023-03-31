@@ -7,12 +7,12 @@ struct RestorableDSU {
 	bool update(int a, int b) {
 		times.push_back(ssize(stk));
 		a = find(a), b = find(b);
-		if (a == b) return false;
+		if (a == b) return 0;
 		if (s[a] > s[b]) swap(a, b);
 		stk.emplace_back(a, s[a]);
 		stk.emplace_back(b, s[b]);
 		s[a] += s[b], s[b] = a;
-		return true;
+		return 1;
 	}
 	void undo() {
 		assert(!times.empty());
