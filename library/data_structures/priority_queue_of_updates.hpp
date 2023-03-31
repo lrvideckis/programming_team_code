@@ -1,5 +1,12 @@
 /** @file */
 #pragma once
+/**
+ * @see https://codeforces.com/blog/entry/111117
+ * @code{.cpp}
+ *     pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
+ *     int sum = pq.ds.sum(u);
+ * @endcode
+ */
 template <typename DS, typename... ARGS> struct pq_updates {
 
 	DS ds;//any data structure with member functions `update` and `undo`

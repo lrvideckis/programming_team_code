@@ -6,13 +6,6 @@
 #include "../../../library/data_structures/dsu_restorable.hpp"
 #include "../../../library/data_structures/priority_queue_of_updates.hpp"
 
-dsu_restorable init_dsu(const vector<int>& initial_values) {
-	int n = ssize(initial_values);
-	dsu_restorable dsu(n);
-	for (int i = 0; i < n; i++) dsu.add(i, initial_values[i]);
-	return dsu;
-}
-
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
@@ -56,7 +49,8 @@ int main() {
 			}
 		}
 	}
-	pq_updates<dsu_restorable, int, int> pq(init_dsu(initial_values));
+	pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
+	for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
 	int curr_priority_counter = -q;
 	for (int i = 0; i < q; i++) {
 		int type = queries[i].type;
