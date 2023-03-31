@@ -15,7 +15,7 @@ struct tree_lift {
 	vector<int> d, p, j;
 	/** @} */
 	/**
-	 * @param adj undirected forest
+	 * @param adj forest
 	 * @time O(n)
 	 * @memory O(n)
 	 */
