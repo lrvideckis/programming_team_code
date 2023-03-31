@@ -33,6 +33,7 @@ struct dsu_restorable {
 		}
 		st.pop_back();
 	}
+	int size(int u) const {return -s[find(u)];}
 	bool same(int u, int v) const {return find(u) == find(v);}
 	long long sum(int u) const {return subtree[find(u)];}
 };
