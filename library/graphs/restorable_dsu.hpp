@@ -10,11 +10,11 @@ struct restorable_dsu {
 	vector<vector<pair<int, int>>> st;//TODO: find better way to represent an update
 	restorable_dsu(int n): p(n, -1), subtree(n) {}
 	int find(int u) const {
-		while(p[u] >= 0) u = p[u];
+		while (p[u] >= 0) u = p[u];
 		return u;
 	}
 	void add(int u, int d) {
-		while(u >= 0) subtree[u] += d, u = p[u];
+		while (u >= 0) subtree[u] += d, u = p[u];
 	}
 	bool update(int u, int v) {
 		st.emplace_back();
@@ -29,9 +29,9 @@ struct restorable_dsu {
 	}
 	void undo() {
 		assert(!st.empty());
-		for(auto it = st.back().rbegin(); it != st.back().rend(); it++) {
+		for (auto it = st.back().rbegin(); it != st.back().rend(); it++) {
 			assert(it->second < 0);//TODO remove
-			if(p[it->first] >= 0) subtree[p[it->first]] -= subtree[it->first];
+			if (p[it->first] >= 0) subtree[p[it->first]] -= subtree[it->first];
 			p[it->first] = it->second;
 		}
 		st.pop_back();
