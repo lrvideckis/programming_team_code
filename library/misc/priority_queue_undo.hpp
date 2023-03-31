@@ -1,9 +1,9 @@
 #pragma once
-template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
+template <typename DS, typename... ARGS> struct update_priority_queue {
 
 	DS ds;//any data structure with member functions `update` and `undo`
 
-	using upd = pair<tuple<UPDATE_ARGS...>, map<int, int>::iterator>;
+	using upd = pair<tuple<ARGS...>, map<int, int>::iterator>;
 	vector<upd> upd_st;
 	map<int/*priority*/, int/*index into update stack*/> mp;
 
@@ -32,7 +32,7 @@ template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
 		}
 	}
 
-	void push_update(UPDATE_ARGS... args, int priority) {
+	void push_update(ARGS... args, int priority) {
 		ds.update(args...);
 		auto [it, ins] = mp.emplace(priority, ssize(upd_st));
 		assert(ins);//enforce distinct priorities
