@@ -13,7 +13,7 @@ template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
 		vector<pair<tuple<UPDATE_ARGS...>, std::map<int, int>::iterator>> highest_prio_upds;//TODO rename; TODO: see if I can change to vector<int> - indeces into upd_st
 		int k = 1;//number of pops which we'll do
 		int lowest_pri = INT_MAX;
-		for(auto it = mp.rbegin(); it != mp.rend() && 2 * ssize(highest_prio_upds) < k; it++) {
+		for(auto it = mp.rbegin(); 2 * ssize(highest_prio_upds) < k; it++) {
 			int idx_sk = it->second;
 			highest_prio_upds.push_back(upd_st[idx_sk]);
 			k = max(k, ssize(upd_st) - idx_sk);
@@ -46,8 +46,8 @@ template <typename DS, typename... UPDATE_ARGS> struct update_priority_queue {
 
 	//assumes distinct priorities
 	void push_update(UPDATE_ARGS... args, int priority) {
+		assert(mp.find(priority) == mp.end());//enforce distinct priorities
 		ds.update(args...);
-		assert(mp.find(priority) == mp.end());//TODO: move into test file
 		auto it = mp.emplace(priority, ssize(upd_st)).first;
 		upd_st.emplace_back(make_tuple(args...), it);
 	}

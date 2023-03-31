@@ -6,7 +6,7 @@
 #include "../../../library/graphs/restorable_dsu.hpp"
 #include "../../../library/misc/priority_queue_undo.hpp"
 
-restorable_dsu init_dsu(const vector<long long>& initial_values) {
+restorable_dsu init_dsu(const vector<int>& initial_values) {
 	int n = ssize(initial_values);
 	restorable_dsu dsu(n);
 	for(int i = 0; i < n; i++) dsu.add(i, initial_values[i]);
@@ -18,42 +18,44 @@ int main() {
 	int n, q;
 	cin >> n >> q;
 
-	vector<long long> initial_values(n);
+	vector<int> initial_values(n);
 	for(int i = 0; i < n; i++) cin >> initial_values[i];
 
-	map<pair<int,int>, int> insert_time;
 	vector<int> time_remove(q, -1);
 	struct query {
 		int type, u, v, x;
 	};
 	vector<query> queries(q);
-	for(int i = 0; i < q; i++) {
-		int type;
-		cin >> type;
-		if(type == 0) {
-			int u, v;
-			cin >> u >> v;
-			if(u > v) swap(u, v);
-			assert(!insert_time.count({u, v}));
-			insert_time[{u, v}] = i;
-			queries[i] = {type, u, v, -1};
-		} else if(type == 1) {
-			int u, v;
-			cin >> u >> v;
-			if(u > v) swap(u, v);
-			assert(insert_time.count({u, v}));
-			time_remove[insert_time[{u, v}]] = i;
-			insert_time.erase({u, v});
-			queries[i] = {type, -1, -1, -1};
-		} else if(type == 2) {
-			int v, x;
-			cin >> v >> x;
-			queries[i] = {type, -1, v, x};
-		} else {
-			assert(type == 3);
-			int v;
-			cin >> v;
-			queries[i] = {type, -1, v, -1};
+	{
+		map<pair<int,int>, int> insert_time;
+		for(int i = 0; i < q; i++) {
+			int type;
+			cin >> type;
+			if(type == 0) {
+				int u, v;
+				cin >> u >> v;
+				if(u > v) swap(u, v);
+				assert(!insert_time.count({u, v}));
+				insert_time[{u, v}] = i;
+				queries[i] = {type, u, v, -1};
+			} else if(type == 1) {
+				int u, v;
+				cin >> u >> v;
+				if(u > v) swap(u, v);
+				assert(insert_time.count({u, v}));
+				time_remove[insert_time[{u, v}]] = i;
+				insert_time.erase({u, v});
+				queries[i] = {type, -1, -1, -1};
+			} else if(type == 2) {
+				int v, x;
+				cin >> v >> x;
+				queries[i] = {type, -1, v, x};
+			} else {
+				assert(type == 3);
+				int v;
+				cin >> v;
+				queries[i] = {type, -1, v, -1};
+			}
 		}
 	}
 

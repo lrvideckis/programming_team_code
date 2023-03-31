@@ -32,5 +32,5 @@ struct restorable_dsu {
 		st.pop_back();
 	}
 	int size(int u) const { return -p[find(u)]; }
-	int sum(int u) const { return subtree[find(u)]; }
+	long long sum(int u) const { return subtree[find(u)]; }
 };
