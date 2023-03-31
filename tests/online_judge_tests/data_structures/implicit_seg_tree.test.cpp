@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/area_of_union_of_rectangles"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon/implicit_seg_tree.hpp"
+#include "../../../library/data_structures/uncommon_range_data_structures/implicit_seg_tree.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

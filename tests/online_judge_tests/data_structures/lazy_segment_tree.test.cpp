@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_G"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon/iterative_lazy_segment_tree.hpp"
+#include "../../../library/data_structures/uncommon_range_data_structures/iterative_lazy_segment_tree.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
