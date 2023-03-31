@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../../../library/range_data_structures/uncommon/distinct_query.hpp"
+#include "../../../library/data_structures/uncommon/distinct_query.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);

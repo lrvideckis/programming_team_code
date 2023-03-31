@@ -17,6 +17,7 @@
 #include <complex> //for kactl's FFT
 #include <functional> //for lambdas
 #include <climits> // for INT_MAX, INT_MIN
+#include <optional>
 using namespace std;
 
 #define ssize(x) (int)(x).size()
