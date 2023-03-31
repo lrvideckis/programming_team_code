@@ -1,4 +1,8 @@
-//https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/data-structures/DSURestorable.h
+/** @file */
+/**
+ * @see https://github.com/ucf-programming-team/hackpack-cpp/
+ * blob/master/content/data-structures/DSURestorable.h
+ */
 struct restorable_dsu {
 	vector<int> p/*parent*/;
 	vector<long long> subtree;
@@ -31,6 +35,6 @@ struct restorable_dsu {
 		}
 		st.pop_back();
 	}
-	int size(int u) const { return -p[find(u)]; }
+	//TODO: add size (here and also in a test
 	long long sum(int u) const { return subtree[find(u)]; }
 };
