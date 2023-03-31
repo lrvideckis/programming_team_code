@@ -1,4 +1,5 @@
 #!/bin/bash
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 
 # miscellaneous checks - done before initializing git submodules to avoid checking stuff not in our code
@@ -29,6 +30,19 @@ echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wra
 cat ../library/**/*.hpp |
 	tr '[:blank:]' '\n' |
 	awk --assign=max_len="$WORD_LENGTH_THRESHOLD" '{if(length>max_len)print$0}' |
+	grep . &&
+	exit 1
+
+echo ".hpp files missing pragma once:"
+comm -23 --check-order <(
+	find ../library/ -type f -name "*.hpp" |
+		sort |
+		uniq
+) <(
+	grep --fixed-strings "#pragma once" --recursive ../library/ --files-with-matches |
+		sort |
+		uniq
+) |
 	grep . &&
 	exit 1
 
