@@ -7,7 +7,7 @@
 struct restorable_dsu {
 	vector<int> p/*parent*/;
 	vector<long long> subtree;
-	vector<vector<pair<int, int>>> st;//TODO: find better way to represent an update
+	vector<optional<tuple<int, int, int>>> st;
 	restorable_dsu(int n): p(n, -1), subtree(n) {}
 	int find(int u) const {
 		while (p[u] >= 0) u = p[u];
@@ -21,21 +21,21 @@ struct restorable_dsu {
 		u = find(u), v = find(v);
 		if (u == v) return 0;
 		if (p[u] > p[v]) swap(u, v);
-		st.back().emplace_back(u, p[u]);
-		st.back().emplace_back(v, p[v]);
+		st.back().emplace(u, v, p[v]);
 		subtree[u] += subtree[v];
 		p[u] += p[v], p[v] = u;
 		return 1;
 	}
 	void undo() {
 		assert(!st.empty());
-		for (auto it = st.back().rbegin(); it != st.back().rend(); it++) {
-			assert(it->second < 0);//TODO remove
-			if (p[it->first] >= 0) subtree[p[it->first]] -= subtree[it->first];
-			p[it->first] = it->second;
+		if (st.back()) {
+			auto [u, v, sz_v] = st.back().value();
+			p[v] = sz_v;
+			p[u] -= p[v];
+			subtree[u] -= subtree[v];
 		}
 		st.pop_back();
 	}
 	//TODO: add size (here and also in a test
-	long long sum(int u) const { return subtree[find(u)]; }
+	long long sum(int u) const {return subtree[find(u)];}
 };
