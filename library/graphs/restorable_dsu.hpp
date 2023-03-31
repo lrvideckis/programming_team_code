@@ -1,6 +1,7 @@
 //https://github.com/ucf-programming-team/hackpack-cpp/blob/master/content/data-structures/DSURestorable.h
 struct restorable_dsu {
-	vector<int> p/*parent*/, subtree;
+	vector<int> p/*parent*/;
+	vector<long long> subtree;
 	vector<vector<pair<int, int>>> st;//TODO: find better way to represent an update
 	restorable_dsu(int n): p(n, -1), subtree(n) {}
 	int find(int u) const {
