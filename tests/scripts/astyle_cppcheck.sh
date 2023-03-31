@@ -46,7 +46,6 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
-
 astyle --options=.config/.astylerc --recursive "online_judge_tests/*.test.cpp" "../library/*.hpp" |
 	grep "Formatted" && exit 1
 
