@@ -5,8 +5,6 @@
  *     n_choose_k<1'000'000'007> nk(n); // to use `choose` with inputs strictly < n
  *     n_choose_k<1'000'003> nk(1'000'003); // to use `choose_lucas` with arbitrarily large inputs
  * @endcode
- *
- * @tparam MOD a prime >= n
  */
 template<int MOD> struct n_choose_k {
 	vector<long long> inv, fact, inv_fact;
