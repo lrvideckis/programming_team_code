@@ -20,27 +20,19 @@ struct stack_with_get_max {
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-
 	int n, l;
 	cin >> n >> l;
-
 	vector<int> arr(n);
-	for(int i = 0; i < n; i++) cin >> arr[i];
-
+	for (int i = 0; i < n; i++) cin >> arr[i];
 	pq_updates<stack_with_get_max, int> pq{stack_with_get_max()};
-
-	int priority = (n-l)/2;
-
-	for(int i = 0; i < l; i++)
+	int priority = (n - l) / 2;
+	for (int i = 0; i < l; i++)
 		pq.push_update(arr[i], priority--);
-
 	cout << pq.ds.get_max() << " ";
-
-	for(int i = l; i < n; i++) {
+	for (int i = l; i < n; i++) {
 		pq.push_update(arr[i], priority--);
 		pq.pop_update();
 		cout << pq.ds.get_max() << " ";
 	}
-
 	return 0;
 }
