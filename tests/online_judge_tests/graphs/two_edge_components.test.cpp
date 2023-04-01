@@ -1,9 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../template.hpp"
-#include "../kactl_macros.hpp"
-
-#include "../../../kactl/content/data-structures/UnionFind.h"
 #include "../../../library/graphs/bridge_tree.hpp"
+#include "../../../library/data_structures/dsu_restorable.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -33,19 +31,19 @@ int main() {
 		int cnt_bridges = accumulate(cc.is_bridge.begin(), cc.is_bridge.end(), 0);
 		assert(sum_deg % 2 == 0 && sum_deg / 2 == cnt_bridges);
 	}
-	UF dsu(n);
+	dsu_restorable dsu(n);
 	int num_sets_dsu = n;
 	for (int i = 0; i < m; i++) {
 		if (!cc.is_bridge[i]) {
 			auto [u, v] = edges[i];
-			num_sets_dsu -= dsu.join(u, v);
+			num_sets_dsu -= dsu.update(u, v);
 		}
 	}
 	assert(num_sets_dsu == ssize(bt));
 	for (int i = 0; i < m; i++) {
 		if (cc.is_bridge[i]) {
 			auto [u, v] = edges[i];
-			bool same_set = dsu.sameSet(u, v);
+			bool same_set = dsu.same(u, v);
 			assert(!same_set);
 		}
 	}

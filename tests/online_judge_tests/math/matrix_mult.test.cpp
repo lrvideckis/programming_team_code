@@ -6,12 +6,10 @@
 #undef _GLIBCXX_DEBUG_PEDANTIC
 #undef _GLIBCXX_ASSERTIONS
 #include "../template.hpp"
-#include "../kactl_macros.hpp"
-
 #include "../../../library/math/matrix_mult.hpp"
 
 const int MOD = 998'244'353;
-
+#include "../kactl_macros.hpp"
 #include "../../../hackpack-cpp/content/number-theory/ModInt.h"
 
 int main() {

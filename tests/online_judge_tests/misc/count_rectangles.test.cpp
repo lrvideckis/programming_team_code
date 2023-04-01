@@ -1,10 +1,10 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_B"
 #include "../template.hpp"
+#include "../../../library/misc/random.hpp"
+#include "../../../library/misc/monotonic_stack_related/count_rectangles.hpp"
+
 #include "../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/SubMatrix.h"
-#include "../../../library/misc/random.hpp"
-
-#include "../../../library/misc/monotonic_stack_related/count_rectangles.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
