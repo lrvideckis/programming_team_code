@@ -28,11 +28,11 @@ int main() {
 	int priority = (n - l) / 2;
 	for (int i = 0; i < l; i++)
 		pq.push_update(arr[i], priority--);
-	cout << pq.ds.get_max() << " ";
+	cout << pq.ds.get_max();
 	for (int i = l; i < n; i++) {
 		pq.push_update(arr[i], priority--);
 		pq.pop_update();
-		cout << pq.ds.get_max() << " ";
+		cout << " " << pq.ds.get_max();
 	}
 	return 0;
 }
