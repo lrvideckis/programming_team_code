@@ -6,17 +6,17 @@
 #include "../../../library/data_structures/priority_queue_of_updates.hpp"
 
 struct stack_with_get_max {
-	stack<pair<int, int>> st;
+	vector<pair<int, int>> st;
 	void update(int val) {
-		st.emplace(val, st.empty() ? val : min(val, st.top()));
+		st.emplace_back(val, st.empty() ? val : min(val, st.back()));
 	}
 	void undo() {
-		st.pop();
+		st.pop_back();
 	}
 	int get_max() const {
-		return st.top().second;
+		return st.back().second;
 	}
-}
+};
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
