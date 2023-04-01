@@ -1,21 +1,20 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
-#include "../kactl_macros.hpp"
-#include "../../../kactl/content/data-structures/UnionFind.h"
-
 #include "../../../library/misc/random.hpp"
-
 #include "../../../library/graphs/count_paths_per_node.hpp"
-#include "../../../library/graphs/count_paths_per_length.hpp"
 #include "../../../library/graphs/tree_lifting.hpp"
+#include "../../../library/data_structures/dsu_restorable.hpp"
 
-vector<vector<long long>> naive(const vector<vector<int>>& adj, UF& uf) {
+#include "../kactl_macros.hpp"
+#include "../../../library/graphs/count_paths_per_length.hpp"
+
+vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restorable& dsu) {
 	tree_lift lift(adj);
 	int n = ssize(adj);
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
-			if (uf.sameSet(u, v)) {
+			if (dsu.same(u, v)) {
 				int path_length_edges = lift.dist_edges(u, v);
 				for (int i = 0; i <= path_length_edges; i++)
 					cnts_naive[path_length_edges][lift.kth_path(u, v, i)]++;
@@ -28,18 +27,18 @@ vector<vector<long long>> naive(const vector<vector<int>>& adj, UF& uf) {
 int main() {
 	for (int n = 2; n <= 100; n++) {
 		vector<vector<int>> adj(n);
-		UF uf(n);
+		dsu_restorable dsu(n);
 		for (int q = n; q--;) {
 			int u = get_rand<int>(0, n);
 			int v = get_rand<int>(0, n);
 			if (u == v)
 				continue;
-			if (uf.join(u, v)) {
+			if (dsu.update(u, v)) {
 				adj[u].push_back(v);
 				adj[v].push_back(u);
 			}
 		}
-		vector<vector<long long>> cnts_naive = naive(adj, uf);
+		vector<vector<long long>> cnts_naive = naive(adj, dsu);
 		for (int k = 1; k <= n; k++)
 			assert(count_paths_per_node(adj, k) == cnts_naive[k]);
 		vector<long long> num_paths_len = count_paths_per_length(adj);

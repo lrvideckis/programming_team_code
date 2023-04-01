@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
+#include "../../../library/math/prime_sieve.hpp"
+#include "../../../library/math/mobius_inversion.hpp"
+
 #include "../kactl_macros.hpp"
 #include "../../../kactl/content/number-theory/MillerRabin.h"
-#include "../../../library/math/prime_sieve.hpp"
-
-#include "../../../library/math/mobius_inversion.hpp"
 
 int main() {
 	vector<int> sieve = get_sieve(N);
