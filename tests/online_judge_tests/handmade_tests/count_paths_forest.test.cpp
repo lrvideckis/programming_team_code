@@ -2,10 +2,11 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 #include "../../../library/graphs/count_paths_per_node.hpp"
-#include "../../../library/graphs/count_paths_per_length.hpp"
 #include "../../../library/graphs/tree_lifting.hpp"
 #include "../../../library/data_structures/dsu_restorable.hpp"
 
+#include "../kactl_macros.hpp"
+#include "../../../library/graphs/count_paths_per_length.hpp"
 
 vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restorable& dsu) {
 	tree_lift lift(adj);
