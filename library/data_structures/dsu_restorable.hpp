@@ -31,8 +31,8 @@ struct dsu_restorable {
 		}
 		st.pop_back();
 	}
-	void add(int u, int d) {while (u >= 0) subtree[u] += d, u = p[u];}
-	bool same(int u, int v) const {return find(u) == find(v);}
 	int size(int u) const {return -p[find(u)];}
+	bool same_set(int u, int v) const {return find(u) == find(v);}
 	long long sum(int u) const {return subtree[find(u)];}
+	void add(int u, int d) {while (u >= 0) subtree[u] += d, u = p[u];}
 };

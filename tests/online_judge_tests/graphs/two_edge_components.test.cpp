@@ -43,7 +43,7 @@ int main() {
 	for (int i = 0; i < m; i++) {
 		if (cc.is_bridge[i]) {
 			auto [u, v] = edges[i];
-			bool same_set = dsu.same(u, v);
+			bool same_set = dsu.same_set(u, v);
 			assert(!same_set);
 		}
 	}

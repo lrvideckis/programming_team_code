@@ -14,7 +14,7 @@ vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restor
 	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
-			if (dsu.same(u, v)) {
+			if (dsu.same_set(u, v)) {
 				int path_length_edges = lift.dist_edges(u, v);
 				for (int i = 0; i <= path_length_edges; i++)
 					cnts_naive[path_length_edges][lift.kth_path(u, v, i)]++;
