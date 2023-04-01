@@ -48,13 +48,13 @@ template <typename DS, typename... ARGS> struct pq_updates {
 	}
 	/**
 	 * @param args arguments to DS::update
-	 * @param priority associated with the update
+	 * @param priority must be distinct, can be negative
 	 * @time O(log(n) + T(n))
 	 */
 	void push_update(ARGS... args, int priority) {
 		ds.update(args...);
 		auto [it, ins] = mp.emplace(priority, ssize(upd_st));
-		assert(ins);//enforce distinct priorities
+		assert(ins);
 		upd_st.emplace_back(make_tuple(args...), it);
 	}
 };
