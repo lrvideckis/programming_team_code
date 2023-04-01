@@ -34,5 +34,6 @@ int main() {
 		pq.pop_update();
 		cout << " " << pq.ds.get_max();
 	}
+	cout << '\n';
 	return 0;
 }
