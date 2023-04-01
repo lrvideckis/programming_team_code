@@ -9,13 +9,16 @@ int main() {
 	for (int n = 1; n < 100; n++) {
 		dsu_restorable dsu(n);
 		vector<vector<int>> adj(n);
+		vector<pair<int,int>> edge_st;
 		for (int q = 0; q < 100; q++) {
-			if (get_rand<int>(0, 2) == 0) {
+			int type = get_rand<int>(0, 3);
+			if (type == 0) {
 				int u = get_rand<int>(0, n), v = get_rand(0, n);
 				dsu.update(u, v);
 				adj[u].push_back(v);
 				adj[v].push_back(u);
-			} else {
+				edge_st.emplace_back(u, v);
+			} else if(type == 1) {
 				int u = get_rand<int>(0, n);
 				vector<bool> vis(n);
 				int size_component = 0;
@@ -30,6 +33,13 @@ int main() {
 				vis[u] = true;
 				dfs(dfs, u);
 				assert(size_component == dsu.size(u));
+			} else if(!edge_st.empty()) {
+				auto [u, v] = edge_st.back();
+				edge_st.pop_back();
+				assert(adj[u].back() == v && adj[v].back() == u);
+				adj[u].pop_back();
+				adj[v].pop_back();
+				dsu.undo();
 			}
 		}
 	}
