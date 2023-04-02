@@ -20,7 +20,7 @@ int main() {
 	sort(edges.begin(), edges.end(), [&](const vertical_edge & a, const vertical_edge & b) -> bool {
 		return a.x < b.x;
 	});
-	const int MN = 0, MX = int(1e9) + 1;
+	const int MN = 0, MX = 1'000'000'001;
 	implicit_seg_tree < 500'000 * 31 * 2 * 2 + 100 > ist(MN, MX);
 	long long area = 0;
 	//sweepline

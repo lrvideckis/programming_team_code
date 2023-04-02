@@ -7,6 +7,6 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int m, n;
 	cin >> m >> n;
-	cout << bin_exp(m, n, 1e9 + 7) << '\n';
+	cout << bin_exp(m, n, 1'000'000'007) << '\n';
 	return 0;
 }

@@ -32,7 +32,7 @@ int main() {
 	test_lucas<7>(n_choose_k<7>(7));
 	test_lucas<11>(n_choose_k<11>(11));
 	test_lucas<13>(n_choose_k<13>(13));
-	const int N = 1001, MOD = 1e9 + 7;
+	const int N = 1001, MOD = 1'000'000'007;
 	n_choose_k<MOD> nk(N);
 	//test mod inverse
 	for (int i = 1; i < N; i++)
