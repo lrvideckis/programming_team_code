@@ -1,6 +1,5 @@
 /** @file */
 #pragma once
-const long long INF = 1e18;
 /**
  * @see https://e-maxx.ru/algo/min_cost_flow
  */
@@ -38,7 +37,7 @@ struct mcmf {
 	pair<ll, ll> get_flow(int s, int t, ll total_flow) {
 		ll flow = 0, cost = 0;
 		while (flow < total_flow) {
-			vector<ll> d(N, INF);
+			vector<ll> d(N, LLONG_MAX);
 			vector<int> p_edge(N), id(N, 0), q(N), p(N);
 			int qh = 0, qt = 0;
 			q[qt++] = s;
@@ -64,7 +63,7 @@ struct mcmf {
 					}
 				}
 			}
-			if (d[t] == INF) break;
+			if (d[t] == LLONG_MAX) break;
 			ll addflow = total_flow - flow;
 			for (int v = t; v != s; v = p[v]) {
 				int pv = p[v], pr = p_edge[v];
