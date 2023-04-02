@@ -8,7 +8,7 @@
  *     string s;
  *     suffix_array info(s, 128);
  *     vector<int> arr;
- *     suffix_array info(arr, 1e5 + 1);
+ *     suffix_array info(arr, 100'005);
  * @endcode
  */
 template <typename T> struct suffix_array {

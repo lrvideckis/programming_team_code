@@ -1,6 +1,5 @@
 /** @file */
 #pragma once
-const long long INF = 1e18;
 /**
  * Represents a matching: number of edges is maximized (with pairwise distinct
  * nodes). Of all ways to do this, sum of edge weights is minimized.
@@ -29,12 +28,12 @@ weighted_match hungarian(const vector<vector<long long>>& cost) {
 	for (int i = 1; i <= n; i++) {
 		p[0] = i;
 		int j0 = 0;
-		vector<long long> minv(m + 1, INF);
+		vector<long long> minv(m + 1, LLONG_MAX);
 		vector<bool> used(m + 1, 0);
 		do {
 			used[j0] = 1;
 			int i0 = p[j0], j1 = 0;
-			long long delta = INF;
+			long long delta = LLONG_MAX;
 			for (int j = 1; j <= m; j++)
 				if (!used[j]) {
 					long long cur = cost[i0][j] - u[i0] - v[j];

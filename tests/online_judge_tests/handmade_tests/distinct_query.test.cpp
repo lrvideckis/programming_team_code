@@ -10,7 +10,7 @@ int main() {
 		int n = get_rand(1, 100);
 		vector<int> arr(n);
 		if (get_rand(0, 2) == 1)
-			generate(arr.begin(), arr.end(), []() {return get_rand<int>(-1e9, 1e9);});
+			generate(arr.begin(), arr.end(), []() {return get_rand<int>(INT_MIN, INT_MAX);});
 		else
 			generate(arr.begin(), arr.end(), []() {return get_rand<int>(-2, 3);});
 		distinct_query pst(arr);

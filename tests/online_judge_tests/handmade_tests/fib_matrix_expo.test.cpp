@@ -21,7 +21,7 @@ int main() {
 	for (int i = 0; i < 500; i++)
 		check(i);
 	for (int tests = 1000; tests--;)
-		check(get_rand<long long>(0, 1e18));
+		check(get_rand<long long>(0, LLONG_MAX));
 	cout << "Hello World\n";
 	return 0;
 }

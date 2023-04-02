@@ -72,7 +72,7 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
 					return 1;
 				}
 			}
-			level[u] = 1e9;
+			level[u] = INT_MAX;
 			return 0;
 		};
 		for (int i = 0; i < lsz; i++)

@@ -3,6 +3,7 @@ CXX = "g++"
 CXXFLAGS = [
 	"-O2",
 	"-fsanitize=address,undefined",
+	"-fno-sanitize-recover=all",
 	"-std=c++17",
 	"-D_GLIBCXX_DEBUG",
 	"-D_GLIBCXX_SANITIZE_VECTOR",
