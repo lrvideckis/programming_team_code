@@ -11,5 +11,4 @@ CXXFLAGS = [
 	"-D_GLIBCXX_ASSERTIONS",
 	"-fstack-protector",
 	"-D_FORTIFY_SOURCE=2",
-	"-g",
 ]
