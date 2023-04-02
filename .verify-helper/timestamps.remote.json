@@ -57,5 +57,7 @@
 "tests/online_judge_tests/strings/sa_query_multi_matching.test.cpp": "2023-04-02 13:51:12 -0500",
 "tests/online_judge_tests/strings/sa_query_palindrome.test.cpp": "2023-04-02 13:51:12 -0500",
 "tests/online_judge_tests/strings/sa_query_single_matching.test.cpp": "2023-04-02 13:51:12 -0500",
-"tests/online_judge_tests/strings/sa_query_zfunc.test.cpp": "2023-04-02 13:51:12 -0500"
+"tests/online_judge_tests/strings/sa_query_zfunc.test.cpp": "2023-04-02 13:51:12 -0500",
+"tests/online_judge_tests/strings/suffix_array.test.cpp": "2023-04-02 13:51:12 -0500",
+"tests/online_judge_tests/strings/trie.test.cpp": "2023-03-31 14:48:53 -0500"
 }
