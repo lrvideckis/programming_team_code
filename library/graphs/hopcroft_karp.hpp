@@ -63,15 +63,9 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
 			}
 		}
 		if (!found) return {size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r};
-		int test = INT_MAX;
-
-		test++;
-		cerr << test << endl;
-		//assert(test + 1 < 0);
 		auto dfs = [&](auto&& self, int u) -> bool {
 			for (auto x : adj[u]) {
 				int v = r_to_l[x];
-				assert(level[u] != INT_MAX);
 				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {
 					l_to_r[u] = x;
 					r_to_l[x] = u;
