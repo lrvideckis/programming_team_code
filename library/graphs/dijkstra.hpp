@@ -1,6 +1,5 @@
 /** @file */
 #pragma once
-const long long INF = 1e18;
 /**
  * @param adj directed or undirected, weighted graph
  * @param u source node
@@ -12,7 +11,7 @@ const long long INF = 1e18;
  */
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj, int u) {
 	using node = pair<long long, int>;
-	vector<long long> len(ssize(adj), INF);
+	vector<long long> len(ssize(adj), LLONG_MAX);
 	len[u] = 0;
 	priority_queue<node, vector<node>, greater<node>> q;
 	q.emplace(0, u);
