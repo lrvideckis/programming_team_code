@@ -9,8 +9,9 @@
 struct dsu_restorable {
 	vector<int> p;
 	vector<long long> subtree;
+	int num_sets;
 	vector<optional<array<int, 3>>> st;
-	dsu_restorable(int n): p(n, -1), subtree(n) {}
+	dsu_restorable(int n): p(n, -1), subtree(n), num_sets(n) {}
 	int find(int u) const {
 		while (p[u] >= 0) u = p[u];
 		return u;
@@ -20,14 +21,14 @@ struct dsu_restorable {
 		if ((u = find(u)) == (v = find(v))) return 0;
 		if (p[u] > p[v]) swap(u, v);
 		st.back() = {u, v, p[v]};
-		p[u] += p[v], p[v] = u, subtree[u] += subtree[v];
+		p[u] += p[v], p[v] = u, subtree[u] += subtree[v], num_sets--;
 		return 1;
 	}
 	void undo() {
 		assert(!st.empty());
 		if (st.back()) {
 			auto [u, v, sz_v] = st.back().value();
-			subtree[u] -= subtree[v], p[v] = sz_v, p[u] -= p[v];
+			num_sets++, subtree[u] -= subtree[v], p[v] = sz_v, p[u] -= p[v];
 		}
 		st.pop_back();
 	}

@@ -19,20 +19,27 @@ int main() {
 				adj[v].push_back(u);
 				edge_st.emplace_back(u, v);
 			} else if (type == 1) {
-				int u = get_rand<int>(0, n);
+				vector<vector<int>> comps;
 				vector<bool> vis(n);
-				int size_component = 0;
 				auto dfs = [&](auto&& self, int node) -> void {
-					size_component++;
+					comps.back().push_back(node);
 					for (int next : adj[node])
 						if (!vis[next]) {
 							vis[next] = true;
 							self(self, next);
 						}
 				};
-				vis[u] = true;
-				dfs(dfs, u);
-				assert(size_component == dsu.size(u));
+				for (int i = 0; i < n; i++) {
+					if (!vis[i]) {
+						comps.emplace_back();
+						vis[i] = true;
+						dfs(dfs, i);
+					}
+				}
+				assert(ssize(comps) == dsu.num_sets);
+				for (auto& cc : comps)
+					for (int node : cc)
+						assert(dsu.size(node) == ssize(cc));
 			} else if (!edge_st.empty()) {
 				auto [u, v] = edge_st.back();
 				edge_st.pop_back();
