@@ -33,6 +33,6 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 		for (int j = 0; j < 2; j++)
 			partial_sum(cnt[i].rbegin(), cnt[i].rend() - 1, cnt[i].rbegin());
 	for (int i = n - 1; i >= 1; i--)
-		transform(cnt[i].begin(), cnt[i].end(), cnt[i + 1].begin(), cnt[i].begin(), [](int x, int y) {return x + y;});
+		transform(cnt[i].begin(), cnt[i].end(), cnt[i + 1].begin(), cnt[i].begin(), plus{});
 	return cnt;
 }

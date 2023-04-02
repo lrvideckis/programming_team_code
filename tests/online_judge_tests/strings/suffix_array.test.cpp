@@ -6,9 +6,10 @@
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	{
-		string s;
-		suffix_array sa(s, 128);
-		assert(sa.lcp.empty());
+		suffix_array<string> sa_empty("", 128);
+		assert(sa_empty.lcp.empty());
+		suffix_array<string> sa_single("a", 128);
+		assert(sa_single.lcp.empty());
 	}
 	string s;
 	cin >> s;
