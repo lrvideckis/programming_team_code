@@ -6,8 +6,8 @@
 struct iso_info {
 	int num_distinct_subtrees; /**< number of classes (by iso.) of subtrees */
 	/**
-	 * - 0 <= id[u] < num_distinct_subtrees
-	 * - id[u] == id[v] iff subtree u is isomorphic to subtree v
+	 * - 0 <= iso_id[u] < num_distinct_subtrees
+	 * - iso_id[u] == iso_id[v] iff subtree u is isomorphic to subtree v
 	 */
 	vector<int> iso_id;
 };
@@ -28,14 +28,11 @@ iso_info subtree_iso(const vector<vector<int>>& adj) {
 	auto dfs = [&](auto&& self, int u, int p) -> int {
 		vector<int> ch_ids;
 		ch_ids.reserve(ssize(adj[u]));
-		for (auto v : adj[u]) {
+		for (auto v : adj[u])
 			if (v != p)
 				ch_ids.push_back(self(self, v, u));
-		}
 		sort(ch_ids.begin(), ch_ids.end());
-		auto it = hashes.find(ch_ids);
-		if (it == hashes.end())
-			return iso_id[u] = hashes[ch_ids] = ssize(hashes);
+		auto it = hashes.try_emplace(ch_ids, ssize(hashes)).first;
 		return iso_id[u] = it->second;
 	};
 	for (int i = 0; i < ssize(adj); i++)
