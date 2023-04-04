@@ -7,11 +7,11 @@
  * DSU without path compression, so non-amortized. Most operations are O(log n)
  */
 struct dsu_restorable {
+	int num_sets;
 	vector<int> p;
 	vector<long long> subtree;
-	int num_sets;
 	vector<optional<array<int, 3>>> st;
-	dsu_restorable(int n): p(n, -1), subtree(n), num_sets(n) {}
+	dsu_restorable(int n): num_sets(n), p(n, -1), subtree(n) {}
 	int find(int u) const {
 		while (p[u] >= 0) u = p[u];
 		return u;
