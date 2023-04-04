@@ -63,12 +63,12 @@ int main() {
 		if (v >= q) {//leaf node
 			const int DEPTH_LEAF = __lg(v), MAX_DEPTH = __lg(2 * q - 1);
 			if (tl == 0) { //left-most leaf
-				assert(v == (1 << max_depth));
-				assert(depth_leaf == max_depth);
+				assert(v == (1 << MAX_DEPTH));
+				assert(DEPTH_LEAF == MAX_DEPTH);
 			}
 			assert(q <= v && v < 2 * q);
-			assert(depth_leaf == max_depth || depth_leaf == max_depth - 1);
-			if ((q & (q - 1)) == 0) assert(depth_leaf == max_depth);
+			assert(DEPTH_LEAF == MAX_DEPTH || DEPTH_LEAF == MAX_DEPTH - 1);
+			if ((q & (q - 1)) == 0) assert(DEPTH_LEAF == MAX_DEPTH);
 			if (queries[tl].type == 2)
 				dsu.add(queries[tl].v, queries[tl].x);
 			else if (queries[tl].type == 3)
