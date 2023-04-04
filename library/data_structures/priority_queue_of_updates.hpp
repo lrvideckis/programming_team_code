@@ -13,7 +13,7 @@
  */
 template <typename DS, typename... ARGS> struct pq_updates {
 	DS ds; /**< arbitrary data structure */
-	using upd = pair<tuple<ARGS...>, map<int, int>::iterator>; /**< update */
+	using upd = pair<tuple<ARGS...>, map<int, int>::iterator>;
 	vector<upd> upd_st; /**< stack of updates */
 	map<int, int> mp; /**< priority -> index into update stack */
 	/**

@@ -977,7 +977,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          update_impl \
                          ll \
                          add_edge \
-                         dsu_restorable
+                         dsu_restorable \
+                         upd \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
