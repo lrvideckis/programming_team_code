@@ -5,6 +5,8 @@
  * @code{.cpp}
  *     pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
  *     for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
+ *     //or
+ *     pq.ds.subtree = initial_values;
  *     pq.push_update(u, v, curr_pri);
  *     cout << pq.ds.sum(v) << '\n';
  * @endcode
