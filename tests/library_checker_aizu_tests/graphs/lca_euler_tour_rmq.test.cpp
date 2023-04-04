@@ -21,6 +21,9 @@ int main() {
 	while (q--) {
 		int u, v;
 		cin >> u >> v;
-		cout << lca.lca(u, v) << '\n';
+		int curr_lca = lca.lca(u, v);
+		assert((curr_lca == u) == lca.in_subtree(u, v));
+		assert((curr_lca == v) == lca.in_subtree(v, u));
+		cout << curr_lca << '\n';
 	}
 }
