@@ -39,4 +39,4 @@ doxygen ../tests/Doxyfile |& grep seg_tree
     1. Longer codes for online contests like codeforces where you can copy paste
     2. Shorter, golfed codes for ICPC where you can't copy paste
 - How hard to modify existing library code
-- Easily testable (preferably there is a problem to test, instead of [handmade tests](../tests/online_judge_tests/handmade_tests)). These are the only judges whose problems can be used in CI: [library checker](https://judge.yosupo.jp/), [aizu judge](https://onlinejudge.u-aizu.ac.jp/courses/list)
+- Easily testable (preferably there is a problem to test, instead of [handmade tests](../tests/library_checker_aizu_tests/handmade_tests)). These are the only judges whose problems can be used in CI: [library checker](https://judge.yosupo.jp/), [aizu judge](https://onlinejudge.u-aizu.ac.jp/courses/list)

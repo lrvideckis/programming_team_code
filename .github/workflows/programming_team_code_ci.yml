@@ -3,7 +3,7 @@ name: programming team code CI
 on: push
 
 jobs:
-  online_judge_tests:
+  library_checker_aizu_tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -82,7 +82,7 @@ jobs:
 
   publish_pdf:
     runs-on: ubuntu-22.04
-    needs: [online_judge_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_pdf]
+    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_pdf]
     if: github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v2
