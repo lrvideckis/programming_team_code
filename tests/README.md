@@ -1,4 +1,4 @@
-All commands (except doxygen) run *only* on `*.test.cpp` files in [online_judge_tests/](online_judge_tests/) (thus also *included* `*.hpp` files in [library/](../library/)).
+All commands (except doxygen) run *only* on `*.test.cpp` files in [library_checker_aizu_tests/](library_checker_aizu_tests/) (thus also *included* `*.hpp` files in [library/](../library/)).
   - Reason: `*.hpp` files don't have includes (because CP) which some of these tools need. Also this way incentivizes adding tests.
     - BTW kactl addresses this problem by [manually adding includes](https://github.com/kth-competitive-programming/kactl/blob/main/doc/scripts/test-compiles.sh) to header files, then [compiling](https://github.com/kth-competitive-programming/kactl/blob/main/doc/scripts/compile-all.sh) the modified headers.
   - see `make find_files_without_tests` for `*.hpp` files which are not included by any `*.test.cpp` file

@@ -5,7 +5,7 @@ set -euo pipefail
 # miscellaneous checks - done before initializing git submodules to avoid checking stuff not in our code
 
 echo "check no endl"
-grep "endl" --recursive online_judge_tests/ && exit 1
+grep "endl" --recursive library_checker_aizu_tests/ && exit 1
 
 echo "check template<typename T> over template<class T>:"
 grep --extended-regexp "template\s?<class" --recursive ../library/ && exit 1
@@ -20,7 +20,7 @@ echo "check 0 instead of false"
 grep --extended-regexp "false" --recursive ../library/ && exit 1
 
 echo "check files and directories are snake_case:"
-find ../library/ online_judge_tests/ -name "*[A-Z]*" -or -name "*-*" |
+find ../library/ library_checker_aizu_tests/ -name "*[A-Z]*" -or -name "*-*" |
 	grep --invert-match ".verify-helper" |
 	grep --invert-match "README" &&
 	exit 1
@@ -46,7 +46,7 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
-astyle --options=.config/.astylerc --recursive "online_judge_tests/*.test.cpp" "../library/*.hpp" |
+astyle --options=.config/.astylerc --recursive "library_checker_aizu_tests/*.test.cpp" "../library/*.hpp" |
 	grep "Formatted" && exit 1
 
 git submodule init
@@ -54,5 +54,5 @@ git submodule update
 
 cppcheck --enable=all --inconclusive --suppressions-list=.config/.cppcheck_suppression_list \
 	--force --language=c++ --error-exitcode=1 --std=c++17 --max-ctu-depth=50 \
-	../library/**/*.hpp online_judge_tests/**/*.test.cpp ||
+	../library/**/*.hpp library_checker_aizu_tests/**/*.test.cpp ||
 	exit 1

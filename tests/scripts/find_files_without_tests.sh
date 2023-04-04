@@ -11,7 +11,7 @@ comm -23 --check-order <(
 		sort |
 		uniq
 ) <(
-	g++ -MM online_judge_tests/**/*.test.cpp |
+	g++ -MM library_checker_aizu_tests/**/*.test.cpp |
 		xargs basename --multiple |
 		grep "\.hpp$" |
 		sort |
