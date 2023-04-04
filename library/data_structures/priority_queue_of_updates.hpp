@@ -29,10 +29,9 @@ template <typename DS, typename... ARGS> struct pq_updates {
 		vector<upd> extra;
 		int idx = ssize(upd_st) - 1, lowest_pri = INT_MAX;
 		for (auto it = mp.rbegin(); 2 * ssize(extra) < ssize(upd_st) - idx; it++) {
-			int idx_sk = it->second;
+			auto [pri, idx_sk] = *it;
 			extra.push_back(upd_st[idx_sk]);
-			idx = min(idx, idx_sk);
-			lowest_pri = it->first;
+			idx = min(idx, idx_sk), lowest_pri = pri;
 		}
 		auto it = remove_if(upd_st.begin() + idx, upd_st.end(), [&](const auto & curr) {
 			return curr.second->first >= lowest_pri;
