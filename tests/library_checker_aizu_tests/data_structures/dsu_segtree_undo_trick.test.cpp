@@ -58,15 +58,24 @@ int main() {
 			add_edge(add_edge, i_time, q, edge.first, edge.second, 0, q, 1);
 	}
 	auto dfs = [&](auto&& self, int tl, int tr, int v) -> void {
+		for (auto [node_u, node_v] : tree[v]) dsu.update(node_u, node_v);
 		assert((v >= q) == ((tr - tl) == 1));
-		for (auto [node_u, node_v] : tree[v])
-			dsu.update(node_u, node_v);
 		if (v >= q) {//leaf node
+			const int depth_leaf = __lg(v), max_depth = __lg(2 * q - 1);
+			if (tl == 0) { //left-most leaf
+				assert(v == (1 << max_depth));
+				assert(depth_leaf == max_depth);
+			}
+			assert(q <= v && v < 2 * q);
+			assert(depth_leaf == max_depth || depth_leaf == max_depth - 1);
+			if ((q & (q - 1)) == 0) assert(depth_leaf == max_depth);
 			if (queries[tl].type == 2)
 				dsu.add(queries[tl].v, queries[tl].x);
 			else if (queries[tl].type == 3)
 				cout << dsu.sum(queries[tl].v) << '\n';
 		} else {
+			assert(1 <= v && v < q);
+			if (((tr - tl) & (tr - tl - 1)) == 0) assert(split(tl, tr) == (tl + tr) / 2);
 			int tm = split(tl, tr);
 			self(self, tl, tm, 2 * v);
 			self(self, tm, tr, 2 * v + 1);
