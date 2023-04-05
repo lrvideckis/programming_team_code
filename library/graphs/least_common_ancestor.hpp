@@ -59,7 +59,7 @@ struct LCA {
 	/**
 	 * @see https://codeforces.com/blog/entry/71567?#comment-559285
 	 * @code{.cpp}
-	 *     int u, v; //to loop over all nodes on path from u to v:
+	 *     int u, v; //to loop over all nodes (except v) on path from u to v:
 	 *     for (int i = u; i != v; i = lca.first_on_path(i, v)) {}
 	 * @endcode
 	 * @param u,v endpoint nodes of path
