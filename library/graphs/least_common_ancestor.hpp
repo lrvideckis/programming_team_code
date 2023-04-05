@@ -66,7 +66,7 @@ struct LCA {
 	 * @returns node at index 1 in {u,p[u],..,lca(u,v),..,p[v],v}
 	 * @time O(1)
 	 */
-	int first_on_path(int u, int v) const {
+	int next_on_path(int u, int v) const {
 		assert(u != v);
 		return in_subtree(u, v) ? rmq.query(in[u] + 1, in[v] + 1) : p[u];
 	}
