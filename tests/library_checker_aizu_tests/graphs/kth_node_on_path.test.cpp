@@ -26,7 +26,7 @@ int main() {
 		else
 			cout << lift.kth_path(u, v, k) << '\n';
 		assert(dist_in_edges == lca.dist_edges(u, v));
-		if(u != v) {
+		if (u != v) {
 			assert(lift.kth_path(u, v, 1) == lca.first_on_path(u, v));
 			//assert(lift.kth_path(u, v, dist_in_edges - 1) == lca.first_on_path(v, u));
 			assert(lift.kth_path(u, v, dist_in_edges) == v);
