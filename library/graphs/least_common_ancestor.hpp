@@ -57,6 +57,7 @@ struct LCA {
 	 */
 	bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sz[u];}
 	/**
+	 * @see https://codeforces.com/blog/entry/71567?#comment-559285
 	 * @code{.cpp}
 	 *     int u, v; //to loop over all nodes on path from u to v:
 	 *     for (int i = u; i != v; i = lca.first_on_path(i, v)) {}
