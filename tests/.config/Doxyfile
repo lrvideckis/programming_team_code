@@ -979,6 +979,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          add_edge \
                          dsu_restorable \
                          upd \
+                         init \
+                         rmq \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
