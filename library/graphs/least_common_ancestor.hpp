@@ -20,19 +20,18 @@ struct LCA {
 	 * @time O(n log n)
 	 * @memory O(n log n)
 	 */
-	LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N, -1), sz(N, 1), d(N), p(N), rmq(init(adj)) {}
+	LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
 	RMQ<int> init(const vector<vector<int>>& adj) {
 		tour.reserve(N);
 		for (int i = 0; i < N; i++)
-			if (in[i] == -1) dfs(adj, i, -1);
+			if (p[i] == -1) dfs(adj, i);
 		return {tour, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;}};
 	}
-	void dfs(const vector<vector<int>>& adj, int u, int par) {
-		in[u] = ssize(tour), p[u] = par;
-		tour.push_back(u);
+	void dfs(const vector<vector<int>>& adj, int u) {
+		in[u] = ssize(tour), tour.push_back(u);
 		for (int v : adj[u])
-			if (v != par)
-				d[v] = 1 + d[u], dfs(adj, v, u), sz[u] += sz[v];
+			if (v != p[u])
+				d[v] = d[p[v] = u] + 1, dfs(adj, v), sz[u] += sz[v];
 	}
 	/**
 	 * @param u,v 2 nodes in the same component

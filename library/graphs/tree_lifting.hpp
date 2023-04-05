@@ -22,13 +22,13 @@ struct tree_lift {
 	tree_lift(const vector<vector<int>>& adj): N(ssize(adj)), d(N), p(N, -1), j(N, -1) {
 		for (int i = 0; i < N; i++)
 			if (j[i] == -1)
-				j[i] = i, dfs(i, adj);
+				j[i] = i, dfs(adj, i);
 	}
-	void dfs(int u, const vector<vector<int>>& adj) {
+	void dfs(const vector<vector<int>>& adj, int u) {
 		int jmp = (d[u] + d[j[j[u]]] == 2 * d[j[u]]) ? j[j[u]] : u;
 		for (int v : adj[u])
 			if (v != p[u])
-				d[v] = d[p[v] = u] + 1, j[v] = jmp, dfs(v, adj);
+				d[v] = d[p[v] = u] + 1, j[v] = jmp, dfs(adj, v);
 	}
 	/**
 	 * @param u query node
