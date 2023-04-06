@@ -43,13 +43,13 @@ struct mcmf {
 			q[qt++] = s;
 			d[s] = 0;
 			while (qh != qt) {
-				int v = q[qh++];
-				id[v] = 2;
+				int u = q[qh++];
+				id[u] = 2;
 				if (qh == N) qh = 0;
-				for (int i = 0; i < ssize(adj[v]); i++) {
-					const edge& r = e[adj[v][i]];
-					if (r.flow < r.cap && d[v] + r.cost < d[r.v]) {
-						d[r.v] = d[v] + r.cost;
+				for (int i = 0; i < ssize(adj[u]); i++) {
+					const edge& r = e[adj[u][i]];
+					if (r.flow < r.cap && d[u] + r.cost < d[r.v]) {
+						d[r.v] = d[u] + r.cost;
 						if (id[r.v] == 0) {
 							q[qt++] = r.v;
 							if (qt == N) qt = 0;
@@ -58,21 +58,21 @@ struct mcmf {
 							q[qh] = r.v;
 						}
 						id[r.v] = 1;
-						p[r.v] = v;
+						p[r.v] = u;
 						p_edge[r.v] = i;
 					}
 				}
 			}
 			if (d[t] == LLONG_MAX) break;
 			ll addflow = total_flow - flow;
-			for (int v = t; v != s; v = p[v]) {
-				int pv = p[v], pr = p_edge[v];
+			for (int u = t; u != s; u = p[u]) {
+				int pv = p[u], pr = p_edge[u];
 				addflow = min(addflow, e[adj[pv][pr]].cap - e[adj[pv][pr]].flow);
 			}
-			for (int v = t; v != s; v = p[v]) {
-				int pv = p[v], pr = p_edge[v], r = e[adj[pv][pr]].back;
+			for (int u = t; u != s; u = p[u]) {
+				int pv = p[u], pr = p_edge[u], r = e[adj[pv][pr]].back;
 				e[adj[pv][pr]].flow += addflow;
-				e[adj[v][r]].flow -= addflow;
+				e[adj[u][r]].flow -= addflow;
 				cost += e[adj[pv][pr]].cost * addflow;
 			}
 			flow += addflow;
