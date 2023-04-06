@@ -2,13 +2,13 @@
 CXX = "g++"
 CXXFLAGS = [
 	"-O2",
+	"-std=c++17",
 	"-fsanitize=address,undefined",
 	"-fno-sanitize-recover=all",
-	"-std=c++17",
+	"-fstack-protector",
 	"-D_GLIBCXX_DEBUG",
 	"-D_GLIBCXX_SANITIZE_VECTOR",
 	"-D_GLIBCXX_DEBUG_PEDANTIC",
 	"-D_GLIBCXX_ASSERTIONS",
-	"-fstack-protector",
 	"-D_FORTIFY_SOURCE=2",
 ]
