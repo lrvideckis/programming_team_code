@@ -1,13 +1,10 @@
 /** @file */
 #pragma once
 const int N = 1001;
-/**
- * nCk with arbitrarily large integers requires O(MOD) precalc
- */
 long long inv[N], fact[N], inv_fact[N];
 /**
- * @time O(n + sqrt(MOD))
- * @memory O(n)
+ * @time O(N + sqrt(MOD))
+ * @memory O(N)
  */
 template<int MOD> void calc_chooses() {
 	for (int i = 2; i * i <= MOD; i++) assert(MOD % i);
@@ -30,6 +27,7 @@ template<int MOD> long long C(int n, int k) {
 	return fact[n] * inv_fact[k] % MOD * inv_fact[n - k] % MOD;
 }
 /**
+ * requires O(MOD) precalc
  * @param n,k arbitrarily large integers
  * @returns number of ways to choose k objects out of n
  * @time O(log(k))
