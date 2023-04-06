@@ -25,10 +25,10 @@ vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restor
 }
 
 int main() {
-	for (int n = 2; n <= 100; n++) {
+	for (int n = 1; n <= 100; n++) {
 		vector<vector<int>> adj(n);
 		dsu_restorable dsu(n);
-		for (int q = n; q--;) {
+		for (int i = 0; i < n - 2; i++) {
 			int u = get_rand<int>(0, n);
 			int v = get_rand<int>(0, n);
 			if (u == v)
