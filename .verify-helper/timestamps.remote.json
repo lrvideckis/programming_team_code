@@ -30,6 +30,7 @@
 "tests/library_checker_aizu_tests/handmade_tests/distinct_query.test.cpp": "2023-04-06 16:49:02 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/dsu_size.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/fib_matrix_expo.test.cpp": "2023-04-04 13:38:05 -0500",
+"tests/library_checker_aizu_tests/handmade_tests/lca_both_methods_on_forest.test.cpp": "2023-04-06 18:09:21 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/mobius_inversion.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/math/binary_exponentiation_mod.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/math/derangement.test.cpp": "2023-04-06 16:49:02 -0500",
