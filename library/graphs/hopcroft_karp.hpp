@@ -52,23 +52,23 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
 			int u = q.front();
 			q.pop();
 			mvc_l[u] = 0;
-			for (auto x : adj[u]) {
-				mvc_r[x] = 1;
-				int v = r_to_l[x];
-				if (v == -1) found = 1;
-				else if (level[v] == -1) {
-					level[v] = level[u] + 1;
-					q.push(v);
+			for (auto v : adj[u]) {
+				mvc_r[v] = 1;
+				int w = r_to_l[v];
+				if (w == -1) found = 1;
+				else if (level[w] == -1) {
+					level[w] = level[u] + 1;
+					q.push(w);
 				}
 			}
 		}
 		if (!found) return {size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r};
 		auto dfs = [&](auto&& self, int u) -> bool {
-			for (auto x : adj[u]) {
-				int v = r_to_l[x];
-				if (v == -1 || (level[u] + 1 == level[v] && self(self, v))) {
-					l_to_r[u] = x;
-					r_to_l[x] = u;
+			for (auto v : adj[u]) {
+				int w = r_to_l[v];
+				if (w == -1 || (level[u] + 1 == level[w] && self(self, w))) {
+					l_to_r[u] = v;
+					r_to_l[v] = u;
 					return 1;
 				}
 			}

@@ -45,31 +45,31 @@ int main() {
 			}
 		}
 		// testing commented loops in block_vertex_tree
-		for (int v = 0; v < n; v++) {
-			assert(ssize(node_to_bccs[v]) == ssize(bvt[v]));
-			for (int bccid : bvt[v]) {
+		for (int u = 0; u < n; u++) {
+			assert(ssize(node_to_bccs[u]) == ssize(bvt[u]));
+			for (int bccid : bvt[u]) {
 				bccid -= n;
-				assert(node_to_bccs[v].count(bccid));
+				assert(node_to_bccs[u].count(bccid));
 			}
 		}
 		for (int bccid = 0; bccid < cc.num_bccs; bccid++) {
 			assert(ssize(bcc_to_nodes[bccid]) == ssize(bvt[bccid + n]));
-			for (int v : bvt[bccid + n])
-				assert(bcc_to_nodes[bccid].count(v));
+			for (int u : bvt[bccid + n])
+				assert(bcc_to_nodes[bccid].count(u));
 		}
 	}
 	vector<int> lone_nodes;
-	for (int v = 0; v < n; v++)
-		if (bvt[v].empty())
-			lone_nodes.push_back(v);
+	for (int u = 0; u < n; u++)
+		if (bvt[u].empty())
+			lone_nodes.push_back(u);
 	cout << cc.num_bccs + ssize(lone_nodes) << '\n';
 	for (int bccid = 0; bccid < cc.num_bccs; bccid++) {
 		cout << ssize(bvt[bccid + n]) << " ";
-		for (int v : bvt[bccid + n])
-			cout << v << " ";
+		for (int u : bvt[bccid + n])
+			cout << u << " ";
 		cout << '\n';
 	}
-	for (int v : lone_nodes)
-		cout << "1 " << v << '\n';
+	for (int u : lone_nodes)
+		cout << "1 " << u << '\n';
 	return 0;
 }
