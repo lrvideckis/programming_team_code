@@ -19,10 +19,10 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
 				child_depths.back().push_back(ssize(q));
 				queue<pair<int, int>> new_q;
 				while (!q.empty()) {
-					auto [v, par] = q.front();
+					auto [v, p] = q.front();
 					q.pop();
 					for (auto w : adj_removed_edges[v]) {
-						if (w == par) continue;
+						if (w == p) continue;
 						new_q.emplace(w, v);
 					}
 				}
