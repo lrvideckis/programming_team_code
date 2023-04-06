@@ -27,7 +27,7 @@
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
 	int n = ssize(adj);
 	vector<vector<int>> bvt(n + cc.num_bccs);
-	vector<bool> vis(cc.num_bccs, 0);
+	vector<bool> vis(cc.num_bccs);
 	for (int i = 0; i < n; i++) {
 		for (auto [_, e_id] : adj[i]) {
 			int bccid = cc.bcc_id[e_id];
