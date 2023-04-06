@@ -35,15 +35,15 @@ struct graph_info {
 graph_info bridge_and_cut(const vector<vector<pair<int, int>>>& adj, int m) {
 	//stuff for both (always keep)
 	int n = ssize(adj), timer = 1;
-	vector<int> tin(n, 0);
+	vector<int> tin(n);
 	//2 edge cc stuff (delete if not needed)
 	int num_2_edge_ccs = 0;
-	vector<bool> is_bridge(m, 0);
+	vector<bool> is_bridge(m);
 	vector<int> two_edge_ccid(n), node_stack;
 	node_stack.reserve(n);
 	//bcc stuff (delete if not needed)
 	int num_bccs = 0;
-	vector<bool> is_cut(n, 0);
+	vector<bool> is_cut(n);
 	vector<int> bcc_id(m), edge_stack;
 	edge_stack.reserve(m);
 	auto dfs = [&](auto&& self, int u, int p_id) -> int {

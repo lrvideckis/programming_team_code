@@ -30,7 +30,7 @@ matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long l
 	if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
 		return {rank, det, {}}; //no solution exists
 	}
-	vector<long long> x(m, 0);
+	vector<long long> x(m);
 	int j = 0;
 	for_each(mat.begin(), mat.begin() + rank, [&](const auto & v) {
 		while (v[j] == 0) j++;

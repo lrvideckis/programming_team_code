@@ -10,6 +10,7 @@ struct LCA {
 	const int N;
 	/**
 	 * time in, subtree size, depth, parent, pre order traversal
+	 * note: in[order[i]] = i, order[in[i]] = i
 	 * @{
 	 */
 	vector<int> in, sz, d, p, order;
