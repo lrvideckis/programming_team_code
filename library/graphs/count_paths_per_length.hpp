@@ -10,7 +10,7 @@
  * @memory O(n)
  */
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
-	vector<long long> num_paths(ssize(adj), 0);
+	vector<long long> num_paths(ssize(adj));
 	centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
 		vector<vector<double>> child_depths;
 		for (auto u : adj_removed_edges[cent]) {
@@ -37,7 +37,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
 			auto prod = conv(total_depth, cnt_depth);
 			for (int i = 1; i < ssize(prod); i++)
 				num_paths[i] += llround(prod[i]);
-			total_depth.resize(ssize(cnt_depth), 0.0);
+			total_depth.resize(ssize(cnt_depth));
 			for (int i = 1; i < ssize(cnt_depth); i++)
 				total_depth[i] += cnt_depth[i];
 		}

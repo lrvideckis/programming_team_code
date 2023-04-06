@@ -38,7 +38,7 @@ struct mcmf {
 		ll flow = 0, cost = 0;
 		while (flow < total_flow) {
 			vector<ll> d(N, LLONG_MAX);
-			vector<int> p_edge(N), id(N, 0), q(N), p(N);
+			vector<int> p_edge(N), id(N), q(N), p(N);
 			int qh = 0, qt = 0;
 			q[qt++] = s;
 			d[s] = 0;

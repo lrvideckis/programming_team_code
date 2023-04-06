@@ -27,7 +27,7 @@ struct scc_info {
  */
 scc_info scc(const vector<vector<int>>& adj) {
 	int n = ssize(adj), timer = 1, num_sccs = 0;
-	vector<int> tin(n, 0), scc_id(n, -1), node_stack;
+	vector<int> tin(n), scc_id(n, -1), node_stack;
 	node_stack.reserve(n);
 	auto dfs = [&](auto&& self, int u) -> int {
 		int low = tin[u] = timer++;
