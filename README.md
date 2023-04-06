@@ -26,7 +26,7 @@ I've added links to sources when applicable. Everything is under the [CC0 licens
 link | notes
 --- | ---
 https://github.com/kth-competitive-programming/kactl | optimized for ICPC, widely used
-https://github.com/yosupo06/Algorithm | optimized for online contests, crowd-sourced tests
+https://github.com/yosupo06/library-checker-problems | optimized for online contests, tested via crowd-sourcing
 https://github.com/ShahjalalShohag/code-library |
 https://github.com/ecnerwala/cp-book |
 https://github.com/the-tourist/algo |
