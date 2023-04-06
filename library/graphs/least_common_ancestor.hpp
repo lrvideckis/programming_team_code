@@ -9,10 +9,10 @@
 struct LCA {
 	const int N;
 	/**
-	 * time in, subtree size, depth, parent, node order of euler tour
+	 * time in, subtree size, depth, parent, pre order traversal
 	 * @{
 	 */
-	vector<int> in, sz, d, p, tour;
+	vector<int> in, sz, d, p, order;
 	/** @} */
 	RMQ<int> rmq;
 	/**
@@ -22,13 +22,13 @@ struct LCA {
 	 */
 	LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
 	RMQ<int> init(const vector<vector<int>>& adj) {
-		tour.reserve(N);
+		order.reserve(N);
 		for (int i = 0; i < N; i++)
 			if (p[i] == -1) dfs(adj, i);
-		return {tour, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;}};
+		return {order, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;}};
 	}
 	void dfs(const vector<vector<int>>& adj, int u) {
-		in[u] = ssize(tour), tour.push_back(u);
+		in[u] = ssize(order), order.push_back(u);
 		for (int v : adj[u])
 			if (v != p[u])
 				d[v] = d[p[v] = u] + 1, dfs(adj, v), sz[u] += sz[v];
@@ -62,7 +62,7 @@ struct LCA {
 	 *     for (int i = u; i != v; i = lca.next_on_path(i, v)) {}
 	 * @endcode
 	 * @param u,v endpoint nodes of path
-	 * @returns node at index 1 in {u,p[u],..,lca(u,v),..,p[v],v}
+	 * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[1]
 	 * @time O(1)
 	 */
 	int next_on_path(int u, int v) const {
