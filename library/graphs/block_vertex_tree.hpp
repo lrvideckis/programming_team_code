@@ -28,16 +28,16 @@ vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj,
 	int n = ssize(adj);
 	vector<vector<int>> bvt(n + cc.num_bccs);
 	vector<bool> vis(cc.num_bccs, 0);
-	for (int u = 0; u < n; u++) {
-		for (auto [_, e_id] : adj[u]) {
+	for (int i = 0; i < n; i++) {
+		for (auto [_, e_id] : adj[i]) {
 			int bccid = cc.bcc_id[e_id];
 			if (!vis[bccid]) {
 				vis[bccid] = 1;
-				bvt[u].push_back(bccid + n);
-				bvt[bccid + n].push_back(u);
+				bvt[i].push_back(bccid + n);
+				bvt[bccid + n].push_back(i);
 			}
 		}
-		for (auto bccid : bvt[u]) vis[bccid - n] = 0;
+		for (auto bccid : bvt[i]) vis[bccid - n] = 0;
 	}
 	return bvt;
 }
