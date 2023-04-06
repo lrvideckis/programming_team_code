@@ -23,17 +23,15 @@ I've added links to sources when applicable. Everything is under the [CC0 licens
 
 ## Other CP repos
 
-link | notes
+type | list
 --- | ---
-https://github.com/kth-competitive-programming/kactl | optimized for ICPC, widely used
-https://github.com/yosupo06/library-checker-problems | optimized for online contests, tested via crowd-sourcing
-https://github.com/ShahjalalShohag/code-library |
+optimized for ICPC | <ul><li>https://github.com/kth-competitive-programming/kactl</li><li>https://github.com/ucf-programming-team/hackpack-cpp</li><li>https://github.com/foreverbell/acm-icpc-cheat-sheet</li></ul>
+optimized for online contests | <ul><li>https://github.com/yosupo06/library-checker-problems</li></ul>
+extensive | <ul><li>https://github.com/koosaga/olympiad/tree/master/Library/codes</li><li>https://github.com/ShahjalalShohag/code-library</li><li>https://github.com/brunomaletta/Biblioteca</li></ul>
+python | https://github.com/cheran-senthil/PyRival
+ |
 https://github.com/ecnerwala/cp-book |
 https://github.com/the-tourist/algo |
 https://github.com/nealwu/competitive-programming |
 https://github.com/dacin21/dacin21_codebook |
-https://github.com/ucf-programming-team/hackpack-cpp |
-https://github.com/foreverbell/acm-icpc-cheat-sheet |
-https://github.com/koosaga/olympiad/tree/master/Library/codes |
-https://github.com/brunomaletta/Biblioteca |
-https://github.com/cheran-senthil/PyRival |
+ |
