@@ -26,7 +26,7 @@
 "tests/library_checker_aizu_tests/graphs/strongly_connected_components.test.cpp": "2023-04-06 16:49:02 -0500",
 "tests/library_checker_aizu_tests/graphs/subtree_isomorphism.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/graphs/two_edge_components.test.cpp": "2023-04-06 16:49:02 -0500",
-"tests/library_checker_aizu_tests/handmade_tests/count_paths_forest.test.cpp": "2023-04-06 16:49:02 -0500",
+"tests/library_checker_aizu_tests/handmade_tests/count_paths_forest.test.cpp": "2023-04-06 17:32:44 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/distinct_query.test.cpp": "2023-04-06 16:49:02 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/dsu_size.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/fib_matrix_expo.test.cpp": "2023-04-04 13:38:05 -0500",
@@ -57,5 +57,8 @@
 "tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-04-06 16:49:02 -0500",
 "tests/library_checker_aizu_tests/strings/sa_query_multi_matching.test.cpp": "2023-04-06 16:49:02 -0500",
 "tests/library_checker_aizu_tests/strings/sa_query_palindrome.test.cpp": "2023-04-06 16:49:02 -0500",
+"tests/library_checker_aizu_tests/strings/sa_query_single_matching.test.cpp": "2023-04-06 16:49:02 -0500",
+"tests/library_checker_aizu_tests/strings/sa_query_zfunc.test.cpp": "2023-04-06 16:49:02 -0500",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-04-06 16:49:02 -0500",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-04-04 13:38:05 -0500"
 }
