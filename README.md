@@ -27,7 +27,7 @@ type | list
 --- | ---
 optimized for ICPC | <ul><li>https://github.com/kth-competitive-programming/kactl</li><li>https://github.com/ucf-programming-team/hackpack-cpp</li><li>https://github.com/foreverbell/acm-icpc-cheat-sheet</li></ul>
 optimized for online contests | <ul><li>https://github.com/yosupo06/library-checker-problems</li></ul>
-extensive | <ul><li>https://github.com/koosaga/olympiad/tree/master/Library/codes</li><li>https://github.com/ShahjalalShohag/code-library</li><li>https://github.com/brunomaletta/Biblioteca</li></ul>
+contains rare algs | <ul><li>https://github.com/koosaga/olympiad/tree/master/Library/codes</li><li>https://github.com/ShahjalalShohag/code-library</li><li>https://github.com/brunomaletta/Biblioteca</li></ul>
 python | https://github.com/cheran-senthil/PyRival
  |
 https://github.com/ecnerwala/cp-book |
