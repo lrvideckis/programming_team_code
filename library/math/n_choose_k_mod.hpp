@@ -34,6 +34,7 @@ template<int MOD> long long C(int n, int k) {
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template<int MOD> long long C(long long n, long long k) {
+	assert(MOD <= N);
 	if (k < 0 || n < k) return 0;
 	long long res = 1;
 	for (; k && k < n && res; n /= MOD, k /= MOD)
