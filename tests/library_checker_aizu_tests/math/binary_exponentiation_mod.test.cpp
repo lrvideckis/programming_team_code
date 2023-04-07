@@ -9,6 +9,13 @@ int main() {
 	int m, n;
 	cin >> m >> n;
 	assert(bin_exp(m, n, 998'244'353) == bin_exp(m, n));
+	if (n & 1) {
+		assert(bin_exp(-m, n, 998'244'353) == (998'244'353 - bin_exp(m, n)) % 998'244'353);
+		assert((998'244'353 - bin_exp(m, n, 998'244'353)) % 998'244'353 == bin_exp(-m, n));
+	} else {
+		assert(bin_exp(-m, n, 998'244'353) == bin_exp(m, n));
+		assert(bin_exp(m, n, 998'244'353) == bin_exp(-m, n));
+	}
 	cout << bin_exp(m, n, 1'000'000'007) << '\n';
 	return 0;
 }
