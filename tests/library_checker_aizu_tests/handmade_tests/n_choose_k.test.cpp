@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
-#include "../../../library/math/binary_exponentiation_mod.hpp"
 
 #include "../../../library/math/n_choose_k_mod.hpp"
 
