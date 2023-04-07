@@ -1,7 +1,20 @@
 /** @file */
 #pragma once
-#include "binary_exponentiation_mod.hpp"
 #include "totient.hpp"
+/**
+ * @param b base
+ * @param e exponent
+ * @returns (b^e)%mod, 1 for 0^0.
+ * @time O(log e)
+ */
+long long bin_exp(long long b, long long e, int mod) {
+	assert(0 <= e);
+	long long res = 1;
+	if ((b %= mod) < 0) b += mod;
+	for (; e; b = b * b % mod, e /= 2)
+		if (e & 1) res = res * b % mod;
+	return res;
+}
 /**
  * @see https://cp-algorithms.com/algebra/phi-function.html#generalization
  *
