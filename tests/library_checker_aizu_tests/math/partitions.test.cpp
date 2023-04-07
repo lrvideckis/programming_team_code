@@ -6,7 +6,7 @@
 int main() {
 	int n;
 	cin >> n;
-	for (long long val : partitions(n + 1, 998244353))
+	for (long long val : partitions(n + 1))
 		cout << val << " ";
 	cout << '\n';
 	return 0;
