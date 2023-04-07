@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-const int mod = 998'244'353; //TODO change to MOD, this is to test that the CI catches it
+const int MOD = 998'244'353;
 /**
  * @author camc
  * @param a,b arrays of the same length
@@ -17,10 +17,10 @@ vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
 	for (int i = 1; i < n; i++) {
 		for (int j = i; j < n; j += i)
 			sum_a[j] += a[i], sum_b[j] += b[i];
-		c[i] = int(sum_a[i] % mod * (sum_b[i] % mod) % mod);
+		c[i] = int(sum_a[i] % MOD * (sum_b[i] % MOD) % MOD);
 	}
 	for (int i = 1; i < n; i++)
 		for (int j = i + i; j < n; j += i)
-			c[j] = (c[j] - c[i] + mod) % mod;
+			c[j] = (c[j] - c[i] + MOD) % MOD;
 	return c;
 }
