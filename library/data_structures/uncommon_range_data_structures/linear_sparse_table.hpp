@@ -4,6 +4,7 @@
 //https://codeforces.com/blog/entry/92310
 //https://github.com/okwedook/olymp/blob/master/code/data-structures/LinearMinTable.hpp
 //TODO: have least_common_ancestor.hpp depend on this
+//TODO: test on https://judge.yosupo.jp/problem/predecessor_problem
 //
 //memory: theoretically O(nlogn / log(log(n))), practically: 3 vector<unsigned long long>'s of size n
 template <typename T> struct linear_rmq {
