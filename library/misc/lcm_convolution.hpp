@@ -1,5 +1,6 @@
 /** @file */
 #pragma once
+const int MOD = 998'244'353;
 /**
  * @author camc
  * @param a,b arrays of the same length
@@ -8,17 +9,18 @@
  * @time O(n log n)
  * @memory O(n)
  */
-template<int MOD> vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
+vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
 	assert(ssize(a) == ssize(b));
 	int n = ssize(a);
-	vector<int> sum_a(n), sum_b(n), c(n);
+	vector<long long> sum_a(n), sum_b(n);
+	vector<int> c(n);
 	for (int i = 1; i < n; i++) {
 		for (int j = i; j < n; j += i)
-			sum_a[j] = (sum_a[j] + a[i]) % MOD, sum_b[j] = (sum_b[j] + b[i]) % MOD;
-		c[i] = int((1LL * sum_a[i] * sum_b[i]) % MOD);
-	}
-	for (int i = 1; i < n; i++)
+			sum_a[j] += a[i], sum_b[j] += b[i];
+		sum_a[i] %= MOD, sum_b[i] %= MOD;
+		c[i] = int((c[i] + sum_a[i] * sum_b[i]) % MOD);
 		for (int j = i + i; j < n; j += i)
-			c[j] = (c[j] - c[i] + MOD) % MOD;
+			if ((c[j] -= c[i]) < 0) c[j] += MOD;
+	}
 	return c;
 }

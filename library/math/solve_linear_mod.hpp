@@ -16,17 +16,16 @@ struct matrix_info {
  *
  * @param mat n (rows) by m (cols) matrix; left in reduced row echelon form
  * @param b length n column vector
- * @param mod a prime
  * @returns length m vector x
  * @time O(n * m * min(n, m))
  * @memory O(n * m)
  */
-matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b, long long mod) {
+matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b) {
 	assert(ssize(mat) == ssize(b));
 	int n = ssize(mat), m = ssize(mat[0]);
 	for (int i = 0; i < n; i++)
 		mat[i].push_back(b[i]);
-	auto [rank, det] = row_reduce(mat, m, mod);
+	auto [rank, det] = row_reduce(mat, m);
 	if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
 		return {rank, det, {}}; //no solution exists
 	}

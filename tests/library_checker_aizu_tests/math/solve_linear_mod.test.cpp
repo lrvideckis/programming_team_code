@@ -5,7 +5,6 @@
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	const long long MOD = 998244353;
 	int n, m;
 	cin >> n >> m;
 	vector<vector<long long>> mat(n, vector<long long>(m));
@@ -16,7 +15,7 @@ int main() {
 	vector<long long> b(n);
 	for (int i = 0; i < n; i++)
 		cin >> b[i];
-	matrix_info info = solve_linear_mod(mat, b, MOD);
+	matrix_info info = solve_linear_mod(mat, b);
 	assert(info.rank <= min(n, m));
 	if (info.x.empty()) {
 		cout << -1 << '\n';

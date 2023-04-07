@@ -3,7 +3,6 @@
 #include "../../../library/misc/random.hpp"
 #include "../../../library/math/fibonacci.hpp"
 
-const int MOD = 1'000'000'007;
 #include "../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/Matrix.h"
 #include "../../../hackpack-cpp/content/number-theory/ModInt.h"
@@ -13,7 +12,7 @@ void check(long long n) {
 	mat_2_by_2 mat;
 	mat.d = {{{{1, 1}}, {{1, 0}}}};
 	vector<mi> vec = {1, 0};
-	long long res = fib(n, MOD);
+	long long res = fib(n);
 	assert(res == int(((mat ^ n) * vec)[0]));
 }
 

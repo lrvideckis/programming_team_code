@@ -1,5 +1,6 @@
 /** @file */
 #pragma once
+const int MOD = 998'244'353;
 /**
  * @author camc
  * @param a,b arrays of the same length
@@ -8,17 +9,18 @@
  * @time O(n log n)
  * @memory O(n)
  */
-template<int MOD> vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
+vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
 	assert(ssize(a) == ssize(b));
 	int n = ssize(a);
 	vector<int> c(n);
 	for (int g = n - 1; g >= 1; g--) {
-		int sum_a = 0, sum_b = 0;
+		long long sum_a = 0, sum_b = 0;
 		for (int i = g; i < n; i += g) {
-			sum_a = (sum_a + a[i]) % MOD, sum_b = (sum_b + b[i]) % MOD;
-			c[g] = (c[g] - c[i] + MOD) % MOD;
+			sum_a += a[i], sum_b += b[i];
+			if ((c[g] -= c[i]) < 0) c[g] += MOD;
 		}
-		c[g] = int((c[g] + 1LL * sum_a * sum_b) % MOD);
+		sum_a %= MOD, sum_b %= MOD;
+		c[g] = int((c[g] + sum_a * sum_b) % MOD);
 	}
 	return c;
 }
