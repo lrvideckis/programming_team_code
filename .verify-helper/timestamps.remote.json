@@ -60,5 +60,6 @@
 "tests/library_checker_aizu_tests/strings/sa_query_palindrome.test.cpp": "2023-04-06 18:14:37 -0500",
 "tests/library_checker_aizu_tests/strings/sa_query_single_matching.test.cpp": "2023-04-06 18:14:37 -0500",
 "tests/library_checker_aizu_tests/strings/sa_query_zfunc.test.cpp": "2023-04-06 18:14:37 -0500",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-04-06 18:14:37 -0500",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-04-04 13:38:05 -0500"
 }
