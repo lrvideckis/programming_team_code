@@ -4,6 +4,7 @@
 /**
  * @param b base
  * @param e exponent
+ * @param mod modulo
  * @returns (b^e)%mod, 1 for 0^0.
  * @time O(log e)
  */
