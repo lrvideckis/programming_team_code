@@ -21,7 +21,7 @@ long long bin_exp(long long b, long long e, int mod) {
  *
  * Let t = totient(mod).
  * If log2(mod) <= e then (b^e)%mod == (b^(t+(e%t)))%mod
- * So you need enough b cases to cover when log2(mod) > e
+ * So you need enough base cases to cover when log2(mod) > e
  *
  * @param b,e,mod see return
  * @returns b ^ (b ^ (b ^ ... )) % mod, where the height of the tower
