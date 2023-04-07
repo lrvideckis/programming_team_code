@@ -8,11 +8,10 @@ int main() {
 	int n;
 	cin >> n;
 	vector<vector<long long>> matrix(n, vector<long long>(n));
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 			cin >> matrix[i][j];
-	}
-	auto [rank, det] = row_reduce(matrix, n, 998244353);
+	auto [rank, det] = row_reduce(matrix, n);
 	cout << det << '\n';
 	return 0;
 }
