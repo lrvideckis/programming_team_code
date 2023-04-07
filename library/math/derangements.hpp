@@ -7,7 +7,7 @@
  * @return number of permutations p such that p[i] != i
  * @time O(n)
  */
-vector<long long> derangements(int n, long long mod) {
+vector<long long> derangements(int n, int mod) {
 	vector<long long> dp(n);
 	dp[0] = 1;
 	for (int i = 2; i < n; i++)
