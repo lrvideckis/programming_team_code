@@ -23,6 +23,8 @@ I've added links to sources when applicable. Everything is under the [CC0 licens
 
 ## Other CP repos
 
+https://github.com/search?q=online-judge-verify-helper+path%3A.github
+
 type | list
 --- | ---
 optimized for ICPC | <ul><li>https://github.com/kth-competitive-programming/kactl</li><li>https://github.com/ucf-programming-team/hackpack-cpp</li><li>https://github.com/foreverbell/acm-icpc-cheat-sheet</li></ul>
