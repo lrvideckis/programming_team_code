@@ -23,6 +23,8 @@ I've added links to sources when applicable. Everything is under the [CC0 licens
 
 ## Other CP repos
 
+https://github.com/search?q=online-judge-verify-helper+path%3A.github
+
 link | notes
 --- | ---
 https://github.com/kth-competitive-programming/kactl | one of the best
