@@ -2,19 +2,16 @@
 #pragma once
 const int MOD = 998'244'353;
 /**
- * @param base,pw see return
- * @returns (base^pw)%MOD, 1 for 0^0.
+ * @param b base
+ * @param e exponent
+ * @returns (b^e)%MOD, 1 for 0^0.
  * @time O(log pw)
  */
-long long bin_exp(long long base, long long pw) {
-	assert(0 <= pw && 1 <= MOD);
+long long bin_exp(long long b, long long e) {
+	assert(0 <= e);
 	long long res = 1;
-	base %= MOD;
-	if (base < 0) base += MOD;
-	while (pw > 0) {
-		if (pw & 1) res = res * base % MOD;
-		base = base * base % MOD;
-		pw >>= 1;
-	}
+	if ((b %= MOD) < 0) b += MOD;
+	for (; e; b = b * b % MOD, e /= 2)
+		if (e & 1) res = res * b % MOD;
 	return res;
 }
