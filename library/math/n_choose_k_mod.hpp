@@ -7,7 +7,7 @@ long long inv[N], fact[N], inv_fact[N];
  * @memory O(N)
  */
 void calc_chooses() {
-	assert(max(2, N) <= MOD);
+	static_assert(max(2, N) <= MOD);
 	for (int i = 2; i * i <= MOD; i++) assert(MOD % i);
 	for (int i = 0; i < 2; i++)
 		inv[i] = fact[i] = inv_fact[i] = 1;
