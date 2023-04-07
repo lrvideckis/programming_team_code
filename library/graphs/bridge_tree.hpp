@@ -17,8 +17,8 @@
 vector<vector<int>> bridge_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
 	vector<vector<int>> tree(cc.num_2_edge_ccs);
 	for (int i = 0; i < ssize(adj); i++)
-		for (auto [to, e_id] : adj[i])
+		for (auto [u, e_id] : adj[i])
 			if (cc.is_bridge[e_id])
-				tree[cc.two_edge_ccid[i]].push_back(cc.two_edge_ccid[to]);
+				tree[cc.two_edge_ccid[i]].push_back(cc.two_edge_ccid[u]);
 	return tree;
 }

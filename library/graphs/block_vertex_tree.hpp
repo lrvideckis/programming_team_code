@@ -6,13 +6,13 @@
  *     graph_info cc = bridge_and_cut(adj, m);
  *     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
  *
- *     //to loop over each *unique* bcc containing a node v:
- *     for (auto bccid : bvt[v]) {
+ *     //to loop over each *unique* bcc containing a node u:
+ *     for (auto bccid : bvt[u]) {
  *         bccid -= n;
  *     }
  *
  *     //to loop over each *unique* node inside a bcc:
- *     for (auto v : bvt[bccid + n]) {}
+ *     for (auto u : bvt[bccid + n]) {}
  * @endcode
  *
  * [0, n) are original nodes
@@ -27,17 +27,17 @@
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
 	int n = ssize(adj);
 	vector<vector<int>> bvt(n + cc.num_bccs);
-	vector<bool> vis(cc.num_bccs, 0);
-	for (int v = 0; v < n; v++) {
-		for (auto [_, e_id] : adj[v]) {
+	vector<bool> vis(cc.num_bccs);
+	for (int i = 0; i < n; i++) {
+		for (auto [_, e_id] : adj[i]) {
 			int bccid = cc.bcc_id[e_id];
 			if (!vis[bccid]) {
 				vis[bccid] = 1;
-				bvt[v].push_back(bccid + n);
-				bvt[bccid + n].push_back(v);
+				bvt[i].push_back(bccid + n);
+				bvt[bccid + n].push_back(i);
 			}
 		}
-		for (auto bccid : bvt[v]) vis[bccid - n] = 0;
+		for (auto bccid : bvt[i]) vis[bccid - n] = 0;
 	}
 	return bvt;
 }

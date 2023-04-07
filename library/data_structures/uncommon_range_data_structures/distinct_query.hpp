@@ -18,7 +18,7 @@ struct distinct_query {
 	 * @time O(n log n)
 	 * @memory O(n log n)
 	 */
-	distinct_query(const vector<int>& arr) : N(ssize(arr)), roots(N + 1, 0) {
+	distinct_query(const vector<int>& arr) : N(ssize(arr)), roots(N + 1) {
 		tree.emplace_back(0, 0, 0); //acts as null
 		map<int, int> last_idx;
 		for (int i = 0; i < N; i++) {
