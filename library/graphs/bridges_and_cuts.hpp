@@ -35,27 +35,27 @@ struct graph_info {
 graph_info bridge_and_cut(const vector<vector<pair<int, int>>>& adj, int m) {
 	//stuff for both (always keep)
 	int n = ssize(adj), timer = 1;
-	vector<int> tin(n, 0);
+	vector<int> tin(n);
 	//2 edge cc stuff (delete if not needed)
 	int num_2_edge_ccs = 0;
-	vector<bool> is_bridge(m, 0);
+	vector<bool> is_bridge(m);
 	vector<int> two_edge_ccid(n), node_stack;
 	node_stack.reserve(n);
 	//bcc stuff (delete if not needed)
 	int num_bccs = 0;
-	vector<bool> is_cut(n, 0);
+	vector<bool> is_cut(n);
 	vector<int> bcc_id(m), edge_stack;
 	edge_stack.reserve(m);
-	auto dfs = [&](auto&& self, int v, int p_id) -> int {
-		int low = tin[v] = timer++, deg = 0;
-		node_stack.push_back(v);
-		for (auto [to, e_id] : adj[v]) {
+	auto dfs = [&](auto&& self, int u, int p_id) -> int {
+		int low = tin[u] = timer++, deg = 0;
+		node_stack.push_back(u);
+		for (auto [v, e_id] : adj[u]) {
 			if (e_id == p_id) continue;
-			if (!tin[to]) {
+			if (!tin[v]) {
 				edge_stack.push_back(e_id);
-				int low_ch = self(self, to, e_id);
-				if (low_ch >= tin[v]) {
-					is_cut[v] = 1;
+				int low_ch = self(self, v, e_id);
+				if (low_ch >= tin[u]) {
+					is_cut[u] = 1;
 					while (1) {
 						int edge = edge_stack.back();
 						edge_stack.pop_back();
@@ -66,19 +66,19 @@ graph_info bridge_and_cut(const vector<vector<pair<int, int>>>& adj, int m) {
 				}
 				low = min(low, low_ch);
 				deg++;
-			} else if (tin[to] < tin[v]) {
+			} else if (tin[v] < tin[u]) {
 				edge_stack.push_back(e_id);
-				low = min(low, tin[to]);
+				low = min(low, tin[v]);
 			}
 		}
-		if (p_id == -1) is_cut[v] = (deg > 1);
-		if (tin[v] == low) {
+		if (p_id == -1) is_cut[u] = (deg > 1);
+		if (tin[u] == low) {
 			if (p_id != -1) is_bridge[p_id] = 1;
 			while (1) {
 				int node = node_stack.back();
 				node_stack.pop_back();
 				two_edge_ccid[node] = num_2_edge_ccs;
-				if (node == v) break;
+				if (node == u) break;
 			}
 			num_2_edge_ccs++;
 		}

@@ -10,7 +10,7 @@ template <typename T> struct BIT {
 	 * @param n initial size
 	 * @time O(n)
 	 */
-	BIT(int n) : bit(n, 0) {}
+	BIT(int n) : bit(n) {}
 	/**
 	 * @param a initial array
 	 * @time O(n)

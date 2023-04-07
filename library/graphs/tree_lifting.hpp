@@ -64,7 +64,7 @@ struct tree_lift {
 	/**
 	 * @param u,v endpoint nodes of path
 	 * @param k index into path
-	 * @returns node at index k in {u,p[u],..,lca(u,v),..,p[v],v}, so u if k=0
+	 * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[k], so u if k=0
 	 * @time O(log n)
 	 */
 	int kth_path(int u, int v, int k) const {

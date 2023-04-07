@@ -19,6 +19,7 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		assert(lift.lca(i, i) == i);
 		assert(lca.lca(i, i) == i);
+		assert(lca.in[lca.order[i]] == i && lca.order[lca.in[i]] == i);
 	}
 	while (q--) {
 		int u, v;

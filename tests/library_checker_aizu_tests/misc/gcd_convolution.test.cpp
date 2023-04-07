@@ -11,12 +11,11 @@ istream& operator >> (istream& is, vector<int>& v) {
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
-	const int MOD = 998'244'353;
 	int n;
 	cin >> n;
 	vector<int> a(n + 1), b(n + 1);
 	cin >> a >> b;
-	auto c = gcd_convolution<MOD>(a, b);
+	auto c = gcd_convolution(a, b);
 	for (int i = 1; i <= n; i++)
 		cout << c[i] << ' ';
 	cout << '\n';

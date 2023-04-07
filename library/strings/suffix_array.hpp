@@ -51,7 +51,7 @@ template <typename T> struct suffix_array {
 		for (int len = 0; len < N; len = max(1, 2 * len)) {
 			iota(tmp.begin(), tmp.begin() + len, N - len);
 			copy_if(sa.begin(), sa.end(), tmp.begin() + len, [&](int& val) {return (val -= len) >= 0;});
-			vector<int> freq(max_val, 0);
+			vector<int> freq(max_val);
 			for (auto val : rank) freq[val]++;
 			partial_sum(freq.begin(), freq.end(), freq.begin());
 			for_each(tmp.rbegin(), tmp.rend(), [&](int t) {
