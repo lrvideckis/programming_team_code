@@ -3,6 +3,9 @@
 //https://codeforces.com/blog/entry/78931
 //https://codeforces.com/blog/entry/92310
 //https://github.com/okwedook/olymp/blob/master/code/data-structures/LinearMinTable.hpp
+//TODO: have least_common_ancestor.hpp depend on this
+//
+//memory: theoretically O(nlogn / log(log(n))), practically: 3 vector<unsigned long long>'s of size n
 template <typename T> struct linear_rmq {
 	function<bool(const T&, const T&)> op;
 	RMQ(const vector<T>& arr, const function<bool(const T&, const T&)>& a_op) : op(a_op) {
