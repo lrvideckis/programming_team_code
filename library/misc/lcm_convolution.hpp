@@ -17,10 +17,10 @@ vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
 	for (int i = 1; i < n; i++) {
 		for (int j = i; j < n; j += i)
 			sum_a[j] += a[i], sum_b[j] += b[i];
-		c[i] = int(sum_a[i] % MOD * (sum_b[i] % MOD) % MOD);
-	}
-	for (int i = 1; i < n; i++)
+		sum_a[i] %= MOD, sum_b[i] %= MOD;
+		if ((c[i] += sum_a[i] * sum_b[i] % MOD) >= MOD) c[i] -= MOD;
 		for (int j = i + i; j < n; j += i)
 			if ((c[j] -= c[i]) < 0) c[j] += MOD;
+	}
 	return c;
 }
