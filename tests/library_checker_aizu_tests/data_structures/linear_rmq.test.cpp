@@ -5,15 +5,15 @@
 
 vector<int> convert_min(const string& s) {
 	vector<int> arr(ssize(s), -1);
-	for(int i = 0; i < ssize(s); i++)
-		if(s[i] == '1') arr[i] = i;
+	for (int i = 0; i < ssize(s); i++)
+		if (s[i] == '1') arr[i] = i;
 	return arr;
 }
 
 vector<int> convert_max(const string& s) {
 	vector<int> arr(ssize(s), 1);
-	for(int i = 0; i < ssize(s); i++)
-		if(s[i] == '1') arr[i] = -i;
+	for (int i = 0; i < ssize(s); i++)
+		if (s[i] == '1') arr[i] = -i;
 	return arr;
 }
 
@@ -38,9 +38,9 @@ int main() {
 				rmq_min_idx.update(k, -1);
 				rmq_max_idx.update(k, 1);
 			}
-		} else if (type == 2) {
+		} else if (type == 2)
 			cout << s[k] << '\n';
-		} else if (type == 3) {
+		else if (type == 3) {
 			int idx = rmq_min_idx.query_idx(k, n);
 			cout << rmq_min_idx.query_idx(k, n) << '\n';
 		} else {
