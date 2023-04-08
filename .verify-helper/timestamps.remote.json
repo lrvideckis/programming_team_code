@@ -49,6 +49,7 @@
 "tests/library_checker_aizu_tests/misc/iterate_submasks.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/misc/iterate_supermasks.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/misc/lcm_convolution.test.cpp": "2023-04-07 12:07:48 -0400",
+"tests/library_checker_aizu_tests/misc/max_rect_histogram.test.cpp": "2023-04-08 15:33:12 -0500",
 "tests/library_checker_aizu_tests/misc/num_subsequences.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/strings/binary_trie.test.cpp": "2023-04-04 13:38:05 -0500",
 "tests/library_checker_aizu_tests/strings/kmp.test.cpp": "2023-04-06 18:14:37 -0500",
