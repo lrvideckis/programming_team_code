@@ -8,7 +8,7 @@
  * @param arr array
  * @param less one of less, less_equal, greater, greater_equal
  * @returns array `le` where `le[i]` = max integer such that: `le[i]` < i and
- * !less(arr[le[i]], arr[i]). Returns -1 if no number exists.
+ * less(arr[le[i]], arr[i]). Returns -1 if no number exists.
  * @time O(n)
  * @memory O(n)
  */
@@ -16,7 +16,7 @@ template <typename T> vector<int> monotonic_stack(const vector<T>& arr, const fu
 	vector<int> le(ssize(arr));
 	for (int i = 0; i < ssize(arr); i++) {
 		le[i] = i - 1;
-		while (le[i] >= 0 && less(arr[le[i]], arr[i])) le[i] = le[le[i]];
+		while (le[i] >= 0 && !less(arr[le[i]], arr[i])) le[i] = le[le[i]];
 	}
 	return le;
 }
