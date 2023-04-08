@@ -2,13 +2,13 @@
 #pragma once
 /**
  * @code{.cpp}
- *     vector<int> le = monotonic_stack<int>(arr, less());
+ *     vector<int> le = monotonic_stack<int>(arr, less()); //less, less_equal, greater, greater_equal
  *     vector<int> le = monotonic_stack<int>(arr, [&](int x, int y) {return x < y;});
  * @endcode
  * @param arr array
- * @param less one of less, less_equal, greater, greater_equal
- * @returns array `le` where `le[i]` = max integer such that: `le[i]` < i and
- * less(arr[le[i]], arr[i]). Returns -1 if no number exists.
+ * @param less any transitive compare operator
+ * @returns array le where le[i] = max integer such that: le[i] < i and
+ * less(arr[le[i]], arr[i]). If no integer exists, le[i] = -1
  * @time O(n)
  * @memory O(n)
  */

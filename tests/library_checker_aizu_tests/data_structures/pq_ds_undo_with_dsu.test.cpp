@@ -4,7 +4,7 @@
 #include "../template.hpp"
 
 #include "../../../library/data_structures/dsu_restorable.hpp"
-#include "../../../library/data_structures/priority_queue_of_updates.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/priority_queue_of_updates.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
