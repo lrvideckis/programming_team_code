@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_range_data_structures/disjoint_sparse_table.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/disjoint_sparse_table.hpp"
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
