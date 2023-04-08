@@ -20,8 +20,8 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
 		transform(arr.begin(), arr.end(), grid[i].begin(), arr.begin(), [](int a, bool g) {
 			return g * (a + 1);
 		});
-		vector<int> left = monotonic_stack<int>(arr, greater());
-		vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), greater_equal());
+		vector<int> left = monotonic_stack<int>(arr, less());
+		vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), less_equal());
 		for (int j = 0; j < m; j++) {
 			int le = j - left[j] - 1, ri = rv(right[rv(j)]) - j - 1;
 			cnt[arr[j]][le + ri + 1]++;
