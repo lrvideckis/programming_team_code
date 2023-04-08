@@ -7,16 +7,18 @@
 //TODO: test on https://judge.yosupo.jp/problem/predecessor_problem
 //
 //memory: theoretically O(nlogn / log(log(n))), practically: 3 vector<unsigned long long>'s of size n
-template <typename T> struct linear_rmq {
-	function<bool(const T&, const T&)> op;
-	RMQ(const vector<T>& arr, const function<bool(const T&, const T&)>& a_op) : op(a_op) {
+template <typename T> struct name_todo {
+	const int N;
+	function<bool(const T&, const T&)> cmp; //any transitive compare operator
+	name_todo(const vector<T>& arr, const function<bool(const T&, const T&)>& a_cmp) : N(ssize(arr)), cmp(a_cmp) {
 		//TODO
 	}
 	int query_idx(int le, int ri) const {//time: theoretically O(log(n) / log(log(n))), practically 3 times complexity of normal RMQ query
-		assert(0 <= le && le < ri && ri <= ssize(dp[0]));
+		assert(0 <= le && le < ri && ri <= N);
 		//TODO
+		return -1;
 	}
-	update(int idx, const T& val) {//time: theoretically O((log(n)^2) / log(log(n))), practically 3 * 64 array indexes
+	void update(int idx, const T& val) {//time: theoretically O((log(n)^2) / log(log(n))), practically 3 * 64 array indexes
 		//TODO
 	}
 };
