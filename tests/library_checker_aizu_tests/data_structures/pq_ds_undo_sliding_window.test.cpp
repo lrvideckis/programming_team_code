@@ -3,7 +3,7 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/data_structures/priority_queue_of_updates.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/priority_queue_of_updates.hpp"
 
 struct stack_with_get_max {
 	vector<pair<int, int>> st;
