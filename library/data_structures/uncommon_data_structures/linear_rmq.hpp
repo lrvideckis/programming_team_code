@@ -47,7 +47,7 @@ template <typename T> struct linear_rmq {
 	int min_ind(int le, int ri) const {
 		return less(arr[le], arr[ri]) ? le : ri;
 	}
-	int query_idx(int le, int ri) const {//time: theoretically O(log(n) / log(log(n))), practically ssize(mask) <= 4 if n <= 2^24
+	int query_idx(int le, int ri) const {//time: theoretically O(log(n) / log(log(n))), practically if n <= 2^24 then ssize(mask) <= 4
 		assert(0 <= le && le < ri && ri <= N);
 		int res = le;
 		for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
