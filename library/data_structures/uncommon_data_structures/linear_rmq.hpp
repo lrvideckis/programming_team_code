@@ -19,8 +19,8 @@ template <typename T> struct linear_rmq {
 	 * 1-st block: [1*64^level, 2*64^level)
 	 * 2-nd block: [2*64^level, 3*64^level)
 	 * ...
-	 * mask[level][i] = min-monotonic stack over blocks in range [i, i+64)
-	 * idx[level][i] = idx of minimum over all array values in blocks in range [i, i+64)
+	 * mask[level][i] = min-monotonic stack over blocks [i, i+64)
+	 * idx[level][i] = array idx of minimum over all values in blocks [i, i+64)
 	 * @{
 	 */
 	vector<vector<ull>> mask;
@@ -50,10 +50,8 @@ template <typename T> struct linear_rmq {
 		}
 	}
 	/**
-	 * @param level defines block size. on the level'th level, blocks are:
-	 * [0, 64^level), [64^level, 2*64^level), [2*64^level, 3*64^level), ...
-	 * @param i defines which block on this level
-	 * @returns index of minimum in block [i*64^level, (i+1)*64^level)
+	 * @param level,i defines a block, corresponding to arr[i*64^level, (i+1)*64^level)
+	 * @returns array index of minimum in block
 	 */
 	int blk(int level, int i) const {
 		return level ? idx[level - 1][i << 6] : i;
