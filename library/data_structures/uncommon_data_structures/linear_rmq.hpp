@@ -24,13 +24,13 @@ template <typename T> struct linear_rmq {
 	void update(int level, int le, int ri) {
 		for (int i = ri - 1; i >= le; i--) {
 			ull st = mask[level][i + 1];
-			const T& curr = arr[f(level, i)];
-			while (st && less(curr, arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
+			const T& curr = arr[blk(level, i)];
+			while (st && less(curr, arr[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
 			mask[level][i] = st = ((st << 1) | 1);
-			idx[level][i] = f(level, i + int(__lg(st)));
+			idx[level][i] = blk(level, i + int(__lg(st)));
 		}
 	}
-	int f(int level, int i) const {
+	int blk(int level, int i) const {
 		return level ? idx[level - 1][i << 6] : i;
 	}
 	int mn(int le, int ri) const {
@@ -42,7 +42,7 @@ template <typename T> struct linear_rmq {
 		for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
 			if (ri - le < 64) {//TODO: avoid min_idx_block if it's the last block
 				int x = 64 - (ri - le);
-				return mn(res, f(level, le + int(__lg((mask[level][le] << x) >> x))));
+				return mn(res, blk(level, le + int(__lg((mask[level][le] << x) >> x))));
 			}
 			res = mn(res, mn(idx[level][le], idx[level][ri - 64]));
 		}
