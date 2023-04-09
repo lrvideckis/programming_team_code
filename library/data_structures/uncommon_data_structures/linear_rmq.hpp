@@ -13,8 +13,19 @@ template <typename T> struct linear_rmq {
 	const int N;
 	vector<T> arr;
 	function<bool(const T&, const T&)> less;
+	/**
+	 * on the level'th level, blocks are:
+	 * 0-th block: [0*64^level, 1*64^level)
+	 * 1-st block: [1*64^level, 2*64^level)
+	 * 2-nd block: [2*64^level, 3*64^level)
+	 * ...
+	 * mask[level][i] = min-monotonic stack over blocks in range [i, i+64)
+	 * idx[level][i] = idx of minimum over all array values in blocks in range [i, i+64)
+	 * @{
+	 */
 	vector<vector<ull>> mask;
 	vector<vector<int>> idx;
+	/** @} */
 	/**
 	 * @param a_arr an array
 	 * @param a_less transitive compare operator
@@ -24,8 +35,8 @@ template <typename T> struct linear_rmq {
 	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) : N(ssize(a_arr)), arr(a_arr), less(a_less) {
 		for (int n = N; n >= 2; n = ((n + 63) >> 6)) {
 			int level = ssize(idx);
-			idx.emplace_back(n);
 			mask.emplace_back(n + 1);
+			idx.emplace_back(n);
 			calc(level, 0, n);
 		}
 	}
@@ -38,6 +49,12 @@ template <typename T> struct linear_rmq {
 			idx[level][i] = blk(level, i + int(__lg(st)));
 		}
 	}
+	/**
+	 * @param level defines block size. on the level'th level, blocks are:
+	 * [0, 64^level), [64^level, 2*64^level), [2*64^level, 3*64^level), ...
+	 * @param i defines which block on this level
+	 * @returns index of minimum in block [i*64^level, (i+1)*64^level)
+	 */
 	int blk(int level, int i) const {
 		return level ? idx[level - 1][i << 6] : i;
 	}
