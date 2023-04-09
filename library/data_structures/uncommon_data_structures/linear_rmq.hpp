@@ -29,7 +29,7 @@ template <typename T> struct linear_rmq {
 			ull st = mask[level][i + 1];
 			while (st && less(arr[f(level, i)], arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
 			mask[level][i] = st = ((st << 1) | 1);
-			idx[level][i] = f(level, i + __lg(st));
+			idx[level][i] = f(level, i + int(__lg(st)));
 		}
 	}
 	int f(int level, int i) const {
@@ -37,7 +37,7 @@ template <typename T> struct linear_rmq {
 	}
 	int min_idx_block(int level, int le, int ri) const {//returns index of min in range [le, ri)
 		int x = 64 - (ri - le);
-		return f(level, le + __lg((mask[level][le] << x) >> x));
+		return f(level, le + int(__lg((mask[level][le] << x) >> x)));
 	}
 	int min_ind(int le, int ri) const {
 		return less(arr[le], arr[ri]) ? le : ri;
