@@ -9,11 +9,9 @@ template <typename T> struct linear_rmq {
 	using ull = unsigned long long;
 	const int N;
 	vector<T> arr;
+	function<bool(const T&, const T&)> less; //any transitive compare operator
 	vector<vector<int>> idx; //idx[level][i] = index of min in range [i, i + 64^(level+1))
 	vector<vector<ull>> mask; //mask[level][le] = stack representing subarray arr[le, le + 64)
-
-
-	function<bool(const T&, const T&)> less; //any transitive compare operator
 	//time & memory: O(n)
 	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) :
 		N(ssize(a_arr)), arr(a_arr), less(a_less) {
