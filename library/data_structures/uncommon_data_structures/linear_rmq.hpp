@@ -18,22 +18,22 @@ template <typename T> struct linear_rmq {
 	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) :
 		N(ssize(a_arr)),
 		arr(a_arr),
+		idx(1, vector<int>(N)),
 		mask(1, vector<ull>(N)), less(a_less) {
-		auto g = [&](int i) -> int {
-			return idx.size() ? idx.back()[i << 6] : i;
-		};
+		int level = 0;
 		while (1) {
-			int n = ssize(mask.back());
+			int n = ssize(idx.back());
 			ull st = 0;
-			vector<int> new_idx_row(n);
 			for (int i = n - 1; i >= 0; i--) {
-				while (st && less(arr[g(i)], arr[g(i + 1 + __builtin_ctzll(st))])) st &= st - 1;
+				while (st && less(arr[f(level, i)], arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
 				mask.back()[i] = st = ((st << 1) | 1);
-				new_idx_row[i] = g(i + __lg(st));
+				idx.back()[i] = f(level, i + __lg(st));
 			}
-			idx.emplace_back(new_idx_row);
 			if (n <= 2 * 64) break;
-			mask.emplace_back((n + 63) >> 6);
+			int sz = (n + 63) >> 6;
+			mask.emplace_back(sz);
+			idx.emplace_back(sz);
+			level++;
 		}
 	}
 	int f(int level, int i) const {
