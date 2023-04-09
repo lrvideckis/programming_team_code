@@ -29,14 +29,14 @@ int main() {
 		if (type == 0) {
 			if (s[k] == '0') {
 				s[k] = '1';
-				rmq_min_idx.set_val(k, k);
-				rmq_max_idx.set_val(k, k);
+				rmq_min_idx.update(k, k);
+				rmq_max_idx.update(k, k);
 			}
 		} else if (type == 1) {
 			if (s[k] == '1') {
 				s[k] = '0';
-				rmq_min_idx.set_val(k, INT_MAX);
-				rmq_max_idx.set_val(k, -1);
+				rmq_min_idx.update(k, INT_MAX);
+				rmq_max_idx.update(k, -1);
 			}
 		} else if (type == 2)
 			cout << s[k] << '\n';

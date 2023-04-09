@@ -18,10 +18,10 @@ template <typename T> struct linear_rmq {
 			int level = ssize(idx);
 			idx.emplace_back(n);
 			mask.emplace_back(n + 1);
-			update(level, 0, n);
+			calc(level, 0, n);
 		}
 	}
-	void update(int level, int le, int ri) {
+	void calc(int level, int le, int ri) {
 		for (int i = ri - 1; i >= le; i--) {
 			ull st = mask[level][i + 1];
 			const T& curr = arr[blk(level, i)];
@@ -48,10 +48,10 @@ template <typename T> struct linear_rmq {
 		}
 		return res;
 	}
-	void set_val(int pos, const T& val) {//time: theoretically O((log(n)^2) / log(log(n)))
+	void update(int pos, const T& val) {//time: theoretically O((log(n)^2) / log(log(n)))
 		assert(0 <= pos && pos < N);
 		arr[pos] = val;
 		for (int level = 0; level < ssize(mask); level++, pos >>= 6)
-			update(level, max(0, pos - 63), pos + 1);
+			calc(level, max(0, pos - 63), pos + 1);
 	}
 };
