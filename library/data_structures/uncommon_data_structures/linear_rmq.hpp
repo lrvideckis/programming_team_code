@@ -51,9 +51,17 @@ template <typename T> struct linear_rmq {
 		}
 		return res;
 	}
-	/*
-	void update(int idx, const T& val) {//time: theoretically O((log(n)^2) / log(log(n)))
-		//TODO
+	void update(int pos, const T& val) {//time: theoretically O((log(n)^2) / log(log(n)))
+		assert(0 <= pos && pos < N);
+		arr[pos] = val;
+		for (int level = 0; level < ssize(mask); level++, pos >>= 6) {
+			int n = ssize(mask[level]);
+			ull st = (pos + 1 < n ? mask[level][pos + 1] : 0);
+			for (int i = pos; i >= max(0, pos - 63); i--) {
+				while (st && less(arr[f(level, i)], arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
+				mask[level][i] = st = ((st << 1) | 1);
+				idx[level][i] = f(level, i + __lg(st));
+			}
+		}
 	}
-	*/
 };
