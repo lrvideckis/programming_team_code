@@ -33,10 +33,6 @@ template <typename T> struct linear_rmq {
 	int f(int level, int i) const {
 		return level ? idx[level - 1][i << 6] : i;
 	}
-	int min_idx_block(int level, int le, int ri) const {//returns index of min in range [le, ri)
-		int x = 64 - (ri - le);
-		return f(level, le + int(__lg((mask[level][le] << x) >> x)));
-	}
 	int min_ind(int le, int ri) const {
 		return less(arr[le], arr[ri]) ? le : ri;
 	}
@@ -44,8 +40,10 @@ template <typename T> struct linear_rmq {
 		assert(0 <= le && le < ri && ri <= N);
 		int res = le;
 		for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
-			if (ri - le < 64) //TODO: avoid min_idx_block if it's the last block
-				return min_ind(res, min_idx_block(level, le, ri));
+			if (ri - le < 64) {//TODO: avoid min_idx_block if it's the last block
+				int x = 64 - (ri - le);
+				return min_ind(res, f(level, le + int(__lg((mask[level][le] << x) >> x))));
+			}
 			res = min_ind(res, min_ind(idx[level][le], idx[level][ri - 64]));
 		}
 		return res;
