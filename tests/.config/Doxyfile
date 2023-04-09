@@ -976,11 +976,17 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          query_impl \
                          update_impl \
                          ll \
+                         ull \
+                         mn \
+                         mx \
+                         arr \
+                         less \
                          add_edge \
                          dsu_restorable \
                          upd \
                          init \
                          rmq \
+                         calc \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
