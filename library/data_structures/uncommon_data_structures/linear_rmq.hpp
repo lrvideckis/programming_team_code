@@ -17,18 +17,20 @@ template <typename T> struct linear_rmq {
 	//time & memory: O(n)
 	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) :
 		N(ssize(a_arr)), arr(a_arr), less(a_less) {
-		for (int n = N; ; n = (n + 63) >> 6) {
-			vector<int> new_idx(n);
-			vector<ull> new_mask(n);
-			ull st = 0;
-			for (int i = n - 1; i >= 0; i--) {
-				while (st && less(arr[f(ssize(idx), i)], arr[f(ssize(idx), i + 1 + __builtin_ctzll(st))])) st &= st - 1;
-				new_mask[i] = st = ((st << 1) | 1);
-				new_idx[i] = f(ssize(idx), i + __lg(st));
-			}
-			idx.emplace_back(new_idx);
-			mask.emplace_back(new_mask);
-			if (n <= 2 * 64) break;//TODO: move to for-loop condition
+		for (int n = N; n > 2; n = (n + 63) >> 6) {
+			int level = ssize(idx);
+			idx.emplace_back(n);
+			mask.emplace_back(n);
+			update(level, 0, n);
+		}
+	}
+	void update(int level, int le, int ri) {
+		assert(0 <= le && le < ri && ri <= ssize(mask[level]));
+		ull st = (ri < ssize(mask[level]) ? mask[level][ri] : 0);
+		for (int i = ri - 1; i >= le; i--) {
+			while (st && less(arr[f(level, i)], arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
+			mask[level][i] = st = ((st << 1) | 1);
+			idx[level][i] = f(level, i + __lg(st));
 		}
 	}
 	int f(int level, int i) const {
@@ -50,15 +52,6 @@ template <typename T> struct linear_rmq {
 			res = min_ind(res, min_ind(idx[level][le], idx[level][ri - 64]));
 		}
 		return res;
-	}
-	void update(int level, int le, int ri) {
-		assert(0 <= le && le < ri && ri <= ssize(mask[level]));
-		ull st = (ri < ssize(mask[level]) ? mask[level][ri] : 0);
-		for (int i = ri - 1; i >= le; i--) {
-			while (st && less(arr[f(level, i)], arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
-			mask[level][i] = st = ((st << 1) | 1);
-			idx[level][i] = f(level, i + __lg(st));
-		}
 	}
 	void set_val(int pos, const T& val) {//time: theoretically O((log(n)^2) / log(log(n)))
 		assert(0 <= pos && pos < N);
