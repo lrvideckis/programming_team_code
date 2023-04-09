@@ -15,7 +15,7 @@ template <typename T> struct linear_rmq {
 	//time & memory: O(n)
 	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) :
 		N(ssize(a_arr)), arr(a_arr), less(a_less) {
-		for (int n = N; n > 2; n = (n + 63) >> 6) {
+		for (int n = N; n >= 2; n = (n + 63) >> 6) {
 			int level = ssize(idx);
 			idx.emplace_back(n);
 			mask.emplace_back(n + 1);
