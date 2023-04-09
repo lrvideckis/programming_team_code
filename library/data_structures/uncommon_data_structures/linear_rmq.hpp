@@ -13,9 +13,8 @@ template <typename T> struct linear_rmq {
 	vector<vector<int>> idx; //idx[level][i] = index of min in range [i, i + 64^(level+1))
 	vector<vector<ull>> mask; //mask[level][le] = stack representing subarray arr[le, le + 64)
 	//time & memory: O(n)
-	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) :
-		N(ssize(a_arr)), arr(a_arr), less(a_less) {
-		for (int n = N; n >= 2; n = ((n - 1) >> 6)) {
+	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) : N(ssize(a_arr)), arr(a_arr), less(a_less) {
+		for (int n = N; n >= 2; n = ((n + 63) >> 6)) {
 			int level = ssize(idx);
 			idx.emplace_back(n);
 			mask.emplace_back(n + 1);
@@ -34,7 +33,7 @@ template <typename T> struct linear_rmq {
 	int f(int level, int i) const {
 		return level ? idx[level - 1][i << 6] : i;
 	}
-	int min_ind(int le, int ri) const {
+	int mn(int le, int ri) const {
 		return less(arr[le], arr[ri]) ? le : ri;
 	}
 	int query_idx(int le, int ri) const {//time: theoretically O(log(n) / log(log(n))), practically if n <= 2^24 then ssize(mask) <= 4
@@ -43,9 +42,9 @@ template <typename T> struct linear_rmq {
 		for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
 			if (ri - le < 64) {//TODO: avoid min_idx_block if it's the last block
 				int x = 64 - (ri - le);
-				return min_ind(res, f(level, le + int(__lg((mask[level][le] << x) >> x))));
+				return mn(res, f(level, le + int(__lg((mask[level][le] << x) >> x))));
 			}
-			res = min_ind(res, min_ind(idx[level][le], idx[level][ri - 64]));
+			res = mn(res, mn(idx[level][le], idx[level][ri - 64]));
 		}
 		return res;
 	}
