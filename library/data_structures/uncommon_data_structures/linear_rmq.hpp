@@ -16,24 +16,19 @@ template <typename T> struct linear_rmq {
 	function<bool(const T&, const T&)> less; //any transitive compare operator
 	//time & memory: O(n)
 	linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) :
-		N(ssize(a_arr)),
-		arr(a_arr),
-		idx(1, vector<int>(N)),
-		mask(1, vector<ull>(N)), less(a_less) {
-		int level = 0;
-		while (1) {
-			int n = ssize(idx.back());
+		N(ssize(a_arr)), arr(a_arr), less(a_less) {
+		for (int n = N; ; n = (n + 63) >> 6) {
+			vector<int> new_idx(n);
+			vector<ull> new_mask(n);
 			ull st = 0;
 			for (int i = n - 1; i >= 0; i--) {
-				while (st && less(arr[f(level, i)], arr[f(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
-				mask.back()[i] = st = ((st << 1) | 1);
-				idx.back()[i] = f(level, i + __lg(st));
+				while (st && less(arr[f(ssize(idx), i)], arr[f(ssize(idx), i + 1 + __builtin_ctzll(st))])) st &= st - 1;
+				new_mask[i] = st = ((st << 1) | 1);
+				new_idx[i] = f(ssize(idx), i + __lg(st));
 			}
-			if (n <= 2 * 64) break;
-			int sz = (n + 63) >> 6;
-			mask.emplace_back(sz);
-			idx.emplace_back(sz);
-			level++;
+			idx.emplace_back(new_idx);
+			mask.emplace_back(new_mask);
+			if (n <= 2 * 64) break;//TODO: move to for-loop condition
 		}
 	}
 	int f(int level, int i) const {
@@ -41,7 +36,6 @@ template <typename T> struct linear_rmq {
 	}
 	int min_idx_block(int level, int le, int ri) const {//returns index of min in range [le, ri)
 		int x = 64 - (ri - le);
-		assert(x > 0);
 		return f(level, le + __lg((mask[level][le] << x) >> x));
 	}
 	int min_ind(int le, int ri) const {
@@ -58,7 +52,7 @@ template <typename T> struct linear_rmq {
 		return res;
 	}
 	/*
-	void update(int idx, const T& val) {//time: theoretically O((log(n)^2) / log(log(n))), practically 4 * 64 array indexes
+	void update(int idx, const T& val) {//time: theoretically O((log(n)^2) / log(log(n)))
 		//TODO
 	}
 	*/
