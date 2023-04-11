@@ -31,4 +31,4 @@ optimized for ICPC | <ul><li>https://github.com/kth-competitive-programming/kact
 optimized for online contests | <ul><li>https://github.com/yosupo06/library-checker-problems</li></ul>
 extensive | <ul><li>https://github.com/koosaga/olympiad/tree/master/Library/codes</li><li>https://github.com/ShahjalalShohag/code-library</li><li>https://github.com/brunomaletta/Biblioteca</li><li>https://github.com/dacin21/dacin21_codebook</li></ul>
 lgm | <ul><li>https://github.com/ecnerwala/cp-book</li><li>https://github.com/the-tourist/algo</li><li>https://github.com/nealwu/competitive-programming</li><li>https://github.com/bqi343/cp-notebook</li><li>https://github.com/suisen-cp/cp-library-cpp</li></ul>
-python | https://github.com/cheran-senthil/PyRival
+python | <ul><li>https://github.com/cheran-senthil/PyRival</li></ul>
