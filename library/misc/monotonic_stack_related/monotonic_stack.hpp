@@ -2,8 +2,9 @@
 #pragma once
 /**
  * @code{.cpp}
- *     vector<int> le = monotonic_stack<int>(arr, less()); //less, less_equal, greater, greater_equal
- *     vector<int> le = monotonic_stack<int>(arr, [&](int x, int y) {return x < y;});
+ *     vector<long long> arr;
+ *     vector<int> le = monotonic_stack<long long>(arr, less()); //less, less_equal, greater, greater_equal
+ *     vector<int> le = monotonic_stack<long long>(arr, [&](long long x, long long y) {return x < y;});
  * @endcode
  * @param arr array
  * @param less any transitive compare operator
