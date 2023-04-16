@@ -67,7 +67,7 @@ jobs:
     - name: Check correctness, completeness of doxygen comments
       run: make --directory=tests/ doxygen
 
-  build_pdf:
+  build_hackpack:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -88,9 +88,9 @@ jobs:
         name: hackpack
         path: tests/hackpack.pdf
 
-  publish_pdf:
+  publish_hackpack:
     runs-on: ubuntu-latest
-    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_pdf]
+    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_hackpack]
       # if: github.ref == 'refs/heads/main' TODO: revert, only temporary
     steps:
     - uses: actions/checkout@v2
