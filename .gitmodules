@@ -4,3 +4,6 @@
 [submodule "hackpack-cpp"]
 	path = hackpack-cpp
 	url = https://github.com/ucf-programming-team/hackpack-cpp
+[submodule "notebook-generator"]
+	path = notebook-generator
+	url = https://github.com/pin3da/notebook-generator
