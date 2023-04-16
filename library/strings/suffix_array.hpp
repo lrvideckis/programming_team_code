@@ -21,7 +21,7 @@ template <typename T> struct suffix_array {
 	 * 3 ana
 	 * 4 na
 	 * 5 a
-	 * sorted,  lcp
+	 * sorted,  longest common prefix (lcp)
 	 * 5 a
 	 *   |      1
 	 * 3 ana
