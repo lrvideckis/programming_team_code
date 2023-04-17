@@ -17,8 +17,6 @@ for header in ../library/**/*.hpp; do
 	sed --in-place "1s;^;//$comment\n//$hash\n;" "$header"
 done
 
-# TODO replace underscores with spaces in file/directory names
-
 git submodule init
 git submodule update
 
@@ -28,9 +26,11 @@ git submodule update
 	npm run test
 )
 
+find ../library/ -depth -execdir rename --all '_' ' ' {} \;
+
 ./../notebook-generator/bin/notebookgen ../library/ --author "SDSMT" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
 
-# TODO replace spaces with underscores in file/directory names
+find ../library/ -depth -execdir rename --all ' ' '_' {} \;
 
 #remove hash code comments
 sed -i '1,2d' ../library/**/*.hpp
