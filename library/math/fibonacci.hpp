@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-const int MOD = 1'000'000'007;
+const int MOD = 998'244'353;
 unordered_map<long long, long long> table; /**< for memoization */
 /**
  * @see https://codeforces.com/blog/entry/14516
