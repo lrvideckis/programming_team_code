@@ -9,13 +9,11 @@ for header in ../library/**/*.hpp; do
 	sed --in-place "1s;^;//$comment\n//$hash\n;" "$header"
 done
 
-#needed to make boxes under headings empty, otherwise you get filler text
-touch NULL
+# replace underscores with spaces in file/directory names
 
-#need to compile twice for it to generate the table of contents
-#I think it's related to not knowing page numbers until after first pdf generation
-pdflatex -halt-on-error .config/hackpack.tex || exit 1
-pdflatex -halt-on-error .config/hackpack.tex || exit 1
+# run notebook-generator command
+
+# replace spaces with underscores in file/directory names
 
 #remove hash code comments
 sed -i '1,2d' ../library/**/*.hpp
