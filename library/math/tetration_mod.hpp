@@ -17,7 +17,7 @@ long long bin_exp(long long b, long long e, int mod) {
     return res;
 }
 /**
- * @see https://cp-algorithms.com/algebra/phi-function.html#generalization
+ * @see https://cp-algorithms.com/algebra /phi-function.html#generalization
  *
  * Let t = totient(mod).
  * If log2(mod) <= e then (b^e)%mod == (b^(t+(e%t)))%mod

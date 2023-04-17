@@ -34,7 +34,7 @@ jobs:
       run: oj-verify all
 
   astyle_cppcheck:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
@@ -43,7 +43,7 @@ jobs:
       run: make --directory=tests/ astyle_cppcheck
 
   clangtidy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
@@ -52,14 +52,14 @@ jobs:
       run: make --directory=tests/ clangtidy
 
   compile_all_tests:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Compile all tests
       run: make --directory=tests/ compile_all_tests
 
   doxygen:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install doxygen
@@ -67,12 +67,16 @@ jobs:
     - name: Check correctness, completeness of doxygen comments
       run: make --directory=tests/ doxygen
 
-  build_pdf:
-    runs-on: ubuntu-22.04
+  build_hackpack:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: sudo apt install texlive-latex-base texlive-fonts-extra
+    - name: Install texlive, rename
+      run: sudo apt update && sudo apt install texlive texlive-latex-extra rename
+    - name: Install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: "12.16.0"
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3
@@ -80,9 +84,9 @@ jobs:
         name: hackpack
         path: tests/hackpack.pdf
 
-  publish_pdf:
-    runs-on: ubuntu-22.04
-    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_pdf]
+  publish_hackpack:
+    runs-on: ubuntu-latest
+    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_hackpack]
     if: github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v2
@@ -99,7 +103,7 @@ jobs:
         files: tests/hackpack.pdf
 
   format_and_check_bash_scripts:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies

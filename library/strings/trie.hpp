@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 /**
- * @see https://cp-algorithms.com/string/aho_corasick.html#construction-of-the-trie
+ * @see https://cp-algorithms.com/string/ aho_corasick.html#construction-of-the-trie
  */
 const int K = 26; /**< alphabet size */
 struct trie {

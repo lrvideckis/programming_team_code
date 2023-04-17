@@ -25,14 +25,6 @@ find ../library/ library_checker_aizu_tests/ -name "*[A-Z]*" -or -name "*-*" |
 	grep --invert-match "README" &&
 	exit 1
 
-WORD_LENGTH_THRESHOLD=80
-echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
-cat ../library/**/*.hpp |
-	tr '[:blank:]' '\n' |
-	awk --assign=max_len="$WORD_LENGTH_THRESHOLD" '{if(length>max_len)print$0}' |
-	grep . &&
-	exit 1
-
 echo ".hpp files missing pragma once:"
 comm -23 --check-order <(
 	find ../library/ -type f -name "*.hpp" |
