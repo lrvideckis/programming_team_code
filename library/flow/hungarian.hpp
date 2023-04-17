@@ -56,7 +56,6 @@ weighted_match hungarian(const vector<vector<long long>>& cost) {
         } while (j0);
     }
     vector<int> l_to_r(n + 1);
-    for (int j = 1; j <= m; j++)
-        l_to_r[p[j]] = j;
+    for (int j = 1; j <= m; j++) l_to_r[p[j]] = j;
     return {-v[0], l_to_r};
 }

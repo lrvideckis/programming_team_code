@@ -54,8 +54,7 @@ struct distinct_query {
         if (tree[vr].sum == 0 || idx <= tl) return 0;
         if (tr <= idx) return tree[vr].sum - tree[vl].sum;
         int tm = tl + (tr - tl) / 2;
-        return
-            query_impl(idx, tl, tm, tree[vl].lch, tree[vr].lch) +
-            query_impl(idx, tm, tr, tree[vl].rch, tree[vr].rch);
+        return query_impl(idx, tl, tm, tree[vl].lch, tree[vr].lch) +
+               query_impl(idx, tm, tr, tree[vl].rch, tree[vr].rch);
     }
 };
