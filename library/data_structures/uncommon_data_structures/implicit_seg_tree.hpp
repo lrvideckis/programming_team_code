@@ -23,7 +23,7 @@ template <int N> struct implicit_seg_tree {
     implicit_seg_tree(int le, int ri) : root_l(le), root_r(ri) {
         tree[ptr++].val = {0, ri - le};
     }
-    void apply(ch add, int v) {
+    void apply(const ch& add, int v) {
         tree[v].val[0] += add;
         tree[v].lazy += add;
     }
@@ -44,8 +44,8 @@ template <int N> struct implicit_seg_tree {
     /**
      * @param le,ri defines range [le, ri)
      */
-    void update(int le, int ri, ch add) {update(le, ri, add, root_l, root_r, 0);}
-    void update(int le, int ri, ch add, int tl, int tr, int v) {
+    void update(int le, int ri, const ch& add) {update(le, ri, add, root_l, root_r, 0);}
+    void update(int le, int ri, const ch& add, int tl, int tr, int v) {
         if (ri <= tl || tr <= le)
             return;
         if (le <= tl && tr <= ri)
