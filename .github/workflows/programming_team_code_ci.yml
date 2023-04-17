@@ -72,8 +72,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install texlive
-      #run: sudo apt-get install texlive texlive-latex-extra
-      run: sudo apt install texlive-full
+      run: sudo apt update && sudo apt install texlive texlive-latex-extra
     - name: Install node
       uses: actions/setup-node@v1
       with:
