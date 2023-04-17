@@ -26,11 +26,11 @@ git submodule update
 	npm run test
 )
 
-find ../library/ -depth -execdir rename --all '_' ' ' {} \;
+find ../library/ -depth -execdir rename 's/_/ /g' {} \;
 
 ./../notebook-generator/bin/notebookgen ../library/ --author "SDSMT" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
 
-find ../library/ -depth -execdir rename --all ' ' '_' {} \;
+find ../library/ -depth -execdir rename 's/ /_/g' {} \;
 
 #remove hash code comments
 sed -i '1,2d' ../library/**/*.hpp
