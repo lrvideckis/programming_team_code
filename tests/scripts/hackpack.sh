@@ -28,7 +28,7 @@ git submodule update
 	npm run test
 )
 
-./../notebook-generator/bin/notebookgen ../library/ --author "SDSM&T" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
+./../notebook-generator/bin/notebookgen ../library/ --author "SDSMT" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
 
 # TODO replace spaces with underscores in file/directory names
 
