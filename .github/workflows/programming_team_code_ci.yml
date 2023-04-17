@@ -87,7 +87,7 @@ jobs:
   publish_hackpack:
     runs-on: ubuntu-latest
     needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests, doxygen, build_hackpack]
-      # if: github.ref == 'refs/heads/main' TODO: revert, only temporary
+    if: github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v2
     - uses: actions/download-artifact@v3
