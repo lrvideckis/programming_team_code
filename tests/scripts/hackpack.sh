@@ -26,6 +26,8 @@ git submodule update
 	npm run test
 )
 
+# underscores in file names look bad in hackpack, so this
+# replaces all underscores with spaces
 find ../library/ -depth -execdir rename 'y/_/ /' {} \;
 
 ./../notebook-generator/bin/notebookgen ../library/ --author "SDSMT" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
