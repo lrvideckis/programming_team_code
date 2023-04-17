@@ -2,6 +2,8 @@
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 
+rename -V
+
 WORD_LENGTH_THRESHOLD=65
 echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
 cat ../library/**/*.hpp |
@@ -26,11 +28,11 @@ git submodule update
 	npm run test
 )
 
-find ../library/ -depth -execdir rename 'y/_/ /' {} \;
+find ../library/ -depth -execdir rename --all '_' ' ' {} \;
 
 ./../notebook-generator/bin/notebookgen ../library/ --author "SDSMT" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
 
-find ../library/ -depth -execdir rename 'y/ /_/' {} \;
+find ../library/ -depth -execdir rename --all ' ' '_' {} \;
 
 #remove hash code comments
 sed -i '1,2d' ../library/**/*.hpp
