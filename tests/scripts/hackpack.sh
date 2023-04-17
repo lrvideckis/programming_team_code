@@ -31,7 +31,7 @@ find ../library/ -depth -execdir rename 'y/_/ /' {} +
 
 # regarding school branding: https://brand.sdsmt.edu/identity/our-name/
 # in particular, no initials
-./../notebook-generator/bin/notebookgen ../library/ --author "South Dakota Mines" --output ./hackpack.pdf --size 8 --columns 3
+./../notebook-generator/bin/notebookgen ../library/ --author "South Dakota Mines" --output ./hackpack.pdf --size 8 --columns 3 --image .config/SouthDakotaMinesLogo.png
 
 find ../library/ -depth -execdir rename 'y/ /_/' {} +
 
