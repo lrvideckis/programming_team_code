@@ -14,14 +14,14 @@ struct iter_seg_tree {
     iter_seg_tree(const vector<long long>& arr) : S(1 << __lg(2 * ssize(arr) - 1)), st(arr) {}
     void pull(int v) {st.tree[v] = op(st.tree[2 * v], st.tree[2 * v + 1]);}
     /**
-     * @see https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
+     * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
     int to_leaf(int i) const {
         i += S;
         return i < 2 * st.N ? i : 2 * (i - st.N);
     }
     /**
-     * @see https://github.com/ecnerwala/cp-book/blob/master/src/seg_tree.hpp
+     * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
     pair<int, int> get_node_bounds(int a) const {
         assert(1 <= a && a < 2 * st.N);

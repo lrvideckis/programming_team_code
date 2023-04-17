@@ -64,7 +64,7 @@ template <typename T> struct sa_query {
      * @param t needle
      * @returns min i such that t == s.substr(i, ssize(t)) or -1. For example,
      * replace RMQ with kth-smallest PST/Wavelet to solve
-     * https://open.kattis.com/problems/anothersubstringqueryproblem
+     * https://open.kattis.com/problems /anothersubstringqueryproblem
      * @time O(|t| * log(|s|))
      */
     int find_first(const T& t) const {
