@@ -1,6 +1,8 @@
 #!/bin/bash
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
+# ** glob now searches any number of levels
+shopt -s globstar
 
 WORD_LENGTH_THRESHOLD=65
 echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
