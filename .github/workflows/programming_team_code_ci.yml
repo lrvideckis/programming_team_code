@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install texlive
+    - name: Install texlive, rename
       run: sudo apt update && sudo apt install texlive texlive-latex-extra rename
     - name: Install node
       uses: actions/setup-node@v1
