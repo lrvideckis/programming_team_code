@@ -22,19 +22,18 @@ done
 git submodule init
 git submodule update
 
-(
-	cd ../notebook-generator/
-	npm ci
-	npm run test
-)
+npm ci --prefix ../notebook-generator/
+npm run test --prefix ../notebook-generator/
 
 # underscores in file names look bad in hackpack, so this
 # replaces all underscores with spaces
-find ../library/ -depth -execdir rename 'y/_/ /' {} \;
+find ../library/ -depth -execdir rename 'y/_/ /' {} +
 
-./../notebook-generator/bin/notebookgen ../library/ --author "SDSMT" --initials SDSMT --output ./hackpack.pdf --size 8 --columns 3
+# regarding school branding: https://brand.sdsmt.edu/identity/our-name/
+# in particular, no initials
+./../notebook-generator/bin/notebookgen ../library/ --author "South Dakota Mines" --output ./hackpack.pdf --size 8 --columns 3
 
-find ../library/ -depth -execdir rename 'y/ /_/' {} \;
+find ../library/ -depth -execdir rename 'y/ /_/' {} +
 
 #remove hash code comments
 sed -i '1,2d' ../library/**/*.hpp
