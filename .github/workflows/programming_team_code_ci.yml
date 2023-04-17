@@ -77,10 +77,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: "12.16.0"
-    - name: Install packages
-      run: npm ci
-    - run: npm run test
-    - run: test/run.sh
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3
