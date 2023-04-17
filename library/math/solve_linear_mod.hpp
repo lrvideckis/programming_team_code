@@ -5,9 +5,9 @@
  * Info about matrix and solution vector
  */
 struct matrix_info {
-	int rank; /**< max number of linearly independent vectors */
-	long long det; /**< determinant */
-	vector<long long> x; /**< solution vector, empty iff no solution */
+    int rank; /**< max number of linearly independent vectors */
+    long long det; /**< determinant */
+    vector<long long> x; /**< solution vector, empty iff no solution */
 };
 /**
  * Solves mat * x = b under prime mod. Number of unique solutions = (size of
@@ -21,19 +21,19 @@ struct matrix_info {
  * @memory O(n * m)
  */
 matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b) {
-	assert(ssize(mat) == ssize(b));
-	int n = ssize(mat), m = ssize(mat[0]);
-	for (int i = 0; i < n; i++)
-		mat[i].push_back(b[i]);
-	auto [rank, det] = row_reduce(mat, m);
-	if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
-		return {rank, det, {}}; //no solution exists
-	}
-	vector<long long> x(m);
-	int j = 0;
-	for_each(mat.begin(), mat.begin() + rank, [&](const auto & v) {
-		while (v[j] == 0) j++;
-		x[j] = v.back();
-	});
-	return {rank, det, x};
+    assert(ssize(mat) == ssize(b));
+    int n = ssize(mat), m = ssize(mat[0]);
+    for (int i = 0; i < n; i++)
+        mat[i].push_back(b[i]);
+    auto [rank, det] = row_reduce(mat, m);
+    if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
+        return {rank, det, {}}; //no solution exists
+    }
+    vector<long long> x(m);
+    int j = 0;
+    for_each(mat.begin(), mat.begin() + rank, [&](const auto & v) {
+        while (v[j] == 0) j++;
+        x[j] = v.back();
+    });
+    return {rank, det, x};
 }

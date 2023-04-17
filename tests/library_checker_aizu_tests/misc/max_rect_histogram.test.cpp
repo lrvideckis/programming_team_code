@@ -4,12 +4,12 @@
 #include "../../../library/misc/monotonic_stack_related/max_rect_histogram.hpp"
 
 int main() {
-	cin.tie(0)->sync_with_stdio(0);
-	int n;
-	cin >> n;
-	vector<int> arr(n);
-	for (int i = 0; i < n; i++)
-		cin >> arr[i];
-	cout << max_rect_histogram(arr) << '\n';
-	return 0;
+    cin.tie(0)->sync_with_stdio(0);
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+    cout << max_rect_histogram(arr) << '\n';
+    return 0;
 }
