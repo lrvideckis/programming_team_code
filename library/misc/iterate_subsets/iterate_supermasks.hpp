@@ -9,6 +9,6 @@
  * @memory O(1)
  */
 void iterate_supermasks(int mask, int n, const function<void(int)>& func) {
-	for (int supermask = mask; supermask < (1 << n); supermask = (supermask + 1) | mask)
-		func(supermask);
+    for (int supermask = mask; supermask < (1 << n); supermask = (supermask + 1) | mask)
+        func(supermask);
 }

@@ -8,9 +8,9 @@
  * @time O(n)
  */
 vector<long long> derangements(int n, int mod) {
-	vector<long long> dp(n);
-	dp[0] = 1;
-	for (int i = 2; i < n; i++)
-		dp[i] = (i - 1) * (dp[i - 1] + dp[i - 2]) % mod;
-	return dp;
+    vector<long long> dp(n);
+    dp[0] = 1;
+    for (int i = 2; i < n; i++)
+        dp[i] = (i - 1) * (dp[i - 1] + dp[i - 2]) % mod;
+    return dp;
 }

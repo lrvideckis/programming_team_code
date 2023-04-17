@@ -11,8 +11,8 @@
  * @time O(1)
  */
 int next_subset(int mask) {
-	int c = mask & -mask, r = mask + c;
-	return r | (((r ^ mask) >> 2) / c);
+    int c = mask & -mask, r = mask + c;
+    return r | (((r ^ mask) >> 2) / c);
 }
 /**
  * @author camc
@@ -22,6 +22,6 @@ int next_subset(int mask) {
  * @memory O(1)
  */
 void iterate_chooses(int n, int k, const function<void(int)>& func) {
-	for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
-		func(mask);
+    for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
+        func(mask);
 }

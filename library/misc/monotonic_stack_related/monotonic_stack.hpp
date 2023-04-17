@@ -14,10 +14,10 @@
  * @memory O(n)
  */
 template <typename T> vector<int> monotonic_stack(const vector<T>& arr, const function<bool(const T&, const T&)>& less) {
-	vector<int> le(ssize(arr));
-	for (int i = 0; i < ssize(arr); i++) {
-		le[i] = i - 1;
-		while (le[i] >= 0 && !less(arr[le[i]], arr[i])) le[i] = le[le[i]];
-	}
-	return le;
+    vector<int> le(ssize(arr));
+    for (int i = 0; i < ssize(arr); i++) {
+        le[i] = i - 1;
+        while (le[i] >= 0 && !less(arr[le[i]], arr[i])) le[i] = le[le[i]];
+    }
+    return le;
 }

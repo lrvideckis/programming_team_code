@@ -8,6 +8,6 @@
  * @memory O(1)
  */
 void iterate_submasks(int mask, const function<void(int)>& func) {
-	for (int submask = mask; submask; submask = (submask - 1) & mask)
-		func(submask);
+    for (int submask = mask; submask; submask = (submask - 1) & mask)
+        func(submask);
 }

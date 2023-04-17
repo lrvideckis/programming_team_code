@@ -25,19 +25,19 @@
  * @memory O(n + m)
  */
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
-	int n = ssize(adj);
-	vector<vector<int>> bvt(n + cc.num_bccs);
-	vector<bool> vis(cc.num_bccs);
-	for (int i = 0; i < n; i++) {
-		for (auto [_, e_id] : adj[i]) {
-			int bccid = cc.bcc_id[e_id];
-			if (!vis[bccid]) {
-				vis[bccid] = 1;
-				bvt[i].push_back(bccid + n);
-				bvt[bccid + n].push_back(i);
-			}
-		}
-		for (auto bccid : bvt[i]) vis[bccid - n] = 0;
-	}
-	return bvt;
+    int n = ssize(adj);
+    vector<vector<int>> bvt(n + cc.num_bccs);
+    vector<bool> vis(cc.num_bccs);
+    for (int i = 0; i < n; i++) {
+        for (auto [_, e_id] : adj[i]) {
+            int bccid = cc.bcc_id[e_id];
+            if (!vis[bccid]) {
+                vis[bccid] = 1;
+                bvt[i].push_back(bccid + n);
+                bvt[bccid + n].push_back(i);
+            }
+        }
+        for (auto bccid : bvt[i]) vis[bccid - n] = 0;
+    }
+    return bvt;
 }

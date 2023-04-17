@@ -11,8 +11,8 @@ int mobius[N];
  * @time O(n log n)
  */
 void calc_mobius() {
-	mobius[1] = 1;
-	for (int i = 1; i < N; i++)
-		for (int j = i + i; j < N; j += i)
-			mobius[j] -= mobius[i];
+    mobius[1] = 1;
+    for (int i = 1; i < N; i++)
+        for (int j = i + i; j < N; j += i)
+            mobius[j] -= mobius[i];
 }
