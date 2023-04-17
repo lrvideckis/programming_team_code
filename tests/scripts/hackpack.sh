@@ -2,6 +2,14 @@
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
 
+WORD_LENGTH_THRESHOLD=65
+echo "The following words are > $WORD_LENGTH_THRESHOLD characters, and won't wrap in PDF:"
+cat ../library/**/*.hpp |
+	tr '[:blank:]' '\n' |
+	awk --assign=max_len="$WORD_LENGTH_THRESHOLD" '{if(length>max_len)print$0}' |
+	grep . &&
+	exit 1
+
 #adds hash code comments
 for header in ../library/**/*.hpp; do
 	hash=$(../library/contest/hash.sh <"$header")
