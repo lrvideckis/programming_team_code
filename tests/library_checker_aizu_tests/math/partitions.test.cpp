@@ -4,10 +4,10 @@
 #include "../../../library/math/partitions.hpp"
 
 int main() {
-	int n;
-	cin >> n;
-	for (long long val : partitions(n + 1))
-		cout << val << " ";
-	cout << '\n';
-	return 0;
+    int n;
+    cin >> n;
+    for (long long val : partitions(n + 1))
+        cout << val << " ";
+    cout << '\n';
+    return 0;
 }

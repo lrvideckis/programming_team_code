@@ -1,7 +1,4 @@
-indent=tab
-indent=force-tab
 indent-col1-comments
-indent-after-parens
 keep-one-line-blocks
 style=attach
 attach-return-type
