@@ -77,6 +77,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: "12.16.0"
+    - name: Install Notebook Generator
+      run: sudo npm install -g npm@latest && sudo npm install -g notebook-generator
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3
