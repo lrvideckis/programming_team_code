@@ -24,6 +24,7 @@ git submodule update
 
 # underscores in file names look bad in hackpack, so this
 # replaces all underscores with spaces
+# note, this is the perl `rename` command, not the linux util
 find ../library/ -depth -execdir rename 'y/_/ /' {} +
 
 # regarding school branding: https://brand.sdsmt.edu/identity/our-name/
