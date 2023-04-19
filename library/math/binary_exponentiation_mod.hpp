@@ -2,6 +2,8 @@
 #pragma once
 const int MOD = 998'244'353;
 /**
+ * @see https://github.com/kth-competitive-programming/kactl
+ * /blob/main/content/number-theory/ModPow.h
  * @param b base
  * @param e exponent
  * @returns (b^e)%MOD, 1 for 0^0.
