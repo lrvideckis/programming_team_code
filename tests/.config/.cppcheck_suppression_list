@@ -18,3 +18,5 @@ functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:31
 unusedScopedObject:../library/graphs/count_paths_per_length.hpp:14
 unusedScopedObject:../library/graphs/count_paths_per_node.hpp:15
 knownConditionTrueFalse:../library/math/n_choose_k_mod.hpp:39
+arrayIndexOutOfBoundsCond:../library/math/prime_sieve.hpp:23
+variableScope:../kactl/content/number-theory/Factor.h:47
