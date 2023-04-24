@@ -3,8 +3,13 @@
 
 #include "../../../library/math/prime_sieve.hpp"
 
+#include "../kactl_macros.hpp"
+#include "../../../kactl/content/number-theory/MillerRabin.h"
+
 int main() {
-    vector<int> sieve = get_sieve(1001);
+    init_sieve();
+    for (int i = 1; i < N; i++)
+        assert(isPrime(i) == is_prime(i));
     int n;
     cin >> n;
     map<int, int> prime_to_max_exponent;
@@ -14,7 +19,7 @@ int main() {
         map<int, int> curr;
         {
             int prev_prime = -1;
-            for (int prime_factor : get_prime_factors(val, sieve)) {
+            for (int prime_factor : get_prime_factors(val)) {
                 assert(prime_factor >= prev_prime);
                 prev_prime = prime_factor;
                 curr[prime_factor]++;

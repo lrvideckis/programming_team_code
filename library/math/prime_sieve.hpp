@@ -1,23 +1,23 @@
 /** @file */
 #pragma once
+const int N = 1001;
+int sieve[N];
 /**
  * @param val an integer
- * @param sieve prime sieve
  * @returns 1 iff val is prime
  * @time O(1)
  */
-bool is_prime(int val, const vector<int>& sieve) {
-    assert(val < ssize(sieve));
+bool is_prime(int val) {
+    assert(val < N && sieve[1] == 1);
     return val >= 2 && sieve[val] == val;
 }
 /**
  * @param val an integer
- * @param sieve prime sieve
  * @returns all prime factors of val (sorted)
  * @time O(log(val))
  */
-vector<int> get_prime_factors(int val, const vector<int>& sieve) {
-    assert(val < ssize(sieve));
+vector<int> get_prime_factors(int val) {
+    assert(val < N && sieve[1] == 1);
     vector<int> factors;
     while (val > 1) {
         int p = sieve[val];
@@ -27,17 +27,13 @@ vector<int> get_prime_factors(int val, const vector<int>& sieve) {
     return factors;
 }
 /**
- * @param n size
- * @returns array `sieve` where `sieve[i]` = min prime factor of `i`.
  * @time O(n * log(logn))
  * @memory O(n)
  */
-vector<int> get_sieve(int n) {
-    vector<int> sieve(n);
-    iota(sieve.begin(), sieve.end(), 0);
-    for (int i = 2; i * i < n; i++)
+void init_sieve() {
+    iota(begin(sieve), end(sieve), 0);
+    for (int i = 2; i * i < N; i++)
         if (sieve[i] == i)
-            for (int j = i * i; j < n; j += i)
+            for (int j = i * i; j < N; j += i)
                 sieve[j] = min(sieve[j], i);
-    return sieve;
 }
