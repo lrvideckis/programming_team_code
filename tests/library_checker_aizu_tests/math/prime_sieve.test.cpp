@@ -4,7 +4,7 @@
 #include "../../../library/math/prime_sieve.hpp"
 
 int main() {
-    vector<int> sieve = get_sieve(1001);
+    init_sieve();
     int n;
     cin >> n;
     map<int, int> prime_to_max_exponent;
@@ -14,7 +14,7 @@ int main() {
         map<int, int> curr;
         {
             int prev_prime = -1;
-            for (int prime_factor : get_prime_factors(val, sieve)) {
+            for (int prime_factor : get_prime_factors(val)) {
                 assert(prime_factor >= prev_prime);
                 prev_prime = prime_factor;
                 curr[prime_factor]++;
