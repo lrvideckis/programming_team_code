@@ -1,19 +1,16 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
-#include "../../../library/math/prime_sieve.hpp"
 #include "../../../library/math/mobius_inversion.hpp"
 
 #include "../kactl_macros.hpp"
-#include "../../../kactl/content/number-theory/MillerRabin.h"
+#include "../../../kactl/content/number-theory/Factor.h"
 
 int main() {
-    vector<int> sieve = get_sieve(N);
     calc_mobius();
     for (int i = 1; i < N; i++) {
-        assert(isPrime(i) == is_prime(i, sieve));
         int val = i;
         map<int, int> factors;
-        for (int prime_factor : get_prime_factors(val, sieve))
+        for (int prime_factor : factor(val))
             factors[prime_factor]++;
         {
             bool found_square = 0;

@@ -3,8 +3,13 @@
 
 #include "../../../library/math/prime_sieve.hpp"
 
+#include "../kactl_macros.hpp"
+#include "../../../kactl/content/number-theory/MillerRabin.h"
+
 int main() {
     init_sieve();
+    for (int i = 1; i < N; i++)
+        assert(isPrime(i) == is_prime(i));
     int n;
     cin >> n;
     map<int, int> prime_to_max_exponent;
