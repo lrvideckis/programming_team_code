@@ -9,8 +9,8 @@ int main() {
     calc_mobius();
     for (int i = 1; i < N; i++) {
         int val = i;
-        map<int, int> factors;
-        for (int prime_factor : factor(val))
+        map<ull, int> factors;
+        for (auto prime_factor : factor(val))
             factors[prime_factor]++;
         {
             bool found_square = 0;
