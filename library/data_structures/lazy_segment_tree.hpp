@@ -16,9 +16,9 @@ long long op(long long vl, long long vr) {
 /**
  * By default, update: range add, query: range sum
  *
+ * root is at tree[1]
  * internal nodes are [1, n)
  * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[bit_ceil(unsigned(n))]
- * root is at tree[1]
  */
 struct seg_tree {
     const int N;
