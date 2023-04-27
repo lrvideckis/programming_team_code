@@ -21,6 +21,9 @@ grep --extended-regexp "true" --recursive ../library/ && exit 1
 echo "check 0 instead of false"
 grep --extended-regexp "false" --recursive ../library/ && exit 1
 
+echo "passing std::function as template is faster+shorter:"
+grep --extended-regexp "function<.*\(.*\)>" --recursive ../library/ && exit 1
+
 echo "check files and directories are snake_case:"
 find ../library/ library_checker_aizu_tests/ -name "*[A-Z]*" -or -name "*-*" |
 	grep --invert-match ".verify-helper" |
