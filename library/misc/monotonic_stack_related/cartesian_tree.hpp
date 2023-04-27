@@ -7,6 +7,7 @@
  *     vector<int> par = cartesian_tree(arr, greater()); //max cartesian tree
  * @endcode
  * @param arr array of distinct integers
+ * @param less any transitive compare operator
  * @returns array par where par[v] = parent of node v in min-cartesian-tree.
  * par[v] == -1 iff arr[v] == min(arr)
  * @time O(n)
