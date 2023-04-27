@@ -11,8 +11,8 @@ int main() {
     for (int i = 0; i < n; i++)
         cin >> arr[i];
     vector<int> sorted(arr);
-    sort(sorted.begin(), sorted.end());
-    sorted.erase(unique(sorted.begin(), sorted.end()), sorted.end());
+    sort(begin(sorted), end(sorted));
+    sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
     kth_smallest st(arr);
     for (int i = 0; i < n; i++) {
         int mx = arr[i];

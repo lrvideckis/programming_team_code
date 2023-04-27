@@ -24,7 +24,7 @@ int main() {
         }
         for (auto [l, r] : tests) {
             string substr = s.substr(l, r - l);
-            assert(pal_q.is_pal(l, r) == (substr == string(substr.rbegin(), substr.rend())));
+            assert(pal_q.is_pal(l, r) == (substr == string(rbegin(substr), rend(substr))));
         }
     }
     for (int i = 0; i < n; i++) {

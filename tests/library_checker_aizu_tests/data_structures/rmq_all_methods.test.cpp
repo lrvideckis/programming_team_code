@@ -16,7 +16,7 @@ int main() {
     disjoint_rmq<int> dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
     linear_rmq<int> lin_rmq(arr, less());
     vector<int> le_mono = monotonic_stack<int>(arr, less());
-    vector<int> ri_mono = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), less());
+    vector<int> ri_mono = monotonic_stack<int>(vector<int>(rbegin(arr), rend(arr)), less());
     auto rv = [&](int i) -> int {
         return n - 1 - i;
     };

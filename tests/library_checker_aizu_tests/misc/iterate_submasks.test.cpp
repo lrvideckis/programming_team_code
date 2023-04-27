@@ -19,7 +19,7 @@ int main() {
         submasks.push_back(submask);
     };
     iterate_submasks(mask, func);
-    sort(submasks.begin(), submasks.end());
+    sort(begin(submasks), end(submasks));
     for (auto submask : submasks) {
         cout << submask << ':';
         for (int bit = 0; bit < n; bit++) {

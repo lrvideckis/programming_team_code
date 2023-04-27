@@ -25,10 +25,10 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     for (int n = 1; n <= 8; n++) {
         vector<int> perm(n);
-        iota(perm.begin(), perm.end(), 0);
+        iota(begin(perm), end(perm), 0);
         do {
             test_all_subarrays(perm);
-        } while (next_permutation(perm.begin(), perm.end()));
+        } while (next_permutation(begin(perm), end(perm)));
     }
     for (int n = 1; n <= 100; n++) {
         for (int times = 0; times < 40; times++) {
