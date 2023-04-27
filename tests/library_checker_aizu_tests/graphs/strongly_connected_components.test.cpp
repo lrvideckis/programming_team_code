@@ -16,7 +16,7 @@ int main() {
     auto [num_sccs, scc_id] = scc(adj);
     //sanity check for reverse topo order of SCCs
     for (int i = 0; i < n; i++) {
-        for (int j : adj[i])
+        for (auto j : adj[i])
             assert(scc_id[i] >= scc_id[j]);
     }
     cout << num_sccs << '\n';
@@ -25,7 +25,7 @@ int main() {
         each_scc[scc_id[i]].push_back(i);
     for (int i = num_sccs - 1; i >= 0; i--) {
         cout << each_scc[i].size() << " ";
-        for (int node : each_scc[i])
+        for (auto node : each_scc[i])
             cout << node << " ";
         cout << '\n';
     }

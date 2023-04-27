@@ -23,7 +23,7 @@ int main() {
             assert(t == s.substr(first_match, ssize(t)));
         }
     }
-    for (int match : matches)
+    for (auto match : matches)
         cout << match << '\n';
     return 0;
 }
