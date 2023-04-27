@@ -17,11 +17,11 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
         return m - 1 - j;
     };
     for (const auto& row : grid) {
-        transform(arr.begin(), arr.end(), row.begin(), arr.begin(), [](int a, bool g) {
+        transform(begin(arr), end(arr), begin(row), begin(arr), [](int a, bool g) {
             return g * (a + 1);
         });
         vector<int> left = monotonic_stack<int>(arr, less());
-        vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), less_equal());
+        vector<int> right = monotonic_stack<int>(vector<int>(rbegin(arr), rend(arr)), less_equal());
         for (int j = 0; j < m; j++) {
             int le = j - left[j] - 1, ri = rv(right[rv(j)]) - j - 1;
             cnt[arr[j]][le + ri + 1]++;
@@ -31,8 +31,8 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
     }
     for (int i = 1; i <= n; i++)
         for (int j = 0; j < 2; j++)
-            partial_sum(cnt[i].rbegin(), cnt[i].rend() - 1, cnt[i].rbegin());
+            partial_sum(rbegin(cnt[i]), rend(cnt[i]) - 1, rbegin(cnt[i]));
     for (int i = n - 1; i >= 1; i--)
-        transform(cnt[i].begin(), cnt[i].end(), cnt[i + 1].begin(), cnt[i].begin(), plus{});
+        transform(begin(cnt[i]), end(cnt[i]), begin(cnt[i + 1]), begin(cnt[i]), plus{});
     return cnt;
 }

@@ -35,15 +35,15 @@ template <typename F> struct centroid_decomp {
     void dfs(int u) {
         calc_subtree_sizes(u);
         for (int p = -1, sz_root = sub_sz[u];;) {
-            auto big_ch = find_if(adj[u].begin(), adj[u].end(), [&](int v) -> bool {
+            auto big_ch = find_if(begin(adj[u]), end(adj[u]), [&](int v) -> bool {
                 return v != p && 2 * sub_sz[v] > sz_root;
             });
-            if (big_ch == adj[u].end()) break;
+            if (big_ch == end(adj[u])) break;
             p = u, u = *big_ch;
         }
         func(adj, u);
         for (auto v : adj[u]) {
-            adj[v].erase(find(adj[v].begin(), adj[v].end(), u));
+            adj[v].erase(find(begin(adj[v]), end(adj[v]), u));
             dfs(v);
         }
     }

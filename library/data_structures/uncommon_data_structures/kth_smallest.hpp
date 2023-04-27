@@ -24,7 +24,7 @@ struct kth_smallest {
      * @memory O(n log(mx - mn))
      */
     kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1) {
-        auto [mn_iter, mx_iter] = minmax_element(arr.begin(), arr.end());
+        auto [mn_iter, mx_iter] = minmax_element(begin(arr), end(arr));
         mn = *mn_iter, mx = *mx_iter + 1;
         tree.emplace_back(0, 0, 0); //acts as null
         for (int i = 0; i < ssize(arr); i++)

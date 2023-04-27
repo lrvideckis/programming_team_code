@@ -45,16 +45,16 @@ template <typename T> struct suffix_array {
      * @time O((nlogn) + max_val)
      * @memory O(n + max_val)
      */
-    suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(s.begin(), s.end()), lcp(max(0, N - 1)) {
-        iota(sa.begin(), sa.end(), 0);
+    suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(begin(s), end(s)), lcp(max(0, N - 1)) {
+        iota(begin(sa), end(sa), 0);
         vector<int> tmp(N);
         for (int len = 0; len < N; len = max(1, 2 * len)) {
-            iota(tmp.begin(), tmp.begin() + len, N - len);
-            copy_if(sa.begin(), sa.end(), tmp.begin() + len, [&](int& val) {return (val -= len) >= 0;});
+            iota(begin(tmp), begin(tmp) + len, N - len);
+            copy_if(begin(sa), end(sa), begin(tmp) + len, [&](int& val) {return (val -= len) >= 0;});
             vector<int> freq(max_val);
             for (auto val : rank) freq[val]++;
-            partial_sum(freq.begin(), freq.end(), freq.begin());
-            for_each(tmp.rbegin(), tmp.rend(), [&](int t) {
+            partial_sum(begin(freq), end(freq), begin(freq));
+            for_each(rbegin(tmp), rend(tmp), [&](int t) {
                 sa[--freq[rank[t]]] = t;
             });
             swap(rank, tmp);
