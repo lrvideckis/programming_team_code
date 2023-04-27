@@ -25,7 +25,7 @@ int main() {
             for (auto to : bt[v])
                 assert(to != v); //didn't add any non-bridge
         }
-        int sum_deg = accumulate(begin(bt), end(bt), 0, [](int sum, const auto & neighbors) -> int {
+        int sum_deg = accumulate(begin(bt), bt.end(), 0, [](int sum, const auto & neighbors) -> int {
             return sum + ssize(neighbors);
         });
         int cnt_bridges = accumulate(begin(cc.is_bridge), end(cc.is_bridge), 0);
