@@ -10,14 +10,14 @@ int main() {
         int n = get_rand(1, 100);
         vector<int> arr(n);
         if (get_rand(0, 2) == 1)
-            generate(arr.begin(), arr.end(), []() {return get_rand<int>(INT_MIN, INT_MAX);});
+            generate(begin(arr), end(arr), []() {return get_rand<int>(INT_MIN, INT_MAX);});
         else
-            generate(arr.begin(), arr.end(), []() {return get_rand<int>(-2, 3);});
+            generate(begin(arr), end(arr), []() {return get_rand<int>(-2, 3);});
         distinct_query pst(arr);
         for (int i = 0; i <= n; i++) assert(pst.query(i, i) == 0);
         for (int l = 0; l < n; l++) {
             for (int r = l; r <= n; r++) {
-                set<int> copy_arr(arr.begin() + l, arr.begin() + r);
+                set<int> copy_arr(begin(arr) + l, begin(arr) + r);
                 assert(pst.query(l, r) == ssize(copy_arr));
             }
         }

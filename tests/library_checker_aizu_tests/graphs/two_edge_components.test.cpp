@@ -25,10 +25,10 @@ int main() {
             for (int to : bt[v])
                 assert(to != v); //didn't add any non-bridge
         }
-        int sum_deg = accumulate(bt.begin(), bt.end(), 0, [](int sum, const auto & neighbors) -> int {
+        int sum_deg = accumulate(begin(bt), end(bt), 0, [](int sum, const auto & neighbors) -> int {
             return sum + ssize(neighbors);
         });
-        int cnt_bridges = accumulate(cc.is_bridge.begin(), cc.is_bridge.end(), 0);
+        int cnt_bridges = accumulate(begin(cc.is_bridge), end(cc.is_bridge), 0);
         assert(sum_deg % 2 == 0 && sum_deg / 2 == cnt_bridges);
     }
     dsu_restorable dsu(n);

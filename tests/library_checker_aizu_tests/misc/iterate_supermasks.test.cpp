@@ -18,7 +18,7 @@ int main() {
         supermasks.push_back(supermask);
     };
     iterate_supermasks(mask, n, func);
-    sort(supermasks.begin(), supermasks.end());
+    sort(begin(supermasks), end(supermasks));
     for (auto supermask : supermasks) {
         cout << supermask << ':';
         for (int bit = 0; bit < n; bit++) {

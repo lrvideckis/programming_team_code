@@ -44,7 +44,7 @@ int main() {
         vector<long long> num_paths_len = count_paths_per_length(adj);
         for (int k = 1; k < n; k++) {
             vector<long long> count_paths = count_paths_per_node(adj, k);
-            long long total_paths = accumulate(count_paths.begin(), count_paths.end(), 0LL);
+            long long total_paths = accumulate(begin(count_paths), end(count_paths), 0LL);
             assert(total_paths % (k + 1) == 0);
             total_paths /= k + 1;
             assert(num_paths_len[k] == total_paths);

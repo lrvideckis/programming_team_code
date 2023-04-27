@@ -17,7 +17,7 @@ int main() {
         edges.push_back({x1, y1, y2, 1});
         edges.push_back({x2, y1, y2, -1});
     }
-    sort(edges.begin(), edges.end(), [&](const vertical_edge & a, const vertical_edge & b) -> bool {
+    sort(begin(edges), end(edges), [&](const vertical_edge & a, const vertical_edge & b) -> bool {
         return a.x < b.x;
     });
     const int MN = 0, MX = 1'000'000'001;

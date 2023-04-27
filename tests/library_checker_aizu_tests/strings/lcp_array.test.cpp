@@ -10,5 +10,5 @@ int main() {
     int n = ssize(s);
     suffix_array str_info(s, 128);
     assert(ssize(str_info.lcp) == n - 1);
-    cout << 1LL * n * (n + 1) / 2 - accumulate(str_info.lcp.begin(), str_info.lcp.end(), 0LL) << '\n';
+    cout << 1LL * n * (n + 1) / 2 - accumulate(begin(str_info.lcp), end(str_info.lcp), 0LL) << '\n';
 }

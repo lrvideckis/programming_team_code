@@ -12,8 +12,8 @@ int main() {
     cin >> s >> t;
     sa_query sq(s, 128);
     auto [le, ri] = sq.find(t);
-    vector<int> matches(sq.info.sa.begin() + le, sq.info.sa.begin() + ri);
-    sort(matches.begin(), matches.end());
+    vector<int> matches(begin(sq.info.sa) + le, begin(sq.info.sa) + ri);
+    sort(begin(matches), end(matches));
     {
         int first_match = sq.find_first(t);
         if (matches.empty())
