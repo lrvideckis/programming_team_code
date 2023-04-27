@@ -11,15 +11,15 @@ struct merge_sort_tree {
      * @param arr static array
      */
     merge_sort_tree(const vector<int>& arr) : N(ssize(arr)),  S(N ? 1 << __lg(2 * N - 1) : 0), tree(2 * N) {
-        transform(arr.begin(), arr.end(), tree.begin() + N, [](int val) -> vector<int> {
+        transform(begin(arr), end(arr), begin(tree) + N, [](int val) -> vector<int> {
             return {val};
         });
-        rotate(tree.rbegin(), tree.rbegin() + S - N, tree.rbegin() + N);
+        rotate(rbegin(tree), rbegin(tree) + S - N, rbegin(tree) + N);
         for (int i = N - 1; i >= 1; i--) {
             const auto& le = tree[2 * i];
             const auto& ri = tree[2 * i + 1];
             tree[i].resize(ssize(le) + ssize(ri));
-            merge(le.begin(), le.end(), ri.begin(), ri.end(), tree[i].begin());
+            merge(begin(le), end(le), begin(ri), end(ri), begin(tree[i]));
         }
     }
     /**
@@ -29,7 +29,7 @@ struct merge_sort_tree {
      * @time O(log n)
      */
     int value(int x, int v) const {
-        auto [le, ri] = equal_range(tree[v].begin(), tree[v].end(), x);
+        auto [le, ri] = equal_range(begin(tree[v]), end(tree[v]), x);
         return int(ri - le);
     }
     /**

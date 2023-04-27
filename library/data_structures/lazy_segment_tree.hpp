@@ -25,7 +25,7 @@ struct seg_tree {
     vector<long long> tree, lazy;
     seg_tree(int n) : N(n), tree(2 * N), lazy(N) {}
     seg_tree(const vector<long long>& arr) : N(ssize(arr)), tree(2 * N), lazy(N) {
-        rotate_copy(arr.begin(), arr.begin() + (N ? 2 * N - (2 << __lg(N)) : 0), arr.end(), tree.begin() + N);
+        rotate_copy(begin(arr), begin(arr) + (N ? 2 * N - (2 << __lg(N)) : 0), end(arr), begin(tree) + N);
         for (int i = N - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
     }
     void apply(long long change, int tl, int tr, int v) {

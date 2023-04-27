@@ -4,7 +4,7 @@
  * @returns pseudo-random number
  * @code{.cpp}
  *     vector<int> a;
- *     shuffle(a.begin(), a.end(), rng);
+ *     shuffle(begin(a), end(a), rng);
  * @endcode
  */
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());

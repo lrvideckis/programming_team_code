@@ -31,7 +31,7 @@ iso_info subtree_iso(const vector<vector<int>>& adj) {
         for (auto v : adj[u])
             if (v != p)
                 ch_ids.push_back(self(self, v, u));
-        sort(ch_ids.begin(), ch_ids.end());
+        sort(begin(ch_ids), end(ch_ids));
         return iso_id[u] = hashes.try_emplace(ch_ids, ssize(hashes)).first->second;
     };
     for (int i = 0; i < ssize(adj); i++)

@@ -30,18 +30,18 @@ template <typename DS, typename... ARGS> struct pq_updates {
         assert(!upd_st.empty());
         vector<upd> extra;
         int idx = ssize(upd_st) - 1, lowest_pri = INT_MAX;
-        for (auto it = mp.rbegin(); 2 * ssize(extra) < ssize(upd_st) - idx; it++) {
+        for (auto it = rbegin(mp); 2 * ssize(extra) < ssize(upd_st) - idx; it++) {
             auto [pri, idx_sk] = *it;
             extra.push_back(upd_st[idx_sk]);
             idx = min(idx, idx_sk), lowest_pri = pri;
         }
-        auto it = remove_if(upd_st.begin() + idx, upd_st.end(), [&](const auto & curr) {
+        auto it = remove_if(begin(upd_st) + idx, end(upd_st), [&](const auto & curr) {
             return curr.second->first >= lowest_pri;
         });
-        reverse_copy(extra.begin(), extra.end(), it);
+        reverse_copy(begin(extra), end(extra), it);
         for (int i = idx; i < ssize(upd_st); i++) ds.undo();
         upd_st.pop_back();
-        mp.erase(prev(mp.end()));
+        mp.erase(prev(end(mp)));
         for (int i = idx; i < ssize(upd_st); i++) {
             apply(&DS::update, tuple_cat(make_tuple(&ds), upd_st[i].first));
             upd_st[i].second->second = i;

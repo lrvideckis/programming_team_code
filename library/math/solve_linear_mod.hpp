@@ -26,12 +26,12 @@ matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long l
     for (int i = 0; i < n; i++)
         mat[i].push_back(b[i]);
     auto [rank, det] = row_reduce(mat, m);
-    if (any_of(mat.begin() + rank, mat.end(), [](const auto & v) {return v.back();})) {
+    if (any_of(begin(mat) + rank, end(mat), [](const auto & v) {return v.back();})) {
         return {rank, det, {}}; //no solution exists
     }
     vector<long long> x(m);
     int j = 0;
-    for_each(mat.begin(), mat.begin() + rank, [&](const auto & v) {
+    for_each(begin(mat), begin(mat) + rank, [&](const auto & v) {
         while (v[j] == 0) j++;
         x[j] = v.back();
     });

@@ -56,9 +56,9 @@ template <typename T> struct sa_query {
         auto cmp = [&](int i, int cmp_val) -> bool {
             return s.compare(i, ssize(t), t) < cmp_val;
         };
-        auto le = lower_bound(info.sa.begin(), info.sa.end(), 0, cmp);
-        auto ri = lower_bound(le, info.sa.end(), 1, cmp);
-        return {le - info.sa.begin(), ri - info.sa.begin()};
+        auto le = lower_bound(begin(info.sa), end(info.sa), 0, cmp);
+        auto ri = lower_bound(le, end(info.sa), 1, cmp);
+        return {le - begin(info.sa), ri - begin(info.sa)};
     }
     /**
      * @param t needle

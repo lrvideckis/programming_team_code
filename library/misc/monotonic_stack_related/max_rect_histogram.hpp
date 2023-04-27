@@ -13,7 +13,7 @@ long long max_rect_histogram(const vector<int>& arr) {
         return ssize(arr) - 1 - i;
     };
     vector<int> left = monotonic_stack<int>(arr, less());
-    vector<int> right = monotonic_stack<int>(vector<int>(arr.rbegin(), arr.rend()), less());
+    vector<int> right = monotonic_stack<int>(vector<int>(rbegin(arr), rend(arr)), less());
     long long max_area = 0;
     for (int i = 0; i < ssize(arr); i++) {
         int le = left[i], ri = rv(right[rv(i)]);//arr[i] is the max of range (le, ri)
