@@ -22,7 +22,7 @@ int main() {
         return 0;
     }
     cout << m - info.rank << '\n';
-    for (long long val : info.x)
+    for (auto val : info.x)
         cout << val << " ";
     cout << '\n';
     vector<int> pivot(m, -1);

@@ -23,7 +23,7 @@ int main() {
                 vector<bool> vis(n);
                 auto dfs = [&](auto&& self, int node) -> void {
                     comps.back().push_back(node);
-                    for (int next : adj[node])
+                    for (auto next : adj[node])
                         if (!vis[next]) {
                             vis[next] = true;
                             self(self, next);
@@ -38,7 +38,7 @@ int main() {
                 }
                 assert(ssize(comps) == dsu.num_sets);
                 for (auto& cc : comps)
-                    for (int node : cc)
+                    for (auto node : cc)
                         assert(dsu.size(node) == ssize(cc));
             } else if (!edge_st.empty()) {
                 auto [u, v] = edge_st.back();

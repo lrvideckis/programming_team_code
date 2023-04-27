@@ -31,7 +31,7 @@ int main() {
         return pair(a.first * b.first % MOD, (b.first * a.second + b.second) % MOD);
     });
     int le = 0, ri = 0;//range [le, ri)
-    for (const query& curr : queries) {
+    for (const auto& curr : queries) {
         if (curr.type == 0)
             ri++;
         else if (curr.type == 1)
