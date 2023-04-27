@@ -10,7 +10,7 @@ unordered_map<long long, long long> table; /**< for memoization */
  */
 long long fib(long long n) {
     if (n < 2) return 1;
-    if (table.find(n) != table.end()) return table[n];
+    if (table.find(n) != end(table)) return table[n];
     table[n] = (fib((n + 1) / 2) * fib(n / 2) + fib((n - 1) / 2) * fib((n - 2) / 2)) % MOD;
     return table[n];
 }

@@ -14,7 +14,7 @@ int num_subsequences(const vector<int>& arr, int mod) {
         int& curr = dp[i + 1] = 2 * dp[i];
         if (curr >= mod) curr -= mod;
         auto it = last.find(arr[i]);
-        if (it != last.end()) {
+        if (it != end(last)) {
             curr -= dp[it->second];
             if (curr < 0) curr += mod;
             it->second = i;
