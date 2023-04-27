@@ -8,14 +8,14 @@
  * @time O(n)
  * @memory O(n)
  */
-vector<int> cartesian_tree(const vector<int>& arr) {
+template <typename F> vector<int> cartesian_tree(const vector<int>& arr, const F& less) {
     int n = ssize(arr);
-    vector<int> left = monotonic_stack<int>(arr, less());
-    vector<int> right = monotonic_stack<int>(vector<int>(rbegin(arr), rend(arr)), less());
+    vector<int> left = monotonic_stack<int>(arr, less);
+    vector<int> right = monotonic_stack<int>(vector<int>(rbegin(arr), rend(arr)), less);
     vector<int> par(n);
     transform(begin(left), end(left), rbegin(right), begin(par), [&](int le, int ri) {
         ri = n - 1 - ri;
-        if (le >= 0 && ri < n) return arr[le] > arr[ri] ? le : ri;
+        if (le >= 0 && ri < n) return less(arr[le], arr[ri]) ? ri : le;
         if (le >= 0) return le;
         if (ri < n) return ri;
         return -1;
