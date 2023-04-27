@@ -30,7 +30,7 @@ struct LCA {
     }
     void dfs(const vector<vector<int>>& adj, int u) {
         in[u] = ssize(order), order.push_back(u);
-        for (int v : adj[u])
+        for (auto v : adj[u])
             if (v != p[u])
                 d[v] = d[p[v] = u] + 1, dfs(adj, v), sz[u] += sz[v];
     }

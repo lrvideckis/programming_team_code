@@ -21,7 +21,7 @@ int main() {
         assert(str_info.sa[str_info.rank[i]] == i);
         assert(str_info.rank[str_info.sa[i]] == i);
     }
-    for (int val : str_info.sa)
+    for (auto val : str_info.sa)
         cout << val << " ";
     cout << '\n';
 }

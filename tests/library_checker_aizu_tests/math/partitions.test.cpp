@@ -6,7 +6,7 @@
 int main() {
     int n;
     cin >> n;
-    for (long long val : partitions(n + 1))
+    for (auto val : partitions(n + 1))
         cout << val << " ";
     cout << '\n';
     return 0;

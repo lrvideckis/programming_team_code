@@ -19,7 +19,7 @@ int main() {
         map<int, int> curr;
         {
             int prev_prime = -1;
-            for (int prime_factor : get_prime_factors(val)) {
+            for (auto prime_factor : get_prime_factors(val)) {
                 assert(prime_factor >= prev_prime);
                 prev_prime = prime_factor;
                 curr[prime_factor]++;

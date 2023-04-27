@@ -22,7 +22,7 @@ int main() {
     {
         assert(ssize(bt) == cc.num_2_edge_ccs);
         for (int v = 0; v < cc.num_2_edge_ccs; v++) {
-            for (int to : bt[v])
+            for (auto to : bt[v])
                 assert(to != v); //didn't add any non-bridge
         }
         int sum_deg = accumulate(begin(bt), end(bt), 0, [](int sum, const auto & neighbors) -> int {
@@ -62,7 +62,7 @@ int main() {
     cout << cc.num_2_edge_ccs << '\n';
     for (const auto& curr_cc : ccs) {
         cout << ssize(curr_cc) << " ";
-        for (int node : curr_cc)
+        for (auto node : curr_cc)
             cout << node << " ";
         cout << '\n';
     }
