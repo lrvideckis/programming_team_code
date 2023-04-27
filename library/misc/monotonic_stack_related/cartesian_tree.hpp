@@ -2,6 +2,10 @@
 #pragma once
 #include "monotonic_stack.hpp"
 /**
+ * @code{.cpp}
+ *     vector<int> par = cartesian_tree(arr, less()); //min cartesian tree
+ *     vector<int> par = cartesian_tree(arr, greater()); //max cartesian tree
+ * @endcode
  * @param arr array of distinct integers
  * @returns array par where par[v] = parent of node v in min-cartesian-tree.
  * par[v] == -1 iff arr[v] == min(arr)
