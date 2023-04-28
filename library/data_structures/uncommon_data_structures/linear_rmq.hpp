@@ -4,15 +4,15 @@
  * @see https://codeforces.com/blog/entry/78931 https://codeforces.com/blog/entry/92310
  * @code{.cpp}
  *     vector<long long> arr;
- *     linear_rmq<long long> rmq(arr, less());//minimum query
- *     linear_rmq<long long> rmq(arr, greater());//maximum query
+ *     linear_rmq rmq(arr, less());//minimum query
+ *     linear_rmq rmq(arr, greater());//maximum query
  * @endcode
  */
-template <typename T> struct linear_rmq {
+template <typename T, typename F> struct linear_rmq {
     using ull = unsigned long long;
     const int N;
     vector<T> arr;
-    function<bool(const T&, const T&)> less;
+    F less;
     /**
      * on the level'th level, blocks are:
      * 0-th block: [0*64^level, 1*64^level)
@@ -32,7 +32,7 @@ template <typename T> struct linear_rmq {
      * @time O(n)
      * @memory O(n)
      */
-    linear_rmq(const vector<T>& a_arr, function<bool(const T&, const T&)> a_less) : N(ssize(a_arr)), arr(a_arr), less(a_less) {
+    linear_rmq(const vector<T>& a_arr, const F& a_less) : N(ssize(a_arr)), arr(a_arr), less(a_less) {
         for (int n = N; n >= 2; n = ((n + 63) >> 6)) {
             int level = ssize(idx);
             mask.emplace_back(n + 1);
