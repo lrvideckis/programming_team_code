@@ -35,4 +35,4 @@ notebook-generator ../library/ --author "South Dakota Mines" --output ./hackpack
 find ../library/ -depth -execdir rename 'y/ /_/' {} +
 
 #remove hash code comments
-sed -i '1,2d' ../library/**/*.hpp
+sed --in-place '1,2d' ../library/**/*.hpp
