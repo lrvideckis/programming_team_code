@@ -21,6 +21,9 @@ grep --extended-regexp "true" --recursive ../library/ && exit 1
 echo "check 0 instead of false"
 grep --extended-regexp "false" --recursive ../library/ && exit 1
 
+echo "check begin(arr) instead of arr.begin(), similarly for end, rbegin, rend:"
+grep --fixed-strings --regexp=".begin()" --regexp=".rbegin()" --regexp=".end()" --regexp=".rend()" --recursive ../library/ library_checker_aizu_tests/ && exit 1
+
 echo "check files and directories are snake_case:"
 find ../library/ library_checker_aizu_tests/ -name "*[A-Z]*" -or -name "*-*" |
 	grep --invert-match ".verify-helper" |
