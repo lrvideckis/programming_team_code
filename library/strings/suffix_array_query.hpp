@@ -15,7 +15,7 @@ template <typename T> struct sa_query {
      * needed for various queries
      * @{
      */
-    RMQ<int> rmq_lcp, rmq_sa;
+    RMQ<int, function<int(int, int)>> rmq_lcp, rmq_sa;
     /** @} */
     /**
      * @param a_s,max_val string/array with 0 <= a_s[i] < max_val
