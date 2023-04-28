@@ -17,6 +17,15 @@ int main() {
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
+    {
+        //check each node is the centroid of exactly one decomposition
+        vector<bool> seen_cent(n);
+        centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+            assert(!seen_cent[cent]);
+            seen_cent[cent] = 1;
+        });
+        assert(find(begin(seen_cent), end(seen_cent), 0) == end(seen_cent));
+    }
     vector<long long> cnt_len = count_paths_per_length(adj);
     if (n >= 2) {
         int k = get_rand(1, n);
