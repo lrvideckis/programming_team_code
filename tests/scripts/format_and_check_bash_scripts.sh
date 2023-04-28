@@ -34,5 +34,6 @@ comm -23 --check-order <(
 
 shellcheck --shell=bash --check-sourced --enable=check-set-e-suppressed,quote-safe-variables ./library/**/*.sh ./tests/**/*.sh || exit 1
 
+shfmt --version
 shfmt -version
 shfmt --language-dialect=bash --simplify --diff --write ./library/**/*.sh ./tests/**/*.sh || exit 1
