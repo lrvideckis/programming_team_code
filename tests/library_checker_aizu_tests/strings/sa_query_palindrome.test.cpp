@@ -8,7 +8,7 @@ int main() {
     string s;
     cin >> s;
     int n = ssize(s);
-    s = s + '$' + string(rbegin(s), s.rend());
+    s = s + '$' + string(rbegin(s), rend(s));
     sa_query sq(s, 128);
     for (int i = 0; i < n; i++) {
         for (int j = i; j < min(i + 2, n); j++)
