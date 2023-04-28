@@ -15,14 +15,14 @@ struct LCA {
      */
     vector<int> in, sz, d, p, order;
     /** @} */
-    RMQ<int> rmq;
+    RMQ<int, function<int(int, int)>> rmq;
     /**
      * @param adj forest
      * @time O(n log n)
      * @memory O(n log n)
      */
     LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
-    RMQ<int> init(const vector<vector<int>>& adj) {
+    RMQ<int, function<int(int, int)>> init(const vector<vector<int>>& adj) {
         order.reserve(N);
         for (int i = 0; i < N; i++)
             if (p[i] == -1) dfs(adj, i);

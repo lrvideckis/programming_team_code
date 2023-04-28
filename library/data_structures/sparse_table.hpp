@@ -3,24 +3,24 @@
 /**
  * @code{.cpp}
  *     vector<long long> arr;
- *     RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
  *
  *     //To get index of min element:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = i
- *     RMQ<pair<long long, int>> rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <typename T> struct RMQ {
+template <typename T, typename F> struct RMQ {
     vector<vector<T>> dp; /**< dp[i][j] = op of range [j, j + 2^i) */
-    function<T(const T&, const T&)> op; /**< usually min,max,and,or,gcd */
+    F op; /**< usually min,max,and,or,gcd */
     /**
      * @param arr static array
      * @param a_op any associative, communative, idempotent operation
      * @time O(n log n)
      * @memory O(n log n)
      */
-    RMQ(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : dp(1, arr), op(a_op) {
+    RMQ(const vector<T>& arr, const F& a_op) : dp(1, arr), op(a_op) {
         for (int i = 0; (2 << i) <= ssize(arr); i++) {
             dp.emplace_back(ssize(arr) - (2 << i) + 1);
             transform(begin(dp[i]) + (1 << i), end(dp[i]), begin(dp[i]), begin(dp[i + 1]), op);

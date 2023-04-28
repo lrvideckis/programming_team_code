@@ -23,7 +23,7 @@ int main() {
         } else if (queries[i].type == 2)
             cin >> queries[i].x;
     }
-    disjoint_rmq<pair<ll, ll>> rmq(lines, [](const auto & a, const auto & b) {
+    disjoint_rmq rmq(lines, [](const auto & a, const auto & b) {
         //f1(x) = a.first * x + a.second
         //f2(x) = b.first * x + b.second
         //f2(f1(x)) = b.first * (a.first * x + a.second) + b.second

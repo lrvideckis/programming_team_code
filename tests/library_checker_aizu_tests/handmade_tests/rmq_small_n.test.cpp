@@ -8,9 +8,9 @@
 
 void test_all_subarrays(const vector<int>& arr) {
     int n = ssize(arr);
-    RMQ<int> rmq(arr, [](auto x, auto y) {return min(x, y);});
-    disjoint_rmq<int> dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
-    linear_rmq<int> lin_rmq(arr, less());
+    RMQ rmq(arr, [](auto x, auto y) {return min(x, y);});
+    disjoint_rmq dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
+    linear_rmq lin_rmq(arr, less());
     for (int le = 0; le < n; le++) {
         for (int ri = le + 1; ri <= n; ri++) {
             int idx_min = lin_rmq.query_idx(le, ri);
