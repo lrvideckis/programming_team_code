@@ -43,6 +43,7 @@
 "tests/library_checker_aizu_tests/math/solve_linear_mod.test.cpp": "2023-04-27 11:51:28 -0700",
 "tests/library_checker_aizu_tests/math/tetration.test.cpp": "2023-04-17 00:31:41 -0500",
 "tests/library_checker_aizu_tests/math/totient.test.cpp": "2023-04-17 00:10:50 -0500",
+"tests/library_checker_aizu_tests/misc/and_convolution.test.cpp": "2023-05-01 01:25:50 -0400",
 "tests/library_checker_aizu_tests/misc/cartesian_tree.test.cpp": "2023-04-28 10:39:52 -0700",
 "tests/library_checker_aizu_tests/misc/count_rectangles.test.cpp": "2023-04-28 10:39:52 -0700",
 "tests/library_checker_aizu_tests/misc/gcd_convolution.test.cpp": "2023-04-17 00:10:50 -0500",
