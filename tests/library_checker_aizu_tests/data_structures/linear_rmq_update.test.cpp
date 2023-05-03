@@ -22,8 +22,8 @@ int main() {
     int n, q;
     string s;
     cin >> n >> q >> s;
-    linear_rmq<int> rmq_min_idx(convert_min(s));
-    linear_rmq<int> rmq_max_idx(convert_max(s), greater());
+    linear_rmq<int> rmq_min_idx(convert_min(s), less<int>());
+    linear_rmq<int> rmq_max_idx(convert_max(s), greater<int>());
     while (q--) {
         int type, k;
         cin >> type >> k;
