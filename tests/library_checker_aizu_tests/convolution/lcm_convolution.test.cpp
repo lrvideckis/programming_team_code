@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lcm_convolution"
 #include "../template.hpp"
 
-#include "../../../library/lcm_convolution.hpp"
+#include "../../../library/convolution/lcm_convolution.hpp"
 
 istream& operator >> (istream& is, vector<int>& v) {
     for (int i = 1; i < ssize(v); i++)
