@@ -10,7 +10,7 @@ void test_all_subarrays(const vector<int>& arr) {
     int n = ssize(arr);
     RMQ<int> rmq(arr, [](auto x, auto y) {return min(x, y);});
     disjoint_rmq<int> dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
-    linear_rmq<int> lin_rmq(arr, less());
+    linear_rmq<int> lin_rmq(arr, less<int>());
     for (int le = 0; le < n; le++) {
         for (int ri = le + 1; ri <= n; ri++) {
             int idx_min = lin_rmq.query_idx(le, ri);

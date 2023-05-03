@@ -5,7 +5,7 @@
  * @code{.cpp}
  *     vector<long long> arr;
  *     linear_rmq<long long> rmq(arr);//minimum query
- *     linear_rmq<long long> rmq(arr, greater());//maximum query
+ *     linear_rmq<long long> rmq(arr, greater<long long>());//maximum query
  * @endcode
  */
 template <typename T, typename F = less<T>> struct linear_rmq {
