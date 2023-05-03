@@ -8,7 +8,7 @@
  * @time O(3^n) to iterate every supermask of every mask of size n
  * @memory O(1)
  */
-template <typename F> void iterate_supermasks(int mask, int n, const F& func) {
+void iterate_supermasks(int mask, int n, const function<void(int)>& func) {
     for (int supermask = mask; supermask < (1 << n); supermask = (supermask + 1) | mask)
         func(supermask);
 }
