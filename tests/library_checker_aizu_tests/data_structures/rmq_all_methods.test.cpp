@@ -4,7 +4,7 @@
 #include "../../../library/data_structures/sparse_table.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/disjoint_sparse_table.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/linear_rmq.hpp"
-#include "../../../library/misc/monotonic_stack_related/monotonic_stack.hpp"
+#include "../../../library/monotonic_stack_related/monotonic_stack.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

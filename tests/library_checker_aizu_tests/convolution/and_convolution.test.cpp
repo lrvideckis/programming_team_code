@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bitwise_and_convolution"
 #include "../template.hpp"
 
-#include "../../../library/misc/and_convolution.hpp"
+#include "../../../library/convolution/and_convolution.hpp"
 
 istream& operator >> (istream& is, vector<int>& v) {
     for (auto& x : v)

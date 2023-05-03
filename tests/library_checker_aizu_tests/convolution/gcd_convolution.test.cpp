@@ -1,7 +1,7 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/lcm_convolution"
+#define PROBLEM "https://judge.yosupo.jp/problem/gcd_convolution"
 #include "../template.hpp"
 
-#include "../../../library/misc/lcm_convolution.hpp"
+#include "../../../library/convolution/gcd_convolution.hpp"
 
 istream& operator >> (istream& is, vector<int>& v) {
     for (int i = 1; i < ssize(v); i++)
@@ -15,9 +15,10 @@ int main() {
     cin >> n;
     vector<int> a(n + 1), b(n + 1);
     cin >> a >> b;
-    auto c = lcm_convolution(a, b);
+    auto c = gcd_convolution(a, b);
     for (int i = 1; i <= n; i++)
         cout << c[i] << ' ';
     cout << '\n';
     return 0;
 }
+
