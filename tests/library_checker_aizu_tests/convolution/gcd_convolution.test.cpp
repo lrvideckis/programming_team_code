@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/gcd_convolution"
 #include "../template.hpp"
 
-#include "../../../library/misc/gcd_convolution.hpp"
+#include "../../../library/gcd_convolution.hpp"
 
 istream& operator >> (istream& is, vector<int>& v) {
     for (int i = 1; i < ssize(v); i++)
