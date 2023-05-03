@@ -25,6 +25,7 @@ int main() {
         cin >> le >> ri;
         int idx_min = lin_rmq.query_idx(le, ri);
         assert(le_mono[idx_min] < le && le <= idx_min && idx_min < ri && ri <= rv(ri_mono[rv(idx_min)]));
+        assert(rmq.query(le_mono[idx_min] + 1, rv(ri_mono[rv(idx_min)])) == arr[idx_min]);
         assert(arr[idx_min] == rmq.query(le, ri));
         assert(arr[idx_min] == dis_rmq.query(le, ri));
         cout << arr[idx_min] << '\n';

@@ -21,7 +21,7 @@ int next_subset(int mask) {
  * @time O(n choose k)
  * @memory O(1)
  */
-void iterate_chooses(int n, int k, const function<void(int)>& func) {
+template<typename F> void iterate_chooses(int n, int k, const F& func) {
     for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
         func(mask);
 }

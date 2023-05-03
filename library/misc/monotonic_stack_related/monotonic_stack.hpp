@@ -3,8 +3,8 @@
 /**
  * @code{.cpp}
  *     vector<long long> arr;
- *     vector<int> le = monotonic_stack<long long>(arr, less()); //less, less_equal, greater, greater_equal
- *     vector<int> le = monotonic_stack<long long>(arr, [&](long long x, long long y) {return x < y;});
+ *     vector<int> le = monotonic_stack(arr, less()); //less, less_equal, greater, greater_equal
+ *     vector<int> le = monotonic_stack(arr, [&](long long x, long long y) {return x < y;});
  * @endcode
  * @param arr array
  * @param less any transitive compare operator
@@ -13,7 +13,7 @@
  * @time O(n)
  * @memory O(n)
  */
-template <typename T> vector<int> monotonic_stack(const vector<T>& arr, const function<bool(const T&, const T&)>& less) {
+template <typename T, typename F> vector<int> monotonic_stack(const vector<T>& arr, const F& less) {
     vector<int> le(ssize(arr));
     for (int i = 0; i < ssize(arr); i++) {
         le[i] = i - 1;

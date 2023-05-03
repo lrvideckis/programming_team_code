@@ -13,7 +13,7 @@
  *     });
  * @endcode
  */
-template <typename T> struct disjoint_rmq {
+template <typename T, typename F = function<T(const T&, const T&)>> struct disjoint_rmq {
     const int N;
     vector<vector<T>> dp; /**< stores op of some subarray */
     /**
@@ -23,14 +23,14 @@ template <typename T> struct disjoint_rmq {
      * - matrix multiply
      * - function composition
      */
-    function<T(const T&, const T&)> op;
+    F op;
     /**
      * @param arr static array
      * @param a_op any associative operation
      * @time O(n log n)
      * @memory O(n log n)
      */
-    disjoint_rmq(const vector<T>& arr, const function<T(const T&, const T&)>& a_op) : N(ssize(arr)), op(a_op) {
+    disjoint_rmq(const vector<T>& arr, const F& a_op) : N(ssize(arr)), op(a_op) {
         for (int len = 1; len <= N; len *= 2) {
             dp.emplace_back(N);
             for (int le = 0; le < N; le += 2 * len) {
