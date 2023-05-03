@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_C"
 #include "../template.hpp"
 
-#include "../../../library/misc/monotonic_stack_related/max_rect_histogram.hpp"
+#include "../../../library/monotonic_stack_related/max_rect_histogram.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
