@@ -12,9 +12,9 @@ int main() {
     cin >> n >> q;
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
-    RMQ rmq(arr, [](auto x, auto y) {return min(x, y);});
-    disjoint_rmq dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
-    linear_rmq lin_rmq(arr, less());
+    RMQ<int> rmq(arr, [](auto x, auto y) {return min(x, y);});
+    disjoint_rmq<int> dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
+    linear_rmq<int> lin_rmq(arr, less<int>());
     vector<int> le_mono = monotonic_stack<int>(arr, less());
     vector<int> ri_mono = monotonic_stack<int>(vector<int>(rbegin(arr), rend(arr)), less());
     auto rv = [&](int i) -> int {

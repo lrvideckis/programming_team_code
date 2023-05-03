@@ -3,15 +3,15 @@
 /**
  * @code{.cpp}
  *     vector<long long> arr;
- *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x, y); });
  *
  *     //To get index of min element:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = i
- *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     RMQ<pair<long long, int>> rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <typename T, typename F> struct RMQ {
+template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
     vector<vector<T>> dp; /**< dp[i][j] = op of range [j, j + 2^i) */
     F op; /**< usually min,max,and,or,gcd */
     /**

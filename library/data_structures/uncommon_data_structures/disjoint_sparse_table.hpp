@@ -7,13 +7,13 @@
  * @code{.cpp}
  *     //usage for min and # of mins:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = 1
- *     disjoint_rmq rmq(arr, [&](auto x, auto y) {
+ *     disjoint_rmq<pair<long long, int>> rmq(arr, [&](auto x, auto y) {
  *         if (x.first == y.first) return make_pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
  * @endcode
  */
-template <typename T, typename F> struct disjoint_rmq {
+template <typename T, typename F = function<T(const T&, const T&)>> struct disjoint_rmq {
     const int N;
     vector<vector<T>> dp; /**< stores op of some subarray */
     /**
