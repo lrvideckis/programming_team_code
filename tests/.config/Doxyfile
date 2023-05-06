@@ -262,7 +262,7 @@ TAB_SIZE               = 4
 # @} or use a double escape (\\{ and \\})
 
 ALIASES += "time=@xrefitem time \"Time\" \"Time\""
-ALIASES += "memory=@xrefitem memory \"Memory\" \"Memory\""
+ALIASES += "space=@xrefitem space \"Space\" \"Space\""
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
