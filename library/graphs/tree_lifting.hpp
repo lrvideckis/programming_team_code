@@ -1,7 +1,6 @@
 /** @file */
 #pragma once
 /**
- * @author lightseba
  * @see https://github.com/ucf-programming-team/hackpack-cpp
  * /blob/master/content/graphs/TreeLifting.h
  * Calculate jumps up a tree, to support fast upward jumps and LCAs.

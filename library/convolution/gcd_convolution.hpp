@@ -2,7 +2,6 @@
 #pragma once
 const int MOD = 998'244'353;
 /**
- * @author camc
  * @param a,b arrays of the same length
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
  * (i,j) where gcd(i,j) == k

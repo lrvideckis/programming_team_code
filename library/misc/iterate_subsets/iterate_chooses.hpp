@@ -14,7 +14,6 @@ int next_subset(int mask) {
     return r | (((r ^ mask) >> 2) / c);
 }
 /**
- * @author camc
  * @param n,k defines which bitmasks
  * @param func called on all bitmasks of size n with k bits set
  * @time O(n choose k)
