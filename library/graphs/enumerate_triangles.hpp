@@ -1,7 +1,6 @@
 /** @file */
 #pragma once
 /**
- * @author camc
  * @code{.cpp}
  *     enumerate_triangles(edges, n, [&](int u, int v, int w) {
  *         //u, v, w form a triangle
