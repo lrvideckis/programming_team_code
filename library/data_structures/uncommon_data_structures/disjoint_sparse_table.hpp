@@ -28,7 +28,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @param arr static array
      * @param a_op any associative operation
      * @time O(n log n)
-     * @memory O(n log n)
+     * @space O(n log n)
      */
     disjoint_rmq(const vector<T>& arr, const F& a_op) : N(ssize(arr)), op(a_op) {
         for (int len = 1; len <= N; len *= 2) {

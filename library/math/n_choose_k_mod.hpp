@@ -4,7 +4,7 @@ const int N = 17, MOD = 17;
 long long inv[N], fact[N], inv_fact[N];
 /**
  * @time O(N + sqrt(MOD))
- * @memory O(N)
+ * @space O(N)
  */
 void calc_chooses() {
     static_assert(max(2, N) <= MOD);

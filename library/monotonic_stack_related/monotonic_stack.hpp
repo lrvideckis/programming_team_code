@@ -11,7 +11,7 @@
  * @returns array le where le[i] = max integer such that: le[i] < i and
  * less(arr[le[i]], arr[i]). If no integer exists, le[i] = -1
  * @time O(n)
- * @memory O(n)
+ * @space O(n)
  */
 template <typename T, typename F> vector<int> monotonic_stack(const vector<T>& arr, const F& less) {
     vector<int> le(ssize(arr));

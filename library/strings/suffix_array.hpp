@@ -43,7 +43,7 @@ template <typename T> struct suffix_array {
     /**
      * @param s,max_val string/array with 0 <= s[i] < max_val
      * @time O((nlogn) + max_val)
-     * @memory O(n + max_val)
+     * @space O(n + max_val)
      */
     suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(begin(s), end(s)), lcp(max(0, N - 1)) {
         iota(begin(sa), end(sa), 0);

@@ -6,7 +6,7 @@ const int MOD = 998'244'353;
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
  * (i,j) where lcm(i,j) == k
  * @time O(n log n)
- * @memory O(n)
+ * @space O(n)
  */
 vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
     assert(ssize(a) == ssize(b));

@@ -20,7 +20,7 @@ template <typename T> struct sa_query {
     /**
      * @param a_s,max_val string/array with 0 <= a_s[i] < max_val
      * @time O((nlogn) + max_val)
-     * @memory O((nlogn) + max_val)
+     * @space O((nlogn) + max_val)
      */
     sa_query(const T& a_s, int max_val) :
         s(a_s),

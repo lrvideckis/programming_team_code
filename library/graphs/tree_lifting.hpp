@@ -16,7 +16,7 @@ struct tree_lift {
     /**
      * @param adj forest
      * @time O(n)
-     * @memory O(n)
+     * @space O(n)
      */
     tree_lift(const vector<vector<int>>& adj): N(ssize(adj)), d(N), p(N, -1), j(N, -1) {
         for (int i = 0; i < N; i++)

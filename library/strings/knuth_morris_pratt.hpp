@@ -20,7 +20,7 @@ template <typename T> struct KMP {
     /**
      * @param a_needle string to be searched for inside haystack
      * @time O(|needle|)
-     * @memory O(|needle|)
+     * @space O(|needle|)
      */
     KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {}
     /**

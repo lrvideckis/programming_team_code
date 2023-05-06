@@ -22,7 +22,7 @@ Place this directly before a struct or function.
  * @returns Sum of range.
  * @time O(n * sqrt(n log n)) I don't care about formatting as long as it's
  * clear. Ex: O(log n * k) could either mean O(log(n) * k) or O(log(nk)) - bad.
- * @memory O(n ^ (3/2))
+ * @space O(n ^ (3/2))
  */
 ```
 for member vars:

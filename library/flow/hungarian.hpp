@@ -18,7 +18,7 @@ struct weighted_match {
  * the edge u <=> v, 1<=u<=n; 1<=v<=m
  * @returns min matching
  * @time O(n^2 * m)
- * @memory O(n * m)
+ * @space O(n * m)
  */
 weighted_match hungarian(const vector<vector<long long>>& cost) {
     int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;

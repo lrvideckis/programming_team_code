@@ -9,7 +9,7 @@
  * are also affected by row operations.
  * @returns pair(rank, determinant)
  * @time O(n * m * min(cols, n))
- * @memory O(n * m)
+ * @space O(n * m)
  */
 pair<int, long long> row_reduce(vector<vector<long long>>& mat, int cols) {
     int n = ssize(mat), m = ssize(mat[0]), rank = 0;

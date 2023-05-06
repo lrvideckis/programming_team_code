@@ -10,7 +10,7 @@
  * @param n number of nodes
  * @param f a function run on all length-3-cycles exactly once
  * @time O(n + m ^ (3/2))
- * @memory O(n + m)
+ * @space O(n + m)
  */
 template <typename F> void enumerate_triangles(const vector<pair<int, int>>& edges, int n, const F& f) {
     vector<int> deg(n);

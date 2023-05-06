@@ -19,7 +19,7 @@ struct iso_info {
  * @param adj rooted forest
  * @returns which subtrees are isomorphic
  * @time O(n log n)
- * @memory O(n)
+ * @space O(n)
  */
 iso_info subtree_iso(const vector<vector<int>>& adj) {
     vector<int> iso_id(ssize(adj), -1);

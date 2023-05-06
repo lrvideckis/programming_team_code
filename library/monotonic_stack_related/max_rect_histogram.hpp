@@ -6,7 +6,7 @@
  * @returns largest integer x such that there exists a subarray arr[le,ri)
  * with: (ri-le) * min(arr[le,ri)) == x
  * @time O(n)
- * @memory O(n)
+ * @space O(n)
  */
 long long max_rect_histogram(const vector<int>& arr) {
     auto rv = [&](int i) -> int {
