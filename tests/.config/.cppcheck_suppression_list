@@ -2,7 +2,7 @@ noExplicitConstructor
 missingIncludeSystem
 unusedStructMember:../library/math/solve_linear_mod.hpp
 unusedStructMember:../library/graphs/strongly_connected_components.hpp:7
-unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
+unusedStructMember:../library/graphs/subtree_isomorphism.hpp:6
 unusedStructMember:../library/graphs/hopcroft_karp.hpp:8
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
 unusedStructMember:../library/graphs/bridges_and_cuts.hpp
@@ -17,7 +17,7 @@ functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:22
 functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:31
 unusedScopedObject:../library/graphs/count_paths_per_length.hpp:14
 unusedScopedObject:library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp:23
-unusedScopedObject:../library/graphs/count_paths_per_node.hpp:15
+unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14
 knownConditionTrueFalse:../library/math/n_choose_k_mod.hpp:39
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve.hpp:23
 variableScope:../kactl/content/number-theory/Factor.h:47
