@@ -11,7 +11,7 @@
  * @returns array par where par[v] = parent of node v in min-cartesian-tree.
  * par[v] == -1 iff arr[v] == min(arr)
  * @time O(n)
- * @memory O(n)
+ * @space O(n)
  */
 template <typename F> vector<int> cartesian_tree(const vector<int>& arr, const F& less) {
     int n = ssize(arr);

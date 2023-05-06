@@ -6,7 +6,7 @@
  * @param a,b matrices
  * @returns a*b (not overflow safe)
  * @time O(n * m * inner)
- * @memory O(n * m)
+ * @space O(n * m)
  */
 template <typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, const vector<vector<T>>& b) {
     assert(ssize(a[0]) == ssize(b));

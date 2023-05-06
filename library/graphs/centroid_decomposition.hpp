@@ -15,7 +15,7 @@ template <typename F> struct centroid_decomp {
      * @param a_adj unweighted undirected forest
      * @param a_func called on centroid of each decomposition
      * @time O(n log n) each node is adjacent to O(logn) centroids
-     * @memory O(n)
+     * @space O(n)
      */
     centroid_decomp(const vector<vector<int>>& a_adj, const F& a_func)
         : adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {

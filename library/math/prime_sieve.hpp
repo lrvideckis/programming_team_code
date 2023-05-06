@@ -28,7 +28,7 @@ vector<int> get_prime_factors(int val) {
 }
 /**
  * @time O(n * log(logn))
- * @memory O(n)
+ * @space O(n)
  */
 void init_sieve() {
     iota(begin(sieve), end(sieve), 0);

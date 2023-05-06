@@ -7,7 +7,7 @@
  * `i`. `len[start]` is always 0.
  * @time O((n + m) log n) Note log(m) < log(n^2) = 2*log(n), so O(log n) ==
  * O(log m)
- * @memory O(n + m)
+ * @space O(n + m)
  */
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj, int start) {
     using node = pair<long long, int>;

@@ -10,7 +10,7 @@ struct pal_query {
     /**
      * @param s string
      * @time O(n)
-     * @memory O(n)
+     * @space O(n)
      */
     pal_query(const string& s) : N(ssize(s)), pal_len(manacher(s)) {}
     /**

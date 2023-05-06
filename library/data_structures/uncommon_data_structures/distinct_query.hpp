@@ -16,7 +16,7 @@ struct distinct_query {
     /**
      * @param arr static array; can't handle updates
      * @time O(n log n)
-     * @memory O(n log n)
+     * @space O(n log n)
      */
     distinct_query(const vector<int>& arr) : N(ssize(arr)), roots(N + 1) {
         tree.emplace_back(0, 0, 0); //acts as null

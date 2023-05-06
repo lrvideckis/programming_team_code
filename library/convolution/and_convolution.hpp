@@ -6,7 +6,7 @@ const int MOD = 998'244'353;
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
  * (i,j) where i & j == k
  * @time O(2^n * n)
- * @memory O(2^n)
+ * @space O(2^n)
  */
 vector<int> and_convolution(vector<int> a, vector<int> b) {
     int n = __lg(ssize(a));

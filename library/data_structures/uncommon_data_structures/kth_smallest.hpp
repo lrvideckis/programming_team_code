@@ -21,7 +21,7 @@ struct kth_smallest {
     /**
      * @param arr static array; can't handle updates
      * @time O(n log(mx - mn))
-     * @memory O(n log(mx - mn))
+     * @space O(n log(mx - mn))
      */
     kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1) {
         auto [mn_iter, mx_iter] = minmax_element(begin(arr), end(arr));
