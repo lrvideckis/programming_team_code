@@ -11,9 +11,9 @@ int main() {
         vector<vector<int>> adj(n);
         vector<pair<int, int>> edge_st;
         for (int q = 0; q < 100; q++) {
-            int type = get_rand<int>(0, 3);
+            int type = get_rand<int>(0, 2);
             if (type == 0) {
-                int u = get_rand<int>(0, n), v = get_rand(0, n);
+                int u = get_rand<int>(0, n - 1), v = get_rand(0, n - 1);
                 dsu.update(u, v);
                 adj[u].push_back(v);
                 adj[v].push_back(u);
