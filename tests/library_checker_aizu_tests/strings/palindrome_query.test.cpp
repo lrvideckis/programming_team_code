@@ -18,7 +18,7 @@ int main() {
                 tests.emplace_back(i, j);
         }
         for (int i = 0; i < int(10'000'000 / n); i++) {
-            int l = get_rand(0, n), r = get_rand(0, n);
+            int l = get_rand(0, n - 1), r = get_rand(0, n - 1);
             if (l > r) swap(l, r);
             tests.emplace_back(l, r);
         }

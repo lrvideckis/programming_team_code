@@ -12,8 +12,8 @@ int main() {
     //test `less` function
     {
         for (int num_tests = 50; num_tests--;) {
-            auto le = get_rand<int>(0, ssize(s));
-            auto ri = get_rand<int>(0, ssize(s));
+            auto le = get_rand<int>(0, ssize(s) - 1);
+            auto ri = get_rand<int>(0, ssize(s) - 1);
             if (le > ri)
                 swap(le, ri);
             assert(sq.less(le, ri) == (s.substr(le) < s.substr(ri)));

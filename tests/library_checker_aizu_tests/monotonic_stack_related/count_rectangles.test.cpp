@@ -28,7 +28,7 @@ int main() {
         SubMatrix<int> sm(temp_grid);
         int tests = 20;
         while (tests--) {
-            int rows = get_rand(1, n + 1), cols = get_rand(1, m + 1);
+            int rows = get_rand(1, n), cols = get_rand(1, m);
             int cnt = 0;
             for (int i = 0; i + rows <= n; i++) {
                 for (int j = 0; j + cols <= m; j++) {

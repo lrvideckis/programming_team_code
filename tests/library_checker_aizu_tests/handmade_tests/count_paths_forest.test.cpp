@@ -29,8 +29,8 @@ int main() {
         vector<vector<int>> adj(n);
         dsu_restorable dsu(n);
         for (int i = 0; i < n - 2; i++) {
-            int u = get_rand<int>(0, n);
-            int v = get_rand<int>(0, n);
+            int u = get_rand<int>(0, n - 1);
+            int v = get_rand<int>(0, n - 1);
             if (u == v)
                 continue;
             if (dsu.update(u, v)) {
