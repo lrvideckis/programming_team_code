@@ -7,6 +7,7 @@ unordered_map<long long, long long> table; /**< for memoization */
  * @param n an integer
  * @returns nth fibonacci number
  * @time O(log n)
+ * @space O(log n)
  */
 long long fib(long long n) {
     if (n < 2) return 1;

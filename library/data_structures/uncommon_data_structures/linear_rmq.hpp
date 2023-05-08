@@ -63,6 +63,7 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
      * @param le,ri defines range [le, ri)
      * @returns index of minimum in range
      * @time O(log(n) / log(log(n))), practically if n <= 2^24 then ssize(mask) <= 4
+     * @space O(1)
      */
     int query_idx(int le, int ri) const {
         assert(0 <= le && le < ri && ri <= N);
@@ -77,9 +78,19 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
         return res;
     }
     /**
+     * @param le,ri defines range [le, ri)
+     * @returns minimum in range
+     * @time O(log(n) / log(log(n)))
+     * @space O(1)
+     */
+    int query(int le, int ri) const {
+        return arr[query_idx(le, ri)];
+    }
+    /**
      * @param pos index to update
      * @param val new value
      * @time O((log(n)^2) / log(log(n)))
+     * @space O(1)
      */
     void update(int pos, const T& val) {
         assert(0 <= pos && pos < N);
