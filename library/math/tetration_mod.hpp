@@ -7,6 +7,7 @@
  * @param mod modulo
  * @returns (b^e)%mod, 1 for 0^0.
  * @time O(log e)
+ * @space O(1)
  */
 long long bin_exp(long long b, long long e, int mod) {
     assert(0 <= e);
@@ -27,6 +28,7 @@ long long bin_exp(long long b, long long e, int mod) {
  * @returns b ^ (b ^ (b ^ ... )) % mod, where the height of the tower
  * is e.
  * @time O(sqrt(mod) * log(mod))
+ * @space O(log(mod)) on stack, O(1) on heap
  */
 long long tetration(long long b, long long e, int mod) {
     if (mod == 1) return 0;

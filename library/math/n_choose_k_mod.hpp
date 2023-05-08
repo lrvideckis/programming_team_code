@@ -21,6 +21,7 @@ void calc_chooses() {
  * @param n,k requires n < N
  * @returns number of ways to choose k objects out of n
  * @time O(1)
+ * @space O(1)
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 long long C(int n, int k) {
@@ -33,6 +34,7 @@ long long C(int n, int k) {
  * @param n,k arbitrarily large integers
  * @returns number of ways to choose k objects out of n
  * @time O(log(k))
+ * @space O(1)
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 long long C(long long n, long long k) {

@@ -21,7 +21,7 @@ struct kth_smallest {
     /**
      * @param arr static array; can't handle updates
      * @time O(n log(mx - mn))
-     * @space O(n log(mx - mn))
+     * @space O(n log(mx - mn)) on heap
      */
     kth_smallest(const vector<int>& arr) : roots(ssize(arr) + 1) {
         auto [mn_iter, mx_iter] = minmax_element(begin(arr), end(arr));
@@ -51,6 +51,7 @@ struct kth_smallest {
      * @returns (k+1)th smallest number in range. k is 0-based, so
      * query(le,ri,0) returns the min
      * @time O(log(mx - mn))
+     * @space O(log(mx - mn)) on stack, O(1) on heap
      */
     int query(int le, int ri, int k) const {
         assert(0 <= k && k < ri - le);

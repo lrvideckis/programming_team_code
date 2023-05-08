@@ -6,6 +6,7 @@ int sieve[N];
  * @param val an integer
  * @returns 1 iff val is prime
  * @time O(1)
+ * @space O(1)
  */
 bool is_prime(int val) {
     assert(val < N && sieve[1] == 1);
@@ -15,6 +16,7 @@ bool is_prime(int val) {
  * @param val an integer
  * @returns all prime factors of val (sorted)
  * @time O(log(val))
+ * @space O(log(val))
  */
 vector<int> get_prime_factors(int val) {
     assert(val < N && sieve[1] == 1);
