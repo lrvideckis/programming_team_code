@@ -8,8 +8,8 @@
  * @endcode
  * @param arr array of distinct integers
  * @param less any transitive compare operator
- * @returns array par where par[v] = parent of node v in min-cartesian-tree.
- * par[v] == -1 iff arr[v] == min(arr)
+ * @returns array par where par[v] = parent of node v in cartesian-tree.
+ * par[v] == -1 means node v is the root
  * @time O(n)
  * @space O(n)
  */

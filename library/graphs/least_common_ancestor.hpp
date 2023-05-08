@@ -38,6 +38,7 @@ struct LCA {
      * @param u,v 2 nodes in the same component
      * @returns lca of u, v
      * @time O(1)
+     * @space O(1)
      */
     int lca(int u, int v) const {
         if (u == v) return u;
@@ -48,12 +49,14 @@ struct LCA {
      * @param u,v endpoint nodes of path
      * @returns number of edges on path
      * @time O(1)
+     * @space O(1)
      */
     int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
     /**
      * @param u,v 2 nodes
      * @returns 1 iff v is in u's subtree
      * @time O(1)
+     * @space O(1)
      */
     bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sz[u];}
     /**
@@ -65,6 +68,7 @@ struct LCA {
      * @param u,v endpoint nodes of path
      * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[1]
      * @time O(1)
+     * @space O(1)
      */
     int next_on_path(int u, int v) const {
         assert(u != v);
