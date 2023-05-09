@@ -77,6 +77,14 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
         return res;
     }
     /**
+     * @param le,ri defines range [le, ri)
+     * @returns minimum in range
+     * @time O(log(n) / log(log(n)))
+     */
+    int query(int le, int ri) const {
+        return arr[query_idx(le, ri)];
+    }
+    /**
      * @param pos index to update
      * @param val new value
      * @time O((log(n)^2) / log(log(n)))
