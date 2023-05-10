@@ -1,4 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
+//since this causes an O(n) partition check for each call to `lower_bound`,
+//causing TLE.
+#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/persistent_segment_tree.hpp"
