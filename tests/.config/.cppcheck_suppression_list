@@ -21,3 +21,4 @@ unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14
 knownConditionTrueFalse:../library/math/n_choose_k_mod.hpp:39
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve.hpp:23
 variableScope:../kactl/content/number-theory/Factor.h:47
+functionStatic:../library/data_structures/uncommon_range_data_structures/kth_smallest.hpp:19
