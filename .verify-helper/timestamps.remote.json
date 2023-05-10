@@ -63,6 +63,7 @@
 "tests/library_checker_aizu_tests/strings/sa_query_multi_matching.test.cpp": "2023-05-10 15:44:25 -0600",
 "tests/library_checker_aizu_tests/strings/sa_query_palindrome.test.cpp": "2023-05-10 15:44:25 -0600",
 "tests/library_checker_aizu_tests/strings/sa_query_single_matching.test.cpp": "2023-05-10 15:44:25 -0600",
+"tests/library_checker_aizu_tests/strings/sa_query_zfunc.test.cpp": "2023-05-10 15:44:25 -0600",
 "tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-05-06 15:03:06 -0400",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-04-17 00:31:41 -0500"
 }
