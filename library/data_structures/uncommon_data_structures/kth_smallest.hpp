@@ -16,9 +16,9 @@ struct kth_smallest {
         for (int i = 0; i < ssize(arr); i++)
             pst.update(arr[i], 1, i);
     }
-    PST init(const vector<int>& arr) {
+    static PST init(const vector<int>& arr) {
         auto [mn, mx] = minmax_element(begin(arr), end(arr));
-        return PST(*mn, *mx + 1);
+        return {*mn, *mx + 1};
     }
     /**
      * @param le,ri defines range [le, ri)
