@@ -45,7 +45,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @returns op of range
      * @time O(1)
      */
-    T query(int le, int ri) const {
+    inline T query(int le, int ri) const {
         assert(0 <= le && le < ri && ri <= N);
         if (ri - le == 1) return dp[0][le];
         int lg = __lg(le ^ (ri - 1));

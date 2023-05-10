@@ -23,11 +23,11 @@ template <int N> struct implicit_seg_tree {
     implicit_seg_tree(int le, int ri) : root_l(le), root_r(ri) {
         tree[ptr++].val = {0, ri - le};
     }
-    void apply(const ch& add, int v) {
+    inline void apply(const ch& add, int v) {
         tree[v].val[0] += add;
         tree[v].lazy += add;
     }
-    void push(int tl, int tm, int tr, int v) {
+    inline void push(int tl, int tm, int tr, int v) {
         if (tr - tl > 1 && tree[v].lch == -1) {
             assert(ptr + 1 < N);
             tree[v].lch = ptr;
