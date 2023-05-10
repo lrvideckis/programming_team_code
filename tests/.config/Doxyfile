@@ -954,6 +954,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          binary_trie::node \
                          kth_smallest::node \
                          distinct_query::node \
+                         PST::node \
                          mcmf::edge \
                          N \
                          dfs \
@@ -988,6 +989,9 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          init \
                          rmq \
                          calc \
+                         ROOT_L \
+                         ROOT_R \
+                         pst \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
