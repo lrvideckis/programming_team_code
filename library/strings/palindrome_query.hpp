@@ -18,7 +18,7 @@ struct pal_query {
      * @returns 1 iff s.substr(le, ri - le) is a palindrome (so 1 when le == ri)
      * @time O(1)
      */
-    bool is_pal(int le, int ri) const {
+    inline bool is_pal(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= N);
         auto [quot, rem] = div(ri - le, 2);
         return pal_len[rem][le + quot] >= quot;
