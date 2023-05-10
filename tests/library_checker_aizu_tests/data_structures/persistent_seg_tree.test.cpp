@@ -5,32 +5,39 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+
     int n, q;
     cin >> n >> q;
 
     vector<array<int, 3>> points(n);
+    vector<int> all_y(n);
     for(int i = 0; i < n; i++) {
         int x, y, w;
         cin >> x >> y >> w;
         points[i] = {x, y, w};
+        all_y[i] = y;
     }
 
-    //TODO: check that CI catches these non-cam style iterators
-    sort(points.begin(), points.end(), [](const array<int, 3>& a, const array<int, 3>& b) -> bool {
-        return a[0] < b[0];
-    });
+    sort(begin(points), end(points));
 
-    PST pst(-5, 1'000'000'000);
+    sort(begin(all_y), end(all_y));
+    all_y.erase(unique(begin(all_y), end(all_y)), end(all_y));
 
-    for(const auto& point : points) {
+    PST pst(-5, ssize(all_y));
+
+    for(auto& point : points) {
+        point[1] = int(lower_bound(begin(all_y), end(all_y), point[1]) - begin(all_y));
         pst.update(point[1], point[2], ssize(pst.roots) - 1);
     }
 
     while(q--) {
         int le, down, ri, up;
         cin >> le >> down >> ri >> up;
-        le = lower_bound(points.begin(), points.end(), array<int, 3>({le, -1, -1})) - points.begin();
-        ri = lower_bound(points.begin(), points.end(), array<int, 3>({ri, -1, -1})) - points.begin();
+        le = int(lower_bound(begin(points), end(points), array<int, 3>({le, -1, -1})) - begin(points));
+        ri = int(lower_bound(begin(points), end(points), array<int, 3>({ri, -1, -1})) - begin(points));
+
+        down = int(lower_bound(begin(all_y), end(all_y), down) - begin(all_y));
+        up = int(lower_bound(begin(all_y), end(all_y), up) - begin(all_y));
         cout << pst.query(down, up, ri) - pst.query(down, up, le) << '\n';
     }
 

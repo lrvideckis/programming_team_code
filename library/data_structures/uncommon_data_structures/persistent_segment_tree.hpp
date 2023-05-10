@@ -1,3 +1,6 @@
+/** @file */
+#pragma once
+//NOLINTNEXTLINE(readability-identifier-naming)
 struct PST {
     struct node {
         long long sum;
@@ -7,8 +10,8 @@ struct PST {
     const int L, R;//TODO: check that clang tidy enforces all caps here
     vector<int> roots;
     deque<node> tree;
-    PST(int a_root_l, int a_root_r) :
-        L(a_root_l), R(a_root_r), roots(1), tree(1, {0LL, 0, 0}) {}
+    PST(int root_l, int root_r) :
+        L(root_l), R(root_r), roots(1), tree(1, {0LL, 0, 0}) {}
     void update(int idx, long long change, int version) {
         assert(L <= idx && idx < R);
         assert(0 <= version && version < ssize(roots));
