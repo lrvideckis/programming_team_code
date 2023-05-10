@@ -26,7 +26,7 @@ template <typename T> struct BIT {
      * @param d delta
      * @time O(log n)
      */
-    void update(int i, const T& d) {
+    inline void update(int i, const T& d) {
         assert(0 <= i && i < ssize(bit));
         for (; i < ssize(bit); i |= i + 1) bit[i] += d;
     }
@@ -35,7 +35,7 @@ template <typename T> struct BIT {
      * @returns sum of range
      * @time O(log n)
      */
-    T sum(int ri) const {
+    inline T sum(int ri) const {
         assert(0 <= ri && ri <= ssize(bit));
         T ret = 0;
         for (; ri > 0; ri &= ri - 1) ret += bit[ri - 1];
@@ -46,7 +46,7 @@ template <typename T> struct BIT {
      * @returns sum of range
      * @time O(log n)
      */
-    T sum(int le, int ri) const {
+    inline T sum(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= ssize(bit));
         return sum(ri) - sum(le);
     }
@@ -56,7 +56,7 @@ template <typename T> struct BIT {
      * @returns min pos such that sum of range [0, pos) >= sum (or n+1)
      * @time O(log n)
      */
-    int lower_bound(T sum) const {
+    inline int lower_bound(T sum) const {
         if (sum <= 0) return 0;
         int pos = 0;
         for (int pw = 1 << __lg(ssize(bit) | 1); pw; pw >>= 1)
