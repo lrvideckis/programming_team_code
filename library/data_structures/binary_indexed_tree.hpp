@@ -56,7 +56,7 @@ template <typename T> struct BIT {
      * @returns min pos such that sum of range [0, pos) >= sum (or n+1)
      * @time O(log n)
      */
-    inline int lower_bound(T sum) const {
+    int lower_bound(T sum) const {
         if (sum <= 0) return 0;
         int pos = 0;
         for (int pw = 1 << __lg(ssize(bit) | 1); pw; pw >>= 1)
