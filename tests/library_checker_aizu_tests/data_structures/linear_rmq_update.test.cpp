@@ -43,13 +43,23 @@ int main() {
             cout << s[k] << '\n';
         else if (type == 3) {
             int idx = rmq_min_idx.query_idx(k, n);
-            if (s[idx] == '0') cout << -1 << '\n';
-            else cout << idx << '\n';
+            if (s[idx] == '0') {
+                assert(rmq_min_idx.query(k, n) == INT_MAX);
+                cout << -1 << '\n';
+            } else {
+                assert(rmq_min_idx.query(k, n) == idx);
+                cout << idx << '\n';
+            }
         } else {
             assert(type == 4);
             int idx = rmq_max_idx.query_idx(0, k + 1);
-            if (s[idx] == '0') cout << -1 << '\n';
-            else cout << idx << '\n';
+            if (s[idx] == '0') {
+                assert(rmq_max_idx.query(0, k + 1) == -1);
+                cout << -1 << '\n';
+            } else {
+                assert(rmq_max_idx.query(0, k + 1) == idx);
+                cout << idx << '\n';
+            }
         }
     }
     return 0;
