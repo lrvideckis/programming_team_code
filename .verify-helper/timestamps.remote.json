@@ -14,6 +14,7 @@
 "tests/library_checker_aizu_tests/data_structures/lazy_segment_tree_constructor.test.cpp": "2023-04-27 09:46:59 -0700",
 "tests/library_checker_aizu_tests/data_structures/linear_rmq_update.test.cpp": "2023-05-06 15:03:06 -0400",
 "tests/library_checker_aizu_tests/data_structures/merge_sort_tree.test.cpp": "2023-04-27 09:46:59 -0700",
+"tests/library_checker_aizu_tests/data_structures/persistent_seg_tree.test.cpp": "2023-05-09 23:37:44 -0600",
 "tests/library_checker_aizu_tests/data_structures/pq_ds_undo_sliding_window.test.cpp": "2023-04-27 09:46:59 -0700",
 "tests/library_checker_aizu_tests/data_structures/pq_ds_undo_with_dsu.test.cpp": "2023-04-27 09:46:59 -0700",
 "tests/library_checker_aizu_tests/data_structures/rmq_all_methods.test.cpp": "2023-05-06 15:03:06 -0400",
