@@ -32,7 +32,7 @@ template <typename T> struct sa_query {
      * @returns max integer k such that s.substr(idx1, k) == s.substr(idx2, k)
      * @time O(1)
      */
-    int get_lcp(int idx1, int idx2) const {
+    inline int get_lcp(int idx1, int idx2) const {
         if (idx1 == idx2) return ssize(s) - idx1;
         auto [le, ri] = minmax(info.rank[idx1], info.rank[idx2]);
         return rmq_lcp.query(le, ri);
@@ -42,7 +42,7 @@ template <typename T> struct sa_query {
      * @returns 1 iff suffix s.substr(idx1) < s.substr(idx2)
      * @time O(1)
      */
-    bool less(int idx1, int idx2) const {
+    inline bool less(int idx1, int idx2) const {
         return info.rank[idx1] < info.rank[idx2];
     }
     /**

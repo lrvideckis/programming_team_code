@@ -36,7 +36,7 @@ struct binary_trie {
     /**
      * @returns number of integers in this multiset.
      */
-    int size() const {
+    inline int size() const {
         return t[0].sub_sz;
     }
     /**
