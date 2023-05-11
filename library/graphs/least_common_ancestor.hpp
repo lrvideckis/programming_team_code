@@ -39,7 +39,7 @@ struct LCA {
      * @returns lca of u, v
      * @time O(1)
      */
-    int lca(int u, int v) const {
+    inline int lca(int u, int v) const {
         if (u == v) return u;
         tie(u, v) = minmax(in[u], in[v]);
         return p[rmq.query(u + 1, v + 1)];
@@ -49,13 +49,13 @@ struct LCA {
      * @returns number of edges on path
      * @time O(1)
      */
-    int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
+    inline int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
     /**
      * @param u,v 2 nodes
      * @returns 1 iff v is in u's subtree
      * @time O(1)
      */
-    bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sz[u];}
+    inline bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sz[u];}
     /**
      * @see https://codeforces.com/blog/entry/71567?#comment-559285
      * @code{.cpp}
@@ -66,7 +66,7 @@ struct LCA {
      * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[1]
      * @time O(1)
      */
-    int next_on_path(int u, int v) const {
+    inline int next_on_path(int u, int v) const {
         assert(u != v);
         return in_subtree(u, v) ? rmq.query(in[u] + 1, in[v] + 1) : p[u];
     }

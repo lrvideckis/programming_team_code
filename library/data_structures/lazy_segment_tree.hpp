@@ -6,11 +6,11 @@
  * @returns split point of range which makes the segment tree a complete
  * binary tree
  */
-int split(int tl, int tr) {
+inline int split(int tl, int tr) {
     int pw2 = 1 << __lg(tr - tl);
     return min(tl + pw2, tr - pw2 / 2);
 }
-long long op(long long vl, long long vr) {
+inline long long op(long long vl, long long vr) {
     return vl + vr;
 }
 /**
@@ -28,11 +28,11 @@ struct seg_tree {
         rotate_copy(begin(arr), begin(arr) + (N ? 2 * N - (2 << __lg(N)) : 0), end(arr), begin(tree) + N);
         for (int i = N - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
     }
-    void apply(long long change, int tl, int tr, int v) {
+    inline void apply(long long change, int tl, int tr, int v) {
         tree[v] += (tr - tl) * change;
         if (v < N) lazy[v] += change;
     }
-    void push(int tl, int tm, int tr, int v) {
+    inline void push(int tl, int tm, int tr, int v) {
         if (lazy[v]) {
             apply(lazy[v], tl, tm, 2 * v);
             apply(lazy[v], tm, tr, 2 * v + 1);
