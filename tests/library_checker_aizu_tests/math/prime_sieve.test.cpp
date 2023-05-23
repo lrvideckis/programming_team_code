@@ -3,7 +3,6 @@
 
 #include "../../../library/math/prime_sieve.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../kactl/content/number-theory/MillerRabin.h"
 
 int main() {
