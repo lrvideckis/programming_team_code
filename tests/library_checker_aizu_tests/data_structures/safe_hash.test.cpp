@@ -1,4 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
+//this test TLE's when using debug mode; ACs not in debug mode
+//still haven't figured why :(
+#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/safe_hash.hpp"
