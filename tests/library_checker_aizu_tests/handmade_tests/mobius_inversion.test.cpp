@@ -2,7 +2,6 @@
 #include "../template.hpp"
 #include "../../../library/math/mobius_inversion.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../kactl/content/number-theory/Factor.h"
 
 int main() {

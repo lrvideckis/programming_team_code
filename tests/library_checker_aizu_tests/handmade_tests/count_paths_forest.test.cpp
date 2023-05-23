@@ -5,7 +5,6 @@
 #include "../../../library/graphs/tree_lifting.hpp"
 #include "../../../library/data_structures/dsu_restorable.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
 vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restorable& dsu) {

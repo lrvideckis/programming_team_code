@@ -3,7 +3,6 @@
 #include "../../../library/misc/random.hpp"
 #include "../../../library/monotonic_stack_related/count_rectangles.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/SubMatrix.h"
 
 int main() {

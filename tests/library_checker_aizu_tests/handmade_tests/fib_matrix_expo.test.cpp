@@ -3,7 +3,6 @@
 #include "../../../library/misc/random.hpp"
 #include "../../../library/math/fibonacci.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../kactl/content/data-structures/Matrix.h"
 #include "../../../hackpack-cpp/content/number-theory/ModInt.h"
 
