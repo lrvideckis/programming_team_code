@@ -3,7 +3,6 @@
 #include "../../../library/misc/random.hpp"
 #include "../../../library/graphs/count_paths_per_node.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
 int main() {

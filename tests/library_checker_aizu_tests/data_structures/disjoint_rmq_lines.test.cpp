@@ -5,7 +5,6 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    using ll = long long;
     const ll MOD = 998'244'353;
     int q;
     cin >> q;
