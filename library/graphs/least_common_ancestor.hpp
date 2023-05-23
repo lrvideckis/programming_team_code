@@ -13,7 +13,7 @@ struct LCA {
      * note: in[order[i]] = i, order[in[i]] = i
      * @{
      */
-    vector<int> in, sz, d, p, order;
+    vector<int> in, sub_sz, d, p, order;
     /** @} */
     RMQ<int> rmq;
     /**
@@ -21,7 +21,7 @@ struct LCA {
      * @time O(n log n)
      * @space O(n log n)
      */
-    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
+    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
     RMQ<int> init(const vector<vector<int>>& adj) {
         order.reserve(N);
         for (int i = 0; i < N; i++)
@@ -32,7 +32,7 @@ struct LCA {
         in[u] = ssize(order), order.push_back(u);
         for (auto v : adj[u])
             if (v != p[u])
-                d[v] = d[p[v] = u] + 1, dfs(adj, v), sz[u] += sz[v];
+                d[v] = d[p[v] = u] + 1, dfs(adj, v), sub_sz[u] += sub_sz[v];
     }
     /**
      * @param u,v 2 nodes in the same component
@@ -55,7 +55,7 @@ struct LCA {
      * @returns 1 iff v is in u's subtree
      * @time O(1)
      */
-    inline bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sz[u];}
+    inline bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sub_sz[u];}
     /**
      * @see https://codeforces.com/blog/entry/71567?#comment-559285
      * @code{.cpp}
