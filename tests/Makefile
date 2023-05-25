@@ -15,6 +15,8 @@ help:
 	@echo "make hackpack                      | build hackpack.pdf from .tex file"
 	@echo
 	@echo "make format_and_check_bash_scripts | runs shfmt and shellcheck"
+	@echo
+	@echo "make remove_all_comments           | mainly to reduce code length"
 
 compile_all_tests:
 	./scripts/compile_all_tests.sh
@@ -36,3 +38,6 @@ hackpack:
 
 format_and_check_bash_scripts:
 	./scripts/format_and_check_bash_scripts.sh
+
+remove_all_comments:
+	./scripts/remove_all_comments.sh
