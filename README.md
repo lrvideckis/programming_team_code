@@ -32,3 +32,4 @@ optimized for online contests | <ul><li>https://github.com/yosupo06/library-chec
 extensive | <ul><li>https://github.com/koosaga/olympiad/tree/master/Library/codes</li><li>https://github.com/ShahjalalShohag/code-library</li><li>https://github.com/brunomaletta/Biblioteca</li><li>https://github.com/dacin21/dacin21_codebook</li></ul>
 lgm | <ul><li>https://github.com/ecnerwala/cp-book</li><li>https://github.com/the-tourist/algo</li><li>https://github.com/nealwu/competitive-programming</li><li>https://github.com/bqi343/cp-notebook</li><li>https://github.com/suisen-cp/cp-library-cpp</li></ul>
 python | <ul><li>https://github.com/cheran-senthil/PyRival</li></ul>
+rust | <ul><li>https://github.com/EgorKulikov/rust_algo</li><li>https://github.com/bminaiev/rust-contests</li><li>https://github.com/EbTech/rust-algorithms</li></ul>
