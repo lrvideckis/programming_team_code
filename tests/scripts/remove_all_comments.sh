@@ -5,6 +5,6 @@ set -euo pipefail
 shopt -s globstar
 
 for header in ../library/**/*.hpp; do
-    cpp -P -fmax-include-depth=0 "$header" temp_file
+    cpp -fpreprocessed -P "$header" temp_file
     mv temp_file "$header"
 done
