@@ -33,7 +33,7 @@ struct match_info {
  * @endcode
  * @param adj bipartite graph
  * @param rsz number of nodes on right side
- * @returns info about max matching, and min vertix cover
+ * @returns info about max matching, and min vertex cover
  * @time O(n + m * sqrt(n)) n = lsz + rsz
  * @space O(n + m)
  */
