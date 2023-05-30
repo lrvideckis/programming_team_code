@@ -113,7 +113,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Remove comments and merge into no_comments branch
-      run: git checkout -b no_comments && make --directory=tests/ remove_all_comments && git add library/ && git commit -m "idk" && git push --force
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email github-actions@github.com
+        git checkout -b no_comments
+        make --directory=tests/ remove_all_comments
+        git add library/
+        git commit -m "idk"
+        git push
 
   format_and_check_bash_scripts:
     runs-on: ubuntu-latest
