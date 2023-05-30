@@ -25,7 +25,10 @@ jobs:
         default: true
         profile: minimal
     - name: Set up git submodules
-      run: git submodule init && git submodule update && rm -rf hackpack-cpp/tests/
+      run: |
+        git submodule init
+        git submodule update
+        rm -rf hackpack-cpp/tests/
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -72,13 +75,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install texlive, rename
-      run: sudo apt update && sudo apt install texlive texlive-latex-extra rename
+      run: |
+        sudo apt update
+        sudo apt install texlive texlive-latex-extra rename
     - name: Install node
       uses: actions/setup-node@v1
       with:
         node-version: "12.16.0"
     - name: Install Notebook Generator
-      run: sudo npm install -g npm@latest && sudo npm install -g notebook-generator
+      run: |
+        sudo npm install -g npm@latest
+        sudo npm install -g notebook-generator
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3
@@ -103,6 +110,22 @@ jobs:
         prerelease: false
         title: hackpack
         files: tests/hackpack.pdf
+
+  update_no_comments_branch:
+    runs-on: ubuntu-latest
+    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Remove comments and force push to no_comments branch
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email 33103480+lrvideckis@users.noreply.github.com
+        git checkout -b no_comments
+        make --directory=tests/ remove_all_comments
+        git add library/
+        git commit -m "remove comments"
+        git push origin no_comments --force
 
   format_and_check_bash_scripts:
     runs-on: ubuntu-latest
