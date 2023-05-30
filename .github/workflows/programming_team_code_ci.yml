@@ -117,7 +117,7 @@ jobs:
         git config --local user.name github-actions
         git config --local user.email github-actions@github.com
         git checkout -b no_comments
-        git pull
+        git pull origin no_comments
         make --directory=tests/ remove_all_comments
         git add library/
         git commit -m "idk"
