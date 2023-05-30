@@ -9,3 +9,4 @@ for header in ../library/**/*.hpp; do
 	mv temp_file "$header"
 	sed --in-place '1d' "$header"
 done
+sed --in-place '1d' ../library/**/*.hpp
