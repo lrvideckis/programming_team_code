@@ -14,7 +14,7 @@ int main() {
             int v = get_rand<int>(0, n - 1);
             if (u == v)
                 continue;
-            if (dsu.update(u, v)) {
+            if (dsu.join(u, v)) {
                 adj[u].push_back(v);
                 adj[v].push_back(u);
             }
