@@ -2,7 +2,6 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../kactl_macros.hpp"
 #include "../../../library/strings/palindrome_query.hpp"
 
 int main() {

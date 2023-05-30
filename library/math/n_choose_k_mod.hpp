@@ -24,7 +24,7 @@ void calc_chooses() {
  * @space O(1)
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-long long C(int n, int k) {
+inline long long C(int n, int k) {
     assert(fact[n]);
     if (k < 0 || n < k) return 0;
     return fact[n] * inv_fact[k] % MOD * inv_fact[n - k] % MOD;

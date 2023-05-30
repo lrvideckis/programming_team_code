@@ -14,7 +14,7 @@ int main() {
             int type = get_rand<int>(0, 2);
             if (type == 0) {
                 int u = get_rand<int>(0, n - 1), v = get_rand(0, n - 1);
-                dsu.update(u, v);
+                dsu.join(u, v);
                 adj[u].push_back(v);
                 adj[v].push_back(u);
                 edge_st.emplace_back(u, v);

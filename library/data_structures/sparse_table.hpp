@@ -31,7 +31,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
      * @returns op of range
      * @time O(1) usually, or O(log MAX) if op is gcd
      */
-    T query(int le, int ri) const {
+    inline T query(int le, int ri) const {
         assert(0 <= le && le < ri && ri <= ssize(dp[0]));
         int lg = __lg(ri - le);
         return op(dp[lg][le], dp[lg][ri - (1 << lg)]);

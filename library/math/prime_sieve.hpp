@@ -8,7 +8,7 @@ int sieve[N];
  * @time O(1)
  * @space O(1)
  */
-bool is_prime(int val) {
+inline bool is_prime(int val) {
     assert(val < N && sieve[1] == 1);
     return val >= 2 && sieve[val] == val;
 }

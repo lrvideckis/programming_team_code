@@ -13,7 +13,7 @@ struct LCA {
      * note: in[order[i]] = i, order[in[i]] = i
      * @{
      */
-    vector<int> in, sz, d, p, order;
+    vector<int> in, sub_sz, d, p, order;
     /** @} */
     RMQ<int> rmq;
     /**
@@ -21,7 +21,7 @@ struct LCA {
      * @time O(n log n)
      * @space O(n log n)
      */
-    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
+    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
     RMQ<int> init(const vector<vector<int>>& adj) {
         order.reserve(N);
         for (int i = 0; i < N; i++)
@@ -32,7 +32,7 @@ struct LCA {
         in[u] = ssize(order), order.push_back(u);
         for (auto v : adj[u])
             if (v != p[u])
-                d[v] = d[p[v] = u] + 1, dfs(adj, v), sz[u] += sz[v];
+                d[v] = d[p[v] = u] + 1, dfs(adj, v), sub_sz[u] += sub_sz[v];
     }
     /**
      * @param u,v 2 nodes in the same component
@@ -40,7 +40,7 @@ struct LCA {
      * @time O(1)
      * @space O(1)
      */
-    int lca(int u, int v) const {
+    inline int lca(int u, int v) const {
         if (u == v) return u;
         tie(u, v) = minmax(in[u], in[v]);
         return p[rmq.query(u + 1, v + 1)];
@@ -51,14 +51,14 @@ struct LCA {
      * @time O(1)
      * @space O(1)
      */
-    int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
+    inline int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
     /**
      * @param u,v 2 nodes
      * @returns 1 iff v is in u's subtree
      * @time O(1)
      * @space O(1)
      */
-    bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sz[u];}
+    inline bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sub_sz[u];}
     /**
      * @see https://codeforces.com/blog/entry/71567?#comment-559285
      * @code{.cpp}
@@ -70,7 +70,7 @@ struct LCA {
      * @time O(1)
      * @space O(1)
      */
-    int next_on_path(int u, int v) const {
+    inline int next_on_path(int u, int v) const {
         assert(u != v);
         return in_subtree(u, v) ? rmq.query(in[u] + 1, in[v] + 1) : p[u];
     }
