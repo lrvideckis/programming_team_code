@@ -7,5 +7,5 @@ shopt -s globstar
 for header in ../library/**/*.hpp; do
 	cpp -fpreprocessed -P "$header" temp_file
 	mv temp_file "$header"
-	sed --in-place '1d' "$header"
 done
+sed --in-place '1d' ../library/**/*.hpp
