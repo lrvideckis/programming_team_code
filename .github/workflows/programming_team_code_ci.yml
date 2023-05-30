@@ -117,12 +117,10 @@ jobs:
         git config --local user.name github-actions
         git config --local user.email github-actions@github.com
         git checkout -b no_comments
-        git config pull.rebase false
-        git pull origin no_comments
         make --directory=tests/ remove_all_comments
         git add library/
         git commit -m "idk"
-        git push --set-upstream origin no_comments
+        git push origin no_comments --force
 
   format_and_check_bash_scripts:
     runs-on: ubuntu-latest
