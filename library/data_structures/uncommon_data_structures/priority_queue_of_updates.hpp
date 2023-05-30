@@ -11,7 +11,7 @@
  *     cout << pq.ds.sum(v) << '\n';
  * @endcode
  * @time n interweaved calls to pop_update, push_update take O(T(n)*nlogn)
- * where O(T(n)) = time complexity of DS::update and DS::undo
+ * where O(T(n)) = time complexity of DS::join and DS::undo
  */
 template <typename DS, typename... ARGS> struct pq_updates {
     DS ds; /**< arbitrary data structure */
@@ -19,7 +19,7 @@ template <typename DS, typename... ARGS> struct pq_updates {
     vector<upd> upd_st; /**< stack of updates */
     map<int, int> mp; /**< priority -> index into update stack */
     /**
-     * @param a_ds any data structure with member functions `update` and `undo`
+     * @param a_ds any data structure with member functions `join` and `undo`
      */
     pq_updates(const DS& a_ds) : ds(a_ds) {}
     /**
@@ -43,17 +43,17 @@ template <typename DS, typename... ARGS> struct pq_updates {
         upd_st.pop_back();
         mp.erase(prev(end(mp)));
         for (int i = idx; i < ssize(upd_st); i++) {
-            apply(&DS::update, tuple_cat(make_tuple(&ds), upd_st[i].first));
+            apply(&DS::join, tuple_cat(make_tuple(&ds), upd_st[i].first));
             upd_st[i].second->second = i;
         }
     }
     /**
-     * @param args arguments to DS::update
+     * @param args arguments to DS::join
      * @param priority must be distinct, can be negative
      * @time O(log(n) + T(n))
      */
     void push_update(ARGS... args, int priority) {
-        ds.update(args...);
+        ds.join(args...);
         auto [it, ins] = mp.emplace(priority, ssize(upd_st));
         assert(ins);
         upd_st.emplace_back(make_tuple(args...), it);
