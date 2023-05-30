@@ -16,7 +16,7 @@ struct dsu_restorable {
         while (p[u] >= 0) u = p[u];
         return u;
     }
-    bool update(int u, int v) {
+    bool join(int u, int v) {
         st.emplace_back();
         if ((u = find(u)) == (v = find(v))) return 0;
         if (p[u] > p[v]) swap(u, v);

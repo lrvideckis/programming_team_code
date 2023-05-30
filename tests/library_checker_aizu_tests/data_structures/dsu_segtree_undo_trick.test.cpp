@@ -58,7 +58,7 @@ int main() {
             add_edge(add_edge, i_time, q, edge.first, edge.second, 0, q, 1);
     }
     auto dfs = [&](auto&& self, int tl, int tr, int v) -> void {
-        for (auto [node_u, node_v] : tree[v]) dsu.update(node_u, node_v);
+        for (auto [node_u, node_v] : tree[v]) dsu.join(node_u, node_v);
         assert((v >= q) == ((tr - tl) == 1));
         if (v >= q) {//leaf node
             const int DEPTH_LEAF = __lg(v), MAX_DEPTH = __lg(2 * q - 1);
