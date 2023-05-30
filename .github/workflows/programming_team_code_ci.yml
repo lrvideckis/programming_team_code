@@ -120,7 +120,7 @@ jobs:
         make --directory=tests/ remove_all_comments
         git add library/
         git commit -m "idk"
-        git push
+        git push --set-upstream origin no_comments
 
   format_and_check_bash_scripts:
     runs-on: ubuntu-latest
