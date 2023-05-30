@@ -9,4 +9,5 @@ for header in ../library/**/*.hpp; do
 	mv temp_file "$header"
 	sed --in-place '1d' "$header"
 done
+# the cpp preprocessor sometimes leaves a blank empty line at the beginning
 sed --in-place '/^$/d' ../library/**/*.hpp
