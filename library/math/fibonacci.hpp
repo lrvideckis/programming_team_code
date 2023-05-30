@@ -2,7 +2,7 @@
 #pragma once
 const int MOD = 998'244'353;
 /**
- * @see https://codeforces.com/blog/entry/14516 https://cp-algorithms.com/algebra/fibonacci-numbers.html#fast-doubling-method
+ * @see https://codeforces.com/blog/entry/14516 https://cp-algorithms.com/algebra /fibonacci-numbers.html#fast-doubling-method
  * @code{.cpp}
  *     auto val = fib(n).first;
  *     //n=0 -> val=0
