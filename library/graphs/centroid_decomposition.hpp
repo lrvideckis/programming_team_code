@@ -19,7 +19,9 @@ template <typename F> struct centroid_decomp {
      */
     centroid_decomp(const vector<vector<int>>& a_adj, const F& a_func)
         : adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
-        for (int i = 0; i < ssize(adj); i++) if (sub_sz[i] == -1) dfs(i);
+        for (int i = 0; i < ssize(adj); i++)
+            if (sub_sz[i] == -1)
+                dfs(i);
     }
     void calc_subtree_sizes(int u, int p = -1) {
         sub_sz[u] = 1;
