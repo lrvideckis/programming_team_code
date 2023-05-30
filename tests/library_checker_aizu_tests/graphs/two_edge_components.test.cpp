@@ -36,7 +36,7 @@ int main() {
     for (int i = 0; i < m; i++) {
         if (!cc.is_bridge[i]) {
             auto [u, v] = edges[i];
-            num_sets_dsu -= dsu.update(u, v);
+            num_sets_dsu -= dsu.join(u, v);
         }
     }
     assert(num_sets_dsu == ssize(bt));

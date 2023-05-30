@@ -7,7 +7,7 @@
 
 struct stack_with_get_max {
     vector<pair<int, int>> st;
-    void update(int val) {
+    void join(int val) {
         st.emplace_back(val, st.empty() ? val : min(val, st.back().second));
     }
     void undo() {
