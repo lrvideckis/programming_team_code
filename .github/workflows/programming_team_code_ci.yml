@@ -104,6 +104,16 @@ jobs:
         title: hackpack
         files: tests/hackpack.pdf
 
+  publish_no_comments_version:
+    runs-on: ubuntu-latest
+    needs: [library_checker_aizu_tests, astyle_cppcheck, clangtidy, compile_all_tests]
+      #if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/test_branch' # TODO: revert
+    steps:
+    - uses: actions/checkout@v2
+    - name: Remove comments and merge into no_comments branch
+      run: echo "hi"
+
   format_and_check_bash_scripts:
     runs-on: ubuntu-latest
     steps:
