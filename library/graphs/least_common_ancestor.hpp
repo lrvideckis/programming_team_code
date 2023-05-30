@@ -17,7 +17,7 @@ struct LCA {
     /** @} */
     RMQ<int> rmq;
     /**
-     * @param adj forest
+     * @param adj forest (rooted or unrooted)
      * @time O(n log n)
      * @space O(n log n)
      */
