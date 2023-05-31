@@ -41,8 +41,8 @@ struct LCA {
      */
     inline int lca(int u, int v) const {
         if (u == v) return u;
-        tie(u, v) = minmax(in[u], in[v]);
-        return p[rmq.query(u + 1, v + 1)];
+        auto [x, y] = minmax(in[u], in[v]);
+        return p[rmq.query(x + 1, y + 1)];
     }
     /**
      * @param u,v endpoint nodes of path
