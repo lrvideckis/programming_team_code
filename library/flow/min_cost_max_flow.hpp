@@ -14,7 +14,7 @@ struct mcmf {
     vector<edge> e; /**< edge list */
     vector<vector<int>> adj; /**< adjacency list */
     /**
-     * @param a_n number of nodes. Note 0 <= s,t < a_n
+     * @param a_n number of nodes.
      */
     mcmf(int a_n) : N(a_n), adj(N) {}
     void add_edge(int u, int v, ll cap, ll cost) {
@@ -26,8 +26,8 @@ struct mcmf {
         e.push_back(e2);
     }
     /**
-     * @param s source
-     * @param t sink
+     * @param s source, 0 <= s < N
+     * @param t sink, 0 <= t < N
      * @param total_flow we try to send this amount of flow through the graph
      * @returns pair(flow, cost)
      * - flow: (<=total_flow) is the max amount of flow we are able to send.

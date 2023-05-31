@@ -7,4 +7,7 @@ shopt -s globstar
 for header in ../library/**/*.hpp; do
 	cpp -fpreprocessed -P "$header" temp_file
 	mv temp_file "$header"
+	sed --in-place '1d' "$header"
 done
+# the cpp preprocessor sometimes leaves a blank empty line at the beginning
+sed --in-place '/^$/d' ../library/**/*.hpp
