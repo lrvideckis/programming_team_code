@@ -8,8 +8,8 @@
  * @endcode
  */
 template <typename F> struct centroid_decomp {
-    vector<vector<int>> adj; /**< copy of tree where we remove edges to represent each decomposition */
-    F func; /**< copy of function */
+    vector<vector<int>> adj;
+    F func;
     vector<int> sub_sz; /**< subtree sizes of current decomponsition */
     /**
      * @param a_adj unweighted undirected forest
