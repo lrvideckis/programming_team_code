@@ -30,7 +30,7 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
      * @param a_arr an array
      * @param a_less transitive compare operator
      * @time O(n)
-     * @space O(n)
+     * @space `arr`, `mask`, and `idx` vectors are all O(n) total size
      */
     linear_rmq(const vector<T>& a_arr, const F& a_less) : N(ssize(a_arr)), arr(a_arr), less(a_less) {
         for (int n = N; n >= 2; n = ((n + 63) >> 6)) {

@@ -18,7 +18,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
      * @param arr static array
      * @param a_op any associative, communative, idempotent operation
      * @time O(n log n)
-     * @space O(n log n) for `dp`
+     * @space O(n log n) for `dp` vector
      */
     RMQ(const vector<T>& arr, const F& a_op) : dp(1, arr), op(a_op) {
         for (int i = 0; (2 << i) <= ssize(arr); i++) {

@@ -11,7 +11,7 @@ struct distinct_query {
     /**
      * @param arr static array; can't handle updates
      * @time O(n log n)
-     * @space O(n log n) for PST::tree
+     * @space O(n log n) for PST::tree vector
      */
     distinct_query(const vector<int>& arr) : N(ssize(arr)), pst(0, N + 1) {
         map<int, int> last_idx;
