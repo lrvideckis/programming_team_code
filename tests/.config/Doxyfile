@@ -998,6 +998,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          needle \
                          pi \
                          e \
+                         t \
                          adj \
                          func \
                          sub_sz \
