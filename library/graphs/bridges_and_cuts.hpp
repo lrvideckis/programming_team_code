@@ -24,7 +24,7 @@ struct graph_info {
  *         adj[u].emplace_back(v, i);
  *         adj[v].emplace_back(u, i);
  *     }
- *     auto [num_bccs, is_cut, bcc_id] = bridge_and_cut(adj, m);
+ *     auto [num_2_edge_ccs, is_bridge, two_edge_ccid, num_bccs, is_cut, bcc_id] = bridge_and_cut(adj, m);
  * @endcode
  * @param adj undirected graph; possibly with multiple edges
  * @param m number of edges
@@ -36,12 +36,12 @@ graph_info bridge_and_cut(const vector<vector<pair<int, int>>>& adj, int m) {
     //stuff for both (always keep)
     int n = ssize(adj), timer = 1;
     vector<int> tin(n);
-    //2 edge cc stuff (delete if not needed)
+    //2 edge cc stuff
     int num_2_edge_ccs = 0;
     vector<bool> is_bridge(m);
     vector<int> two_edge_ccid(n), node_stack;
     node_stack.reserve(n);
-    //bcc stuff (delete if not needed)
+    //bcc stuff
     int num_bccs = 0;
     vector<bool> is_cut(n);
     vector<int> bcc_id(m), edge_stack;

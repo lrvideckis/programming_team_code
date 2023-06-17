@@ -9,14 +9,9 @@
  * Various queries you can do based on suffix array.
  */
 template <typename T> struct sa_query {
-    T s; /**< initial string */
-    suffix_array<T> info; /**< stores raw arrays */
-    /**
-     * needed for various queries
-     * @{
-     */
+    T s;
+    suffix_array<T> info;
     RMQ<int> rmq_lcp, rmq_sa;
-    /** @} */
     /**
      * @param a_s,max_val string/array with 0 <= a_s[i] < max_val
      * @time O((nlogn) + max_val)

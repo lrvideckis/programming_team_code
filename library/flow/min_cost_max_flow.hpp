@@ -11,8 +11,8 @@ struct mcmf {
         int back;
     };
     const int N;
-    vector<edge> e; /**< edge list */
-    vector<vector<int>> adj; /**< adjacency list */
+    vector<edge> e;
+    vector<vector<int>> adj;
     /**
      * @param a_n number of nodes.
      */

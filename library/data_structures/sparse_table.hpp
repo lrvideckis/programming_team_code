@@ -13,7 +13,7 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
     vector<vector<T>> dp; /**< dp[i][j] = op of range [j, j + 2^i) */
-    F op; /**< usually min,max,and,or,gcd */
+    F op;
     /**
      * @param arr static array
      * @param a_op any associative, communative, idempotent operation

@@ -993,6 +993,24 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          ROOT_R \
                          pst \
                          rd \
+                         dp \
+                         op \
+                         needle \
+                         pi \
+                         e \
+                         t \
+                         adj \
+                         func \
+                         sub_sz \
+                         s \
+                         info \
+                         rmq_lcp \
+                         rmq_sa \
+                         ds \
+                         upd_st \
+                         is \
+                         safe_map \
+                         safe_hash_table \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

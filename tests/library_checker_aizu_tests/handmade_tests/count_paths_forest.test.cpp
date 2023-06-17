@@ -3,7 +3,7 @@
 #include "../../../library/misc/random.hpp"
 #include "../../../library/graphs/count_paths_per_node.hpp"
 #include "../../../library/graphs/tree_lifting.hpp"
-#include "../../../library/data_structures/dsu_restorable.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
 
 #include "../../../library/graphs/count_paths_per_length.hpp"
 

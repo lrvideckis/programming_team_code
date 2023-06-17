@@ -15,7 +15,7 @@ using namespace __gnu_pbds;
  * find_by_order - find kth largest element, k is 0 based so find_by_order(0) returns min element
  */
 template <typename T> using indexed_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-indexed_set<pair<long long, int>> is; /**< example initialization */
+indexed_set<pair<long long, int>> is;
 /**
  * @see https://codeforces.com/blog/entry/60737
  *
