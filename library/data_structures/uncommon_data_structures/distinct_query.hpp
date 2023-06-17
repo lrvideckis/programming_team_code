@@ -11,7 +11,7 @@ struct distinct_query {
     /**
      * @param arr static array; can't handle updates
      * @time O(n log n)
-     * @space O(n log n)
+     * @space O(n log n) for PST::tree
      */
     distinct_query(const vector<int>& arr) : N(ssize(arr)), pst(0, N + 1) {
         map<int, int> last_idx;
@@ -25,6 +25,7 @@ struct distinct_query {
      * @param le,ri defines range [le, ri)
      * @returns number of distinct elements in range; query(i, i) returns 0.
      * @time O(log n)
+     * @space O(log n) for recursion stack; no new nodes are allocated
      */
     int query(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= N);

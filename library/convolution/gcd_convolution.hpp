@@ -6,7 +6,7 @@ const int MOD = 998'244'353;
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
  * (i,j) where gcd(i,j) == k
  * @time O(n log n)
- * @space O(n)
+ * @space a size O(n) vector is allocated and returned
  */
 vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
     assert(ssize(a) == ssize(b));

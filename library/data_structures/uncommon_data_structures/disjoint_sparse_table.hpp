@@ -28,7 +28,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @param arr static array
      * @param a_op any associative operation
      * @time O(n log n)
-     * @space O(n log n)
+     * @space O(n log n) for `dp`
      */
     disjoint_rmq(const vector<T>& arr, const F& a_op) : N(ssize(arr)), op(a_op) {
         for (int len = 1; len <= N; len *= 2) {
@@ -44,6 +44,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @param le,ri defines range [le, ri)
      * @returns op of range
      * @time O(1)
+     * @space O(1)
      */
     inline T query(int le, int ri) const {
         assert(0 <= le && le < ri && ri <= N);
