@@ -10,7 +10,7 @@ struct binary_trie {
         int sub_sz = 0;
         array<int, 2> next = {-1, -1};
     };
-    vector<node> t; /**< stores trie */
+    vector<node> t;
     binary_trie() : t(1) {}
     /**
      * @param val integer

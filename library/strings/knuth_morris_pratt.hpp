@@ -15,8 +15,8 @@
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T> struct KMP {
-    T needle; /**< copy of needle */
-    vector<int> pi; /**< prefix function */
+    T needle;
+    vector<int> pi;
     /**
      * @param a_needle string to be searched for inside haystack
      * @time O(|needle|)

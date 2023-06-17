@@ -3,7 +3,7 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/data_structures/dsu_restorable.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/priority_queue_of_updates.hpp"
 
 int main() {

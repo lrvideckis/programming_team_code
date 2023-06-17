@@ -15,7 +15,7 @@
  */
 template <typename T, typename F = function<T(const T&, const T&)>> struct disjoint_rmq {
     const int N;
-    vector<vector<T>> dp; /**< stores op of some subarray */
+    vector<vector<T>> dp;
     /**
      * examples:
      * - min and # of mins.

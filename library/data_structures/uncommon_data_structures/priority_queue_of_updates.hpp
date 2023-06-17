@@ -14,9 +14,9 @@
  * where O(T(n)) = time complexity of DS::join and DS::undo
  */
 template <typename DS, typename... ARGS> struct pq_updates {
-    DS ds; /**< arbitrary data structure */
+    DS ds;
     using upd = pair<tuple<ARGS...>, map<int, int>::iterator>;
-    vector<upd> upd_st; /**< stack of updates */
+    vector<upd> upd_st;
     map<int, int> mp; /**< priority -> index into update stack */
     /**
      * @param a_ds any data structure with member functions `join` and `undo`
