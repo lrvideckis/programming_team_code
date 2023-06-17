@@ -1002,6 +1002,10 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          adj \
                          func \
                          sub_sz \
+                         s \
+                         info \
+                         rmq_lcp \
+                         rmq_sa \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
