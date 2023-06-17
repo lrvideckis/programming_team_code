@@ -1008,6 +1008,9 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          rmq_sa \
                          ds \
                          upd_st \
+                         is \
+                         safe_map \
+                         safe_hash_table \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

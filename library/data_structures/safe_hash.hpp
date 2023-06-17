@@ -15,6 +15,6 @@ struct custom_hash {
         return splitmix64(x + FIXED_RANDOM);
     }
 };
-unordered_map<long long, long long, custom_hash> safe_map; /**< example initialization */
+unordered_map<long long, long long, custom_hash> safe_map;
 #include "policy_based_data_structures.hpp"
-gp_hash_table<long long, long long, custom_hash> safe_hash_table; /**< example initialization */
+gp_hash_table<long long, long long, custom_hash> safe_hash_table;
