@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/dsu_restorable.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
 #include "../../../library/data_structures/lazy_segment_tree.hpp"
 
 int main() {
