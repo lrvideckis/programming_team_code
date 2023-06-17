@@ -10,7 +10,7 @@ struct kth_smallest {
     /**
      * @param arr static array; can't handle updates
      * @time O(n log(mx - mn))
-     * @space O(n log(mx - mn)) on heap
+     * @space O(n log(mx - mn)) nodes are pushed back onto PST::tree
      */
     kth_smallest(const vector<int>& arr) : pst(init(arr)) {
         for (int i = 0; i < ssize(arr); i++)
@@ -26,7 +26,7 @@ struct kth_smallest {
      * @returns (k+1)th smallest number in range. k is 0-based, so
      * query(le,ri,0) returns the min
      * @time O(log(mx - mn))
-     * @space O(log(mx - mn)) on stack, O(1) on heap
+     * @space O(log(mx - mn)) for recursion stack; no new nodes are allocated
      */
     int query(int le, int ri, int k) const {
         assert(0 <= k && k < ri - le);
