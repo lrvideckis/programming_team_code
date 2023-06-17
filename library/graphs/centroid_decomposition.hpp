@@ -10,7 +10,7 @@
 template <typename F> struct centroid_decomp {
     vector<vector<int>> adj;
     F func;
-    vector<int> sub_sz; /**< subtree sizes of current decomponsition */
+    vector<int> sub_sz;
     /**
      * @param a_adj unweighted undirected forest
      * @param a_func called on centroid of each decomposition
