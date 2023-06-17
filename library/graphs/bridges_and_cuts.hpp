@@ -24,7 +24,7 @@ struct graph_info {
  *         adj[u].emplace_back(v, i);
  *         adj[v].emplace_back(u, i);
  *     }
- *     auto [num_bccs, is_cut, bcc_id] = bridge_and_cut(adj, m);
+ *     auto [num_2_edge_ccs, is_bridge, two_edge_ccid, num_bccs, is_cut, bcc_id] = bridge_and_cut(adj, m);
  * @endcode
  * @param adj undirected graph; possibly with multiple edges
  * @param m number of edges
