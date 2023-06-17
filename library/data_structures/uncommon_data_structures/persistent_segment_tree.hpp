@@ -26,7 +26,8 @@ struct PST {
      * @param idx,change does arr[idx] += change
      * @param version which version to update. Each call to update creates a
      * new version. Initially there is a dummy version.
-     * @time O(log(ROOT_R - ROOT_L)) new nodes are pushed back onto `tree`; (and for recursion stack)
+     * @time O(log(ROOT_R - ROOT_L))
+     * @space O(log(ROOT_R - ROOT_L)) new nodes are pushed back onto `tree`; (and for recursion stack)
      */
     void update(int idx, long long change, int version) {
         assert(ROOT_L <= idx && idx < ROOT_R);
@@ -52,7 +53,8 @@ struct PST {
      * @param le, ri defines range [le, ri)
      * @param version which version to query
      * @returns sum of range for that version
-     * @time O(log(ROOT_R - ROOT_L)) for recursion stack, no new nodes are allocated
+     * @time O(log(ROOT_R - ROOT_L))
+     * @space O(log(ROOT_R - ROOT_L)) for recursion stack, no new nodes are allocated
      */
     long long query(int le, int ri, int version) const {
         assert(ROOT_L <= le && ri <= ROOT_R);
