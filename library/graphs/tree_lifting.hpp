@@ -45,7 +45,7 @@ struct tree_lift {
     /**
      * @param u,v 2 nodes in the same component
      * @returns lca of u, v
-     * @time O(log(path length))
+     * @time O(log(path length(u, v)))
      * @space O(1)
      */
     int lca(int u, int v) const {
@@ -59,7 +59,7 @@ struct tree_lift {
     /**
      * @param u,v endpoint nodes of path
      * @returns number of edges on path
-     * @time O(log(path length))
+     * @time O(log(path length(u, v)))
      * @space O(1)
      */
     int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
@@ -67,7 +67,7 @@ struct tree_lift {
      * @param u,v endpoint nodes of path
      * @param k index into path
      * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[k], so u if k=0
-     * @time O(log(path length))
+     * @time O(log(path length(u, v)))
      * @space O(1)
      */
     int kth_path(int u, int v, int k) const {

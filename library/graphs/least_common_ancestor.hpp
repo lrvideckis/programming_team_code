@@ -19,7 +19,7 @@ struct LCA {
     /**
      * @param adj forest (rooted or unrooted)
      * @time O(n log n)
-     * @space O(n log n)
+     * @space O(n log n) for rmq, all other vectors are O(n)
      */
     LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
     RMQ<int> init(const vector<vector<int>>& adj) {
