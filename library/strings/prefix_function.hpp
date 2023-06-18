@@ -4,7 +4,8 @@
  * @see https://cp-algorithms.com/string /prefix-function.html#implementation
  * @param s string/array
  * @returns prefix function
- * @time this function allocates/returns a O(n) vector
+ * @time O(n)
+ * @space this function allocates/returns a O(n) vector
  */
 template <typename T> vector<int> prefix_function(const T& s) {
     vector<int> pi(ssize(s));

@@ -7,6 +7,8 @@
  * `i`. `d[s]` is always 0.
  * @time O((n + m) log n) Note log(m) < log(n^2) = 2*log(n), so O(log n) ==
  * O(log m)
+ * @space besides the O(n + m) param `adj`, this function allocates/returns a
+ * O(n) distance array. The (temporary) priority queue can grow to size O(n+m)
  */
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj, int s) {
     using node = pair<long long, int>;

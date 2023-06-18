@@ -17,6 +17,7 @@ struct binary_trie {
      * @param delta 1 to insert val, -1 to remove val
      * @returns number of occurances of val in multiset
      * @time O(MX_BIT)
+     * @space O(MX_BIT) new nodes are pushed back onto `t`
      */
     int update(long long val, int delta) {
         int c = 0;
@@ -44,6 +45,7 @@ struct binary_trie {
      * @returns integer x such that x is in this multiset, and the value of
      * (x^val) is minimum.
      * @time O(MX_BIT)
+     * @space O(1)
      */
     long long min_xor(long long val) const {
         assert(size() > 0);
