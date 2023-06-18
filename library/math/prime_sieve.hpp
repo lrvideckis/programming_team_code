@@ -16,7 +16,7 @@ inline bool is_prime(int val) {
  * @param val an integer
  * @returns all prime factors of val (sorted)
  * @time O(log(val))
- * @space O(log(val)) for `factors` vector
+ * @space this function allocates/returns a O(log(val)) vector
  */
 vector<int> get_prime_factors(int val) {
     assert(val < N && sieve[1] == 1);

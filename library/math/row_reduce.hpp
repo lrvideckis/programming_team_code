@@ -9,7 +9,7 @@
  * are also affected by row operations.
  * @returns pair(rank, determinant)
  * @time O(n * m * min(cols, n))
- * @space besides the O(n * m) `mat` param, this functions allocates O(1) space
+ * @space besides the O(n * m) `mat` param, this function uses O(1) space
  */
 pair<int, long long> row_reduce(vector<vector<long long>>& mat, int cols) {
     int n = ssize(mat), m = ssize(mat[0]), rank = 0;

@@ -28,7 +28,7 @@ long long bin_exp(long long b, long long e, int mod) {
  * @returns b ^ (b ^ (b ^ ... )) % mod, where the height of the tower
  * is e.
  * @time O(sqrt(mod) * log(mod))
- * @space O(log(mod)) on stack, O(1) on heap
+ * @space O(log(mod)) for recursion stack, since totient(totient(mod)) <= mod/2
  */
 long long tetration(long long b, long long e, int mod) {
     if (mod == 1) return 0;
