@@ -12,7 +12,7 @@
  * @param cc what's calculated by bridges_and_cuts
  * @returns adjacency list of bridge tree
  * @time O(n + m)
- * @space this function allocates and returns `tree` vector, which is O(n + m)
+ * @space this function allocates and returns `tree` vector, which is O(n)
  */
 vector<vector<int>> bridge_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
     vector<vector<int>> tree(cc.num_2_edge_ccs);
