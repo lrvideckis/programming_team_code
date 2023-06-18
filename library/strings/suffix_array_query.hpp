@@ -14,8 +14,9 @@ template <typename T> struct sa_query {
     RMQ<int> rmq_lcp, rmq_sa;
     /**
      * @param a_s,max_val string/array with 0 <= a_s[i] < max_val
-     * @time O((nlogn) + max_val)
-     * @space O((nlogn) + max_val)
+     * @time O((n log n) + max_val)
+     * @space O(n log n) for RMQ's; O(max_val) for `freq` array used
+     * temporarily in suffix_array constructor
      */
     sa_query(const T& a_s, int max_val) :
         s(a_s),
@@ -26,6 +27,7 @@ template <typename T> struct sa_query {
      * @param idx1,idx2 starting 0-based-indexes of suffixes
      * @returns max integer k such that s.substr(idx1, k) == s.substr(idx2, k)
      * @time O(1)
+     * @space O(1)
      */
     inline int get_lcp(int idx1, int idx2) const {
         if (idx1 == idx2) return ssize(s) - idx1;
@@ -36,6 +38,7 @@ template <typename T> struct sa_query {
      * @param idx1,idx2 starting 0-based-indexes of suffixes
      * @returns 1 iff suffix s.substr(idx1) < s.substr(idx2)
      * @time O(1)
+     * @space O(1)
      */
     inline bool less(int idx1, int idx2) const {
         return info.rank[idx1] < info.rank[idx2];
@@ -46,6 +49,7 @@ template <typename T> struct sa_query {
      * - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
      * - `ri - le` is the # of matches of t in s.
      * @time O(|t| * log(|s|))
+     * @space O(1)
      */
     pair<int, int> find(const T& t) const {
         auto cmp = [&](int i, int cmp_val) -> bool {
@@ -61,6 +65,7 @@ template <typename T> struct sa_query {
      * replace RMQ with kth-smallest PST/Wavelet to solve
      * https://open.kattis.com/problems /anothersubstringqueryproblem
      * @time O(|t| * log(|s|))
+     * @space O(1)
      */
     int find_first(const T& t) const {
         auto [le, ri] = find(t);
