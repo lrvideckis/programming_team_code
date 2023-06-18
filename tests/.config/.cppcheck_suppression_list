@@ -6,7 +6,7 @@ unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
 unusedStructMember:../library/graphs/hopcroft_karp.hpp:8
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
 unusedStructMember:../library/graphs/bridges_and_cuts.hpp
-unusedStructMember:../library/flow/hungarian.hpp:8
+unusedStructMember:../library/flow/hungarian.hpp:9
 functionConst:../kactl/content/data-structures/SubMatrix.h:24
 useStlAlgorithm:../kactl/content/numerical/FastFourierTransform.h:53
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
@@ -18,6 +18,6 @@ functionConst:../hackpack-cpp/content/graphs/TreeLifting.h:31
 unusedScopedObject:../library/graphs/count_paths_per_length.hpp:14
 unusedScopedObject:library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp:22
 unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14
-knownConditionTrueFalse:../library/math/n_choose_k_mod.hpp:39
-arrayIndexOutOfBoundsCond:../library/math/prime_sieve.hpp:23
+knownConditionTrueFalse:../library/math/n_choose_k_mod.hpp:41
+arrayIndexOutOfBoundsCond:../library/math/prime_sieve.hpp:25
 variableScope:../kactl/content/number-theory/Factor.h:47
