@@ -19,8 +19,9 @@ struct weighted_match {
  * the edge u <=> v, 1<=u<=n; 1<=v<=m
  * @returns min matching
  * @time O(n^2 * m)
- * @space this function returns `weighted_match` which is O(n), although
- * various O(m) arrays are also allocated temporarily
+ * @space besides the O(n * m) `cost` param, this function returns
+ * `weighted_match` which is O(n), although various O(m) arrays are also
+ * allocated temporarily
  */
 weighted_match hungarian(const vector<vector<long long>>& cost) {
     int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;

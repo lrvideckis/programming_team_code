@@ -16,7 +16,7 @@ inline bool is_prime(int val) {
  * @param val an integer
  * @returns all prime factors of val (sorted)
  * @time O(log(val))
- * @space O(log(val))
+ * @space O(log(val)) for `factors` vector
  */
 vector<int> get_prime_factors(int val) {
     assert(val < N && sieve[1] == 1);
@@ -30,7 +30,7 @@ vector<int> get_prime_factors(int val) {
 }
 /**
  * @time O(n * log(logn))
- * @space O(n)
+ * @space O(n) for `sieve` vector
  */
 void init_sieve() {
     iota(begin(sieve), end(sieve), 0);
