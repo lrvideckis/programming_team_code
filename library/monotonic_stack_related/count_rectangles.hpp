@@ -7,7 +7,7 @@
  * an i-by-j sub rectangle appears in the matrix such that all i*j cells in the
  * sub rectangle are 1. cnt[0][j] and cnt[i][0] will contain garbage values.
  * @time O(n * m)
- * @space O(n * m)
+ * @space this function allocates/returns a O(n * m) vector
  */
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
     int n = ssize(grid), m = ssize(grid[0]);

@@ -15,6 +15,7 @@ const int MOD = 998'244'353;
  * @param n an integer
  * @returns a pair {nth fibonacci number, (n+1)th fibonacci number}
  * @time O(log n)
+ * @space O(log n) for recursion stack
  */
 pair<long long, long long> fib(long long n) {
     if (n == 0) return {0LL, 1LL};

@@ -6,7 +6,8 @@
  * @param a,b matrices
  * @returns a*b (not overflow safe)
  * @time O(n * m * inner)
- * @space O(n * m)
+ * @space besides the O(n * inner) and O(inner * m) params, this function
+ * allocates and returns a O(n * m) vector
  */
 template <typename T> vector<vector<T>> operator * (const vector<vector<T>>& a, const vector<vector<T>>& b) {
     assert(ssize(a[0]) == ssize(b));

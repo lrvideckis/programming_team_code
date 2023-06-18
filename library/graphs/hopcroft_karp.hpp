@@ -35,7 +35,7 @@ struct match_info {
  * @param rsz number of nodes on right side
  * @returns info about max matching, and min vertex cover
  * @time O(n + m * sqrt(n)) n = lsz + rsz
- * @space O(n + m)
+ * @space this function allocates/returns `match_info` which is O(n) n = lsz + rsz
  */
 match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
     int size_of_matching = 0, lsz = ssize(adj);

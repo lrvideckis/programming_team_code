@@ -8,7 +8,8 @@ const int N = 1'000'005;
  */
 int mobius[N];
 /**
- * @time O(n log n)
+ * @time O(N log N)
+ * @space O(N)
  */
 void calc_mobius() {
     mobius[1] = 1;

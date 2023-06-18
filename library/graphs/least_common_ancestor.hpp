@@ -19,7 +19,7 @@ struct LCA {
     /**
      * @param adj forest (rooted or unrooted)
      * @time O(n log n)
-     * @space O(n log n)
+     * @space O(n log n) for rmq, all other vectors are O(n)
      */
     LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
     RMQ<int> init(const vector<vector<int>>& adj) {
@@ -38,6 +38,7 @@ struct LCA {
      * @param u,v 2 nodes in the same component
      * @returns lca of u, v
      * @time O(1)
+     * @space O(1)
      */
     inline int lca(int u, int v) const {
         if (u == v) return u;
@@ -48,12 +49,14 @@ struct LCA {
      * @param u,v endpoint nodes of path
      * @returns number of edges on path
      * @time O(1)
+     * @space O(1)
      */
     inline int dist_edges(int u, int v) const {return d[u] + d[v] - 2 * d[lca(u, v)];}
     /**
      * @param u,v 2 nodes
      * @returns 1 iff v is in u's subtree
      * @time O(1)
+     * @space O(1)
      */
     inline bool in_subtree(int u, int v) const {return in[u] <= in[v] && in[v] < in[u] + sub_sz[u];}
     /**
@@ -65,6 +68,7 @@ struct LCA {
      * @param u,v endpoint nodes of path
      * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[1]
      * @time O(1)
+     * @space O(1)
      */
     inline int next_on_path(int u, int v) const {
         assert(u != v);

@@ -9,11 +9,13 @@ template <typename T> struct BIT {
     /**
      * @param n initial size
      * @time O(n)
+     * @space O(n) for `bit` vector
      */
     BIT(int n) : bit(n) {}
     /**
      * @param a initial array
      * @time O(n)
+     * @space O(n) for `bit` vector
      */
     BIT(const vector<T>& a) : bit(a) {
         for (int i = 0; i < ssize(a); i++) {
@@ -25,6 +27,7 @@ template <typename T> struct BIT {
      * @param i index
      * @param d delta
      * @time O(log n)
+     * @space O(1)
      */
     inline void update(int i, const T& d) {
         assert(0 <= i && i < ssize(bit));
@@ -34,6 +37,7 @@ template <typename T> struct BIT {
      * @param ri defines range [0, ri)
      * @returns sum of range
      * @time O(log n)
+     * @space O(1)
      */
     inline T sum(int ri) const {
         assert(0 <= ri && ri <= ssize(bit));
@@ -45,6 +49,7 @@ template <typename T> struct BIT {
      * @param le,ri defines range [le, ri)
      * @returns sum of range
      * @time O(log n)
+     * @space O(1)
      */
     inline T sum(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= ssize(bit));
@@ -55,6 +60,7 @@ template <typename T> struct BIT {
      * @param sum see return
      * @returns min pos such that sum of range [0, pos) >= sum (or n+1)
      * @time O(log n)
+     * @space O(1)
      */
     int lower_bound(T sum) const {
         if (sum <= 0) return 0;

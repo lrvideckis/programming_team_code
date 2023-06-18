@@ -18,6 +18,7 @@ struct PST {
      * @param root_l,root_r defines range [ROOT_L, ROOT_L) of root node, can be
      * negative
      * @time O(1)
+     * @space O(1)
      */
     PST(int root_l, int root_r) :
         ROOT_L(root_l), ROOT_R(root_r), roots(1), tree(1, {0LL, 0, 0}) {}
@@ -26,6 +27,7 @@ struct PST {
      * @param version which version to update. Each call to update creates a
      * new version. Initially there is a dummy version.
      * @time O(log(ROOT_R - ROOT_L))
+     * @space O(log(ROOT_R - ROOT_L)) new nodes are pushed back onto `tree`; (and for recursion stack)
      */
     void update(int idx, long long change, int version) {
         assert(ROOT_L <= idx && idx < ROOT_R);
@@ -52,6 +54,7 @@ struct PST {
      * @param version which version to query
      * @returns sum of range for that version
      * @time O(log(ROOT_R - ROOT_L))
+     * @space O(log(ROOT_R - ROOT_L)) for recursion stack, no new nodes are allocated
      */
     long long query(int le, int ri, int version) const {
         assert(ROOT_L <= le && ri <= ROOT_R);

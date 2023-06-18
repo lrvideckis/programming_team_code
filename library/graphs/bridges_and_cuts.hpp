@@ -30,7 +30,7 @@ struct graph_info {
  * @param m number of edges
  * @returns info about both bridge edges and cut nodes.
  * @time O(n + m)
- * @space O(n + m)
+ * @space this function allocates and returns a `graph_info` struct, which is O(n + m)
  */
 graph_info bridge_and_cut(const vector<vector<pair<int, int>>>& adj, int m) {
     //stuff for both (always keep)
