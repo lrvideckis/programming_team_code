@@ -18,7 +18,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
      * @param arr static array
      * @param a_op any associative, communative, idempotent operation
      * @time O(n log n)
-     * @space O(n log n)
+     * @space O(n log n) for `dp` vector
      */
     RMQ(const vector<T>& arr, const F& a_op) : dp(1, arr), op(a_op) {
         for (int i = 0; (2 << i) <= ssize(arr); i++) {
@@ -30,6 +30,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
      * @param le,ri defines range [le, ri)
      * @returns op of range
      * @time O(1) usually, or O(log MAX) if op is gcd
+     * @space O(1)
      */
     inline T query(int le, int ri) const {
         assert(0 <= le && le < ri && ri <= ssize(dp[0]));

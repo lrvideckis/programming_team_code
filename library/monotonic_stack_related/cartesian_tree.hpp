@@ -11,7 +11,7 @@
  * @returns array par where par[v] = parent of node v in cartesian-tree.
  * par[v] == -1 means node v is the root
  * @time O(n)
- * @space O(n)
+ * @space this function allocates/returns vectors which are O(n)
  */
 template <typename F> vector<int> cartesian_tree(const vector<int>& arr, const F& less) {
     int n = ssize(arr);

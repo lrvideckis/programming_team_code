@@ -6,6 +6,7 @@ const int MOD = 998'244'353;
  * @param n an integer
  * @returns array p where p[i] = number of partitions of i numbers
  * @time O(n sqrt n) note there does exist a O(n log n) solution as well
+ * @space O(n) for `dp` vector
  */
 vector<long long> partitions(int n) {
     vector<long long> dp(n, 1);

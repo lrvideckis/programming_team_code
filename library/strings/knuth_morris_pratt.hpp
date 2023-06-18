@@ -20,14 +20,16 @@ template <typename T> struct KMP {
     /**
      * @param a_needle string to be searched for inside haystack
      * @time O(|needle|)
-     * @space O(|needle|)
+     * @space O(|needle|) for `needle` and `pi` arrays
      */
     KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {}
     /**
      * @param haystack usually |needle| <= |haystack|
      * @returns array `matches` where:
      * haystack.substr(matches[i], ssize(needle)) == needle
-     * @time O(|needle| + |haystack|)
+     * @time O(|haystack|)
+     * @space besides O(|haystack|) param, this function allocates/returns an
+     * array of size (# matches), at worst O(|haystack|)
      */
     vector<int> find(const T& haystack) const {
         vector<int> matches;

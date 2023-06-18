@@ -22,7 +22,8 @@
  * @param cc what's calculated by bridges_and_cuts
  * @returns adjacency list of block vertex tree
  * @time O(n + m)
- * @space O(n + m)
+ * @space besides the O(n + m) sized params, this function allocates and
+ * returns `bvt` vector which is O(n)
  */
 vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
     int n = ssize(adj);

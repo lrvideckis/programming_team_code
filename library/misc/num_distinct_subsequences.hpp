@@ -5,7 +5,7 @@
  * @returns the number of distinct subsequences of `arr`. The empty subsequence
  * is counted.
  * @time O(n log n)
- * @space O(n)
+ * @space besides O(n) `arr` param, O(n) extra space is allocated temporarily
  */
 int num_subsequences(const vector<int>& arr, int mod) {
     vector<int> dp(ssize(arr) + 1, 1);

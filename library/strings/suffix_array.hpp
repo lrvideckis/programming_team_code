@@ -42,8 +42,9 @@ template <typename T> struct suffix_array {
     /** @} */
     /**
      * @param s,max_val string/array with 0 <= s[i] < max_val
-     * @time O((nlogn) + max_val)
-     * @space O(n + max_val)
+     * @time O((n log n) + max_val)
+     * @space this function allocates O(n) space for `sa`, `rank`, and `lcp`
+     * vectors, but also allocates a O(max_val) vector `freq` temporarily
      */
     suffix_array(const T& s, int max_val) : N(ssize(s)), sa(N), rank(begin(s), end(s)), lcp(max(0, N - 1)) {
         iota(begin(sa), end(sa), 0);

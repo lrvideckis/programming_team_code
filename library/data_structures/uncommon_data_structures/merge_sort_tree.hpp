@@ -9,6 +9,8 @@ struct merge_sort_tree {
     vector<vector<int>> tree;
     /**
      * @param arr static array
+     * @time O(n log n)
+     * @space O(n log n) for `tree` vector
      */
     merge_sort_tree(const vector<int>& arr) : N(ssize(arr)),  S(N ? 1 << __lg(2 * N - 1) : 0), tree(2 * N) {
         transform(begin(arr), end(arr), begin(tree) + N, [](int val) -> vector<int> {
@@ -27,6 +29,7 @@ struct merge_sort_tree {
      * @param x target value
      * @returns number of values equal to x in v's corresponding array
      * @time O(log n)
+     * @space O(1)
      */
     int value(int x, int v) const {
         auto [le, ri] = equal_range(begin(tree[v]), end(tree[v]), x);
@@ -45,6 +48,7 @@ struct merge_sort_tree {
      * @param x query parameter
      * @returns the number of values in range equal to x.
      * @time O(log^2(n))
+     * @space O(1)
      */
     int query(int le, int ri, int x) const {
         int res = 0;

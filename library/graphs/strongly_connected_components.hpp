@@ -23,7 +23,8 @@ struct scc_info {
  * @param adj directed, unweighted graph
  * @returns the SCCs
  * @time O(n + m)
- * @space O(n + m)
+ * @space besides the O(n + m) `adj` param, this function allocates/returns
+ * various vectors which are each O(n)
  */
 scc_info scc(const vector<vector<int>>& adj) {
     int n = ssize(adj), timer = 1, num_sccs = 0;

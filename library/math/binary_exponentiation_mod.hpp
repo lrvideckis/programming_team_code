@@ -8,6 +8,7 @@ const int MOD = 998'244'353;
  * @param e exponent
  * @returns (b^e)%MOD, 1 for 0^0.
  * @time O(log e)
+ * @space O(1)
  */
 long long bin_exp(long long b, long long e) {
     assert(0 <= e);
