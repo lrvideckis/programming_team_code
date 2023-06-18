@@ -10,13 +10,14 @@ struct pal_query {
     /**
      * @param s string
      * @time O(n)
-     * @space O(n)
+     * @space O(n) for `pal_len` array
      */
     pal_query(const string& s) : N(ssize(s)), pal_len(manacher(s)) {}
     /**
      * @param le,ri defines substring [le,ri)
      * @returns 1 iff s.substr(le, ri - le) is a palindrome (so 1 when le == ri)
      * @time O(1)
+     * @space O(1)
      */
     inline bool is_pal(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= N);

@@ -7,7 +7,7 @@
  * @returns array `num_paths` where `num_paths[i]` = # of paths in tree with `i`
  * edges. `num_paths[1]` = # edges
  * @time O(n log^2 n)
- * @space O(n)
+ * @space this function allocates/returns various vectors which are each O(n)
  */
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
     vector<long long> num_paths(ssize(adj));

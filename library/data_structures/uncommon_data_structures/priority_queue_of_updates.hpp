@@ -12,6 +12,7 @@
  * @endcode
  * @time n interweaved calls to pop_update, push_update take O(T(n)*nlogn)
  * where O(T(n)) = time complexity of DS::join and DS::undo
+ * @space n interweaved calls to pop_update, push_update uses O(n) space
  */
 template <typename DS, typename... ARGS> struct pq_updates {
     DS ds;
@@ -25,6 +26,8 @@ template <typename DS, typename... ARGS> struct pq_updates {
     /**
      * Remove update with max priority
      * @time O(log(n) + k*T(n)) where k = # of pops off the update stack
+     * @space a temporary vector of size O(k) is used to store popped updates;
+     * size of `upd_st`, `mp` member variables decreases by 1
      */
     void pop_update() {
         assert(!upd_st.empty());
@@ -51,6 +54,7 @@ template <typename DS, typename... ARGS> struct pq_updates {
      * @param args arguments to DS::join
      * @param priority must be distinct, can be negative
      * @time O(log(n) + T(n))
+     * @space an new update is allocated, inserted into `upd_st`, `mp` member variables
      */
     void push_update(ARGS... args, int priority) {
         ds.join(args...);

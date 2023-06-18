@@ -1,8 +1,9 @@
 /** @file */
 #pragma once
 /**
- * Represents a matching: number of edges is maximized (with pairwise distinct
- * nodes). Of all ways to do this, sum of edge weights is minimized.
+ * Represents a matching: number of edges is maximized, but since it's a
+ * complete bipartite graph with n <= m, this matching always has size n. Of
+ * all ways to do this, sum of edge weights is minimized.
  */
 struct weighted_match {
     long long min_weight; /**< sum of edge weights in matching */
@@ -18,7 +19,9 @@ struct weighted_match {
  * the edge u <=> v, 1<=u<=n; 1<=v<=m
  * @returns min matching
  * @time O(n^2 * m)
- * @space O(n * m)
+ * @space besides the O(n * m) `cost` param, this function returns
+ * `weighted_match` which is O(n), and various O(m) arrays are also allocated
+ * temporarily
  */
 weighted_match hungarian(const vector<vector<long long>>& cost) {
     int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;

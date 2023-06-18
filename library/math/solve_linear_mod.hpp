@@ -18,7 +18,8 @@ struct matrix_info {
  * @param b length n column vector
  * @returns length m vector x
  * @time O(n * m * min(n, m))
- * @space O(n * m)
+ * @space besides the O(n * m) `mat` param, this function allocates/returns a
+ * O(m) solution vector
  */
 matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b) {
     assert(ssize(mat) == ssize(b));
