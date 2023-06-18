@@ -6,7 +6,7 @@
  * @param mod an integer
  * @return number of permutations p such that p[i] != i
  * @time O(n)
- * @space O(n)
+ * @space O(n) for `dp` vector
  */
 vector<long long> derangements(int n, int mod) {
     vector<long long> dp(n);
