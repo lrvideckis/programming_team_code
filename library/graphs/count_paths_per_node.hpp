@@ -7,7 +7,7 @@
  * @returns array `num_paths` where `num_paths[i]` = number of paths with k
  * edges where node `i` is on the path. 0-based nodes.
  * @time O(n log n)
- * @space O(n)
+ * @space O(n) for various vectors
  */
 vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
     vector<long long> num_paths(ssize(adj));
