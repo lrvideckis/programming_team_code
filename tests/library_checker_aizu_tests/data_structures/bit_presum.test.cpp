@@ -3,15 +3,13 @@
 
 #include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
 
-
 vector<bit_presum> init_presums(const vector<int>& arr) {
     const int n = ssize(arr);
     vector<bit_presum> presums;
-    for(int bit = 0; bit < 30; bit++) {
+    for (int bit = 0; bit < 30; bit++) {
         vector<bool> the_bits(n);
-        for(int i = 0; i < n; i++) {
-            the_bits[i] = (arr[i]>>bit)&1;
-        }
+        for (int i = 0; i < n; i++)
+            the_bits[i] = (arr[i] >> bit) & 1;
         presums.emplace_back(the_bits);
     }
     return presums;
@@ -30,7 +28,7 @@ int main() {
         int le, ri;
         cin >> le >> ri;
         long long sum = 0;
-        for(int bit = 0; bit < 30; bit++)
+        for (int bit = 0; bit < 30; bit++)
             sum += (1LL << bit) * (presums[bit].popcount(ri) - presums[bit].popcount(le));
         cout << sum << '\n';
     }

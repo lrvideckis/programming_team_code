@@ -18,20 +18,20 @@ int main() {
     vector<int> sorted(arr);
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-    for(int& val : arr)
+    for (int& val : arr)
         val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted)) - 30;
-    wavelet_tree wt(arr, -30, ssize(sorted)-30);
+    wavelet_tree wt(arr, -30, ssize(sorted) - 30);
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
         int res = mst.query(le, ri, x);
         auto it = lower_bound(begin(sorted), end(sorted), x);
-        if(it == end(sorted) || (*it) != x) {
+        if (it == end(sorted) || (*it) != x)
             assert(res == 0);
-        } else {
+        else {
             int idx = int(it - begin(sorted)) - 30;
-            assert(wt.rect_count(le,ri,idx, idx+1) == res);
-            assert(wt.rect_count(le,ri,idx, idx) == 0);
+            assert(wt.rect_count(le, ri, idx, idx + 1) == res);
+            assert(wt.rect_count(le, ri, idx, idx) == 0);
         }
         cout << res << '\n';
     }
