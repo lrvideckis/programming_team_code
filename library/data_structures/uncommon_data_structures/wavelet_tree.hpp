@@ -39,8 +39,9 @@ struct wavelet_tree {
     const int N, MINV, MAXV;
 
     vector<bit_presum> tree;
+    vector<vector<int>> tree_pref;
 
-    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV-MINV, vector<bool>()) {
+    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV-MINV, vector<bool>()), tree_pref(MAXV-MINV) {
         for(int val : arr) assert(MINV <= val && val < MAXV);//TODO: should I keep this?
         arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
         build(arr, 0, N, MINV, MAXV, 1);
@@ -53,6 +54,8 @@ struct wavelet_tree {
         vector<bool> bits(ri-le);
         transform(begin(arr) + le, begin(arr) + ri, begin(bits), low);
         tree[v] = bit_presum(bits);
+        tree_pref[v].resize(ri - le + 1);
+        partial_sum(begin(arr) + le, begin(arr) + ri, begin(tree_pref[v]) + 1);
         //vector<int> bits_int(begin(bits), end(bits));//to pass to BIT constructor
         int mi = stable_partition(begin(arr)+le, begin(arr)+ri, low) - begin(arr);
         build(arr, le, mi, tl, tm, 2*v);
@@ -60,29 +63,29 @@ struct wavelet_tree {
     }
 
     //count idx s.t. le <= idx < ri and x <= arr[idx] < y
-    int count(int le, int ri, int x, int y) {
+    int rect_count(int le, int ri, int x, int y) {
         assert(0 <= le && le <= ri && ri <= N);
         assert(MINV <= x && x <= y && y <= MAXV);
-        return count(le,ri,x,y,MINV, MAXV, 1);
+        return rect_count(le,ri,x,y,MINV, MAXV, 1);
     }
-    int count(int le, int ri, int x, int y, int tl, int tr, int v) {
+    int rect_count(int le, int ri, int x, int y, int tl, int tr, int v) {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri-le;
         int tm = split(tl,tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        return count(pl, pr, x, y, tl, tm, 2*v) +
-            count(le-pl, ri-pr, x, y, tm, tr, 2*v+1);
+        return rect_count(pl, pr, x, y, tl, tm, 2*v) +
+               rect_count(le-pl, ri-pr, x, y, tm, tr, 2*v+1);
     }
 
-    //kth(le,ri,0) returns min of range [le,ri)
-    int kth(int le, int ri, int k) const {
+    //kth_smallest(le,ri,0) returns min of range [le,ri)
+    int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(0 <= k && k < ri - le);
-        return kth(le, ri, k, MINV, MAXV, 1);
+        return kth_smallest(le, ri, k, MINV, MAXV, 1);
     }
-    int kth(int le, int ri, int k, int tl, int tr, int v) const {
+    int kth_smallest(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr-tl == 1) return tl;
         int tm = split(tl,tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        if (k < pr-pl) return kth(pl, pr, k, tl, tm, 2*v);
-        return kth(le-pl, ri-pr, k-(pr-pl), tm, tr, 2*v+1);
+        if (k < pr-pl) return kth_smallest(pl, pr, k, tl, tm, 2*v);
+        return kth_smallest(le-pl, ri-pr, k-(pr-pl), tm, tr, 2*v+1);
     }
 };

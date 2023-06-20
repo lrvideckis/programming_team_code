@@ -22,7 +22,7 @@ int main() {
         int l, r, k;
         cin >> l >> r >> k;
         int res = st.query(l, r, k);
-        assert(res == wt.kth(l, r, k));
+        assert(res == wt.kth_smallest(l, r, k));
         cout << sorted[res + 50] << '\n';
     }
     return 0;

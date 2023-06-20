@@ -30,8 +30,8 @@ int main() {
             assert(res == 0);
         } else {
             int idx = int(it - begin(sorted)) - 30;
-            assert(wt.count(le,ri,idx, idx+1) == res);
-            assert(wt.count(le,ri,idx, idx) == 0);
+            assert(wt.rect_count(le,ri,idx, idx+1) == res);
+            assert(wt.rect_count(le,ri,idx, idx) == 0);
         }
         cout << res << '\n';
     }
