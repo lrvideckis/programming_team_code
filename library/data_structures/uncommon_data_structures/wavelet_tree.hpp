@@ -60,7 +60,8 @@ struct wavelet_tree {
 
     //kth(le,ri,0) returns min of range [le,ri)
     int kth(int le, int ri, int k) const {
-        //TODO: add asserts cleaning params
+        assert(0 <= k && k < ri - le);
+        assert(0 <= le && ri <= N);
         return kth(le, ri, k, MINV, MAXV, 1);
     }
     int kth(int le, int ri, int k, int tl, int tr, int v) const {
