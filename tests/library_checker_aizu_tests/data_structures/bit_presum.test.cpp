@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/wavelet_matrix.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
 
 
 vector<bit_presum> init_presums(const vector<int>& arr) {
@@ -31,7 +31,7 @@ int main() {
         cin >> le >> ri;
         long long sum = 0;
         for(int bit = 0; bit < 30; bit++)
-            sum += (1LL << bit) * presums[bit].popcount(le, ri);
+            sum += (1LL << bit) * (presums[bit].popcount(ri) - presums[bit].popcount(le));
         cout << sum << '\n';
     }
 }
