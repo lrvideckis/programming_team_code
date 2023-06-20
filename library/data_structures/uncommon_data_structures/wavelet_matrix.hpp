@@ -12,56 +12,28 @@
  *   - sum of all values = val seems pointless
  * */
 
-class Bit_Presum{
-public:
-    static constexpr uint32_t omega = CHAR_BIT * sizeof(uint64_t);
-    static constexpr uint32_t lg_omega = __lg(omega);
-    static_assert(omega == 64u);
-
-    Bit_Presum(vector<uint64_t> mask_) : n(mask_.size()), mask(move(mask_)), presum(n+1){
-        build();
-    }
-    Bit_Presum(uint32_t bits, bool init_val = 0) : n((bits>>lg_omega) + 1), mask(n, init_val ? ~uint64_t{0} : uint64_t{0}), presum(n+1){
-        if(init_val) mask.back()<<=((n<<lg_omega) - bits);
-        build();
-    }
-    /// popcount l <= i < r
-    uint32_t query(uint32_t l, uint32_t r) const {
-        if(__builtin_expect(r < l, false)) return 0;
-        return query(r) - query(l);
-    }
-    /// popcount 0 <= i < x
-    uint32_t query(uint32_t x) const {
-        uint32_t high = x>>lg_omega, low = x & ((uint64_t{1}<<lg_omega) - 1);
-        uint32_t ret = presum_query(high);
-        ret+= __builtin_popcountll(mask[high]& ((uint64_t{1} << low)-1));
-        return ret;
-    }
-
-    void update_pre_build(uint32_t x, bool val){
-        uint32_t high = x>>lg_omega, low = x & ((1u<<lg_omega) - 1);
-        mask[high] = (mask[high] & ~(uint64_t{1} << low)) | (uint64_t{val}<<low);
-    }
-
-
-private:
-    void presum_build(){
-        for(uint32_t x=1;x<=n;++x){
-            presum[x]+=presum[x-1];
-        }
-    }
-    // sum 0 <= i < x
-    uint32_t presum_query(uint32_t x) const {
-        return presum[x];
-    }
-    void build(){
-        for(uint32_t x=0;x<n;++x){
-            presum[x+1] = __builtin_popcountll(mask[x]);
-        }
-        presum_build();
-    }
-
-    const uint32_t n;
+struct bit_presum {
+    const int N;
     vector<uint64_t> mask;
-    vector<uint32_t> presum;
+    vector<int> presum;
+
+    bit_presum(const vector<bool>& arr) : N(ssize(arr)), mask((N+63) / 64 + 1), presum(ssize(mask)) {
+        for(int i = 0; i < N; i++)
+            mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
+        for(int i = 0; i < ssize(mask)-1; i++)
+            presum[i+1] = __builtin_popcountll(mask[i]) + presum[i];
+    }
+
+    /// l <= idx < r
+    int popcount(int l, int r) const {
+        assert(0 <= l && l <= r && r <= N);
+        return popcount(r) - popcount(l);
+    }
+
+    /// 0 <= idx < i
+    int popcount(int i) const {
+        assert(0 <= i && i <= N);
+        int high = i >> 6, low = i & 63;
+        return presum[high] + __builtin_popcountll(mask[high] & ((1ULL << low)-1));//sanitizers may cause RTE here from overflow/underflow
+    }
 };
