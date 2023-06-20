@@ -54,14 +54,28 @@ int main() {
             }
         }
         for(int tests_kth_sum = 100; tests_kth_sum--;) {
-            int k = get_rand<int>(0, N - 1);
+            int k = get_rand<int>(0, N);
+            if(tests_kth_sum == 50) k = 0;
+            if(tests_kth_sum == 49) k = N;
+            if(k == 0) {
+                assert(wt.kth_sum(0, N, k) == 0);
+                continue;
+            }
             int curr_cnt = 0;
             long long curr_sum = 0;
+            int kth_smallest_naive = -1;
             for(int i = 0; i < VAL_RANGE; i++) {
-                //TODO
-                if(curr_cnt + count_val[i]
-                if(curr_sum + 1LL * (i+LARGE) * count_val[i] kk
+                if(curr_cnt + count_val[i] >= k) {
+                    kth_smallest_naive = i + LARGE;
+                    curr_sum += 1LL * (i+LARGE) * (k-curr_cnt);
+                    break;
+                }
+                curr_cnt += count_val[i];
+                curr_sum += 1LL * (i+LARGE) * count_val[i];
             }
+            assert(kth_smallest_naive != -1);
+            assert(wt.kth_smallest(0,N,k) == kth_smallest_naive);
+            assert(wt.kth_sum(0,N,k) == curr_sum);
         }
     }
     cout << "Hello World\n";

@@ -111,9 +111,9 @@ struct wavelet_tree {
         return kth_sum(le, ri, k, MINV, MAXV, 1);
     }
     long long kth_sum(int le, int ri, int k, int tl, int tr, int v) const {
-        if (tr-tl == 1) return k * tl;
+        if (tr-tl == 1) return 1LL * k * tl;
         int tm = split(tl,tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        if (k < pr-pl) return kth_sum(pl, pr, k, tl, tm, 2*v);
+        if (k <= pr-pl) return kth_sum(pl, pr, k, tl, tm, 2*v);
         //TODO: increase tree_pref to 2*(MAXV-MINV) just to simplify code?
         long long sum_left = (tm-tl==1 ? 1LL * tl * (pr-pl) : tree_pref[2*v][pr] - tree_pref[2*v][pl]);
         return sum_left + kth_sum(le-pl, ri-pr, k-(pr-pl), tm, tr, 2*v+1);
