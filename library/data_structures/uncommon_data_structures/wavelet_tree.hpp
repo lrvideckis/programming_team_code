@@ -93,13 +93,13 @@ struct wavelet_tree {
     //kth_smallest(le,ri,0) returns min of range [le,ri)
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
-        assert(0 <= k && k < ri - le);
+        assert(1 <= k && k <= ri - le);
         return kth_smallest(le, ri, k, MINV, MAXV, 1);
     }
     int kth_smallest(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr-tl == 1) return tl;
         int tm = split(tl,tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        if (k < pr-pl) return kth_smallest(pl, pr, k, tl, tm, 2*v);
+        if (k <= pr-pl) return kth_smallest(pl, pr, k, tl, tm, 2*v);
         return kth_smallest(le-pl, ri-pr, k-(pr-pl), tm, tr, 2*v+1);
     }
 
@@ -107,7 +107,7 @@ struct wavelet_tree {
     //kth_sum(le,ri,k) returns sum of smallest (k+1) numbers in [le,ri)
     long long kth_sum(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
-        assert(0 <= k && k < ri - le);
+        assert(0 <= k && k <= ri - le);
         return kth_sum(le, ri, k, MINV, MAXV, 1);
     }
     long long kth_sum(int le, int ri, int k, int tl, int tr, int v) const {
