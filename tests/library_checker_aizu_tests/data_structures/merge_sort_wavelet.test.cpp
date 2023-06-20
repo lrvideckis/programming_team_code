@@ -25,7 +25,6 @@ int main() {
         int le, ri, x;
         cin >> le >> ri >> x;
         int res = mst.query(le, ri, x);
-        /*
         auto it = lower_bound(begin(sorted), end(sorted), x);
         if(it == end(sorted) || (*it) != x) {
             assert(res == 0);
@@ -34,7 +33,6 @@ int main() {
             assert(wt.count(le,ri,idx, idx+1) == res);
             assert(wt.count(le,ri,idx, idx) == 0);
         }
-        */
         cout << res << '\n';
     }
     return 0;
