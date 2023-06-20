@@ -15,15 +15,15 @@ int main() {
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
     for(int& val : arr)
-        val = lower_bound(begin(sorted), end(sorted), val) - begin(sorted);
+        val = lower_bound(begin(sorted), end(sorted), val) - begin(sorted) - 50;
     kth_smallest st(arr);
-    wavelet_tree wt(arr);
+    wavelet_tree wt(arr, -50, ssize(sorted) - 50);
     while (q--) {
         int l, r, k;
         cin >> l >> r >> k;
         int res = st.query(l, r, k);
         assert(res == wt.kth(l, r, k));
-        cout << sorted[res] << '\n';
+        cout << sorted[res + 50] << '\n';
     }
     return 0;
 }

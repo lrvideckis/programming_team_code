@@ -13,29 +13,19 @@
  * */
 
 struct bit_presum {
-    int N;//TODO make const again
+    int n;
     vector<uint64_t> mask;
     vector<int> presum;
-
-    bit_presum() : N(0) {}//TODO: remove this?
-    bit_presum(const vector<bool>& arr) : N(ssize(arr)), mask((N+63) / 64 + 1), presum(ssize(mask)) {
-        for(int i = 0; i < N; i++)
+    bit_presum(const vector<bool>& arr) : n(ssize(arr)), mask((n+63) / 64 + 1), presum(ssize(mask)) {
+        for(int i = 0; i < n; i++)
             mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
         for(int i = 0; i < ssize(mask)-1; i++)
             presum[i+1] = __builtin_popcountll(mask[i]) + presum[i];
     }
-
-    /// l <= idx < r
-    int popcount(int l, int r) const {
-        assert(0 <= l && l <= r && r <= N);
-        return popcount(r) - popcount(l);
-    }
-
-    /// 0 <= idx < i
+    // 0 <= idx < i
     int popcount(int i) const {
-        assert(0 <= i && i <= N);
-        int high = i >> 6, low = i & 63;
-        return presum[high] + __builtin_popcountll(mask[high] & ((1ULL << low)-1));//sanitizers may cause RTE here from overflow/underflow
+        assert(0 <= i && i <= n);
+        return presum[i>>6] + __builtin_popcountll(mask[i>>6] & ((1ULL << (i & 63))-1));
     }
 };
 
@@ -46,14 +36,17 @@ inline int split(int tl, int tr) {
 
 //TODO rearrange params to match other seg trees
 //TODO rename params to le, ri
+//TODO which functions to make inline
+//TODO figure out which debug flag makes this test TLE
 struct wavelet_tree {
-    const int N, MINN, MAXN;
+    const int N, MINV, MAXV;
 
     vector<bit_presum> tree;
 
-    wavelet_tree(vector<int> arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1), tree(2*(MAXN-MINN)) {
+    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(2*(MAXV-MINV), vector<bool>()) {
+        for(int val : arr) assert(MINV <= val && val < MAXV);//TODO: should I keep this?
         arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
-        build(arr, 0, N, 1, MINN, MAXN);
+        build(arr, 0, N, 1, MINV, MAXV);
     }
 
     void build(vector<int>& arr, int b, int e, int p, int l, int r) {
@@ -61,13 +54,7 @@ struct wavelet_tree {
         auto low = [&](int val) -> bool {return val < m;};
         vector<bool> bits(e-b);
         transform(begin(arr) + b, begin(arr) + e, begin(bits), low);
-        {
-            bit_presum curr(bits);
-            //TODO: this is terrible, I want to do something like: tree[p] = bit_presum(bits);
-            tree[p].N = curr.N;
-            tree[p].mask = curr.mask;
-            tree[p].presum = curr.presum;
-        }
+        tree[p] = bit_presum(bits);
         if (r-l == 1) return;
         int m2 = stable_partition(begin(arr)+b, begin(arr)+e, low) - begin(arr);
         build(arr, b, m2, 2*p, l, m);
@@ -76,7 +63,8 @@ struct wavelet_tree {
 
     //kth(i,j,0) returns min of range [i,j)
     int kth(int i, int j, int k) const {
-        return kth(i, j, k, 1, MINN, MAXN);
+        //TODO: add asserts cleaning params
+        return kth(i, j, k, 1, MINV, MAXV);
     }
     int kth(int i, int j, int k, int p, int l, int r) const {
         if (r-l == 1) return l;
