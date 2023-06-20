@@ -18,6 +18,7 @@
 #include <functional> //for lambdas
 #include <climits> // for INT_MAX, INT_MIN
 #include <optional>
+#include <stdint.h> // for uint64_t
 using namespace std;
 
 #define ssize(x) (int)(x).size()

@@ -9,7 +9,6 @@
  * @endcode
  */
 template <typename T, typename F = function<bool(const T&, const T&)>> struct linear_rmq {
-    using ull = unsigned long long;
     const int N;
     vector<T> arr;
     F less;
@@ -23,7 +22,7 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
      * idx[level][i] = array idx of minimum over all values in blocks [i, i+64)
      * @{
      */
-    vector<vector<ull>> mask;
+    vector<vector<uint64_t>> mask;
     vector<vector<int>> idx;
     /** @} */
     /**
@@ -42,7 +41,7 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
     }
     void calc(int level, int le, int ri) {
         for (int i = ri - 1; i >= le; i--) {
-            ull st = mask[level][i + 1];
+            uint64_t st = mask[level][i + 1];
             const T& curr = arr[blk(level, i)];
             while (st && less(curr, arr[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
             mask[level][i] = st = ((st << 1) | 1);
