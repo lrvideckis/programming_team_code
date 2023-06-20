@@ -13,10 +13,11 @@
  * */
 
 struct bit_presum {
-    const int N;
+    int N;//TODO make const again
     vector<uint64_t> mask;
     vector<int> presum;
 
+    bit_presum() : N(0) {}//TODO: remove this?
     bit_presum(const vector<bool>& arr) : N(ssize(arr)), mask((N+63) / 64 + 1), presum(ssize(mask)) {
         for(int i = 0; i < N; i++)
             mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
@@ -38,43 +39,47 @@ struct bit_presum {
     }
 };
 
+//TODO rearrange params to match other seg trees
+//TODO rename params to le, ri
+//TODO test which midpoint gives least memory/is fastest
 struct wavelet_tree {
     const int N, MINN, MAXN;
 
-    vector<int> esq[4*(MAXN-MINN)];
+    vector<bit_presum> tree;
 
-    wavelet_tree(const vector<int>& arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1) {
-        build(0, n, 1, MINN, MAXN);
+    wavelet_tree(vector<int> arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1), tree(4*(MAXN-MINN)) {
+        arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
+        build(arr, 0, N, 1, MINN, MAXN);
     }
-    void build(int b = 0, int e = n, int p = 1, int l = MINN, int r = MAXN) {
-        int m = (l+r)/2; esq[p].push_back(0); pref[p].push_back(0);
-        for (int i = b; i < e; i++) {
-            esq[p].push_back(esq[p].back()+(v[i]<=m));
-            pref[p].push_back(pref[p].back()+v[i]);
+
+    void build(vector<int>& arr, int b, int e, int p, int l, int r) {
+        assert(p < ssize(tree));
+        int m = l + (r-l)/2;
+        auto low = [&](int val) -> bool {return val < m;};
+        vector<bool> bits(e-b);
+        transform(begin(arr) + b, begin(arr) + e, begin(bits), low);
+        {
+            bit_presum curr(bits);
+            //TODO: this is terrible, I want to do tree[p] = bit_presum(bits);
+            tree[p].N = curr.N;
+            tree[p].mask = curr.mask;
+            tree[p].presum = curr.presum;
         }
-        if (l == r) return;
-        int m2 = stable_partition(v+b, v+e, [=](int i){return i <= m;}) - v;
-        build(b, m2, 2*p, l, m), build(m2, e, 2*p+1, m+1, r);
+        if (r-l == 1) return;
+        int m2 = stable_partition(begin(arr)+b, begin(arr)+e, low) - begin(arr);
+        build(arr, b, m2, 2*p, l, m);
+        build(arr, m2, e, 2*p+1, m, r);
     }
 
-    int count(int i, int j, int x, int y, int p = 1, int l = MINN, int r = MAXN) const {
-        if (y < l || r < x) return 0;
-        if (x <= l && r <= y) return j-i;
-        int m = (l+r)/2, ei = esq[p][i], ej = esq[p][j];
-        return count(ei, ej, x, y, 2*p, l, m)+count(i-ei, j-ej, x, y, 2*p+1, m+1, r);
+    //kth(i,j,0) returns min of range [i,j)
+    int kth(int i, int j, int k) const {
+        return kth(i, j, k, 1, MINN, MAXN);
     }
-
-    int kth(int i, int j, int k, int p=1, int l = MINN, int r = MAXN) const {
-        if (l == r) return l;
-        int m = (l+r)/2, ei = esq[p][i], ej = esq[p][j];
-        if (k <= ej-ei) return kth(ei, ej, k, 2*p, l, m);
-        return kth(i-ei, j-ej, k-(ej-ei), 2*p+1, m+1, r);
+    int kth(int i, int j, int k, int p, int l, int r) const {
+        if (r-l == 1) return l;
+        assert(p < ssize(tree));
+        int m = l+(r-l)/2, ei = tree[p].popcount(i), ej = tree[p].popcount(j);
+        if (k < ej-ei) return kth(ei, ej, k, 2*p, l, m);
+        return kth(i-ei, j-ej, k-(ej-ei), 2*p+1, m, r);
     }
-
-    int sum(int i, int j, int x, int y, int p = 1, int l = MINN, int r = MAXN) const {
-        if (y < l || r < x) return 0;
-        if (x <= l && r <= y) return pref[p][j]-pref[p][i];
-        int m = (l+r)/2, ei = esq[p][i], ej = esq[p][j];
-        return sum(ei, ej, x, y, 2*p, l, m) + sum(i-ei, j-ej, x, y, 2*p+1, m+1, r);
-    }
-}
+};

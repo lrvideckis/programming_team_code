@@ -2,6 +2,7 @@
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/kth_smallest.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -13,18 +14,16 @@ int main() {
     vector<int> sorted(arr);
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
+    for(int& val : arr)
+        val = lower_bound(begin(sorted), end(sorted), val) - begin(sorted);
     kth_smallest st(arr);
-    for (int i = 0; i < n; i++) {
-        int mx = arr[i];
-        for (int j = i + 1; j <= min(i + 5, n); j++) {
-            mx = max(mx, arr[j - 1]);
-            assert(st.query(i, j, j - i - 1) == mx);
-        }
-    }
+    wavelet_tree wt(arr);
     while (q--) {
         int l, r, k;
         cin >> l >> r >> k;
-        cout << st.query(l, r, k) << '\n';
+        int res = st.query(l, r, k);
+        assert(res == wt.kth(l, r, k));
+        cout << sorted[res] << '\n';
     }
     return 0;
 }
