@@ -15,7 +15,7 @@ int main() {
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
     for(int& val : arr)
-        val = lower_bound(begin(sorted), end(sorted), val) - begin(sorted) - 50;
+        val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted)) - 50;
     kth_smallest st(arr);
     wavelet_tree wt(arr, -50, ssize(sorted) - 50);
     for (int i = 0; i < n; i++) {

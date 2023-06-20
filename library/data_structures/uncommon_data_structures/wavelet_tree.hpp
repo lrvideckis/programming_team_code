@@ -57,7 +57,7 @@ struct wavelet_tree {
         tree_pref[v].resize(ri - le + 1);
         inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(tree_pref[v]) + 1, plus<long long>(), 0LL);
         //vector<int> bits_int(begin(bits), end(bits));//to pass to BIT constructor
-        int mi = stable_partition(begin(arr)+le, begin(arr)+ri, low) - begin(arr);
+        int mi = int(stable_partition(begin(arr)+le, begin(arr)+ri, low) - begin(arr));
         build(arr, le, mi, tl, tm, 2*v);
         build(arr, mi, ri, tm, tr, 2*v+1);
     }
