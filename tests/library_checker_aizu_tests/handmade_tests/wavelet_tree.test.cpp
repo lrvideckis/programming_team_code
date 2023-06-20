@@ -53,6 +53,16 @@ int main() {
                 }
             }
         }
+        for(int tests_kth_sum = 100; tests_kth_sum--;) {
+            int k = get_rand<int>(0, N - 1);
+            int curr_cnt = 0;
+            long long curr_sum = 0;
+            for(int i = 0; i < VAL_RANGE; i++) {
+                //TODO
+                if(curr_cnt + count_val[i]
+                if(curr_sum + 1LL * (i+LARGE) * count_val[i] kk
+            }
+        }
     }
     cout << "Hello World\n";
     return 0;
