@@ -1,17 +1,5 @@
-/*
- * not pointer based
- * 32/64x memory optimized
- * supports operations:
- *   - kth smallest
- *   - count < val seems pointless
- *   - count = val seems pointless
- *   - rectangle count: # vals x in subarray s.t. low <= x < high
- *   - sum of all values < val (requires n log memory which isn't 32/64x optimized)
- *         for space comment for this, mention
- *   - sum of all values in rectangle (requires n log memory which isn't 32/64x optimized)
- *   - sum of all values = val seems pointless
- * */
-
+/** @file */
+#pragma once
 struct bit_presum {
     int n;
     vector<uint64_t> mask;
@@ -34,7 +22,6 @@ inline int split(int tl, int tr) {
     return min(tl + pw2, tr - pw2 / 2);
 }
 
-//TODO figure out which debug flag makes this test TLE
 struct wavelet_tree {
     const int N, MINV, MAXV;
 
@@ -56,7 +43,6 @@ struct wavelet_tree {
         tree[v] = bit_presum(bits);
         tree_pref[v].resize(ri - le + 1);
         inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(tree_pref[v]) + 1, plus<long long>(), 0LL);
-        //vector<int> bits_int(begin(bits), end(bits));//to pass to BIT constructor
         int mi = int(stable_partition(begin(arr)+le, begin(arr)+ri, low) - begin(arr));
         build(arr, le, mi, tl, tm, 2*v);
         build(arr, mi, ri, tm, tr, 2*v+1);
@@ -90,7 +76,6 @@ struct wavelet_tree {
                rect_sum(le-pl, ri-pr, x, y, tm, tr, 2*v+1);
     }
 
-    //kth_smallest(le,ri,0) returns min of range [le,ri)
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= ri - le);
@@ -103,8 +88,6 @@ struct wavelet_tree {
         return kth_smallest(le-pl, ri-pr, k-(pr-pl), tm, tr, 2*v+1);
     }
 
-    //TODO: allow for the trivial case of k=-1, (representing the sum of no numbers), and this function should return 0
-    //kth_sum(le,ri,k) returns sum of smallest (k+1) numbers in [le,ri)
     long long kth_sum(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(0 <= k && k <= ri - le);
@@ -114,7 +97,6 @@ struct wavelet_tree {
         if (tr-tl == 1) return 1LL * k * tl;
         int tm = split(tl,tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
         if (k <= pr-pl) return kth_sum(pl, pr, k, tl, tm, 2*v);
-        //TODO: increase tree_pref to 2*(MAXV-MINV) just to simplify code?
         long long sum_left = (tm-tl==1 ? 1LL * tl * (pr-pl) : tree_pref[2*v][pr] - tree_pref[2*v][pl]);
         return sum_left + kth_sum(le-pl, ri-pr, k-(pr-pl), tm, tr, 2*v+1);
     }
