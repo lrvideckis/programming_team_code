@@ -30,6 +30,22 @@ int main() {
                     }
                 }
             }
+            if(n <= 35) {
+                for(int le = 0; le <= n; le++) {
+                    for(int ri = le; ri <= n; ri++) {
+                        vector<int> subarray(begin(arr) + le, begin(arr) + ri);
+                        sort(begin(subarray), end(subarray));
+                        int sum = 0;
+                        for(int k = 0; k <= ssize(subarray); k++) {
+                            if(k) {
+                                assert(wt.kth_smallest(le, ri, k) == subarray[k-1]);
+                                sum += subarray[k-1];
+                            }
+                            assert(wt.kth_sum(le, ri, k) == sum);
+                        }
+                    }
+                }
+            }
         }
     }
     //max test for overflow
