@@ -39,28 +39,31 @@ struct bit_presum {
     }
 };
 
+inline int split(int tl, int tr) {
+    int pw2 = 1 << __lg(tr - tl);
+    return min(tl + pw2, tr - pw2 / 2);
+}
+
 //TODO rearrange params to match other seg trees
 //TODO rename params to le, ri
-//TODO test which midpoint gives least memory/is fastest
 struct wavelet_tree {
     const int N, MINN, MAXN;
 
     vector<bit_presum> tree;
 
-    wavelet_tree(vector<int> arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1), tree(4*(MAXN-MINN)) {
+    wavelet_tree(vector<int> arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1), tree(2*(MAXN-MINN)) {
         arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
         build(arr, 0, N, 1, MINN, MAXN);
     }
 
     void build(vector<int>& arr, int b, int e, int p, int l, int r) {
-        assert(p < ssize(tree));
-        int m = l + (r-l)/2;
+        int m = split(l,r);
         auto low = [&](int val) -> bool {return val < m;};
         vector<bool> bits(e-b);
         transform(begin(arr) + b, begin(arr) + e, begin(bits), low);
         {
             bit_presum curr(bits);
-            //TODO: this is terrible, I want to do tree[p] = bit_presum(bits);
+            //TODO: this is terrible, I want to do something like: tree[p] = bit_presum(bits);
             tree[p].N = curr.N;
             tree[p].mask = curr.mask;
             tree[p].presum = curr.presum;
@@ -77,8 +80,7 @@ struct wavelet_tree {
     }
     int kth(int i, int j, int k, int p, int l, int r) const {
         if (r-l == 1) return l;
-        assert(p < ssize(tree));
-        int m = l+(r-l)/2, ei = tree[p].popcount(i), ej = tree[p].popcount(j);
+        int m = split(l,r), ei = tree[p].popcount(i), ej = tree[p].popcount(j);
         if (k < ej-ei) return kth(ei, ej, k, 2*p, l, m);
         return kth(i-ei, j-ej, k-(ej-ei), 2*p+1, m, r);
     }
