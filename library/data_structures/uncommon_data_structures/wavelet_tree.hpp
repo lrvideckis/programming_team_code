@@ -38,12 +38,12 @@ struct bit_presum {
     }
 };
 
-struct wavelet_matrix {
+struct wavelet_tree {
     const int N, MINN, MAXN;
 
     vector<int> esq[4*(MAXN-MINN)];
 
-    wavelet_matrix(const vector<int>& arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1) {
+    wavelet_tree(const vector<int>& arr) : N(ssize(arr)), MINN(*min_element(begin(arr), end(arr))), MAXN(*max_element(begin(arr), end(arr)) + 1) {
         build(0, n, 1, MINN, MAXN);
     }
     void build(int b = 0, int e = n, int p = 1, int l = MINN, int r = MAXN) {
