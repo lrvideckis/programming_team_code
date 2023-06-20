@@ -3,8 +3,8 @@
  * 32/64x memory optimized
  * supports operations:
  *   - kth smallest
- *   - count < val
- *   - count = val
+ *   - count < val seems pointless
+ *   - count = val seems pointless
  *   - rectangle count: # vals x in subarray s.t. low <= x < high
  *   - sum of all values < val (requires n log memory which isn't 32/64x optimized)
  *         for space comment for this, mention
@@ -43,6 +43,7 @@ struct wavelet_tree {
     wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(2*(MAXV-MINV), vector<bool>()) {
         for(int val : arr) assert(MINV <= val && val < MAXV);//TODO: should I keep this?
         arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
+        if(arr.empty()) return;//TODO: find better way to handle empty array
         build(arr, 0, N, MINV, MAXV, 1);
     }
 
@@ -58,10 +59,24 @@ struct wavelet_tree {
         build(arr, mi, ri, tm, tr, 2*v+1);
     }
 
+    //count idx s.t. le <= idx < ri and x <= arr[idx] < y
+    int count(int le, int ri, int x, int y) {
+        assert(0 <= le && le <= ri && ri <= N);
+        assert(MINV <= x && x <= y && y <= MAXV);
+        return count(le,ri,x,y,MINV, MAXV, 1);
+    }
+    int count(int le, int ri, int x, int y, int tl, int tr, int v) {
+        if (y <= tl || tr <= x) return 0;
+        if (x <= tl && tr <= y) return ri-le;
+        int tm = split(tl,tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
+        return count(pl, pr, x, y, tl, tm, 2*v) +
+            count(le-pl, ri-pr, x, y, tm, tr, 2*v+1);
+    }
+
     //kth(le,ri,0) returns min of range [le,ri)
     int kth(int le, int ri, int k) const {
-        assert(0 <= k && k < ri - le);
         assert(0 <= le && ri <= N);
+        assert(0 <= k && k < ri - le);
         return kth(le, ri, k, MINV, MAXV, 1);
     }
     int kth(int le, int ri, int k, int tl, int tr, int v) const {
