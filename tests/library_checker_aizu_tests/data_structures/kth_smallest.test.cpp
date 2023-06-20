@@ -18,13 +18,13 @@ int main() {
         int mx = arr[i];
         for (int j = i + 1; j <= min(i + 5, n); j++) {
             mx = max(mx, arr[j - 1]);
-            assert(st.query(i, j, j - i - 1) == mx);
+            assert(st.query(i, j, j - i) == mx);
         }
     }
     while (q--) {
         int l, r, k;
         cin >> l >> r >> k;
-        cout << st.query(l, r, k) << '\n';
+        cout << st.query(l, r, k + 1) << '\n';
     }
     return 0;
 }

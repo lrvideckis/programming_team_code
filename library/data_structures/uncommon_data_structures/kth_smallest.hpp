@@ -23,21 +23,22 @@ struct kth_smallest {
     /**
      * @param le,ri defines range [le, ri)
      * @param k query parameter
-     * @returns (k+1)th smallest number in range. k is 0-based, so
-     * query(le,ri,0) returns the min
+     * @returns kth smallest number in range. k is 1-based, so
+     *     - query(le,ri,1) returns the min
+     *     - query(le,ri,(ri-le)) returns the max
      * @time O(log(mx - mn))
      * @space O(log(mx - mn)) for recursion stack; no new nodes are allocated
      */
     int query(int le, int ri, int k) const {
-        assert(0 <= k && k < ri - le);
         assert(0 <= le && ri < ssize(pst.roots));
+        assert(1 <= k && k <= ri - le);
         return query_impl(k, pst.ROOT_L, pst.ROOT_R, pst.roots[le], pst.roots[ri]);
     }
     int query_impl(int k, int tl, int tr, int vl, int vr) const {
         if (tr - tl == 1) return tl;
         int tm = tl + (tr - tl) / 2;
         int left_count = int(pst.tree[pst.tree[vr].lch].sum - pst.tree[pst.tree[vl].lch].sum);
-        if (left_count > k) return query_impl(k, tl, tm, pst.tree[vl].lch, pst.tree[vr].lch);
+        if (left_count >= k) return query_impl(k, tl, tm, pst.tree[vl].lch, pst.tree[vr].lch);
         return query_impl(k - left_count, tm, tr, pst.tree[vl].rch, pst.tree[vr].rch);
     }
 };
