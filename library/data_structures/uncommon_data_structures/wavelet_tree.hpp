@@ -40,20 +40,20 @@ struct wavelet_tree {
 
     vector<bit_presum> tree;
 
-    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(2*(MAXV-MINV), vector<bool>()) {
+    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV-MINV, vector<bool>()) {
         for(int val : arr) assert(MINV <= val && val < MAXV);//TODO: should I keep this?
         arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
-        if(arr.empty()) return;//TODO: find better way to handle empty array
         build(arr, 0, N, MINV, MAXV, 1);
     }
 
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
+        if (tr-tl <= 1) return;
         int tm = split(tl,tr);
         auto low = [&](int val) -> bool {return val < tm;};
         vector<bool> bits(ri-le);
         transform(begin(arr) + le, begin(arr) + ri, begin(bits), low);
         tree[v] = bit_presum(bits);
-        if (tr-tl == 1) return;
+        //vector<int> bits_int(begin(bits), end(bits));//to pass to BIT constructor
         int mi = stable_partition(begin(arr)+le, begin(arr)+ri, low) - begin(arr);
         build(arr, le, mi, tl, tm, 2*v);
         build(arr, mi, ri, tm, tr, 2*v+1);
