@@ -30,7 +30,6 @@ struct wavelet_tree {
 
     wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_pref(MAXV - MINV) {
         for (int val : arr) assert(MINV <= val && val < MAXV); //TODO: should I keep this?
-        arr.reserve(2 * ssize(arr));//so that stable_partition is O(n)
         build(arr, 0, N, MINV, MAXV, 1);
     }
 
