@@ -23,7 +23,7 @@ int main() {
         assert(sorted[start] == val);
         val = start - 50;
     }
-    kth_smallest st(arr);
+    kth_smallest st(arr, -50, ssize(sorted) - 50);
     for (int i = 0; i < n; i++) {
         int mx = arr[i];
         for (int j = i + 1; j <= min(i + 5, n); j++) {

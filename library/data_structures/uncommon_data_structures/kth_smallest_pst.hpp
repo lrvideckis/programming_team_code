@@ -9,16 +9,13 @@ struct kth_smallest {
     PST pst;
     /**
      * @param arr static array; can't handle updates
+     * @param minv,maxv must satisfy: minv <= arr[i] < maxv
      * @time O(n log(mx - mn))
      * @space O(n log(mx - mn)) nodes are pushed back onto PST::tree
      */
-    kth_smallest(const vector<int>& arr) : pst(init(arr)) {
+    kth_smallest(const vector<int>& arr, int minv, int maxv) : pst(minv, maxv) {
         for (int i = 0; i < ssize(arr); i++)
             pst.update(arr[i], 1, i);
-    }
-    static PST init(const vector<int>& arr) {
-        auto [mn, mx] = minmax_element(begin(arr), end(arr));
-        return {*mn, *mx + 1};
     }
     /**
      * @param le,ri defines range [le, ri)
