@@ -1,5 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
-#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
@@ -14,8 +13,16 @@ int main() {
     vector<int> sorted(arr);
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-    for (int& val : arr)
-        val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted)) - 50;
+    for (int& val : arr) {
+        int start = -1, end = ssize(sorted);
+        while (start + 1 < end) {
+            int mid = (start + end) / 2;
+            if (sorted[mid] >= val) end = mid;
+            else start = mid;
+        }
+        assert(sorted[end] == val);
+        val = end - 50;
+    }
     wavelet_tree wt(arr, -50, ssize(sorted) - 50);
     for (int i = 0; i < n; i++) {
         int mx = arr[i];

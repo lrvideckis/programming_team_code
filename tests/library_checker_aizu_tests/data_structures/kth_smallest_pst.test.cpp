@@ -16,7 +16,7 @@ int main() {
     vector<int> sorted(arr);
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-    for(int& val : arr)
+    for (int& val : arr)
         val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
     kth_smallest st(arr);
     for (int i = 0; i < n; i++) {
