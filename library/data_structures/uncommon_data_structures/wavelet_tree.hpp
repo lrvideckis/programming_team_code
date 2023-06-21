@@ -16,23 +16,18 @@ struct bit_presum {
         return presum[i >> 6] + __builtin_popcountll(mask[i >> 6] & ((1ULL << (i & 63)) - 1));
     }
 };
-
 inline int split(int tl, int tr) {
     int pw2 = 1 << __lg(tr - tl);
     return min(tl + pw2, tr - pw2 / 2);
 }
-
 struct wavelet_tree {
     const int N, MINV, MAXV;
-
     vector<bit_presum> tree;
     vector<vector<long long>> tree_pref;
-
     wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_pref(MAXV - MINV) {
         for (int val : arr) assert(MINV <= val && val < MAXV); //TODO: should I keep this?
         build(arr, 0, N, MINV, MAXV, 1);
     }
-
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
@@ -46,7 +41,6 @@ struct wavelet_tree {
         build(arr, le, mi, tl, tm, 2 * v);
         build(arr, mi, ri, tm, tr, 2 * v + 1);
     }
-
     //count idx s.t. le <= idx < ri and x <= arr[idx] < y
     int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N);
@@ -60,7 +54,6 @@ struct wavelet_tree {
         return rect_count(pl, pr, x, y, tl, tm, 2 * v) +
                rect_count(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
-
     //sum of arr[idx] s.t. le <= idx < ri and x <= arr[idx] < y
     long long rect_sum(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N);
@@ -74,7 +67,6 @@ struct wavelet_tree {
         return rect_sum(pl, pr, x, y, tl, tm, 2 * v) +
                rect_sum(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
-
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= ri - le);
@@ -86,7 +78,6 @@ struct wavelet_tree {
         if (k <= pr - pl) return kth_smallest(pl, pr, k, tl, tm, 2 * v);
         return kth_smallest(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
-
     long long kth_sum(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(0 <= k && k <= ri - le);
