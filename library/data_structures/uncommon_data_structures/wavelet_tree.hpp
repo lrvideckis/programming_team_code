@@ -48,12 +48,12 @@ struct wavelet_tree {
     }
 
     //count idx s.t. le <= idx < ri and x <= arr[idx] < y
-    int rect_count(int le, int ri, int x, int y) {
+    int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N);
         assert(MINV <= x && x <= y && y <= MAXV);
         return rect_count(le, ri, x, y, MINV, MAXV, 1);
     }
-    int rect_count(int le, int ri, int x, int y, int tl, int tr, int v) {
+    int rect_count(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
@@ -62,12 +62,12 @@ struct wavelet_tree {
     }
 
     //sum of arr[idx] s.t. le <= idx < ri and x <= arr[idx] < y
-    long long rect_sum(int le, int ri, int x, int y) {
+    long long rect_sum(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N);
         assert(MINV <= x && x <= y && y <= MAXV);
         return rect_sum(le, ri, x, y, MINV, MAXV, 1);
     }
-    long long rect_sum(int le, int ri, int x, int y, int tl, int tr, int v) {
+    long long rect_sum(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : tree_pref[v][ri] - tree_pref[v][le]);
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
