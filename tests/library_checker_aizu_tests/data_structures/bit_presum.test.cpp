@@ -4,11 +4,11 @@
 #include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
 
 vector<bit_presum> init_presums(const vector<int>& arr) {
-    const int n = ssize(arr);
+    const int N = ssize(arr);
     vector<bit_presum> presums;
     for (int bit = 0; bit < 30; bit++) {
-        vector<bool> the_bits(n);
-        for (int i = 0; i < n; i++)
+        vector<bool> the_bits(N);
+        for (int i = 0; i < N; i++)
             the_bits[i] = (arr[i] >> bit) & 1;
         presums.emplace_back(the_bits);
     }
