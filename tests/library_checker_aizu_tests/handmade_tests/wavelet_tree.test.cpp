@@ -12,7 +12,7 @@ int main() {
             int maxn = get_rand<int>(-1000, 1000);
             if (minn > maxn) swap(minn, maxn);
             vector<int> arr(n);
-            for (int& val : arr) val = get_rand<int>(minn, maxn);
+            generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             wavelet_tree wt(arr, minn, maxn + 1);
             for (int queries = 3; queries--;) {
                 int x = get_rand<int>(minn, maxn + 1);
