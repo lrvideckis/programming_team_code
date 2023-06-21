@@ -2,7 +2,6 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/kth_smallest.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
 
 int main() {
