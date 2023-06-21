@@ -14,14 +14,14 @@ int main() {
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
     for (int& val : arr) {
-        int start = -1, end = ssize(sorted);
+        int start = 0, end = ssize(sorted);
         while (start + 1 < end) {
             int mid = (start + end) / 2;
-            if (sorted[mid] >= val) end = mid;
-            else start = mid;
+            if (sorted[mid] <= val) start = mid;
+            else end = mid;
         }
-        assert(sorted[end] == val);
-        val = end - 50;
+        assert(sorted[start] == val);
+        val = start - 50;
     }
     kth_smallest st(arr);
     for (int i = 0; i < n; i++) {
