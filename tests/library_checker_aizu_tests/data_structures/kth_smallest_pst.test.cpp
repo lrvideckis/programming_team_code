@@ -1,7 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
-//since this causes an O(n) partition check for each call to `lower_bound`,
-//causing TLE.
-#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/kth_smallest_pst.hpp"
@@ -16,8 +13,16 @@ int main() {
     vector<int> sorted(arr);
     sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-    for (int& val : arr)
-        val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+    for (int& val : arr) {
+        int start = -1, end = ssize(sorted);
+        while (start + 1 < end) {
+            int mid = (start + end) / 2;
+            if (sorted[mid] >= val) end = mid;
+            else start = mid;
+        }
+        assert(sorted[end] == val);
+        val = end - 50;
+    }
     kth_smallest st(arr);
     for (int i = 0; i < n; i++) {
         int mx = arr[i];
@@ -29,7 +34,7 @@ int main() {
     while (q--) {
         int l, r, k;
         cin >> l >> r >> k;
-        cout << sorted[st.query(l, r, k + 1)] << '\n';
+        cout << sorted[st.query(l, r, k + 1) + 50] << '\n';
     }
     return 0;
 }
