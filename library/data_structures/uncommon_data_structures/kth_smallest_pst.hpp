@@ -19,8 +19,8 @@ struct kth_smallest {
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @param k query parameter
-     * @returns kth smallest number in range. k is 1-based, so
+     * @param k must satisfy 1 <= k <= ri - le
+     * @returns kth smallest number in range.
      *     - query(le,ri,1) returns the min
      *     - query(le,ri,(ri-le)) returns the max
      * @time O(log(maxv - minv))
