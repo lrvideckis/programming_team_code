@@ -1015,6 +1015,13 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          build \
                          MINV \
                          MAXV \
+                         n \
+                         mask \
+                         presum \
+                         rect_count_impl \
+                         rect_sum_impl \
+                         kth_smallest_impl \
+                         kth_sum_impl \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

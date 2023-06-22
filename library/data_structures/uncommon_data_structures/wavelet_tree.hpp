@@ -79,17 +79,14 @@ struct wavelet_tree {
     int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N);
         assert(MINV <= x && x <= y && y <= MAXV);
-        return rect_count(le, ri, x, y, MINV, MAXV, 1);
+        return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
     }
-    /**
-     * @overload
-     */
-    int rect_count(int le, int ri, int x, int y, int tl, int tr, int v) const {
+    int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        return rect_count(pl, pr, x, y, tl, tm, 2 * v) +
-               rect_count(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
+        return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
+               rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
@@ -100,17 +97,14 @@ struct wavelet_tree {
     long long rect_sum(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N);
         assert(MINV <= x && x <= y && y <= MAXV);
-        return rect_sum(le, ri, x, y, MINV, MAXV, 1);
+        return rect_sum_impl(le, ri, x, y, MINV, MAXV, 1);
     }
-    /**
-     * @overload
-     */
-    long long rect_sum(int le, int ri, int x, int y, int tl, int tr, int v) const {
+    long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : tree_pref[v][ri] - tree_pref[v][le]);
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        return rect_sum(pl, pr, x, y, tl, tm, 2 * v) +
-               rect_sum(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
+        return rect_sum_impl(pl, pr, x, y, tl, tm, 2 * v) +
+               rect_sum_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
     /**
      * @param le,ri defines range [le, ri)
@@ -124,16 +118,13 @@ struct wavelet_tree {
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= ri - le);
-        return kth_smallest(le, ri, k, MINV, MAXV, 1);
+        return kth_smallest_impl(le, ri, k, MINV, MAXV, 1);
     }
-    /**
-     * @overload
-     */
-    int kth_smallest(int le, int ri, int k, int tl, int tr, int v) const {
+    int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        if (k <= pr - pl) return kth_smallest(pl, pr, k, tl, tm, 2 * v);
-        return kth_smallest(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+        if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
+        return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
     /**
      * @param le,ri defines range [le, ri)
@@ -148,16 +139,13 @@ struct wavelet_tree {
     long long kth_sum(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(0 <= k && k <= ri - le);
-        return kth_sum(le, ri, k, MINV, MAXV, 1);
+        return kth_sum_impl(le, ri, k, MINV, MAXV, 1);
     }
-    /**
-     * @overload
-     */
-    long long kth_sum(int le, int ri, int k, int tl, int tr, int v) const {
+    long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return 1LL * k * tl;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        if (k <= pr - pl) return kth_sum(pl, pr, k, tl, tm, 2 * v);
+        if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * v);
         long long sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : tree_pref[2 * v][pr] - tree_pref[2 * v][pl]);
-        return sum_left + kth_sum(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+        return sum_left + kth_sum_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
 };
