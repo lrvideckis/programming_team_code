@@ -81,6 +81,9 @@ struct wavelet_tree {
         assert(MINV <= x && x <= y && y <= MAXV);
         return rect_count(le, ri, x, y, MINV, MAXV, 1);
     }
+    /**
+     * @overload
+     */
     int rect_count(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
@@ -99,6 +102,9 @@ struct wavelet_tree {
         assert(MINV <= x && x <= y && y <= MAXV);
         return rect_sum(le, ri, x, y, MINV, MAXV, 1);
     }
+    /**
+     * @overload
+     */
     long long rect_sum(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : tree_pref[v][ri] - tree_pref[v][le]);
@@ -120,6 +126,9 @@ struct wavelet_tree {
         assert(1 <= k && k <= ri - le);
         return kth_smallest(le, ri, k, MINV, MAXV, 1);
     }
+    /**
+     * @overload
+     */
     int kth_smallest(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
@@ -141,6 +150,9 @@ struct wavelet_tree {
         assert(0 <= k && k <= ri - le);
         return kth_sum(le, ri, k, MINV, MAXV, 1);
     }
+    /**
+     * @overload
+     */
     long long kth_sum(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return 1LL * k * tl;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
