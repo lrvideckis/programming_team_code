@@ -8,26 +8,22 @@
 struct kth_smallest {
     PST pst;
     /**
-     * @param arr static array; can't handle updates
-     * @time O(n log(mx - mn))
-     * @space O(n log(mx - mn)) nodes are pushed back onto PST::tree
+     * @param arr,minv,maxv must satisfy: minv <= arr[i] < maxv
+     * @time O(n log(maxv - minv))
+     * @space O(n log(maxv - minv)) nodes are pushed back onto PST::tree
      */
-    kth_smallest(const vector<int>& arr) : pst(init(arr)) {
+    kth_smallest(const vector<int>& arr, int minv, int maxv) : pst(minv, maxv) {
         for (int i = 0; i < ssize(arr); i++)
             pst.update(arr[i], 1, i);
     }
-    static PST init(const vector<int>& arr) {
-        auto [mn, mx] = minmax_element(begin(arr), end(arr));
-        return {*mn, *mx + 1};
-    }
     /**
      * @param le,ri defines range [le, ri)
-     * @param k query parameter
-     * @returns kth smallest number in range. k is 1-based, so
+     * @param k must satisfy 1 <= k <= ri - le
+     * @returns kth smallest number in range.
      *     - query(le,ri,1) returns the min
      *     - query(le,ri,(ri-le)) returns the max
-     * @time O(log(mx - mn))
-     * @space O(log(mx - mn)) for recursion stack; no new nodes are allocated
+     * @time O(log(maxv - minv))
+     * @space O(log(maxv - minv)) for recursion stack; no new nodes are allocated
      */
     int query(int le, int ri, int k) const {
         assert(0 <= le && ri < ssize(pst.roots));

@@ -961,6 +961,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          dfs1 \
                          dfs2 \
                          tree \
+                         tree_pref \
                          calc_subtree_sizes \
                          INF \
                          seg_tree \
@@ -1011,6 +1012,17 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          is \
                          safe_map \
                          safe_hash_table \
+                         build \
+                         MINV \
+                         MAXV \
+                         n \
+                         mask \
+                         presum \
+                         rect_count_impl \
+                         rect_sum_impl \
+                         kth_smallest_impl \
+                         kth_sum_impl \
+                         idx \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
