@@ -41,7 +41,7 @@ inline int split(int tl, int tr) {
 }
 /**
  * @see https://codeforces.com/blog/entry/52854
- * https://github.com/brunomaletta/Biblioteca/blob/master/Codigo/Estruturas/waveletTree.cpp
+ * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
  */
 struct wavelet_tree {
     const int N, MINV, MAXV;
