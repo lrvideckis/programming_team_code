@@ -15,8 +15,8 @@ int main() {
             generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             wavelet_tree wt(arr, minn, maxn + 1);
             for (int queries = 3; queries--;) {
-                int x = get_rand<int>(minn, maxn + 1);
-                int y = get_rand<int>(minn, maxn + 1);
+                int x = get_rand<int>(-1000, 1000);
+                int y = get_rand<int>(-1000, 1000);
                 if (x > y) swap(x, y);
                 for (int le = 0; le <= n; le++) {
                     int cnt = 0, sum = 0;

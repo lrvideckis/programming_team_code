@@ -77,8 +77,7 @@ struct wavelet_tree {
      * @space O(log(maxv - minv)) for recursive stack
      */
     int rect_count(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N);
-        assert(MINV <= x && x <= y && y <= MAXV);
+        assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
     }
     int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
@@ -95,8 +94,7 @@ struct wavelet_tree {
      * @space O(log(maxv - minv)) for recursive stack
      */
     long long rect_sum(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N);
-        assert(MINV <= x && x <= y && y <= MAXV);
+        assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_sum_impl(le, ri, x, y, MINV, MAXV, 1);
     }
     long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
