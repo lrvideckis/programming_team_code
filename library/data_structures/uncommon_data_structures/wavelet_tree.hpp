@@ -130,9 +130,9 @@ struct wavelet_tree {
      * @param le,ri defines range [le, ri)
      * @param k must satisfy 0 <= k <= ri - le
      * @returns the sum of the k smallest numbers in range.
-     *     - kth_smallest(le,ri,0) returns 0
-     *     - kth_smallest(le,ri,1) returns the min
-     *     - kth_smallest(le,ri,(ri-le)) returns the sum of range
+     *     - kth_sum(le,ri,0) returns 0
+     *     - kth_sum(le,ri,1) returns the min
+     *     - kth_sum(le,ri,(ri-le)) returns the sum of range
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */
