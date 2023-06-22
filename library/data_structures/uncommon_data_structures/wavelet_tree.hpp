@@ -54,7 +54,6 @@ struct wavelet_tree {
      *        O((maxv - minv) + n * log(maxv - minv))      for `tree_pref`
      */
     wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_pref(MAXV - MINV) {
-        for (int val : arr) assert(MINV <= val && val < MAXV); //TODO: should I keep this?
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
