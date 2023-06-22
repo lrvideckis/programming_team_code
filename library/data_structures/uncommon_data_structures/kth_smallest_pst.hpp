@@ -8,8 +8,7 @@
 struct kth_smallest {
     PST pst;
     /**
-     * @param arr static array; can't handle updates
-     * @param minv,maxv must satisfy: minv <= arr[i] < maxv
+     * @param arr,minv,maxv must satisfy: minv <= arr[i] < maxv
      * @time O(n log(maxv - minv))
      * @space O(n log(maxv - minv)) nodes are pushed back onto PST::tree
      */
