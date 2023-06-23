@@ -16,6 +16,7 @@ int main() {
             wavelet_tree_updates wtu(arr, minn, maxn + 1);
             vector<bool> is_active(n, 1);
             for(int operations = 50; operations--;) {
+                cerr << "operations: " << operations << endl;
                 if (operations%3 == 0) {//rect_count query
                     int le = get_rand<int>(0, n);
                     int ri = get_rand<int>(0, n);
@@ -35,6 +36,8 @@ int main() {
                     for(int i = le; i < ri; i++)
                         if(is_active[i]) sorted.push_back(arr[i]);
                     sort(begin(sorted), end(sorted));
+                    cerr << "range: " << le << " " << ri << endl;
+                    cerr << "sorted size: " << ssize(sorted) << endl;
                     for(int k = 1; k <= ssize(sorted); k++)
                         assert(wtu.kth_smallest(le, ri, k) == sorted[k-1]);
                 } else {//update active status

@@ -48,9 +48,10 @@ inline int split(int tl, int tr) {
 }
 struct wavelet_tree_updates {
     const int N, MINV, MAXV;
+    vector<int> orig_arr;//TODO: let's not store this?
     vector<bit_presum> tree;
     vector<bit_bit> tree_bit;//TODO: better name?
-    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_bit(2 * (MAXV - MINV), 0) {
+    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), orig_arr(arr), tree(MAXV - MINV, vector<bool>()), tree_bit(2 * (MAXV - MINV), 0) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
@@ -66,27 +67,33 @@ struct wavelet_tree_updates {
         build(arr, mi, ri, tm, tr, 2 * v + 1);
     }
     void set_active(int i, bool is_active) {
+        cerr << "set active" << endl;
+        //TODO: return in O(1) if active state doesn't change?
         assert(0 <= i && i < N);
-        set_impl(i, MINV, MAXV, 1);
+        set_active_impl(i, is_active, orig_arr[i], MINV, MAXV, 1);
     }
-    void set_impl(int i, int tl, int tr, int v) const {
+    void set_active_impl(int i, bool is_active, int orig_value, int tl, int tr, int v) {
+        tree_bit[v].set(i, is_active);
         if (tr - tl == 1) return;
         int tm = split(tl, tr), pi = tree[v].popcount(i);
-        if () return set_impl(pi, tl, tm, 2 * v);
-        set_impl(i - pi, tm, tr, 2 * v + 1);
+        //TODO: think of better condition
+        if (orig_value < tm) return set_active_impl(pi, is_active, orig_value, tl, tm, 2 * v);
+        set_active_impl(i - pi, is_active, orig_value, tm, tr, 2 * v + 1);
     }
     int rect_count(int le, int ri, int x, int y) const {
+        cerr << "rect count" << endl;
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
     }
     int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
-        if (x <= tl && tr <= y) return ri - le;
+        if (x <= tl && tr <= y) return tree_bit[v].popcount(le, ri);
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
         return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
     int kth_smallest(int le, int ri, int k) const {
+        cerr << "kth smallest" << endl;
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= ri - le);
         return kth_smallest_impl(le, ri, k, MINV, MAXV, 1);
@@ -94,7 +101,8 @@ struct wavelet_tree_updates {
     int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
         int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
-        if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
-        return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+        int cnt_left = tree_bit[2 * v].popcount(pl, pr);
+        if (k <= cnt_left) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
+        return kth_smallest_impl(le - pl, ri - pr, k - cnt_left, tm, tr, 2 * v + 1);
     }
 };
