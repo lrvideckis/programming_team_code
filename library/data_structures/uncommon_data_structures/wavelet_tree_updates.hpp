@@ -1,29 +1,29 @@
 /** @file */
 #pragma once
 #include "../binary_indexed_tree.hpp"
+struct bit_presum {
+    int n;
+    vector<uint64_t> mask;
+    vector<int> presum;
+    bit_presum(const vector<bool>& arr) : n(ssize(arr)), mask((n + 63) / 64 + 1), presum(ssize(mask)) {
+        for (int i = 0; i < n; i++)
+            mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
+        for (int i = 0; i < ssize(mask) - 1; i++)
+            presum[i + 1] = __builtin_popcountll(mask[i]) + presum[i];
+    }
+    inline int popcount(int i) const {
+        assert(0 <= i && i <= n);
+        return presum[i >> 6] + __builtin_popcountll(mask[i >> 6] & ((1ULL << (i & 63)) - 1));
+    }
+};
 //TODO: write tests
-/**
- * @see https://codeforces.com/blog/entry/112755
- * @param tl,tr defines range [tl, tr)
- * @returns split point of range which makes the wavelet tree a complete
- * binary tree
- */
 inline int split(int tl, int tr) {
     int pw2 = 1 << __lg(tr - tl);
     return min(tl + pw2, tr - pw2 / 2);
 }
-/**
- * @see https://codeforces.com/blog/entry/52854
- * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
- */
 struct wavelet_tree {
     const int N, MINV, MAXV;
     vector<BIT> tree;
-    /**
-     * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
-     * @time O((maxv - minv) + n * log(maxv - minv))
-     * @space O((maxv - minv) + n * log(maxv - minv)) for `tree`
-     */
     wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, BIT<int>(0)) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
@@ -48,12 +48,6 @@ struct wavelet_tree {
         if () return set_impl(pi, tl, tm, 2 * v);
         set_impl(idx - pi, tm, tr, 2 * v + 1);
     }
-    /**
-     * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of indexes i such that le <= i < ri and x <= arr[i] < y
-     * @time O(log(maxv - minv) * log(n))
-     * @space O(log(maxv - minv)) for recursive stack
-     */
     int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
@@ -65,15 +59,6 @@ struct wavelet_tree {
         return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
-    /**
-     * @param le,ri defines range [le, ri)
-     * @param k must satisfy 1 <= k <= ri - le
-     * @returns kth smallest number in range.
-     *     - kth_smallest(le,ri,1) returns the min
-     *     - kth_smallest(le,ri,(ri-le)) returns the max
-     * @time O(log(maxv - minv) * log(n))
-     * @space O(log(maxv - minv)) for recursive stack
-     */
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= ri - le);
