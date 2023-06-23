@@ -52,7 +52,7 @@ template <typename T> struct BIT {
      * @space O(1)
      */
     inline T sum(int le, int ri) const {
-        assert(0 <= le && le <= ri && ri <= ssize(bit));
+        assert(le <= ri);
         return sum(ri) - sum(le);
     }
     /**
