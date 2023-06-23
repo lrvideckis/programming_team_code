@@ -12,7 +12,7 @@ struct bit_presum {
      * @time O(n)
      * @space O(n / 64)
      */
-    bit_presum(const vector<bool>& arr) : n(ssize(arr)), mask((n + 63) / 64 + 1), presum(ssize(mask)) {
+    bit_presum(const vector<bool>& arr) : n(ssize(arr)), mask(n / 64 + 1), presum(ssize(mask)) {
         for (int i = 0; i < n; i++)
             mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
         for (int i = 0; i < ssize(mask) - 1; i++)
