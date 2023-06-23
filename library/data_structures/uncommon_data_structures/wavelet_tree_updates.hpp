@@ -2,6 +2,7 @@
 #pragma once
 #include "../binary_indexed_tree.hpp"
 
+//TODO: test on https://judge.yosupo.jp/problem/point_add_range_sum
 struct bit_bit {
     int n;
     vector<uint64_t> mask;
@@ -12,7 +13,12 @@ struct bit_bit {
         assert(0 <= i && i <= n);
         return presum.sum(i >> 6) + __builtin_popcountll(mask[i >> 6] & ((1ULL << (i & 63)) - 1));
     }
+    inline int popcount(int le, int ri) const {
+        assert(le <= ri);
+        return popcount(ri) - popcount(le);
+    }
     void set(int i, bool new_val) {
+        assert(0 <= i && i < n);
         int high = i >> 6, low = i & 63;
         if(((mask[high] >> low) & 1) != new_val) {
             mask[high] ^= 1ULL << low;
@@ -44,7 +50,7 @@ struct wavelet_tree_updates {
     const int N, MINV, MAXV;
     vector<bit_presum> tree;
     vector<bit_bit> tree_bit;//TODO: better name?
-    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_bit(MAXV - MINV, 0) {
+    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_bit(2 * (MAXV - MINV), 0) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
@@ -59,18 +65,16 @@ struct wavelet_tree_updates {
         build(arr, le, mi, tl, tm, 2 * v);
         build(arr, mi, ri, tm, tr, 2 * v + 1);
     }
-    void set_active(int idx, bool is_active) {
-        assert(0 <= idx && idx < N);
-        //set_impl(idx, MINV, MAXV, 1);
+    void set_active(int i, bool is_active) {
+        assert(0 <= i && i < N);
+        set_impl(i, MINV, MAXV, 1);
     }
-    /*
-    void set_impl(int idx, int tl, int tr, int v) const {
+    void set_impl(int i, int tl, int tr, int v) const {
         if (tr - tl == 1) return;
-        int tm = split(tl, tr), pi = tree[v].sum(idx);
+        int tm = split(tl, tr), pi = tree[v].popcount(i);
         if () return set_impl(pi, tl, tm, 2 * v);
-        set_impl(idx - pi, tm, tr, 2 * v + 1);
+        set_impl(i - pi, tm, tr, 2 * v + 1);
     }
-    */
     int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
