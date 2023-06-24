@@ -18,6 +18,10 @@ vector<bit_bit> init_prebits(const vector<long long>& arr) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    {
+        bit_bit bb(0);
+        assert(bb.popcount(0, 0) == 0);
+    }
     int n, q;
     cin >> n >> q;
     vector<long long> arr(n);

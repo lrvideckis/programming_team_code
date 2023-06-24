@@ -55,19 +55,18 @@ struct wavelet_tree_updates {
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
+        tree_bit[v] = bit_bit(ri - le);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         auto low = [&](int val) -> bool {return val < tm;};
         vector<bool> bits(ri - le);
         transform(begin(arr) + le, begin(arr) + ri, begin(bits), low);
         tree[v] = bit_presum(bits);
-        tree_bit[v] = bit_bit(ri - le);
         int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
         build(arr, le, mi, tl, tm, 2 * v);
         build(arr, mi, ri, tm, tr, 2 * v + 1);
     }
     void set_active(int i, bool is_active) {
-        cerr << "set active" << endl;
         //TODO: return in O(1) if active state doesn't change?
         assert(0 <= i && i < N);
         set_active_impl(i, is_active, orig_arr[i], MINV, MAXV, 1);
@@ -81,7 +80,6 @@ struct wavelet_tree_updates {
         set_active_impl(i - pi, is_active, orig_value, tm, tr, 2 * v + 1);
     }
     int rect_count(int le, int ri, int x, int y) const {
-        cerr << "rect count" << endl;
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
     }
@@ -93,7 +91,6 @@ struct wavelet_tree_updates {
                rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
     int kth_smallest(int le, int ri, int k) const {
-        cerr << "kth smallest" << endl;
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= ri - le);
         return kth_smallest_impl(le, ri, k, MINV, MAXV, 1);
