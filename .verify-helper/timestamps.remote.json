@@ -2,6 +2,7 @@
 "tests/library_checker_aizu_tests/convolution/and_convolution.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/convolution/gcd_convolution.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/convolution/lcm_convolution.test.cpp": "2023-06-19 22:33:57 -0500",
+"tests/library_checker_aizu_tests/data_structures/bit_bit.test.cpp": "2023-06-23 17:28:45 -0700",
 "tests/library_checker_aizu_tests/data_structures/bit_presum.test.cpp": "2023-06-22 22:59:47 -0700",
 "tests/library_checker_aizu_tests/data_structures/disjoint_rmq_lines.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/data_structures/disjoint_rmq_sum.test.cpp": "2023-06-19 22:33:57 -0500",
