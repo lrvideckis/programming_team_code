@@ -8,7 +8,7 @@ struct bit_bit {
     vector<uint64_t> mask;
     BIT<int> presum;
     //TODO: re-think if these size formulas are minimal
-    bit_bit(int a_n) : n(a_n), mask(n / 64 + 1, -1), presum(vector<int>((n + 63) / 64, 1)) {}
+    bit_bit(int a_n) : n(a_n), mask(n / 64 + 1, -1), presum(vector<int>((n + 63) / 64, 64)) {}
     inline int popcount(int i) const {
         assert(0 <= i && i <= n);
         return presum.sum(i >> 6) + __builtin_popcountll(mask[i >> 6] & ((1ULL << (i & 63)) - 1));
