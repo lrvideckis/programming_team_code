@@ -31,6 +31,10 @@ struct bit_bit {
         }
     }
 };
+/**
+ * @see https://ioinformatics.org/journal/v10_2016_19_37.pdf
+ * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
+ */
 struct wavelet_tree_updates {
     const int N, MINV, MAXV;
     vector<int> orig_arr;//TODO: let's not store this?
