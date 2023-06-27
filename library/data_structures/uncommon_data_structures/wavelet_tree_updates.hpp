@@ -56,8 +56,8 @@ struct wavelet_tree_updates {
         build(arr, mi, ri, tm, tr, 2 * v + 1);
     }
     void set_active(int i, bool is_active) {
-        //TODO: return in O(1) if active state doesn't change?
         assert(0 <= i && i < N);
+        if(bit_bits[1].on(i) == is_active) return;
         set_active_impl(i, is_active, orig_arr[i], MINV, MAXV, 1);
     }
     void set_active_impl(int i, bool is_active, int orig_value, int tl, int tr, int v) {
