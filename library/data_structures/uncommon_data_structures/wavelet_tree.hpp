@@ -29,6 +29,16 @@ struct bit_presum {
         assert(0 <= i && i <= n);
         return presum[i >> 6] + __builtin_popcountll(mask[i >> 6] & ((1ULL << (i & 63)) - 1));
     }
+    /**
+     * @param i index
+     * @returns true iff arr[i] was on
+     * @time O(1)
+     * @space O(1)
+     */
+    inline bool on(int i) const {
+        assert(0 <= i && i < n);
+        return (mask[i >> 6] >> (i & 63)) & 1;
+    }
 };
 /**
  * @see https://codeforces.com/blog/entry/112755
