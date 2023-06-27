@@ -2,6 +2,7 @@
 #pragma once
 /**
  * space efficient boolean array with prefix sum query
+ * @see https://github.com/dacin21/dacin21_codebook/blob/master/trees/wavelet_matrix.cpp
  */
 struct bit_presum {
     int n;
@@ -40,20 +41,20 @@ inline int split(int tl, int tr) {
     return min(tl + pw2, tr - pw2 / 2);
 }
 /**
- * @see https://codeforces.com/blog/entry/52854
+ * @see https://ioinformatics.org/journal/v10_2016_19_37.pdf
  * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
  */
 struct wavelet_tree {
     const int N, MINV, MAXV;
-    vector<bit_presum> tree;
-    vector<vector<long long>> tree_pref;
+    vector<bit_presum> bit_presums;
+    vector<vector<long long>> presums;
     /**
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))
-     * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `tree`
-     *        O((maxv - minv) + n * log(maxv - minv))      for `tree_pref`
+     * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bit_presums`
+     *        O((maxv - minv) + n * log(maxv - minv))      for `presums`
      */
-    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), tree(MAXV - MINV, vector<bool>()), tree_pref(MAXV - MINV) {
+    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bit_presums(MAXV - MINV, vector<bool>()), presums(MAXV - MINV) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
@@ -62,9 +63,9 @@ struct wavelet_tree {
         auto low = [&](int val) -> bool {return val < tm;};
         vector<bool> bits(ri - le);
         transform(begin(arr) + le, begin(arr) + ri, begin(bits), low);
-        tree[v] = bit_presum(bits);
-        tree_pref[v].resize(ri - le + 1);
-        inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(tree_pref[v]) + 1, plus<long long>(), 0LL);
+        bit_presums[v] = bit_presum(bits);
+        presums[v].resize(ri - le + 1);
+        inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(presums[v]) + 1, plus<long long>(), 0LL);
         int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
         build(arr, le, mi, tl, tm, 2 * v);
         build(arr, mi, ri, tm, tr, 2 * v + 1);
@@ -82,7 +83,7 @@ struct wavelet_tree {
     int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
-        int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
+        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
         return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
@@ -98,8 +99,8 @@ struct wavelet_tree {
     }
     long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
-        if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : tree_pref[v][ri] - tree_pref[v][le]);
-        int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
+        if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : presums[v][ri] - presums[v][le]);
+        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
         return rect_sum_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_sum_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
@@ -119,7 +120,7 @@ struct wavelet_tree {
     }
     int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
-        int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
+        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
         if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
         return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
@@ -140,9 +141,9 @@ struct wavelet_tree {
     }
     long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return 1LL * k * tl;
-        int tm = split(tl, tr), pl = tree[v].popcount(le), pr = tree[v].popcount(ri);
+        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
         if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * v);
-        long long sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : tree_pref[2 * v][pr] - tree_pref[2 * v][pl]);
+        long long sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : presums[2 * v][pr] - presums[2 * v][pl]);
         return sum_left + kth_sum_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
 };
