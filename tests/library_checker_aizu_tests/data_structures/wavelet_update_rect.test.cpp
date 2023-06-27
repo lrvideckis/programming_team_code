@@ -22,14 +22,14 @@ int main() {
         int le, ri, x;
         cin >> le >> ri >> x;
         int start = 0, end = ssize(sorted);
-        while(start + 1 < end) {
+        while (start + 1 < end) {
             int mid = (start + end) / 2;
-            if(sorted[mid] <= x) start = mid;
+            if (sorted[mid] <= x) start = mid;
             else end = mid;
         }
-        if(sorted[start] != x) {
+        if (sorted[start] != x)
             cout << 0 << '\n';
-        } else {
+        else {
             int idx = start - 30;
             assert(wtu.rect_count(le, ri, idx, idx) == 0);
             cout << wtu.rect_count(le, ri, idx, idx + 1) << '\n';

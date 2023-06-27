@@ -31,7 +31,7 @@ struct bit_presum {
     }
     /**
      * @param i index
-     * @returns true iff arr[i] was on
+     * @returns 1 iff arr[i] was on
      * @time O(1)
      * @space O(1)
      */

@@ -25,7 +25,7 @@ struct bit_bit {
     }
     void set(int i, bool new_val) {
         assert(0 <= i && i < n);
-        if(on(i) != new_val) {
+        if (on(i) != new_val) {
             mask[i >> 6] ^= 1ULL << (i & 63);
             presum.update(i >> 6, new_val ? 1 : -1);
         }
@@ -56,7 +56,7 @@ struct wavelet_tree_updates {
     }
     void set_active(int i, bool is_active) {
         assert(0 <= i && i < N);
-        if(bit_bits[1].on(i) == is_active) return;
+        if (bit_bits[1].on(i) == is_active) return;
         set_active_impl(i, is_active, MINV, MAXV, 1);
     }
     void set_active_impl(int i, bool is_active, int tl, int tr, int v) {

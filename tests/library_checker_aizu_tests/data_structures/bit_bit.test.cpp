@@ -32,12 +32,12 @@ int main() {
     while (q--) {
         int type;
         cin >> type;
-        if(type == 0) {
+        if (type == 0) {
             int i;
             int delta;
             cin >> i >> delta;
             arr[i] += delta;
-            for(int bit = 0; bit < MAX_BIT; bit++)
+            for (int bit = 0; bit < MAX_BIT; bit++)
                 prebits[bit].set(i, (arr[i] >> bit) & 1);
         } else {
             assert(type == 1);
@@ -45,7 +45,7 @@ int main() {
             cin >> le >> ri;
             long long sum = 0;
             for (int bit = 0; bit < MAX_BIT; bit++) {
-                if(ri - le == 1)
+                if (ri - le == 1)
                     sum += (1LL << bit) * prebits[bit].on(le);
                 else
                     sum += (1LL << bit) * prebits[bit].popcount(le, ri);

@@ -29,7 +29,7 @@ int main() {
         cin >> le >> ri;
         long long sum = 0;
         for (int bit = 0; bit < 30; bit++)
-            if(ri - le == 1)
+            if (ri - le == 1)
                 sum += (1LL << bit) * presums[bit].on(le);
             else
                 sum += (1LL << bit) * (presums[bit].popcount(ri) - presums[bit].popcount(le));
