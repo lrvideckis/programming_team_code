@@ -4,7 +4,7 @@
 //for bit_presum and split
 #include "wavelet_tree.hpp"
 /**
- * @see https://github.com/dacin21/dacin21_codebook/blob/master/trees/wavelet_matrix_updates.cpp
+ * @see https://github.com/dacin21/dacin21_codebook /blob/master/trees/wavelet_matrix_updates.cpp
  */
 struct bit_bit {
     int n;

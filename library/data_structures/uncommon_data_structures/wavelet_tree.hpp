@@ -2,7 +2,7 @@
 #pragma once
 /**
  * space efficient boolean array with prefix sum query
- * @see https://github.com/dacin21/dacin21_codebook/blob/master/trees/wavelet_matrix.cpp
+ * @see https://github.com/dacin21/dacin21_codebook /blob/master/trees/wavelet_matrix.cpp
  */
 struct bit_presum {
     int n;
