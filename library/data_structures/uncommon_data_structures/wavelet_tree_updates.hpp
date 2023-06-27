@@ -63,7 +63,7 @@ struct wavelet_tree_updates {
         bit_bits[v].set(i, is_active);
         if (tr - tl == 1) return;
         int tm = split(tl, tr), pi = bit_presums[v].popcount(i);
-        if (bit_presums[v].popcount(i+1) - pi) return set_active_impl(pi, is_active, tl, tm, 2 * v);
+        if (bit_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
         set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
     }
     int rect_count(int le, int ri, int x, int y) const {
