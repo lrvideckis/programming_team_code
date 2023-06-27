@@ -81,7 +81,7 @@ struct wavelet_tree_updates {
     }
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
-        assert(1 <= k && k <= ri - le);//TODO: k should be <= number of active in range
+        assert(1 <= k && k <= bit_bits[1].popcount(le, ri));
         return kth_smallest_impl(le, ri, k, MINV, MAXV, 1);
     }
     int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
