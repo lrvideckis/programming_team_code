@@ -46,7 +46,7 @@ int main() {
             long long sum = 0;
             for (int bit = 0; bit < MAX_BIT; bit++) {
                 if(ri - le == 1)
-                    sum += (1LL << bit) * prebits[bit].is_on(le);
+                    sum += (1LL << bit) * prebits[bit].on(le);
                 else
                     sum += (1LL << bit) * prebits[bit].popcount(le, ri);
             }

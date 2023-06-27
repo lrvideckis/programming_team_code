@@ -19,13 +19,13 @@ struct bit_bit {
         assert(le <= ri);
         return popcount(ri) - popcount(le);
     }
-    inline int is_on(int i) const {
+    inline int on(int i) const {
         assert(0 <= i && i < n);
         return (mask[i >> 6] >> (i & 63)) & 1;
     }
     void set(int i, bool new_val) {
         assert(0 <= i && i < n);
-        if(is_on(i) != new_val) {
+        if(on(i) != new_val) {
             mask[i >> 6] ^= 1ULL << (i & 63);
             presum.update(i >> 6, new_val ? 1 : -1);
         }
