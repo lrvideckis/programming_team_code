@@ -37,10 +37,9 @@ struct bit_bit {
  */
 struct wavelet_tree_updates {
     const int N, MINV, MAXV;
-    vector<int> orig_arr;//TODO: let's not store this?
     vector<bit_presum> bit_presums;
     vector<bit_bit> bit_bits;
-    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), orig_arr(arr), bit_presums(MAXV - MINV, vector<bool>()), bit_bits(2 * (MAXV - MINV), 0) {
+    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bit_presums(MAXV - MINV, vector<bool>()), bit_bits(2 * (MAXV - MINV), 0) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
@@ -58,15 +57,14 @@ struct wavelet_tree_updates {
     void set_active(int i, bool is_active) {
         assert(0 <= i && i < N);
         if(bit_bits[1].on(i) == is_active) return;
-        set_active_impl(i, is_active, orig_arr[i], MINV, MAXV, 1);
+        set_active_impl(i, is_active, MINV, MAXV, 1);
     }
-    void set_active_impl(int i, bool is_active, int orig_value, int tl, int tr, int v) {
+    void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
         bit_bits[v].set(i, is_active);
         if (tr - tl == 1) return;
         int tm = split(tl, tr), pi = bit_presums[v].popcount(i);
-        //TODO: think of better condition
-        if (orig_value < tm) return set_active_impl(pi, is_active, orig_value, tl, tm, 2 * v);
-        set_active_impl(i - pi, is_active, orig_value, tm, tr, 2 * v + 1);
+        if (bit_presums[v].popcount(i+1) - pi) return set_active_impl(pi, is_active, tl, tm, 2 * v);
+        set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
     }
     int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
