@@ -44,8 +44,12 @@ int main() {
             int le, ri;
             cin >> le >> ri;
             long long sum = 0;
-            for (int bit = 0; bit < MAX_BIT; bit++)
-                sum += (1LL << bit) * prebits[bit].popcount(le, ri);
+            for (int bit = 0; bit < MAX_BIT; bit++) {
+                if(ri - le == 1)
+                    sum += (1LL << bit) * prebits[bit].is_on(le);
+                else
+                    sum += (1LL << bit) * prebits[bit].popcount(le, ri);
+            }
             cout << sum << '\n';
         }
     }

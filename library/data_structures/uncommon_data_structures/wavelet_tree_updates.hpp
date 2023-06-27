@@ -3,8 +3,6 @@
 #include "../binary_indexed_tree.hpp"
 //for bit_presum and split
 #include "wavelet_tree.hpp"
-
-//TODO: test on https://judge.yosupo.jp/problem/point_add_range_sum
 /**
  * @see https://github.com/dacin21/dacin21_codebook/blob/master/trees/wavelet_matrix_updates.cpp
  */
@@ -12,7 +10,6 @@ struct bit_bit {
     int n;
     vector<uint64_t> mask;
     BIT<int> presum;
-    //TODO: re-think if these size formulas are minimal
     bit_bit(int a_n) : n(a_n), mask(n / 64 + 1, -1), presum(vector<int>((n + 63) / 64, 64)) {}
     inline int popcount(int i) const {
         assert(0 <= i && i <= n);
@@ -22,12 +19,15 @@ struct bit_bit {
         assert(le <= ri);
         return popcount(ri) - popcount(le);
     }
+    inline int is_on(int i) const {
+        assert(0 <= i && i < n);
+        return (mask[i >> 6] >> (i & 63)) & 1;
+    }
     void set(int i, bool new_val) {
         assert(0 <= i && i < n);
-        int high = i >> 6, low = i & 63;
-        if(((mask[high] >> low) & 1) != new_val) {
-            mask[high] ^= 1ULL << low;
-            presum.update(high, new_val ? 1 : -1);
+        if(is_on(i) != new_val) {
+            mask[i >> 6] ^= 1ULL << (i & 63);
+            presum.update(i >> 6, new_val ? 1 : -1);
         }
     }
 };
@@ -39,7 +39,7 @@ struct wavelet_tree_updates {
     const int N, MINV, MAXV;
     vector<int> orig_arr;//TODO: let's not store this?
     vector<bit_presum> bit_presums;
-    vector<bit_bit> bit_bits;//TODO: better name?
+    vector<bit_bit> bit_bits;
     wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), orig_arr(arr), bit_presums(MAXV - MINV, vector<bool>()), bit_bits(2 * (MAXV - MINV), 0) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
