@@ -94,8 +94,8 @@ struct wavelet_tree_updates {
     /**
      * @param i index
      * @param is_active we want to set active_state[i] = is_active
-     * @time O()
-     * @space O()
+     * @time O(log(maxv - minv) * log(n / 64))
+     * @space O(log(maxv - minv)) for recursive stack
      */
     void set_active(int i, bool is_active) {
         assert(0 <= i && i < N);
@@ -109,6 +109,12 @@ struct wavelet_tree_updates {
         if (bit_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
         set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
     }
+    /**
+     * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
+     * @returns number of *active* indexes i such that le <= i < ri and x <= arr[i] < y
+     * @time O(log(maxv - minv) * log(n / 64))
+     * @space O(log(maxv - minv)) for recursive stack
+     */
     int rect_count(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
@@ -120,6 +126,15 @@ struct wavelet_tree_updates {
         return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
+    /**
+     * @param le,ri defines range [le, ri)
+     * @param k must satisfy 1 <= k <= # active indexes in [le, ri)
+     * @returns kth smallest *active* number in range.
+     *     - kth_smallest(le,ri,1) returns the smallest active number
+     *     - kth_smallest(le,ri,bit_bits[1].popcount(le, ri)) returns the largest active number
+     * @time O(log(maxv - minv) * log(n / 64))
+     * @space O(log(maxv - minv)) for recursive stack
+     */
     int kth_smallest(int le, int ri, int k) const {
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= bit_bits[1].popcount(le, ri));
