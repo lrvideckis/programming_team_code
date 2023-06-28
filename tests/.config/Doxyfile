@@ -960,8 +960,6 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          dfs \
                          dfs1 \
                          dfs2 \
-                         tree \
-                         tree_pref \
                          calc_subtree_sizes \
                          INF \
                          seg_tree \
@@ -1018,10 +1016,15 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          n \
                          mask \
                          presum \
+                         presums \
                          rect_count_impl \
                          rect_sum_impl \
                          kth_smallest_impl \
                          kth_sum_impl \
+                         set_active_impl \
+                         bit_presums \
+                         bit_bits \
+                         tree \
                          idx \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
