@@ -77,6 +77,7 @@ struct wavelet_tree_updates {
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bit_presums` and for `presums`
      */
     wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bit_presums(MAXV - MINV, vector<bool>()), bit_bits(2 * (MAXV - MINV), 0) {
+        assert(minv < maxv);
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
