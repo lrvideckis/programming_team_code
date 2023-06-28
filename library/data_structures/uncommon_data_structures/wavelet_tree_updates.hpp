@@ -45,7 +45,7 @@ struct bit_bit {
      * @time O(1)
      * @space O(1)
      */
-    inline int on(int i) const {
+    inline bool on(int i) const {
         assert(0 <= i && i < n);
         return (mask[i >> 6] >> (i & 63)) & 1;
     }
