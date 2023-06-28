@@ -1,8 +1,9 @@
 /** @file */
 #pragma once
 /**
- * space efficient boolean array with prefix sum query
  * @see https://github.com/dacin21/dacin21_codebook /blob/master/trees/wavelet_matrix.cpp
+ *
+ * space efficient boolean array with prefix sum query
  */
 struct bit_presum {
     int n;
