@@ -24,19 +24,14 @@ struct merge_sort_tree {
         for (int i = N - 1; i >= 1; i--) {
             const auto& le = tree[2 * i];
             const auto& ri = tree[2 * i + 1];
-            tree[i].resize(ssize(le) + ssize(ri));
-            merge(begin(le), end(le), begin(ri), end(ri), begin(tree[i]));
-            num_went_left[i].resize(ssize(tree[i]) + 1);
-            auto it = begin(le);
-            for(int j = 0; j < ssize(tree[i]); j++) {
-                it = find_if(it, end(le), [&](int val) {return val >= tree[i][j];});
-                if(it == end(le)) break;
-                if(*it == tree[i][j]) {
-                    num_went_left[i][j + 1] = 1;
-                    it++;
-                }
-            }
-            partial_sum(begin(num_went_left[i]), end(num_went_left[i]), begin(num_went_left[i]));
+            vector<pair<int, bool>> both(ssize(le) + ssize(ri));
+            transform(begin(le), end(le), begin(both), [](int val) {return pair(val, 1);});
+            transform(begin(ri), end(ri), begin(both) + ssize(le), [](int val) {return pair(val, 0);});
+            inplace_merge(begin(both), begin(both) + ssize(le), end(both));
+            tree[i].resize(ssize(both));
+            transform(begin(both), end(both), begin(tree[i]), [](auto val) {return val.first;});
+            num_went_left[i].resize(ssize(both) + 1);
+            transform_inclusive_scan(begin(both), end(both), begin(num_went_left[i]) + 1, plus{}, [](auto val) {return int(val.second);});
         }
     }
     int query(int le, int ri, int x, int y) const {
