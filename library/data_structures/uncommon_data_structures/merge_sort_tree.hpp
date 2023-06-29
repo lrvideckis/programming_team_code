@@ -1,6 +1,12 @@
 /** @file */
 #pragma once
 #include "bit_presum.hpp"
+/**
+ * @see https://codeforces.com/blog/entry/112755
+ * @param tl,tr defines range [tl, tr)
+ * @returns split point of range which makes the merge sort tree a complete
+ * binary tree
+ */
 inline int split(int tl, int tr) {
     int pw2 = 1 << __lg(tr - tl);
     return min(tl + pw2, tr - pw2 / 2);
