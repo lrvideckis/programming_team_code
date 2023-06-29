@@ -21,17 +21,18 @@ struct merge_sort_tree {
     merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), tree(2 * N), num_went_left(N) {
         transform(begin(arr), end(arr), begin(tree) + N, [](int val) -> vector<int> {return {val};});
         rotate(begin(tree) + N, begin(tree) + (N ? 3 * N - (2 << __lg(N)) : 0), end(tree));
+        vector<pair<int, bool>> both(N);
         for (int i = N - 1; i >= 1; i--) {
             const auto& le = tree[2 * i];
             const auto& ri = tree[2 * i + 1];
-            vector<pair<int, bool>> both(ssize(le) + ssize(ri));
+            int tot = ssize(le) + ssize(ri);
             transform(begin(le), end(le), begin(both), [](int val) {return pair(val, 1);});
             transform(begin(ri), end(ri), begin(both) + ssize(le), [](int val) {return pair(val, 0);});
-            inplace_merge(begin(both), begin(both) + ssize(le), end(both));
-            tree[i].resize(ssize(both));
-            transform(begin(both), end(both), begin(tree[i]), [](auto val) {return val.first;});
-            num_went_left[i].resize(ssize(both) + 1);
-            transform_inclusive_scan(begin(both), end(both), begin(num_went_left[i]) + 1, plus{}, [](auto val) {return int(val.second);});
+            inplace_merge(begin(both), begin(both) + ssize(le), begin(both) + tot);
+            tree[i].resize(tot);
+            transform(begin(both), begin(both) + tot, begin(tree[i]), [](auto val) {return val.first;});
+            num_went_left[i].resize(tot + 1);
+            transform_inclusive_scan(begin(both), begin(both) + tot, begin(num_went_left[i]) + 1, plus{}, [](auto val) {return int(val.second);});
         }
     }
     int query(int le, int ri, int x, int y) const {
