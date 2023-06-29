@@ -6,8 +6,8 @@ inline int split(int tl, int tr) {
     return min(tl + pw2, tr - pw2 / 2);
 }
 /**
- * For point updates: either switch to policy based BST, or use sqrt
- * decomposition.
+ * For point updates: either switch to merge sort tree with policy based BST, use sqrt
+ * decomposition, or wavelet tree
  */
 struct merge_sort_tree {
     const int N;
@@ -37,6 +37,12 @@ struct merge_sort_tree {
             bit_presums[i] = bit_presum(bits);
         }
     }
+    /**
+     * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
+     * @returns sum of values arr[i] such that le <= i < ri and x <= arr[i] < y
+     * @time O(log(n))
+     * @space O(log(n)) for recursive stack
+     */
     int query(int le, int ri, int x, int y) const {
         int xi = int(lower_bound(begin(tree[1]), end(tree[1]), x) - begin(tree[1]));
         int yi = int(lower_bound(begin(tree[1]), end(tree[1]), y) - begin(tree[1]));
