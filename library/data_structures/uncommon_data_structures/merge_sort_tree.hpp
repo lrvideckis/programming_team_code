@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 #include "bit_presum.hpp"
-inline int split_2(int tl, int tr) {
+inline int split(int tl, int tr) {
     int pw2 = 1 << __lg(tr - tl);
     return min(tl + pw2, tr - pw2 / 2);
 }
@@ -45,7 +45,7 @@ struct merge_sort_tree {
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
         if (le <= tl && tr <= ri) return yi - xi;
-        int tm = split_2(tl, tr), pl = bit_presums[v].popcount(xi), pr = bit_presums[v].popcount(yi);
+        int tm = split(tl, tr), pl = bit_presums[v].popcount(xi), pr = bit_presums[v].popcount(yi);
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
