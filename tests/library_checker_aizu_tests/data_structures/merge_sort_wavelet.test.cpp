@@ -24,7 +24,7 @@ int main() {
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
-        int res = mst.query(le, ri, x);
+        int res = mst.query(le, ri, x, x + 1);
         auto it = lower_bound(begin(sorted), end(sorted), x);
         if (it == end(sorted) || (*it) != x)
             assert(res == 0);

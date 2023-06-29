@@ -1,61 +1,66 @@
 /** @file */
 #pragma once
+
+inline int split_2(int tl, int tr) {
+    int pw2 = 1 << __lg(tr - tl);
+    return min(tl + pw2, tr - pw2 / 2);
+}
+
 /**
  * For point updates: either switch to policy based BST, or use sqrt
  * decomposition.
  */
 struct merge_sort_tree {
-    const int N, S /**< smallest power of 2 >= N */;
-    vector<vector<int>> tree;
+    const int N;
+    vector<vector<int>> tree, num_went_left/*TODO: rename*/;
     /**
      * @param arr static array
      * @time O(n log n)
      * @space O(n log n) for `tree` vector
      */
-    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)),  S(N ? 1 << __lg(2 * N - 1) : 0), tree(2 * N) {
-        transform(begin(arr), end(arr), begin(tree) + N, [](int val) -> vector<int> {
-            return {val};
-        });
-        rotate(rbegin(tree), rbegin(tree) + S - N, rbegin(tree) + N);
+    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), tree(2 * N), num_went_left(N, vector<int>(1)) {
+        transform(begin(arr), end(arr), begin(tree) + N, [](int val) -> vector<int> {return {val};});
+        rotate(begin(tree) + N, begin(tree) + (N ? 3 * N - (2 << __lg(N)) : 0), end(tree));
         for (int i = N - 1; i >= 1; i--) {
             const auto& le = tree[2 * i];
             const auto& ri = tree[2 * i + 1];
-            tree[i].resize(ssize(le) + ssize(ri));
-            merge(begin(le), end(le), begin(ri), end(ri), begin(tree[i]));
+            //TODO: golf this: change tree to vector<vector<pair<int, int>>> maybe?
+            //well no cuz we want num_went_left to be only length N
+            int ptrL = 0, ptrR = 0;
+            while(ptrL < ssize(le) && ptrR < ssize(ri)) {
+                if(le[ptrL] < ri[ptrR]) {
+                    tree[i].push_back(le[ptrL++]);
+                    num_went_left[i].push_back(num_went_left[i].back() + 1);
+                } else {
+                    tree[i].push_back(ri[ptrR++]);
+                    num_went_left[i].push_back(num_went_left[i].back());
+                }
+            }
+            while(ptrL < ssize(le)) {
+                tree[i].push_back(le[ptrL++]);
+                num_went_left[i].push_back(num_went_left[i].back() + 1);
+            }
+            while(ptrR < ssize(ri)) {
+                tree[i].push_back(ri[ptrR++]);
+                num_went_left[i].push_back(num_went_left[i].back());
+            }
+
+            //tree[i].resize(ssize(le) + ssize(ri));
+            //merge(begin(le), end(le), begin(ri), end(ri), begin(tree[i]));
         }
     }
-    /**
-     * @param v a node
-     * @param x target value
-     * @returns number of values equal to x in v's corresponding array
-     * @time O(log n)
-     * @space O(1)
-     */
-    int value(int x, int v) const {
-        auto [le, ri] = equal_range(begin(tree[v]), end(tree[v]), x);
-        return int(ri - le);
+    int query(int le, int ri, int x, int y) const {
+        int xi = int(lower_bound(begin(tree[1]), end(tree[1]), x) - begin(tree[1]));
+        int yi = int(lower_bound(begin(tree[1]), end(tree[1]), y) - begin(tree[1]));
+        return query_impl(le, ri, xi, yi, 0, N, 1);
     }
-    /**
-     * @param i endpoint of subarray of arr
-     * @returns corresponding leaf index
-     */
-    int to_leaf(int i) const {
-        i += S;
-        return i < 2 * N ? i : 2 * (i - N);
-    }
-    /**
-     * @param le,ri defines range [le, ri)
-     * @param x query parameter
-     * @returns the number of values in range equal to x.
-     * @time O(log^2(n))
-     * @space O(1)
-     */
-    int query(int le, int ri, int x) const {
-        int res = 0;
-        for (le = to_leaf(le), ri = to_leaf(ri); le < ri; le >>= 1, ri >>= 1) {
-            if (le & 1) res += value(x, le++);
-            if (ri & 1) res += value(x, --ri);
-        }
-        return res;
+    int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
+        if (ri <= tl || tr <= le) return 0;
+        //invariant: all values in subarray [xi, yi) in tree[v] are in range [x, y)
+        if (le <= tl && tr <= ri) return yi - xi;
+        int tm = split_2(tl, tr);
+        int pl = num_went_left[v][xi], pr = num_went_left[v][yi];
+        return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
+               query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
 };
