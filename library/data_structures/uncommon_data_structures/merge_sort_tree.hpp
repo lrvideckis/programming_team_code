@@ -44,9 +44,11 @@ struct merge_sort_tree {
      * @space O(log(n)) for recursive stack
      */
     int query(int le, int ri, int x, int y) const {
-        int xi = int(lower_bound(begin(tree[1]), end(tree[1]), x) - begin(tree[1]));
-        int yi = int(lower_bound(begin(tree[1]), end(tree[1]), y) - begin(tree[1]));
-        return query_impl(le, ri, xi, yi, 0, N, 1);
+        assert(0 <= le && le <= ri && ri <= N && x <= y);
+        auto idx = [&](int val) -> int {
+            return tree.empty() ? 0 : int(lower_bound(begin(tree[1]), end(tree[1]), val) - begin(tree[1]));
+        };
+        return query_impl(le, ri, idx(x), idx(y), 0, N, 1);
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
