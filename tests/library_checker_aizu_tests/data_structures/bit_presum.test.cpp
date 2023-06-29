@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/bit_presum.hpp"
 
 vector<bit_presum> init_presums(const vector<int>& arr) {
     const int N = ssize(arr);
