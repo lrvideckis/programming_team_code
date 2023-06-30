@@ -35,7 +35,7 @@ struct merge_sort_tree {
         int tm = split(tl, tr);
         build(cpy, tl, tm, 2 * v);
         build(cpy, tm, tr, 2 * v + 1);
-        for(int i = tl; i < tr; i++) cpy[i].second = i < tm;
+        for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
         inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr);
         vector<bool> bits(tr - tl);
         transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
