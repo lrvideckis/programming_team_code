@@ -22,7 +22,7 @@ struct merge_sort_tree {
     /**
      * @param arr static array
      * @time O(n log n)
-     * @space O((n log n) / 64) for `bit_presums` vector
+     * @space O(n + (n log n) / 64) for `bit_presums` vector
      */
     merge_sort_tree(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()) {
         vector<pair<int, bool>> cpy(N);
