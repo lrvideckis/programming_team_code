@@ -25,20 +25,20 @@ struct merge_sort_tree {
      * @space O((n log n) / 64) for `bit_presums` vector
      */
     merge_sort_tree(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()) {
-        vector<pair<int, bool>> tmp(N);
-        transform(begin(a_arr), end(a_arr), begin(tmp), [](int val) {return pair(val, 0);});
-        build(tmp, 0, N, 1);
-        transform(begin(tmp), end(tmp), begin(arr), [](auto val) {return val.first;});
+        vector<pair<int, bool>> cpy(N);
+        transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
+        build(cpy, 0, N, 1);
+        transform(begin(cpy), end(cpy), begin(arr), [](auto val) {return val.first;});
     }
-    void build(vector<pair<int, bool>>& arr, int tl, int tr, int v) {
+    void build(vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        build(arr, tl, tm, 2 * v);
-        build(arr, tm, tr, 2 * v + 1);
-        for(int i = tl; i < tr; i++) arr[i].second = i < tm;
-        inplace_merge(begin(arr) + tl, begin(arr) + tm, begin(arr) + tr);
+        build(cpy, tl, tm, 2 * v);
+        build(cpy, tm, tr, 2 * v + 1);
+        for(int i = tl; i < tr; i++) cpy[i].second = i < tm;
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr);
         vector<bool> bits(tr - tl);
-        transform(begin(arr) + tl, begin(arr) + tr, begin(bits), [](auto val) {return val.second;});
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
         bit_presums[v] = bit_presum(bits);
     }
     /**
@@ -50,7 +50,7 @@ struct merge_sort_tree {
     int query(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         auto idx = [&](int val) -> int {
-            return tree.empty() ? 0 : int(lower_bound(begin(arr), end(arr), val) - begin(tree[1]));
+            return arr.empty() ? 0 : int(lower_bound(begin(arr), end(arr), val) - begin(arr));
         };
         return query_impl(le, ri, idx(x), idx(y), 0, N, 1);
     }
