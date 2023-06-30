@@ -28,7 +28,7 @@ struct merge_sort_tree {
         vector<pair<int, bool>> tmp(N);
         transform(begin(a_arr), end(a_arr), begin(tmp), [](int val) {return pair(val, 0);});
         build(tmp, 0, N, 1);
-        transform(begin(tmp), end(tmp), begin(arr), [](auto val) {return val.first;}
+        transform(begin(tmp), end(tmp), begin(arr), [](auto val) {return val.first;});
     }
     void build(vector<pair<int, bool>>& arr, int tl, int tr, int v) {
         if (tr - tl <= 1) return;
