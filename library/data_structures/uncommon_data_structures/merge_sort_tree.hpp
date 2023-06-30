@@ -49,10 +49,9 @@ struct merge_sort_tree {
      */
     int query(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
-        auto idx = [&](int val) -> int {
-            return arr.empty() ? 0 : int(lower_bound(begin(arr), end(arr), val) - begin(arr));
-        };
-        return query_impl(le, ri, idx(x), idx(y), 0, N, 1);
+        int xi = int(lower_bound(begin(arr), end(arr), x) - begin(arr));
+        int yi = int(lower_bound(begin(arr), end(arr), y) - begin(arr));
+        return query_impl(le, ri, xi, yi, 0, N, 1);
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
