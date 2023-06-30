@@ -17,31 +17,29 @@ inline int split(int tl, int tr) {
  */
 struct merge_sort_tree {
     const int N;
-    vector<vector<int>> tree;
+    vector<int> arr;
     vector<bit_presum> bit_presums;
     /**
-     * @param arr static array
+     * @param a_arr array
      * @time O(n log n)
-     * @space O(n log n) for `tree` vector
-     *        O((n log n) / 64) for `bit_presums` vector
+     * @space O(n + (n log n) / 64) for `bit_presums` vector
      */
-    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), tree(2 * N), bit_presums(N, vector<bool>()) {
-        transform(begin(arr), end(arr), begin(tree) + N, [](int val) -> vector<int> {return {val};});
-        rotate(begin(tree) + N, begin(tree) + (N ? 3 * N - (2 << __lg(N)) : 0), end(tree));
-        vector<pair<int, bool>> both(N);
-        for (int i = N - 1; i >= 1; i--) {
-            const auto& le = tree[2 * i];
-            const auto& ri = tree[2 * i + 1];
-            int tot = ssize(le) + ssize(ri);
-            transform(begin(le), end(le), begin(both), [](int val) {return pair(val, 1);});
-            transform(begin(ri), end(ri), begin(both) + ssize(le), [](int val) {return pair(val, 0);});
-            inplace_merge(begin(both), begin(both) + ssize(le), begin(both) + tot);
-            tree[i].resize(tot);
-            vector<bool> bits(tot);
-            transform(begin(both), begin(both) + tot, begin(tree[i]), [](auto val) {return val.first;});
-            transform(begin(both), begin(both) + tot, begin(bits), [](auto val) {return val.second;});
-            bit_presums[i] = bit_presum(bits);
-        }
+    merge_sort_tree(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()) {
+        vector<pair<int, bool>> cpy(N);
+        transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
+        build(cpy, 0, N, 1);
+        transform(begin(cpy), end(cpy), begin(arr), [](auto val) {return val.first;});
+    }
+    void build(vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
+        if (tr - tl <= 1) return;
+        int tm = split(tl, tr);
+        build(cpy, tl, tm, 2 * v);
+        build(cpy, tm, tr, 2 * v + 1);
+        for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr);
+        vector<bool> bits(tr - tl);
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
+        bit_presums[v] = bit_presum(bits);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
@@ -51,10 +49,9 @@ struct merge_sort_tree {
      */
     int query(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
-        auto idx = [&](int val) -> int {
-            return tree.empty() ? 0 : int(lower_bound(begin(tree[1]), end(tree[1]), val) - begin(tree[1]));
-        };
-        return query_impl(le, ri, idx(x), idx(y), 0, N, 1);
+        int xi = int(lower_bound(begin(arr), end(arr), x) - begin(arr));
+        int yi = int(lower_bound(begin(arr), end(arr), y) - begin(arr));
+        return query_impl(le, ri, xi, yi, 0, N, 1);
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
