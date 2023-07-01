@@ -1,6 +1,7 @@
 /** @file */
 #pragma once
 #include "bit_presum.hpp"
+#include "bit_bit.hpp"
 /**
  * @see https://codeforces.com/blog/entry/112755
  * @param tl,tr defines range [tl, tr)
@@ -15,16 +16,18 @@ inline int split(int tl, int tr) {
  * For point updates: either switch to merge sort tree with policy based BST, use sqrt
  * decomposition, or wavelet tree
  */
-struct merge_sort_tree {
+struct merge_sort_tree_updates {
     const int N;
     vector<int> arr;
     vector<bit_presum> bit_presums;
+    vector<bit_bit> bit_bis;
     /**
      * @param a_arr array
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bit_presums` vector
+     *        O(n + (n log n) / 64) for `bit_bits` vector
      */
-    merge_sort_tree(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()) {
+    merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()), bit_bits(2 * N, 0) {
         vector<pair<int, bool>> cpy(N);
         transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, N, 1);
@@ -55,7 +58,7 @@ struct merge_sort_tree {
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
-        if (le <= tl && tr <= ri) return yi - xi;
+        if (le <= tl && tr <= ri) return bit_bits.popcount(xi, yi);
         int tm = split(tl, tr), pl = bit_presums[v].popcount(xi), pr = bit_presums[v].popcount(yi);
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
