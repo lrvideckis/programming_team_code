@@ -59,7 +59,7 @@ struct merge_sort_tree_updates {
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
-        if (le <= tl && tr <= ri) return bit_bits.popcount(xi, yi);
+        if (le <= tl && tr <= ri) return bit_bits[v].popcount(xi, yi);
         int tm = split(tl, tr), pl = bit_presums[v].popcount(xi), pr = bit_presums[v].popcount(yi);
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
