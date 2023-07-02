@@ -27,13 +27,14 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bit_presums` vector
      *        O(n + (n log n) / 64) for `bit_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()), bit_bits(2 * N, 0) {
+    merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
         transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, N, 1);
         transform(begin(cpy), end(cpy), begin(arr), [](auto val) {return val.first;});
     }
     void build(vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
+        bit_bits[v] = bit_bit(tr - tl);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         build(cpy, tl, tm, 2 * v);
