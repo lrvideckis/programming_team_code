@@ -5,6 +5,7 @@
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree.hpp"
+#define split split_2
 #include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree_updates.hpp"
 
 int main() {
