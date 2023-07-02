@@ -64,4 +64,22 @@ struct merge_sort_tree_updates {
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
+    /**
+     * @param i index
+     * @param is_active we want to set active_state[i] = is_active
+     * @time O(log(n) * log(n / 64))
+     * @space O(log(n)) for recursive stack
+     */
+    void set_active(int i, bool is_active) {
+        assert(0 <= i && i < N);
+        if (bit_bits[1].on(i) == is_active) return;
+        set_active_impl(i, is_active, MINV, MAXV, 1);
+    }
+    void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
+        bit_bits[v].set(i, is_active);
+        if (tr - tl == 1) return;
+        int tm = split(tl, tr), pi = bit_presums[v].popcount(i);
+        if (bit_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
+        set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
+    }
 };
