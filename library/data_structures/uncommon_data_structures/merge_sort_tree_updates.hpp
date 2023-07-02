@@ -20,7 +20,7 @@ struct merge_sort_tree_updates {
     const int N;
     vector<int> arr;
     vector<bit_presum> bit_presums;
-    vector<bit_bit> bit_bis;
+    vector<bit_bit> bit_bits;
     /**
      * @param a_arr array
      * @time O(n log n)
