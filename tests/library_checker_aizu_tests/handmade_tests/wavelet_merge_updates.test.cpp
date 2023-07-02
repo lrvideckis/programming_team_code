@@ -29,7 +29,7 @@ int main() {
                     for (int i = le; i < ri; i++)
                         count_naive += (is_active[i] && x <= arr[i] && arr[i] < y);
                     assert(wtu.rect_count(le, ri, x, y) == count_naive);
-                    assert(mstu.rect_count(le, ri, x, y) == count_naive);
+                    assert(mstu.query(le, ri, x, y) == count_naive);
                 } else if (operations % 3 == 1) { //kth_smallest query
                     int le = get_rand<int>(0, n);
                     int ri = get_rand<int>(0, n);
