@@ -13,8 +13,7 @@ inline int split(int tl, int tr) {
     return min(tl + pw2, tr - pw2 / 2);
 }
 /**
- * For point updates: either switch to merge sort tree with policy based BST, use sqrt
- * decomposition, or wavelet tree
+ * merge sort tree with toggle element active point update
  */
 struct merge_sort_tree_updates {
     const int N;
