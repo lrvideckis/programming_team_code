@@ -48,7 +48,6 @@
 "tests/library_checker_aizu_tests/handmade_tests/n_choose_k.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/rmq_small_n.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/wavelet_tree.test.cpp": "2023-06-29 02:51:08 -0700",
-"tests/library_checker_aizu_tests/handmade_tests/wavelet_tree_updates.test.cpp": "2023-07-01 08:16:10 -1000",
 "tests/library_checker_aizu_tests/math/binary_exponentiation_mod.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/math/derangement.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/math/matrix_determinant.test.cpp": "2023-06-19 22:33:57 -0500",
