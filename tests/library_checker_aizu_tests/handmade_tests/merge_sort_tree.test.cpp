@@ -3,6 +3,7 @@
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree.hpp"
+#include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree_updates.hpp"
 
 int main() {
     //brute force small cases
@@ -14,6 +15,7 @@ int main() {
             vector<int> arr(n);
             generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             merge_sort_tree mst(arr);
+            merge_sort_tree_updates mstu(arr);
             for (int queries = 30; queries--;) {
                 int x = get_rand<int>(-1000, 1000);
                 int y = get_rand<int>(-1000, 1000);
@@ -22,6 +24,7 @@ int main() {
                     int cnt = 0;
                     for (int ri = le; ri <= n; ri++) {
                         assert(mst.query(le, ri, x, y) == cnt);
+                        assert(mstu.query(le, ri, x, y) == cnt);
                         if (ri < n && x <= arr[ri] && arr[ri] < y)
                             cnt++;
                     }
