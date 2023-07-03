@@ -32,7 +32,8 @@ struct merge_sort_tree_updates {
         //transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
         for(int i = 0; i < N; i++) cpy[i].first = i;
         build(a_arr, cpy, 0, N, 1);
-        transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
+        for(int i = 0; i < N; i++) perm[cpy[i].first] = i;
+        //transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
         for(int i = 0; i < N; i++) sorted[i] = a_arr[i];//sorted[perm[i]] = a_arr[i];
         sort(begin(sorted), end(sorted));
     }
