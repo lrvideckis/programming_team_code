@@ -17,7 +17,7 @@ inline int split(int tl, int tr) {
  */
 struct merge_sort_tree_updates {
     const int N;
-    vector<int> arr;
+    vector<int> sorted, perm;
     vector<bit_presum> bit_presums;
     vector<bit_bit> bit_bits;
     /**
@@ -26,20 +26,22 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bit_presums` vector
      *        O(n + (n log n) / 64) for `bit_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
+    merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), sorted(N), perm(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
+        iota(begin(perm), end(perm), 0);
         transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, N, 1);
-        transform(begin(cpy), end(cpy), begin(arr), [](auto val) {return val.first;});
+        transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
+        for(int i = 0; i < N; i++) sorted[i] = a_arr[perm[i]];
     }
-    void build(vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
+    void build(const vector<int>& a_arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
         bit_bits[v] = bit_bit(tr - tl);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        build(cpy, tl, tm, 2 * v);
-        build(cpy, tm, tr, 2 * v + 1);
+        build(a_arr, cpy, tl, tm, 2 * v);
+        build(a_arr, cpy, tm, tr, 2 * v + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
-        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr);
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](int i, int j) {return a_arr[cpy[i].first] < a_arr[cpy[j].first];});
         vector<bool> bits(tr - tl);
         transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
         bit_presums[v] = bit_presum(bits);
