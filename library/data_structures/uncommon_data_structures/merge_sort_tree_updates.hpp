@@ -54,8 +54,8 @@ struct merge_sort_tree_updates {
      */
     int query(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
-        int xi = int(lower_bound(begin(arr), end(arr), x) - begin(arr));
-        int yi = int(lower_bound(begin(arr), end(arr), y) - begin(arr));
+        int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
+        int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
         return query_impl(le, ri, xi, yi, 0, N, 1);
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
@@ -73,6 +73,7 @@ struct merge_sort_tree_updates {
      */
     void set_active(int i, bool is_active) {
         assert(0 <= i && i < N);
+        i = perm[i];
         if (bit_bits[1].on(i) == is_active) return;
         set_active_impl(i, is_active, 0, N, 1);
     }
