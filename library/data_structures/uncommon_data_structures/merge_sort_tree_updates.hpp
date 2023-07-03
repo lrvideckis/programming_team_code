@@ -32,7 +32,7 @@ struct merge_sort_tree_updates {
         transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
         build(a_arr, cpy, 0, N, 1);
         transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
-        for(int i = 0; i < N; i++) sorted[i] = a_arr[perm[i]];
+        for(int i = 0; i < N; i++) sorted[perm[i]] = a_arr[i];
     }
     void build(const vector<int>& a_arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
         bit_bits[v] = bit_bit(tr - tl);
