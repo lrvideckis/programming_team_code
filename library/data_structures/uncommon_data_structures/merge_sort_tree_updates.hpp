@@ -30,7 +30,7 @@ struct merge_sort_tree_updates {
         vector<pair<int, bool>> cpy(N);
         iota(begin(perm), end(perm), 0);
         transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
-        build(cpy, 0, N, 1);
+        build(a_arr, cpy, 0, N, 1);
         transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
         for(int i = 0; i < N; i++) sorted[i] = a_arr[perm[i]];
     }
