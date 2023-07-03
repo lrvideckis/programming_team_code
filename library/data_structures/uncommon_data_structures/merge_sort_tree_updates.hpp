@@ -28,8 +28,9 @@ struct merge_sort_tree_updates {
      */
     merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), sorted(N), perm(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
-        iota(begin(perm), end(perm), 0);
-        transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
+        //iota(begin(perm), end(perm), 0);
+        //transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
+        for(int i = 0; i < N; i++) copy[i].first = i;
         build(a_arr, cpy, 0, N, 1);
         transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
         for(int i = 0; i < N; i++) sorted[i] = a_arr[i];//sorted[perm[i]] = a_arr[i];
