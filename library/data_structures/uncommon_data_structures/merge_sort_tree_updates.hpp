@@ -41,7 +41,7 @@ struct merge_sort_tree_updates {
         build(a_arr, cpy, tl, tm, 2 * v);
         build(a_arr, cpy, tm, tr, 2 * v + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
-        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](int i, int j) {return a_arr[cpy[i].first] < a_arr[cpy[j].first];});
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return a_arr[i.first] < a_arr[j.first];});
         vector<bool> bits(tr - tl);
         transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
         bit_presums[v] = bit_presum(bits);
