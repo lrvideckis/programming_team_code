@@ -4,9 +4,9 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree.hpp"
+#include "../../../library/data_structures/wavelet_merge/merge_sort_tree.hpp"
 #define split split_2
-#include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree_updates.hpp"
+#include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
