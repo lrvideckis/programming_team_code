@@ -17,18 +17,18 @@ inline int split(int tl, int tr) {
  */
 struct merge_sort_tree {
     const int N;
-    vector<int> arr;
+    vector<int> sorted;
     vector<bit_presum> bit_presums;
     /**
      * @param a_arr array
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bit_presums` vector
      */
-    merge_sort_tree(const vector<int>& a_arr) : N(ssize(a_arr)), arr(N), bit_presums(N, vector<bool>()) {
+    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), sorted(N), bit_presums(N, vector<bool>()) {
         vector<pair<int, bool>> cpy(N);
-        transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
+        transform(begin(arr), end(arr), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, N, 1);
-        transform(begin(cpy), end(cpy), begin(arr), [](auto val) {return val.first;});
+        transform(begin(cpy), end(cpy), begin(sorted), [](auto val) {return val.first;});
     }
     void build(vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
         if (tr - tl <= 1) return;
@@ -49,8 +49,8 @@ struct merge_sort_tree {
      */
     int query(int le, int ri, int x, int y) const {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
-        int xi = int(lower_bound(begin(arr), end(arr), x) - begin(arr));
-        int yi = int(lower_bound(begin(arr), end(arr), y) - begin(arr));
+        int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
+        int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
         return query_impl(le, ri, xi, yi, 0, N, 1);
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
