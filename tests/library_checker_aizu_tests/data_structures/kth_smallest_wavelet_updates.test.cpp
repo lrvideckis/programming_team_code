@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/wavelet_tree_updates.hpp"
+#include "../../../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
