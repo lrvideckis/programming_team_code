@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/bit_bit.hpp"
+#include "../../../library/data_structures/wavelet_merge/bit_bit.hpp"
 
 const int MAX_BIT = 51;
 
