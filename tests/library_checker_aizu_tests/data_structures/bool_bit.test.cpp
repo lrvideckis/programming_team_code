@@ -9,7 +9,7 @@ vector<bool_bit> init_prebools(const vector<long long>& arr) {
     const int N = ssize(arr);
     vector<bool_bit> prebools;
     for (int bit = 0; bit < MAX_BIT; bit++) {
-        prebits.emplace_back(N);
+        prebools.emplace_back(N);
         for (int i = 0; i < N; i++)
             prebools[bit].set(i, (arr[i] >> bit) & 1);
     }
