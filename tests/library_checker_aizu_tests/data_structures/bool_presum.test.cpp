@@ -1,16 +1,16 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/wavelet_merge/bit_presum.hpp"
+#include "../../../library/data_structures/wavelet_merge/bool_presum.hpp"
 
-vector<bit_presum> init_presums(const vector<int>& arr) {
+vector<bool_presum> init_presums(const vector<int>& arr) {
     const int N = ssize(arr);
-    vector<bit_presum> presums;
+    vector<bool_presum> presums;
     for (int bit = 0; bit < 30; bit++) {
-        vector<bool> the_bits(N);
+        vector<bool> the_bools(N);
         for (int i = 0; i < N; i++)
-            the_bits[i] = (arr[i] >> bit) & 1;
-        presums.emplace_back(the_bits);
+            the_bools[i] = (arr[i] >> bit) & 1;
+        presums.emplace_back(the_bools);
     }
     return presums;
 }
@@ -22,7 +22,7 @@ int main() {
     vector<int> arr(n);
     for (int i = 0; i < n; i++)
         cin >> arr[i];
-    vector<bit_presum> presums = init_presums(arr);
+    vector<bool_presum> presums = init_presums(arr);
     assert(ssize(presums) == 30);
     while (q--) {
         int le, ri;
