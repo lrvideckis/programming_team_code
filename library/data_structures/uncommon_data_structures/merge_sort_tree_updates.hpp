@@ -72,9 +72,8 @@ struct merge_sort_tree_updates {
      */
     void set_active(int i, bool is_active) {
         assert(0 <= i && i < N);
-        i = perm[i];
-        if (bit_bits[1].on(i) == is_active) return;
-        set_active_impl(i, is_active, 0, N, 1);
+        if (bit_bits[1].on(perm[i]) == is_active) return;
+        set_active_impl(perm[i], is_active, 0, N, 1);
     }
     void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
         bit_bits[v].set(i, is_active);
