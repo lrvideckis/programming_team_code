@@ -26,26 +26,21 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bit_presums` vector
      *        O(n + (n log n) / 64) for `bit_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& a_arr) : N(ssize(a_arr)), sorted(N), perm(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
+    merge_sort_tree_updates(const vector<int>& arr) : N(ssize(arr)), sorted(N), perm(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
-        //iota(begin(perm), end(perm), 0);
-        //transform(begin(a_arr), end(a_arr), begin(cpy), [](int val) {return pair(val, 0);});
         for(int i = 0; i < N; i++) cpy[i].first = i;
-        build(a_arr, cpy, 0, N, 1);
-        for(int i = 1; i < N; i++) assert(a_arr[cpy[i-1].first] <= a_arr[cpy[i].first]);
+        build(arr, cpy, 0, N, 1);
         for(int i = 0; i < N; i++) perm[cpy[i].first] = i;
-        //transform(begin(cpy), end(cpy), begin(perm), [](auto val) {return val.first;});
-        for(int i = 0; i < N; i++) sorted[i] = a_arr[i];//sorted[perm[i]] = a_arr[i];
-        sort(begin(sorted), end(sorted));
+        for(int i = 0; i < N; i++) sorted[i] = arr[cpy[i].first];
     }
-    void build(const vector<int>& a_arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
+    void build(const vector<int>& arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
         bit_bits[v] = bit_bit(tr - tl);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        build(a_arr, cpy, tl, tm, 2 * v);
-        build(a_arr, cpy, tm, tr, 2 * v + 1);
+        build(arr, cpy, tl, tm, 2 * v);
+        build(arr, cpy, tm, tr, 2 * v + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
-        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return a_arr[i.first] < a_arr[j.first];});
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return arr[i.first] < arr[j.first];});
         vector<bool> bits(tr - tl);
         transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
         bit_presums[v] = bit_presum(bits);
