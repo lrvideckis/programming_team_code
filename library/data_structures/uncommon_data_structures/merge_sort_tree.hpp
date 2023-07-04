@@ -20,7 +20,7 @@ struct merge_sort_tree {
     vector<int> sorted;
     vector<bit_presum> bit_presums;
     /**
-     * @param a_arr array
+     * @param arr array
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bit_presums` vector
      */
