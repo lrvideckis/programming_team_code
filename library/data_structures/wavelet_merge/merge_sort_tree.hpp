@@ -21,7 +21,7 @@ struct merge_sort_tree {
     /**
      * @param arr array
      * @time O(n log n)
-     * @space O(n + (n log n) / 64) for `bit_presums` vector
+     * @space O(n + (n log n) / 64) for `bool_presums` vector
      */
     merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), sorted(N), bool_presums(N, vector<bool>()) {
         vector<pair<int, bool>> cpy(N);
