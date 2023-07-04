@@ -12,8 +12,7 @@ inline int split(int tl, int tr) {
     return min(tl + pw2, tr - pw2 / 2);
 }
 /**
- * For point updates: either switch to merge sort tree with policy based BST, use sqrt
- * decomposition, or wavelet tree
+ * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/mergeSortTree.cpp
  */
 struct merge_sort_tree {
     const int N;
