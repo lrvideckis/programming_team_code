@@ -45,7 +45,7 @@ struct merge_sort_tree_updates {
         inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return arr[i.first] < arr[j.first];});
         vector<bool> bools(tr - tl);
         transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
-        bit_presums[v] = bit_presum(bools);
+        bool_presums[v] = bool_presum(bools);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
