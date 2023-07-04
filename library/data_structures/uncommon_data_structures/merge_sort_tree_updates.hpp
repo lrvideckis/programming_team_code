@@ -28,9 +28,9 @@ struct merge_sort_tree_updates {
      */
     merge_sort_tree_updates(const vector<int>& arr) : N(ssize(arr)), sorted(N), perm(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
-        for(int i = 0; i < N; i++) cpy[i].first = i;
+        for (int i = 0; i < N; i++) cpy[i].first = i;
         build(arr, cpy, 0, N, 1);
-        for(int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++) {
             perm[cpy[i].first] = i;
             sorted[i] = arr[cpy[i].first];
         }
