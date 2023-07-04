@@ -3,6 +3,8 @@
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/wavelet_tree_updates.hpp"
+#define split split_2
+#include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree_updates.hpp"
 
 int main() {
     for (int n = 0; n <= 200; n++) {
@@ -14,6 +16,7 @@ int main() {
             vector<int> arr(n);
             generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             wavelet_tree_updates wtu(arr, minn, maxn + 1);
+            merge_sort_tree_updates mstu(arr);
             vector<bool> is_active(n, 1);
             for (int operations = 50; operations--;) {
                 if (operations % 3 == 0) { //rect_count query
@@ -27,6 +30,7 @@ int main() {
                     for (int i = le; i < ri; i++)
                         count_naive += (is_active[i] && x <= arr[i] && arr[i] < y);
                     assert(wtu.rect_count(le, ri, x, y) == count_naive);
+                    assert(mstu.query(le, ri, x, y) == count_naive);
                 } else if (operations % 3 == 1) { //kth_smallest query
                     int le = get_rand<int>(0, n);
                     int ri = get_rand<int>(0, n);
@@ -43,6 +47,7 @@ int main() {
                     int i = get_rand<int>(0, n - 1);
                     bool new_val = get_rand<int>(0, 1);
                     wtu.set_active(i, new_val);
+                    mstu.set_active(i, new_val);
                     is_active[i] = new_val;
                 }
             }
