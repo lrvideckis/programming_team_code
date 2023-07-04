@@ -30,8 +30,10 @@ struct merge_sort_tree_updates {
         vector<pair<int, bool>> cpy(N);
         for(int i = 0; i < N; i++) cpy[i].first = i;
         build(arr, cpy, 0, N, 1);
-        for(int i = 0; i < N; i++) perm[cpy[i].first] = i;
-        for(int i = 0; i < N; i++) sorted[i] = arr[cpy[i].first];
+        for(int i = 0; i < N; i++) {
+            perm[cpy[i].first] = i;
+            sorted[i] = arr[cpy[i].first];
+        }
     }
     void build(const vector<int>& arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
         bit_bits[v] = bit_bit(tr - tl);
