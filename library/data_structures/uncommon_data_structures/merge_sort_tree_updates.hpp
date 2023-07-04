@@ -21,7 +21,7 @@ struct merge_sort_tree_updates {
     vector<bit_presum> bit_presums;
     vector<bit_bit> bit_bits;
     /**
-     * @param a_arr array
+     * @param arr array
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bit_presums` vector
      *        O(n + (n log n) / 64) for `bit_bits` vector
