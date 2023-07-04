@@ -43,7 +43,7 @@ struct merge_sort_tree {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns sum of values arr[i] such that le <= i < ri and x <= arr[i] < y
+     * @returns number of indexes i such that le <= i < ri and x <= arr[i] < y
      * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */
