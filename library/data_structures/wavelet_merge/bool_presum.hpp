@@ -17,9 +17,7 @@ struct bool_presum {
     bool_presum(const vector<bool>& arr) : n(ssize(arr)), mask(n / 64 + 1), presum(ssize(mask)) {
         for (int i = 0; i < n; i++)
             mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
-        exclusive_scan(begin(mask), end(mask), begin(presum), 0, [&](int sum, int i) {return sum + __builtin_popcountll(mask[i]);});
-        //for (int i = 0; i < ssize(mask) - 1; i++)
-            //presum[i + 1] = __builtin_popcountll(mask[i]) + presum[i];
+        exclusive_scan(begin(mask), end(mask), begin(presum), 0, [&](int sum, int val) {return sum + __builtin_popcountll(val);});
     }
     /**
      * @param i defines range [0, i)
