@@ -19,7 +19,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     for (int sz = 0; sz < 1111; sz++) {
         vector<bool> bools(sz, 0);
-        bools.back() = 1;
+        if (!bools.empty()) bools.back() = 1;
         bool_presum tmp(bools);
         int mask_sz = ssize(tmp.mask);
         assert(!tmp.mask[mask_sz - 1]);
