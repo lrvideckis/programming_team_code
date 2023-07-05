@@ -59,4 +59,18 @@ struct merge_sort_tree {
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
+    /**
+     * @param x,y defines range of values [x, y)
+     * @param k must satisfy 1 <= k <= number of indexes i such that x <= arr[i] < y
+     * @returns an index i such that arr[i] is the kth smallest value in [x, y)
+     *     - kth_smallest(le,ri,1) returns the min
+     *     - kth_smallest(le,ri,(ri-le)) returns the max
+     * @time O(log(n))
+     * @space O(log(n)) for recursive stack
+     */
+    int kth_smallest(int x, int y, int k) const {
+        assert(0 <= le && ri <= N);
+        assert(1 <= k && k <= query(0, N, x, y));
+        return kth_smallest_impl(x, y, k, 0, N, 1);
+    }
 };
