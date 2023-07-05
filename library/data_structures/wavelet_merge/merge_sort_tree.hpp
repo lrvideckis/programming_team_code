@@ -77,8 +77,8 @@ struct merge_sort_tree {
     }
     int kth_smallest_impl(int xi, int yi, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
-        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(xi), pr = bool_presums[v].popcount(yi);
         if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
-        return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+        return kth_smallest_impl(xi - pl, yi - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
 };
