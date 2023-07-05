@@ -81,7 +81,7 @@ struct wavelet_tree_updates {
      * @param k must satisfy 1 <= k <= # active indexes in [le, ri)
      * @returns kth smallest *active* number in range.
      *     - kth_smallest(le,ri,1) returns the smallest active number
-     *     - kth_smallest(le,ri,bit_bits[1].popcount(le, ri)) returns the largest active number
+     *     - kth_smallest(le,ri,bool_bits[1].popcount(le, ri)) returns the largest active number
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */
