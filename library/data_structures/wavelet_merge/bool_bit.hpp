@@ -6,7 +6,7 @@
  *
  * space efficient boolean array with range sum query, and point update
  */
-struct bit_bit {
+struct bool_bit {
     int n;
     vector<uint64_t> mask;
     BIT<int> presum;
@@ -16,7 +16,7 @@ struct bit_bit {
      * @time O(n)
      * @space O(n / 64)
      */
-    bit_bit(int a_n) : n(a_n), mask(n / 64 + 1, -1), presum(vector<int>((n + 63) / 64, 64)) {}
+    bool_bit(int a_n) : n(a_n), mask(n / 64 + 1, -1), presum(vector<int>((n + 63) / 64, 64)) {}
     /**
      * @param i defines range [0, i)
      * @returns sum/popcount of range

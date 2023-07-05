@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
-#include "bit_presum.hpp"
-#include "bit_bit.hpp"
+#include "bool_presum.hpp"
+#include "bool_bit.hpp"
 /**
  * @see https://codeforces.com/blog/entry/112755
  * @param tl,tr defines range [tl, tr)
@@ -18,15 +18,15 @@ inline int split(int tl, int tr) {
 struct merge_sort_tree_updates {
     const int N;
     vector<int> sorted, perm;
-    vector<bit_presum> bit_presums;
-    vector<bit_bit> bit_bits;
+    vector<bool_presum> bool_presums;
+    vector<bool_bit> bool_bits;
     /**
      * @param arr array
      * @time O(n log n)
-     * @space O(n + (n log n) / 64) for `bit_presums` vector
-     *        O(n + (n log n) / 64) for `bit_bits` vector
+     * @space O(n + (n log n) / 64) for `bool_presums` vector
+     *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& arr) : N(ssize(arr)), sorted(N), perm(N), bit_presums(N, vector<bool>()), bit_bits(max(2, 2 * N), 0) {
+    merge_sort_tree_updates(const vector<int>& arr) : N(ssize(arr)), sorted(N), perm(N), bool_presums(N, vector<bool>()), bool_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
         for (int i = 0; i < N; i++) cpy[i].first = i;
         build(arr, cpy, 0, N, 1);
@@ -36,16 +36,16 @@ struct merge_sort_tree_updates {
         }
     }
     void build(const vector<int>& arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
-        bit_bits[v] = bit_bit(tr - tl);
+        bool_bits[v] = bool_bit(tr - tl);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         build(arr, cpy, tl, tm, 2 * v);
         build(arr, cpy, tm, tr, 2 * v + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
         inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return arr[i.first] < arr[j.first];});
-        vector<bool> bits(tr - tl);
-        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
-        bit_presums[v] = bit_presum(bits);
+        vector<bool> bools(tr - tl);
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
+        bool_presums[v] = bool_presum(bools);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
@@ -61,8 +61,8 @@ struct merge_sort_tree_updates {
     }
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
-        if (le <= tl && tr <= ri) return bit_bits[v].popcount(xi, yi);
-        int tm = split(tl, tr), pl = bit_presums[v].popcount(xi), pr = bit_presums[v].popcount(yi);
+        if (le <= tl && tr <= ri) return bool_bits[v].popcount(xi, yi);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(xi), pr = bool_presums[v].popcount(yi);
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
@@ -74,14 +74,14 @@ struct merge_sort_tree_updates {
      */
     void set_active(int i, bool is_active) {
         assert(0 <= i && i < N);
-        if (bit_bits[1].on(perm[i]) == is_active) return;
+        if (bool_bits[1].on(perm[i]) == is_active) return;
         set_active_impl(perm[i], is_active, 0, N, 1);
     }
     void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
-        bit_bits[v].set(i, is_active);
+        bool_bits[v].set(i, is_active);
         if (tr - tl == 1) return;
-        int tm = split(tl, tr), pi = bit_presums[v].popcount(i);
-        if (bit_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
+        int tm = split(tl, tr), pi = bool_presums[v].popcount(i);
+        if (bool_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
         set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
     }
 };

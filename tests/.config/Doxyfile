@@ -1022,8 +1022,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          kth_smallest_impl \
                          kth_sum_impl \
                          set_active_impl \
-                         bit_presums \
-                         bit_bits \
+                         bool_presums \
+                         bool_bits \
                          tree \
                          idx \
                          sorted \

@@ -2,9 +2,9 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/wavelet_tree_updates.hpp"
+#include "../../../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp"
 #define split split_2
-#include "../../../library/data_structures/uncommon_data_structures/merge_sort_tree_updates.hpp"
+#include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
 
 int main() {
     for (int n = 0; n <= 200; n++) {

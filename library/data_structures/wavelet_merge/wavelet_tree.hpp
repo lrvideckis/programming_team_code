@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "bit_presum.hpp"
+#include "bool_presum.hpp"
 /**
  * @see https://codeforces.com/blog/entry/112755
  * @param tl,tr defines range [tl, tr)
@@ -17,24 +17,24 @@ inline int split(int tl, int tr) {
  */
 struct wavelet_tree {
     const int N, MINV, MAXV;
-    vector<bit_presum> bit_presums;
+    vector<bool_presum> bool_presums;
     vector<vector<long long>> presums;
     /**
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))
-     * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bit_presums`
+     * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums`
      *        O((maxv - minv) + n * log(maxv - minv))      for `presums`
      */
-    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bit_presums(MAXV - MINV, vector<bool>()), presums(MAXV - MINV) {
+    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), presums(MAXV - MINV) {
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         auto low = [&](int val) -> bool {return val < tm;};
-        vector<bool> bits(ri - le);
-        transform(begin(arr) + le, begin(arr) + ri, begin(bits), low);
-        bit_presums[v] = bit_presum(bits);
+        vector<bool> bools(ri - le);
+        transform(begin(arr) + le, begin(arr) + ri, begin(bools), low);
+        bool_presums[v] = bool_presum(bools);
         presums[v].resize(ri - le + 1);
         inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(presums[v]) + 1, plus<long long>(), 0LL);
         int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
@@ -54,7 +54,7 @@ struct wavelet_tree {
     int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
-        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
         return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
@@ -71,7 +71,7 @@ struct wavelet_tree {
     long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : presums[v][ri] - presums[v][le]);
-        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
         return rect_sum_impl(pl, pr, x, y, tl, tm, 2 * v) +
                rect_sum_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
     }
@@ -91,7 +91,7 @@ struct wavelet_tree {
     }
     int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
-        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
         if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
         return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
@@ -112,7 +112,7 @@ struct wavelet_tree {
     }
     long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return 1LL * k * tl;
-        int tm = split(tl, tr), pl = bit_presums[v].popcount(le), pr = bit_presums[v].popcount(ri);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
         if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * v);
         long long sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : presums[2 * v][pr] - presums[2 * v][pl]);
         return sum_left + kth_sum_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);

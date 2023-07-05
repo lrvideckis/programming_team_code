@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/wavelet_tree.hpp"
+#include "../../../library/data_structures/wavelet_merge/wavelet_tree.hpp"
 
 int main() {
     //brute force small cases

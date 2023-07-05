@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "bit_presum.hpp"
+#include "bool_presum.hpp"
 /**
  * @see https://codeforces.com/blog/entry/112755
  * @param tl,tr defines range [tl, tr)
@@ -17,13 +17,13 @@ inline int split(int tl, int tr) {
 struct merge_sort_tree {
     const int N;
     vector<int> sorted;
-    vector<bit_presum> bit_presums;
+    vector<bool_presum> bool_presums;
     /**
      * @param arr array
      * @time O(n log n)
-     * @space O(n + (n log n) / 64) for `bit_presums` vector
+     * @space O(n + (n log n) / 64) for `bool_presums` vector
      */
-    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), sorted(N), bit_presums(N, vector<bool>()) {
+    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), sorted(N), bool_presums(N, vector<bool>()) {
         vector<pair<int, bool>> cpy(N);
         transform(begin(arr), end(arr), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, N, 1);
@@ -36,9 +36,9 @@ struct merge_sort_tree {
         build(cpy, tm, tr, 2 * v + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
         inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr);
-        vector<bool> bits(tr - tl);
-        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bits), [](auto val) {return val.second;});
-        bit_presums[v] = bit_presum(bits);
+        vector<bool> bools(tr - tl);
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
+        bool_presums[v] = bool_presum(bools);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
@@ -55,7 +55,7 @@ struct merge_sort_tree {
     int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
         if (le <= tl && tr <= ri) return yi - xi;
-        int tm = split(tl, tr), pl = bit_presums[v].popcount(xi), pr = bit_presums[v].popcount(yi);
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(xi), pr = bool_presums[v].popcount(yi);
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
