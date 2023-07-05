@@ -71,6 +71,14 @@ struct merge_sort_tree {
     int kth_smallest(int x, int y, int k) const {
         assert(0 <= le && ri <= N);
         assert(1 <= k && k <= query(0, N, x, y));
-        return kth_smallest_impl(x, y, k, 0, N, 1);
+        int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
+        int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
+        return kth_smallest_impl(xi, yi, k, 0, N, 1);
+    }
+    int kth_smallest_impl(int xi, int yi, int k, int tl, int tr, int v) const {
+        if (tr - tl == 1) return tl;
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
+        if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
+        return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
 };
