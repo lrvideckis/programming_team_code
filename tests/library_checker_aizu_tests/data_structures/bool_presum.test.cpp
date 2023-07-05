@@ -17,6 +17,12 @@ vector<bool_presum> init_presums(const vector<int>& arr) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    for (int sz = 0; sz < 1111; sz++) {
+        vector<bool> bools(sz, 0);
+        bools.back() = 1;
+        bool_presums tmp(bools);
+        assert(tmp.mask.back());
+    }
     int n, q;
     cin >> n >> q;
     vector<int> arr(n);
