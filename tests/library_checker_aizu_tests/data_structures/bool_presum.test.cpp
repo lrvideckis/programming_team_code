@@ -20,8 +20,10 @@ int main() {
     for (int sz = 0; sz < 1111; sz++) {
         vector<bool> bools(sz, 0);
         bools.back() = 1;
-        bool_presums tmp(bools);
-        assert(tmp.mask.back());
+        bool_presum tmp(bools);
+        int mask_sz = ssize(tmp.mask);
+        assert(!tmp.mask[mask_sz - 1]);
+        if (mask_sz >= 2) assert(tmp.mask[mask_sz - 2]);
     }
     int n, q;
     cin >> n >> q;
