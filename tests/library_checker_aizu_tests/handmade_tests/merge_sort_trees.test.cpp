@@ -30,17 +30,17 @@ int main() {
                             cnt++;
                     }
                 }
+                vector<pair<int, int>> vals;
+                for (int i = 0; i < n; i++) {
+                    if (x <= arr[i] && arr[i] < y)
+                        vals.emplace_back(arr[i], i);
+                }
+                sort(begin(vals), end(vals));
+                int cnt_in_range = mst.query(0, n, x, y);
+                assert(cnt_in_range == ssize(vals));
+                for (int k = 1; k <= cnt_in_range; k++)
+                    assert(mst.kth_smallest(x, y, k) == vals[k - 1].second);
             }
-            vector<pair<int, int>> vals;
-            for (int i = 0; i < n; i++) {
-                if (x <= arr[i] && arr[i] < y)
-                    vals.emplace_back(arr[i], i);
-            }
-            sort(begin(vals), end(vals));
-            int cnt_in_range = mst.query(0, n, x, y);
-            assert(cnt_in_range == ssize(vals));
-            for (int k = 1; k <= cnt_in_range; k++)
-                assert(mst.kth_smallest(x, y, k) == vals[k - 1].second);
         }
     }
     cout << "Hello World\n";
