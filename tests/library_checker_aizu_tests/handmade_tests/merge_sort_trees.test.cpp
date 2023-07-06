@@ -37,7 +37,7 @@ int main() {
                 }
                 sort(begin(vals), end(vals));
                 bool dist = 1;
-                for (int k = 1; k < ssize(vals); k++)
+                for (int i = 1; i < ssize(vals); i++)
                     if(vals[i-1].first == vals[i].first) dist = 0;
                 assert(ssize(vals) == mst.query(0, n, x, y));
                 if(!dist) continue;
