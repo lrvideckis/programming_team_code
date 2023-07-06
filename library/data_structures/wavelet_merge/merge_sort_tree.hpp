@@ -59,4 +59,26 @@ struct merge_sort_tree {
         return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
+    /**
+     * @param x,y defines range of values [x, y)
+     * @param k must satisfy 1 <= k <= number of indexes i such that x <= arr[i] < y
+     * @returns the kth smallest index i such that x <= arr[i] < y
+     *     - kth_smallest(x,y,1) returns the smallest index i such that x <= arr[i] < y
+     *     - kth_smallest(x,y,query(0,n,x,y)) returns the largest index i such that x <= arr[i] < y
+     *     - kth_smallest(-INF,INF,k) returns (k - 1)
+     * @time O(log(n))
+     * @space O(log(n)) for recursive stack
+     */
+    int kth_smallest(int x, int y, int k) const {
+        int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
+        int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
+        assert(1 <= k && k <= yi - xi);
+        return kth_smallest_impl(xi, yi, k, 0, N, 1);
+    }
+    int kth_smallest_impl(int xi, int yi, int k, int tl, int tr, int v) const {
+        if (tr - tl == 1) return tl;
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(xi), pr = bool_presums[v].popcount(yi);
+        if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
+        return kth_smallest_impl(xi - pl, yi - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+    }
 };
