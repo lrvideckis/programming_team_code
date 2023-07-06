@@ -17,6 +17,9 @@ int main() {
             generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             merge_sort_tree mst(arr);
             merge_sort_tree_updates mstu(arr);
+            for (int i = 0; i < n; i++) {
+                assert(mst.kth_smallest(minn, maxn + 1, i + 1) == i);
+            }
             for (int queries = 30; queries--;) {
                 int x = get_rand<int>(-1000, 1000);
                 int y = get_rand<int>(-1000, 1000);
