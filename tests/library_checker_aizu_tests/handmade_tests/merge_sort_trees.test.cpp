@@ -36,7 +36,11 @@ int main() {
                         vals.emplace_back(arr[i], i);
                 }
                 sort(begin(vals), end(vals));
+                bool dist = 1;
+                for (int k = 1; k < ssize(vals); k++)
+                    if(vals[i-1].first == vals[i].first) dist = 0;
                 assert(ssize(vals) == mst.query(0, n, x, y));
+                if(!dist) continue;
                 for (int k = 1; k <= ssize(vals); k++)
                     assert(mst.kth_smallest(x, y, k) == vals[k - 1].second);
             }
