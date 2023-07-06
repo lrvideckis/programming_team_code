@@ -38,8 +38,10 @@ int main() {
                     if (x <= arr[i] && arr[i] < y)
                         vals.push_back(i);
                 assert(ssize(vals) == mst.query(0, n, x, y));
-                for (int k = 1; k <= ssize(vals); k++)
+                for (int k = 1; k <= ssize(vals); k++) {
                     assert(mst.kth_smallest(x, y, k) == vals[k - 1]);
+                    assert(mstu.kth_smallest(x, y, k) == vals[k - 1]);
+                }
             }
         }
     }
