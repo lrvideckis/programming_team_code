@@ -5,8 +5,8 @@
 #include "../template.hpp"
 
 #include "../../../library/data_structures/wavelet_merge/merge_sort_tree.hpp"
-//#define split split_2
-//#include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
+#define split split_2
+#include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -25,11 +25,12 @@ int main() {
         inverted[ptr[arr[i]]++] = i;
     }
     merge_sort_tree mst(inverted);
-    //merge_sort_tree_updates mstu(arr);
+    merge_sort_tree_updates mstu(inverted);
     while (q--) {
         int le, ri, k;
         cin >> le >> ri >> k;
         int res = mst.kth_smallest(le, ri, k + 1);
+        assert(res == mstu.kth_smallest(le, ri, k + 1));
         cout << sorted[res] << '\n';
     }
     return 0;

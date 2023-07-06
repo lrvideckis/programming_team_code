@@ -48,8 +48,26 @@ struct merge_sort_tree_updates {
         bool_presums[v] = bool_presum(bools);
     }
     /**
+     * @param i index
+     * @param is_active we want to set active_state[i] = is_active
+     * @time O(log(n) * log(n / 64))
+     * @space O(log(n)) for recursive stack
+     */
+    void set_active(int i, bool is_active) {
+        assert(0 <= i && i < N);
+        if (bool_bits[1].on(perm[i]) == is_active) return;
+        set_active_impl(perm[i], is_active, 0, N, 1);
+    }
+    void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
+        bool_bits[v].set(i, is_active);
+        if (tr - tl == 1) return;
+        int tm = split(tl, tr), pi = bool_presums[v].popcount(i);
+        if (bool_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
+        set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
+    }
+    /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of active indexes i such that le <= i < ri and x <= arr[i] < y
      * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */
@@ -67,21 +85,25 @@ struct merge_sort_tree_updates {
                query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
     /**
-     * @param i index
-     * @param is_active we want to set active_state[i] = is_active
-     * @time O(log(n) * log(n / 64))
+     * @param x,y defines range of values [x, y)
+     * @param k must satisfy 1 <= k <= number of active indexes i such that x <= arr[i] < y
+     * @returns the kth smallest active index i such that x <= arr[i] < y
+     *     - kth_smallest(x,y,1) returns the smallest active index i such that x <= arr[i] < y
+     *     - kth_smallest(x,y,query(0,n,x,y)) returns the largest active index i such that x <= arr[i] < y
+     * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */
-    void set_active(int i, bool is_active) {
-        assert(0 <= i && i < N);
-        if (bool_bits[1].on(perm[i]) == is_active) return;
-        set_active_impl(perm[i], is_active, 0, N, 1);
+    int kth_smallest(int x, int y, int k) const {
+        int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
+        int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
+        assert(1 <= k && k <= bool_bits[1].popcount(xi, yi));
+        return kth_smallest_impl(xi, yi, k, 0, N, 1);
     }
-    void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
-        bool_bits[v].set(i, is_active);
-        if (tr - tl == 1) return;
-        int tm = split(tl, tr), pi = bool_presums[v].popcount(i);
-        if (bool_presums[v].on(i)) return set_active_impl(pi, is_active, tl, tm, 2 * v);
-        set_active_impl(i - pi, is_active, tm, tr, 2 * v + 1);
+    int kth_smallest_impl(int xi, int yi, int k, int tl, int tr, int v) const {
+        if (tr - tl == 1) return tl;
+        int tm = split(tl, tr), pl = bool_presums[v].popcount(xi), pr = bool_presums[v].popcount(yi);
+        int cnt_left = bool_bits[2 * v].popcount(pl, pr);
+        if (k <= cnt_left) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
+        return kth_smallest_impl(xi - pl, yi - pr, k - cnt_left, tm, tr, 2 * v + 1);
     }
 };
