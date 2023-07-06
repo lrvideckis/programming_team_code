@@ -15,7 +15,8 @@
 //#define split split_2
 //#include "../../../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp"
 
-__attribute__((no_sanitize("address,undefined")))
+__attribute__((no_sanitize("address")))
+__attribute__((no_sanitize("undefined")))
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, q;
