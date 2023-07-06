@@ -65,6 +65,7 @@ struct merge_sort_tree {
      * @returns the kth smallest index i such that x <= arr[i] < y
      *     - kth_smallest(x,y,1) returns the smallest index i such that x <= arr[i] < y
      *     - kth_smallest(x,y,query(0,n,x,y)) returns the largest index i such that x <= arr[i] < y
+     *     - kth_smallest(-INF,INF,k) returns (k - 1)
      * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */
