@@ -1,4 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
 //since this causes an O(n) partition check for each call to `lower_bound`,
 //causing TLE.
 #undef _GLIBCXX_DEBUG
