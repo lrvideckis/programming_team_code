@@ -14,7 +14,9 @@ int main() {
     string s;
     cin >> n >> q >> s;
     merge_sort_tree_updates mstu(vector<int>(n, 0));
-    wavelet_tree_updates wtu(vector<int>(n, 0), 0, 1);
+    vector<int> wavelet_init(n);
+    iota(begin(wavelet_init), end(wavelet_init), 0);
+    wavelet_tree_updates wtu(wavelet_init, 0, n);
     for(int i = 0; i < n; i++)
         if(s[i] == '0') {
             mstu.set_active(i, 0);
@@ -35,15 +37,23 @@ int main() {
             cout << res << '\n';
         } else if(type == 3) {
             int num_larger = mstu.rect_count(k, n, 0, 1);
+            assert(num_larger == wtu.rect_count(k, n, 0, 1));
             if (num_larger == 0) cout << -1 << '\n';
             else {
-                cout << mstu.kth_smallest(0, 1, mstu.rect_count(0, k, 0, 1) + 1) << '\n';
+                int res = mstu.kth_smallest(0, 1, mstu.rect_count(0, k, 0, 1) + 1);
+                assert(res == wtu.kth_smallest(k, n, 1));
+                cout << res << '\n';
             }
         } else {
             assert(type == 4);
             int num_smaller = mstu.rect_count(0, k + 1, 0, 1);
+            assert(num_smaller == wtu.rect_count(0, k + 1, 0, 1));
             if (num_smaller == 0) cout << -1 << '\n';
-            else cout << mstu.kth_smallest(0, 1, num_smaller) << '\n';
+            else {
+                int res = mstu.kth_smallest(0, 1, num_smaller);
+                assert(res == wtu.kth_smallest(0, k + 1, num_smaller));
+                cout << res << '\n';
+            }
         }
     }
     return 0;
