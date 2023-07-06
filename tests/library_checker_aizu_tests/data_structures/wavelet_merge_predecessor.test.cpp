@@ -5,7 +5,7 @@
 #undef _GLIBCXX_SANITIZE_VECTOR
 #undef _GLIBCXX_DEBUG_PEDANTIC
 #undef _GLIBCXX_ASSERTIONS
-#undef _FORTIFY_SOURCE=2
+#undef _FORTIFY_SOURCE
 
 #include "../template.hpp"
 
