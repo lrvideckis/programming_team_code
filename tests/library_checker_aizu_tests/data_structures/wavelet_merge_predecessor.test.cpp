@@ -10,7 +10,7 @@ int main() {
     string s;
     cin >> n >> q >> s;
     merge_sort_tree_updates mstu(vector<int>(n, 0));
-    wavelet_tree_updates wtu(vector<int>(n, 0));
+    wavelet_tree_updates wtu(vector<int>(n, 0), 0, 1);
     for(int i = 0; i < n; i++)
         if(s[i] == '0') {
             mstu.set_active(i, 0);
