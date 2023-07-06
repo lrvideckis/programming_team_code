@@ -30,19 +30,13 @@ int main() {
                             cnt++;
                     }
                 }
-                vector<pair<int, int>> vals;
-                for (int i = 0; i < n; i++) {
+                vector<int> vals;
+                for (int i = 0; i < n; i++)
                     if (x <= arr[i] && arr[i] < y)
-                        vals.emplace_back(arr[i], i);
-                }
-                sort(begin(vals), end(vals));
-                bool dist = 1;
-                for (int i = 1; i < ssize(vals); i++)
-                    if(vals[i-1].first == vals[i].first) dist = 0;
+                        vals.push_back(i);
                 assert(ssize(vals) == mst.query(0, n, x, y));
-                if(!dist) continue;
                 for (int k = 1; k <= ssize(vals); k++)
-                    assert(mst.kth_smallest(x, y, k) == vals[k - 1].second);
+                    assert(mst.kth_smallest(x, y, k) == vals[k - 1]);
             }
         }
     }
