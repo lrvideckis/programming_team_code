@@ -2,6 +2,7 @@
 #include "../template.hpp"
 
 #include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
+#define split split_2
 #include "../../../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp"
 
 int main() {
