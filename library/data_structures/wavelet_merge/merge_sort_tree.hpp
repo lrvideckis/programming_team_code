@@ -50,14 +50,14 @@ struct merge_sort_tree {
         assert(0 <= le && le <= ri && ri <= N && x <= y);
         int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
         int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
-        return query_impl(le, ri, xi, yi, 0, N, 1);
+        return rect_count_impl(le, ri, xi, yi, 0, N, 1);
     }
-    int query_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
+    int rect_count_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
         if (le <= tl && tr <= ri) return yi - xi;
         int tm = split(tl, tr), pl = bool_presums[v].popcount(xi), pr = bool_presums[v].popcount(yi);
-        return query_impl(le, ri, pl, pr, tl, tm, 2 * v) +
-               query_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
+        return rect_count_impl(le, ri, pl, pr, tl, tm, 2 * v) +
+               rect_count_impl(le, ri, xi - pl, yi - pr, tm, tr, 2 * v + 1);
     }
     /**
      * @param x,y defines range of values [x, y)
