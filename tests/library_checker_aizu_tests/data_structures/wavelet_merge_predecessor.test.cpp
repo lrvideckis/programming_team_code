@@ -1,4 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
+//since this causes an O(n) partition check for each call to `lower_bound`,
+//causing TLE.
+#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
