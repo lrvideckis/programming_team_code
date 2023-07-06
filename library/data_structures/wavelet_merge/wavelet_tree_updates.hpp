@@ -61,7 +61,7 @@ struct wavelet_tree_updates {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of *active* indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of active indexes i such that le <= i < ri and x <= arr[i] < y
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */
@@ -79,9 +79,9 @@ struct wavelet_tree_updates {
     /**
      * @param le,ri defines range [le, ri)
      * @param k must satisfy 1 <= k <= # active indexes in [le, ri)
-     * @returns kth smallest *active* number in range.
+     * @returns kth smallest active number in range.
      *     - kth_smallest(le,ri,1) returns the smallest active number
-     *     - kth_smallest(le,ri,bool_bits[1].popcount(le, ri)) returns the largest active number
+     *     - kth_smallest(le,ri,rect_count(le,ri,-INF,INF)) returns the largest active number
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */
