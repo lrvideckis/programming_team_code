@@ -2,6 +2,11 @@
 //since this causes an O(n) partition check for each call to `lower_bound`,
 //causing TLE.
 #undef _GLIBCXX_DEBUG
+#undef _GLIBCXX_SANITIZE_VECTOR
+#undef _GLIBCXX_DEBUG_PEDANTIC
+#undef _GLIBCXX_ASSERTIONS
+#undef _FORTIFY_SOURCE=2
+
 #include "../template.hpp"
 
 #include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
