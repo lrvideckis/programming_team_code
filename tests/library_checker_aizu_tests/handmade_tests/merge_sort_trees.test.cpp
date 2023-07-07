@@ -16,7 +16,7 @@ int main() {
             vector<int> arr(n);
             generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             merge_sort_tree mst(arr);
-            merge_sort_tree_updates mstu(arr);
+            merge_sort_tree_updates mstu(arr, vector<bool>(n, 1));
             for (int i = 0; i < n; i++) {
                 assert(mst.kth_smallest(minn, maxn + 1, i + 1) == i);
                 assert(mstu.kth_smallest(minn, maxn + 1, i + 1) == i);

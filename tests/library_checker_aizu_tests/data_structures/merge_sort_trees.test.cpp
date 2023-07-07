@@ -16,7 +16,7 @@ int main() {
     for (int i = 0; i < n; i++)
         cin >> arr[i];
     merge_sort_tree mst(arr);
-    merge_sort_tree_updates mstu(arr);
+    merge_sort_tree_updates mstu(arr, vector<bool>(n, 1));
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;

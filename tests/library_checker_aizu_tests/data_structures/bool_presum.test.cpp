@@ -17,6 +17,12 @@ vector<bool_presum> init_presums(const vector<int>& arr) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    for (int n = 0; n <= 500; n++) {
+        vector<bool> init(n);
+        bool_presum bp(init);
+        for (int i = 0; i <= n; i++)
+            assert(bp.popcount(i) == 0);
+    }
     int n, q;
     cin >> n >> q;
     vector<int> arr(n);

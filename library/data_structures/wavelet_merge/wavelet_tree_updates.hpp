@@ -28,31 +28,35 @@ struct wavelet_tree_updates {
      *     sort(begin(sorted), end(sorted));
      *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
      *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree_updates(arr, 0, ssize(sorted));
+     *     wavelet_tree_updates wtu(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
      * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
+     * @param active active[i] == 1 iff index i is initially active
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), 0) {
-        assert(minv < maxv);
-        build(arr, 0, N, MINV, MAXV, 1);
+    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), vector<bool>()) {
+        assert(minv < maxv && ssize(active) == N);
+        vector<pair<int, bool>> cpy(N);
+        transform(begin(arr), end(arr), begin(active), begin(cpy), [](int x, bool y) {return pair(x, y);});
+        build(cpy, 0, N, MINV, MAXV, 1);
     }
-    void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
-        bool_bits[v] = bool_bit(ri - le);
+    void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int v) {
+        vector<bool> bools(ri - le);
+        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), [](auto p) {return p.second;});
+        bool_bits[v] = bool_bit(bools);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        auto low = [&](int val) -> bool {return val < tm;};
-        vector<bool> bools(ri - le);
-        transform(begin(arr) + le, begin(arr) + ri, begin(bools), low);
+        auto low = [&](auto p) -> bool {return p.first < tm;};
+        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), low);
         bool_presums[v] = bool_presum(bools);
-        int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
-        build(arr, le, mi, tl, tm, 2 * v);
-        build(arr, mi, ri, tm, tr, 2 * v + 1);
+        int mi = int(stable_partition(begin(cpy) + le, begin(cpy) + ri, low) - begin(cpy));
+        build(cpy, le, mi, tl, tm, 2 * v);
+        build(cpy, mi, ri, tm, tr, 2 * v + 1);
     }
     /**
      * @param i index
-     * @param is_active we want to set active_state[i] = is_active
+     * @param is_active we want to set active[i] = is_active
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */

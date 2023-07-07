@@ -5,18 +5,26 @@
  * @see https://github.com/dacin21/dacin21_codebook /blob/master/trees/wavelet_matrix_updates.cpp
  *
  * space efficient boolean array with range sum query, and point update
+ * note `>> 6` is the same as `/ 64`
+ * note `& 63` is the same as `% 64`
  */
 struct bool_bit {
     int n;
     vector<uint64_t> mask;
     BIT<int> presum;
     /**
-     * initially everything is on
-     * @param a_n size
+     * @param arr boolean array
      * @time O(n)
      * @space O(n / 64)
      */
-    bool_bit(int a_n) : n(a_n), mask(n / 64 + 1, -1), presum(vector<int>((n + 63) / 64, 64)) {}
+    bool_bit(const vector<bool>& arr) : n(ssize(arr)), mask(n / 64 + 1), presum(0) {
+        vector<int> init((n + 63) / 64);
+        for (int i = 0; i < n; i++) {
+            mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
+            init[i >> 6] += arr[i];
+        }
+        presum = BIT<int>(init);
+    }
     /**
      * @param i defines range [0, i)
      * @returns sum/popcount of range

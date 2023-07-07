@@ -9,18 +9,21 @@ vector<bool_bit> init_prebools(const vector<long long>& arr) {
     const int N = ssize(arr);
     vector<bool_bit> prebools;
     for (int bit = 0; bit < MAX_BIT; bit++) {
-        prebools.emplace_back(N);
+        vector<bool> curr(N);
         for (int i = 0; i < N; i++)
-            prebools[bit].set(i, (arr[i] >> bit) & 1);
+            curr[i] = (arr[i] >> bit) & 1;
+        prebools.emplace_back(curr);
     }
     return prebools;
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    {
-        bool_bit bb(0);
-        assert(bb.popcount(0, 0) == 0);
+    for (int n = 0; n <= 500; n++) {
+        vector<bool> init(n);
+        bool_bit bb(init);
+        for (int i = 0; i <= n; i++)
+            assert(bb.popcount(i) == 0);
     }
     int n, q;
     cin >> n >> q;

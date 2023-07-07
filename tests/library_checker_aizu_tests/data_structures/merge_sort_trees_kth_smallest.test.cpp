@@ -25,7 +25,7 @@ int main() {
         inverted[ptr[arr[i]]++] = i;
     }
     merge_sort_tree mst(inverted);
-    merge_sort_tree_updates mstu(inverted);
+    merge_sort_tree_updates mstu(inverted, vector<bool>(n, 1));
     while (q--) {
         int le, ri, k;
         cin >> le >> ri >> k;
