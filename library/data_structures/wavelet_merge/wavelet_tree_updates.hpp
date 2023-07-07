@@ -21,6 +21,15 @@ struct wavelet_tree_updates {
     vector<bool_presum> bool_presums;
     vector<bool_bit> bool_bits;
     /**
+     * @code{.cpp}
+     *     vector<int> arr;
+     *     ...
+     *     vector<int> sorted(arr);
+     *     sort(begin(sorted), end(sorted));
+     *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
+     *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+     *     wavelet_tree_updates(arr, 0, ssize(sorted));
+     * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
@@ -61,7 +70,7 @@ struct wavelet_tree_updates {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of *active* indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of active indexes i such that le <= i < ri and x <= arr[i] < y
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */
@@ -79,9 +88,9 @@ struct wavelet_tree_updates {
     /**
      * @param le,ri defines range [le, ri)
      * @param k must satisfy 1 <= k <= # active indexes in [le, ri)
-     * @returns kth smallest *active* number in range.
+     * @returns kth smallest active number in range.
      *     - kth_smallest(le,ri,1) returns the smallest active number
-     *     - kth_smallest(le,ri,bool_bits[1].popcount(le, ri)) returns the largest active number
+     *     - kth_smallest(le,ri,rect_count(le,ri,-INF,INF)) returns the largest active number
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */

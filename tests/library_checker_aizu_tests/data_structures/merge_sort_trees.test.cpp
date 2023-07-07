@@ -20,10 +20,10 @@ int main() {
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
-        assert(mst.query(le, ri, x, x) == 0);
-        assert(mstu.query(le, ri, x, x) == 0);
-        int res = mst.query(le, ri, x, x + 1);
-        assert(res == mstu.query(le, ri, x, x + 1));
+        assert(mst.rect_count(le, ri, x, x) == 0);
+        assert(mstu.rect_count(le, ri, x, x) == 0);
+        int res = mst.rect_count(le, ri, x, x + 1);
+        assert(res == mstu.rect_count(le, ri, x, x + 1));
         cout << res << '\n';
     }
     return 0;
