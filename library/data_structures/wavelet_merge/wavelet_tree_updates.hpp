@@ -31,10 +31,11 @@ struct wavelet_tree_updates {
      *     wavelet_tree_updates(arr, 0, ssize(sorted));
      * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
+     * @param active_state active_state[i] == 1 iff index i is initially active
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), 0) {
+    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active_state) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), 0) {
         assert(minv < maxv);
         build(arr, 0, N, MINV, MAXV, 1);
     }

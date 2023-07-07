@@ -22,11 +22,12 @@ struct merge_sort_tree_updates {
     vector<bool_bit> bool_bits;
     /**
      * @param arr array
+     * @param active_state active_state[i] == 1 iff index i is initially active
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& arr) : N(ssize(arr)), sorted(N), perm(N), bool_presums(N, vector<bool>()), bool_bits(max(2, 2 * N), 0) {
+    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active_state) : N(ssize(arr)), sorted(N), perm(N), bool_presums(N, vector<bool>()), bool_bits(max(2, 2 * N), 0) {
         vector<pair<int, bool>> cpy(N);
         for (int i = 0; i < N; i++) cpy[i].first = i;
         build(arr, cpy, 0, N, 1);
