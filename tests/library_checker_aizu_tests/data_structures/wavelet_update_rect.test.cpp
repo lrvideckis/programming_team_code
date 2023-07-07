@@ -17,7 +17,7 @@ int main() {
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
     for (int& val : arr)
         val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted)) - 30;
-    wavelet_tree_updates wtu(arr, -30, max(1, ssize(sorted)) - 30);
+    wavelet_tree_updates wtu(arr, -30, max(1, ssize(sorted)) - 30, vector<bool>(n, 1));
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
