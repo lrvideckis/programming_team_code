@@ -25,7 +25,6 @@
 "tests/library_checker_aizu_tests/data_structures/pq_ds_undo_sliding_window.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/data_structures/pq_ds_undo_with_dsu.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/data_structures/rmq_all_methods.test.cpp": "2023-06-19 22:33:57 -0500",
-"tests/library_checker_aizu_tests/data_structures/safe_hash.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/data_structures/wavelet_rect.test.cpp": "2023-07-07 00:52:10 -0700",
 "tests/library_checker_aizu_tests/data_structures/wavelet_update_rect.test.cpp": "2023-07-07 00:52:10 -0700",
 "tests/library_checker_aizu_tests/flow/hungarian.test.cpp": "2023-06-19 22:33:57 -0500",
