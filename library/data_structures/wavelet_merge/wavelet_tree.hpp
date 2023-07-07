@@ -27,7 +27,7 @@ struct wavelet_tree {
      *     sort(begin(sorted), end(sorted));
      *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
      *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree(arr, 0, ssize(sorted));
+     *     wavelet_tree wt(arr, 0, ssize(sorted));
      * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))

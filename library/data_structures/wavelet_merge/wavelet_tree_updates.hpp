@@ -28,7 +28,7 @@ struct wavelet_tree_updates {
      *     sort(begin(sorted), end(sorted));
      *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
      *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree_updates(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
+     *     wavelet_tree_updates wtu(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
      * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @param active_state active_state[i] == 1 iff index i is initially active
@@ -36,18 +36,18 @@ struct wavelet_tree_updates {
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
     wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active_state) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), vector<bool>()) {
-        assert(minv <= maxv && ssize(arr) == ssize(active_state));
+        assert(minv <= maxv && ssize(active_state) == N);
         vector<pair<int, bool>> cpy(N);
         transform(begin(arr), end(arr), begin(active_state), begin(cpy), [](int x, bool y) {return pair(x, y);});
         build(cpy, 0, N, MINV, MAXV, 1);
     }
     void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int v) {
         vector<bool> bools(ri - le);
-        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), [](const auto& p) {return p.second;});
+        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), [](auto p) {return p.second;});
         bool_bits[v] = bool_bit(bools);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        auto low = [&](const auto& p) -> bool {return p.first < tm;};
+        auto low = [&](auto p) -> bool {return p.first < tm;};
         transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), low);
         bool_presums[v] = bool_presum(bools);
         int mi = int(stable_partition(begin(cpy) + le, begin(cpy) + ri, low) - begin(cpy));
