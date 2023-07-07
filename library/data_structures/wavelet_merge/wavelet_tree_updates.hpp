@@ -31,14 +31,14 @@ struct wavelet_tree_updates {
      *     wavelet_tree_updates wtu(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
      * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
-     * @param active_state active_state[i] == 1 iff index i is initially active
+     * @param active active[i] == 1 iff index i is initially active
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active_state) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), vector<bool>()) {
-        assert(minv < maxv && ssize(active_state) == N);
+    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), vector<bool>()) {
+        assert(minv < maxv && ssize(active) == N);
         vector<pair<int, bool>> cpy(N);
-        transform(begin(arr), end(arr), begin(active_state), begin(cpy), [](int x, bool y) {return pair(x, y);});
+        transform(begin(arr), end(arr), begin(active), begin(cpy), [](int x, bool y) {return pair(x, y);});
         build(cpy, 0, N, MINV, MAXV, 1);
     }
     void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int v) {
@@ -56,7 +56,7 @@ struct wavelet_tree_updates {
     }
     /**
      * @param i index
-     * @param is_active we want to set active_state[i] = is_active
+     * @param is_active we want to set active[i] = is_active
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */
