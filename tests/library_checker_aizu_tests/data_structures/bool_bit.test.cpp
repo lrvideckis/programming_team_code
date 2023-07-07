@@ -20,7 +20,8 @@ vector<bool_bit> init_prebools(const vector<long long>& arr) {
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     for (int n = 0; n <= 500; n++) {
-        bool_bit bb(vector<bool>(n));
+        vector<bool> init(n);
+        bool_bit bb(init);
         for (int i = 0; i <= n; i++)
             assert(bb.popcount(i) == 0);
     }
