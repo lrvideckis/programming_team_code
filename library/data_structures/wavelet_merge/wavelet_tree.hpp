@@ -20,6 +20,15 @@ struct wavelet_tree {
     vector<bool_presum> bool_presums;
     vector<vector<long long>> presums;
     /**
+     * @code{.cpp}
+     *     vector<int> arr;
+     *     ...
+     *     vector<int> sorted(arr);
+     *     sort(begin(sorted), end(sorted));
+     *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
+     *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+     *     wavelet_tree(arr, 0, ssize(sorted));
+     * @endcode
      * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums`
