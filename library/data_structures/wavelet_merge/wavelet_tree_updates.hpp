@@ -22,24 +22,21 @@ struct wavelet_tree_updates {
     vector<bool_bit> bool_bits;
     /**
      * @code{.cpp}
-     *     int n;
+     *     vector<int> arr;
      *     ...
-     *     vector<pair<int, bool>> arr(n);
-     *     ...
-     *     vector<int> sorted(n);
-     *     for (int i = 0; i < n; i++) sorted[i] = arr[i].first;
+     *     vector<int> sorted(arr);
      *     sort(begin(sorted), end(sorted));
      *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-     *     for (auto& [val, active] : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree_updates(arr, 0, ssize(sorted));
+     *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+     *     wavelet_tree_updates(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
      * @endcode
-     * @param arr arr[i] = a pair(value, initial active state)
-     * @param minv,maxv must satisfy minv <= arr[i].first < maxv
+     * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
      * @param active_state active_state[i] == 1 iff index i is initially active
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(vector<pair<int, bool>> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(max(2, 2 * (MAXV - MINV)), vector<bool>()) {
+    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active_state) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), 0) {
+        assert(minv <= maxv && ssize(arr) == ssize(active_state));
         build(arr, 0, N, MINV, MAXV, 1);
     }
     void build(vector<pair<int, bool>>& arr, int le, int ri, int tl, int tr, int v) {
