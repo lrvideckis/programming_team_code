@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
+//since this code uses n*log memory where n <= 10^7,
+//we need all the speedups we can get
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
-//since this causes an O(n) partition check for each call to `lower_bound`,
-//causing TLE.
 #undef _GLIBCXX_DEBUG
 #undef _GLIBCXX_SANITIZE_VECTOR
 #undef _GLIBCXX_DEBUG_PEDANTIC
