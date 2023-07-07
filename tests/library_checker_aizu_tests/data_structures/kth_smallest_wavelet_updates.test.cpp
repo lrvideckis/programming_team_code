@@ -23,7 +23,7 @@ int main() {
         assert(sorted[start] == val);
         val = start - 50;
     }
-    wavelet_tree_updates wtu(arr, -50, ssize(sorted) - 50);
+    wavelet_tree_updates wtu(arr, -50, ssize(sorted) - 50, vector<bool>(n, 1));
     for (int i = 0; i < n; i++) {
         int mx = arr[i];
         for (int j = i + 1; j <= min(i + 5, n); j++) {
