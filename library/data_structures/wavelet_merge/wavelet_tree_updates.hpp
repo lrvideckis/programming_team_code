@@ -35,23 +35,25 @@ struct wavelet_tree_updates {
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active_state) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), 0) {
+    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active_state) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), vector<bool>()) {
         assert(minv <= maxv && ssize(arr) == ssize(active_state));
-        build(arr, 0, N, MINV, MAXV, 1);
+        vector<pair<int, bool>> cpy(N);
+        transform(begin(arr), end(arr), begin(active_state), begin(cpy), [](int x, bool y) {return pair(x, y);});
+        build(cpy, 0, N, MINV, MAXV, 1);
     }
-    void build(vector<pair<int, bool>>& arr, int le, int ri, int tl, int tr, int v) {
+    void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int v) {
         vector<bool> init(ri - le);
-        transform(begin(arr) + le, begin(arr) + ri, begin(init), [](const auto& p) {return p.second;});
+        transform(begin(cpy) + le, begin(cpy) + ri, begin(init), [](const auto& p) {return p.second;});
         bool_bits[v] = bool_bit(init);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         auto low = [&](const auto& p) -> bool {return p.first < tm;};
         vector<bool> bools(ri - le);
-        transform(begin(arr) + le, begin(arr) + ri, begin(bools), low);
+        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), low);
         bool_presums[v] = bool_presum(bools);
-        int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
-        build(arr, le, mi, tl, tm, 2 * v);
-        build(arr, mi, ri, tm, tr, 2 * v + 1);
+        int mi = int(stable_partition(begin(cpy) + le, begin(cpy) + ri, low) - begin(cpy));
+        build(cpy, le, mi, tl, tm, 2 * v);
+        build(cpy, mi, ri, tm, tr, 2 * v + 1);
     }
     /**
      * @param i index
