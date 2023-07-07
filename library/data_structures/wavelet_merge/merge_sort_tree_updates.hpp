@@ -27,26 +27,32 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active_state) : N(ssize(arr)), sorted(N), perm(N), bool_presums(N, vector<bool>()), bool_bits(max(2, 2 * N), 0) {
-        vector<pair<int, bool>> cpy(N);
-        for (int i = 0; i < N; i++) cpy[i].first = i;
-        build(arr, cpy, 0, N, 1);
+    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active_state) : N(ssize(arr)), sorted(N), perm(N), bool_presums(N, vector<bool>()), bool_bits(max(2, 2 * N), vector<bool>()) {
+        assert(ssize(active_state) == N);
+        vector<int> p(N);
+        iota(begin(p), end(p), 0);
+        vector<bool> is_left(N);
+        build(arr, active_state, p, is_left, 0, N, 1);
         for (int i = 0; i < N; i++) {
-            perm[cpy[i].first] = i;
-            sorted[i] = arr[cpy[i].first];
+            perm[p[i]] = i;
+            sorted[i] = arr[p[i]];
         }
     }
-    void build(const vector<int>& arr, vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
-        bool_bits[v] = bool_bit(tr - tl);
-        if (tr - tl <= 1) return;
+    void build(const vector<int>& arr, const vector<bool>& active_state, vector<int>& p, vector<bool>& is_left, int tl, int tr, int v) {
+        if (tr - tl <= 1) {
+            if (tr - tl == 1) bool_bits[v] = bool_bit(vector<bool>(1, active_state[tl]));
+            return;
+        }
         int tm = split(tl, tr);
-        build(arr, cpy, tl, tm, 2 * v);
-        build(arr, cpy, tm, tr, 2 * v + 1);
-        for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
-        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return arr[i.first] < arr[j.first];});
+        build(arr, active_state, p, is_left, tl, tm, 2 * v);
+        build(arr, active_state, p, is_left, tm, tr, 2 * v + 1);
+        for (int i = tl; i < tr; i++) is_left[p[i]] = i < tm;
+        inplace_merge(begin(p) + tl, begin(p) + tm, begin(p) + tr, [&](int i, int j) {return arr[i] < arr[j];});
         vector<bool> bools(tr - tl);
-        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
+        transform(begin(p) + tl, begin(p) + tr, begin(bools), [&](int i) {return is_left[i];});
         bool_presums[v] = bool_presum(bools);
+        transform(begin(p) + tl, begin(p) + tr, begin(bools), [&](int i) {return active_state[i];});
+        bool_bits[v] = bool_bit(bools);
     }
     /**
      * @param i index

@@ -3,8 +3,8 @@
 #include "../../../library/misc/random.hpp"
 
 #include "../../../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp"
-//#define split split_2
-//#include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
+#define split split_2
+#include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
 
 int main() {
     for (int n = 0; n <= 130; n++) {
@@ -17,7 +17,7 @@ int main() {
             generate(begin(arr), end(arr), [&]() {return get_rand<int>(minn, maxn);});
             vector<bool> active_state(n);
             generate(begin(active_state), end(active_state), [&]() {return get_rand<int>(0, 1);});
-            //merge_sort_tree_updates mstu(arr);
+            merge_sort_tree_updates mstu(arr, active_state);
             wavelet_tree_updates wtu(arr, minn, maxn + 1, active_state);
             for (int operations = 50; operations--;) {
                 if (operations % 4 == 0) { //rect_count query
@@ -31,7 +31,7 @@ int main() {
                     for (int i = le; i < ri; i++)
                         count_naive += (active_state[i] && x <= arr[i] && arr[i] < y);
                     assert(wtu.rect_count(le, ri, x, y) == count_naive);
-                    //assert(mstu.rect_count(le, ri, x, y) == count_naive);
+                    assert(mstu.rect_count(le, ri, x, y) == count_naive);
                 } else if (operations % 4 == 1) { //kth_smallest query
                     int le = get_rand<int>(0, n);
                     int ri = get_rand<int>(0, n);
@@ -50,15 +50,15 @@ int main() {
                     for (int i = 0; i < n; i++)
                         if (active_state[i] && x <= arr[i] && arr[i] < y)
                             idxs.push_back(i);
-                    //for (int k = 1; k <= ssize(idxs); k++)
-                        //assert(mstu.kth_smallest(x, y, k) == idxs[k - 1]);
+                    for (int k = 1; k <= ssize(idxs); k++)
+                        assert(mstu.kth_smallest(x, y, k) == idxs[k - 1]);
                 } else {//update active status
                     assert(operations % 4 == 3);
                     if (n == 0) continue;
                     int i = get_rand<int>(0, n - 1);
                     bool new_val = get_rand<int>(0, 1);
                     wtu.set_active(i, new_val);
-                    //mstu.set_active(i, new_val);
+                    mstu.set_active(i, new_val);
                     active_state[i] = new_val;
                 }
             }
