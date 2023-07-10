@@ -17,6 +17,8 @@ help:
 	@echo "make format_and_check_bash_scripts | runs shfmt and shellcheck"
 	@echo
 	@echo "make remove_all_comments           | mainly to reduce code length"
+	@echo
+	@echo "make print_which_tests_havent_run  | to check if all tests have run"
 
 compile_all_tests:
 	./scripts/compile_all_tests.sh
@@ -41,3 +43,6 @@ format_and_check_bash_scripts:
 
 remove_all_comments:
 	./scripts/remove_all_comments.sh
+
+print_which_tests_havent_run:
+	./scripts/print_which_tests_havent_run.sh
