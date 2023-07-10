@@ -1,6 +1,4 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_3_D"
-//since _GLIBCXX_DEBUG causes std::map insert/erase operations to be O(n)
-#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon_data_structures/deque.hpp"
