@@ -2,8 +2,7 @@
 #pragma once
 #include "../data_structures/sparse_table.hpp"
 /**
- * @see https://github.com/kth-competitive-programming/
- * kactl/blob/main/content/graph/LCA.h
+ * @see https://github.com/kth-competitive-programming /kactl/blob/main/content/graph/LCA.h
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {

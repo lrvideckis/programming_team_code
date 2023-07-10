@@ -3,9 +3,6 @@
 #include "suffix_array.hpp"
 #include "../data_structures/sparse_table.hpp"
 /**
- * @see https://github.com/yosupo06/Algorithm/blob
- * /master/src/string/suffixarray.hpp
- *
  * Various queries you can do based on suffix array.
  */
 template <typename T> struct sa_query {
@@ -44,6 +41,7 @@ template <typename T> struct sa_query {
         return info.rank[idx1] < info.rank[idx2];
     }
     /**
+     * @see https://github.com/yosupo06/Algorithm/blob /master/src/string/suffixarray.hpp
      * @param t needle
      * @returns range [le, ri) such that:
      * - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))

@@ -2,6 +2,7 @@
 #pragma once
 #include "totient.hpp"
 /**
+ * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/number-theory/ModPow.h
  * @param b base
  * @param e exponent
  * @param mod modulo
