@@ -30,7 +30,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         if (le.empty()) {
             vector<T> arr(ssize(ri));
             transform(begin(ri), end(ri), begin(arr), [](pair<T,T> x) {return x.first;});
-            rebuild(arr, (ssize(arr)+1)/2);
+            rebuild(arr, (ssize(arr) + 1) / 2);
         }
         assert(!le.empty());
         le.pop_back();
@@ -40,7 +40,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         if (ri.empty()) {
             vector<T> arr(ssize(le));
             transform(begin(le), end(le), rbegin(arr), [](pair<T,T> x) {return x.first;});
-            rebuild(arr, ssize(arr)/2);
+            rebuild(arr, ssize(arr) / 2);
         }
         assert(!ri.empty());
         ri.pop_back();
