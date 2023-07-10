@@ -21,7 +21,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    deq(const F& a_op) : op(a_op) {}
+    deq(F a_op) : op(a_op) {}
     /**
      * @returns deq[0] op deq[1] op ... op deq.back()
      * @time O(1)
