@@ -13,8 +13,7 @@ struct scc_info {
     vector<int> scc_id;
 };
 /**
- * @see https://github.com/kth-competitive-programming/
- * kactl/blob/main/content/graph/SCC.h
+ * @see https://github.com/kth-competitive-programming /kactl/blob/main/content/graph/SCC.h
  *
  * @code{.cpp}
  *     //example usage

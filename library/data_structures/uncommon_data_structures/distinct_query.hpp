@@ -2,8 +2,7 @@
 #pragma once
 #include "persistent_segment_tree.hpp"
 /**
- * @see https://cp-algorithms.com/data_structures/segment_tree.html#
- *     preserving-the-history-of-its-values-persistent-segment-tree
+ * @see https://cp-algorithms.com/data_structures/segment_tree.html# preserving-the-history-of-its-values-persistent-segment-tree
  */
 struct distinct_query {
     const int N;

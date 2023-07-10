@@ -1,8 +1,7 @@
 /** @file */
 #pragma once
 /**
- * @see https://github.com/kth-competitive-programming/kactl
- * /blob/main/content/strings/SuffixArray.h
+ * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/strings/SuffixArray.h
  *
  * @code{.cpp}
  *     string s;
