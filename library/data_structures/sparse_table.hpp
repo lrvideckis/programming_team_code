@@ -3,11 +3,17 @@
 /**
  * @code{.cpp}
  *     vector<long long> arr;
+ *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     //or
  *     RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x, y); });
  *
  *     //To get index of min element:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = i
  *     RMQ<pair<long long, int>> rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     //or
+ *     vector<int> idxs(n);
+ *     iota(begin(idxs), end(idxs), 0);
+ *     RMQ<int> rmq(idxs, [&](auto x, auto y) { return arr[x] < arr[y] ? x : y; });
  * @endcode
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
