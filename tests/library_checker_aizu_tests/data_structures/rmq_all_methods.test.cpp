@@ -10,12 +10,16 @@ int mn(int x, int y) {
     return min(x, y);
 }
 
+bool cmp(int x, int y) {
+    return x < y;
+}
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     {
         RMQ rmq_without_template(vector<int>(), mn);
         disjoint_rmq disjoint_rmq_without_template(vector<int>(), mn);
-        linear_rmq lin_rmq_without_template(vector<int>(), less<int>());
+        linear_rmq lin_rmq_without_template(vector<int>(), cmp);
     }
     int n, q;
     cin >> n >> q;
