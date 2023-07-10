@@ -11,8 +11,14 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         return op(le.back().second, ri.back().second);
     }
     inline int size() const {return ssize(le) + ssize(ri);}
-    inline T front() const {return le.empty() ? ri[0].first : le.back().first;}
-    inline T back() const {return ri.empty() ? le[0].first : ri.back().first;}
+    inline T front() const {
+        assert(size());
+        return le.empty() ? ri[0].first : le.back().first;
+    }
+    inline T back() const {
+        assert(size());
+        return ri.empty() ? le[0].first : ri.back().first;
+    }
     inline void push_front(const T& elem) {
         le.emplace_back(elem, le.empty() ? elem : op(elem, le.back().second));
     }
