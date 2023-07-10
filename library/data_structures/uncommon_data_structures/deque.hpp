@@ -58,6 +58,16 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         return ri.empty() ? le[0].first : ri.back().first;
     }
     /**
+     * @param i index
+     * @returns deq[i]
+     * @time O(1)
+     * @space O(1)
+     */
+    inline T& operator[](int i) {
+        assert(0 <= i && i < size());
+        return i < ssize(le) ? le[ssize(le) - i - 1].first : ri[i - ssize(le)].first;
+    }
+    /**
      * @param elem element to insert at beginning
      * @time O(1)
      * @space O(1)

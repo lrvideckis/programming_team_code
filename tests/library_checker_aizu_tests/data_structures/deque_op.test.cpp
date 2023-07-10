@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/deque_operate_all_composite"
 #include "../template.hpp"
 
+#include "../../../library/misc/random.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/deque.hpp"
 
 int main() {
@@ -50,6 +51,10 @@ int main() {
         if (dq.size()) {
             assert(stl_dq.front() == dq.front());
             assert(stl_dq.back() == dq.back());
+            for (int index_tests = 10; index_tests--;) {
+                int idx = get_rand<int>(0, dq.size() - 1);
+                assert(stl_dq[idx] == dq[idx]);
+            }
         }
     }
     return 0;
