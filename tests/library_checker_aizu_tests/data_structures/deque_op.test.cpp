@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/deque_operate_all_composite"
 #include "../template.hpp"
 
+#include "../../../library/misc/random.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/deque.hpp"
 
 int main() {
@@ -11,7 +12,7 @@ int main() {
     using line = pair<int, int>;
     //f1 = begin, f2 = second after begin
     //we want op(f1, f2) = the function f2(f1(x))
-    deq<line> dq([](const line & i, const line & j) -> line {
+    deq<line> dq(vector<line>(), [](const line & i, const line & j) -> line {
         return pair(1LL * i.first * j.first % MOD,
                     (1LL * j.first * i.second + j.second) % MOD);
     });
@@ -50,6 +51,10 @@ int main() {
         if (dq.size()) {
             assert(stl_dq.front() == dq.front());
             assert(stl_dq.back() == dq.back());
+            for (int index_tests = 10; index_tests--;) {
+                int idx = get_rand<int>(0, dq.size() - 1);
+                assert(stl_dq[idx] == dq[idx]);
+            }
         }
     }
     return 0;
