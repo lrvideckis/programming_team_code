@@ -24,7 +24,7 @@ struct bool_presum {
     }
     /**
      * @param i defines range [0, i)
-     * @returns sum/popcount of range
+     * @returns arr[0] + arr[1] + ... + arr[i - 1]
      * @time O(1)
      * @space O(1)
      */

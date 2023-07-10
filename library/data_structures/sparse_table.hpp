@@ -12,7 +12,7 @@
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
-    vector<vector<T>> dp; /**< dp[i][j] = op of range [j, j + 2^i) */
+    vector<vector<T>> dp; /**< dp[i][j] = arr[j] op arr[j + 1] op ... op arr[j + 2^i - 1] */
     F op;
     /**
      * @param arr static array
@@ -28,7 +28,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns op of range
+     * @returns arr[le] op arr[le + 1] op ... op arr[ri - 1]
      * @time O(1) usually, or O(log MAX) if op is gcd
      * @space O(1)
      */

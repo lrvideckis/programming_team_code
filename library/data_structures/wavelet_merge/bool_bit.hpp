@@ -27,7 +27,7 @@ struct bool_bit {
     }
     /**
      * @param i defines range [0, i)
-     * @returns sum/popcount of range
+     * @returns arr[0] + arr[1] + ... + arr[i - 1]
      * @time O(log(n / 64))
      * @space O(1)
      */
@@ -37,7 +37,7 @@ struct bool_bit {
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns sum/popcount of range
+     * @returns arr[le] + arr[le + 1] + ... + arr[ri - 1]
      * @time O(log(n / 64))
      * @space O(1)
      */

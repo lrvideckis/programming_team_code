@@ -52,7 +52,7 @@ struct PST {
     /**
      * @param le, ri defines range [le, ri)
      * @param version which version to query
-     * @returns sum of range for that version
+     * @returns arr[le] + arr[le + 1] + ... + arr[ri - 1] during the `version`-th version
      * @time O(log(ROOT_R - ROOT_L))
      * @space O(log(ROOT_R - ROOT_L)) for recursion stack, no new nodes are allocated
      */
