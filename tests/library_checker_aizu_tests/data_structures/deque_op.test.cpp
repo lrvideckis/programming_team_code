@@ -11,43 +11,43 @@ int main() {
     using line = pair<int, int>;
     //f1 = begin, f2 = second after begin
     //we want op(f1, f2) = the function f2(f1(x))
-    deq<line> dq([](const line& i, const line& j) -> line {
+    deq<line> dq([](const line & i, const line & j) -> line {
         return pair(1LL * i.first * j.first % MOD,
                     (1LL * j.first * i.second + j.second) % MOD);
     });
     deque<line> stl_dq;
-    while(q--) {
+    while (q--) {
         int type;
         cin >> type;
-        if(type == 0) {
+        if (type == 0) {
             int a, b;
             cin >> a >> b;
             dq.push_front(pair(a, b));
             stl_dq.emplace_front(a, b);
-        } else if(type == 1) {
+        } else if (type == 1) {
             int a, b;
             cin >> a >> b;
             dq.push_back(pair(a, b));
             stl_dq.emplace_back(a, b);
-        } else if(type == 2) {
+        } else if (type == 2) {
             dq.pop_front();
             stl_dq.pop_front();
-        } else if(type == 3) {
+        } else if (type == 3) {
             dq.pop_back();
             stl_dq.pop_back();
         } else {
             assert(type == 4);
             int x;
             cin >> x;
-            if(dq.size() == 0) {
+            if (dq.size() == 0)
                 cout << x << '\n';
-            } else {
+            else {
                 line curr = dq.query();
                 cout << (1LL * curr.first * x + curr.second) % MOD << '\n';
             }
         }
         assert(ssize(stl_dq) == dq.size());
-        if(dq.size()) {
+        if (dq.size()) {
             assert(stl_dq.front() == dq.front());
             assert(stl_dq.back() == dq.back());
         }
