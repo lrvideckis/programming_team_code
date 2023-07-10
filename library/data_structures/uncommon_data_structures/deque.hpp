@@ -1,24 +1,21 @@
 /** @file */
 #pragma once
 /**
- * @see <link to some source>
- *
- * Name, description, and/or any notes/tricks. It's okay if this is multiple
- * lines; wrap like this.
- * @code{.cpp}
- *     //example usage or initialization
- *     vector<int> arr;
- * @endcode
- * @param le,ri defines range [le, ri)
- * @returns Sum of range.
- * @time O(n * sqrt(n log n)) I don't care about formatting as long as it's
- * clear. Ex: O(log n * k) could either mean O(log(n) * k) or O(log(nk)) - bad.
- * @space O(n ^ (3/2)) note space complexity is always <= time complexity
- * (unless you can travel back in time)
+ * deque with query for operation of the deque
  */
 template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     F op;
+    /**
+     * @see https://github.com/suisen-cp/cp-library-cpp /blob/main/library/datastructure/deque_aggregation.hpp
+     * simulate a deque with 2 stacks:
+     * `le`, `ri` are stacks of { value, sum }
+     *     accumulate
+     *    <-----------  -------> fold values from inside
+     *   (     le     ][  ri    )
+     * @{
+     */
     vector<pair<T, T>> le, ri;
+    /** @} */
     /**
      * @param a_op associative operation
      * @time O(1)
