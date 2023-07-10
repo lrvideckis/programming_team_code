@@ -30,7 +30,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @time O(n log n)
      * @space O(n log n) for `dp` vector
      */
-    disjoint_rmq(const vector<T>& arr, const F& a_op) : N(ssize(arr)), op(a_op) {
+    disjoint_rmq(const vector<T>& arr, F a_op) : N(ssize(arr)), op(a_op) {
         for (int len = 1; len <= N; len *= 2) {
             dp.emplace_back(N);
             for (int le = 0; le < N; le += 2 * len) {

@@ -13,7 +13,7 @@
  * @time O(n)
  * @space this function allocates/returns vectors which are O(n)
  */
-template <typename F> vector<int> cartesian_tree(const vector<int>& arr, const F& less) {
+template <typename F> vector<int> cartesian_tree(const vector<int>& arr, F less) {
     int n = ssize(arr);
     vector<int> left = monotonic_stack(arr, less);
     vector<int> right = monotonic_stack(vector<int>(rbegin(arr), rend(arr)), less);

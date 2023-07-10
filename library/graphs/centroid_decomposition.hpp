@@ -18,7 +18,7 @@ template <typename F> struct centroid_decomp {
      * @space `adj` and `sub_sz` arrays take O(n); recursion stack for `dfs` is
      * O(log n); recursion stack for `calc_subtree_sizes` is O(n)
      */
-    centroid_decomp(const vector<vector<int>>& a_adj, const F& a_func)
+    centroid_decomp(const vector<vector<int>>& a_adj, F a_func)
         : adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
         for (int i = 0; i < ssize(adj); i++)
             if (sub_sz[i] == -1)
