@@ -33,19 +33,19 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         assert(size());
         if(ri.empty()) {
             vector<T> arr(ssize(le));
-            transform(begin(le), end(le), begin(arr), [](pair<T,T> x) {return x.first;});
+            transform(begin(le), end(le), rbegin(arr), [](pair<T,T> x) {return x.first;});
             rebuild(arr, ssize(arr)/2);
         }
         assert(!ri.empty());
         ri.pop_back();
     }
-    inline void rebuild(const vector<T>& arr, int szf) {
+    inline void rebuild(const vector<T>& arr, int sz_le) {
         vector<T> presum(arr);
-        partial_sum(begin(presum) + szf, end(presum), begin(presum) + szf, op);
-        partial_sum(rend(presum) - szf, rend(presum), rend(presum) - szf, [&](T x, T y) {return op(y, x);});
-        le.resize(szf);
-        transform(begin(arr), begin(arr) + szf, begin(presum), begin(le), [](T x, T y) {return pair(x, y);});
-        ri.resize(ssize(arr) - szf);
-        transform(begin(arr) + szf, end(arr), begin(presum) + szf, begin(ri), [](T x, T y) {return pair(x, y);});
+        partial_sum(begin(presum) + sz_le, end(presum), begin(presum) + sz_le, op);
+        partial_sum(rend(presum) - sz_le, rend(presum), rend(presum) - sz_le, [&](T x, T y) {return op(y, x);});
+        le.resize(sz_le);
+        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) {return pair(x, y);});
+        ri.resize(ssize(arr) - sz_le);
+        transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](T x, T y) {return pair(x, y);});
     }
 };

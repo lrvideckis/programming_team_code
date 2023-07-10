@@ -11,10 +11,9 @@ int main() {
     using line = pair<int, int>;
     //f1 = begin, f2 = second after begin
     //we want op(f1, f2) = the function f2(f1(x))
-    deq<line> dq([](const line& a, const line& b) -> line {
-        return pair(1LL * a.first * b.first % mod,
-                    (1LL * b.first * a.second + b.second) % mod
-                    );
+    deq<line> dq([](const line& i, const line& j) -> line {
+        return pair(1LL * i.first * j.first % mod,
+                    (1LL * j.first * i.second + j.second) % mod);
     });
     deque<line> stl_dq;
     while(q--) {
