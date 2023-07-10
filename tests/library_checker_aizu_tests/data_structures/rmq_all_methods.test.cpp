@@ -6,8 +6,17 @@
 #include "../../../library/data_structures/uncommon_data_structures/linear_rmq.hpp"
 #include "../../../library/monotonic_stack_related/monotonic_stack.hpp"
 
+int mn(int x, int y) {
+    return min(x, y);
+}
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    {
+        RMQ rmq_without_template(vector<int>(), mn);
+        disjoint_rmq disjoint_rmq_without_template(vector<int>(), mn);
+        linear_rmq lin_rmq_without_template(arr, less<int>());
+    }
     int n, q;
     cin >> n >> q;
     vector<int> arr(n);
