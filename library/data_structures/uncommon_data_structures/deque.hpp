@@ -2,6 +2,15 @@
 #pragma once
 /**
  * deque with query for operation of the deque
+ * @code{.cpp}
+ *     vector<pair<long long, int>> arr;
+ *     ...
+ *     deque with query for: get min and # of mins in deque
+ *     deq<pair<long long, int>> dq(arr, [](const auto& x, const auto& y) {
+ *         if (x.first == y.first) return pair(x.first, x.second + y.second);
+ *         return min(x, y);
+ *     });
+ * @endcode
  */
 template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     F op;
@@ -17,11 +26,12 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     vector<pair<T, T>> le, ri;
     /** @} */
     /**
+     * @param arr initial array: arr[0] is front, arr.back() is back
      * @param a_op associative operation
      * @time O(1)
      * @space O(1)
      */
-    deq(F a_op) : op(a_op) {}
+    deq(const vector<T>& arr, F a_op) : op(a_op) {rebuild(arr, ssize(arr) / 2);}
     /**
      * @returns deq[0] op deq[1] op ... op deq.back()
      * @time O(1)
@@ -46,7 +56,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
      */
     inline T front() const {
         assert(size());
-        return le.empty() ? ri[0].first : le.back().first;
+        return (le.empty() ? ri[0] : le.back()).first;
     }
     /**
      * @returns deq.back()
@@ -55,7 +65,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
      */
     inline T back() const {
         assert(size());
-        return ri.empty() ? le[0].first : ri.back().first;
+        return (ri.empty() ? le[0] : ri.back()).first;
     }
     /**
      * @param i index
@@ -63,9 +73,9 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T& operator[](int i) {
+    inline T operator[](int i) const {
         assert(0 <= i && i < size());
-        return i < ssize(le) ? le[ssize(le) - i - 1].first : ri[i - ssize(le)].first;
+        return (i < ssize(le) ? le[ssize(le) - i - 1] : ri[i - ssize(le)]).first;
     }
     /**
      * @param elem element to insert at beginning
@@ -114,9 +124,9 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         ri.pop_back();
     }
     inline void rebuild(const vector<T>& arr, int sz_le) {
-        vector<T> presum(arr);
-        partial_sum(rend(presum) - sz_le, rend(presum), rend(presum) - sz_le, [&](const T & x, const T & y) {return op(y, x);});
-        partial_sum(begin(presum) + sz_le, end(presum), begin(presum) + sz_le, op);
+        vector<T> presum(ssize(arr));
+        partial_sum(rend(arr) - sz_le, rend(arr), rend(presum) - sz_le, [&](const T & x, const T & y) {return op(y, x);});
+        partial_sum(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, op);
         le.resize(sz_le);
         ri.resize(ssize(arr) - sz_le);
         transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](const T & x, const T & y) {return pair(x, y);});
