@@ -105,8 +105,8 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     }
     inline void rebuild(const vector<T>& arr, int sz_le) {
         vector<T> presum(arr);
-        partial_sum(begin(presum) + sz_le, end(presum), begin(presum) + sz_le, op);
         partial_sum(rend(presum) - sz_le, rend(presum), rend(presum) - sz_le, [&](const T & x, const T & y) {return op(y, x);});
+        partial_sum(begin(presum) + sz_le, end(presum), begin(presum) + sz_le, op);
         le.resize(sz_le);
         ri.resize(ssize(arr) - sz_le);
         transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](const T & x, const T & y) {return pair(x, y);});
