@@ -6,8 +6,8 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     deq(const F& a_op) : op(a_op) {}
     inline T query() const {
         assert(size());
-        if(le.empty()) return ri.back().second;
-        if(ri.empty()) return le.back().second;
+        if (le.empty()) return ri.back().second;
+        if (ri.empty()) return le.back().second;
         return op(le.back().second, ri.back().second);
     }
     inline int size() const {return ssize(le) + ssize(ri);}
@@ -27,7 +27,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     }
     inline void pop_front() {
         assert(size());
-        if(le.empty()) {
+        if (le.empty()) {
             vector<T> arr(ssize(ri));
             transform(begin(ri), end(ri), begin(arr), [](pair<T,T> x) {return x.first;});
             rebuild(arr, (ssize(arr)+1)/2);
@@ -37,7 +37,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
     }
     inline void pop_back() {
         assert(size());
-        if(ri.empty()) {
+        if (ri.empty()) {
             vector<T> arr(ssize(le));
             transform(begin(le), end(le), rbegin(arr), [](pair<T,T> x) {return x.first;});
             rebuild(arr, ssize(arr)/2);
