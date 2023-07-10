@@ -8,7 +8,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         assert(size());
         if(le.empty()) return ri.back().second;
         if(ri.empty()) return le.back().second;
-        return op(le.back().second, le.back().second);
+        return op(le.back().second, ri.back().second);
     }
     inline int size() const {return ssize(le) + ssize(ri);}
     inline T front() const {return le.empty() ? ri[0].first : le.back().first;}
@@ -44,8 +44,8 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
         partial_sum(begin(presum) + sz_le, end(presum), begin(presum) + sz_le, op);
         partial_sum(rend(presum) - sz_le, rend(presum), rend(presum) - sz_le, [&](T x, T y) {return op(y, x);});
         le.resize(sz_le);
-        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) {return pair(x, y);});
         ri.resize(ssize(arr) - sz_le);
+        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) {return pair(x, y);});
         transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](T x, T y) {return pair(x, y);});
     }
 };
