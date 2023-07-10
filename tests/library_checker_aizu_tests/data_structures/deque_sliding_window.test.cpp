@@ -3,6 +3,10 @@
 
 #include "../../../library/data_structures/uncommon_data_structures/deque.hpp"
 
+int mn(int x, int y) {
+    return min(x, y);
+}
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, l;
@@ -10,7 +14,7 @@ int main() {
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
     vector<int> init(begin(arr), begin(arr) + l);
-    deq dq(init, [](int x, int y) {return min(x, y);});
+    deq dq(init, mn);
     cout << dq.query();
     for (int i = l; i < n; i++) {
         dq.push_back(arr[i]);
