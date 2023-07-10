@@ -42,7 +42,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns op of range
+     * @returns arr[le] op arr[le + 1] op ... op arr[ri - 1]
      * @time O(1)
      * @space O(1)
      */
