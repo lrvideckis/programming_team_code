@@ -15,7 +15,7 @@ int main() {
     {
         RMQ rmq_without_template(vector<int>(), mn);
         disjoint_rmq disjoint_rmq_without_template(vector<int>(), mn);
-        linear_rmq lin_rmq_without_template(arr, less<int>());
+        linear_rmq lin_rmq_without_template(vector<int>(), less<int>());
     }
     int n, q;
     cin >> n >> q;
