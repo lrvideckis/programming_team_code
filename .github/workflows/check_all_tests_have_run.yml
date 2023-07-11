@@ -1,0 +1,14 @@
+name: Check all tests have run
+
+on:
+  push:
+    paths:
+      - '.verify-helper/timestamps.remote.json'
+
+jobs:
+  print_which_tests_havent_run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Print the tests which haven't run
+      run: make --directory=tests/ print_which_tests_havent_run
