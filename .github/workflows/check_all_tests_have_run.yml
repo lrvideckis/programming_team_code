@@ -3,7 +3,7 @@ name: Check all tests have run
 on:
   push:
     paths:
-      - '.verify-helper/timestamps.remote.json'
+      - '**.json'
 
 jobs:
   print_which_tests_havent_run:
