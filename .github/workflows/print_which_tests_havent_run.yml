@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - src
+      - .verify-helper/timestamps.remote.json
 
   print_which_tests_havent_run:
     runs-on: ubuntu-latest
