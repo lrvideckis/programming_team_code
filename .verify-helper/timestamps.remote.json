@@ -66,5 +66,15 @@
 "tests/library_checker_aizu_tests/misc/iterate_supermasks.test.cpp": "2023-07-10 00:18:38 -0700",
 "tests/library_checker_aizu_tests/misc/num_subsequences.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_tree.test.cpp": "2023-07-10 00:18:38 -0700",
-"tests/library_checker_aizu_tests/monotonic_stack_related/count_rectangles.test.cpp": "2023-07-10 00:18:38 -0700"
+"tests/library_checker_aizu_tests/monotonic_stack_related/count_rectangles.test.cpp": "2023-07-10 00:18:38 -0700",
+"tests/library_checker_aizu_tests/monotonic_stack_related/max_rect_histogram.test.cpp": "2023-07-10 00:18:38 -0700",
+"tests/library_checker_aizu_tests/strings/kmp.test.cpp": "2023-06-19 22:33:57 -0500",
+"tests/library_checker_aizu_tests/strings/lcp_array.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/strings/palindrome_query.test.cpp": "2023-06-19 22:33:57 -0500",
+"tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-06-19 22:33:57 -0500",
+"tests/library_checker_aizu_tests/strings/sa_query_multi_matching.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/strings/sa_query_palindrome.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/strings/sa_query_single_matching.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/strings/sa_query_zfunc.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-07-10 14:14:04 -0700"
 }
