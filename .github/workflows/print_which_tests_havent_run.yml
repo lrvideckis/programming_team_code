@@ -1,3 +1,7 @@
+on:
+  push:
+    paths:
+      - src
 
   print_which_tests_havent_run:
     runs-on: ubuntu-latest
