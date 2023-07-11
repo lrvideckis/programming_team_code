@@ -31,5 +31,13 @@
 "tests/library_checker_aizu_tests/data_structures/wavelet_update_rect.test.cpp": "2023-07-09 22:02:27 -0700",
 "tests/library_checker_aizu_tests/flow/hungarian.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/flow/min_cost_max_flow.test.cpp": "2023-06-19 22:33:57 -0500",
-"tests/library_checker_aizu_tests/graphs/biconnected_components.test.cpp": "2023-06-19 22:33:57 -0500"
+"tests/library_checker_aizu_tests/graphs/biconnected_components.test.cpp": "2023-06-19 22:33:57 -0500",
+"tests/library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp": "2023-07-10 00:18:38 -0700",
+"tests/library_checker_aizu_tests/graphs/dijkstra.test.cpp": "2023-06-19 22:33:57 -0500",
+"tests/library_checker_aizu_tests/graphs/enumerate_triangles.test.cpp": "2023-07-10 00:18:38 -0700",
+"tests/library_checker_aizu_tests/graphs/hopcroft_karp.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/graphs/kth_node_on_path.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/graphs/lca_both_methods.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/graphs/strongly_connected_components.test.cpp": "2023-07-10 14:14:04 -0700",
+"tests/library_checker_aizu_tests/graphs/subtree_isomorphism.test.cpp": "2023-06-19 22:33:57 -0500"
 }
