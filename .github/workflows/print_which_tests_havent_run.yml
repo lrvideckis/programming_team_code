@@ -3,6 +3,7 @@ on:
     paths:
       - .verify-helper/timestamps.remote.json
 
+jobs:
   print_which_tests_havent_run:
     runs-on: ubuntu-latest
     needs: [library_checker_aizu_tests]
