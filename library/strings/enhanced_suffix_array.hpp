@@ -24,7 +24,8 @@ template <typename T> struct enhanced_sa {
         s(a_s),
         info(suffix_array(s, max_val)),
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
-        rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}) {
+        rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
+        root_node(-1) {
 
             int last_interval = -1;
             stack<int> st;
@@ -60,7 +61,10 @@ template <typename T> struct enhanced_sa {
                     childs[st.top()].push_back(last_interval);
                 }
             }
-            assert(le[root_node] == 0 && ri[root_node] == ssize(info.lcp));
+            assert(ssize(le) == ssize(ri) && ssize(le) == ssize(lcp_val) && ssize(le) == ssize(childs));
+            if(!le.empty()) {
+                assert(le[root_node] == 0 && ri[root_node] == ssize(info.lcp));
+            }
             for(int i = 0; i < ssize(childs); i++) {
                 for(int j : childs[i]) {
                     assert(le[i] <= le[j] && le[j] < ri[j] && ri[j] <= ri[i]);
@@ -110,6 +114,11 @@ template <typename T> struct enhanced_sa {
      * @space O(1)
      */
     pair<int, int> find(const T& t) const {
+        if(root_node == -1) {//TODO: find a way to not have to special case this
+            assert(ssize(info.sa) <= 1);
+            return (ssize(t) == 1 && s == t) ? pair(0, 1) : pair(0, 0);
+        }
+        assert(ssize(info.sa) >= 2);
         //subarray [le[v], ri[v]] in info.sa
         //lcp_val[v] = min of [le[v], ri[v]) in info.lcp
         //cout << "query t: " << t << endl;
