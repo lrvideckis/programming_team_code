@@ -18,7 +18,8 @@ inline long long op(long long vl, long long vr) {
  *
  * root is at tree[1]
  * internal nodes are [1, n)
- * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[bit_ceil(unsigned(n))]
+ * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[1 << k] where k = __lg(2 * n - 1)
+ *     note (1 << k) is the only power of 2 such that n <= (1 << k) < 2 * n
  */
 struct seg_tree {
     const int N;
