@@ -27,10 +27,10 @@ template <typename T> struct enhanced_sa {
         rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
         root_node(-1) {
 
-            int last_interval = -1;
             stack<int> st;
 
             for(int i = 0; i < ssize(info.lcp); i++) {
+                int last_interval = -1;
                 int farthest_left = i;
                 while(!st.empty() && lcp_val[st.top()] > info.lcp[i]) {
                     //here, interval [st.top().second, i]
@@ -53,9 +53,11 @@ template <typename T> struct enhanced_sa {
                     le.push_back(farthest_left);
                     ri.push_back(ssize(info.lcp));
                 }
+                assert(last_interval == -1);
             }
             while(!st.empty()) {
-                root_node = last_interval = st.top();
+                int last_interval = st.top();
+                root_node = last_interval;
                 st.pop();
                 if(!st.empty()) {
                     childs[st.top()].push_back(last_interval);
