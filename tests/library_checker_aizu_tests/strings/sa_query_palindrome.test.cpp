@@ -9,7 +9,7 @@ int main() {
     cin >> s;
     int n = ssize(s);
     s = s + '$' + string(rbegin(s), rend(s));
-    sa_query esa(s, 128);
+    enhanced_sa esa(s, 128);
     for (int i = 0; i < n; i++) {
         for (int j = i; j < min(i + 2, n); j++)
             cout << esa.get_lcp(j, (n - i - 1) + n + 1) * 2 - (i == j) << " ";
