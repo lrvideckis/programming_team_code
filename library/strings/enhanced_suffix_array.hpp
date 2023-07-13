@@ -5,7 +5,7 @@
 /**
  * Various queries you can do based on suffix array.
  */
-template <typename T> struct sa_query {
+template <typename T> struct enhanced_sa {
     T s;
     suffix_array<T> info;
     RMQ<int> rmq_lcp, rmq_sa;
@@ -15,7 +15,7 @@ template <typename T> struct sa_query {
      * @space O(n log n) for RMQ's; O(max_val) for `freq` array used
      * temporarily in suffix_array constructor
      */
-    sa_query(const T& a_s, int max_val) :
+    enhanced_sa(const T& a_s, int max_val) :
         s(a_s),
         info(suffix_array(s, max_val)),
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),

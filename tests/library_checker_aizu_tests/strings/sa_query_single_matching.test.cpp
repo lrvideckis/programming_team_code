@@ -10,12 +10,12 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    sa_query sq(s, 128);
-    auto [le, ri] = sq.find(t);
-    vector<int> matches(begin(sq.info.sa) + le, begin(sq.info.sa) + ri);
+    enhanced_sa esa(s, 128);
+    auto [le, ri] = esa.find(t);
+    vector<int> matches(begin(esa.info.sa) + le, begin(esa.info.sa) + ri);
     sort(begin(matches), end(matches));
     {
-        int first_match = sq.find_first(t);
+        int first_match = esa.find_first(t);
         if (matches.empty())
             assert(first_match == -1);
         else {
