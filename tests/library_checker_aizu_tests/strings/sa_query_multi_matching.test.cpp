@@ -4,7 +4,7 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_query.hpp"
+#include "../../../library/strings/enhanced_suffix_array.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
