@@ -21,9 +21,10 @@ int main() {
     for (int i = 0; i < n; i++) cin >> arr[i];
     iter_seg_tree ist(arr);
     {
-        int pw2 = 1;
-        while (pw2 < n) pw2 *= 2;
-        assert(arr[0] == ist.st.tree[pw2]);
+        //to test the comment in lazy_segment_tree.hpp
+        int k = __lg(2 * n - 1);
+        assert(n <= (1 << k) && (1 << k) < 2 * n);
+        assert(arr[0] == ist.st.tree[1 << k]);
     }
     while (q--) {
         int type;
