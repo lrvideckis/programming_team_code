@@ -31,7 +31,7 @@ template <typename F> vector<int> monotonic_stack(const vector<int>& arr, F less
  *     - le[i] is the max index such that arr[le[i]] <= arr[i], or -1
  *     - ri[i] is the min index such that arr[i] > arr[ri[i]], or n
  * @time O(n)
- * @space O(n)
+ * @space two O(n) vectors are allocated and returned
  */
 pair<vector<int>, vector<int>> get_range(const vector<int>& arr) {
     vector<int> le = monotonic_stack(arr, less_equal());
