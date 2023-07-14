@@ -3,27 +3,27 @@
 #include "monotonic_stack.hpp"
 /**
  * @code{.cpp}
- *     vector<int> par = cartesian_tree(arr, less()); //min cartesian tree
- *     vector<int> par = cartesian_tree(arr, greater()); //max cartesian tree
+ *     auto [root, adj] = min_cartesian_tree(arr);
  * @endcode
  * @param arr array of distinct integers
- * @param less any transitive compare operator
- * @returns array par where par[v] = parent of node v in cartesian-tree.
- * par[v] == -1 means node v is the root
+ * @returns root of tree, and adjacency list (only childs)
  * @time O(n)
- * @space this function allocates/returns vectors which are O(n)
+ * @space this function allocates/returns an adj list which is O(n)
  */
-template <typename F> vector<int> cartesian_tree(const vector<int>& arr, F less) {
+pair<int, vector<vector<int>>> min_cartesian_tree(const vector<int>& arr) {
     int n = ssize(arr);
-    vector<int> left = monotonic_stack(arr, less);
-    vector<int> right = monotonic_stack(vector<int>(rbegin(arr), rend(arr)), less);
-    vector<int> par(n);
-    transform(begin(left), end(left), rbegin(right), begin(par), [&](int le, int ri) {
-        ri = n - 1 - ri;
-        if (le >= 0 && ri < n) return less(arr[le], arr[ri]) ? ri : le;
-        if (le >= 0) return le;
-        if (ri < n) return ri;
-        return -1;
-    });
-    return par;
+    auto [le, ri] = get_range(arr);
+    int root = -1;
+    vector<vector<int>> adj(n);
+    for (int i = 0; i < n; i++) {
+        if (le[i] == -1 && ri[i] == n) {
+            assert(root == -1);
+            root = i;
+        } else {
+            bool le_par = (le[i] >= 0 && (ri[i] == n || arr[le[i]] > arr[ri[i]]));
+            adj[le_par ? le[i] : ri[i]].push_back(i);
+        }
+    }
+    assert(root != -1);
+    return {root, adj};
 }
