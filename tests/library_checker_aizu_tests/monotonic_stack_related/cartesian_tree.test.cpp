@@ -14,7 +14,7 @@ int main() {
     vector<int> par(n, -1);
     par[root] = root;
     for (int i = 0; i < n; i++) {
-        assert(le[i] < i && i < ri[i]);
+        assert(-1 <= le[i] && le[i] < i && i < ri[i] && ri <= n);
         assert(le[i] == -1 || arr[le[i]] < arr[i]);//because distinct numbers, if dups, then arr[le[i]] <= arr[i]
         assert(ri[i] == n || arr[i] > arr[ri[i]]);
         for (int j : adj[i]) {
