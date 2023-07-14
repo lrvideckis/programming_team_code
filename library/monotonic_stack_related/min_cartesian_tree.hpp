@@ -9,12 +9,15 @@
  *        |  |  |     |  |     |     |
  *        |  |  |     |  |     |     |
  * index: 0  1  2  3  4  5  6  7  8  9
- * root = 4
+ * root = 4; note root could = -1, when arr is empty
  * node | children
  * 4    | 1, 7, 9
  * 1    | 0, 2
  * 7    | 5
  * indexes 3, 6, 8 are not nodes, as they are not the left-most min of their subarrays
+ * note: to_min[3] = 1
+ *       to_min[6] = 5
+ *       to_min[8] = 4
  * @code{.cpp}
  *     auto [le, ri] = get_range(arr);
  *     auto [root, adj] = min_cartesian_tree(arr, le, ri);
