@@ -9,12 +9,18 @@ int main() {
     cin >> n;
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
-    auto [root, adj] = min_cartesian_tree(arr);
-    vector<int> par(n, -2);
+    auto [le, ri] = get_range(arr);
+    auto [root, adj] = min_cartesian_tree(arr, le, ri);
+    vector<int> par(n, -1);
     par[root] = root;
     for (int i = 0; i < n; i++) {
-        for (int j : adj[i])
+        assert(le[i] < i && i < ri[i]);
+        assert(le[i] == -1 || arr[le[i]] < arr[i]);//because distinct numbers, if dups, then arr[le[i]] <= arr[i]
+        assert(ri[i] == n || arr[i] > arr[ri[i]]);
+        for (int j : adj[i]) {
+            assert(le[i] <= le[j] && ri[j] <= ri[i]);
             par[j] = i;
+        }
     }
     for (int i = 0; i < n; i++) cout << par[i] << " ";
     return 0;
