@@ -2,7 +2,7 @@
 #pragma once
 #include "suffix_array.hpp"
 #include "../data_structures/sparse_table.hpp"
-#include <stack>
+#include "../monotonic_stack_related/max_rect_histogram.hpp"
 /**
  * Various queries you can do based on suffix array.
  */
@@ -26,65 +26,15 @@ template <typename T> struct enhanced_sa {
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
         rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
         root_node(-1) {
-
-            stack<int> st;
-
+            auto rv = [&](int i) -> int {
+                return ssize(info.lcp) - 1 - i;
+            };
+            vector<int> left = monotonic_stack<int>(info.lcp, less_equal());
+            vector<int> right = monotonic_stack<int>(vector<int>(rbegin(info.lcp), rend(info.lcp)), less());
             for(int i = 0; i < ssize(info.lcp); i++) {
-                int last_interval = -1;
-                int farthest_left = i;
-                while(!st.empty() && lcp_val[st.top()] > info.lcp[i]) {
-                    //here, interval [st.top().second, i]
-                    last_interval = st.top();
-                    st.pop();
-                    ri[last_interval] = i;
-                    assert(le[last_interval] < farthest_left);
-                    farthest_left = le[last_interval];
-                    if(!st.empty() && lcp_val[st.top()] >= info.lcp[i]) {
-                        childs[st.top()].push_back(last_interval);
-                        last_interval = -1;
-                    }
-                }
-                if(st.empty() || lcp_val[st.top()] < info.lcp[i]) {
-                    st.push(ssize(le));
-                    childs.emplace_back();
-                    if(last_interval != -1) childs.back().push_back(last_interval);
-                    last_interval = -1;
-                    lcp_val.push_back(info.lcp[i]);
-                    le.push_back(farthest_left);
-                    ri.push_back(ssize(info.lcp));
-                }
-                assert(last_interval == -1);
+                //cout << left[i] << " " << i << " " << rv(right[rv(i)]) << endl;
+                cout << left[i] + 1 << " " << rv(right[rv(i)]) << endl;
             }
-            while(!st.empty()) {
-                int last_interval = st.top();
-                root_node = last_interval;
-                st.pop();
-                if(!st.empty()) {
-                    childs[st.top()].push_back(last_interval);
-                }
-            }
-            assert(ssize(le) == ssize(ri) && ssize(le) == ssize(lcp_val) && ssize(le) == ssize(childs));
-            if(!le.empty()) {
-                assert(le[root_node] == 0 && ri[root_node] == ssize(info.lcp));
-            }
-            for(int i = 0; i < ssize(childs); i++) {
-                for(int j : childs[i]) {
-                    assert(le[i] <= le[j] && le[j] < ri[j] && ri[j] <= ri[i]);
-                }
-                for(int j = 1; j < ssize(childs[i]); j++) {
-                    assert(ri[childs[i][j-1]] < le[childs[i][j]]);
-                }
-            }
-            /*
-            for(int i = 0; i < ssize(childs); i++) {
-                cout << lcp_val[i] << "    " << le[i] << " " << ri[i] << endl;
-            }
-            for(int i = 0; i < ssize(childs); i++) {
-                for(int j : childs[i]) {
-                    cout << "edge: " << lcp_val[i] << "   " << le[i] << " " << ri[i] << " -> " << lcp_val[j] << "    " << le[j] << " " << ri[j] << endl;
-                }
-            }
-            */
         }
     /**
      * @param idx1,idx2 starting 0-based-indexes of suffixes
