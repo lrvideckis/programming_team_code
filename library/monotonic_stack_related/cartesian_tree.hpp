@@ -9,6 +9,7 @@
  *     auto [root, adj] = min_cartesian_tree(arr, le, ri);
  * @endcode
  * @param arr array of integers (there can be duplicates)
+ * @param le,ri arr[i] is the min of range (le[i], ri[i])
  * @returns root of tree, and adjacency list (only childs)
  * @time O(n)
  * @space this function allocates/returns an adj list which is O(n)
