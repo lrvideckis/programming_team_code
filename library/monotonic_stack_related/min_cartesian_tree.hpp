@@ -20,7 +20,8 @@
  * @code{.cpp}
  *     auto [le, ri] = get_range(arr);
  *     auto [root, adj] = min_cartesian_tree(arr, le, ri);
- *     queue<int> q({root});
+ *     queue<int> q;
+ *     if (root != -1) q.push(root);
  *     while (!q.empty()) {
  *         int u = q.front();
  *         //arr[u] is the min value of exclusive-exclusive range (le[u], ri[u])
