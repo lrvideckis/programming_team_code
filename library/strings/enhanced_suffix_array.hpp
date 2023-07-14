@@ -2,7 +2,7 @@
 #pragma once
 #include "suffix_array.hpp"
 #include "../data_structures/sparse_table.hpp"
-#include "../monotonic_stack_related/max_rect_histogram.hpp"
+#include "../monotonic_stack_related/min_cartesian_tree.hpp"
 /**
  * Various queries you can do based on suffix array.
  */
@@ -10,8 +10,8 @@ template <typename T> struct enhanced_sa {
     T s;
     suffix_array<T> info;
     RMQ<int> rmq_lcp, rmq_sa;
-    int root_node;
-    vector<int> lcp_val, le, ri;
+    vector<int> le, ri;
+    int root;
     vector<map<int, int>> lcp_tree;
     /**
      * @param a_s,max_val string/array with 0 <= a_s[i] < max_val
@@ -24,68 +24,26 @@ template <typename T> struct enhanced_sa {
         info(suffix_array(s, max_val)),
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
         rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
-        root_node(-1),
         lcp_tree(ssize(info.lcp)) {
-
-            //for(int val : info.lcp) cout << val << " ";
-            //cout << endl;
-
             tie(le, ri) = get_range(info.lcp);
-
-            auto is_node = [&](int i) -> bool {
-                assert(0 <= i && i < ssize(info.lcp));
-                return le[i] == -1 || info.lcp[le[i]] < info.lcp[i];
-            };
-
-            vector<int> leftmost_min(ssize(info.lcp));
-            iota(begin(leftmost_min), end(leftmost_min), 0);
-            for(int i = 0; i < ssize(info.lcp); i++) {
-                if(!is_node(i)) {
-                    leftmost_min[i] = leftmost_min[le[i]];
-                }
-            }
-            //min cartesian tree: move to cartesian tree file
-
-            vector<vector<int>> adj(ssize(info.lcp));
-
-            for(int i = 0; i < ssize(info.lcp); i++) {
-                if(le[i] == -1 && ri[i] == ssize(info.lcp)) {
-                    assert(root_node == -1);
-                    root_node = i;
-                } else if(is_node(i)) {
-                    bool le_par = (le[i] >= 0 && (ri[i] == ssize(info.lcp) || info.lcp[le[i]] > info.lcp[ri[i]]));
-                    int par = leftmost_min[le_par ? le[i] : ri[i]];
-                    assert(info.lcp[par] < info.lcp[i]);
-                    assert(le[par] <= le[i] && ri[i] <= ri[par]);
-                    //cout << "edge: " << le[par]+1 << " " << ri[par] << " -> " << le[i]+1 << " " << ri[i] << "    ";
-                    assert(info.sa[i] + info.lcp[par] < ssize(s));
-                    //cout << "letter: " << s[info.sa[i] + info.lcp[par]] << endl;//correct
-                    adj[par].push_back(i);
-                }
-            }
-            if(root_node == -1) return;
-
+            vector<vector<int>> adj;
+            tie(root, adj) = min_cartesian_tree(info.lcp, le, ri);
             assert(ssize(adj) == ssize(info.lcp));
-            //convert and add childs
-            queue<int> q({root_node});
+            if(root == -1) return;//TODO: try to find a way to not special case this
+            queue<int> q({root});
             while(!q.empty()) {
                 int u = q.front();
-                //node u's inclusive-exclusive range: [ le[u]+1, ri[u] )
                 q.pop();
                 int prev = le[u] + 1;
                 for(int v : adj[u]) {
-                    //add leaves between last child interval and this interval
-                    for(int i = prev; i <= le[v]; i++) {
+                    for(int i = prev; i <= le[v]; i++)
                         assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
-                    }
                     assert(lcp_tree[u].emplace(s[info.sa[v] + info.lcp[u]], v).second);
                     prev = ri[v] + 1;
                     q.push(v);
                 }
-                //add leaves after last child interval
-                for(int i = prev; i <= ri[u]; i++) {
+                for(int i = prev; i <= ri[u]; i++)
                     assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
-                }
             }
         }
     /**
@@ -96,8 +54,8 @@ template <typename T> struct enhanced_sa {
      */
     inline int get_lcp(int idx1, int idx2) const {
         if (idx1 == idx2) return ssize(s) - idx1;
-        auto [le, ri] = minmax(info.rank[idx1], info.rank[idx2]);
-        return rmq_lcp.query(le, ri);
+        auto [x, y] = minmax(info.rank[idx1], info.rank[idx2]);
+        return rmq_lcp.query(x, y);
     }
     /**
      * @param idx1,idx2 starting 0-based-indexes of suffixes
@@ -119,12 +77,12 @@ template <typename T> struct enhanced_sa {
      */
     pair<int, int> find(const T& t) const {
 
-        if(root_node == -1) {//TODO: find a way to not have to special case this
+        if(root == -1) {//TODO: find a way to not have to special case this
             assert(ssize(info.sa) <= 1);
             return (ssize(t) == 1 && s == t) ? pair(0, 1) : pair(0, 0);
         }
         assert(ssize(info.sa) >= 2);
-        int u = root_node;
+        int u = root;
         int cnt_matched = 0;
         while(u < ssize(info.lcp)) {
             {
@@ -165,8 +123,8 @@ template <typename T> struct enhanced_sa {
      * @space O(1)
      */
     int find_first(const T& t) const {
-        auto [le, ri] = find(t);
-        if (le == ri) return -1;
-        return rmq_sa.query(le, ri);
+        auto [x, y] = find(t);
+        if (x == y) return -1;
+        return rmq_sa.query(x, y);
     }
 };
