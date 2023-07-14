@@ -12,8 +12,7 @@ template <typename T> struct enhanced_sa {
     RMQ<int> rmq_lcp, rmq_sa;
     int root_node;
     vector<int> lcp_val, le, ri;
-    //vector<map<int, int>> childs;
-    vector<vector<int>> childs;
+    vector<map<int, int>> lcp_tree;
     /**
      * @param a_s,max_val string/array with 0 <= a_s[i] < max_val
      * @time O((n log n) + max_val)
@@ -25,10 +24,11 @@ template <typename T> struct enhanced_sa {
         info(suffix_array(s, max_val)),
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
         rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
-        root_node(-1) {
+        root_node(-1),
+        lcp_tree(ssize(info.lcp)) {
 
-            for(int val : info.lcp) cout << val << " ";
-            cout << endl;
+            //for(int val : info.lcp) cout << val << " ";
+            //cout << endl;
 
             tie(le, ri) = get_range(info.lcp);
 
@@ -37,30 +37,56 @@ template <typename T> struct enhanced_sa {
                 return le[i] == -1 || info.lcp[le[i]] < info.lcp[i];
             };
 
-            vector<int> first_min(ssize(info.lcp));
-            iota(begin(first_min), end(first_min), 0);
+            vector<int> leftmost_min(ssize(info.lcp));
+            iota(begin(leftmost_min), end(leftmost_min), 0);
             for(int i = 0; i < ssize(info.lcp); i++) {
                 if(!is_node(i)) {
-                    first_min[i] = first_min[le[i]];
+                    leftmost_min[i] = leftmost_min[le[i]];
                 }
             }
+            //min cartesian tree: move to cartesian tree file
 
-            //min cartesian tree
+            vector<vector<int>> adj(ssize(info.lcp));
+
             for(int i = 0; i < ssize(info.lcp); i++) {
                 if(le[i] == -1 && ri[i] == ssize(info.lcp)) {
                     assert(root_node == -1);
                     root_node = i;
                 } else if(is_node(i)) {
                     bool le_par = (le[i] >= 0 && (ri[i] == ssize(info.lcp) || info.lcp[le[i]] > info.lcp[ri[i]]));
-                    int par = first_min[le_par ? le[i] : ri[i]];
+                    int par = leftmost_min[le_par ? le[i] : ri[i]];
                     assert(info.lcp[par] < info.lcp[i]);
                     assert(le[par] <= le[i] && ri[i] <= ri[par]);
-                    cout << "edge: " << le[par]+1 << " " << ri[par] << " -> " << le[i]+1 << " " << ri[i] << "    ";
-                    cout << "letter: " << s[info.sa[i] + info.lcp[par]] << endl;//correct
+                    //cout << "edge: " << le[par]+1 << " " << ri[par] << " -> " << le[i]+1 << " " << ri[i] << "    ";
+                    assert(info.sa[i] + info.lcp[par] < ssize(s));
+                    //cout << "letter: " << s[info.sa[i] + info.lcp[par]] << endl;//correct
+                    adj[par].push_back(i);
                 }
             }
-            assert(root_node != -1);
+            if(root_node == -1) return;
 
+            assert(ssize(adj) == ssize(info.lcp));
+            //convert and add childs
+            queue<int> q({root_node});
+            while(!q.empty()) {
+                int u = q.front();
+                //node u's inclusive-exclusive range: [ le[u]+1, ri[u] )
+                q.pop();
+                int prev = le[u] + 1;
+                for(int v : adj[u]) {
+                    //add leaves between last child interval and this interval
+                    for(int i = prev; i <= le[v]; i++) {
+                        assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
+                    }
+                    assert(lcp_tree[u].emplace(s[info.sa[v] + info.lcp[u]], v).second);
+                    prev = ri[v] + 1;
+                    q.push(v);
+                }
+                //add leaves after last child interval
+                for(int i = prev; i <= ri[u]; i++) {
+                    assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
+                }
+            }
         }
     /**
      * @param idx1,idx2 starting 0-based-indexes of suffixes
@@ -92,52 +118,43 @@ template <typename T> struct enhanced_sa {
      * @space O(1)
      */
     pair<int, int> find(const T& t) const {
+
         if(root_node == -1) {//TODO: find a way to not have to special case this
             assert(ssize(info.sa) <= 1);
             return (ssize(t) == 1 && s == t) ? pair(0, 1) : pair(0, 0);
         }
         assert(ssize(info.sa) >= 2);
-        //subarray [le[v], ri[v]] in info.sa
-        //lcp_val[v] = min of [le[v], ri[v]) in info.lcp
-        //cout << "query t: " << t << endl;
-        int v = root_node;
-        int matched_so_far = 0;
-        while(1) {
-            //cout << "here, interval: " << lcp_val[v] << "    " << le[v] << " " << ri[v] << endl;
-            assert(matched_so_far <= lcp_val[v]);
+        int u = root_node;
+        int cnt_matched = 0;
+        while(u < ssize(info.lcp)) {
             {
-                int cnt_to_match = min(lcp_val[v], ssize(t)) - matched_so_far;
-                assert(cnt_to_match <= ssize(t));
-                if(s.compare(info.sa[le[v]] + matched_so_far, cnt_to_match, t, matched_so_far, cnt_to_match) != 0) {
-                    return {0,0};
+                int cnt_to_match = min(info.lcp[u], ssize(t)) - cnt_matched;
+                assert(0 <= cnt_to_match && cnt_to_match <= ssize(t));
+                if(s.compare(info.sa[le[u] + 1] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
+                    return {0,0};//TODO: return {le[u]+1, le[u]+1} ?
                 }
             }
-            if(lcp_val[v] >= ssize(t)) {
+            if(info.lcp[u] >= ssize(t)) {
                 //cout << "return case 2" << endl;
-                return {le[v], ri[v] + 1};
+                return {le[u] + 1, ri[u] + 1};
             }
-            matched_so_far = lcp_val[v];
-            bool found = 0;
-            for(int child : childs[v]) {
-                if(t[matched_so_far] == s[info.sa[le[child]] + matched_so_far]) {
-                    //cout << "found child" << endl;
-                    found = 1;
-                    v = child;
-                }
+            cnt_matched = info.lcp[u];
+            auto it = lcp_tree[u].find(t[cnt_matched]);
+            if(it == lcp_tree[u].end()) {
+                return {0,0};//TODO: see above todo
             }
-            if(found) continue;
-            for(int i = le[v]; i <= ri[v]; i++) {
-                if(s.compare(info.sa[i] + matched_so_far, ssize(t) - matched_so_far, t, matched_so_far, ssize(t) - matched_so_far) == 0) {
-                    //cout << "return case 3" << endl;
-                    return {i, i + 1};
-                }
-            }
-            if(!found) {
-                //cout << "return case 4" << endl;
-                return {0,0};
-            }
+            u = it->second;
         }
-        assert(0);
+        //reached leaf node
+        u -= ssize(info.lcp);
+        assert(0 <= u && u < ssize(info.sa));
+        int cnt_to_match = ssize(t) - cnt_matched;
+        if(ssize(s) - info.sa[u] < cnt_to_match) return {0,0};
+        assert(0 <= cnt_to_match && cnt_to_match <= ssize(t));
+        if(s.compare(info.sa[u] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
+            return {0,0};//TODO: return {le[u]+1, le[u]+1} ?
+        }
+        return {u, u + 1};
     }
     /**
      * @param t needle
