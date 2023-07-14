@@ -2,11 +2,30 @@
 #pragma once
 #include "monotonic_stack.hpp"
 /**
- * 2, 1, 3, 1, 2, 0, 1, 0, 2
- * TODO: ascii art example
+ * arr = {2, 1, 3, 1, 0, 2, 2, 1, 0, 2}
+ *       (------------x---------------)
+ *       (---x------) | (------x)   (x)
+ *       (x) | (x)    | (x---) |     |
+ *        |  |  |     |  |     |     |
+ *        |  |  |     |  |     |     |
+ * index: 0  1  2  3  4  5  6  7  8  9
+ * root = 4
+ * node | children
+ * 4    | 1, 7, 9
+ * 1    | 0, 2
+ * 7    | 5
+ * indexes 3, 6, 8 are not nodes, as they are not the left-most min of their subarrays
  * @code{.cpp}
  *     auto [le, ri] = get_range(arr);
  *     auto [root, adj] = min_cartesian_tree(arr, le, ri);
+ *     queue<int> q({root});
+ *     while (!q.empty()) {
+ *         int u = q.front();
+ *         //arr[u] is the min value of exclusive-exclusive range (le[u], ri[u])
+ *         q.pop();
+ *         for (int v : adj[u])
+ *             q.push(v);
+ *     }
  * @endcode
  * @param arr array of integers (there can be duplicates)
  * @param le,ri arr[i] is the min of range (le[i], ri[i])
