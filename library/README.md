@@ -1,3 +1,6 @@
+## No comments
+See `no_comments` branch for the same code with all comments removed. The CI will keep this branch updated.
+
 ## Doxygen
 Let's try to minimize the # of non-doxygen comments.
 
