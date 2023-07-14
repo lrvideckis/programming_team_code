@@ -26,15 +26,41 @@ template <typename T> struct enhanced_sa {
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
         rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
         root_node(-1) {
-            auto rv = [&](int i) -> int {
-                return ssize(info.lcp) - 1 - i;
+
+            for(int val : info.lcp) cout << val << " ";
+            cout << endl;
+
+            tie(le, ri) = get_range(info.lcp);
+
+            auto is_node = [&](int i) -> bool {
+                assert(0 <= i && i < ssize(info.lcp));
+                return le[i] == -1 || info.lcp[le[i]] < info.lcp[i];
             };
-            vector<int> left = monotonic_stack<int>(info.lcp, less_equal());
-            vector<int> right = monotonic_stack<int>(vector<int>(rbegin(info.lcp), rend(info.lcp)), less());
+
+            vector<int> first_min(ssize(info.lcp));
+            iota(begin(first_min), end(first_min), 0);
             for(int i = 0; i < ssize(info.lcp); i++) {
-                //cout << left[i] << " " << i << " " << rv(right[rv(i)]) << endl;
-                cout << left[i] + 1 << " " << rv(right[rv(i)]) << endl;
+                if(!is_node(i)) {
+                    first_min[i] = first_min[le[i]];
+                }
             }
+
+            //min cartesian tree
+            for(int i = 0; i < ssize(info.lcp); i++) {
+                if(le[i] == -1 && ri[i] == ssize(info.lcp)) {
+                    assert(root_node == -1);
+                    root_node = i;
+                } else if(is_node(i)) {
+                    bool le_par = (le[i] >= 0 && (ri[i] == ssize(info.lcp) || info.lcp[le[i]] > info.lcp[ri[i]]));
+                    int par = first_min[le_par ? le[i] : ri[i]];
+                    assert(info.lcp[par] < info.lcp[i]);
+                    assert(le[par] <= le[i] && ri[i] <= ri[par]);
+                    cout << "edge: " << le[par]+1 << " " << ri[par] << " -> " << le[i]+1 << " " << ri[i] << "    ";
+                    cout << "letter: " << s[info.sa[i] + info.lcp[par]] << endl;//correct
+                }
+            }
+            assert(root_node != -1);
+
         }
     /**
      * @param idx1,idx2 starting 0-based-indexes of suffixes
