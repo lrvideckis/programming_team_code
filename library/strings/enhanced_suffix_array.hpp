@@ -88,6 +88,7 @@ template <typename T> struct enhanced_sa {
                 if (it == end(lcp_tree[u])) return {0, 0};
                 u = it->second;
             }
+            assert(info.sa[u % ssize(s)] + i < ssize(s));//TODO: find reason why this doesn't fail
             if (s[info.sa[u % ssize(s)] + i] != t[i]) return {0, 0};
         }
         return u < ssize(s) ? pair(le[u] + 1, ri[u] + 1) : pair(u - ssize(s), u - ssize(s) + 1);
