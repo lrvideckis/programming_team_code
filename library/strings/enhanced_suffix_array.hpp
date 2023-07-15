@@ -90,6 +90,7 @@ template <typename T> struct enhanced_sa {
             }
             if (u >= ssize(s)) { //reached leaf node
                 int idx = u - ssize(s);
+                assert(info.sa[idx] + i < ssize(s));
                 auto it = mismatch(begin(t) + i, end(t), begin(s) + info.sa[idx] + i, end(s)).first;
                 return {idx, idx + (it == end(t))};
             }
