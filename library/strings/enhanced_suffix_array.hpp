@@ -25,27 +25,27 @@ template <typename T> struct enhanced_sa {
         rmq_lcp(info.lcp, [](int i, int j) -> int {return min(i, j);}),
         rmq_sa(info.sa, [](int i, int j) -> int {return min(i, j);}),
         lcp_tree(ssize(info.lcp)) {
-            tie(le, ri) = get_range(info.lcp);
-            vector<vector<int>> adj;
-            tie(root, adj) = min_cartesian_tree(info.lcp, le, ri);
-            assert(ssize(adj) == ssize(info.lcp));
-            if(root == -1) return;//TODO: try to find a way to not special case this
-            queue<int> q({root});
-            while(!q.empty()) {
-                int u = q.front();
-                q.pop();
-                int prev = le[u] + 1;
-                for(int v : adj[u]) {
-                    for(int i = prev; i <= le[v]; i++)
-                        assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
-                    assert(lcp_tree[u].emplace(s[info.sa[v] + info.lcp[u]], v).second);
-                    prev = ri[v] + 1;
-                    q.push(v);
-                }
-                for(int i = prev; i <= ri[u]; i++)
+        tie(le, ri) = get_range(info.lcp);
+        vector<vector<int>> adj;
+        tie(root, adj) = min_cartesian_tree(info.lcp, le, ri);
+        assert(ssize(adj) == ssize(info.lcp));
+        if (root == -1) return; //TODO: try to find a way to not special case this
+        queue<int> q({root});
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
+            int prev = le[u] + 1;
+            for (int v : adj[u]) {
+                for (int i = prev; i <= le[v]; i++)
                     assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
+                assert(lcp_tree[u].emplace(s[info.sa[v] + info.lcp[u]], v).second);
+                prev = ri[v] + 1;
+                q.push(v);
             }
+            for (int i = prev; i <= ri[u]; i++)
+                assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
         }
+    }
     /**
      * @param idx1,idx2 starting 0-based-indexes of suffixes
      * @returns max integer k such that s.substr(idx1, k) == s.substr(idx2, k)
@@ -76,30 +76,29 @@ template <typename T> struct enhanced_sa {
      * @space O(1)
      */
     pair<int, int> find(const T& t) const {
-
-        if(root == -1) {//TODO: find a way to not have to special case this
+        if (root == -1) { //TODO: find a way to not have to special case this
             assert(ssize(info.sa) <= 1);
             return (ssize(t) == 1 && s == t) ? pair(0, 1) : pair(0, 0);
         }
         assert(ssize(info.sa) >= 2);
         int u = root;
         int cnt_matched = 0;
-        while(u < ssize(info.lcp)) {
+        while (u < ssize(info.lcp)) {
             {
                 int cnt_to_match = min(info.lcp[u], ssize(t)) - cnt_matched;
                 assert(0 <= cnt_to_match && cnt_to_match <= ssize(t));
-                if(s.compare(info.sa[le[u] + 1] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
-                    return {0,0};//TODO: return {le[u]+1, le[u]+1} ?
+                if (s.compare(info.sa[le[u] + 1] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
+                    return {0, 0}; //TODO: return {le[u]+1, le[u]+1} ?
                 }
             }
-            if(info.lcp[u] >= ssize(t)) {
+            if (info.lcp[u] >= ssize(t)) {
                 //cout << "return case 2" << endl;
                 return {le[u] + 1, ri[u] + 1};
             }
             cnt_matched = info.lcp[u];
             auto it = lcp_tree[u].find(t[cnt_matched]);
-            if(it == lcp_tree[u].end()) {
-                return {0,0};//TODO: see above todo
+            if (it == end(lcp_tree[u])) {
+                return {0, 0}; //TODO: see above todo
             }
             u = it->second;
         }
@@ -107,10 +106,10 @@ template <typename T> struct enhanced_sa {
         u -= ssize(info.lcp);
         assert(0 <= u && u < ssize(info.sa));
         int cnt_to_match = ssize(t) - cnt_matched;
-        if(ssize(s) - info.sa[u] < cnt_to_match) return {0,0};
+        if (ssize(s) - info.sa[u] < cnt_to_match) return {0, 0};
         assert(0 <= cnt_to_match && cnt_to_match <= ssize(t));
-        if(s.compare(info.sa[u] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
-            return {0,0};//TODO: return {le[u]+1, le[u]+1} ?
+        if (s.compare(info.sa[u] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
+            return {0, 0}; //TODO: return {le[u]+1, le[u]+1} ?
         }
         return {u, u + 1};
     }
