@@ -82,36 +82,19 @@ template <typename T> struct enhanced_sa {
         }
         assert(ssize(info.sa) >= 2);
         int u = root;
-        int cnt_matched = 0;
-        while (u < ssize(info.lcp)) {
-            {
-                int cnt_to_match = min(info.lcp[u], ssize(t)) - cnt_matched;
-                assert(0 <= cnt_to_match && cnt_to_match <= ssize(t));
-                if (s.compare(info.sa[le[u] + 1] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
-                    return {0, 0}; //TODO: return {le[u]+1, le[u]+1} ?
-                }
+        for (int i = 0, u = root; i < ssize(t); i++) {
+            if (u < ssize(info.lcp) && i == info.lcp[u]) {
+                auto it = lcp_tree[u].find(t[i]);
+                if (it == end(lcp_tree[u])) return {0, 0};
+                u = it->second;
             }
-            if (info.lcp[u] >= ssize(t)) {
-                //cout << "return case 2" << endl;
-                return {le[u] + 1, ri[u] + 1};
+            if (u >= ssize(info.lcp)) {
+                if (s[info.sa[u - ssize(info.lcp)] + i] != t[i]) return {0, 0};
+            } else {
+                if (s[info.sa[u] + i] != t[i]) return {0, 0};
             }
-            cnt_matched = info.lcp[u];
-            auto it = lcp_tree[u].find(t[cnt_matched]);
-            if (it == end(lcp_tree[u])) {
-                return {0, 0}; //TODO: see above todo
-            }
-            u = it->second;
         }
-        //reached leaf node
-        u -= ssize(info.lcp);
-        assert(0 <= u && u < ssize(info.sa));
-        int cnt_to_match = ssize(t) - cnt_matched;
-        if (ssize(s) - info.sa[u] < cnt_to_match) return {0, 0};
-        assert(0 <= cnt_to_match && cnt_to_match <= ssize(t));
-        if (s.compare(info.sa[u] + cnt_matched, cnt_to_match, t, cnt_matched, cnt_to_match) != 0) {
-            return {0, 0}; //TODO: return {le[u]+1, le[u]+1} ?
-        }
-        return {u, u + 1};
+        return u < ssize(info.lcp) ? pair(le[u] + 1, ri[u] + 1) : pair(u - ssize(info.lcp), u - ssize(info.lcp) + 1);
     }
     /**
      * @param t needle
