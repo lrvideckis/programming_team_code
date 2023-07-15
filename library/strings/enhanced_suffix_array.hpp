@@ -37,13 +37,13 @@ template <typename T> struct enhanced_sa {
             int prev = le[u] + 1;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++)
-                    assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
+                    assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(s) + i).second);
                 assert(lcp_tree[u].emplace(s[info.sa[v] + info.lcp[u]], v).second);
                 prev = ri[v] + 1;
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++)
-                assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(info.lcp) + i).second);
+                assert(lcp_tree[u].emplace(s[info.sa[i] + info.lcp[u]], ssize(s) + i).second);
         }
     }
     /**
@@ -83,18 +83,14 @@ template <typename T> struct enhanced_sa {
         assert(ssize(info.sa) >= 2);
         int u = root;
         for (int i = 0, u = root; i < ssize(t); i++) {
-            if (u < ssize(info.lcp) && i == info.lcp[u]) {
+            if (u < ssize(s) && i == info.lcp[u]) {
                 auto it = lcp_tree[u].find(t[i]);
                 if (it == end(lcp_tree[u])) return {0, 0};
                 u = it->second;
             }
-            if (u >= ssize(info.lcp)) {
-                if (s[info.sa[u - ssize(info.lcp)] + i] != t[i]) return {0, 0};
-            } else {
-                if (s[info.sa[u] + i] != t[i]) return {0, 0};
-            }
+            if (s[info.sa[u % ssize(s)] + i] != t[i]) return {0, 0};
         }
-        return u < ssize(info.lcp) ? pair(le[u] + 1, ri[u] + 1) : pair(u - ssize(info.lcp), u - ssize(info.lcp) + 1);
+        return u < ssize(s) ? pair(le[u] + 1, ri[u] + 1) : pair(u - ssize(s), u - ssize(s) + 1);
     }
     /**
      * @param t needle
