@@ -82,7 +82,7 @@ template <typename T> struct enhanced_sa {
         }
         assert(ssize(info.sa) >= 2);
         int u = root;
-        for (int i = 0, u = root; i < ssize(t); i++) {
+        for (int i = 0; i < ssize(t); i++) {
             if (u < ssize(s) && i == info.lcp[u]) {
                 auto it = lcp_tree[u].find(t[i]);
                 if (it == end(lcp_tree[u])) return {0, 0};
