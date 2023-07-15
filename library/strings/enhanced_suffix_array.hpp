@@ -83,13 +83,17 @@ template <typename T> struct enhanced_sa {
         assert(ssize(info.sa) >= 2);
         int u = root;
         for (int i = 0; i < ssize(t); i++) {
-            if (u < ssize(s) && i == info.lcp[u]) {
+            if (i == info.lcp[u]) {
                 auto it = lcp_tree[u].find(t[i]);
                 if (it == end(lcp_tree[u])) return {0, 0};
                 u = it->second;
             }
-            assert(info.sa[u % ssize(s)] + i < ssize(s));//TODO: find reason why this doesn't fail
-            if (s[info.sa[u % ssize(s)] + i] != t[i]) return {0, 0};
+            if (u >= ssize(s)) { //reached leaf node
+                int idx = u - ssize(s);
+                auto it = mismatch(begin(t) + i, end(t), begin(s) + info.sa[idx] + i, end(s)).first;
+                return {idx, idx + (it == end(t))};
+            }
+            if (s[info.sa[u] + i] != t[i]) return {0, 0};
         }
         return u < ssize(s) ? pair(le[u] + 1, ri[u] + 1) : pair(u - ssize(s), u - ssize(s) + 1);
     }
