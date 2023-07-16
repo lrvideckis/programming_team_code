@@ -18,7 +18,7 @@ template <typename T> struct enhanced_sa {
     vector<map<int, int>> child;
     /**
      * @param a_s,a_sa,a_rank,a_lcp a string and its suffix,lcp arrays
-     * @time O(n)
+     * @time O(n); constructing a map from a sorted array is linear
      * @space all member arrays are O(n)
      */
     enhanced_sa(const T& a_s, const vector<int>& a_sa, const vector<int>& a_rank, const vector<int>& a_lcp) :
@@ -32,15 +32,18 @@ template <typename T> struct enhanced_sa {
             int u = q.front();
             q.pop();
             int prev = le[u] + 1;
+            vector<pair<int, int>> childs;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++)
-                    assert(child[u].emplace(s[sa[i] + lcp[u]], ssize(s) + i).second);
-                assert(child[u].emplace(s[sa[v] + lcp[u]], v).second);
+                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
+                childs.emplace_back(s[sa[v] + lcp[u]], v);
                 prev = ri[v] + 1;
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++)
-                assert(child[u].emplace(s[sa[i] + lcp[u]], ssize(s) + i).second);
+                childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
+            for (int i = 1; i < ssize(childs); i++) assert(childs[i - 1].first < childs[i].first);
+            child[u] = map(begin(childs), end(childs));
         }
     }
     /**
