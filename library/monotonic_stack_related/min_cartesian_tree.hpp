@@ -24,7 +24,7 @@
  *     if (root != -1) q.push(root);
  *     while (!q.empty()) {
  *         int u = q.front();
- *         //arr[u] is the min value of exclusive-exclusive range (le[u], ri[u])
+ *         //arr[u] is the leftmost min of exclusive-exclusive range (le[u], ri[u])
  *         q.pop();
  *         for (int v : adj[u])
  *             q.push(v);
