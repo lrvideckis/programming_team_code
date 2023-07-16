@@ -97,7 +97,7 @@ template <typename T> struct enhanced_sa {
             if (s[info.sa[u] + i] != t[i]) return {0, 0};
         }
         assert(u < ssize(s));
-        return pair(le[u] + 1, ri[u] + 1);
+        return {le[u] + 1, ri[u] + 1};
     }
     /**
      * @param t needle
