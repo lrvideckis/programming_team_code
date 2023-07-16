@@ -39,7 +39,7 @@ template <typename T> struct enhanced_sa {
         }
     }
     /**
-     * @see https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.1129
+     * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
      * @param t needle
      * @returns range [le, ri) such that:
      * - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
