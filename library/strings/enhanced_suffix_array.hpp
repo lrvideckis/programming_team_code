@@ -34,7 +34,9 @@ template <typename T> struct enhanced_sa {
             q.pop();
             vector<pair<int, int>> childs;
             if (adj[u].empty() || le[u] < le[adj[u][0]]) {
+                num_leaves++;
                 int i = le[u] + 1;
+                assert(sa[i] + lcp[u] <= ssize(s));
                 if (sa[i] + lcp[u] < ssize(s))
                     childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
             }
@@ -57,7 +59,7 @@ template <typename T> struct enhanced_sa {
             for (int i = 1; i < ssize(childs); i++) assert(childs[i - 1].first < childs[i].first);
             child[u] = map(begin(childs), end(childs));
         }
-        assert(num_leaves <= ssize(s));
+        assert(num_leaves == ssize(s));
     }
     /**
      * performs trie-style downwards tree walk
