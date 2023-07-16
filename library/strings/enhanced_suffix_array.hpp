@@ -4,6 +4,7 @@
 #include "../monotonic_stack_related/min_cartesian_tree.hpp"
 /**
  * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
+ * offline version of suffix tree
  */
 template <typename T> struct enhanced_sa {
     T s;
