@@ -32,10 +32,18 @@ template <typename T> struct enhanced_sa {
         while (!q.empty()) {
             int u = q.front();
             q.pop();
-            int prev = le[u] + 1;
             vector<pair<int, int>> childs;
+            if (adj[u].empty() || le[u] < le[adj[u][0]]) {
+                num_leaves++;
+                int i = le[u] + 1;
+                assert(sa[i] + lcp[u] <= ssize(s));
+                if (sa[i] + lcp[u] < ssize(s))
+                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
+            }
+            int prev = le[u] + 2;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
+                    assert(sa[i] + lcp[u] < ssize(s));
                     childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
                     num_leaves++;
                 }
@@ -44,6 +52,7 @@ template <typename T> struct enhanced_sa {
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++) {
+                assert(sa[i] + lcp[u] < ssize(s));
                 childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
                 num_leaves++;
             }
@@ -64,7 +73,8 @@ template <typename T> struct enhanced_sa {
     pair<int, int> find(const T& t) const {
         if (root == -1) {
             assert(ssize(sa) <= 1);
-            return (ssize(t) == 1 && s == t) ? pair(0, 1) : pair(0, 0);
+            if (t == "" || s == t) return {0, ssize(s)};
+            return {0, 0};
         }
         assert(ssize(sa) >= 2);
         int u = root;
