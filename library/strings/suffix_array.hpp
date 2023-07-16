@@ -36,6 +36,11 @@ struct sa_info {
  *     vector<int> arr;
  *     auto [sa, rank, lcp] = get_suffix_array(arr, 100'005);
  * @endcode
+ * @param s,max_val string/array with 0 <= s[i] < max_val
+ * @returns suffix array and lcp vectors
+ * @time O((n log n) + max_val)
+ * @space this function allocates O(n) space for `sa`, `rank`, and `lcp`
+ * vectors, but also allocates a O(max_val) vector `freq` temporarily
  */
 template <typename T> sa_info get_suffix_array(const T& s, int max_val) {
     int n = ssize(s);
