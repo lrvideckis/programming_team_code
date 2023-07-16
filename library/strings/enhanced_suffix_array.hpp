@@ -32,8 +32,13 @@ template <typename T> struct enhanced_sa {
         while (!q.empty()) {
             int u = q.front();
             q.pop();
-            int prev = le[u] + 2;
             vector<pair<int, int>> childs;
+            if (adj[u].empty() || le[u] < le[adj[u][0]]) {
+                int i = le[u] + 1;
+                if (sa[i] + lcp[u] < ssize(s))
+                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
+            }
+            int prev = le[u] + 2;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
                     assert(sa[i] + lcp[u] < ssize(s));
