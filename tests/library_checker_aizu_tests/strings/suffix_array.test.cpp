@@ -10,7 +10,7 @@ int main() {
     string s;
     cin >> s;
     int n = ssize(s);
-    auto [sa, rank, _] = get_suffix_array(s, 128);
+    auto [sa, rank, lcp] = get_suffix_array(s, 128);
     assert(ssize(sa) == n);
     assert(ssize(rank) == n);
     assert(ssize(lcp) == n - 1);

@@ -39,7 +39,7 @@ struct sa_info {
  */
 template <typename T> sa_info get_suffix_array(const T& s, int max_val) {
     int n = ssize(s);
-    vector<int> sa(n), rank(n), tmp(n);
+    vector<int> sa(n), rank(begin(s), end(s)), tmp(n);
     iota(begin(sa), end(sa), 0);
     for (int len = 0; len < n; len = max(1, 2 * len)) {
         iota(begin(tmp), begin(tmp) + len, n - len);
