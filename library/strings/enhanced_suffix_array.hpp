@@ -36,6 +36,7 @@ template <typename T> struct enhanced_sa {
             vector<pair<int, int>> childs;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
+                    assert(sa[i] + lcp[u] < ssize(s));
                     childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
                     num_leaves++;
                 }
@@ -44,6 +45,7 @@ template <typename T> struct enhanced_sa {
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++) {
+                assert(sa[i] + lcp[u] < ssize(s));
                 childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
                 num_leaves++;
             }
