@@ -2,6 +2,7 @@
 #include "../template.hpp"
 
 #include "../../../library/strings/suffix_array.hpp"
+#include "../../../library/strings/enhanced_suffix_array.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -15,6 +16,7 @@ int main() {
     cin >> s;
     int n = ssize(s);
     auto [sa, rank, lcp] = get_suffix_array(s, 128);
+    enhanced_sa esa(s, sa, rank, lcp);
     assert(ssize(sa) == n);
     assert(ssize(rank) == n);
     assert(ssize(lcp) == n - 1);
