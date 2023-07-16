@@ -17,6 +17,8 @@ int main() {
     int n = ssize(s);
     auto [sa, rank, lcp] = get_suffix_array(s, 128);
     enhanced_sa esa(s, sa, rank, lcp);
+    auto [le, ri] = esa.find("");
+    assert(le == 0 && ri == n);
     assert(ssize(sa) == n);
     assert(ssize(rank) == n);
     assert(ssize(lcp) == n - 1);

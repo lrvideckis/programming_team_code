@@ -73,7 +73,8 @@ template <typename T> struct enhanced_sa {
     pair<int, int> find(const T& t) const {
         if (root == -1) {
             assert(ssize(sa) <= 1);
-            return (ssize(t) == 1 && s == t) ? pair(0, 1) : pair(0, 0);
+            if (t == "" || s == t) return {0, ssize(s)};
+            return {0, 0};
         }
         assert(ssize(sa) >= 2);
         int u = root;

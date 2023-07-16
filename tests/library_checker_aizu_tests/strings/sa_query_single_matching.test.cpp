@@ -15,6 +15,14 @@ int main() {
     auto [sa, rank, lcp] = get_suffix_array(s, 128);
     sa_query sq(s, sa, rank, lcp);
     enhanced_sa esa(s, sa, rank, lcp);
+    {
+        auto [le, ri] = sq.find("");
+        assert(le == 0 && ri == ssize(s));
+    }
+    {
+        auto [le, ri] = esa.find("");
+        assert(le == 0 && ri == ssize(s));
+    }
     auto [le, ri] = sq.find(t);
     auto [le2, ri2] = esa.find(t);
     assert(ri - le == ri2 - le2);
