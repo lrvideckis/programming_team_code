@@ -1,33 +1,31 @@
 /** @file */
 #pragma once
+/**
+ * suffixes of "banana":
+ * 0 banana
+ * 1 anana
+ * 2 nana
+ * 3 ana
+ * 4 na
+ * 5 a
+ * sorted,  longest common prefix (lcp)
+ * 5 a
+ *   |      1
+ * 3 ana
+ *   |||    3
+ * 1 anana
+ *          0
+ * 0 banana
+ *          0
+ * 4 na
+ *   ||     2
+ * 2 nana
+ * sa = [5, 3, 1, 0, 4, 2]
+ * rank = [3, 2, 5, 1, 4, 0] (sa[rank[i]] == i, rank[sa[i]] == i)
+ * lcp = [1, 3, 0, 0, 2]
+ */
 struct sa_info {
-    /**
-     * suffixes of "banana":
-     * 0 banana
-     * 1 anana
-     * 2 nana
-     * 3 ana
-     * 4 na
-     * 5 a
-     * sorted,  longest common prefix (lcp)
-     * 5 a
-     *   |      1
-     * 3 ana
-     *   |||    3
-     * 1 anana
-     *          0
-     * 0 banana
-     *          0
-     * 4 na
-     *   ||     2
-     * 2 nana
-     * sa = [5, 3, 1, 0, 4, 2]
-     * rank = [3, 2, 5, 1, 4, 0] (sa[rank[i]] == i, rank[sa[i]] == i)
-     * lcp = [1, 3, 0, 0, 2]
-     * @{
-     */
     vector<int> sa, rank, lcp;
-    /** @} */
 };
 /**
  * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/strings/SuffixArray.h
