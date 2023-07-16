@@ -4,6 +4,7 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
+#include "../../../library/strings/suffix_array.hpp"
 #include "../../../library/strings/suffix_array_query.hpp"
 #include "../../../library/strings/enhanced_suffix_array.hpp"
 
@@ -11,8 +12,9 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    sa_query sq(s, 128);
-    enhanced_sa esa(s, 128);
+    auto [sa, rank, lcp] = get_suffix_array(s, 128);
+    sa_query sq(s, sa, rank, lcp);
+    enhanced_sa esa(s, sa, rank, lcp);
     int q;
     cin >> q;
     while (q--) {

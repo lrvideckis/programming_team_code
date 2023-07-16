@@ -8,7 +8,7 @@ int main() {
     string s;
     cin >> s;
     int n = ssize(s);
-    suffix_array str_info(s, 128);
-    assert(ssize(str_info.lcp) == n - 1);
-    cout << 1LL * n * (n + 1) / 2 - accumulate(begin(str_info.lcp), end(str_info.lcp), 0LL) << '\n';
+    auto [sa, rank, lcp] = get_suffix_array(s, 128);
+    assert(ssize(lcp) == n - 1);
+    cout << 1LL * n * (n + 1) / 2 - accumulate(begin(lcp), end(lcp), 0LL) << '\n';
 }
