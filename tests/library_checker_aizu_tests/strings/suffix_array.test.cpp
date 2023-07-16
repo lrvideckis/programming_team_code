@@ -13,6 +13,7 @@ int main() {
     auto [sa, rank, _] = get_suffix_array(s, 128);
     assert(ssize(sa) == n);
     assert(ssize(rank) == n);
+    assert(ssize(lcp) == n - 1);
     for (int i = 0; i < n; i++) {
         assert(sa[rank[i]] == i);
         assert(rank[sa[i]] == i);
