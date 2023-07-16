@@ -2,6 +2,9 @@
 #pragma once
 #include "suffix_array.hpp"
 #include "../monotonic_stack_related/min_cartesian_tree.hpp"
+/**
+ * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
+ */
 template <typename T> struct enhanced_sa {
     T s;
     suffix_array<T> info;
@@ -39,7 +42,7 @@ template <typename T> struct enhanced_sa {
         }
     }
     /**
-     * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
+     * performs trie-style downwards tree walk
      * @param t needle
      * @returns range [le, ri) such that:
      * - for all i in [le, ri): t == s.substr(info.sa[i], ssize(t))
