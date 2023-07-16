@@ -28,23 +28,29 @@ template <typename T> struct enhanced_sa {
         tie(root, adj) = min_cartesian_tree(lcp, le, ri);
         if (root == -1) return;
         queue<int> q({root});
+        int num_leaves = 0;
         while (!q.empty()) {
             int u = q.front();
             q.pop();
             int prev = le[u] + 1;
             vector<pair<int, int>> childs;
             for (int v : adj[u]) {
-                for (int i = prev; i <= le[v]; i++)
+                for (int i = prev; i <= le[v]; i++) {
                     childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
+                    num_leaves++;
+                }
                 childs.emplace_back(s[sa[v] + lcp[u]], v);
                 prev = ri[v] + 1;
                 q.push(v);
             }
-            for (int i = prev; i <= ri[u]; i++)
+            for (int i = prev; i <= ri[u]; i++) {
                 childs.emplace_back(s[sa[i] + lcp[u]], ssize(s) + i);
+                num_leaves++;
+            }
             for (int i = 1; i < ssize(childs); i++) assert(childs[i - 1].first < childs[i].first);
             child[u] = map(begin(childs), end(childs));
         }
+        assert(num_leaves == ssize(s));
     }
     /**
      * performs trie-style downwards tree walk
