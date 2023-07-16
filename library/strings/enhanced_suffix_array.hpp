@@ -4,6 +4,12 @@
 /**
  * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
  * offline version of suffix tree
+ * @code{.cpp}
+ *     string s;
+ *     cin >> s;
+ *     auto [sa, rank, lcp] = get_suffix_array(s, 128);
+ *     enhanced_sa esa(s, sa, rank, lcp);
+ * @endcode
  */
 template <typename T> struct enhanced_sa {
     T s;

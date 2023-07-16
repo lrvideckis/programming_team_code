@@ -4,6 +4,8 @@
 /**
  * Various queries you can do based on suffix array.
  * @code{.cpp}
+ *     string s;
+ *     cin >> s;
  *     auto [sa, rank, lcp] = get_suffix_array(s, 128);
  *     sa_query saq(s, sa, rank, lcp);
  * @endcode
