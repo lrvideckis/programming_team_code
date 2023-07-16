@@ -5,8 +5,12 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    assert(get_suffix_array<string>("", 128).lcp.empty());
-    assert(get_suffix_array<string>("a", 128).lcp.empty());
+    {
+        vector<int> lcp = get_suffix_array<string>("", 128).lcp;
+        assert(lcp.empty());
+        lcp = get_suffix_array<string>("a", 128).lcp;
+        assert(lcp.empty());
+    }
     string s;
     cin >> s;
     int n = ssize(s);
