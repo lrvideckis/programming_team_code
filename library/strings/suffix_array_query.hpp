@@ -44,6 +44,23 @@ template <typename T> struct sa_query {
         return rank[idx1] < rank[idx2];
     }
     /**
+     * @param str_le,str_ri [str_le, str_ri) is the substring you are querying the range for
+     * @returns a range [le, ri) such that:
+     * - for all `i` in [le, ri): the substring [str_le, str_ri) is a
+     *   prefix of the suffix starting at position `i`
+     * @time O(log n)
+     * @space O(1)
+     */
+    inline pair<int, int> get_range(int str_le, int str_ri) const {
+        assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(s));
+        auto cmp = [&](int i, int j) -> bool {
+            return get_lcp(i, );
+        };
+        auto le = lower_bound(begin(sa), end(sa), str_le, cmp);
+
+        return {le - begin(sa), ri - begin(sa)};
+    }
+    /**
      * @see https://github.com/yosupo06/Algorithm/blob /master/src/string/suffixarray.hpp
      * @param t needle
      * @returns range [le, ri) such that:
