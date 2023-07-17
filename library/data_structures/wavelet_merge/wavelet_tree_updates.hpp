@@ -17,7 +17,7 @@ inline int split(int tl, int tr) {
  * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
  */
 struct wavelet_tree_updates {
-    const int n, minv, maxv;
+    int n, minv, maxv;
     vector<bool_presum> bool_presums;
     vector<bool_bit> bool_bits;
     /**
