@@ -7,7 +7,7 @@
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     {
-        string s = "";
+        string s;
         auto [sa, sa_inv] = get_sa(s, 256);
         assert(get_lcp_array(s, sa, sa_inv).empty());
         s = "a";
