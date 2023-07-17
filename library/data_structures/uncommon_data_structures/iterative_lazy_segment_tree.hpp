@@ -8,27 +8,27 @@
  * their recursive counterparts.
  */
 struct iter_seg_tree {
-    const int S; /**< smallest power of 2 >= n */
+    int s; /**< smallest power of 2 >= n */
     seg_tree st;
-    iter_seg_tree(int n) : S(1 << __lg(2 * n - 1)), st(n) {}
-    iter_seg_tree(const vector<long long>& arr) : S(1 << __lg(2 * ssize(arr) - 1)), st(arr) {}
+    iter_seg_tree(int n) : s(1 << __lg(2 * n - 1)), st(n) {}
+    iter_seg_tree(const vector<long long>& arr) : s(1 << __lg(2 * ssize(arr) - 1)), st(arr) {}
     inline void pull(int v) {st.tree[v] = op(st.tree[2 * v], st.tree[2 * v + 1]);}
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
     inline int to_leaf(int i) const {
-        i += S;
-        return i < 2 * st.N ? i : 2 * (i - st.N);
+        i += s;
+        return i < 2 * st.n ? i : 2 * (i - st.n);
     }
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
     inline pair<int, int> get_node_bounds(int a) const {
-        assert(1 <= a && a < 2 * st.N);
-        int l = __builtin_clz(a) - __builtin_clz(2 * st.N - 1);
+        assert(1 <= a && a < 2 * st.n);
+        int l = __builtin_clz(a) - __builtin_clz(2 * st.n - 1);
         int x = a << l, y = (a + 1) << l;
-        assert(S <= x && x < y && y <= 2 * S);
-        return {(x >= 2 * st.N ? (x >> 1) + st.N : x) - S, (y >= 2 * st.N ? (y >> 1) + st.N : y) - S};
+        assert(s <= x && x < y && y <= 2 * s);
+        return {(x >= 2 * st.n ? (x >> 1) + st.n : x) - s, (y >= 2 * st.n ? (y >> 1) + st.n : y) - s};
     }
     void push_parents(int le, int ri) {
         int lca_l_r = __lg((le - 1) ^ ri);
@@ -45,7 +45,7 @@ struct iter_seg_tree {
      * @param le,ri defines range [le, ri)
      */
     void update_iter(int le, int ri, long long change) {
-        assert(0 <= le && le <= ri && ri <= st.N);
+        assert(0 <= le && le <= ri && ri <= st.n);
         if (le == ri) return;
         le = to_leaf(le), ri = to_leaf(ri);
         push_parents(le, ri);
@@ -67,7 +67,7 @@ struct iter_seg_tree {
      * @param le,ri defines range [le, ri)
      */
     long long query_iter(int le, int ri) {
-        assert(0 <= le && le <= ri && ri <= st.N);
+        assert(0 <= le && le <= ri && ri <= st.n);
         if (le == ri) return 0;
         le = to_leaf(le), ri = to_leaf(ri);
         push_parents(le, ri);

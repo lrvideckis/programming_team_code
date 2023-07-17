@@ -14,7 +14,7 @@
  * @endcode
  */
 template <typename T, typename F = function<T(const T&, const T&)>> struct disjoint_rmq {
-    const int N;
+    int n;
     vector<vector<T>> dp;
     /**
      * examples:
@@ -30,11 +30,11 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @time O(n log n)
      * @space O(n log n) for `dp` vector
      */
-    disjoint_rmq(const vector<T>& arr, F a_op) : N(ssize(arr)), op(a_op) {
-        for (int len = 1; len <= N; len *= 2) {
-            dp.emplace_back(N);
-            for (int le = 0; le < N; le += 2 * len) {
-                int mi = min(N, le + len), ri = min(N, le + 2 * len);
+    disjoint_rmq(const vector<T>& arr, F a_op) : n(ssize(arr)), op(a_op) {
+        for (int len = 1; len <= n; len *= 2) {
+            dp.emplace_back(n);
+            for (int le = 0; le < n; le += 2 * len) {
+                int mi = min(n, le + len), ri = min(n, le + 2 * len);
                 partial_sum(rend(arr) - mi, rend(arr) - le, rend(dp.back()) - mi, [&](const T & x, const T & y) {return op(y, x);});
                 partial_sum(begin(arr) + mi, begin(arr) + ri, begin(dp.back()) + mi, op);
             }
@@ -47,7 +47,7 @@ template <typename T, typename F = function<T(const T&, const T&)>> struct disjo
      * @space O(1)
      */
     inline T query(int le, int ri) const {
-        assert(0 <= le && le < ri && ri <= N);
+        assert(0 <= le && le < ri && ri <= n);
         if (ri - le == 1) return dp[0][le];
         int lg = __lg(le ^ (ri - 1));
         return op(dp[lg][le], dp[lg][ri - 1]);

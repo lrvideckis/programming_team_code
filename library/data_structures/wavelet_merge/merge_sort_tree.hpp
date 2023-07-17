@@ -15,7 +15,7 @@ inline int split(int tl, int tr) {
  * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/mergeSortTree.cpp
  */
 struct merge_sort_tree {
-    const int N;
+    int n;
     vector<int> sorted;
     vector<bool_presum> bool_presums;
     /**
@@ -23,10 +23,10 @@ struct merge_sort_tree {
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      */
-    merge_sort_tree(const vector<int>& arr) : N(ssize(arr)), sorted(N), bool_presums(N, vector<bool>()) {
-        vector<pair<int, bool>> cpy(N);
+    merge_sort_tree(const vector<int>& arr) : n(ssize(arr)), sorted(n), bool_presums(n, vector<bool>()) {
+        vector<pair<int, bool>> cpy(n);
         transform(begin(arr), end(arr), begin(cpy), [](int val) {return pair(val, 0);});
-        build(cpy, 0, N, 1);
+        build(cpy, 0, n, 1);
         transform(begin(cpy), end(cpy), begin(sorted), [](auto val) {return val.first;});
     }
     void build(vector<pair<int, bool>>& cpy, int tl, int tr, int v) {
@@ -47,10 +47,10 @@ struct merge_sort_tree {
      * @space O(log(n)) for recursive stack
      */
     int rect_count(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N && x <= y);
+        assert(0 <= le && le <= ri && ri <= n && x <= y);
         int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
         int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
-        return rect_count_impl(le, ri, xi, yi, 0, N, 1);
+        return rect_count_impl(le, ri, xi, yi, 0, n, 1);
     }
     int rect_count_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
@@ -73,7 +73,7 @@ struct merge_sort_tree {
         int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
         int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
         assert(1 <= k && k <= yi - xi);
-        return kth_smallest_impl(xi, yi, k, 0, N, 1);
+        return kth_smallest_impl(xi, yi, k, 0, n, 1);
     }
     int kth_smallest_impl(int xi, int yi, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;

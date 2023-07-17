@@ -9,7 +9,7 @@
  * @endcode
  */
 template <typename T, typename F = function<bool(const T&, const T&)>> struct linear_rmq {
-    const int N;
+    int n;
     vector<T> arr;
     F less;
     /**
@@ -31,12 +31,12 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
      * @time O(n)
      * @space `arr`, `mask`, and `idx` vectors are all O(n)
      */
-    linear_rmq(const vector<T>& a_arr, F a_less) : N(ssize(a_arr)), arr(a_arr), less(a_less) {
-        for (int n = N; n >= 2; n = ((n + 63) >> 6)) {
+    linear_rmq(const vector<T>& a_arr, F a_less) : n(ssize(a_arr)), arr(a_arr), less(a_less) {
+        for (int sz = n; sz >= 2; sz = ((sz + 63) >> 6)) {
             int level = ssize(idx);
-            mask.emplace_back(n + 1);
-            idx.emplace_back(n);
-            calc(level, 0, n);
+            mask.emplace_back(sz + 1);
+            idx.emplace_back(sz);
+            calc(level, 0, sz);
         }
     }
     void calc(int level, int le, int ri) {
@@ -65,7 +65,7 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
      * @space O(1)
      */
     int query_idx(int le, int ri) const {
-        assert(0 <= le && le < ri && ri <= N);
+        assert(0 <= le && le < ri && ri <= n);
         int res = le;
         for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
             if (ri - le < 64) {
@@ -92,7 +92,7 @@ template <typename T, typename F = function<bool(const T&, const T&)>> struct li
      * @space O(1)
      */
     void update(int pos, const T& val) {
-        assert(0 <= pos && pos < N);
+        assert(0 <= pos && pos < n);
         arr[pos] = val;
         for (int level = 0; level < ssize(mask); level++, pos >>= 6)
             calc(level, max(0, pos - 63), pos + 1);

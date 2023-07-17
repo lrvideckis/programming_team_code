@@ -4,8 +4,8 @@
  * @see https://cp-algorithms.com/string /aho_corasick.html#construction-of-the-trie
  */
 const int K = 26; /**< alphabet size */
+const char MIN_CH = 'A'; /**< 'a' for lowercase, '0' for digits */
 struct trie {
-    const char MIN_CH = 'A'; /**< 'a' for lowercase, '0' for digits */
     struct node {
         int next[K], cnt_words = 0, par = -1;
         char ch;

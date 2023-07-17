@@ -22,16 +22,16 @@ inline long long op(long long vl, long long vr) {
  *     note (1 << k) is the only power of 2 such that n <= (1 << k) < 2 * n
  */
 struct seg_tree {
-    const int N;
+    int n;
     vector<long long> tree, lazy;
-    seg_tree(int n) : N(n), tree(2 * N), lazy(N) {}
-    seg_tree(const vector<long long>& arr) : N(ssize(arr)), tree(2 * N), lazy(N) {
-        rotate_copy(begin(arr), begin(arr) + (N ? 2 * N - (2 << __lg(N)) : 0), end(arr), begin(tree) + N);
-        for (int i = N - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
+    seg_tree(int a_n) : n(a_n), tree(2 * n), lazy(n) {}
+    seg_tree(const vector<long long>& arr) : n(ssize(arr)), tree(2 * n), lazy(n) {
+        rotate_copy(begin(arr), begin(arr) + (n ? 2 * n - (2 << __lg(n)) : 0), end(arr), begin(tree) + n);
+        for (int i = n - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
     }
     inline void apply(long long change, int tl, int tr, int v) {
         tree[v] += (tr - tl) * change;
-        if (v < N) lazy[v] += change;
+        if (v < n) lazy[v] += change;
     }
     inline void push(int tl, int tm, int tr, int v) {
         if (lazy[v]) {
@@ -43,7 +43,7 @@ struct seg_tree {
     /**
      * @param le,ri defines range [le, ri)
      */
-    void update(int le, int ri, long long change) {update(le, ri, change, 0, N, 1);}
+    void update(int le, int ri, long long change) {update(le, ri, change, 0, n, 1);}
     void update(int le, int ri, long long change, int tl, int tr, int v) {
         if (ri <= tl || tr <= le) return;
         if (le <= tl && tr <= ri) return apply(change, tl, tr, v);
@@ -56,7 +56,7 @@ struct seg_tree {
     /**
      * @param le,ri defines range [le, ri)
      */
-    long long query(int le, int ri) {return query(le, ri, 0, N, 1);}
+    long long query(int le, int ri) {return query(le, ri, 0, n, 1);}
     long long query(int le, int ri, int tl, int tr, int v) {
         if (ri <= tl || tr <= le) return 0;
         if (le <= tl && tr <= ri) return tree[v];
