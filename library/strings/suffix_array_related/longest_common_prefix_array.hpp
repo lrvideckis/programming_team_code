@@ -30,7 +30,7 @@
  * @code{.cpp}
  *     string s;
  *     auto [sa, sa_inv] = get_sa(s, 256);
- *     auto lcp = get_lcp(s, sa, sa_inv);
+ *     auto lcp = get_lcp_array(s, sa, sa_inv);
  * @endcode
  *
  * @param s,max_val string/array with 0 <= s[i] < max_val
@@ -38,7 +38,7 @@
  * @time O(n)
  * @space this function allocates O(n) space for `lcp`
  */
-template <typename T> vector<int> get_lcp(const T& s, const vector<int>& sa, const vector<int>& sa_inv) {
+template <typename T> vector<int> get_lcp_array(const T& s, const vector<int>& sa, const vector<int>& sa_inv) {
     int n = ssize(s);
     vector<int> lcp(max(0, n - 1));
     for (int i = 0, k = 0; i < n; i++) {

@@ -2,21 +2,19 @@
 #pragma once
 #include "../../data_structures/sparse_table.hpp"
 #include "suffix_array.hpp"
-#include "longest_common_prefix.hpp"
+#include "longest_common_prefix_array.hpp"
 /**
  * Various queries you can do based on suffix array.
  * @code{.cpp}
  *     string s;
  *     cin >> s;
- *     auto [sa, sa_inv] = get_sa(s, 256);
-*     auto lcp = get_lcp(s, sa, sa_inv);
- *     sa_query saq(s, sa, sa_inv, lcp);
+ *     sa_query saq(s, 256);
  * @endcode
  */
 template <typename T> struct sa_query {
     T s;
     vector<int> sa, sa_inv, lcp;
-    RMQ<int> rmq_lcp, rmq_sa;
+    RMQ<int> rmq_sa, rmq_lcp;
     /**
      * @param a_s,a_sa,a_sa_inv,a_lcp a string and its suffix,lcp arrays
      * @time O(n log n) TODO
@@ -24,9 +22,9 @@ template <typename T> struct sa_query {
      */
     sa_query(const T& a_s, int max_val) : s(a_s) {
         tie(sa, sa_inv) = get_sa(s, max_val);
-        lcp = get_lcp(sa, sa_inv);
-        rmq_lcp(lcp, [](int i, int j) -> int {return min(i, j);});
-        rmq_sa(sa, [](int i, int j) -> int {return min(i, j);});
+        lcp = get_lcp_array(s, sa, sa_inv);
+        rmq_sa = RMQ<int>(sa, [](int x, int y) -> int {return min(x, y);});
+        rmq_lcp = RMQ<int>(lcp, [](int x, int y) -> int {return min(x, y);});
     }
     /**
      * @param i1,i2 starting 0-based-indexes of suffixes
