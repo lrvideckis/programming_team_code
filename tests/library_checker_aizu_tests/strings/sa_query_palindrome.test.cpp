@@ -10,7 +10,7 @@ int main() {
     cin >> s;
     int n = ssize(s);
     s = s + '$' + string(rbegin(s), rend(s));
-    auto [sa, rank, lcp] = get_suffix_array(s, 128);
+    auto [sa, rank, lcp] = get_suffix_array(s, 256);
     sa_query sq(s, sa, rank, lcp);
     for (int i = 0; i < n; i++) {
         for (int j = i; j < min(i + 2, n); j++)

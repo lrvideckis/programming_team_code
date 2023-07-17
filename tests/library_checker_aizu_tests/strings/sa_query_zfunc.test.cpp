@@ -9,7 +9,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    auto [sa, rank, lcp] = get_suffix_array(s, 128);
+    auto [sa, rank, lcp] = get_suffix_array(s, 256);
     sa_query sq(s, sa, rank, lcp);
     //test `less` function
     {

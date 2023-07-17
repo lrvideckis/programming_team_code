@@ -7,22 +7,22 @@
  * @code{.cpp}
  *     string s;
  *     cin >> s;
- *     auto [sa, rank, lcp] = get_suffix_array(s, 128);
- *     enhanced_sa esa(s, sa, rank, lcp);
+ *     auto [sa, sa_inv, lcp] = get_suffix_array(s, 256);
+ *     lcp_tree lcpt(s, sa, sa_inv, lcp);
  * @endcode
  */
-template <typename T> struct enhanced_sa {
+template <typename T> struct lcp_tree {
     T s;
-    vector<int> sa, rank, lcp, le, ri;
+    vector<int> sa, sa_inv, lcp, le, ri;
     int root;
     vector<map<int, int>> child;
     /**
-     * @param a_s,a_sa,a_rank,a_lcp a string and its suffix,lcp arrays
+     * @param a_s,a_sa,a_sa_inv,a_lcp a string and its suffix,lcp arrays
      * @time O(n); constructing a map from a sorted array is linear
      * @space all member arrays are O(n)
      */
-    enhanced_sa(const T& a_s, const vector<int>& a_sa, const vector<int>& a_rank, const vector<int>& a_lcp) :
-        s(a_s), sa(a_sa), rank(a_rank), lcp(a_lcp), child(ssize(lcp)) {
+    lcp_tree(const T& a_s, const vector<int>& a_sa, const vector<int>& a_sa_inv, const vector<int>& a_lcp) :
+        s(a_s), sa(a_sa), sa_inv(a_sa_inv), lcp(a_lcp), child(ssize(lcp)) {
         tie(le, ri) = get_range(lcp);
         vector<vector<int>> adj;
         tie(root, adj) = min_cartesian_tree(lcp, le, ri);
