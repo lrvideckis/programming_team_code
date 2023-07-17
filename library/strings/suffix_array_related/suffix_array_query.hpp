@@ -8,6 +8,8 @@
  * @code{.cpp}
  *     string s;
  *     sa_query saq(s, 256);
+ *     vector<int> arr;
+ *     sa_query saq(arr, 100'005);
  * @endcode
  */
 template <typename T> struct sa_query {
