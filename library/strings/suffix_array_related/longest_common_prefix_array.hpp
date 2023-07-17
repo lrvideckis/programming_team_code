@@ -3,14 +3,7 @@
 /**
  * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/strings/SuffixArray.h
  *
- * suffixes of "banana":
- * banana
- * anana
- * nana
- * ana
- * na
- * a
- *
+ * suffixes of "banana", sorted:
  * a
  * |      1
  * ana
