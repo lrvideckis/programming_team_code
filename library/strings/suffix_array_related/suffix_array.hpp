@@ -11,7 +11,6 @@
  * 4 na     4
  * 5 a      0
  *
- * sorted
  * 5 a      0
  * 3 ana    1
  * 1 anana  2
