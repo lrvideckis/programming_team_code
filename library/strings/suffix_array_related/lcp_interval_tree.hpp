@@ -10,7 +10,7 @@
  *     string s;
  *     lcp_tree lcpt(s, 256);
  *     vector<int> arr;
- *     lcp_tree lcpt(arr, 100'005); TODO
+ *     lcp_tree lcpt(arr, 100'005);
  * @endcode
  */
 template <typename T> struct lcp_tree {
