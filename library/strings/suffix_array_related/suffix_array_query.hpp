@@ -15,9 +15,9 @@ template <typename T> struct sa_query {
     vector<int> sa, sa_inv, lcp;
     RMQ<int> rmq_sa, rmq_lcp;
     /**
-     * @param a_s,a_sa,a_sa_inv,a_lcp a string and its suffix,lcp arrays
-     * @time O(n log n) TODO
-     * @space O(n log n) for RMQ's
+     * @param a_s,max_val string/array with 0 <= s[i] < max_val
+     * @time O((n log n) + max_val)
+     * @space O(n log n) for RMQ's; a O(max_val) vector `freq` is used temporarily during get_sa
      */
     sa_query(const T& a_s, int max_val) : s(a_s) {
         tie(sa, sa_inv) = get_sa(s, max_val);

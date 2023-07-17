@@ -18,7 +18,7 @@ template <typename T> struct lcp_tree {
     vector<map<int, int>> child;
     /**
      * @param a_s,a_sa,a_sa_inv,a_lcp a string and its suffix,lcp arrays
-     * @time O(n); constructing a map from a sorted array is linear
+     * @time TODO O(n); constructing a map from a sorted array is linear
      * @space all member arrays are O(n)
      */
     lcp_tree(const T& a_s, const vector<int>& a_sa, const vector<int>& a_sa_inv, const vector<int>& a_lcp) :
