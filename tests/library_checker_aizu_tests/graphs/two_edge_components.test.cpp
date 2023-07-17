@@ -16,9 +16,6 @@ int main() {
         adj[v].emplace_back(u, i);
         edges[i] = {u, v};
     }
-    {
-    auto [num_2_edge_ccs, is_bridge, two_edge_ccid] = bridges(adj, m);
-    }
     bridge_info cc = bridges(adj, m);
     vector<vector<int>> bt = bridge_tree(adj, cc);
     //check correctness of bridge tree
