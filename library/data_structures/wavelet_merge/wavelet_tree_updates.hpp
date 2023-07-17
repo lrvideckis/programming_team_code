@@ -17,7 +17,7 @@ inline int split(int tl, int tr) {
  * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
  */
 struct wavelet_tree_updates {
-    const int N, MINV, MAXV;
+    const int n, minv, maxv;
     vector<bool_presum> bool_presums;
     vector<bool_bit> bool_bits;
     /**
@@ -30,16 +30,16 @@ struct wavelet_tree_updates {
      *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
      *     wavelet_tree_updates wtu(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
      * @endcode
-     * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
+     * @param arr,a_minv,a_maxv must satisfy minv <= arr[i] < maxv
      * @param active active[i] == 1 iff index i is initially active
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(const vector<int>& arr, int minv, int maxv, const vector<bool>& active) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), bool_bits(2 * (MAXV - MINV), vector<bool>()) {
-        assert(minv < maxv && ssize(active) == N);
-        vector<pair<int, bool>> cpy(N);
+    wavelet_tree_updates(const vector<int>& arr, int a_minv, int a_maxv, const vector<bool>& active) : n(ssize(arr)), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), bool_bits(2 * (maxv - minv), vector<bool>()) {
+        assert(minv < maxv && ssize(active) == n);
+        vector<pair<int, bool>> cpy(n);
         transform(begin(arr), end(arr), begin(active), begin(cpy), [](int x, bool y) {return pair(x, y);});
-        build(cpy, 0, N, MINV, MAXV, 1);
+        build(cpy, 0, n, minv, maxv, 1);
     }
     void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int v) {
         vector<bool> bools(ri - le);
@@ -61,9 +61,9 @@ struct wavelet_tree_updates {
      * @space O(log(maxv - minv)) for recursive stack
      */
     void set_active(int i, bool is_active) {
-        assert(0 <= i && i < N);
+        assert(0 <= i && i < n);
         if (bool_bits[1].on(i) == is_active) return;
-        set_active_impl(i, is_active, MINV, MAXV, 1);
+        set_active_impl(i, is_active, minv, maxv, 1);
     }
     void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
         bool_bits[v].set(i, is_active);
@@ -79,8 +79,8 @@ struct wavelet_tree_updates {
      * @space O(log(maxv - minv)) for recursive stack
      */
     int rect_count(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N && x <= y);
-        return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
+        assert(0 <= le && le <= ri && ri <= n && x <= y);
+        return rect_count_impl(le, ri, x, y, minv, maxv, 1);
     }
     int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
@@ -99,9 +99,9 @@ struct wavelet_tree_updates {
      * @space O(log(maxv - minv)) for recursive stack
      */
     int kth_smallest(int le, int ri, int k) const {
-        assert(0 <= le && ri <= N);
+        assert(0 <= le && ri <= n);
         assert(1 <= k && k <= bool_bits[1].popcount(le, ri));
-        return kth_smallest_impl(le, ri, k, MINV, MAXV, 1);
+        return kth_smallest_impl(le, ri, k, minv, maxv, 1);
     }
     int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;

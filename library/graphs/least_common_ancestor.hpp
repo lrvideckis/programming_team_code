@@ -6,7 +6,7 @@
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
-    const int N;
+    int n;
     /**
      * time in, subtree size, depth, parent, pre order traversal
      * note: in[order[i]] = i, order[in[i]] = i
@@ -20,9 +20,9 @@ struct LCA {
      * @time O(n log n)
      * @space O(n log n) for rmq, all other vectors are O(n)
      */
-    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1) {
-        order.reserve(N);
-        for (int i = 0; i < N; i++)
+    LCA(const vector<vector<int>>& adj) : n(ssize(adj)), in(n), sub_sz(n, 1), d(n), p(n, -1) {
+        order.reserve(n);
+        for (int i = 0; i < n; i++)
             if (p[i] == -1) dfs(adj, i);
         rmq = RMQ<int>(order, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;});
     }
