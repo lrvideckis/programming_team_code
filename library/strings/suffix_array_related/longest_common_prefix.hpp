@@ -32,6 +32,7 @@
  *     auto [sa, sa_inv] = get_sa(s, 256);
  *     auto lcp = get_lcp(s, sa, sa_inv);
  * @endcode
+ *
  * @param s,max_val string/array with 0 <= s[i] < max_val
  * @returns suffix array and lcp vectors
  * @time O(n)
