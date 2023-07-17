@@ -12,7 +12,7 @@ struct cut_info {
  * @see https://cp-algorithms.com/graph/cutpoints.html
  *
  * @code{.cpp}
- *     //example initialization of `adj`:
+ *     vector<vector<pair<int, int>>> adj;
  *     for (int i = 0; i < m; i++) {
  *         int u, v;
  *         cin >> u >> v;
