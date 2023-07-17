@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../template.hpp"
-#include "../../../library/graphs/bridge_tree.hpp"
+#include "../../../library/graphs/bridges_cuts/bridge_tree.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
 
 int main() {
