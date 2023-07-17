@@ -1,14 +1,16 @@
 /** @file */
 #pragma once
-#include "../monotonic_stack_related/min_cartesian_tree.hpp"
+#include "../../monotonic_stack_related/min_cartesian_tree.hpp"
+#include "suffix_array.hpp"
+#include "longest_common_prefix_array.hpp"
 /**
  * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
  * offline version of suffix tree
  * @code{.cpp}
  *     string s;
- *     cin >> s;
- *     auto [sa, sa_inv, lcp] = get_suffix_array(s, 256);
- *     lcp_tree lcpt(s, sa, sa_inv, lcp);
+ *     lcp_tree lcpt(s, 256);
+ *     vector<int> arr;
+ *     lcp_tree lcpt(arr, 100'005); TODO
  * @endcode
  */
 template <typename T> struct lcp_tree {
@@ -17,16 +19,19 @@ template <typename T> struct lcp_tree {
     int root;
     vector<map<int, int>> child;
     /**
-     * @param a_s,a_sa,a_sa_inv,a_lcp a string and its suffix,lcp arrays
-     * @time TODO O(n); constructing a map from a sorted array is linear
-     * @space all member arrays are O(n)
+     * @param TODO a_s,max_val string/array with 0 <= s[i] < max_val
+     * @time O((n log n) + max_val); besides suffix array construction and
+     * RMQs, this is O(n), constructing a map from a sorted array is linear
+     * @space all member variables are O(n)
      */
-    lcp_tree(const T& a_s, const vector<int>& a_sa, const vector<int>& a_sa_inv, const vector<int>& a_lcp) :
-        s(a_s), sa(a_sa), sa_inv(a_sa_inv), lcp(a_lcp), child(ssize(lcp)) {
+    lcp_tree(const T& a_s, int max_val) : s(a_s) {
+        tie(sa, sa_inv) = get_sa(s, max_val);
+        lcp = get_lcp_array(s, sa, sa_inv);
         tie(le, ri) = get_range(lcp);
         vector<vector<int>> adj;
         tie(root, adj) = min_cartesian_tree(lcp, le, ri);
         if (root == -1) return;
+        child.resize(ssize(adj));
         queue<int> q({root});
         int num_leaves = 0;
         while (!q.empty()) {
