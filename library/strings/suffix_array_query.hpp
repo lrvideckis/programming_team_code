@@ -1,51 +1,47 @@
 /** @file */
 #pragma once
-#include "../../data_structures/sparse_table.hpp"
-#include "suffix_array.hpp"
-#include "longest_common_prefix_array.hpp"
+#include "../data_structures/sparse_table.hpp"
 /**
  * Various queries you can do based on suffix array.
  * @code{.cpp}
  *     string s;
- *     sa_query saq(s, 256);
- *     vector<int> arr;
- *     sa_query saq(arr, 100'005);
+ *     cin >> s;
+ *     auto [sa, rank, lcp] = get_suffix_array(s, 128);
+ *     sa_query saq(s, sa, rank, lcp);
  * @endcode
  */
 template <typename T> struct sa_query {
     T s;
-    vector<int> sa, sa_inv, lcp;
-    RMQ<int> rmq_sa, rmq_lcp;
+    vector<int> sa, rank, lcp;
+    RMQ<int> rmq_lcp, rmq_sa;
     /**
-     * @param a_s,max_val string/array with 0 <= s[i] < max_val
-     * @time O((n log n) + max_val)
-     * @space O(n log n) for RMQ's; a O(max_val) vector `freq` is used temporarily during get_sa
+     * @param a_s,a_sa,a_rank,a_lcp a string and its suffix,lcp arrays
+     * @time O(n log n)
+     * @space O(n log n) for RMQ's
      */
-    sa_query(const T& a_s, int max_val) : s(a_s) {
-        tie(sa, sa_inv) = get_sa(s, max_val);
-        lcp = get_lcp_array(s, sa, sa_inv);
-        rmq_sa = RMQ<int>(sa, [](int x, int y) -> int {return min(x, y);});
-        rmq_lcp = RMQ<int>(lcp, [](int x, int y) -> int {return min(x, y);});
-    }
+    sa_query(const T& a_s, const vector<int>& a_sa, const vector<int>& a_rank, const vector<int>& a_lcp) :
+        s(a_s), sa(a_sa), rank(a_rank), lcp(a_lcp),
+        rmq_lcp(lcp, [](int i, int j) -> int {return min(i, j);}),
+        rmq_sa(sa, [](int i, int j) -> int {return min(i, j);}) {}
     /**
-     * @param i1,i2 starting 0-based-indexes of suffixes
-     * @returns max integer k such that s.substr(i1, k) == s.substr(i2, k)
+     * @param idx1,idx2 starting 0-based-indexes of suffixes
+     * @returns max integer k such that s.substr(idx1, k) == s.substr(idx2, k)
      * @time O(1)
      * @space O(1)
      */
-    inline int get_lcp(int i1, int i2) const {
-        if (i1 == i2) return ssize(s) - i1;
-        auto [le, ri] = minmax(sa_inv[i1], sa_inv[i2]);
+    inline int get_lcp(int idx1, int idx2) const {
+        if (idx1 == idx2) return ssize(s) - idx1;
+        auto [le, ri] = minmax(rank[idx1], rank[idx2]);
         return rmq_lcp.query(le, ri);
     }
     /**
-     * @param i1,i2 starting 0-based-indexes of suffixes
-     * @returns 1 iff suffix s.substr(i1) < s.substr(i2)
+     * @param idx1,idx2 starting 0-based-indexes of suffixes
+     * @returns 1 iff suffix s.substr(idx1) < s.substr(idx2)
      * @time O(1)
      * @space O(1)
      */
-    inline bool less(int i1, int i2) const {
-        return sa_inv[i1] < sa_inv[i2];
+    inline bool less(int idx1, int idx2) const {
+        return rank[idx1] < rank[idx2];
     }
     /**
      * @see https://github.com/yosupo06/Algorithm/blob /master/src/string/suffixarray.hpp
