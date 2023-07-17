@@ -1033,7 +1033,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          root \
                          child \
                          sa \
-                         rank \
+                         sa_inv \
                          lcp \
                          MX_BIT \
 
