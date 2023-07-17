@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/biconnected_components"
 #include "../template.hpp"
 
-#include "../../../library/graphs/block_vertex_tree.hpp"
+#include "../../../library/graphs/bridges_cuts/block_vertex_tree.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -16,7 +16,7 @@ int main() {
         adj[v].emplace_back(u, i);
         edges[i] = make_pair(u, v);
     }
-    graph_info cc = bridge_and_cut(adj, m);
+    cut_info cc = cuts(adj, m);
     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
     for (int i = 0; i < n; i++) {
         //cut node if there exists a pair of adjacent edges belonging to different BCCs

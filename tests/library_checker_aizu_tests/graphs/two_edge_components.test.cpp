@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 #include "../template.hpp"
-#include "../../../library/graphs/bridge_tree.hpp"
+#include "../../../library/graphs/bridges_cuts/bridge_tree.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
 
 int main() {
@@ -16,7 +16,7 @@ int main() {
         adj[v].emplace_back(u, i);
         edges[i] = {u, v};
     }
-    graph_info cc = bridge_and_cut(adj, m);
+    bridge_info cc = bridges(adj, m);
     vector<vector<int>> bt = bridge_tree(adj, cc);
     //check correctness of bridge tree
     {
