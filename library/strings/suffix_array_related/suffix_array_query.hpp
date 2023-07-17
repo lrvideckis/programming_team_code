@@ -7,7 +7,6 @@
  * Various queries you can do based on suffix array.
  * @code{.cpp}
  *     string s;
- *     cin >> s;
  *     sa_query saq(s, 256);
  * @endcode
  */
