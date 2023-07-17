@@ -19,8 +19,8 @@
  * 4 na     4
  * 2 nana   5
  *
- * sa = [5, 3, 1, 0, 4, 2]
- * sa_inv = [3, 2, 5, 1, 4, 0] (sa[sa_inv[i]] == i, sa_inv[sa[i]] == i)
+ * sa = {5, 3, 1, 0, 4, 2}
+ * sa_inv = {3, 2, 5, 1, 4, 0} (sa[sa_inv[i]] == i, sa_inv[sa[i]] == i)
  *
  * @code{.cpp}
  *     string s;

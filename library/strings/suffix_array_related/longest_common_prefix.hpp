@@ -23,9 +23,9 @@
  *   ||        2
  * 2 nana   5
  *
- * sa = [5, 3, 1, 0, 4, 2]
- * sa_inv = [3, 2, 5, 1, 4, 0] (sa[sa_inv[i]] == i, sa_inv[sa[i]] == i)
- * lcp = [1, 3, 0, 0, 2]
+ * sa = {5, 3, 1, 0, 4, 2}
+ * sa_inv = {3, 2, 5, 1, 4, 0} (sa[sa_inv[i]] == i, sa_inv[sa[i]] == i)
+ * lcp = {1, 3, 0, 0, 2}
  *
  * @code{.cpp}
  *     string s;
