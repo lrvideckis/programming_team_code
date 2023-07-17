@@ -2,6 +2,7 @@
 #pragma once
 #include "../../data_structures/sparse_table.hpp"
 #include "suffix_array.hpp"
+#include "longest_common_prefix.hpp"
 /**
  * Various queries you can do based on suffix array.
  * @code{.cpp}
