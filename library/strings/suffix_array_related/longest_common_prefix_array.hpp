@@ -27,7 +27,7 @@
  *     auto lcp = get_lcp_array(arr, sa, sa_inv);
  * @endcode
  *
- * @param s,max_val string/array with 0 <= s[i] < max_val
+ * @param s,sa,sa_inv string/array and its suffix array
  * @returns lcp vector
  * @time O(n)
  * @space this function allocates O(n) space for `lcp`
