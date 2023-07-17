@@ -38,9 +38,9 @@ bridge_info bridges(const vector<vector<pair<int, int>>>& adj, int m) {
         st.push_back(u);
         for (auto [v, e_id] : adj[u]) {
             if (e_id == p_id) continue;
-            if (!tin[v]) {
+            if (!tin[v])
                 low = min(low, self(self, v, e_id));
-            } else if (tin[v] < tin[u])
+            else if (tin[v] < tin[u])
                 low = min(low, tin[v]);
         }
         if (tin[u] == low) {
