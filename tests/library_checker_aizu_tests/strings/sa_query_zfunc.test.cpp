@@ -2,13 +2,15 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/suffix_array_query.hpp"
+#include "../../../library/strings/suffix_array.hpp"
+#include "../../../library/strings/suffix_array_query.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    sa_query saq(s, 256);
+    auto [sa, rank, lcp] = get_suffix_array(s, 128);
+    sa_query sq(s, sa, rank, lcp);
     //test `less` function
     {
         for (int num_tests = 50; num_tests--;) {
@@ -16,11 +18,11 @@ int main() {
             auto ri = get_rand<int>(0, ssize(s) - 1);
             if (le > ri)
                 swap(le, ri);
-            assert(saq.less(le, ri) == (s.substr(le) < s.substr(ri)));
+            assert(sq.less(le, ri) == (s.substr(le) < s.substr(ri)));
         }
     }
     for (int i = 0; i < ssize(s); i++)
-        cout << saq.get_lcp(i, 0) << " ";
+        cout << sq.get_lcp(i, 0) << " ";
     cout << '\n';
     return 0;
 }
