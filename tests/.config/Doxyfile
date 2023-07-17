@@ -985,11 +985,10 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          add_edge \
                          dsu_restorable \
                          upd \
-                         init \
                          rmq \
                          calc \
-                         ROOT_L \
-                         ROOT_R \
+                         root_l \
+                         root_r \
                          pst \
                          rd \
                          dp \
@@ -1011,8 +1010,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          safe_map \
                          safe_hash_table \
                          build \
-                         MINV \
-                         MAXV \
+                         minv \
+                         maxv \
                          n \
                          mask \
                          presum \
@@ -1036,6 +1035,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          sa \
                          rank \
                          lcp \
+                         MX_BIT \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

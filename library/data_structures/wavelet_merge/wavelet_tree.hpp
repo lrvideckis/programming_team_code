@@ -16,7 +16,7 @@ inline int split(int tl, int tr) {
  * https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Estruturas/waveletTree.cpp
  */
 struct wavelet_tree {
-    const int N, MINV, MAXV;
+    int n, minv, maxv;
     vector<bool_presum> bool_presums;
     vector<vector<long long>> presums;
     /**
@@ -29,13 +29,13 @@ struct wavelet_tree {
      *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
      *     wavelet_tree wt(arr, 0, ssize(sorted));
      * @endcode
-     * @param arr,minv,maxv must satisfy minv <= arr[i] < maxv
+     * @param arr,a_minv,a_maxv must satisfy minv <= arr[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums`
      *        O((maxv - minv) + n * log(maxv - minv))      for `presums`
      */
-    wavelet_tree(vector<int> arr, int minv, int maxv) : N(ssize(arr)), MINV(minv), MAXV(maxv), bool_presums(MAXV - MINV, vector<bool>()), presums(MAXV - MINV) {
-        build(arr, 0, N, MINV, MAXV, 1);
+    wavelet_tree(vector<int> arr, int a_minv, int a_maxv) : n(ssize(arr)), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), presums(maxv - minv) {
+        build(arr, 0, n, minv, maxv, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
         if (tr - tl <= 1) return;
@@ -57,8 +57,8 @@ struct wavelet_tree {
      * @space O(log(maxv - minv)) for recursive stack
      */
     int rect_count(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N && x <= y);
-        return rect_count_impl(le, ri, x, y, MINV, MAXV, 1);
+        assert(0 <= le && le <= ri && ri <= n && x <= y);
+        return rect_count_impl(le, ri, x, y, minv, maxv, 1);
     }
     int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
@@ -74,8 +74,8 @@ struct wavelet_tree {
      * @space O(log(maxv - minv)) for recursive stack
      */
     long long rect_sum(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N && x <= y);
-        return rect_sum_impl(le, ri, x, y, MINV, MAXV, 1);
+        assert(0 <= le && le <= ri && ri <= n && x <= y);
+        return rect_sum_impl(le, ri, x, y, minv, maxv, 1);
     }
     long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
         if (y <= tl || tr <= x) return 0;
@@ -94,9 +94,9 @@ struct wavelet_tree {
      * @space O(log(maxv - minv)) for recursive stack
      */
     int kth_smallest(int le, int ri, int k) const {
-        assert(0 <= le && ri <= N);
+        assert(0 <= le && ri <= n);
         assert(1 <= k && k <= ri - le);
-        return kth_smallest_impl(le, ri, k, MINV, MAXV, 1);
+        return kth_smallest_impl(le, ri, k, minv, maxv, 1);
     }
     int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;
@@ -115,9 +115,9 @@ struct wavelet_tree {
      * @space O(log(maxv - minv)) for recursive stack
      */
     long long kth_sum(int le, int ri, int k) const {
-        assert(0 <= le && ri <= N);
+        assert(0 <= le && ri <= n);
         assert(0 <= k && k <= ri - le);
-        return kth_sum_impl(le, ri, k, MINV, MAXV, 1);
+        return kth_sum_impl(le, ri, k, minv, maxv, 1);
     }
     long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return 1LL * k * tl;

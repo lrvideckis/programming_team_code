@@ -6,6 +6,7 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T> struct BIT {
     vector<T> bit;
+    BIT() {}
     /**
      * @param n initial size
      * @time O(n)
