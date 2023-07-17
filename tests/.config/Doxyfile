@@ -985,7 +985,6 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          add_edge \
                          dsu_restorable \
                          upd \
-                         init \
                          rmq \
                          calc \
                          ROOT_L \

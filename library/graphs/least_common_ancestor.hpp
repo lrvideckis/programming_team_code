@@ -20,12 +20,11 @@ struct LCA {
      * @time O(n log n)
      * @space O(n log n) for rmq, all other vectors are O(n)
      */
-    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1), rmq(init(adj)) {}
-    RMQ<int> init(const vector<vector<int>>& adj) {
+    LCA(const vector<vector<int>>& adj) : N(ssize(adj)), in(N), sub_sz(N, 1), d(N), p(N, -1) {
         order.reserve(N);
         for (int i = 0; i < N; i++)
             if (p[i] == -1) dfs(adj, i);
-        return {order, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;}};
+        rmq = RMQ<int>(order, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;});
     }
     void dfs(const vector<vector<int>>& adj, int u) {
         in[u] = ssize(order), order.push_back(u);
