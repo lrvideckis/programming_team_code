@@ -30,21 +30,21 @@ struct cut_info {
  */
 cut_info cuts(const vector<vector<pair<int, int>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_bccs = 0;
-    vector<int> tin(n), bcc_id(m), edge_stack;
+    vector<int> tin(n), bcc_id(m), st;
     vector<bool> is_cut(n);
-    edge_stack.reserve(m);
+    st.reserve(m);
     auto dfs = [&](auto&& self, int u, int p_id) -> int {
         int low = tin[u] = timer++, deg = 0;
         for (auto [v, e_id] : adj[u]) {
             if (e_id == p_id) continue;
             if (!tin[v]) {
-                edge_stack.push_back(e_id);
+                st.push_back(e_id);
                 int low_ch = self(self, v, e_id);
                 if (low_ch >= tin[u]) {
                     is_cut[u] = 1;
                     while (1) {
-                        int edge = edge_stack.back();
-                        edge_stack.pop_back();
+                        int edge = st.back();
+                        st.pop_back();
                         bcc_id[edge] = num_bccs;
                         if (edge == e_id) break;
                     }
@@ -53,7 +53,7 @@ cut_info cuts(const vector<vector<pair<int, int>>>& adj, int m) {
                 low = min(low, low_ch);
                 deg++;
             } else if (tin[v] < tin[u]) {
-                edge_stack.push_back(e_id);
+                st.push_back(e_id);
                 low = min(low, tin[v]);
             }
         }

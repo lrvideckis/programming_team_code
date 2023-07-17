@@ -30,25 +30,24 @@ struct bridge_info {
  */
 bridge_info bridges(const vector<vector<pair<int, int>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_2_edge_ccs = 0;
-    vector<int> tin(n), two_edge_ccid(n), node_stack;
+    vector<int> tin(n), two_edge_ccid(n), st;
     vector<bool> is_bridge(m);
-    node_stack.reserve(n);
+    st.reserve(n);
     auto dfs = [&](auto&& self, int u, int p_id) -> int {
-        int low = tin[u] = timer++, deg = 0;
-        node_stack.push_back(u);
+        int low = tin[u] = timer++;
+        st.push_back(u);
         for (auto [v, e_id] : adj[u]) {
             if (e_id == p_id) continue;
             if (!tin[v]) {
                 low = min(low, self(self, v, e_id));
-                deg++;
             } else if (tin[v] < tin[u])
                 low = min(low, tin[v]);
         }
         if (tin[u] == low) {
             if (p_id != -1) is_bridge[p_id] = 1;
             while (1) {
-                int node = node_stack.back();
-                node_stack.pop_back();
+                int node = st.back();
+                st.pop_back();
                 two_edge_ccid[node] = num_2_edge_ccs;
                 if (node == u) break;
             }
