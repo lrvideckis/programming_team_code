@@ -4,20 +4,20 @@
  * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/strings/SuffixArray.h
  *
  * suffixes of "banana":
- * 0 banana
- * 1 anana
- * 2 nana
- * 3 ana
- * 4 na
- * 5 a
+ * 0 banana 3
+ * 1 anana  2
+ * 2 nana   5
+ * 3 ana    1
+ * 4 na     4
+ * 5 a      0
  *
  * sorted
- * 5 a
- * 3 ana
- * 1 anana
- * 0 banana
- * 4 na
- * 2 nana
+ * 5 a      0
+ * 3 ana    1
+ * 1 anana  2
+ * 0 banana 3
+ * 4 na     4
+ * 2 nana   5
  *
  * sa = [5, 3, 1, 0, 4, 2]
  * sa_inv = [3, 2, 5, 1, 4, 0] (sa[sa_inv[i]] == i, sa_inv[sa[i]] == i)
