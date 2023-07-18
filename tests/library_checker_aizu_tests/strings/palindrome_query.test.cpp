@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../../../library/strings/palindrome_query.hpp"
+#include "../../../library/strings/manacher/palindrome_query.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -26,10 +26,8 @@ int main() {
             assert(pal_q.is_pal(l, r) == (substr == string(rbegin(substr), rend(substr))));
         }
     }
-    for (int i = 0; i < n; i++) {
-        cout << 2 * pal_q.pal_len[1][i] + 1 << " ";
-        if (i + 1 < n)
-            cout << 2 * pal_q.pal_len[0][i + 1] << " ";
+    for(int i = 0; i < ssize(pal_q.man); i++) {
+        cout << i - 2 * pal_q.man[i] + 1 << " ";
     }
     return 0;
 }
