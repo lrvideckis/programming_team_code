@@ -2,7 +2,7 @@
 #pragma once
 #include "lca_rmq.hpp"
 /**
- * @param lca,u,v endpoint nodes of path
+ * @param u,v endpoint nodes of path
  * @returns number of edges on path
  * @time O(1)
  * @space O(1)

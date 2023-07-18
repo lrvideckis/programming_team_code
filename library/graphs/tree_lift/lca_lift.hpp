@@ -2,7 +2,7 @@
 #pragma once
 #include "kth_par.hpp"
 /**
- * @param tl,u,v 2 nodes in the same component
+ * @param u,v 2 nodes in the same component
  * @returns lca of u, v
  * @time O(log(path length(u, v)))
  * @space O(1)
