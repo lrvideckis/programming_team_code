@@ -39,7 +39,6 @@ template <typename T> struct sa_query {
         return rmq_lcp.query(le, ri);
     }
     /**
-     *
      * @param i1,i2 starting 0-based-indexes of suffixes
      * @returns 1 iff suffix s.substr(i1) < s.substr(i2)
      * @time O(1)
