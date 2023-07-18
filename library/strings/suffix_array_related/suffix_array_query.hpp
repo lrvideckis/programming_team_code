@@ -49,23 +49,21 @@ template <typename T> struct sa_query {
         return sa_inv[i1] < sa_inv[i2];
     }
     /**
-     * @param str_le,str_ri [str_le, str_ri) is the substring you are querying the range for
+     * @param str_le,str_ri defines a substring [str_le, str_ri) of s
      * @returns a range [le, ri) such that:
-     * - for all `i` in [le, ri): the substring [str_le, str_ri) is a
-     *   prefix of the suffix starting at position `i`
-     * @time O(log n)
+     * - for all i in [le, ri): s.substr(str_le, str_ri - str_le) == s.substr(sa[i], str_ri - str_le)
+     * - `ri - le` is the # of matches of s.substr(str_le, str_ri - str_le) in s.
+     * @time O(log(|s|))
      * @space O(1)
      */
     inline pair<int, int> find_substr(int str_le, int str_ri) const {
-        assert(0 <= str_le && str_le < str_ri && str_ri <= ssize(s));
-        auto cmp = [&](int i, int _) -> bool {
-            return get_lcp(i, str_le) < str_ri - str_le;
+        assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(s));
+        if (str_le == ssize(s)) return {0, ssize(s)};
+        auto cmp = [&](int i, bool flip) -> bool {
+            return (get_lcp(i, str_le) < str_ri - str_le)^ flip;
         };
         auto le = lower_bound(begin(sa), begin(sa) + sa_inv[str_le], 0, cmp);
-        auto cmp2 = [&](int i, int _) -> bool {
-            return get_lcp(i, str_le) >= str_ri - str_le;
-        };
-        auto ri = lower_bound(begin(sa) + sa_inv[str_le], end(sa), 0, cmp2);
+        auto ri = lower_bound(begin(sa) + sa_inv[str_le] + 1, end(sa), 1, cmp);
         return {le - begin(sa), ri - begin(sa)};
     }
     /**
@@ -77,7 +75,7 @@ template <typename T> struct sa_query {
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
-    pair<int, int> find_str(const T& t) const {
+    inline pair<int, int> find_str(const T& t) const {
         auto cmp = [&](int i, int cmp_val) -> bool {
             return s.compare(i, ssize(t), t) < cmp_val;
         };
@@ -93,7 +91,7 @@ template <typename T> struct sa_query {
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
-    int find_first(const T& t) const {
+    inline int find_first(const T& t) const {
         auto [le, ri] = find(t);
         if (le == ri) return -1;
         return rmq_sa.query(le, ri);
