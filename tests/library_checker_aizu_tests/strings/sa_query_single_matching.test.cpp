@@ -4,33 +4,31 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array.hpp"
-#include "../../../library/strings/suffix_array_query.hpp"
-#include "../../../library/strings/enhanced_suffix_array.hpp"
+#include "../../../library/strings/suffix_array_related/suffix_array_query.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    auto [sa, rank, lcp] = get_suffix_array(s, 128);
-    sa_query sq(s, sa, rank, lcp);
-    enhanced_sa esa(s, sa, rank, lcp);
+    sa_query saq(s, 256);
+    lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = sq.find("");
+        auto [le, ri] = saq.find("");
         assert(le == 0 && ri == ssize(s));
     }
     {
-        auto [le, ri] = esa.find("");
+        auto [le, ri] = lcpt.find("");
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = sq.find(t);
-    auto [le2, ri2] = esa.find(t);
+    auto [le, ri] = saq.find(t);
+    auto [le2, ri2] = lcpt.find(t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
-    vector<int> matches(begin(sa) + le, begin(sa) + ri);
+    vector<int> matches(begin(saq.sa) + le, begin(saq.sa) + ri);
     sort(begin(matches), end(matches));
     {
-        int first_match = sq.find_first(t);
+        int first_match = saq.find_first(t);
         if (matches.empty())
             assert(first_match == -1);
         else {
