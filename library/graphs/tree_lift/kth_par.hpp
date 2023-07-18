@@ -1,6 +1,9 @@
 /** @file */
 #pragma once
 #include "constructor.hpp"
+/**
+ * copy into main, after initializing `adj`
+ */
 tree_lift tl(adj);
 /**
  * @param u query node
