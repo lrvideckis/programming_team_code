@@ -21,7 +21,7 @@ int main() {
     }
     for (int i = 0; i <= ssize(both); i++) {
         auto [le, ri] = saq_substr.find_substr(i, i);
-        assert(le == 0 && ri == ssize(s) + 1 + ssize(t));
+        assert(le == 0 && ri == ssize(both));
     }
     {
         auto [le, ri] = lcpt.find_str("");
@@ -43,6 +43,7 @@ int main() {
         }
     }
     auto [le3, ri3] = saq_substr.find_substr(ssize(s) + 1, ssize(both));
+    assert(ri3 - le3 == 1 + ri - le);
     vector<int> matches_other(begin(saq_substr.sa) + le3, begin(saq_substr.sa) + ri3);
     matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
     sort(begin(matches_other), end(matches_other));
