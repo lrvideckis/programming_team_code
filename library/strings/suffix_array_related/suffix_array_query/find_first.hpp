@@ -10,7 +10,7 @@
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
-template <typename T> inline int find_first(const sa_query& sq, const T& t) {
+template <typename T> inline int find_first(const sa_query<T>& sq, const T& t) {
     auto [le, ri] = find_str(sq.s, sq.sa, t);
     if (le == ri) return -1;
     return sq.rmq_sa.query(le, ri);
