@@ -92,7 +92,7 @@ template <typename T> struct sa_query {
      * @space O(1)
      */
     inline int find_first(const T& t) const {
-        auto [le, ri] = find(t);
+        auto [le, ri] = find_str(t);
         if (le == ri) return -1;
         return rmq_sa.query(le, ri);
     }
