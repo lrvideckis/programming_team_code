@@ -1,8 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../template.hpp"
 
-#include "../../../library/graphs/tree_lift/constructor.hpp"
-
 #include "../../../library/graphs/lca_rmq/get_lca.hpp"
 #include "../../../library/graphs/lca_rmq/in_subtree.hpp"
 

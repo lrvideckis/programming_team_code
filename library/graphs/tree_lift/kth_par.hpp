@@ -2,10 +2,6 @@
 #pragma once
 #include "constructor.hpp"
 /**
- * copy into main, after initializing `adj`
- */
-tree_lift tl(adj);
-/**
  * @param u query node
  * @param k number of edges
  * @returns a node k edges up from u. With k=1, this returns u's parent.
