@@ -8,7 +8,7 @@ int main() {
     string haystack, needle;
     cin >> haystack >> needle;
     KMP kmp(needle);
-    for (auto idx : kmp.find(haystack))
+    for (auto idx : kmp.find_str(haystack))
         cout << idx << "\n";
     return 0;
 }

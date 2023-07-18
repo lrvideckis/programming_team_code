@@ -48,15 +48,36 @@ template <typename T> struct sa_query {
         return sa_inv[i1] < sa_inv[i2];
     }
     /**
+     * @param str_le,str_ri defines a substring [str_le, str_ri) of s
+     * @returns a range [le, ri) such that:
+     * - for all i in [le, ri): s.substr(str_le, str_ri - str_le) == s.substr(sa[i], str_ri - str_le)
+     * - `ri - le` is the # of matches of s.substr(str_le, str_ri - str_le) in s.
+     * note find_substr(i, i) returns {0, ssize(s)}
+     * note le < ri except when ssize(s) == 0
+     * @time O(log(|s|))
+     * @space O(1)
+     */
+    inline pair<int, int> find_substr(int str_le, int str_ri) const {
+        assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(s));
+        if (str_le == ssize(s)) return {0, ssize(s)};
+        auto cmp = [&](int i, bool flip) -> bool {
+            return flip ^ (get_lcp(i, str_le) < str_ri - str_le);
+        };
+        auto le = lower_bound(begin(sa), begin(sa) + sa_inv[str_le], 0, cmp);
+        auto ri = lower_bound(begin(sa) + sa_inv[str_le] + 1, end(sa), 1, cmp);
+        return {le - begin(sa), ri - begin(sa)};
+    }
+    /**
      * @see https://github.com/yosupo06/Algorithm/blob /master/src/string/suffixarray.hpp
      * @param t needle
      * @returns range [le, ri) such that:
      * - for all i in [le, ri): t == s.substr(sa[i], ssize(t))
      * - `ri - le` is the # of matches of t in s.
+     * note find_str("") returns {0, ssize(s)}
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
-    pair<int, int> find(const T& t) const {
+    inline pair<int, int> find_str(const T& t) const {
         auto cmp = [&](int i, int cmp_val) -> bool {
             return s.compare(i, ssize(t), t) < cmp_val;
         };
@@ -72,8 +93,8 @@ template <typename T> struct sa_query {
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
-    int find_first(const T& t) const {
-        auto [le, ri] = find(t);
+    inline int find_first(const T& t) const {
+        auto [le, ri] = find_str(t);
         if (le == ri) return -1;
         return rmq_sa.query(le, ri);
     }

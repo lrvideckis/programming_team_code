@@ -23,14 +23,18 @@ int main() {
     assert(saq.sa_inv == lcpt.sa_inv);
     assert(saq.lcp == lcpt.lcp);
     {
-        auto [le, ri] = saq.find("");
+        auto [le, ri] = saq.find_str("");
         assert(le == 0 && ri == n);
         assert(ssize(saq.sa) == n);
         assert(ssize(saq.sa_inv) == n);
         assert(ssize(saq.lcp) == n - 1);
     }
+    for (int i = 0; i <= n; i++) {
+        auto [le, ri] = saq.find_substr(i, i);
+        assert(le == 0 && ri == n);
+    }
     {
-        auto [le, ri] = lcpt.find("");
+        auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == n);
         assert(ssize(lcpt.sa) == n);
         assert(ssize(lcpt.sa_inv) == n);

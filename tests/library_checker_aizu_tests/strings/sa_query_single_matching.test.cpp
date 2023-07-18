@@ -12,17 +12,23 @@ int main() {
     string s, t;
     cin >> s >> t;
     sa_query saq(s, 256);
+    string both = s + '$' + t;
+    sa_query saq_substr(both, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = saq.find("");
+        auto [le, ri] = saq.find_str("");
         assert(le == 0 && ri == ssize(s));
+    }
+    for (int i = 0; i <= ssize(both); i++) {
+        auto [le, ri] = saq_substr.find_substr(i, i);
+        assert(le == 0 && ri == ssize(both));
     }
     {
-        auto [le, ri] = lcpt.find("");
+        auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = saq.find(t);
-    auto [le2, ri2] = lcpt.find(t);
+    auto [le, ri] = saq.find_str(t);
+    auto [le2, ri2] = lcpt.find_str(t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
     vector<int> matches(begin(saq.sa) + le, begin(saq.sa) + ri);
@@ -36,6 +42,12 @@ int main() {
             assert(t == s.substr(first_match, ssize(t)));
         }
     }
+    auto [le3, ri3] = saq_substr.find_substr(ssize(s) + 1, ssize(both));
+    assert(ri3 - le3 == 1 + ri - le);
+    vector<int> matches_other(begin(saq_substr.sa) + le3, begin(saq_substr.sa) + ri3);
+    matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
+    sort(begin(matches_other), end(matches_other));
+    assert(matches == matches_other);
     for (auto match : matches)
         cout << match << '\n';
     return 0;
