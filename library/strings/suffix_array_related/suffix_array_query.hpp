@@ -73,6 +73,7 @@ template <typename T> struct sa_query {
      * @returns range [le, ri) such that:
      * - for all i in [le, ri): t == s.substr(sa[i], ssize(t))
      * - `ri - le` is the # of matches of t in s.
+     * note find_str("") returns {0, ssize(s)}
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
