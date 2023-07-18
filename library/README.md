@@ -1,5 +1,9 @@
 ## No comments
-See `no_comments` branch for the same code with all comments removed. The CI will keep this branch updated.
+See `no_comments` branch for the same code with all comments removed. The CI will keep this branch updated. You can remove all comments with:
+```
+cpp -fpreprocessed -P a.cpp a_no_comments.cpp
+```
+Although, note this will also remove `#define ssize(x) (int)(x).size()`
 
 ## Doxygen
 Let's try to minimize the # of non-doxygen comments.

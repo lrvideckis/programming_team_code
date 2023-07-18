@@ -1,9 +1,9 @@
 /** @file */
 #pragma once
-#include "bridges_and_cuts.hpp"
+#include "cuts.hpp"
 /**
  * @code{.cpp}
- *     graph_info cc = bridge_and_cut(adj, m);
+ *     cut_info cc = cuts(adj, m);
  *     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
  *
  *     //to loop over each *unique* bcc containing a node u:
@@ -19,13 +19,13 @@
  * [n, n + num_bccs) are BCC nodes
  *
  * @param adj undirected graph
- * @param cc what's calculated by bridges_and_cuts
+ * @param cc what's calculated by cuts
  * @returns adjacency list of block vertex tree
  * @time O(n + m)
  * @space besides the O(n + m) sized params, this function allocates and
  * returns `bvt` vector which is O(n)
  */
-vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
+vector<vector<int>> block_vertex_tree(const vector<vector<pair<int, int>>>& adj, const cut_info& cc) {
     int n = ssize(adj);
     vector<vector<int>> bvt(n + cc.num_bccs);
     vector<bool> vis(cc.num_bccs);

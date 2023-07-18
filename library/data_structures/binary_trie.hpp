@@ -1,10 +1,10 @@
 /** @file */
 #pragma once
+const int MX_BIT = 62;
 /**
  * Trie on bits. Can be thought of as a multiset of integers.
  */
 struct binary_trie {
-    const int MX_BIT = 62; /**< or 30 for ints */
     struct node {
         long long val = -1;
         int sub_sz = 0;

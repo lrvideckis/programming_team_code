@@ -20,6 +20,7 @@
 template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
     vector<vector<T>> dp; /**< dp[i][j] = arr[j] op arr[j + 1] op ... op arr[j + 2^i - 1] */
     F op;
+    RMQ() {}
     /**
      * @param arr static array
      * @param a_op any associative, communative, idempotent operation

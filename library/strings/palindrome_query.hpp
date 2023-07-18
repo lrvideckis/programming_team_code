@@ -5,14 +5,14 @@
  * Interface on top of manacher array
  */
 struct pal_query {
-    const int N;
+    int n;
     array<vi, 2> pal_len; /**< half the length of palindrome for each center */
     /**
      * @param s string
      * @time O(n)
      * @space O(n) for `pal_len` array
      */
-    pal_query(const string& s) : N(ssize(s)), pal_len(manacher(s)) {}
+    pal_query(const string& s) : n(ssize(s)), pal_len(manacher(s)) {}
     /**
      * @param le,ri defines substring [le,ri)
      * @returns 1 iff s.substr(le, ri - le) is a palindrome (so 1 when le == ri)
@@ -20,7 +20,7 @@ struct pal_query {
      * @space O(1)
      */
     inline bool is_pal(int le, int ri) const {
-        assert(0 <= le && le <= ri && ri <= N);
+        assert(0 <= le && le <= ri && ri <= n);
         auto [quot, rem] = div(ri - le, 2);
         return pal_len[rem][le + quot] >= quot;
     }

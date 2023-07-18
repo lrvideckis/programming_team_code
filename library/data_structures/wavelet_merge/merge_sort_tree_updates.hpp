@@ -16,7 +16,7 @@ inline int split(int tl, int tr) {
  * merge sort tree with toggle element active point update
  */
 struct merge_sort_tree_updates {
-    const int N;
+    int n;
     vector<int> sorted, perm;
     vector<bool_presum> bool_presums;
     vector<bool_bit> bool_bits;
@@ -27,13 +27,13 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active) : N(ssize(arr)), sorted(N), perm(N), bool_presums(N, vector<bool>()), bool_bits(2 * N, vector<bool>()) {
-        assert(ssize(active) == N);
-        if (!N) return;
-        vector<pair<int, bool>> cpy(N);
-        for (int i = 0; i < N; i++) cpy[i].first = i;
-        build(arr, active, cpy, 0, N, 1);
-        for (int i = 0; i < N; i++) {
+    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active) : n(ssize(arr)), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
+        assert(ssize(active) == n);
+        if (!n) return;
+        vector<pair<int, bool>> cpy(n);
+        for (int i = 0; i < n; i++) cpy[i].first = i;
+        build(arr, active, cpy, 0, n, 1);
+        for (int i = 0; i < n; i++) {
             perm[cpy[i].first] = i;
             sorted[i] = arr[cpy[i].first];
         }
@@ -61,9 +61,9 @@ struct merge_sort_tree_updates {
      * @space O(log(n)) for recursive stack
      */
     void set_active(int i, bool is_active) {
-        assert(0 <= i && i < N);
+        assert(0 <= i && i < n);
         if (bool_bits[1].on(perm[i]) == is_active) return;
-        set_active_impl(perm[i], is_active, 0, N, 1);
+        set_active_impl(perm[i], is_active, 0, n, 1);
     }
     void set_active_impl(int i, bool is_active, int tl, int tr, int v) {
         bool_bits[v].set(i, is_active);
@@ -79,10 +79,10 @@ struct merge_sort_tree_updates {
      * @space O(log(n)) for recursive stack
      */
     int rect_count(int le, int ri, int x, int y) const {
-        assert(0 <= le && le <= ri && ri <= N && x <= y);
+        assert(0 <= le && le <= ri && ri <= n && x <= y);
         int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
         int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
-        return rect_count_impl(le, ri, xi, yi, 0, N, 1);
+        return rect_count_impl(le, ri, xi, yi, 0, n, 1);
     }
     int rect_count_impl(int le, int ri, int xi, int yi, int tl, int tr, int v) const {
         if (ri <= tl || tr <= le) return 0;
@@ -104,7 +104,7 @@ struct merge_sort_tree_updates {
         int xi = int(lower_bound(begin(sorted), end(sorted), x) - begin(sorted));
         int yi = int(lower_bound(begin(sorted), end(sorted), y) - begin(sorted));
         assert(1 <= k && k <= bool_bits[1].popcount(xi, yi));
-        return kth_smallest_impl(xi, yi, k, 0, N, 1);
+        return kth_smallest_impl(xi, yi, k, 0, n, 1);
     }
     int kth_smallest_impl(int xi, int yi, int k, int tl, int tr, int v) const {
         if (tr - tl == 1) return tl;

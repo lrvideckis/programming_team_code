@@ -5,16 +5,16 @@
  * @see https://cp-algorithms.com/data_structures/segment_tree.html# preserving-the-history-of-its-values-persistent-segment-tree
  */
 struct distinct_query {
-    const int N;
+    int n;
     PST pst;
     /**
      * @param arr static array; can't handle updates
      * @time O(n log n)
      * @space O(n log n) for PST::tree vector
      */
-    distinct_query(const vector<int>& arr) : N(ssize(arr)), pst(0, N + 1) {
+    distinct_query(const vector<int>& arr) : n(ssize(arr)), pst(0, n + 1) {
         map<int, int> last_idx;
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < n; i++) {
             int& idx = last_idx[arr[i]];
             pst.update(idx, 1, i);
             idx = i + 1;
@@ -27,7 +27,7 @@ struct distinct_query {
      * @space O(log n) for recursion stack; no new nodes are allocated
      */
     int query(int le, int ri) const {
-        assert(0 <= le && le <= ri && ri <= N);
+        assert(0 <= le && le <= ri && ri <= n);
         return int(pst.query(0, le + 1, ri) - pst.query(0, le + 1, le));
     }
 };

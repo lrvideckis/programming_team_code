@@ -10,13 +10,13 @@ struct mcmf {
         ll cap, cost, flow;
         int back;
     };
-    const int N;
+    int n;
     vector<edge> e;
     vector<vector<int>> adj;
     /**
      * @param a_n number of nodes.
      */
-    mcmf(int a_n) : N(a_n), adj(N) {}
+    mcmf(int a_n) : n(a_n), adj(n) {}
     void add_edge(int u, int v, ll cap, ll cost) {
         edge e1 = {u, v, cap, cost, 0, ssize(adj[v])};
         edge e2 = {v, u, 0, -cost, 0, ssize(adj[u])};
@@ -26,8 +26,8 @@ struct mcmf {
         e.push_back(e2);
     }
     /**
-     * @param s source, 0 <= s < N
-     * @param t sink, 0 <= t < N
+     * @param s source, 0 <= s < n
+     * @param t sink, 0 <= t < n
      * @param total_flow we try to send this amount of flow through the graph
      * @returns pair(flow, cost)
      * - flow: (<=total_flow) is the max amount of flow we are able to send.
@@ -37,24 +37,24 @@ struct mcmf {
     pair<ll, ll> get_flow(int s, int t, ll total_flow) {
         ll flow = 0, cost = 0;
         while (flow < total_flow) {
-            vector<ll> d(N, LLONG_MAX);
-            vector<int> p_edge(N), id(N), q(N), p(N);
+            vector<ll> d(n, LLONG_MAX);
+            vector<int> p_edge(n), id(n), q(n), p(n);
             int qh = 0, qt = 0;
             q[qt++] = s;
             d[s] = 0;
             while (qh != qt) {
                 int u = q[qh++];
                 id[u] = 2;
-                if (qh == N) qh = 0;
+                if (qh == n) qh = 0;
                 for (int i = 0; i < ssize(adj[u]); i++) {
                     const edge& r = e[adj[u][i]];
                     if (r.flow < r.cap && d[u] + r.cost < d[r.v]) {
                         d[r.v] = d[u] + r.cost;
                         if (id[r.v] == 0) {
                             q[qt++] = r.v;
-                            if (qt == N) qt = 0;
+                            if (qt == n) qt = 0;
                         } else if (id[r.v] == 2) {
-                            if (--qh == -1) qh = N - 1;
+                            if (--qh == -1) qh = n - 1;
                             q[qh] = r.v;
                         }
                         id[r.v] = 1;

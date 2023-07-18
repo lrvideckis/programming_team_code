@@ -1,21 +1,21 @@
 /** @file */
 #pragma once
-#include "bridges_and_cuts.hpp"
+#include "bridges.hpp"
 /**
- * Never adds multiple edges as bridges_and_cuts.hpp correctly marks them as
+ * Never adds multiple edges as bridges.hpp correctly marks them as
  * non-bridges.
  * @code{.cpp}
- *     graph_info cc = bridge_and_cut(adj, m);
+ *     bridge_info cc = bridges(adj, m);
  *     vector<vector<int>> bt = bridge_tree(adj, cc);
  * @endcode
  * @param adj undirected graph
- * @param cc what's calculated by bridges_and_cuts
+ * @param cc what's calculated by bridges
  * @returns adjacency list of bridge tree
  * @time O(n + m)
  * @space besides the O(n + m) sized params, this function allocates and
  * returns `tree` vector, which is O(n)
  */
-vector<vector<int>> bridge_tree(const vector<vector<pair<int, int>>>& adj, const graph_info& cc) {
+vector<vector<int>> bridge_tree(const vector<vector<pair<int, int>>>& adj, const bridge_info& cc) {
     vector<vector<int>> tree(cc.num_2_edge_ccs);
     for (int i = 0; i < ssize(adj); i++)
         for (auto [u, e_id] : adj[i])
