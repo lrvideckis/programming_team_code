@@ -52,7 +52,7 @@ template <typename T> struct sa_query {
      * @returns a range [le, ri) such that:
      * - for all i in [le, ri): s.substr(str_le, str_ri - str_le) == s.substr(sa[i], str_ri - str_le)
      * - `ri - le` is the # of matches of s.substr(str_le, str_ri - str_le) in s.
-     * note find_substr(i, i) returns {0, ssize(s)}
+     * note find_substr(i, i) returns [0, ssize(s))
      * note le < ri except when ssize(s) == 0
      * @time O(log(|s|))
      * @space O(1)
@@ -73,7 +73,7 @@ template <typename T> struct sa_query {
      * @returns range [le, ri) such that:
      * - for all i in [le, ri): t == s.substr(sa[i], ssize(t))
      * - `ri - le` is the # of matches of t in s.
-     * note find_str("") returns {0, ssize(s)}
+     * note find_str("") returns [0, ssize(s))
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
