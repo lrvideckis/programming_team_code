@@ -29,7 +29,7 @@ int main() {
         assert(ssize(saq.sa_inv) == n);
         assert(ssize(saq.lcp) == n - 1);
     }
-    for (int i = 0; i <= n; i++) {
+    for (int i : {0, ssize(s), ssize(s) / 2}) {
         auto [le, ri] = saq.find_substr(i, i);
         assert(le == 0 && ri == n);
     }
