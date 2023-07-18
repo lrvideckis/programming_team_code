@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../template.hpp"
 
-#include "../../../library/graphs/tree_lifting.hpp"
+#include "../../../library/graphs/tree_lift/get_lca.hpp"
 
 #include "../../../library/graphs/lca_rmq/get_lca.hpp"
 #include "../../../library/graphs/lca_rmq/in_subtree.hpp"
@@ -16,17 +16,17 @@ int main() {
         cin >> par;
         adj[par].push_back(i);
     }
-    tree_lift lift(adj);
+    tree_lift tl(adj);
     LCA lca(adj);
     for (int i = 0; i < n; i++) {
-        assert(lift.lca(i, i) == i);
+        assert(get_lca(tl, i, i) == i);
         assert(get_lca(lca, i, i) == i);
         assert(lca.in[lca.order[i]] == i && lca.order[lca.in[i]] == i);
     }
     while (q--) {
         int u, v;
         cin >> u >> v;
-        int curr_lca = lift.lca(u, v);
+        int curr_lca = get_lca(tl, u, v);
         assert(curr_lca == get_lca(lca, u, v));
         assert((curr_lca == u) == in_subtree(lca, u, v));
         assert((curr_lca == v) == in_subtree(lca, v, u));
