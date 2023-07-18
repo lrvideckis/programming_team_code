@@ -39,6 +39,7 @@ template <typename T> struct sa_query {
         return rmq_lcp.query(le, ri);
     }
     /**
+     *
      * @param i1,i2 starting 0-based-indexes of suffixes
      * @returns 1 iff suffix s.substr(i1) < s.substr(i2)
      * @time O(1)
@@ -55,13 +56,16 @@ template <typename T> struct sa_query {
      * @time O(log n)
      * @space O(1)
      */
-    inline pair<int, int> get_range(int str_le, int str_ri) const {
+    inline pair<int, int> find_subarray(int str_le, int str_ri) const {
         assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(s));
         auto cmp = [&](int i, int j) -> bool {
-            return get_lcp(i, );
+            return get_lcp(i, str_le) < str_ri - str_le;
         };
-        auto le = lower_bound(begin(sa), end(sa), str_le, cmp);
-
+        auto le = lower_bound(begin(sa), begin(sa) + str_le, 0, cmp);
+        auto cmp2 = [&](int i, int j) -> bool {
+            return get_lcp(i, str_le) >= str_ri - str_le;
+        };
+        auto ri = lower_bound(begin(sa) + str_le, end(sa), 0, cmp2);
         return {le - begin(sa), ri - begin(sa)};
     }
     /**
@@ -73,7 +77,7 @@ template <typename T> struct sa_query {
      * @time O(|t| * log(|s|))
      * @space O(1)
      */
-    pair<int, int> find(const T& t) const {
+    pair<int, int> find_str(const T& t) const {
         auto cmp = [&](int i, int cmp_val) -> bool {
             return s.compare(i, ssize(t), t) < cmp_val;
         };

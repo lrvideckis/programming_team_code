@@ -75,7 +75,7 @@ template <typename T> struct lcp_tree {
      * @time O(|t| * log(|alphabet|)); |alphabet| = 26 if only lowercase letters
      * @space O(1)
      */
-    pair<int, int> find(const T& t) const {
+    pair<int, int> find_str(const T& t) const {
         if (root == -1) {
             assert(ssize(sa) <= 1);
             if (t == "" || s == t) return {0, ssize(s)};
