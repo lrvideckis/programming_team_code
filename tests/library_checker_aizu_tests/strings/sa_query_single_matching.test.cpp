@@ -14,15 +14,15 @@ int main() {
     sa_query saq(s, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = saq.find("");
+        auto [le, ri] = saq.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
     {
-        auto [le, ri] = lcpt.find("");
+        auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = saq.find(t);
-    auto [le2, ri2] = lcpt.find(t);
+    auto [le, ri] = saq.find_str(t);
+    auto [le2, ri2] = lcpt.find_str(t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
     vector<int> matches(begin(saq.sa) + le, begin(saq.sa) + ri);
