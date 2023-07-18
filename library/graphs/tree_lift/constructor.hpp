@@ -29,3 +29,7 @@ struct tree_lift {
                 d[v] = d[p[v] = u] + 1, j[v] = jmp, dfs(adj, v);
     }
 };
+/**
+ * copy into main, after initializing `adj`
+ */
+tree_lift tl(adj);
