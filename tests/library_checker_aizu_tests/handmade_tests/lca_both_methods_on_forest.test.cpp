@@ -2,8 +2,12 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
-#include "../../../library/graphs/tree_lifting.hpp"
-#include "../../../library/graphs/least_common_ancestor.hpp"
+
+#include "../../../library/graphs/tree_lift/dist_edges.hpp"
+#include "../../../library/graphs/tree_lift/kth_path.hpp"
+
+#include "../../../library/graphs/lca_rmq/dist_edges.hpp"
+#include "../../../library/graphs/lca_rmq/next_on_path.hpp"
 
 int main() {
     for (int n = 1; n <= 100; n++) {
@@ -26,11 +30,11 @@ int main() {
             int v = get_rand<int>(0, n - 1);
             if (u == v || !dsu.same_set(u, v))
                 continue;
-            assert(tl.lca(u, v) == lca.lca(u, v));
-            assert(tl.dist_edges(u, v) == lca.dist_edges(u, v));
-            assert(tl.kth_path(u, v, 1) == lca.next_on_path(u, v));
+            assert(get_lca(tl, u, v) == get_lca(lca, u, v));
+            assert(dist_edges(tl, u, v) == dist_edges(lca, u, v));
+            assert(kth_path(tl, u, v, 1) == next_on_path(lca, u, v));
             if (tl.d[u] > tl.d[v]) swap(u, v);
-            assert((u == tl.kth(v, tl.d[v] - tl.d[u])) == lca.in_subtree(u, v));
+            assert((u == kth_par(tl, v, tl.d[v] - tl.d[u])) == in_subtree(lca, u, v));
         }
     }
     cout << "Hello World\n";

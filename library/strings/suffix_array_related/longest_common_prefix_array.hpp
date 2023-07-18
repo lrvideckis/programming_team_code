@@ -1,5 +1,6 @@
 /** @file */
 #pragma once
+#include "suffix_array.hpp"
 /**
  * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/strings/SuffixArray.h
  *
