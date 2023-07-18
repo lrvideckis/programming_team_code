@@ -29,6 +29,10 @@ int main() {
         assert(ssize(saq.sa_inv) == n);
         assert(ssize(saq.lcp) == n - 1);
     }
+    for (int i = 0; i <= n; i++) {
+        auto [le, ri] = saq.find_substr(i, i);
+        assert(le == 0 && ri == n);
+    }
     {
         auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == n);
