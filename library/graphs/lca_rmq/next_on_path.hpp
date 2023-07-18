@@ -12,7 +12,7 @@
  * @time O(1)
  * @space O(1)
  */
-inline int next_on_path(const LCA& lca, int u, int v) {
+auto next_on_path = [&](int u, int v) -> int {
     assert(u != v);
-    return in_subtree(lca, u, v) ? lca.rmq.query(lca.in[u] + 1, lca.in[v] + 1) : lca.p[u];
-}
+    return in_subtree(u, v) ? lca.rmq.query(lca.in[u] + 1, lca.in[v] + 1) : lca.p[u];
+};

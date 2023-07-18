@@ -33,3 +33,7 @@ struct LCA {
                 d[v] = d[p[v] = u] + 1, dfs(adj, v), sub_sz[u] += sub_sz[v];
     }
 };
+/**
+ * copy into main, after initializing `adj`
+ */
+LCA lca(adj);
