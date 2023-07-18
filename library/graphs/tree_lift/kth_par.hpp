@@ -2,6 +2,7 @@
 #pragma once
 #include "constructor.hpp"
 /**
+ * @param tl tree lift
  * @param u query node
  * @param k number of edges
  * @returns a node k edges up from u. With k=1, this returns u's parent.
