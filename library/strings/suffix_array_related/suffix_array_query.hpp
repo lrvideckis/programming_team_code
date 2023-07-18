@@ -56,16 +56,16 @@ template <typename T> struct sa_query {
      * @time O(log n)
      * @space O(1)
      */
-    inline pair<int, int> find_subarray(int str_le, int str_ri) const {
-        assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(s));
-        auto cmp = [&](int i, int j) -> bool {
+    inline pair<int, int> find_substr(int str_le, int str_ri) const {
+        assert(0 <= str_le && str_le < str_ri && str_ri <= ssize(s));
+        auto cmp = [&](int i, int _) -> bool {
             return get_lcp(i, str_le) < str_ri - str_le;
         };
-        auto le = lower_bound(begin(sa), begin(sa) + str_le, 0, cmp);
-        auto cmp2 = [&](int i, int j) -> bool {
+        auto le = lower_bound(begin(sa), begin(sa) + sa_inv[str_le], 0, cmp);
+        auto cmp2 = [&](int i, int _) -> bool {
             return get_lcp(i, str_le) >= str_ri - str_le;
         };
-        auto ri = lower_bound(begin(sa) + str_le, end(sa), 0, cmp2);
+        auto ri = lower_bound(begin(sa) + sa_inv[str_le], end(sa), 0, cmp2);
         return {le - begin(sa), ri - begin(sa)};
     }
     /**
