@@ -14,13 +14,10 @@ int main() {
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-
 #include "../../../library/graphs/tree_lift/kth_path.hpp"
 #include "../../../library/graphs/tree_lift/dist_edges_lift.hpp"
-
 #include "../../../library/graphs/lca_rmq/dist_edges_rmq.hpp"
 #include "../../../library/graphs/lca_rmq/next_on_path.hpp"
-
     while (q--) {
         int u, v, k;
         cin >> u >> v >> k;

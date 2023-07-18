@@ -7,10 +7,8 @@
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
 vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restorable& dsu) {
-
 #include "../../../library/graphs/tree_lift/dist_edges_lift.hpp"
 #include "../../../library/graphs/tree_lift/kth_path.hpp"
-
     int n = ssize(adj);
     vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
     for (int u = 0; u < n; u++) {

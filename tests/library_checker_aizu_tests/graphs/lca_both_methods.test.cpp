@@ -13,12 +13,9 @@ int main() {
         cin >> par;
         adj[par].push_back(i);
     }
-
 #include "../../../library/graphs/tree_lift/lca_lift.hpp"
-
 #include "../../../library/graphs/lca_rmq/lca_rmq.hpp"
 #include "../../../library/graphs/lca_rmq/in_subtree.hpp"
-
     for (int i = 0; i < n; i++) {
         assert(lca_lift(i, i) == i);
         assert(lca_rmq(i, i) == i);

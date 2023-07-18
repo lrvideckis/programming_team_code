@@ -18,13 +18,10 @@ int main() {
                 adj[v].push_back(u);
             }
         }
-
 #include "../../../library/graphs/tree_lift/dist_edges_lift.hpp"
 #include "../../../library/graphs/tree_lift/kth_path.hpp"
-
 #include "../../../library/graphs/lca_rmq/dist_edges_rmq.hpp"
 #include "../../../library/graphs/lca_rmq/next_on_path.hpp"
-
         for (int i = 0; i < 100; i++) {
             int u = get_rand<int>(0, n - 1);
             int v = get_rand<int>(0, n - 1);
