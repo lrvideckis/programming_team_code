@@ -11,12 +11,12 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    sa_query saq(s, 256);
+    sa_query sq(s, 256);
     string both = s + '$' + t;
     sa_query saq_substr(both, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = saq.find_str("");
+        auto [le, ri] = sq.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
     for (int i = 0; i <= ssize(both); i++) {
@@ -27,14 +27,14 @@ int main() {
         auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = saq.find_str(t);
+    auto [le, ri] = sq.find_str(t);
     auto [le2, ri2] = lcpt.find_str(t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
-    vector<int> matches(begin(saq.sa) + le, begin(saq.sa) + ri);
+    vector<int> matches(begin(sq.sa) + le, begin(sq.sa) + ri);
     sort(begin(matches), end(matches));
     {
-        int first_match = saq.find_first(t);
+        int first_match = sq.find_first(t);
         if (matches.empty())
             assert(first_match == -1);
         else {

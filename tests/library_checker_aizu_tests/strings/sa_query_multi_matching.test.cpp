@@ -11,10 +11,10 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    sa_query saq(s, 256);
+    sa_query sq(s, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = saq.find_str("");
+        auto [le, ri] = sq.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
     {
@@ -26,7 +26,7 @@ int main() {
     while (q--) {
         string t;
         cin >> t;
-        auto [le, ri] = saq.find_str(t);
+        auto [le, ri] = sq.find_str(t);
         auto [le2, ri2] = lcpt.find_str(t);
         assert(ri - le == ri2 - le2);
         if (ri - le > 0) assert(le == le2);
