@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "kth_par.hpp"
+#include "get_lca.hpp"
 /**
  * @param tl,u,v endpoint nodes of path
  * @param k index into path
@@ -9,8 +9,8 @@
  * @space O(1)
  */
 inline int kth_path(const tree_lift& tl, int u, int v, int k) {
-    int lca_d = tl.d[lca(u, v)];
+    int lca_d = tl.d[get_lca(tl, u, v)];
     int u_lca = tl.d[u] - lca_d;
     int v_lca = tl.d[v] - lca_d;
-    return k <= u_lca ? kth_par(u, k) : kth_par(v, u_lca + v_lca - k);
+    return k <= u_lca ? kth_par(tl, u, k) : kth_par(tl, v, u_lca + v_lca - k);
 }
