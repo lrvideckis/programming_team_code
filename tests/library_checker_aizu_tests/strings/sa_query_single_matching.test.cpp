@@ -12,13 +12,14 @@ int main() {
     string s, t;
     cin >> s >> t;
     sa_query saq(s, 256);
-    sa_query saq_substr(s + '$' + t, 256);
+    string both = s + '$' + t;
+    sa_query saq_substr(both, 256);
     lcp_tree lcpt(s, 256);
     {
         auto [le, ri] = saq.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
-    for (int i = 0; i <= ssize(s) + 1 + ssize(t); i++) {
+    for (int i = 0; i <= ssize(both); i++) {
         auto [le, ri] = saq_substr.find_substr(i, i);
         assert(le == 0 && ri == ssize(s) + 1 + ssize(t));
     }
@@ -41,7 +42,7 @@ int main() {
             assert(t == s.substr(first_match, ssize(t)));
         }
     }
-    auto [le3, ri3] = saq_substr.find_substr(ssize(s) + 1, ssize(s) + 1 + ssize(t));
+    auto [le3, ri3] = saq_substr.find_substr(ssize(s) + 1, ssize(both));
     vector<int> matches_other(begin(saq_substr.sa) + le3, begin(saq_substr.sa) + ri3);
     matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
     sort(begin(matches_other), end(matches_other));
