@@ -77,5 +77,6 @@
 "tests/library_checker_aizu_tests/strings/sa_query_palindrome.test.cpp": "2023-07-18 09:34:29 -0700",
 "tests/library_checker_aizu_tests/strings/sa_query_single_matching.test.cpp": "2023-07-18 09:34:29 -0700",
 "tests/library_checker_aizu_tests/strings/sa_query_zfunc.test.cpp": "2023-07-18 09:34:29 -0700",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-07-18 09:34:29 -0700",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-07-17 13:43:14 -0700"
 }
