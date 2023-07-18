@@ -11,18 +11,18 @@ int main() {
             string s(n, 'a');
             int mx_char = get_rand<int>(0, 5);
             generate(begin(s), end(s), [&]() {return char('a' + get_rand<int>(0, mx_char));});
-            sa_query saq(s, 256);
+            sa_query sq(s, 256);
             for (int str_le = 0; str_le <= n; str_le++) {
                 for (int str_ri = str_le; str_ri <= n; str_ri++) {
-                    auto [le, ri] = saq.find_substr(str_le, str_ri);
+                    auto [le, ri] = sq.find_substr(str_le, str_ri);
                     if (str_le == str_ri)
                         assert(le == 0 && ri == n);
                     if (str_le < n)
-                        assert(0 <= le && le <= saq.sa_inv[str_le] && saq.sa_inv[str_le] < ri && ri <= n);
+                        assert(0 <= le && le <= sq.sa_inv[str_le] && sq.sa_inv[str_le] < ri && ri <= n);
                     for (int i = le; i < ri; i++)
-                        assert(s.substr(saq.sa[i], str_ri - str_le) == s.substr(str_le, str_ri - str_le));
-                    assert(le == 0 || s.substr(saq.sa[le - 1], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
-                    assert(ri == n || s.substr(saq.sa[ri], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
+                        assert(s.substr(sq.sa[i], str_ri - str_le) == s.substr(str_le, str_ri - str_le));
+                    assert(le == 0 || s.substr(sq.sa[le - 1], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
+                    assert(ri == n || s.substr(sq.sa[ri], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
                 }
             }
         }

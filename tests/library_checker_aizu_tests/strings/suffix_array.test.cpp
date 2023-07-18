@@ -17,20 +17,20 @@ int main() {
     string s;
     cin >> s;
     int n = ssize(s);
-    sa_query saq(s, 256);
+    sa_query sq(s, 256);
     lcp_tree lcpt(s, 256);
-    assert(saq.sa == lcpt.sa);
-    assert(saq.sa_inv == lcpt.sa_inv);
-    assert(saq.lcp == lcpt.lcp);
+    assert(sq.sa == lcpt.sa);
+    assert(sq.sa_inv == lcpt.sa_inv);
+    assert(sq.lcp == lcpt.lcp);
     {
-        auto [le, ri] = saq.find_str("");
+        auto [le, ri] = sq.find_str("");
         assert(le == 0 && ri == n);
-        assert(ssize(saq.sa) == n);
-        assert(ssize(saq.sa_inv) == n);
-        assert(ssize(saq.lcp) == n - 1);
+        assert(ssize(sq.sa) == n);
+        assert(ssize(sq.sa_inv) == n);
+        assert(ssize(sq.lcp) == n - 1);
     }
     for (int i : {0, ssize(s), ssize(s) / 2}) {
-        auto [le, ri] = saq.find_substr(i, i);
+        auto [le, ri] = sq.find_substr(i, i);
         assert(le == 0 && ri == n);
     }
     {
@@ -41,10 +41,10 @@ int main() {
         assert(ssize(lcpt.lcp) == n - 1);
     }
     for (int i = 0; i < n; i++) {
-        assert(saq.sa[saq.sa_inv[i]] == i);
-        assert(saq.sa_inv[saq.sa[i]] == i);
+        assert(sq.sa[sq.sa_inv[i]] == i);
+        assert(sq.sa_inv[sq.sa[i]] == i);
     }
-    for (auto val : saq.sa)
+    for (auto val : sq.sa)
         cout << val << " ";
     cout << '\n';
 }
