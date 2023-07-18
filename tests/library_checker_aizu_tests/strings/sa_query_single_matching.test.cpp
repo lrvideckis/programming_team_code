@@ -12,10 +12,15 @@ int main() {
     string s, t;
     cin >> s >> t;
     sa_query saq(s, 256);
+    sa_query saq_substr(s + '$' + t, 256);
     lcp_tree lcpt(s, 256);
     {
         auto [le, ri] = saq.find_str("");
         assert(le == 0 && ri == ssize(s));
+    }
+    for (int i = 0; i <= ssize(s) + 1 + ssize(t); i++) {
+        auto [le, ri] = saq.find_substr(i, i);
+        assert(le == 0 && ri == ssize(s) + 1 + ssize(t));
     }
     {
         auto [le, ri] = lcpt.find_str("");
