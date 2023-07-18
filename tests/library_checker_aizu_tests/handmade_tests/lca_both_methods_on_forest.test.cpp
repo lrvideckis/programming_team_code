@@ -2,12 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
-
-#include "../../../library/graphs/tree_lift/dist_edges.hpp"
-#include "../../../library/graphs/tree_lift/kth_path.hpp"
-
-#include "../../../library/graphs/lca_rmq/dist_edges.hpp"
-#include "../../../library/graphs/lca_rmq/next_on_path.hpp"
+#include "../../../library/data_structures/sparse_table.hpp"
 
 int main() {
     for (int n = 1; n <= 100; n++) {
@@ -23,18 +18,23 @@ int main() {
                 adj[v].push_back(u);
             }
         }
-        tree_lift tl(adj);
-        LCA lca(adj);
+
+#include "../../../library/graphs/tree_lift/dist_edges_lift.hpp"
+#include "../../../library/graphs/tree_lift/kth_path.hpp"
+
+#include "../../../library/graphs/lca_rmq/dist_edges_rmq.hpp"
+#include "../../../library/graphs/lca_rmq/next_on_path.hpp"
+
         for (int i = 0; i < 100; i++) {
             int u = get_rand<int>(0, n - 1);
             int v = get_rand<int>(0, n - 1);
             if (u == v || !dsu.same_set(u, v))
                 continue;
-            assert(get_lca(tl, u, v) == get_lca(lca, u, v));
-            assert(dist_edges(tl, u, v) == dist_edges(lca, u, v));
-            assert(kth_path(tl, u, v, 1) == next_on_path(lca, u, v));
+            assert(lca_lift(u, v) == lca_rmq(u, v));
+            assert(dist_edges_lift(u, v) == dist_edges_rmq(u, v));
+            assert(kth_path(u, v, 1) == next_on_path(u, v));
             if (tl.d[u] > tl.d[v]) swap(u, v);
-            assert((u == kth_par(tl, v, tl.d[v] - tl.d[u])) == in_subtree(lca, u, v));
+            assert((u == kth_par(v, tl.d[v] - tl.d[u])) == in_subtree(u, v));
         }
     }
     cout << "Hello World\n";
