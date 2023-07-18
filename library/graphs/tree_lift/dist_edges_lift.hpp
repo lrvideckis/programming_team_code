@@ -7,6 +7,6 @@
  * @time O(log(path length(u, v)))
  * @space O(1)
  */
-auto dist_edges = [&](int u, int v) -> int {
-    return tl.d[u] + tl.d[v] - 2 * tl.d[get_lca(u, v)];
+auto dist_edges_lift = [&](int u, int v) -> int {
+    return tl.d[u] + tl.d[v] - 2 * tl.d[lca_lift(u, v)];
 };
