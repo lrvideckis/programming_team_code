@@ -2,7 +2,8 @@
 #include "../template.hpp"
 #include "../../../library/misc/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/suffix_array_query.hpp"
+#include "../../../library/strings/suffix_array_related/suffix_array_query/suf_cmp.hpp"
+#include "../../../library/strings/suffix_array_related/suffix_array_query/get_lcp.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -16,11 +17,11 @@ int main() {
             auto ri = get_rand<int>(0, ssize(s) - 1);
             if (le > ri)
                 swap(le, ri);
-            assert(sq.less(le, ri) == (s.substr(le) < s.substr(ri)));
+            assert(suf_cmp(sq.sa_inv, le, ri) == (s.substr(le) < s.substr(ri)));
         }
     }
     for (int i = 0; i < ssize(s); i++)
-        cout << sq.get_lcp(i, 0) << " ";
+        cout << get_lcp(sq, i, 0) << " ";
     cout << '\n';
     return 0;
 }
