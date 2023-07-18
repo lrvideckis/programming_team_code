@@ -60,7 +60,7 @@ template <typename T> struct sa_query {
         assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(s));
         if (str_le == ssize(s)) return {0, ssize(s)};
         auto cmp = [&](int i, bool flip) -> bool {
-            return (get_lcp(i, str_le) < str_ri - str_le)^ flip;
+            return (get_lcp(i, str_le) < str_ri - str_le) ^ flip;
         };
         auto le = lower_bound(begin(sa), begin(sa) + sa_inv[str_le], 0, cmp);
         auto ri = lower_bound(begin(sa) + sa_inv[str_le] + 1, end(sa), 1, cmp);
