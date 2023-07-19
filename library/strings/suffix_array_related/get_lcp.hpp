@@ -4,7 +4,6 @@
 #include "suffix_array.hpp"
 #include "longest_common_prefix_array.hpp"
 /**
- *
  * @code{.cpp}
  *     string s;
  *     auto [sa, sa_inv] = get_sa(s, 256);
