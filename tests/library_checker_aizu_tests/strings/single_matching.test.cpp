@@ -42,8 +42,8 @@ int main() {
         string both = s + '$' + t;
         lcp_query lq_both(both, 256);
         for (int i = 0; i <= ssize(both); i++) {
-            auto [le, ri] = find_substr(lq_both, i, i);
-            assert(le == 0 && ri == ssize(both));
+            auto [le3, ri3] = find_substr(lq_both, i, i);
+            assert(le3 == 0 && ri3 == ssize(both));
         }
         auto [le3, ri3] = find_substr(lq_both, ssize(s) + 1, ssize(both));
         assert(ri3 - le3 == 1 + ri - le);
