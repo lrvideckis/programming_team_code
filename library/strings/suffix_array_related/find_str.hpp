@@ -25,11 +25,11 @@
  * @space O(1)
  */
 template <typename T> inline pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
-    auto cmp = [&](int i, int cmp_val) -> bool {
-        auto [it_t, it_s] = mismatch(begin(t), end(t), begin(s) + i, end(s));
-        return 1;//TODO
-    };
-    auto le = lower_bound(begin(sa), end(sa), 0, cmp);
-    auto ri = lower_bound(le, end(sa), 1, cmp);
+    auto le = lower_bound(begin(sa), end(sa), 0, [&](int i, int _) -> bool {
+        return lexicographical_compare(begin(s) + i, end(s), begin(t), end(t));
+    });
+    auto ri = lower_bound(le, end(sa), 0, [&](int i, int _) -> bool {
+        return mismatch(begin(s) + i, end(s), begin(t), end(t)).second == end(t);
+    });
     return {le - begin(sa), ri - begin(sa)};
 }

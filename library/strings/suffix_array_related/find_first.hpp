@@ -1,5 +1,6 @@
 /** @file */
 #pragma once
+#include "../../data_structures/sparse_table.hpp"
 #include "find_str.hpp"
 /**
  * @code{.cpp}
@@ -10,8 +11,8 @@
  *     // or
  *     vector<int> arr;
  *     auto [sa, sa_inv] = get_sa(arr, 100'005);
- *     string t;
- *     int first_match_idx = find_first(s, sa, t);
+ *     vector<int> t;
+ *     int first_match_idx = find_first(arr, sa, t);
  * @endcode
  *
  * @param t needle

@@ -4,37 +4,32 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_related/suffix_array_query/find_first.hpp"
+#include "../../../library/strings/suffix_array_related/find_first.hpp"
+#include "../../../library/strings/suffix_array_related/find_substr.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    sa_query sq(s, 256);
-    string both = s + '$' + t;
-    sa_query sq_substr(both, 256);
+    auto [sa, sa_inv] = get_sa(s, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = find_str(sq.s, sq.sa, "");
+        auto [le, ri] = find_str(s, sa, string(""));
         assert(le == 0 && ri == ssize(s));
-    }
-    for (int i = 0; i <= ssize(both); i++) {
-        auto [le, ri] = sq_substr.find_substr(sq_substr, i, i);
-        assert(le == 0 && ri == ssize(both));
     }
     {
         auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = find_str(sq.s, sq.sa, t);
+    auto [le, ri] = find_str(s, sa, t);
     auto [le2, ri2] = lcpt.find_str(t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
-    vector<int> matches(begin(sq.sa) + le, begin(sq.sa) + ri);
+    vector<int> matches(begin(sa) + le, begin(sa) + ri);
     sort(begin(matches), end(matches));
     {
-        int first_match = find_first(sq, t);
+        int first_match = find_first(s, sa, t);
         if (matches.empty())
             assert(first_match == -1);
         else {
@@ -42,12 +37,22 @@ int main() {
             assert(t == s.substr(first_match, ssize(t)));
         }
     }
-    auto [le3, ri3] = find_substr(sq_substr, ssize(s) + 1, ssize(both));
-    assert(ri3 - le3 == 1 + ri - le);
-    vector<int> matches_other(begin(sq_substr.sa) + le3, begin(sq_substr.sa) + ri3);
-    matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
-    sort(begin(matches_other), end(matches_other));
-    assert(matches == matches_other);
+    {
+        //test find_substr
+        string both = s + '$' + t;
+        auto [sa_both, sa_inv_both] = get_sa(both, 256);
+        vector<int> lcp_both = get_lcp_array({sa_both, sa_inv_both}, both);
+        for (int i = 0; i <= ssize(both); i++) {
+            auto [le, ri] = find_substr({sa_both, sa_inv_both}, lcp_both, i, i);
+            assert(le == 0 && ri == ssize(both));
+        }
+        auto [le3, ri3] = find_substr({sa_both, sa_inv_both}, lcp_both, ssize(s) + 1, ssize(both));
+        assert(ri3 - le3 == 1 + ri - le);
+        vector<int> matches_other(begin(sa_both) + le3, begin(sa_both) + ri3);
+        matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
+        sort(begin(matches_other), end(matches_other));
+        assert(matches == matches_other);
+    }
     for (auto match : matches)
         cout << match << '\n';
     return 0;
