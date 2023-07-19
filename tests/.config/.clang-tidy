@@ -81,6 +81,7 @@ Checks: >
     cppcoreguidelines-avoid-const-or-ref-data-members,
     cppcoreguidelines-avoid-goto,
     cppcoreguidelines-interfaces-global-init,
+    cppcoreguidelines-prefer-member-initializer,
     performance-*,
     readability-identifier-naming,
     readability-make-member-function-const,
