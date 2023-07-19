@@ -24,7 +24,7 @@
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
-template <typename T> pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
+template <typename T> inline pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
     auto cmp = [&](int i, int cmp_val) -> bool {
         return s.compare(i, ssize(t), t) < cmp_val;
     };
