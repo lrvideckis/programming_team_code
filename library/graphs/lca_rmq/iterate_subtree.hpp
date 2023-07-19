@@ -12,7 +12,7 @@
  * @param lca lca via rmq
  * @param u some node
  * @param f lambda which runs on each node in u's subtree (including u)
- * @time O(1)
+ * @time O(size of u's subtree)
  * @space O(1)
  */
 template <typename F> void iterate_subtree(const LCA& lca, int u, F f) {
