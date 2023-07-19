@@ -40,15 +40,14 @@ int main() {
     {
         //test find_substr
         string both = s + '$' + t;
-        auto [sa_both, sa_inv_both] = get_sa(both, 256);
-        vector<int> lcp_both = get_lcp_array({sa_both, sa_inv_both}, both);
+        lcp_query lq_both(both, 256);
         for (int i = 0; i <= ssize(both); i++) {
-            auto [le, ri] = find_substr({sa_both, sa_inv_both}, lcp_both, i, i);
+            auto [le, ri] = find_substr(lq_both, i, i);
             assert(le == 0 && ri == ssize(both));
         }
-        auto [le3, ri3] = find_substr({sa_both, sa_inv_both}, lcp_both, ssize(s) + 1, ssize(both));
+        auto [le3, ri3] = find_substr(lq_both, ssize(s) + 1, ssize(both));
         assert(ri3 - le3 == 1 + ri - le);
-        vector<int> matches_other(begin(sa_both) + le3, begin(sa_both) + ri3);
+        vector<int> matches_other(begin(lq_both.sf.sa) + le3, begin(lq_both.sf.sa) + ri3);
         matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
         sort(begin(matches_other), end(matches_other));
         assert(matches == matches_other);
