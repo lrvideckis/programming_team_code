@@ -12,7 +12,7 @@
  *     // or
  *     vector<int> arr;
  *     auto [sa, sa_inv] = get_sa(arr, 100'005);
- *     string t;
+ *     vector<int> t;
  *     auto [le, ri] = find_str(arr, sa, t);
  * @endcode
  *
@@ -26,7 +26,8 @@
  */
 template <typename T> inline pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
     auto cmp = [&](int i, int cmp_val) -> bool {
-        return s.compare(i, ssize(t), t) < cmp_val;
+        auto [it_t, it_s] = mismatch(begin(t), end(t), begin(s) + i, end(s));
+        return 1;//TODO
     };
     auto le = lower_bound(begin(sa), end(sa), 0, cmp);
     auto ri = lower_bound(le, end(sa), 1, cmp);
