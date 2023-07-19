@@ -4,15 +4,6 @@
 #include "find_str.hpp"
 /**
  * @code{.cpp}
- *     string s;
- *     auto [sa, sa_inv] = get_sa(s, 256);
- *     string t;
- *     int first_match_idx = find_first(s, sa, t);
- *     // or
- *     vector<int> arr;
- *     auto [sa, sa_inv] = get_sa(arr, 100'005);
- *     vector<int> t;
- *     int first_match_idx = find_first(arr, sa, t);
  * @endcode
  *
  * @param t needle
@@ -22,9 +13,15 @@
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
-template <typename T> inline int find_first(const T& s, const vector<int>& sa, const T& t) {
-    static RMQ<int> rmq_sa(sa, [](int x, int y) -> int {return min(x, y);});
-    auto [le, ri] = find_str(s, sa, t);
-    if (le == ri) return -1;
-    return rmq_sa.query(le, ri);
-}
+template <typename T> struct find_first {
+    T s;
+    suf sf;
+    RMQ<int> rmq;
+    find_first(const T& a_s, int max_val) : s(a_s), sf(get_sa(s, max_val)),
+        rmq(sf.sa, [](int x, int y) -> int {return min(x, y);}) {}
+    inline int first_match(const T& t) const {
+        auto [le, ri] = find_str(s, sf.sa, t);
+        if (le == ri) return -1;
+        return rmq.query(le, ri);
+    }
+};

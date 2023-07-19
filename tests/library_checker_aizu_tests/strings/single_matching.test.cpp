@@ -12,24 +12,24 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    auto [sa, sa_inv] = get_sa(s, 256);
+    find_first ff(s, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = find_str(s, sa, string(""));
+        auto [le, ri] = find_str(s, ff.sf.sa, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     {
         auto [le, ri] = lcpt.find_str("");
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = find_str(s, sa, t);
+    auto [le, ri] = find_str(s, ff.sf.sa, t);
     auto [le2, ri2] = lcpt.find_str(t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
-    vector<int> matches(begin(sa) + le, begin(sa) + ri);
+    vector<int> matches(begin(ff.sf.sa) + le, begin(ff.sf.sa) + ri);
     sort(begin(matches), end(matches));
     {
-        int first_match = find_first(s, sa, t);
+        int first_match = ff.first_match(t);
         if (matches.empty())
             assert(first_match == -1);
         else {
