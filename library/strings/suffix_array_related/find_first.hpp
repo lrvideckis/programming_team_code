@@ -1,6 +1,5 @@
 /** @file */
 #pragma once
-#include "constructor.hpp"
 #include "find_str.hpp"
 /**
  * @param t needle
@@ -10,8 +9,9 @@
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
-template <typename T> inline int find_first(const sa_query<T>& sq, const T& t) {
-    auto [le, ri] = find_str(sq.s, sq.sa, t);
+template <typename T> inline int find_first(const T& s, const vector<int>& sa, const T& t) {
+    static RMQ<int> rmq_sa(sa, [](int x, int y) -> int {return min(x, y);});
+    auto [le, ri] = find_str(s, sa, t);
     if (le == ri) return -1;
-    return sq.rmq_sa.query(le, ri);
+    return rmq_sa.query(le, ri);
 }
