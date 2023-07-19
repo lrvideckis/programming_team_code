@@ -78,7 +78,7 @@
 "tests/library_checker_aizu_tests/strings/multi_matching.test.cpp": "2023-07-19 16:36:40 -0700",
 "tests/library_checker_aizu_tests/strings/palindrome_query.test.cpp": "2023-07-17 13:43:14 -0700",
 "tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-06-19 22:33:57 -0500",
-"tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2023-07-19 16:36:40 -0700",
+"tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2023-07-19 16:47:41 -0700",
 "tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-07-19 16:36:40 -0700",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-07-17 13:43:14 -0700"
 }
