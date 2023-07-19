@@ -6,10 +6,12 @@
  * @code{.cpp}
  *     LCA lca(adj);
  *     iterate_subtree(lca, u, [&](int v) {
+ *         //v is in u's subtree
  *     });
  * @endcode
  * @param lca lca via rmq
- * @param u node which defines a subtree
+ * @param u some node
+ * @param f lambda which runs on each node in u's subtree (including u)
  * @time O(1)
  * @space O(1)
  */
