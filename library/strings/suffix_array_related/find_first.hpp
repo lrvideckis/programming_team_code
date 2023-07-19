@@ -2,6 +2,18 @@
 #pragma once
 #include "find_str.hpp"
 /**
+ * @code{.cpp}
+ *     string s;
+ *     auto [sa, sa_inv] = get_sa(s, 256);
+ *     string t;
+ *     int first_match_idx = find_first(s, sa, t);
+ *     // or
+ *     vector<int> arr;
+ *     auto [sa, sa_inv] = get_sa(arr, 100'005);
+ *     string t;
+ *     int first_match_idx = find_first(s, sa, t);
+ * @endcode
+ *
  * @param t needle
  * @returns min i such that t == s.substr(i, ssize(t)) or -1. For example,
  * replace RMQ with kth-smallest PST/Wavelet to solve
