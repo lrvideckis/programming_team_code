@@ -72,9 +72,9 @@
 "tests/library_checker_aizu_tests/strings/kmp.test.cpp": "2023-07-18 00:32:02 -0700",
 "tests/library_checker_aizu_tests/strings/lcp_array.test.cpp": "2023-07-19 12:17:27 -0700",
 "tests/library_checker_aizu_tests/strings/lcp_interval_tree.test.cpp": "2023-07-19 13:32:44 -0700",
+"tests/library_checker_aizu_tests/strings/lcp_query_zfunc.test.cpp": "2023-07-19 16:16:14 -0700",
+"tests/library_checker_aizu_tests/strings/multi_matching.test.cpp": "2023-07-19 16:12:06 -0700",
 "tests/library_checker_aizu_tests/strings/palindrome_query.test.cpp": "2023-07-17 13:43:14 -0700",
 "tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-06-19 22:33:57 -0500",
-"tests/library_checker_aizu_tests/strings/sa_query_multi_matching.test.cpp": "2023-07-19 15:08:17 -0700",
-"tests/library_checker_aizu_tests/strings/sa_query_palindrome.test.cpp": "2023-07-19 15:11:23 -0700",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-07-17 13:43:14 -0700"
 }
