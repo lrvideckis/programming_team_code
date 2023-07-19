@@ -19,16 +19,16 @@ int main() {
     {
         vector<int> cnt_small_iterated(n), cnt_big_iterated(n);
         for (int i = 0; i < n; i++) {
-            if(adj[i].empty()) continue;
+            if (adj[i].empty()) continue;
             int big_ch_idx = int(max_element(begin(adj[i]), end(adj[i]), [&](int x, int y) {return lca.sub_sz[x] < lca.sub_sz[y];}) - begin(adj[i]));
             for (int j = 0; j < ssize(adj[i]); j++) {
                 int u = adj[i][j];
                 assert(lca.sub_sz[u] <= lca.sub_sz[adj[i][big_ch_idx]]);
-                if(j == big_ch_idx) {
+                if (j == big_ch_idx) {
                     int le = lca.in[u];
                     int ri = lca.in[u] + lca.sub_sz[u];
                     cnt_big_iterated[le]++;
-                    if(ri < n) cnt_big_iterated[ri]--;
+                    if (ri < n) cnt_big_iterated[ri]--;
                     continue;
                 }
                 iterate_subtree(lca, u, [&](int v) {
