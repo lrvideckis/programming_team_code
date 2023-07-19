@@ -25,24 +25,23 @@ int main() {
     string s;
     cin >> s;
     int n = ssize(s);
-    auto [sa, sa_inv] = get_sa(s, 256);
-    vector<int> lcp = get_lcp_array({sa, sa_inv}, s);
+    lcp_query lq(s, 256);
     {
-        auto [le, ri] = find_str(s, sa, string(""));
+        auto [le, ri] = find_str(s, lq.sf.sa, string(""));
         assert(le == 0 && ri == n);
-        assert(ssize(sa) == n);
-        assert(ssize(sa_inv) == n);
-        assert(ssize(lcp) == n - 1);
+        assert(ssize(lq.sf.sa) == n);
+        assert(ssize(lq.sf.sa_inv) == n);
+        assert(ssize(lq.lcp) == n - 1);
     }
     for (int i : {0, ssize(s), ssize(s) / 2}) {
-        auto [le, ri] = find_substr({sa, sa_inv}, lcp, i, i);
+        auto [le, ri] = find_substr(lq, i, i);
         assert(le == 0 && ri == n);
     }
     for (int i = 0; i < n; i++) {
-        assert(sa[sa_inv[i]] == i);
-        assert(sa_inv[sa[i]] == i);
+        assert(lq.sf.sa[lq.sf.sa_inv[i]] == i);
+        assert(lq.sf.sa_inv[lq.sf.sa[i]] == i);
     }
-    for (auto val : sa)
+    for (auto val : lq.sf.sa)
         cout << val << " ";
     cout << '\n';
 }
