@@ -2,7 +2,8 @@
 #pragma once
 #include "get_lca.hpp"
 /**
- * @param tl,u,v endpoint nodes of path
+ * @param tl tree lift
+ * @param u,v endpoint nodes of path
  * @returns number of edges on path
  * @time O(log(path length(u, v)))
  * @space O(1)

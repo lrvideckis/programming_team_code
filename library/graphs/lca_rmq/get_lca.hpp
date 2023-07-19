@@ -2,7 +2,8 @@
 #pragma once
 #include "constructor.hpp"
 /**
- * @param lca,u,v 2 nodes in the same component
+ * @param lca lca via rmq
+ * @param u,v 2 nodes in the same component
  * @returns lca of u, v
  * @time O(1)
  * @space O(1)

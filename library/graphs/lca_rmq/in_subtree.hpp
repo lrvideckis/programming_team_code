@@ -2,7 +2,8 @@
 #pragma once
 #include "constructor.hpp"
 /**
- * @param lca,u,v 2 nodes
+ * @param lca lca via rmq
+ * @param u,v 2 nodes
  * @returns 1 iff v is in u's subtree
  * @time O(1)
  * @space O(1)

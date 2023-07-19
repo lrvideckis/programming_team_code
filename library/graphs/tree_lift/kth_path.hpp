@@ -2,7 +2,8 @@
 #pragma once
 #include "get_lca.hpp"
 /**
- * @param tl,u,v endpoint nodes of path
+ * @param tl tree lift
+ * @param u,v endpoint nodes of path
  * @param k index into path
  * @returns the node vector<int>({u,p[u],..,lca(u,v),..,p[v],v})[k], so u if k=0
  * @time O(log(path length(u, v)))
