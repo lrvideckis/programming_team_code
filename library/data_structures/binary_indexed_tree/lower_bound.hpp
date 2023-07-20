@@ -3,6 +3,7 @@
 #include "binary_indexed_tree.hpp"
 /**
  * Requires bit.sum(i, i + 1) >= 0
+ * @param bit binary indexed tree
  * @param sum see return
  * @returns min pos such that sum of range [0, pos) >= sum (or n+1)
  * @time O(log n)
