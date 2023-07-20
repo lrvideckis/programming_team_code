@@ -7,10 +7,10 @@
 
 g++ -std=c++17 a.cpp -o a.out
 g++ -std=c++17 b.cpp -o b.out
-g++ -std=c++17 test.cpp -o test.out
+g++ -std=c++17 gen_test.cpp -o gen_test.out
 
 while :; do
 	echo "hi"
-	./test.out >in
+	./gen_test.out >in
 	diff --ignore-all-space <(./a.out <in) <(./b.out <in) || break
 done
