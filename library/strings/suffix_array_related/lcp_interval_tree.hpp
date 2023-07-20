@@ -27,7 +27,7 @@ template <typename T> struct lcp_tree {
      * @space all member variables are O(n)
      */
     lcp_tree(const T& a_s, int max_val) : s(a_s), sf(get_sa(s, max_val)), lcp(get_lcp_array(sf, s)) {
-        tie(le, ri) = get_range(lcp);
+        tie(le, ri) = min_range(lcp);
         vector<vector<int>> adj;
         tie(root, adj) = min_cartesian_tree(lcp, le, ri);
         if (root == -1) return;

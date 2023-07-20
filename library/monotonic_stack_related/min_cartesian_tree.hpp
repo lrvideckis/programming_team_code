@@ -18,7 +18,7 @@
  *       to_min[6] = 5
  *       to_min[8] = 4
  * @code{.cpp}
- *     auto [le, ri] = get_range(arr);
+ *     auto [le, ri] = min_range(arr);
  *     auto [root, adj] = min_cartesian_tree(arr, le, ri);
  *     queue<int> q;
  *     if (root != -1) q.push(root);
