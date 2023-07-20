@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "constructor.hpp"
+#include "get_lca.hpp"
 /**
  * @param lca lca via rmq
  * @param u,v 2 nodes
