@@ -21,6 +21,7 @@ int main() {
     //I had a bug where `compare` is only for strings, making `find_str` useless when using vectors
     const int SHIFT = 100'000;
     vector<int> arr;
+    arr.reserve(100);
     for (int i = 0; i < 100; i++)
         arr.push_back(SHIFT + i);
     auto [sa, sa_inv] = get_sa(arr, SHIFT + 100);
@@ -29,6 +30,7 @@ int main() {
             assert(suf_cmp(sa_inv, i - 1, i));
     }
     vector<int> t;
+    t.reserve(10);
     for (int i = 50; i < 60; i++)
         t.push_back(SHIFT + i);
     {
