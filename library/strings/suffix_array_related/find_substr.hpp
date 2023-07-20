@@ -15,7 +15,7 @@
  * @param lq lcp query
  * @param str_le,str_ri defines a substring [str_le, str_ri) of s
  * @returns a range [le, ri) such that:
- * - for all i in [le, ri): s.substr(str_le, str_ri - str_le) == s.substr(sa[i], str_ri - str_le)
+ * - for all i in [le, ri): s.substr(str_le, str_ri - str_le) == s.substr(lq.sf.sa[i], str_ri - str_le)
  * - `ri - le` is the # of matches of s.substr(str_le, str_ri - str_le) in s.
  * note find_substr(i, i) returns [0, ssize(s))
  * note le < ri except when ssize(s) == 0

@@ -19,8 +19,7 @@ template <typename T> struct lcp_query {
      * @space O(n log n) for RMQ's; a O(max_val) vector `freq` is used temporarily during get_sa
      */
     lcp_query(const T& s, int max_val) :
-        sf(get_sa(s, max_val)),
-        lcp(get_lcp_array(sf, s)),
+        sf(get_sa(s, max_val)), lcp(get_lcp_array(sf, s)),
         rmq(lcp, [](int x, int y) -> int {return min(x, y);}) {}
     /**
      * @param i1,i2 starting 0-based-indexes of suffixes
