@@ -30,7 +30,7 @@ int main() {
             int v = get_rand<int>(0, n - 1);
             if (u == v || !dsu.same_set(u, v))
                 continue;
-            assert(get_lca(tl, u, v) == get_lca(lca, u, v));
+            assert(get_lca(tl, u, v) == lca.get_lca(u, v));
             assert(dist_edges(tl, u, v) == dist_edges(lca, u, v));
             assert(kth_path(tl, u, v, 1) == next_on_path(lca, u, v));
             if (tl.d[u] > tl.d[v]) swap(u, v);
