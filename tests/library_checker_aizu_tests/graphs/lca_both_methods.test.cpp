@@ -19,14 +19,14 @@ int main() {
     tree_lift tl(adj);
     LCA lca(adj);
     for (int i = 0; i < n; i++) {
-        assert(get_lca(tl, i, i) == i);
+        assert(tl.get_lca(i, i) == i);
         assert(lca.get_lca(i, i) == i);
         assert(lca.in[lca.order[i]] == i && lca.order[lca.in[i]] == i);
     }
     while (q--) {
         int u, v;
         cin >> u >> v;
-        int curr_lca = get_lca(tl, u, v);
+        int curr_lca = tl.get_lca(u, v);
         assert(curr_lca == lca.get_lca(u, v));
         assert((curr_lca == u) == in_subtree(lca, u, v));
         assert((curr_lca == v) == in_subtree(lca, v, u));
