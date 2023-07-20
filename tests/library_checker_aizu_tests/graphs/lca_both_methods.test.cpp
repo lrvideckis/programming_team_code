@@ -4,7 +4,7 @@
 #include "../../../library/graphs/tree_lift/get_lca.hpp"
 
 #include "../../../library/graphs/lca_rmq/get_lca.hpp"
-#include "../../../library/graphs/lca_rmq/in_subtree.hpp"
+#include "../../../library/graphs/lca_rmq/next_on_path.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
