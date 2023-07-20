@@ -29,7 +29,7 @@
  *     vector<int> lcp = get_lcp_array({sa, sa_inv}, arr);
  * @endcode
  *
- * @param suf,s string/array and its suffix array
+ * @param sf,s string/array and its suffix array
  * @returns lcp vector
  * @time O(n)
  * @space this function allocates O(n) space for `lcp`

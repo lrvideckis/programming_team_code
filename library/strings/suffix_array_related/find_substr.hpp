@@ -3,8 +3,16 @@
 #include "lcp_query.hpp"
 /**
  * @code{.cpp}
+ *     string s;
+ *     lcp_query lq(s, 256);
+ *     auto [le, ri] = find_substr(lq, str_le, str_ri);
+ *     // or
+ *     vector<int> arr;
+ *     lcp_query lq(arr, 100'005);
+ *     auto [le, ri] = find_substr(lq, str_le, str_ri);
  * @endcode
  *
+ * @param lq lcp query
  * @param str_le,str_ri defines a substring [str_le, str_ri) of s
  * @returns a range [le, ri) such that:
  * - for all i in [le, ri): s.substr(str_le, str_ri - str_le) == s.substr(sa[i], str_ri - str_le)

@@ -16,6 +16,7 @@
  *     auto [le, ri] = find_str(arr, sa, t);
  * @endcode
  *
+ * @param s,sa string/array and its suffix array
  * @param t needle
  * @returns range [le, ri) such that:
  * - for all i in [le, ri): t == s.substr(sa[i], ssize(t))
