@@ -1,12 +1,13 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/all/NTL_1_C"
 #include "../template.hpp"
 
-#include "../../../library/math/prime_sieve.hpp"
+#include "../../../library/math/prime_sieve/is_prime.hpp"
+#include "../../../library/math/prime_sieve/get_prime_factors.hpp"
 
 #include "../../../kactl/content/number-theory/MillerRabin.h"
 
 int main() {
-    init_sieve();
+    calc_sieve();
     for (int i = 1; i < N; i++)
         assert(isPrime(i) == is_prime(i));
     int n;
