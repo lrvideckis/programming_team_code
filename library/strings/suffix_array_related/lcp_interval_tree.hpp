@@ -9,6 +9,7 @@
  * @code{.cpp}
  *     string s;
  *     lcp_tree lcpt(s, 256);
+ *     // or
  *     vector<int> arr;
  *     lcp_tree lcpt(arr, 100'005);
  * @endcode
