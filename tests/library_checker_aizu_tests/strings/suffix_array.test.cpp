@@ -1,50 +1,47 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_related/suffix_array_query.hpp"
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
+#include "../../../library/strings/suffix_array_related/find_str.hpp"
+#include "../../../library/strings/suffix_array_related/find_substr.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     {
         string s;
         auto [sa, sa_inv] = get_sa(s, 256);
-        assert(get_lcp_array(s, sa, sa_inv).empty());
-        s = "a";
-        tie(sa, sa_inv) = get_sa(s, 256);
-        assert(get_lcp_array(s, sa, sa_inv).empty());
+        assert(get_lcp_array({sa, sa_inv}, s).empty());
+    }
+    {
+        string s = "a";
+        auto [sa, sa_inv] = get_sa(s, 256);
+        assert(get_lcp_array({sa, sa_inv}, s).empty());
+    }
+    {
+        vector<int> arr;
+        auto [sa, sa_inv] = get_sa(arr, 100'005);
+        vector<int> lcp = get_lcp_array({sa, sa_inv}, arr);
+        assert(sa.empty() && sa_inv.empty() && lcp.empty());
     }
     string s;
     cin >> s;
     int n = ssize(s);
-    sa_query saq(s, 256);
-    lcp_tree lcpt(s, 256);
-    assert(saq.sa == lcpt.sa);
-    assert(saq.sa_inv == lcpt.sa_inv);
-    assert(saq.lcp == lcpt.lcp);
+    lcp_query lq(s, 256);
     {
-        auto [le, ri] = saq.find_str("");
+        auto [le, ri] = find_str(s, lq.sf.sa, string(""));
         assert(le == 0 && ri == n);
-        assert(ssize(saq.sa) == n);
-        assert(ssize(saq.sa_inv) == n);
-        assert(ssize(saq.lcp) == n - 1);
+        assert(ssize(lq.sf.sa) == n);
+        assert(ssize(lq.sf.sa_inv) == n);
+        assert(ssize(lq.lcp) == n - 1);
     }
     for (int i : {0, ssize(s), ssize(s) / 2}) {
-        auto [le, ri] = saq.find_substr(i, i);
+        auto [le, ri] = find_substr(lq, i, i);
         assert(le == 0 && ri == n);
-    }
-    {
-        auto [le, ri] = lcpt.find_str("");
-        assert(le == 0 && ri == n);
-        assert(ssize(lcpt.sa) == n);
-        assert(ssize(lcpt.sa_inv) == n);
-        assert(ssize(lcpt.lcp) == n - 1);
     }
     for (int i = 0; i < n; i++) {
-        assert(saq.sa[saq.sa_inv[i]] == i);
-        assert(saq.sa_inv[saq.sa[i]] == i);
+        assert(lq.sf.sa[lq.sf.sa_inv[i]] == i);
+        assert(lq.sf.sa_inv[lq.sf.sa[i]] == i);
     }
-    for (auto val : saq.sa)
+    for (auto val : lq.sf.sa)
         cout << val << " ";
     cout << '\n';
 }

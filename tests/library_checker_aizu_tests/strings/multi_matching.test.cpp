@@ -4,17 +4,17 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_related/suffix_array_query.hpp"
+#include "../../../library/strings/suffix_array_related/find_str.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    sa_query saq(s, 256);
+    auto [sa, sa_inv] = get_sa(s, 256);
     lcp_tree lcpt(s, 256);
     {
-        auto [le, ri] = saq.find_str("");
+        auto [le, ri] = find_str(s, sa, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     {
@@ -26,7 +26,7 @@ int main() {
     while (q--) {
         string t;
         cin >> t;
-        auto [le, ri] = saq.find_str(t);
+        auto [le, ri] = find_str(s, sa, t);
         auto [le2, ri2] = lcpt.find_str(t);
         assert(ri - le == ri2 - le2);
         if (ri - le > 0) assert(le == le2);
