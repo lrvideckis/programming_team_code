@@ -78,7 +78,7 @@ template <typename T> struct lcp_tree {
     pair<int, int> find_str(const T& t) const {
         if (root == -1) {
             assert(ssize(sf.sa) <= 1);
-            if (t == "" || s == t) return {0, ssize(s)};
+            if (t.empty() || s == t) return {0, ssize(s)};
             return {0, 0};
         }
         assert(ssize(sf.sa) >= 2);
