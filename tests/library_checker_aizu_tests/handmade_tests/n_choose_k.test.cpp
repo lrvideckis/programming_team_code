@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
 
-#include "../../../library/math/n_choose_k_mod.hpp"
+#include "../../../library/math/n_choose_k/choose_lucas.hpp"
 #include "../../../library/math/tetration_mod.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    calc_chooses();
+    calc_facts();
     for (int i = 0; i < N; i++) {
         if (i) assert(bin_exp(i, N - 2, N) == inv[i]);
         assert(bin_exp(fact[i], N - 2, N) == inv_fact[i]);
