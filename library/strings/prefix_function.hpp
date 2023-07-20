@@ -7,7 +7,7 @@
  * @time O(n)
  * @space this function allocates/returns a O(n) vector
  */
-template<class T> vector<int> prefix_function(const T& s) {
+template <class T> vector<int> prefix_function(const T& s) {
     vector<int> pi(ssize(s));
     for (int i = 1; i < ssize(s); i++) {
         int j = pi[i - 1];
