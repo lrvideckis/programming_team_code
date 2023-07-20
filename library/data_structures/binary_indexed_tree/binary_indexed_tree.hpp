@@ -5,23 +5,23 @@
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <typename T> struct BIT {
-    vector<T> bit;
+    vector<T> s;
     BIT() {}
     /**
      * @param n initial size
      * @time O(n)
-     * @space O(n) for `bit` vector
+     * @space O(n) for `s` vector
      */
-    BIT(int n) : bit(n) {}
+    BIT(int n) : s(n) {}
     /**
      * @param a initial array
      * @time O(n)
-     * @space O(n) for `bit` vector
+     * @space O(n) for `s` vector
      */
-    BIT(const vector<T>& a) : bit(a) {
+    BIT(const vector<T>& a) : s(a) {
         for (int i = 0; i < ssize(a); i++) {
             int j = i | (i + 1);
-            if (j < ssize(a)) bit[j] += bit[i];
+            if (j < ssize(a)) s[j] += s[i];
         }
     }
     /**
@@ -31,8 +31,8 @@ template <typename T> struct BIT {
      * @space O(1)
      */
     inline void update(int i, const T& d) {
-        assert(0 <= i && i < ssize(bit));
-        for (; i < ssize(bit); i |= i + 1) bit[i] += d;
+        assert(0 <= i && i < ssize(s));
+        for (; i < ssize(s); i |= i + 1) s[i] += d;
     }
     /**
      * @param ri defines range [0, ri)
@@ -41,9 +41,9 @@ template <typename T> struct BIT {
      * @space O(1)
      */
     inline T sum(int ri) const {
-        assert(0 <= ri && ri <= ssize(bit));
+        assert(0 <= ri && ri <= ssize(s));
         T ret = 0;
-        for (; ri > 0; ri &= ri - 1) ret += bit[ri - 1];
+        for (; ri > 0; ri &= ri - 1) ret += s[ri - 1];
         return ret;
     }
     /**
@@ -55,20 +55,5 @@ template <typename T> struct BIT {
     inline T sum(int le, int ri) const {
         assert(le <= ri);
         return sum(ri) - sum(le);
-    }
-    /**
-     * Requires BIT::sum(i, i + 1) >= 0
-     * @param sum see return
-     * @returns min pos such that sum of range [0, pos) >= sum (or n+1)
-     * @time O(log n)
-     * @space O(1)
-     */
-    int lower_bound(T sum) const {
-        if (sum <= 0) return 0;
-        int pos = 0;
-        for (int pw = 1 << __lg(ssize(bit) | 1); pw; pw >>= 1)
-            if (pos + pw <= ssize(bit) && bit[pos + pw - 1] < sum)
-                pos += pw, sum -= bit[pos - 1];
-        return pos + 1;
     }
 };

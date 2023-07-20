@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../binary_indexed_tree.hpp"
+#include "../binary_indexed_tree/binary_indexed_tree.hpp"
 /**
  * @see https://github.com/dacin21/dacin21_codebook /blob/master/trees/wavelet_matrix_updates.cpp
  *
