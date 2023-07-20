@@ -3,7 +3,7 @@
 
 #include "../../../library/graphs/lca_rmq/get_lca.hpp"
 #include "../../../library/graphs/lca_rmq/iterate_subtree.hpp"
-#include "../../../library/graphs/lca_rmq/in_subtree.hpp"
+#include "../../../library/graphs/lca_rmq/next_on_path.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -52,6 +52,6 @@ int main() {
     while (q--) {
         int u, v;
         cin >> u >> v;
-        cout << get_lca(lca, u, v) << '\n';
+        cout << lca.get_lca(u, v) << '\n';
     }
 }
