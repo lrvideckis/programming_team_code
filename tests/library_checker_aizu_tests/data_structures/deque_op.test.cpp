@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/deque_operate_all_composite"
 #include "../template.hpp"
 
-#include "../../../library/misc/random.hpp"
+#include "../../../library/contest/random.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/deque.hpp"
 
 int main() {

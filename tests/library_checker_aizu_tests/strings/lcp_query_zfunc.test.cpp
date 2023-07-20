@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
 #include "../template.hpp"
-#include "../../../library/misc/random.hpp"
+#include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/suffix_array_related/suf_cmp.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_query.hpp"
