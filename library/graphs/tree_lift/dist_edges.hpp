@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "get_lca.hpp"
+#include "tree_lift.hpp"
 /**
  * @param tl tree lift
  * @param u,v endpoint nodes of path

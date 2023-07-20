@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "get_lca.hpp"
+#include "lca_rmq.hpp"
 /**
  * @see https://codeforces.com/blog/entry/44351
  * @code{.cpp}

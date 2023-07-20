@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "get_lca.hpp"
+#include "lca_rmq.hpp"
 /**
  * @param lca lca via rmq
  * @param u,v endpoint nodes of path

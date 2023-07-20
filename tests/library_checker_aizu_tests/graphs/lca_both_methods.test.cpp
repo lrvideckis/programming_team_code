@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../template.hpp"
 
-#include "../../../library/graphs/tree_lift/get_lca.hpp"
+#include "../../../library/graphs/tree_lift/tree_lift.hpp"
 
-#include "../../../library/graphs/lca_rmq/get_lca.hpp"
+#include "../../../library/graphs/lca_rmq/lca_rmq.hpp"
 #include "../../../library/graphs/lca_rmq/next_on_path.hpp"
 
 int main() {
