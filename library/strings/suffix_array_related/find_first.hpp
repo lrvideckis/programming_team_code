@@ -6,7 +6,7 @@
  * Query for first substring match. Although, mainly an example of
  * how to use `find_str`
  */
-template <typename T> struct find_first {
+template <class T> struct find_first {
     T s;
     suf sf;
     RMQ<int> rmq;

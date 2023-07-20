@@ -12,7 +12,7 @@
  *     });
  * @endcode
  */
-template <typename T, typename F = function<T(const T&, const T&)>> struct deq {
+template <class T, class F = function<T(const T&, const T&)>> struct deq {
     F op;
     /**
      * @see https://github.com/suisen-cp/cp-library-cpp /blob/main/library/datastructure/deque_aggregation.hpp

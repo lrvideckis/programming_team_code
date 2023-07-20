@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "get_lca.hpp"
+#include "tree_lift.hpp"
 /**
  * @param tl tree lift
  * @param u,v endpoint nodes of path
@@ -9,5 +9,5 @@
  * @space O(1)
  */
 inline int dist_edges(const tree_lift& tl, int u, int v) {
-    return tl.d[u] + tl.d[v] - 2 * tl.d[get_lca(tl, u, v)];
+    return tl.d[u] + tl.d[v] - 2 * tl.d[tl.get_lca(u, v)];
 }

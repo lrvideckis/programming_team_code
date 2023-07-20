@@ -15,6 +15,8 @@
 
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
 
+#include "../../../library/strings/knuth_morris_pratt.hpp"
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     //mainly to test all strings algs compile when passing in vectors
@@ -57,6 +59,11 @@ int main() {
         lcp_tree lcpt(arr, SHIFT + 100);
         auto [le, ri] = lcpt.find_str(t);
         assert(le == 50 && ri == 51);
+    }
+    {
+        KMP kmp(t);
+        vector<int> matches = kmp.find_str(arr);
+        assert(matches == vector<int>({50}));
     }
     cout << "Hello World\n";
     return 0;

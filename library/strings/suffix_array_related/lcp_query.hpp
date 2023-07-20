@@ -9,7 +9,7 @@
  * note if one of the suffixes is the entire string (i1 == 0 || i2 == 0)
  * then it's the same as z algorithm
  */
-template <typename T> struct lcp_query {
+template <class T> struct lcp_query {
     suf sf;
     vector<int> lcp;
     RMQ<int> rmq;

@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "get_lca.hpp"
+#include "lca_rmq.hpp"
 /**
  * @param lca lca via rmq
  * @param u,v endpoint nodes of path
@@ -9,5 +9,5 @@
  * @space O(1)
  */
 inline int dist_edges(const LCA& lca, int u, int v) {
-    return lca.d[u] + lca.d[v] - 2 * lca.d[get_lca(lca, u, v)];
+    return lca.d[u] + lca.d[v] - 2 * lca.d[lca.get_lca(u, v)];
 }

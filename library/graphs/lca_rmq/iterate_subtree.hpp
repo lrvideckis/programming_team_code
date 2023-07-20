@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "constructor.hpp"
+#include "lca_rmq.hpp"
 /**
  * @see https://codeforces.com/blog/entry/44351
  * @code{.cpp}
@@ -15,7 +15,7 @@
  * @time O(size of u's subtree)
  * @space O(1)
  */
-template <typename F> void iterate_subtree(const LCA& lca, int u, F f) {
+template <class F> void iterate_subtree(const LCA& lca, int u, F f) {
     for (int i = lca.in[u]; i < lca.in[u] + lca.sub_sz[u]; i++)
         f(lca.order[i]);
 }

@@ -9,7 +9,7 @@
  * @time O(log n)
  * @space O(1)
  */
-template <typename T> inline int lower_bound(const BIT<T>& bit, T sum) {
+template <class T> inline int lower_bound(const BIT<T>& bit, T sum) {
     if (sum <= 0) return 0;
     int pos = 0;
     for (int pw = 1 << __lg(ssize(bit.s) | 1); pw; pw >>= 1)

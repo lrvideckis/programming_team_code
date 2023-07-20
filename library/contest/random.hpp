@@ -18,7 +18,7 @@ mt19937 rng(rd());
  * @param le,ri defines range [le, ri]
  * @returns random number in range
  */
-template <typename T> inline T get_rand(T le, T ri) {
+template <class T> inline T get_rand(T le, T ri) {
     assert(le <= ri);
     return uniform_int_distribution<T>(le, ri)(rng);
 }

@@ -28,4 +28,31 @@ struct tree_lift {
             if (v != p[u])
                 d[v] = d[p[v] = u] + 1, j[v] = jmp, dfs(adj, v);
     }
+    /**
+     * @param u query node
+     * @param k number of edges
+     * @returns a node k edges up from u. With k=1, this returns u's parent.
+     * @time O(log k)
+     * @space O(1)
+     */
+    inline int kth_par(int u, int k) const {
+        if (k > d[u]) return -1;
+        int anc_d = d[u] - k;
+        while (d[u] > anc_d) u = d[j[u]] >= anc_d ? j[u] : p[u];
+        return u;
+    }
+    /**
+     * @param u,v 2 nodes in the same component
+     * @returns lca of u, v
+     * @time O(log(path length(u, v)))
+     * @space O(1)
+     */
+    inline int get_lca(int u, int v) const {
+        if (d[u] < d[v]) swap(u, v);
+        u = kth_par(u, d[u] - d[v]);
+        while (u != v)
+            if (j[u] != j[v]) u = j[u], v = j[v];
+            else u = p[u], v = p[v];
+        return u;
+    }
 };

@@ -25,7 +25,7 @@
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
-template <typename T> inline pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
+template <class T> inline pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
     auto le = lower_bound(begin(sa), end(sa), 0, [&](int i, int) -> bool {
         return lexicographical_compare(begin(s) + i, end(s), begin(t), end(t));
     });

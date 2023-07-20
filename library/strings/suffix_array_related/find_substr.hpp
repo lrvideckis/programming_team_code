@@ -22,7 +22,7 @@
  * @time O(log(|s|))
  * @space O(1)
  */
-template <typename T> inline pair<int, int> find_substr(const lcp_query<T>& lq, int str_le, int str_ri) {
+template <class T> inline pair<int, int> find_substr(const lcp_query<T>& lq, int str_le, int str_ri) {
     assert(0 <= str_le && str_le <= str_ri && str_ri <= ssize(lq.sf.sa));
     if (str_le == ssize(lq.sf.sa)) return {0, ssize(lq.sf.sa)};
     auto cmp = [&](int i, bool flip) -> bool {

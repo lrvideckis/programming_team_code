@@ -12,7 +12,7 @@
  * @time O(n)
  * @space a O(n) vector is allocated and returned
  */
-template <typename F> vector<int> monotonic_stack(const vector<int>& arr, F less) {
+template <class F> vector<int> monotonic_stack(const vector<int>& arr, F less) {
     vector<int> le(ssize(arr));
     iota(begin(le), end(le), -1);
     for (int i = 0; i < ssize(arr); i++)

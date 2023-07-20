@@ -9,11 +9,11 @@ shopt -s globstar
 echo "check no endl"
 grep "endl" --recursive library_checker_aizu_tests/ && exit 1
 
-echo "check template<typename T> over template<class T>:"
-grep --extended-regexp "template\s?<class" --recursive ../library/ && exit 1
+echo "check template<class T> over template<typename T>:"
+grep --extended-regexp "template\s?<typename" --recursive ../library/ && exit 1
 
-echo "check formatting of template <typename T>:"
-grep --extended-regexp "template<typename" --recursive ../library/ && exit 1
+echo "check formatting of template <class T>:"
+grep --extended-regexp "template<class" --recursive ../library/ && exit 1
 
 echo "check 1 instead of true"
 grep --extended-regexp "true" --recursive ../library/ && exit 1

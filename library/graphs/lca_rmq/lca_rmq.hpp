@@ -32,4 +32,15 @@ struct LCA {
             if (v != p[u])
                 d[v] = d[p[v] = u] + 1, dfs(adj, v), sub_sz[u] += sub_sz[v];
     }
+    /**
+     * @param u,v 2 nodes in the same component
+     * @returns lca of u, v
+     * @time O(1)
+     * @space O(1)
+     */
+    inline int get_lca(int u, int v) const {
+        if (u == v) return u;
+        auto [x, y] = minmax(in[u], in[v]);
+        return p[rmq.query(x + 1, y + 1)];
+    }
 };

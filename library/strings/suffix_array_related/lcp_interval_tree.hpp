@@ -14,7 +14,7 @@
  *     lcp_tree lcpt(arr, 100'005);
  * @endcode
  */
-template <typename T> struct lcp_tree {
+template <class T> struct lcp_tree {
     T s;
     suf sf;
     vector<int> lcp, le, ri;
