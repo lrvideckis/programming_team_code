@@ -8,7 +8,7 @@
  *     linear_rmq<long long> rmq(arr, greater<long long>());//maximum query
  * @endcode
  */
-template <typename T, typename F = function<bool(const T&, const T&)>> struct linear_rmq {
+template <class T, class F = function<bool(const T&, const T&)>> struct linear_rmq {
     int n;
     vector<T> arr;
     F less;

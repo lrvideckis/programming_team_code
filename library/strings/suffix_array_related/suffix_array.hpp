@@ -44,7 +44,7 @@ struct suf {
  * @space this function allocates O(n) space for `sa`, `sa_inv`
  * vectors, but also allocates a O(max_val) vector `freq` temporarily
  */
-template <typename T> suf get_sa(const T& s, int max_val) {
+template <class T> suf get_sa(const T& s, int max_val) {
     int n = ssize(s);
     vector<int> sa(n), sa_inv(begin(s), end(s)), tmp(n);
     iota(begin(sa), end(sa), 0);

@@ -4,7 +4,7 @@
  * Binary Indexed Tree
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <typename T> struct BIT {
+template <class T> struct BIT {
     vector<T> s;
     BIT() {}
     /**

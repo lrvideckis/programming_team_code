@@ -7,7 +7,7 @@
  *     });
  * @endcode
  */
-template <typename F> struct centroid_decomp {
+template <class F> struct centroid_decomp {
     vector<vector<int>> adj;
     F func;
     vector<int> sub_sz;
