@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "binary_exponentiation_mod.hpp"
+#include "../binary_exponentiation_mod.hpp"
 /**
  * @code{.cpp}
  *     auto [rank, det] = row_reduce(mat, ssize(mat[0]));
