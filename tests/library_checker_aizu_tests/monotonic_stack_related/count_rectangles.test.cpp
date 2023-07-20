@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_B"
 #include "../template.hpp"
-#include "../../../library/misc/random.hpp"
+#include "../../../library/contest/random.hpp"
 #include "../../../library/monotonic_stack_related/count_rectangles.hpp"
 
 #include "../../../kactl/content/data-structures/SubMatrix.h"

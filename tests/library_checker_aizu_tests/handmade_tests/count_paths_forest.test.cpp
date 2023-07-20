@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../template.hpp"
-#include "../../../library/misc/random.hpp"
+#include "../../../library/contest/random.hpp"
 #include "../../../library/graphs/count_paths_per_node.hpp"
 #include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
 
