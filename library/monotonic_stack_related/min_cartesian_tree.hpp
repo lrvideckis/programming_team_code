@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "monotonic_stack.hpp"
+#include "min_range.hpp"
 /**
  * arr = {2, 1, 3, 1, 0, 2, 2, 1, 0, 2}
  *       (------------x---------------)

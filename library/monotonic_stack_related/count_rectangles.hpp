@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "monotonic_stack.hpp"
+#include "min_range.hpp"
 /**
  * @param grid an n-by-m boolean array
  * @returns an (n+1)-by-(m+1) array cnt where cnt[i][j] = the number of times
