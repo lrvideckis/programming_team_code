@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "monotonic_stack.hpp"
+#include "min_range.hpp"
 /**
  * @param arr contains positive integers
  * @returns largest integer x such that there exists a subarray arr[le,ri)
