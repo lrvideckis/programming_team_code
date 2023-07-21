@@ -4,11 +4,11 @@
 /**
  * @code{.cpp}
  *     string s;
- *     vector<int> man = manacher(s);
+ *     vector<int> man(manacher(s));
  *     bool pal = is_pal(man, le, ri);
  *     // or
  *     vector<int> arr;
- *     vector<int> man = manacher(arr);
+ *     vector<int> man(manacher(arr));
  *     bool pal = is_pal(man, le, ri);
  * @endcode
  *
