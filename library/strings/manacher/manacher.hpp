@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 // https://codeforces.com/blog/entry/12143#comment-324162
-// TODO: mention that i-th center has inclusive inclusive bounds [ man[i], i-man[i] ]
+// TODO: mention that i-th center has bounds [ man[i], i-man[i]+1 )
 // and length  i - 2*man[i] + 1
 template <class T> vector<int> manacher(const T& s) {
     int n = ssize(s);

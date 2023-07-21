@@ -1,5 +1,6 @@
 /** @file */
 #pragma once
+#include "../../data_structures/sparse_table.hpp"
 #include "manacher.hpp"
 /**
  * @see https://codeforces.com/blog/entry/63105#comment-470339
@@ -7,11 +8,11 @@
 //TODO test
 template <class T> struct longest_pal {
     int n;
-    vector<int> man; //TODO: documentation
+    vector<int> man;
     /**
      * @param s string/array
-     * @time O(n)
-     * @space O(n) TODO
+     * @time O(n log n)
+     * @space O(n log n) TODO
      */
     longest_pal(const T& s) : n(ssize(s)), man(manacher(s)) {
         //TODO

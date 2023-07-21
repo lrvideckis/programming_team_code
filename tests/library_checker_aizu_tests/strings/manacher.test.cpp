@@ -39,6 +39,7 @@ int main() {
     }
     for(int i = 0; i < ssize(man); i++) {
         int ri = i - man[i] + 1;
+        assert(man[i] <= ri);
         assert(is_pal(man, man[i], ri));
         assert(man[i] == 0 || ri == n || !is_pal(man, man[i] - 1, ri + 1));
         cout << i - 2 * man[i] + 1 << " ";
