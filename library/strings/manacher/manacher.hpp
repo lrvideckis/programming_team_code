@@ -1,6 +1,8 @@
 /** @file */
 #pragma once
 // https://codeforces.com/blog/entry/12143#comment-324162
+// TODO: mention that i-th center has inclusive inclusive bounds [ man[i], i-man[i] ]
+// and length  i - 2*man[i] + 1
 template <class T> vector<int> manacher(const T& s) {
     int n = ssize(s);
     vector<int> res(max(0, 2*n - 1));
