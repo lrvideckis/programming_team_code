@@ -1,9 +1,6 @@
 /** @file */
 #pragma once
 #include "manacher.hpp"
-/**
- * Interface on top of manacher array
- */
 template <class T> struct pal_query {
     int n;
     vector<int> man; //TODO: documentation

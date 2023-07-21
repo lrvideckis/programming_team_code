@@ -2,14 +2,14 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/manacher/is_palindrome_query.hpp"
+#include "../../../library/strings/manacher/is_palindrome.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
     int n = ssize(s);
-    pal_query pal_q(s);
+    vector<int> man = manacher(s);
     {
         vector<pair<int, int>> tests;
         for (int i = 0; i < n; i++) {
@@ -23,11 +23,11 @@ int main() {
         }
         for (auto [l, r] : tests) {
             string substr = s.substr(l, r - l);
-            assert(pal_q.is_pal(l, r) == (substr == string(rbegin(substr), rend(substr))));
+            assert(is_pal(man, l, r) == (substr == string(rbegin(substr), rend(substr))));
         }
     }
-    for(int i = 0; i < ssize(pal_q.man); i++) {
-        cout << i - 2 * pal_q.man[i] + 1 << " ";
+    for(int i = 0; i < ssize(man); i++) {
+        cout << i - 2 * man[i] + 1 << " ";
     }
     return 0;
 }
