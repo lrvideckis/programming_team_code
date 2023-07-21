@@ -1,5 +1,6 @@
 /** @file */
 #pragma once
+#include "suffix_array.hpp"
 /**
  * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/strings/SuffixArray.h
  *
@@ -21,25 +22,26 @@
  * @code{.cpp}
  *     string s;
  *     auto [sa, sa_inv] = get_sa(s, 256);
- *     auto lcp = get_lcp_array(s, sa, sa_inv);
+ *     vector<int> lcp = get_lcp_array({sa, sa_inv}, s);
+ *     // or
  *     vector<int> arr;
  *     auto [sa, sa_inv] = get_sa(arr, 100'005);
- *     auto lcp = get_lcp_array(arr, sa, sa_inv);
+ *     vector<int> lcp = get_lcp_array({sa, sa_inv}, arr);
  * @endcode
  *
- * @param s,sa,sa_inv string/array and its suffix array
+ * @param sf,s string/array and its suffix array
  * @returns lcp vector
  * @time O(n)
  * @space this function allocates O(n) space for `lcp`
  */
-template <typename T> vector<int> get_lcp_array(const T& s, const vector<int>& sa, const vector<int>& sa_inv) {
+template <class T> vector<int> get_lcp_array(const suf& sf, const T& s) {
     int n = ssize(s);
     vector<int> lcp(max(0, n - 1));
     for (int i = 0, sz = 0; i < n; i++) {
         if (sz > 0) sz--;
-        if (sa_inv[i] == 0) continue;
-        for (int j = sa[sa_inv[i] - 1]; max(i, j) + sz < n && s[i + sz] == s[j + sz];) sz++;
-        lcp[sa_inv[i] - 1] = sz;
+        if (sf.sa_inv[i] == 0) continue;
+        for (int j = sf.sa[sf.sa_inv[i] - 1]; max(i, j) + sz < n && s[i + sz] == s[j + sz];) sz++;
+        lcp[sf.sa_inv[i] - 1] = sz;
     }
     return lcp;
 }

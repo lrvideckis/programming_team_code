@@ -14,7 +14,7 @@
  * code.
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <typename T> struct KMP {
+template <class T> struct KMP {
     T needle;
     vector<int> pi;
     /**

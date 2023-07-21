@@ -17,7 +17,7 @@
  * @endcode
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <typename T, typename F = function<T(const T&, const T&)>> struct RMQ {
+template <class T, class F = function<T(const T&, const T&)>> struct RMQ {
     vector<vector<T>> dp; /**< dp[i][j] = arr[j] op arr[j + 1] op ... op arr[j + 2^i - 1] */
     F op;
     RMQ() {}

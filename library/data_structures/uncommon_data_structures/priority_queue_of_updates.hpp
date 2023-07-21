@@ -14,7 +14,7 @@
  * where O(T(n)) = time complexity of DS::join and DS::undo
  * @space n interweaved calls to pop_update, push_update uses O(n) space
  */
-template <typename DS, typename... ARGS> struct pq_updates {
+template <class DS, class... ARGS> struct pq_updates {
     DS ds;
     using upd = pair<tuple<ARGS...>, map<int, int>::iterator>;
     vector<upd> upd_st;

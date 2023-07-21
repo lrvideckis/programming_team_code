@@ -12,7 +12,7 @@
  * @time O(n + m ^ (3/2))
  * @space besides the O(m) `edges` param, this function allocates a O(n + m) vector temporarily
  */
-template <typename F> void enumerate_triangles(const vector<pair<int, int>>& edges, int n, F f) {
+template <class F> void enumerate_triangles(const vector<pair<int, int>>& edges, int n, F f) {
     vector<int> deg(n);
     for (auto [u, v] : edges)
         deg[u]++, deg[v]++;

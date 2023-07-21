@@ -13,7 +13,7 @@
  *     });
  * @endcode
  */
-template <typename T, typename F = function<T(const T&, const T&)>> struct disjoint_rmq {
+template <class T, class F = function<T(const T&, const T&)>> struct disjoint_rmq {
     int n;
     vector<vector<T>> dp;
     /**

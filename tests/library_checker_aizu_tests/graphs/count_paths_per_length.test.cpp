@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 #include "../template.hpp"
-#include "../../../library/misc/random.hpp"
+#include "../../../library/contest/random.hpp"
 #include "../../../library/graphs/count_paths_per_node.hpp"
 
 #include "../../../library/graphs/count_paths_per_length.hpp"
