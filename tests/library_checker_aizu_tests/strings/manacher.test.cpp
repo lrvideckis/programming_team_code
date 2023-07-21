@@ -2,14 +2,14 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/manacher/is_palindrome.hpp"
+#include "../../../library/strings/manacher/longest_from_start.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
     int n = ssize(s);
-    vector<int> man = manacher(s);
+    vector<int> man(manacher(s)), longest(longest_from_start(man));
     {
         vector<pair<int, int>> tests;
         for (int i = 0; i < n; i++) {
@@ -24,6 +24,17 @@ int main() {
         for (auto [l, r] : tests) {
             string substr = s.substr(l, r - l);
             assert(is_pal(man, l, r) == (substr == string(rbegin(substr), rend(substr))));
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        assert(i + longest[i] <= n);
+        assert(is_pal(man, i, i + longest[i]));
+        if(i + longest[i] < n) {
+            assert(!is_pal(man, i, n));
+            for(int tests = 10; tests--;) {
+                int ri = get_rand(i + longest[i] + 1, n);
+                assert(!is_pal(man, i, ri));
+            }
         }
     }
     for(int i = 0; i < ssize(man); i++) {
