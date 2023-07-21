@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/manacher/palindrome_query.hpp"
+#include "../../../library/strings/manacher/is_palindrome.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
