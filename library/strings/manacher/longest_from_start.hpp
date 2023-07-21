@@ -2,6 +2,8 @@
 #pragma once
 #include "is_palindrome.hpp"
 /**
+ * @see https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Strings/manacher.cpp
+ *
  * @code{.cpp}
  *     string s;
  *     vector<int> man(manacher(s)), longest(longest_from_start(man));
