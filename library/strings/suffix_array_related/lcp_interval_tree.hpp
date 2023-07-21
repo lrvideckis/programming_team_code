@@ -29,7 +29,7 @@ template <class T> struct lcp_tree {
     lcp_tree(const T& a_s, int max_val) : s(a_s), sf(get_sa(s, max_val)), lcp(get_lcp_array(sf, s)) {
         tie(le, ri) = min_range(lcp);
         vector<vector<int>> adj;
-        tie(root, adj) = min_cartesian_tree(lcp, le, ri);
+        tie(root, adj) = min_cartesian_tree(le, ri, lcp);
         if (root == -1) return;
         child.resize(ssize(adj));
         queue<int> q({root});
