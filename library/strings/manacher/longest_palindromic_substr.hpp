@@ -4,6 +4,7 @@
 /**
  * @see https://codeforces.com/blog/entry/63105#comment-470339
  */
+//TODO test
 template <class T> struct longest_pal {
     int n;
     vector<int> man; //TODO: documentation
