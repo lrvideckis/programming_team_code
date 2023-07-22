@@ -10,7 +10,3 @@ grep --recursive --files-with-matches \
 	grep --invert-match --fixed-strings --file=- ../.verify-helper/timestamps.remote.json >tmp_file
 
 mv tmp_file ../.verify-helper/timestamps.remote.json
-
-git add ../.verify-helper/timestamps.remote.json
-git commit --message "removing randomly generated tests to rerun them"
-git push

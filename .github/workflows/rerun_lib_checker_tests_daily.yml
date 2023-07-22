@@ -23,4 +23,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: remove randomly generated tests
-      run: make --directory=tests/ remove_randomly_generated_tests
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email 33103480+lrvideckis@users.noreply.github.com
+        make --directory=tests/ remove_randomly_generated_tests
+        git add .verify-helper/timestamps.remote.json
+        git commit --message "removing randomly generated tests to rerun them"
+        git push
