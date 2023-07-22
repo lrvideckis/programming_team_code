@@ -1,7 +1,7 @@
 name: run lib checker tests daily
 
-on:
-  schedule:
+  #on:
+  #schedule:
     # All library checker tests and some handmade tests are generated randomly.
     # So let's re-run all of these daily haha (why not, github let's us do this
     # for free). Besides the library getting better tested over time, the real
@@ -13,7 +13,9 @@ on:
     #
     # Let's re-run all tests at midnight, so that when I wake up, I can verify
     # all tests ran successfully.
-    - cron:  '0 0 * * *'
+    #- cron:  '0 0 * * *'
+on:
+  push:
 
 jobs:
   astyle_cppcheck:
