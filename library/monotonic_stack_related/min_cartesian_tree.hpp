@@ -19,7 +19,7 @@
  *       to_min[8] = 4
  * @code{.cpp}
  *     auto [le, ri] = min_range(arr);
- *     auto [root, adj] = min_cartesian_tree(arr, le, ri);
+ *     auto [root, adj] = min_cartesian_tree(le, ri, arr);
  *     queue<int> q;
  *     if (root != -1) q.push(root);
  *     while (!q.empty()) {
@@ -36,7 +36,7 @@
  * @time O(n)
  * @space this function allocates/returns an adj list which is O(n)
  */
-pair<int, vector<vector<int>>> min_cartesian_tree(const vector<int>& arr, const vector<int>& le, const vector<int>& ri) {
+pair<int, vector<vector<int>>> min_cartesian_tree(const vector<int>& le, const vector<int>& ri, const vector<int>& arr) {
     int n = ssize(arr);
     assert(ssize(le) == n && ssize(ri) == n);
     auto leftmost_min = [&](int i) -> bool {return le[i] == -1 || arr[le[i]] < arr[i];};
