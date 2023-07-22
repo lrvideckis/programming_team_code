@@ -1,0 +1,26 @@
+name: run lib checker tests daily
+
+  #on:
+  #schedule:
+    # All library checker tests and some handmade tests are generated randomly.
+    # So let's re-run all of these daily haha (why not, github let's us do this
+    # for free). Besides the library getting better tested over time, the real
+    # value of this is occasionally, the library checker folks will add new
+    # test cases. And during each run of `oj-verify all`, all new tests are
+    # pulled down from their repo. I don't follow library checker development
+    # closely enough to manually rerun some test when a new test case is added.
+    # Automating this is a better solution anyways.
+    #
+    # Let's re-run all tests at midnight, so that when I wake up, I can verify
+    # all tests ran successfully.
+    #- cron:  '0 0 * * *'
+
+on: push
+
+jobs:
+  astyle_cppcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: remove randomly generated tests
+      run: make --directory=tests/ remove_randomly_generated_tests
