@@ -6,7 +6,9 @@ shopt -s globstar
 
 grep -V
 
-grep --recursive --files-with-matches library/contest/random\.hpp library_checker_aizu_tests/ |
+grep --recursive --files-with-matches \
+	-e "library/contest/random\.hpp" \
+	-e "https\://judge\.yosupo\.jp/problem/" library_checker_aizu_tests/ |
 	grep --invert-match --fixed-strings --file=- ../.verify-helper/timestamps.remote.json
 
 #mv tmp_file ../.verify-helper/timestamps.remote.json
