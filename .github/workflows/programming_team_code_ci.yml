@@ -124,7 +124,7 @@ jobs:
         git checkout -b no_comments
         make --directory=tests/ remove_all_comments
         git add library/
-        git commit -m "remove comments"
+        git commit --message "remove comments"
         git push origin no_comments --force
 
   format_and_check_bash_scripts:
