@@ -5,6 +5,6 @@ set -euo pipefail
 shopt -s globstar
 
 grep --recursive --files-with-matches library/contest/random\.hpp library_checker_aizu_tests/ |
-	grep --invert-match --fixed-strings --file=- ../.verify-helper/timestamps.remote.json > tmp_file
+	grep --invert-match --fixed-strings --file=- ../.verify-helper/timestamps.remote.json
 
-mv tmp_file ../.verify-helper/timestamps.remote.json
+#mv tmp_file ../.verify-helper/timestamps.remote.json
