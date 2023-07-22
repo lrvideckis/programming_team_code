@@ -3,6 +3,7 @@
 #include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/manacher/longest_from_start.hpp"
+#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -11,17 +12,16 @@ int main() {
             string s(n, 'a');
             int mx_char = get_rand<int>(0, 5);
             generate(begin(s), end(s), [&]() {return char('a' + get_rand<int>(0, mx_char));});
+            vector<int> man = manacher(s);
             vector<vector<bool>> is_pal_naive(n + 1, vector<bool>(n + 1, 1));
-            for (int len = 2; len <= n; len++) {
+            for (int len = 0; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
-                    is_pal_naive[le][ri] = (s[le] == s[ri - 1] && is_pal_naive[le + 1][ri - 1]);
+                    if(len >= 2)
+                        is_pal_naive[le][ri] = (s[le] == s[ri - 1] && is_pal_naive[le + 1][ri - 1]);
+                    assert(is_pal(man, le, ri) == is_pal_naive[le][ri]);
                 }
             }
-            vector<int> man = manacher(s);
-            for (int le = 0; le <= n; le++)
-                for (int ri = le; ri <= n; ri++)
-                    assert(is_pal(man, le, ri) == is_pal_naive[le][ri]);
             vector<int> longest(longest_from_start(man));
             for (int le = 0; le < n; le++) {
                 bool seen_pal = 0;
@@ -30,7 +30,16 @@ int main() {
                     assert((le + longest[le] >= ri) == seen_pal);
                 }
             }
-
+            vector<vector<int>> longest_pal_naive(n + 1, vector<int>(n + 1, 0));
+            longest_pal lp(s);
+            for (int len = 0; len <= n; len++) {
+                for (int le = 0; le + len <= n; le++) {
+                    int ri = le + len;
+                    if(len)
+                        longest_pal_naive[le][ri] = (is_pal_naive[le][ri] ? len : max(longest_pal_naive[le+1][ri], longest_pal_naive[le][ri-1]));
+                    assert(lp.get_longest(le, ri) == longest_pal_naive[le][ri]);
+                }
+            }
         }
     }
     cout << "Hello World\n";
