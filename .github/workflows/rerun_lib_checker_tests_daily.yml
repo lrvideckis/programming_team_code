@@ -13,7 +13,7 @@ on:
     #
     # Let's re-run all tests at midnight, so that when I wake up, I can verify
     # all tests ran successfully.
-    - cron:  '0 0 * * *'
+    - cron:  '0 7 * * *'
 
 jobs:
   astyle_cppcheck:

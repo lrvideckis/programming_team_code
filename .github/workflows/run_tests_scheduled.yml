@@ -10,7 +10,7 @@ on:
     #
     # So only around 5-10 tests run per commit, leaving un-run tests. This cron
     # job solves this by reruning any remaining tests every 30 minutes.
-    - cron:  '15,45 0-6 * * *'
+    - cron:  '15,45 7-12 * * *'
 
 jobs:
   library_checker_aizu_tests:
