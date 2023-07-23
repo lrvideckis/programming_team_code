@@ -3,13 +3,13 @@
 #include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/manacher/longest_from_start.hpp"
-//#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
 #include "../../../library/strings/manacher/count_palindromic_substrs.hpp"
+#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     for (int n = 0; n <= 100; n++) {
-        for (int tests = 100; tests--;) {
+        for (int tests = 50; tests--;) {
             string s(n, 'a');
             int mx_char = get_rand<int>(0, 5);
             generate(begin(s), end(s), [&]() {return char('a' + get_rand<int>(0, mx_char));});
@@ -46,9 +46,8 @@ int main() {
                     assert(pcq.count_pals(le, ri) == count_pals_naive[le][ri]);
                 }
             }
-            /*
             vector<vector<int>> longest_pal_naive(n + 1, vector<int>(n + 1, 0));
-            longest_pal lp(s);
+            longest_pal_query lp(s);
             for (int len = 0; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
@@ -57,7 +56,6 @@ int main() {
                     assert(lp.get_longest(le, ri) == longest_pal_naive[le][ri]);
                 }
             }
-            */
         }
     }
     cout << "Hello World\n";

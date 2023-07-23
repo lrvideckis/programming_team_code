@@ -12,6 +12,7 @@ template <class T> struct pal_count_query {
     wavelet_tree wt_le, wt_ri;
     pal_count_query(const T& s) : n(ssize(s)), man(manacher(s)), wt_le(man, 0, n), wt_ri(init()) {}
     wavelet_tree init() {
+        //TODO: break out right into own file?
         vector<int> right(ssize(man));
         for(int i = 0; i < ssize(man); i++) {
             assert(0 <= man[i] && man[i] < n);

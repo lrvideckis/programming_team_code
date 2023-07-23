@@ -6,7 +6,7 @@
  * @see https://codeforces.com/blog/entry/63105#comment-470339
  */
 //TODO test
-template <class T> struct longest_pal {
+template <class T> struct longest_pal_query {
     int n;
     vector<int> man;
     RMQ<int> rmq;
@@ -15,7 +15,7 @@ template <class T> struct longest_pal {
      * @time O(n log n)
      * @space O(n log n) TODO
      */
-    longest_pal(const T& s) : n(ssize(s)), man(manacher(s)),
+    longest_pal_query(const T& s) : n(ssize(s)), man(manacher(s)),
         rmq(man, [&](int x, int y) -> int {return min(x, y);}) {
         //vector<int> idx(ssize(man));
         //iota(begin(idx), end(idx), 0);
