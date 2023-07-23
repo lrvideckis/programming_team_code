@@ -8,68 +8,73 @@
 //TODO test
 template <class T> struct longest_pal_query {
     int n;
-    vector<int> man;
+    vector<int> man, idx;
     RMQ<int> rmq;
     /**
      * @param s string/array
      * @time O(n log n)
      * @space O(n log n) TODO
      */
-    longest_pal_query(const T& s) : n(ssize(s)), man(manacher(s)),
-        rmq(man, [&](int x, int y) -> int {return min(x, y);}) {
-        //vector<int> idx(ssize(man));
-        //iota(begin(idx), end(idx), 0);
-        //rmq = RMQ<int>(idx, [&](int i1, int i2) -> int {return man[i1] < man[i2];});
-        //rmq_ri = RMQ<int>(idx, [](int i1, int i2) -> int {return man[i1] < man[i1];});
+    longest_pal_query(const T& s) : n(ssize(s)), man(manacher(s)), idx(ssize(man)) {
+        iota(begin(idx), end(idx), 0);
+        rmq = RMQ<int>(idx, [&](int i1, int i2) -> int {return i1-2*man[i1]+1 < i2-2*man[i2]+1 ? i2 : i1;});
     }
-    /**
-     * let mid be given from binary search
-     * [le, ri)
-     * [le, mi); [mi, ri)
-     *
-     * let 0 < i < 2*n-1
-     * for odd len. palindromes (so i is even)
-     * mid[i]
-     *
-     */
     inline int get_longest(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= n);
         if(le == ri) return 0;//TODO remove special case
         int man_le = 2 * le, man_ri = 2 * ri - 1;
+        assert(2 * (ri-le) - 1 == man_ri - man_le);
         assert((man_ri - man_le) % 2 == 1);
+        int start = 0, end = ri - le + 1;
+        while(start + 1 < end) {
+            int mid = (start + end) / 2;
+            //is there some palindromic substring with length >= mid ?
+            //
+            //odd length palindrome; left half:
+            //only consider c such that 2*(c/2 - le)+1 >= mid
+            //c-2*le+1 >= mid
+            //c >= mid+2*le-1 = man_le+mid-1
+            //
+            //2*(c/2 - man[c])+1 >= mid
+            //
+            //-------
+            //
+            //even length palindrome; left half:
+            //only consider c such that 2*((c+1)/2 - le) >= mid
+            //(c+1) - 2*le >= mid
+            //
+            //
+            //
+            //
+            //-----------------------------------------------------------
+            //
+            //odd length palindrome; right half:
+            //only consider c such that: 2 * (ri-1 - c/2) + 1 >= mid
+            //2*ri - 1 - c >= mid
+            //2*ri - 1 - mid >= c
+            //c <= 2*ri - 1 - mid
+            //c < 2*ri - mid
+            //
+            //
+            //even length palindrome; right half:
+            //only consider c such that: 2*(ri - (c+1)/2) >= mid
+            //2*ri - c-1 >= mid
+            //-2*ri + c + 1 <= -mid
+            //c <= 2*ri - 1 - mid
+            //c < 2*ri-mid
+            //
+            //
 
-        int man_mi = (man_ri + man_le) / 2;
 
-        {
-            //range [le, mi)
-            int start = 0, end = man_mi - man_le;
-            while(start + 1 < end) {
-                int mid = (start + end) / 2;
-                //is there some palindromic substring with radius >= mid ?
-                //
-                //for odd length palindromes, 2 * radius + 1 == len (so radius doesn't include middle)
-                //
-                //so it must have middle index i >= le + mid
-                //
-                //for odd length palindromes, man[2*x] is min start index of palindrome for middle at index x
-                //
-                // -------
-                //
-                //for even len palindromes, if middle is at indexes [x, x+2)
-                //
-                //2 * radius == len
-                //
-                //must have x >= le + mid
-                //
-                //
-                if(rmq.query(2 * (le + mid), 2 * mi) <= le) start = mid;
-                else end = mid;
+            if(man_le + mid-1 >= 2*ri - mid) {
+                end = mid;
+                continue;
             }
+            int i = rmq.query(man_le + mid-1, 2*ri - mid);
+            if(i-2*man[i]+1 >= mid) start = mid;
+            else end = mid;
         }
-        {
-            //range [mi, ri)
-        }
-        return min(
+        return start;
     }
 };
 
