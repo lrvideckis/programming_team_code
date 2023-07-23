@@ -22,9 +22,10 @@ template <class T> struct pal_count_query {
     }
 
 
+    //number of non-empty palindromes
     inline long long count_pals(int le, int ri) const {
         assert(0 <= le && le <= ri && ri <= n);
-        if(le == ri) return 0;//TODO is this even correct? should it be 1? - the empty string
+        if(le == ri) return 0;
         int man_le = 2 * le, man_ri = 2 * ri - 1;
         assert((man_ri - man_le) % 2 == 1);
         int man_mi = (man_le + man_ri) / 2;
@@ -32,7 +33,7 @@ template <class T> struct pal_count_query {
         //first half:
         //
         //we want sum over range [man_le, man_mi) of values:
-        //    i/2 - max(man[i],le)   TODO why not +1 here ?
+        //    i/2 - max(man[i],le) + 1
 
         long long cnt = -1LL * wt_le.rect_count(man_le, man_mi, 0, le) * le;
         cnt -= wt_le.rect_sum(man_le, man_mi, le, n);
@@ -40,6 +41,7 @@ template <class T> struct pal_count_query {
         if((man_mi-man_le)%2==1) cnt += (man_mi-1)/2 + 1LL * (man_mi-1-man_le)/2 * (man_le/2 + (man_mi-2)/2);
         else cnt += 1LL * (man_mi-man_le)/2 * (man_le/2 + (man_mi-1)/2);
 
+        cnt += man_mi - man_le;
 
         //second half:
         //
@@ -48,16 +50,6 @@ template <class T> struct pal_count_query {
 
         cnt += 1LL * wt_ri.rect_count(man_mi, man_ri, ri, n + 1) * ri;
         cnt += wt_ri.rect_sum(man_mi, man_ri, 1, ri);
-
-        /*
-        for(int i = man_mi; i < man_ri; i++) cnt -= (i+1)/2;
-
-        {
-            long long naive = 0;
-            for(int i = man_mi; i < man_ri; i++) naive += (i+1)/2;
-            if((man_ri-man_mi)%2==0) assert(naive == 1LL * (man_ri - man_mi) / 2 * (man_ri/2 + (man_mi + 1)/2));
-        }
-        */
 
         if((man_ri-man_mi)%2==0) cnt -= 1LL * (man_ri - man_mi) / 2 * (man_ri/2 + (man_mi + 1)/2);
         else cnt -= 1LL * (man_ri - man_mi - 1) / 2 * (man_ri/2 + (man_mi + 2)/2) + (man_mi + 1) / 2;

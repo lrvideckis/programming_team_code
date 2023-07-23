@@ -31,13 +31,18 @@ int main() {
                     assert((le + longest[le] >= ri) == seen_pal);
                 }
             }
-            vector<vector<int>> count_pals_naive(n + 1, vector<int>(n + 1, 1/*TODO*/));
-            pal_count_query pcq(s);
-            for (int len = 2/*TODO*/; len <= n; len++) {
+            vector<vector<int>> count_pals_naive(n + 1, vector<int>(n + 1, 0));
+            for (int le = 0; le + 1 <= n; le++) count_pals_naive[le][le+1] = 1;
+            for (int len = 2; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
-                    count_pals_naive[le][ri] = count_pals_naive[le+1][ri] + count_pals_naive[le][ri-1] - count_pals_naive[le+1][ri-1];
-                    count_pals_naive[le][ri] += is_pal(man, le, ri);
+                    count_pals_naive[le][ri] = is_pal(man, le, ri) + count_pals_naive[le+1][ri] + count_pals_naive[le][ri-1] - count_pals_naive[le+1][ri-1];
+                }
+            }
+            pal_count_query pcq(s);
+            for (int len = 0; len <= n; len++) {
+                for (int le = 0; le + len <= n; le++) {
+                    int ri = le + len;
                     assert(pcq.count_pals(le, ri) == count_pals_naive[le][ri]);
                 }
             }
