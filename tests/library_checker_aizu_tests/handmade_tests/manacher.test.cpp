@@ -3,7 +3,8 @@
 #include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/manacher/longest_from_start.hpp"
-#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
+//#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
+#include "../../../library/strings/manacher/count_palindromic_substrs.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -30,6 +31,17 @@ int main() {
                     assert((le + longest[le] >= ri) == seen_pal);
                 }
             }
+            vector<vector<int>> count_pals_naive(n + 1, vector<int>(n + 1, 1/*TODO*/));
+            pal_count_query pcq(s);
+            for (int len = 2/*TODO*/; len <= n; len++) {
+                for (int le = 0; le + len <= n; le++) {
+                    int ri = le + len;
+                    count_pals_naive[le][ri] = count_pals_naive[le+1][ri] + count_pals_naive[le][ri-1] - count_pals_naive[le+1][ri-1];
+                    count_pals_naive[le][ri] += is_pal(man, le, ri);
+                    assert(pcq.count_pals(le, ri) == count_pals_naive[le][ri]);
+                }
+            }
+            /*
             vector<vector<int>> longest_pal_naive(n + 1, vector<int>(n + 1, 0));
             longest_pal lp(s);
             for (int len = 0; len <= n; len++) {
@@ -40,6 +52,7 @@ int main() {
                     assert(lp.get_longest(le, ri) == longest_pal_naive[le][ri]);
                 }
             }
+            */
         }
     }
     cout << "Hello World\n";
