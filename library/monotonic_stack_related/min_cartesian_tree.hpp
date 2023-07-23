@@ -24,8 +24,8 @@
  *     if (root != -1) q.push(root);
  *     while (!q.empty()) {
  *         int u = q.front();
- *         //arr[u] is the leftmost min of exclusive-exclusive range (le[u], ri[u])
  *         q.pop();
+ *         //arr[u] is the leftmost min of exclusive-exclusive range (le[u], ri[u])
  *         for (int v : adj[u])
  *             q.push(v);
  *     }
