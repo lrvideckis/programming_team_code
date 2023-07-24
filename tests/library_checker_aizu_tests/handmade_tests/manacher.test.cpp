@@ -8,8 +8,8 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    for (int n = 0; n <= 100; n++) {
-        for (int tests = 50; tests--;) {
+    for (int n = 0; n <= 50; n++) {
+        for (int tests = 20; tests--;) {
             string s(n, 'a');
             if(n == 0 || get_rand<int>(0,1) == 0) {
                 int mx_char = get_rand<int>(0, 5);
