@@ -10,6 +10,7 @@ template <class T> vector<int> manacher(const T& s) {
     for (int pos = 0; pos < 2*n - 1; pos++) {
         int R = pos <= 2*pR ? min(p - res[2*p - pos], pR) : pos/2;
         int L = pos - R;
+
         while (L > 0 && R < n-1 && s[L-1] == s[R+1]) {
             L--;
             R++;
