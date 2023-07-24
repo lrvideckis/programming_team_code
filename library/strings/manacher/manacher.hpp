@@ -8,6 +8,7 @@ template <class T> vector<int> manacher(const T& s) {
     vector<int> res(max(0, 2*n - 1));
     int p = 0, pR = -1;
     for (int pos = 0; pos < 2*n - 1; pos++) {
+        if(pR>=0) assert(p-res[p] == pR);
         int R = pos <= 2*pR ? min(p - res[2*p - pos], pR) : pos/2;
         int L = pos - R;
 
