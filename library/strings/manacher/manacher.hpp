@@ -15,6 +15,7 @@ template <class T> vector<int> manacher(const T& s) {
         while (L > 0 && R < n-1 && s[L-1] == s[R+1]) {
             L--;
             R++;
+            assert(R>pR);
         }
         res[pos] = L;
         if (R > pR) {
