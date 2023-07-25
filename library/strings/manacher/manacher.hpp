@@ -21,6 +21,7 @@ template <class T> vector<int> manacher(const T& s) {
             pR = R;
             p = i;
         }
+        if(i==0) assert(p==0 && pR==0);
     }
     return man;
 }
