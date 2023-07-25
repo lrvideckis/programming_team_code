@@ -18,7 +18,7 @@ template <class T> vector<int> manacher(const T& s) {
             assert(R>pR);
         }
         res[pos] = L;
-        if (R > pR) {
+        if (R >= /*revert*/ pR) {
             pR = R;
             p = pos;
         }
