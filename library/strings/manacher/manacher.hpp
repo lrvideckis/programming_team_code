@@ -5,23 +5,21 @@
 // and length  i - 2*man[i] + 1
 template <class T> vector<int> manacher(const T& s) {
     int n = ssize(s);
-    vector<int> res(max(0, 2*n - 1));
-    int p = 0, pR = -1;
-    for (int pos = 0; pos < 2*n - 1; pos++) {
-        if(pR>=0) assert(p-res[p] == pR);
-        int R = pos <= 2*pR ? min(p - res[2*p - pos], pR) : pos/2;
-        int L = pos - R;
-
+    vector<int> man(max(0, 2*n - 1));
+    for (int i = 0, p = 0, pR = -1; i < 2*n - 1; i++) {
+        if(pR>=0) assert(p-man[p] == pR);
+        int R = i <= 2*pR ? min(p - man[2*p - i], pR) : i/2;
+        int L = i - R;
         while (L > 0 && R < n-1 && s[L-1] == s[R+1]) {
             L--;
             R++;
             assert(R>pR);
         }
-        res[pos] = L;
+        man[i] = L;
         if (R > pR) {
             pR = R;
-            p = pos;
+            p = i;
         }
     }
-    return res;
+    return man;
 }
