@@ -10,6 +10,7 @@ template <class T> vector<int> manacher(const T& s) {
         if(pR>=0) assert(p-man[p] == pR);
         int R = i <= 2*pR ? min(p - man[2*p - i], pR) : i/2;
         int L = i - R;
+        if(i > 2*pR) assert(L == (i+1)/2);
         while (L > 0 && R < n-1 && s[L-1] == s[R+1]) {
             L--;
             R++;
