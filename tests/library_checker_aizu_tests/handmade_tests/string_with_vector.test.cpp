@@ -17,7 +17,9 @@
 
 #include "../../../library/strings/knuth_morris_pratt.hpp"
 
-#include "../../../library/strings/manacher/longest_from_start.hpp"
+#include "../../../library/strings/manacher/longest_from_index.hpp"
+#include "../../../library/strings/manacher/count_palindromic_substrs.hpp"
+#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -68,7 +70,7 @@ int main() {
         assert(matches == vector<int>({50}));
     }
     {
-        vector<int> man(manacher(arr)), longest(longest_from_start(man));
+        vector<int> man(manacher(arr)), longest(longest_from_index(man));
         for (int i = 0; i < ssize(man); i++) {
             int sz = i - 2 * man[i] + 1;
             assert(sz == (1 ^ (i & 1)));
@@ -80,6 +82,16 @@ int main() {
                 assert(!is_pal(man, i, i + 2));
                 if (i)
                     assert(!is_pal(man, i - 1, i + 2));
+            }
+        }
+        count_pal_query cpq(arr);
+        longest_pal_query lpq(arr);
+        for(int le = 0; le < 100; le++) {
+            for(int ri = le + 1; ri <= 100; ri++) {
+                assert(cpq.count_pals(le, ri) == ri - le);
+                auto [idx, len] = lpq.longest_pal(le, ri);
+                assert(le <= idx && idx < ri);
+                assert(len == 1);
             }
         }
     }

@@ -23,7 +23,7 @@ template <class T> struct longest_pal_query {
     }
     inline int len(int i) const {return i - 2 * man[i] + 1;}
     // returns {start index, length}
-    inline pair<int, int> get_longest(int le, int ri) const {
+    inline pair<int, int> longest_pal(int le, int ri) const {
         assert(0 <= le && le < ri && ri <= n);
         int pal_len = int(lower_bound(begin(idx), begin(idx) + (ri - le), 0, [&](int mid, int) -> bool {
             return len(rmq.query(2 * le + mid - 1, 2 * ri - mid)) >= mid;

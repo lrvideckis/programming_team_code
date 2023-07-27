@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/manacher/longest_from_start.hpp"
+#include "../../../library/strings/manacher/longest_from_index.hpp"
 #include "../../../library/strings/manacher/count_palindromic_substrs.hpp"
 #include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
 
@@ -28,7 +28,7 @@ int main() {
                     assert(is_pal(man, le, ri) == is_pal_naive[le][ri]);
                 }
             }
-            vector<int> longest(longest_from_start(man));
+            vector<int> longest(longest_from_index(man));
             for (int le = 0; le < n; le++) {
                 bool seen_pal = 0;
                 for (int ri = n; ri >= le; ri--) {
@@ -44,7 +44,7 @@ int main() {
                     count_pals_naive[le][ri] = is_pal(man, le, ri) + count_pals_naive[le + 1][ri] + count_pals_naive[le][ri - 1] - count_pals_naive[le + 1][ri - 1];
                 }
             }
-            pal_count_query pcq(s);
+            count_pal_query pcq(s);
             for (int len = 0; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
