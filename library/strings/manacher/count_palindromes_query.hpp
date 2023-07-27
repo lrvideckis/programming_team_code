@@ -9,20 +9,15 @@ inline long long sum_consecutive(int le, int ri) {
 /**
  * @see https://codeforces.com/blog/entry/63105#comment-470339
  */
-//TODO test
 template <class T> struct count_pal_query {
     int n;
     vector<int> man;
     wavelet_tree wt_le, wt_ri;
     count_pal_query(const T& s) : n(ssize(s)), man(manacher(s)), wt_le(man, 0, n), wt_ri(init()) {}
     wavelet_tree init() {
-        //TODO: break out right into own file?
         vector<int> right(ssize(man));
-        for (int i = 0; i < ssize(man); i++) {
-            assert(0 <= man[i] && man[i] < n);
+        for (int i = 0; i < ssize(man); i++)
             right[i] = i - man[i] + 1;
-            assert(1 <= right[i] && right[i] <= n);
-        }
         return {right, 1, n + 1};
     }
     //number of non-empty palindromes

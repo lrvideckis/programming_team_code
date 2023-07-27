@@ -18,9 +18,6 @@
  * @space O(1)
  */
 inline bool is_pal(const vector<int>& man, int le, int ri) {
-    //TODO: test with empty string
-    //TODO: add to vector test
-    //TODO: test @code compiles
     assert(0 <= le && le <= ri && ri <= (ssize(man) + 1) / 2);
     return (le == ri ? 1 : man[le + ri - 1] <= le);
 }

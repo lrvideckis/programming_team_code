@@ -2,19 +2,10 @@
 #pragma once
 #include "../../data_structures/sparse_table.hpp"
 #include "manacher.hpp"
-/**
- * @see https://codeforces.com/blog/entry/63105#comment-470339
- */
-//TODO test
 template <class T> struct longest_pal_query {
     int n;
     vector<int> man, idx;
     RMQ<int> rmq;
-    /**
-     * @param s string/array
-     * @time O(n log n)
-     * @space O(n log n) TODO
-     */
     longest_pal_query(const T& s) : n(ssize(s)), man(manacher(s)), idx(n) {
         iota(begin(idx), end(idx), 1);
         vector<int> init(ssize(man));
