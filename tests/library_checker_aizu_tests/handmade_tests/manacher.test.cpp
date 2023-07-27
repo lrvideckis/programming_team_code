@@ -3,8 +3,8 @@
 #include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/manacher/longest_from_index.hpp"
-#include "../../../library/strings/manacher/count_palindromic_substrs.hpp"
-#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
+#include "../../../library/strings/manacher/count_palindromes_query.hpp"
+#include "../../../library/strings/manacher/longest_palindrome_query.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -45,29 +45,23 @@ int main() {
                 }
             }
             count_pal_query pcq(s);
-            for (int len = 0; len <= n; len++) {
+            for (int len = 1; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
                     assert(pcq.count_pals(le, ri) == count_pals_naive[le][ri]);
                 }
             }
             vector<vector<int>> longest_pal(n + 1, vector<int>(n + 1, 0));
-            //vector<vector<int>> longest_pal_idx(n + 1, vector<int>(n + 1, 0));
             longest_pal_query lp(s);
             for (int len = 1; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
                     if (is_pal_naive[le][ri]) {
                         longest_pal[le][ri] = len;
-                        //longest_pal_idx[le][ri] = len;
-                    } else if (longest_pal[le][ri - 1] >= longest_pal[le + 1][ri]) {
-                        longest_pal[le][ri] = longest_pal[le][ri - 1];
-                        //longest_pal_idx[le][ri] = longest_pal_idx[le][ri-1];
                     } else {
-                        longest_pal[le][ri] = longest_pal[le + 1][ri];
-                        //longest_pal_idx[le][ri] = longest_pal_idx[le+1][ri];
+                        longest_pal[le][ri] = max(longest_pal[le + 1][ri], longest_pal[le][ri - 1]);
                     }
-                    auto [curr_idx, curr_len] = lp.get_longest(le, ri);
+                    auto [curr_idx, curr_len] = lp.longest_pal(le, ri);
                     assert(curr_len == longest_pal[le][ri]);
                     assert(is_pal(man, curr_idx, curr_idx + curr_len));
                     assert(le <= curr_idx);
