@@ -2,14 +2,14 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/manacher/longest_from_start.hpp"
+#include "../../../library/strings/manacher/longest_from_index.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
     int n = ssize(s);
-    vector<int> man(manacher(s)), longest(longest_from_start(man));
+    vector<int> man(manacher(s)), longest(longest_from_index(man));
     {
         vector<pair<int, int>> tests;
         for (int i = 0; i < n; i++) {
