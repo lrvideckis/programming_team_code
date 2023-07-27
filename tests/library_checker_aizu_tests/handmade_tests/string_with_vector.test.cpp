@@ -86,8 +86,8 @@ int main() {
         }
         count_pal_query cpq(arr);
         longest_pal_query lpq(arr);
-        for(int le = 0; le < 100; le++) {
-            for(int ri = le + 1; ri <= 100; ri++) {
+        for (int le = 0; le < 100; le++) {
+            for (int ri = le + 1; ri <= 100; ri++) {
                 assert(cpq.count_pals(le, ri) == ri - le);
                 auto [idx, len] = lpq.longest_pal(le, ri);
                 assert(le <= idx && idx < ri);

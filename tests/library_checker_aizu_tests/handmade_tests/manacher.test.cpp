@@ -56,11 +56,10 @@ int main() {
             for (int len = 1; len <= n; len++) {
                 for (int le = 0; le + len <= n; le++) {
                     int ri = le + len;
-                    if (is_pal_naive[le][ri]) {
+                    if (is_pal_naive[le][ri])
                         longest_pal[le][ri] = len;
-                    } else {
+                    else
                         longest_pal[le][ri] = max(longest_pal[le + 1][ri], longest_pal[le][ri - 1]);
-                    }
                     auto [curr_idx, curr_len] = lp.longest_pal(le, ri);
                     assert(curr_len == longest_pal[le][ri]);
                     assert(is_pal(man, curr_idx, curr_idx + curr_len));
