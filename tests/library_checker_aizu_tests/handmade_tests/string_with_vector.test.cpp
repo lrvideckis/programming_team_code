@@ -18,8 +18,8 @@
 #include "../../../library/strings/knuth_morris_pratt.hpp"
 
 #include "../../../library/strings/manacher/longest_from_index.hpp"
-#include "../../../library/strings/manacher/count_palindromic_substrs.hpp"
-#include "../../../library/strings/manacher/longest_palindromic_substr.hpp"
+#include "../../../library/strings/manacher/count_palindromes_query.hpp"
+#include "../../../library/strings/manacher/longest_palindrome_query.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
