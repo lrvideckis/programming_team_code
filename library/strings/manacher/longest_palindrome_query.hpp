@@ -28,8 +28,14 @@ template <class T> struct longest_pal_query {
     inline int len(int i) const {return i - 2 * man[i] + 1;}
     /**
      * approach: binary search: is there some palindromic substring with length >= mid ?
-     * note for a substring [le, ri) of s, the "relevant" centers are subarray
-     * [2 * le, 2 * ri - 1) of `man`
+     * note for a substring [le, ri) of s, the "relevant" centers are subarray [2 * le, 2 * ri - 1) of `man`
+     *
+     * when center i (in "relevant" range) is even (so represents an odd-length palindrome):
+     *     - i / 2 is index of middle of palindrome
+     *     - le <= i / 2 < ri
+     * when center i (in "relevant" range) is odd (so represents an even-length palindrome):
+     *     - (i - 1) / 2, (i + 1) / 2 are indexes of middles of palindrome
+     *     - le <= (i - 1) / 2 < (i + 1) / 2 < ri
      *
      * @param le,ri defines substring [le, ri) of s
      * @returns {start index, length} of longest palindromic substring of s.substr(le, ri - le)

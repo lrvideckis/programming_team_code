@@ -2,7 +2,12 @@
 #pragma once
 #include "../../data_structures/wavelet_merge/wavelet_tree.hpp"
 #include "manacher.hpp"
-//sum of integers in range [le, ri)
+/**
+ * @param le,ri defines range [le, ri)
+ * @returns le + (le + 1) + ... + (ri - 1)
+ * @time O(1)
+ * @space O(1)
+ */
 inline long long sum_consecutive(int le, int ri) {
     return 1LL * (ri - le) * (le + ri - 1) / 2;
 }
