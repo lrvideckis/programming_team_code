@@ -24,7 +24,7 @@ vector<int> longest_from_start(const vector<int>& man) {
     vector<int> longest(n, 1);
     for (int i = n - 2; i >= 0; i--) {
         longest[i] = min(longest[i + 1] + 2, n - i);
-        while(!is_pal(man, i, i + longest[i])) longest[i]--;
+        while (!is_pal(man, i, i + longest[i])) longest[i]--;
     }
     return longest;
 }

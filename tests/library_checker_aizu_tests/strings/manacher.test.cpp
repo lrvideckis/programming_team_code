@@ -29,15 +29,15 @@ int main() {
     for (int i = 0; i < n; i++) {
         assert(i + longest[i] <= n);
         assert(is_pal(man, i, i + longest[i]));
-        if(i + longest[i] < n) {
+        if (i + longest[i] < n) {
             assert(!is_pal(man, i, n));
-            for(int tests = 10; tests--;) {
+            for (int tests = 10; tests--;) {
                 int ri = get_rand(i + longest[i] + 1, n);
                 assert(!is_pal(man, i, ri));
             }
         }
     }
-    for(int i = 0; i < ssize(man); i++) {
+    for (int i = 0; i < ssize(man); i++) {
         int ri = i - man[i] + 1;
         assert(man[i] <= ri);
         assert(is_pal(man, man[i], ri));
