@@ -6,10 +6,10 @@
  *
  * @code{.cpp}
  *     string s;
- *     vector<int> man(manacher(s)), longest(longest_from_start(man));
+ *     vector<int> man(manacher(s)), longest(longest_from_index(man));
  *     // or
  *     vector<int> arr;
- *     vector<int> man(manacher(arr)), longest(longest_from_start(man));
+ *     vector<int> man(manacher(arr)), longest(longest_from_index(man));
  * @endcode
  *
  * @param man manacher array
@@ -19,7 +19,7 @@
  * @time O(n)
  * @space an O(n) vector is allocated and returned
  */
-vector<int> longest_from_start(const vector<int>& man) {
+vector<int> longest_from_index(const vector<int>& man) {
     int n = (ssize(man) + 1) / 2;
     vector<int> longest(n, 1);
     for (int i = n - 2; i >= 0; i--) {
