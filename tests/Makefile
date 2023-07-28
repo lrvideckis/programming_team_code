@@ -18,6 +18,8 @@ help:
 	@echo
 	@echo "make remove_all_comments             | mainly to reduce code length"
 	@echo
+	@echo "make combine_includes                | for use in online contests"
+	@echo
 	@echo "make print_which_tests_havent_run    | to check if all tests have run"
 	@echo
 	@echo "make remove_randomly_generated_tests | removes lines from .verify-helper/timestamps.remote.json"
@@ -47,6 +49,9 @@ format_and_check_bash_scripts:
 
 remove_all_comments:
 	./scripts/remove_all_comments.sh
+
+combine_includes:
+	./scripts/combine_includes.sh
 
 print_which_tests_havent_run:
 	./scripts/print_which_tests_havent_run.sh
