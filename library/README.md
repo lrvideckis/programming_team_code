@@ -1,9 +1,8 @@
-## No comments
-See `no_comments` branch for the same code with all comments removed. The CI will keep this branch updated. You can remove all comments with:
-```
-cpp -fpreprocessed -P a.cpp a_no_comments.cpp
-```
-Although, note this will also remove `#define ssize(x) (int)(x).size()`
+## Branches
+- `online_contest_comments` all included files copy-pasted into the file
+- `online_contest_no_comments` same as above, but also removing all comments
+
+The purpose of these is to be able to copy everything at once for online contests.
 
 ## Doxygen
 Let's try to minimize the # of non-doxygen comments.
