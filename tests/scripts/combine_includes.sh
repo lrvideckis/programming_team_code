@@ -5,9 +5,9 @@ set -euo pipefail
 shopt -s globstar
 
 for header in ../library/**/*.hpp; do
-    new_path=$(echo $header | sed 's/library/chicken/')
-    mkdir --parents $(dirname $new_path)
-	cpp -nostdinc -C -P "$header" $new_path
+	new_path=${header//library/chicken}
+	mkdir --parents "$(dirname "$new_path")"
+	cpp -nostdinc -C -P "$header" "$new_path"
 done
 mv ../library/ ../library_old/
 mv ../chicken/ ../library/
