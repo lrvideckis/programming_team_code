@@ -9,7 +9,7 @@ for header in ../library/**/*.hpp; do
     mkdir --parents $(dirname $new_path)
 	cpp -nostdinc -C -P "$header" $new_path
 done
-
-mv --no-target-directory ../chicken/ ../library/
+mv ../library/ ../chicken2/
+mv ../chicken/ ../library/
 # the cpp preprocessor sometimes leaves blank empty lines
 sed --in-place '/^[[:space:]]*$/d' ../library/**/*.hpp
