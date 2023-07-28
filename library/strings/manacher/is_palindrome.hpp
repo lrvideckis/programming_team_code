@@ -12,6 +12,7 @@
  *     bool pal = is_pal(man, le, ri);
  * @endcode
  *
+ * @param man manacher array
  * @param le,ri defines substring [le,ri)
  * @returns 1 iff s.substr(le, ri - le) is a palindrome
  * @time O(1)
