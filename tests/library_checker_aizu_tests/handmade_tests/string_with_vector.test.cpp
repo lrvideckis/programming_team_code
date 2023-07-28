@@ -17,6 +17,10 @@
 
 #include "../../../library/strings/knuth_morris_pratt.hpp"
 
+#include "../../../library/strings/manacher/longest_from_index.hpp"
+#include "../../../library/strings/manacher/count_palindromes_query.hpp"
+#include "../../../library/strings/manacher/longest_palindrome_query.hpp"
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     //mainly to test all strings algs compile when passing in vectors
@@ -64,6 +68,32 @@ int main() {
         KMP kmp(t);
         vector<int> matches = kmp.find_str(arr);
         assert(matches == vector<int>({50}));
+    }
+    {
+        vector<int> man(manacher(arr)), longest(longest_from_index(man));
+        for (int i = 0; i < ssize(man); i++) {
+            int sz = i - 2 * man[i] + 1;
+            assert(sz == (1 ^ (i & 1)));
+        }
+        for (int i = 0; i < 100; i++) {
+            assert(longest[i] == 1);
+            assert(is_pal(man, i, i + 1));
+            if (i + 2 <= 100) {
+                assert(!is_pal(man, i, i + 2));
+                if (i)
+                    assert(!is_pal(man, i - 1, i + 2));
+            }
+        }
+        count_pal_query cpq(arr);
+        longest_pal_query lpq(arr);
+        for (int le = 0; le < 100; le++) {
+            for (int ri = le + 1; ri <= 100; ri++) {
+                assert(cpq.count_pals(le, ri) == ri - le);
+                auto [idx, len] = lpq.longest_pal(le, ri);
+                assert(le <= idx && idx < ri);
+                assert(len == 1);
+            }
+        }
     }
     cout << "Hello World\n";
     return 0;
