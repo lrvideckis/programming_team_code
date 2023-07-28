@@ -4,6 +4,9 @@ set -euo pipefail
 # ** glob now searches any number of levels
 shopt -s globstar
 
+git submodule init
+git submodule update
+
 for header in ../library/**/*.hpp; do
 	new_path=${header//library/chicken}
 	mkdir --parents "$(dirname "$new_path")"
