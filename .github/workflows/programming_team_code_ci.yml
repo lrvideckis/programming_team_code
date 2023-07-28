@@ -137,8 +137,8 @@ jobs:
       run: |
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
-        git checkout -b online_contest
-        make --directory=tests/ online_contests
+        git checkout -b online_contests
+        make --directory=tests/ combine_includes
         git add library/
         git commit --message "combine includes"
         git push origin online_contests --force
