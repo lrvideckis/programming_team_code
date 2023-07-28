@@ -13,10 +13,10 @@ int main() {
     {
         vector<pair<int, int>> tests;
         for (int i = 0; i < n; i++) {
-            for (int j = i; j <= min(n, i + int(10'000'000 / n)); j++)
+            for (int j = i; j <= min(n, i + int(10'000'000 / max(n, 1))); j++)
                 tests.emplace_back(i, j);
         }
-        for (int i = 0; i < int(10'000'000 / n); i++) {
+        for (int i = 0; i < int(10'000'000 / max(n, 1)); i++) {
             int l = get_rand(0, n - 1), r = get_rand(0, n - 1);
             if (l > r) swap(l, r);
             tests.emplace_back(l, r);
