@@ -124,7 +124,7 @@ jobs:
         git checkout -b online_contest_no_comments
         make --directory=tests/ online_contest_no_comments
         git add library/
-        git commit --message "remove comments"
+        git commit --message "online contest no comments"
         git push origin online_contest_no_comments --force
 
   update_comments_branch:
@@ -140,7 +140,7 @@ jobs:
         git checkout -b online_contest_comments
         make --directory=tests/ online_contest_comments
         git add library/
-        git commit --message "combine includes"
+        git commit --message "online contest comments"
         git push origin online_contest_comments --force
 
   format_and_check_bash_scripts:
