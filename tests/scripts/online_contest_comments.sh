@@ -16,3 +16,5 @@ mv ../library/ ../library_old/
 mv ../chicken/ ../library/
 # the cpp preprocessor sometimes leaves blank empty lines
 sed --in-place '/^[[:space:]]*$/d' ../library/**/*.hpp
+# remove `/** @file */` comments
+sed --in-place '/^\/\*\* @file \*\/$/d' ../library/**/*.hpp
