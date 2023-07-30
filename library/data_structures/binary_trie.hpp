@@ -4,9 +4,9 @@ const int MX_BIT = 62;
 /**
  * Trie on bits. Can be thought of as a multiset of integers.
  */
-struct binary_trie {
+template <class T> struct binary_trie {
     struct node {
-        long long val = -1;
+        T val = -1;
         int sub_sz = 0;
         array<int, 2> next = {-1, -1};
     };
@@ -19,7 +19,7 @@ struct binary_trie {
      * @time O(MX_BIT)
      * @space O(MX_BIT) new nodes are pushed back onto `t`
      */
-    int update(long long val, int delta) {
+    int update(T val, int delta) {
         int c = 0;
         t[0].sub_sz += delta;
         for (int bit = MX_BIT; bit >= 0; bit--) {
@@ -47,7 +47,7 @@ struct binary_trie {
      * @time O(MX_BIT)
      * @space O(1)
      */
-    long long min_xor(long long val) const {
+    T min_xor(T val) const {
         assert(size() > 0);
         int c = 0;
         for (int bit = MX_BIT; bit >= 0; bit--) {
