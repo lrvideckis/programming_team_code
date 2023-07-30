@@ -7,7 +7,8 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, q;
     cin >> n >> q;
-    bit_inv<long long> bit_i(n);
+    bit_inv<long long> bit_i_1(n);
+    bit_inv<long long> bit_i_2(vector<long long>(n, 50));
     while (q--) {
         int type;
         cin >> type;
@@ -15,12 +16,15 @@ int main() {
             int le, ri, x;
             cin >> le >> ri >> x;
             le--;
-            bit_i.update(le, ri, x);
+            bit_i_1.update(le, ri, x);
+            bit_i_2.update(le, ri, x);
         } else {
             int idx;
             cin >> idx;
             idx--;
-            cout << bit_i.get_index(idx) << '\n';
+            long long res = bit_i_1.get_index(idx);
+            assert(res == bit_i_2.get_index(idx) - 50);
+            cout << res << '\n';
         }
     }
     return 0;
