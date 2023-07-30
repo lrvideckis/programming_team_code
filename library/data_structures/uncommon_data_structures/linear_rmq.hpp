@@ -8,7 +8,7 @@
  *     linear_rmq<long long> rmq(arr, greater<long long>());//maximum query
  * @endcode
  */
-template <class T, class F = function<bool(const T&, const T&)>> struct linear_rmq {
+template <class T, class F = function<bool(T, T)>> struct linear_rmq {
     int n;
     vector<T> arr;
     F less;
@@ -42,7 +42,7 @@ template <class T, class F = function<bool(const T&, const T&)>> struct linear_r
     void calc(int level, int le, int ri) {
         for (int i = ri - 1; i >= le; i--) {
             uint64_t st = mask[level][i + 1];
-            const T& curr = arr[blk(level, i)];
+            T curr = arr[blk(level, i)];
             while (st && less(curr, arr[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
             mask[level][i] = st = ((st << 1) | 1);
             idx[level][i] = blk(level, i + int(__lg(st)));
@@ -91,7 +91,7 @@ template <class T, class F = function<bool(const T&, const T&)>> struct linear_r
      * @time O((log(n)^2) / log(log(n)))
      * @space O(1)
      */
-    void update(int pos, const T& val) {
+    void update(int pos, T val) {
         assert(0 <= pos && pos < n);
         arr[pos] = val;
         for (int level = 0; level < ssize(mask); level++, pos >>= 6)
