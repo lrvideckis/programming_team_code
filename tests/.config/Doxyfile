@@ -967,6 +967,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          op \
                          implicit_seg_tree \
                          bit \
+                         bit1 \
+                         bit2 \
                          trie \
                          MOD \
                          inv \
