@@ -28,7 +28,7 @@ int main() {
             int p, x;
             cin >> p >> x;
             bit.update(p, x);
-            //bit_rr.update(p, p + 1, x);
+            bit_rr.update(p, p + 1, x);
             bit_i.update(0, p + 1, x);
         } else {
             int l, r;
@@ -39,7 +39,7 @@ int main() {
                 if (r < n) bit_i_result -= bit_i.get_index(r);
                 assert(res == bit_i_result);
             }
-            //assert(res == bit_rr.sum(l, r));
+            assert(res == bit_rr.sum(l, r));
             cout << res << '\n';
         }
     }

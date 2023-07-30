@@ -12,7 +12,8 @@ template <class T> struct bit_rurq {
         vector<T> init(n);
         adjacent_difference(begin(a), end(a), begin(init));
         bit1 = BIT<T>(init);
-
+        for (int i = 0; i < n; i++) init[i] *= i;
+        bit2 = BIT<T>(init);
     }
     inline void update(int le, int ri, const T& d) {
         assert(0 <= le && le <= ri && ri <= n);
