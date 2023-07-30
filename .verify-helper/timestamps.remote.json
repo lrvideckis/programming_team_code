@@ -2,7 +2,6 @@
 "tests/library_checker_aizu_tests/convolution/and_convolution.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/convolution/gcd_convolution.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/convolution/lcm_convolution.test.cpp": "2023-06-19 22:33:57 -0500",
-"tests/library_checker_aizu_tests/data_structures/binary_trie.test.cpp": "2023-07-17 13:43:14 -0700",
 "tests/library_checker_aizu_tests/data_structures/bit.test.cpp": "2023-07-30 12:44:24 -0600",
 "tests/library_checker_aizu_tests/data_structures/bit_lower_bound.test.cpp": "2023-07-20 12:03:47 -0700",
 "tests/library_checker_aizu_tests/data_structures/bit_rupq.test.cpp": "2023-07-30 12:44:24 -0600",
