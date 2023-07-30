@@ -11,7 +11,14 @@ template <class T> struct binary_trie {
         array<int, 2> next = {-1, -1};
     };
     vector<node> t;
-    binary_trie() : mx_bit(8 * sizeof(T) - 1), t(1) {}
+    /**
+     * @code{.cpp}
+     *     binary_trie<int> bt; //mx_bit = 30
+     *     // or
+     *     binary_trie<long long> bt; //mx_bit = 62
+     * @endcode
+     */
+    binary_trie() : mx_bit(8 * sizeof(T) - 2), t(1) {}
     /**
      * @param val integer
      * @param delta 1 to insert val, -1 to remove val
