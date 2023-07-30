@@ -4,7 +4,7 @@
 /**
  * range update, point query
  */
-template <class T> struct bit_inv {
+template <class T> struct bit_rupq {
     int n;
     BIT<T> bit;
     /**
@@ -12,13 +12,13 @@ template <class T> struct bit_inv {
      * @time O(n)
      * @space O(n)
      */
-    bit_inv(int a_n) : n(a_n), bit(n) {}
+    bit_rupq(int a_n) : n(a_n), bit(n) {}
     /**
      * @param a initial array
      * @time O(n)
      * @space O(n)
      */
-    bit_inv(const vector<T>& a) : n(ssize(a)) {
+    bit_rupq(const vector<T>& a) : n(ssize(a)) {
         vector<T> init(n);
         adjacent_difference(begin(a), end(a), begin(init));
         bit = BIT<T>(init);

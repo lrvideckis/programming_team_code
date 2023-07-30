@@ -7,8 +7,8 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, q;
     cin >> n >> q;
-    bit_inv<long long> bit_i_1(n);
-    bit_inv<long long> bit_i_2(vector<long long>(n, 50));
+    bit_rupq<long long> bit_i_1(n);
+    bit_rupq<long long> bit_i_2(vector<long long>(n, 50));
     while (q--) {
         int type;
         cin >> type;
