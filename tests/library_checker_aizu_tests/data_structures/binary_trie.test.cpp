@@ -7,7 +7,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     int q;
     cin >> q;
-    binary_trie bt;
+    binary_trie<int> bt;
     while (q--) {
         int type;
         long long x;
