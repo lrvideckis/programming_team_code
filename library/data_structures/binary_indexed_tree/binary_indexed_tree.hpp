@@ -30,7 +30,7 @@ template <class T> struct BIT {
      * @time O(log n)
      * @space O(1)
      */
-    inline void update(int i, const T& d) {
+    inline void update(int i, T d) {
         assert(0 <= i && i < ssize(s));
         for (; i < ssize(s); i |= i + 1) s[i] += d;
     }

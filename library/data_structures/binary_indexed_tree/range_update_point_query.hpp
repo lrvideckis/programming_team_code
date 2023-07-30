@@ -31,7 +31,7 @@ template <class T> struct bit_rupq {
      * @time O(log n)
      * @space O(1)
      */
-    inline void update(int le, int ri, const T& d) {
+    inline void update(int le, int ri, T d) {
         assert(0 <= le && le <= ri && ri <= n);
         bit.update(le, d);
         if (ri < n) bit.update(ri, -d);

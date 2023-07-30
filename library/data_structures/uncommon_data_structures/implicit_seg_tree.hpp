@@ -8,7 +8,6 @@
  */
 template <int N> struct implicit_seg_tree {
     using dt = array<long long, 2>; /**< min, number of mins */
-    using ch = long long;
     static dt op(const dt& le, const dt& ri) {
         if (le[0] == ri[0]) return {le[0], le[1] + ri[1]};
         return min(le, ri);
@@ -16,14 +15,14 @@ template <int N> struct implicit_seg_tree {
     static constexpr dt UNIT{LLONG_MAX, 0LL};
     struct node {
         dt val;
-        ch lazy = 0;
+        long long lazy = 0;
         int lch = -1, rch = -1; /**< children, indexes into `tree`, -1 for null */
     } tree[N];
     int ptr = 0, root_l, root_r; /**< [root_l, root_r) defines range of root node; handles negatives */
     implicit_seg_tree(int le, int ri) : root_l(le), root_r(ri) {
         tree[ptr++].val = {0, ri - le};
     }
-    inline void apply(const ch& add, int v) {
+    inline void apply(long long add, int v) {
         tree[v].val[0] += add;
         tree[v].lazy += add;
     }
@@ -44,8 +43,8 @@ template <int N> struct implicit_seg_tree {
     /**
      * @param le,ri defines range [le, ri)
      */
-    void update(int le, int ri, const ch& add) {update(le, ri, add, root_l, root_r, 0);}
-    void update(int le, int ri, const ch& add, int tl, int tr, int v) {
+    void update(int le, int ri, long long add) {update(le, ri, add, root_l, root_r, 0);}
+    void update(int le, int ri, long long add, int tl, int tr, int v) {
         if (ri <= tl || tr <= le)
             return;
         if (le <= tl && tr <= ri)
