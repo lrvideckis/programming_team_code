@@ -12,7 +12,7 @@
  *     });
  * @endcode
  */
-template <class T, class F = function<T(const T&, const T&)>> struct deq {
+template <class T, class F = function<T(T, T)>> struct deq {
     F op;
     /**
      * @see https://github.com/suisen-cp/cp-library-cpp /blob/main/library/datastructure/deque_aggregation.hpp
@@ -82,7 +82,7 @@ template <class T, class F = function<T(const T&, const T&)>> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline void push_front(const T& elem) {
+    inline void push_front(T elem) {
         le.emplace_back(elem, le.empty() ? elem : op(elem, le.back().second));
     }
     /**
@@ -90,7 +90,7 @@ template <class T, class F = function<T(const T&, const T&)>> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline void push_back(const T& elem) {
+    inline void push_back(T elem) {
         ri.emplace_back(elem, ri.empty() ? elem : op(ri.back().second, elem));
     }
     /**
@@ -125,11 +125,11 @@ template <class T, class F = function<T(const T&, const T&)>> struct deq {
     }
     inline void rebuild(const vector<T>& arr, int sz_le) {
         vector<T> presum(ssize(arr));
-        partial_sum(rend(arr) - sz_le, rend(arr), rend(presum) - sz_le, [&](const T & x, const T & y) {return op(y, x);});
+        partial_sum(rend(arr) - sz_le, rend(arr), rend(presum) - sz_le, [&](T x, T y) {return op(y, x);});
         partial_sum(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, op);
         le.resize(sz_le);
         ri.resize(ssize(arr) - sz_le);
-        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](const T & x, const T & y) {return pair(x, y);});
-        transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](const T & x, const T & y) {return pair(x, y);});
+        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) {return pair(x, y);});
+        transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](T x, T y) {return pair(x, y);});
     }
 };

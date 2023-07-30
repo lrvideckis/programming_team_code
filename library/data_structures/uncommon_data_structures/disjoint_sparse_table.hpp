@@ -13,7 +13,7 @@
  *     });
  * @endcode
  */
-template <class T, class F = function<T(const T&, const T&)>> struct disjoint_rmq {
+template <class T, class F = function<T(T, T)>> struct disjoint_rmq {
     int n;
     vector<vector<T>> dp;
     /**
@@ -35,7 +35,7 @@ template <class T, class F = function<T(const T&, const T&)>> struct disjoint_rm
             dp.emplace_back(n);
             for (int le = 0; le < n; le += 2 * len) {
                 int mi = min(n, le + len), ri = min(n, le + 2 * len);
-                partial_sum(rend(arr) - mi, rend(arr) - le, rend(dp.back()) - mi, [&](const T & x, const T & y) {return op(y, x);});
+                partial_sum(rend(arr) - mi, rend(arr) - le, rend(dp.back()) - mi, [&](T x, T y) {return op(y, x);});
                 partial_sum(begin(arr) + mi, begin(arr) + ri, begin(dp.back()) + mi, op);
             }
         }
