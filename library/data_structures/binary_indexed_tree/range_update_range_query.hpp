@@ -26,13 +26,10 @@ template <class T> struct bit_rurq {
     }
     inline T sum(int ri) const {
         //assert(0 <= ri && ri <= n);
-        return bit1.sum(ri + 1) * ri - bit2.sum(ri + 1);
+        return bit1.sum(ri) * (ri-1) - bit2.sum(ri);
     }
     inline T sum(int le, int ri) const {
-        ri--;
         //assert(le <= ri);
-        T res = sum(ri);
-        if (le) res -= sum(le - 1);
-        return res;
+        return sum(ri) - sum(le);
     }
 };
