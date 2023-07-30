@@ -15,7 +15,7 @@ template <class T> struct bit_inv {
         bit.update(le, d);
         if (ri < n) bit.update(ri, -d);
     }
-    inline T sum(int i) const {
+    inline T get_index(int i) const {
         assert(0 <= i && i < n);
         return bit.sum(i + 1);
     }
