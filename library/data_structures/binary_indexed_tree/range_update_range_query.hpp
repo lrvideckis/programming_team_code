@@ -18,15 +18,15 @@ template <class T> struct bit_rurq {
     inline void update(int le, int ri, const T& d) {
         assert(0 <= le && le <= ri && ri <= n);
         bit1.update(le, d);
-        bit2.update(le, (le - 1) * d);
+        bit2.update(le, le * d);
         if (ri < n) {
             bit1.update(ri, -d);
-            bit2.update(ri, -(ri - 1)*d);
+            bit2.update(ri, -ri * d);
         }
     }
     inline T sum(int ri) const {
         assert(0 <= ri && ri <= n);
-        return bit1.sum(ri) * (ri - 1) - bit2.sum(ri);
+        return bit1.sum(ri) * ri - bit2.sum(ri);
     }
     inline T sum(int le, int ri) const {
         assert(le <= ri);
