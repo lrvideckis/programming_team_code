@@ -9,8 +9,7 @@ int main() {
     cin >> q;
     binary_trie<int> bt;
     while (q--) {
-        int type;
-        long long x;
+        int type, x;
         cin >> type >> x;
         if (type == 0) {
             if (bt.update(x, 0) == 0)
@@ -20,7 +19,7 @@ int main() {
                 bt.update(x, -1);
         } else {
             assert(type == 2);
-            long long val = bt.min_xor(x);
+            int val = bt.min_xor(x);
             cout << (val ^ x) << '\n';
         }
     }
