@@ -1037,7 +1037,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          sa \
                          sa_inv \
                          lcp \
-                         MX_BIT \
+                         mx_bit \
                          sf \
                          man \
                          wt_le \

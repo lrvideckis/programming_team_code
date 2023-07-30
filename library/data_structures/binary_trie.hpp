@@ -1,28 +1,35 @@
 /** @file */
 #pragma once
-const int MX_BIT = 62;
 /**
  * Trie on bits. Can be thought of as a multiset of integers.
  */
-struct binary_trie {
+template <class T> struct binary_trie {
+    int mx_bit;
     struct node {
-        long long val = -1;
+        T val = -1;
         int sub_sz = 0;
         array<int, 2> next = {-1, -1};
     };
     vector<node> t;
-    binary_trie() : t(1) {}
+    /**
+     * @code{.cpp}
+     *     binary_trie<int> bt; //mx_bit = 30
+     *     // or
+     *     binary_trie<long long> bt; //mx_bit = 62
+     * @endcode
+     */
+    binary_trie() : mx_bit(8 * sizeof(T) - 2), t(1) {}
     /**
      * @param val integer
      * @param delta 1 to insert val, -1 to remove val
      * @returns number of occurances of val in multiset
-     * @time O(MX_BIT)
-     * @space O(MX_BIT) new nodes are pushed back onto `t`
+     * @time O(mx_bit)
+     * @space O(mx_bit) new nodes are pushed back onto `t`
      */
-    int update(long long val, int delta) {
+    int update(T val, int delta) {
         int c = 0;
         t[0].sub_sz += delta;
-        for (int bit = MX_BIT; bit >= 0; bit--) {
+        for (int bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
             if (t[c].next[v] == -1) {
                 t[c].next[v] = ssize(t);
@@ -44,13 +51,13 @@ struct binary_trie {
      * @param val query parameter
      * @returns integer x such that x is in this multiset, and the value of
      * (x^val) is minimum.
-     * @time O(MX_BIT)
+     * @time O(mx_bit)
      * @space O(1)
      */
-    long long min_xor(long long val) const {
+    T min_xor(T val) const {
         assert(size() > 0);
         int c = 0;
-        for (int bit = MX_BIT; bit >= 0; bit--) {
+        for (int bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
             int ch = t[c].next[v];
             if (ch != -1 && t[ch].sub_sz > 0)
