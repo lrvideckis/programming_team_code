@@ -74,18 +74,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install texlive, rename
+    - name: Install texlive, rename, nodejs, npm
       run: |
         sudo apt update
-        sudo apt install texlive texlive-latex-extra rename
-    - name: Install node
-      uses: actions/setup-node@v1
-      with:
-        node-version: "12.16.0"
-    - name: Install Notebook Generator
-      run: |
-        sudo npm install -g npm@latest
-        sudo npm install -g notebook-generator
+        sudo apt install texlive texlive-latex-extra rename nodejs npm
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3

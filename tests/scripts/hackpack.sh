@@ -22,6 +22,10 @@ done
 git submodule init
 git submodule update
 
+# install dependencies listed in ../notebook-generator/package.json
+npm ci --prefix ../notebook-generator/
+npm run test --prefix ../notebook-generator/
+
 # underscores in file names look bad in hackpack, so this
 # replaces all underscores with spaces
 # note, this is the perl `rename` command, not the linux util
@@ -30,7 +34,7 @@ find ../library/ -depth -execdir rename 'y/_/ /' {} +
 # regarding school branding: https://brand.sdsmt.edu/identity/our-name/
 # in particular, no initials
 # logo taken from https://brand.sdsmt.edu/identity/official-logos/
-notebook-generator ../library/ --author "South Dakota Mines" --output ./hackpack.pdf --size 8 --columns 3 --image .config/SouthDakotaMinesLogo.png
+./../notebook-generator/bin/notebookgen ../library/ --author "South Dakota Mines" --output ./hackpack.pdf --size 8 --columns 3 --image .config/SouthDakotaMinesLogo.png
 
 find ../library/ -depth -execdir rename 'y/ /_/' {} +
 
