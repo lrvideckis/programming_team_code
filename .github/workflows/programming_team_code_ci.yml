@@ -74,10 +74,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install texlive, rename, nodejs
+    - name: Install texlive, rename, nodejs, npm
       run: |
         sudo apt update
-        sudo apt install texlive texlive-latex-extra rename nodejs
+        sudo apt install texlive texlive-latex-extra rename nodejs npm
     - name: build hackpack
       run: make --directory=tests/ hackpack
     - uses: actions/upload-artifact@v3

@@ -22,6 +22,10 @@ done
 git submodule init
 git submodule update
 
+# install dependencies listed in ../notebook-generator/package.json
+npm ci --prefix ../notebook-generator/
+npm run test --prefix ../notebook-generator/
+
 # underscores in file names look bad in hackpack, so this
 # replaces all underscores with spaces
 # note, this is the perl `rename` command, not the linux util
