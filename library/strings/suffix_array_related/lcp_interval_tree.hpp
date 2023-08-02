@@ -43,13 +43,13 @@ template <class T> struct lcp_tree {
                 int i = le[u] + 1;
                 assert(sf.sa[i] + lcp[u] <= ssize(s));
                 if (sf.sa[i] + lcp[u] < ssize(s))
-                    childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(s) + i);
+                    childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(lcp) + i);
             }
             int prev = le[u] + 2;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
                     assert(sf.sa[i] + lcp[u] < ssize(s));
-                    childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(s) + i);
+                    childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(lcp) + i);
                     num_leaves++;
                 }
                 childs.emplace_back(s[sf.sa[v] + lcp[u]], v);
@@ -58,7 +58,7 @@ template <class T> struct lcp_tree {
             }
             for (int i = prev; i <= ri[u]; i++) {
                 assert(sf.sa[i] + lcp[u] < ssize(s));
-                childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(s) + i);
+                childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(lcp) + i);
                 num_leaves++;
             }
             for (int i = 1; i < ssize(childs); i++) assert(childs[i - 1].first < childs[i].first);
@@ -89,8 +89,8 @@ template <class T> struct lcp_tree {
                 if (it == end(child[u])) return {0, 0};
                 u = it->second;
             }
-            if (u >= ssize(s)) {
-                int idx = u - ssize(s);
+            if (u >= ssize(lcp)) {
+                int idx = u - ssize(lcp);
                 auto it = mismatch(begin(t) + i, end(t), begin(s) + sf.sa[idx] + i, end(s)).first;
                 return {idx, idx + (it == end(t))};
             }
