@@ -8,7 +8,7 @@
 #include "../../../library/strings/suffix_array_related/find_str.hpp"
 #include "../../../library/strings/suffix_array_related/find_first.hpp"
 
-#include "../../../library/strings/suffix_array_related/longest_common_prefix_array.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_array.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_query.hpp"
 #include "../../../library/strings/suffix_array_related/find_substr.hpp"

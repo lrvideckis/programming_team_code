@@ -2,7 +2,7 @@
 #pragma once
 #include "../../data_structures/sparse_table.hpp"
 #include "suffix_array.hpp"
-#include "longest_common_prefix_array.hpp"
+#include "lcp_array.hpp"
 /**
  * query for longest common prefix of 2 suffixes
  *

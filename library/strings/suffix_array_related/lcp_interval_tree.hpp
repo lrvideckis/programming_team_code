@@ -2,7 +2,7 @@
 #pragma once
 #include "../../monotonic_stack_related/min_cartesian_tree.hpp"
 #include "suffix_array.hpp"
-#include "longest_common_prefix_array.hpp"
+#include "lcp_array.hpp"
 /**
  * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
  * offline version of suffix tree

@@ -2,7 +2,7 @@
 #include "../template.hpp"
 
 #include "../../../library/strings/suffix_array_related/suffix_array.hpp"
-#include "../../../library/strings/suffix_array_related/longest_common_prefix_array.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_array.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
