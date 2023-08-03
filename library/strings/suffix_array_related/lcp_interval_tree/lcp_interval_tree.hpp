@@ -17,7 +17,7 @@
  *     auto dfs = [&](auto&& self, int u) -> void {
  *         auto [le, ri] = lt.sa_range(u);
  *         int len = lt.lcp_len(u);
- *         if(u < ssize(lt.lcp))
+ *         if (u < ssize(lt.lcp))
  *             for(auto [c, v] : lt.child[u])
  *                 self(self, v);
  *     };
