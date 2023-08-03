@@ -13,6 +13,9 @@
  *     vector<int> arr;
  *     lcp_tree lcpt(arr, 100'005);
  * @endcode
+ *
+ * internal nodes are a subset of [1, n - 1)
+ * leaf nodes are [n - 1, 2 * n - 1), each leaf represents a single suffix
  */
 template <class T> struct lcp_tree {
     T s;
@@ -68,7 +71,7 @@ template <class T> struct lcp_tree {
     }
     /**
      * @param u node
-     * @returns range [le, ri) such that the following (ri - le) strings are equal:
+     * @returns range [le, ri) such that the following (ri - le) substrings are equal:
      *     - for all i in [le, ri): s.substr(sa[i], lcp_len(u))
      * @time O(1)
      * @space O(1)
