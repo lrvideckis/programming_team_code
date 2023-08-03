@@ -1,18 +1,31 @@
 /** @file */
 #pragma once
-#include "../../monotonic_stack_related/min_cartesian_tree.hpp"
-#include "suffix_array.hpp"
-#include "lcp_array.hpp"
+#include "../../../monotonic_stack_related/min_cartesian_tree.hpp"
+#include "../suffix_array.hpp"
+#include "../lcp_array.hpp"
 /**
  * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
  * offline version of suffix tree
  * @code{.cpp}
  *     string s;
- *     lcp_tree lcpt(s, 256);
+ *     lcp_tree lt(s, 256);
  *     // or
  *     vector<int> arr;
- *     lcp_tree lcpt(arr, 100'005);
+ *     lcp_tree lt(arr, 100'005);
+ *
+ *     // same as DFS over suffix tree
+ *     auto dfs = [&](auto&& self, int u) -> void {
+ *         auto [le, ri] = lt.sa_range(u);
+ *         int len = lt.lcp_len(u);
+ *         if (u < ssize(lt.lcp))
+ *             for(auto [c, v] : lt.child[u])
+ *                 self(self, v);
+ *     };
+ *     dfs(dfs, max(lt.root, 0));
  * @endcode
+ *
+ * internal nodes are a subset of [1, n - 1)
+ * leaf nodes are [n - 1, 2 * n - 1), each leaf represents a single suffix
  */
 template <class T> struct lcp_tree {
     T s;
@@ -67,35 +80,24 @@ template <class T> struct lcp_tree {
         assert(num_leaves == ssize(s));
     }
     /**
-     * performs trie-style downwards tree walk
-     * @param t needle
-     * @returns range [le, ri) such that:
-     * - for all i in [le, ri): t == s.substr(sf.sa[i], ssize(t))
-     * - `ri - le` is the # of matches of t in s.
-     * @time O(|t| * log(|alphabet|)); |alphabet| = 26 if only lowercase letters
+     * @param u node
+     * @returns range [le, ri) such that the following (ri - le) substrings are equal:
+     *     - for all i in [le, ri): s.substr(sa[i], lcp_len(u))
+     * @time O(1)
      * @space O(1)
      */
-    pair<int, int> find_str(const T& t) const {
-        if (root == -1) {
-            assert(ssize(sf.sa) <= 1);
-            if (t.empty() || s == t) return {0, ssize(s)};
-            return {0, 0};
-        }
-        assert(ssize(sf.sa) >= 2);
-        int u = root;
-        for (int i = 0; i < ssize(t); i++) {
-            if (i == lcp[u]) {
-                auto it = child[u].find(t[i]);
-                if (it == end(child[u])) return {0, 0};
-                u = it->second;
-            }
-            if (u >= ssize(lcp)) {
-                int idx = u - ssize(lcp);
-                auto it = mismatch(begin(t) + i, end(t), begin(s) + sf.sa[idx] + i, end(s)).first;
-                return {idx, idx + (it == end(t))};
-            }
-            if (s[sf.sa[u] + i] != t[i]) return {0, 0};
-        }
-        return {le[u] + 1, ri[u] + 1};
+    pair<int, int> sa_range(int u) const {
+        if (u < ssize(lcp)) return {le[u] + 1, ri[u] + 1};
+        int idx = u - ssize(lcp);
+        return {idx, idx + 1};
+    }
+    /**
+     * @param u node
+     * @returns length of longest common prefix of u's interval
+     * @time O(1)
+     * @space O(1)
+     */
+    int lcp_len(int u) const {
+        return u < ssize(lcp) ? lcp[u] : ssize(s) - sf.sa[u - ssize(lcp)];
     }
 };
