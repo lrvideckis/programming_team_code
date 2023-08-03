@@ -4,6 +4,16 @@
 /**
  * performs trie-style downwards tree walk
  *
+ * @code{.cpp}
+ *     string s, t;
+ *     lcp_tree lt(s, 256);
+ *     auto [le, ri] = find_str(lt, t);
+ *     // or
+ *     vector<int> arr, t;
+ *     lcp_tree lt(arr, 100'005);
+ *     auto [le, ri] = find_str(arr, t);
+ * @endcode
+ *
  * @param lt lcp interval tree
  * @param t needle
  * @returns range [le, ri) such that:
