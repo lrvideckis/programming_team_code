@@ -19,7 +19,7 @@
  *         int len = lt.lcp_len(u);
  *         if(u < ssize(lt.lcp))
  *             for(auto [c, v] : lt.child[u])
- *                 self(self, v, lt.lcp[u]);
+ *                 self(self, v);
  *     };
  *     dfs(dfs, max(lt.root, 0));
  * @endcode
