@@ -6,24 +6,24 @@
 
 #include "../../../library/strings/suffix_array_related/find_first.hpp"
 #include "../../../library/strings/suffix_array_related/find_substr.hpp"
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
     find_first ff(s, 256);
-    lcp_tree lcpt(s, 256);
+    lcp_tree lt(s, 256);
     {
         auto [le, ri] = find_str(s, ff.sf.sa, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     {
-        auto [le, ri] = lcpt.find_str("");
+        auto [le, ri] = find_str(lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     auto [le, ri] = find_str(s, ff.sf.sa, t);
-    auto [le2, ri2] = lcpt.find_str(t);
+    auto [le2, ri2] = find_str(lt, t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
     vector<int> matches(begin(ff.sf.sa) + le, begin(ff.sf.sa) + ri);

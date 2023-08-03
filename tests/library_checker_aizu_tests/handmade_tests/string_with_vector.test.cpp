@@ -13,7 +13,7 @@
 #include "../../../library/strings/suffix_array_related/lcp_query.hpp"
 #include "../../../library/strings/suffix_array_related/find_substr.hpp"
 
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
 #include "../../../library/strings/knuth_morris_pratt.hpp"
 
@@ -60,8 +60,8 @@ int main() {
         }
     }
     {
-        lcp_tree lcpt(arr, SHIFT + 100);
-        auto [le, ri] = lcpt.find_str(t);
+        lcp_tree lt(arr, SHIFT + 100);
+        auto [le, ri] = find_str(lt, t);
         assert(le == 50 && ri == 51);
     }
     {

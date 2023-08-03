@@ -5,20 +5,20 @@
 #include "../template.hpp"
 
 #include "../../../library/strings/suffix_array_related/find_str.hpp"
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
     auto [sa, sa_inv] = get_sa(s, 256);
-    lcp_tree lcpt(s, 256);
+    lcp_tree lt(s, 256);
     {
         auto [le, ri] = find_str(s, sa, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     {
-        auto [le, ri] = lcpt.find_str("");
+        auto [le, ri] = find_str(lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     int q;
@@ -27,7 +27,7 @@ int main() {
         string t;
         cin >> t;
         auto [le, ri] = find_str(s, sa, t);
-        auto [le2, ri2] = lcpt.find_str(t);
+        auto [le2, ri2] = find_str(lt, t);
         assert(ri - le == ri2 - le2);
         if (ri - le > 0) assert(le == le2);
         cout << (!!(ri - le > 0)) << '\n';
