@@ -66,11 +66,24 @@ template <class T> struct lcp_tree {
         }
         assert(num_leaves == ssize(s));
     }
+    /**
+     * @param u node
+     * @returns range [le, ri) such that the following (ri - le) strings are equal:
+     *     - for all i in [le, ri): s.substr(sa[i], lcp_len(u))
+     * @time O(1)
+     * @space O(1)
+     */
     pair<int, int> sa_range(int u) const {
         if (u < ssize(lcp)) return {le[u] + 1, ri[u] + 1};
         int idx = u - ssize(lcp);
         return {idx, idx + 1};
     }
+    /**
+     * @param u node
+     * @returns length of longest common prefix of u's interval
+     * @time O(1)
+     * @space O(1)
+     */
     int lcp_len(int u) const {
         return u < ssize(lcp) ? lcp[u] : ssize(s) - sf.sa[u - ssize(lcp)];
     }
