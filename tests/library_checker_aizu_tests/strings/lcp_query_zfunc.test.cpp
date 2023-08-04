@@ -25,7 +25,7 @@ int main() {
             auto ri1 = get_rand<int>(0, ssize(s));
             if (le1 > ri1) swap(le1, ri1);
             int le2, ri2;
-            if(get_rand(0, 20) == 0) {
+            if (get_rand(0, 20) == 0) {
                 le2 = le1;
                 ri2 = ri1;
             } else {
@@ -36,8 +36,8 @@ int main() {
             int cmp_result = substr_cmp(s, lq, le1, ri1, le2, ri2);
             string sub1 = s.substr(le1, ri1 - le1);
             string sub2 = s.substr(le2, ri2 - le2);
-            if(cmp_result < 0) assert(sub1 < sub2);
-            else if(cmp_result == 0) assert(sub1 == sub2);
+            if (cmp_result < 0) assert(sub1 < sub2);
+            else if (cmp_result == 0) assert(sub1 == sub2);
             else assert(sub1 > sub2);
         }
     }

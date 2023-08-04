@@ -26,16 +26,16 @@ int main() {
                     assert(ri == n || s.substr(lq.sf.sa[ri], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
                 }
             }
-            for(int i = 0; i <= n; i++) {
-                for(int j = i; j <= n; j++) {
-                    for(int k = 0; k <= n; k++) {
-                        for(int l = k; l <= n; l++) {
+            for (int i = 0; i <= n; i++) {
+                for (int j = i; j <= n; j++) {
+                    for (int k = 0; k <= n; k++) {
+                        for (int l = k; l <= n; l++) {
                             int cmp_val = substr_cmp(s, lq, i, j, k, l);
                             string sub1 = s.substr(i, j - i);
                             string sub2 = s.substr(k, l - k);
-                            if(cmp_val < 0) assert(sub1 < sub2);
-                            if(cmp_val == 0) assert(sub1 == sub2);
-                            if(cmp_val > 0) assert(sub1 > sub2);
+                            if (cmp_val < 0) assert(sub1 < sub2);
+                            if (cmp_val == 0) assert(sub1 == sub2);
+                            if (cmp_val > 0) assert(sub1 > sub2);
                         }
                     }
                 }

@@ -2,7 +2,7 @@
 #pragma once
 #include "lcp_query.hpp"
 template <class T> inline int substr_cmp(const T& s, const lcp_query<T>& lq,
-                       int s_le1, int s_ri1, int s_le2, int s_ri2) {
+        int s_le1, int s_ri1, int s_le2, int s_ri2) {
     int n = ssize(s);
     assert(0 <= s_le1 && s_le1 <= s_ri1 && s_ri1 <= n);
     assert(0 <= s_le2 && s_le2 <= s_ri2 && s_ri2 <= n);

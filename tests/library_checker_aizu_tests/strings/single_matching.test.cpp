@@ -44,12 +44,11 @@ int main() {
         int t_start = ssize(s) + 1;
         lcp_query lq_both(both, 256);
         vector<int> splits = {0, ssize(t)};
-        for(int num_splits = get_rand(0, 4); num_splits--;) {
+        for (int num_splits = get_rand(0, 4); num_splits--;)
             splits.push_back(get_rand(0, ssize(t)));
-        }
         sort(begin(splits), end(splits));
         vector<pair<int, int>> subs;
-        for(int i = 1; i < ssize(splits); i++)
+        for (int i = 1; i < ssize(splits); i++)
             subs.emplace_back(splits[i - 1] + t_start, splits[i] + t_start);
         assert(!subs.empty());
         auto [le3, ri3] = find_substrs_concated(both, lq_both, subs);

@@ -42,7 +42,7 @@ int main() {
         assert(le == 0 && ri == n);
     }
     {
-        auto [le, ri] = find_substrs_concated(s, lq, {{0, 0},{n/2,n/2},{n,n}});
+        auto [le, ri] = find_substrs_concated(s, lq, {{0, 0}, {n / 2, n / 2}, {n, n}});
         assert(le == 0 && ri == n);
     }
     for (int i = 0; i < n; i++) {

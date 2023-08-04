@@ -6,7 +6,7 @@ template <class T> inline pair<int, int> find_substrs_concated(const T& s, const
     using dt = array<int, 3>;
     const auto& sa = lq.sf.sa;
     int n = ssize(sa), le = 0, ri = n, sum_len = 0;
-    auto cmp = [&](int i, const dt& x) -> bool {
+    auto cmp = [&](int i, const dt & x) -> bool {
         i += sum_len;
         return substr_cmp(s, lq, i, min(i + x[1] - x[0], n), x[0], x[1]) < x[2];
     };
