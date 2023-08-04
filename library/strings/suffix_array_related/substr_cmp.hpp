@@ -2,7 +2,6 @@
 #pragma once
 #include "lcp_query.hpp"
 /**
- * @param s string/array
  * @param lq lcp query struct
  * @param s_le1,s_ri1 first substring [s_le1, s_ri1)
  * @param s_le2,s_ri2 second substring [s_le2, s_ri2)
