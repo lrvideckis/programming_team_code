@@ -1,6 +1,6 @@
 ## Branches
 - `online_contest_comments` all included files copy-pasted into the file
-- `online_contest_no_comments` same as above, but also removing all comments
+- `online_contest_no_comments` same as above, but also removing all comments (for the elite user haha)
 
 The purpose of these is to be able to copy everything at once for online contests.
 
