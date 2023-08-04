@@ -4,6 +4,7 @@
 #include "../../../library/strings/suffix_array_related/suffix_array.hpp"
 
 #include "../../../library/strings/suffix_array_related/suf_cmp.hpp"
+#include "../../../library/strings/suffix_array_related/substr_cmp.hpp"
 
 #include "../../../library/strings/suffix_array_related/find_str.hpp"
 #include "../../../library/strings/suffix_array_related/find_first.hpp"
@@ -58,6 +59,9 @@ int main() {
             auto [le, ri] = find_substr(lq, i, i + 1);
             assert(le == i && ri == i + 1);
         }
+        assert(substr_cmp(arr, lq, 0, 100, 0, 100) == 0);
+        assert(substr_cmp(arr, lq, 1, 100, 0, 100) > 0);
+        assert(substr_cmp(arr, lq, 0, 100, 1, 100) < 0);
     }
     {
         lcp_tree lt(arr, SHIFT + 100);
