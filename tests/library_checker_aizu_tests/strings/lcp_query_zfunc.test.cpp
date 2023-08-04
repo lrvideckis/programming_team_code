@@ -18,12 +18,10 @@ int main() {
             auto ri = get_rand<int>(0, ssize(s));
             if (get_rand(0, 30) == 0) le = ssize(s);
             if (get_rand(0, 30) == 0) ri = ssize(s);
-            string le_s = (le == ssize(s) ? "" : s.substr(le));
-            string ri_s = (ri == ssize(s) ? "" : s.substr(ri));
             int cmp_val = suf_cmp(lq.sf.sa_inv, le, ri);
-            if (cmp_val < 0) assert(le_s < ri_s);
-            if (cmp_val == 0) assert(le_s == ri_s);
-            if (cmp_val > 0) assert(le_s > ri_s);
+            if (cmp_val < 0) assert(s.substr(le) < s.substr(ri));
+            if (cmp_val == 0) assert(s.substr(le) == s.substr(ri));
+            if (cmp_val > 0) assert(s.substr(le) > s.substr(ri));
         }
         for (int num_tests = 50; num_tests--;) {
             auto le1 = get_rand<int>(0, ssize(s));
@@ -38,7 +36,7 @@ int main() {
                 ri2 = get_rand<int>(0, ssize(s));
                 if (le2 > ri2) swap(le2, ri2);
             }
-            int cmp_result = substr_cmp(s, lq, le1, ri1, le2, ri2);
+            int cmp_result = substr_cmp(lq, le1, ri1, le2, ri2);
             string sub1 = s.substr(le1, ri1 - le1);
             string sub2 = s.substr(le2, ri2 - le2);
             if (cmp_result < 0) assert(sub1 < sub2);

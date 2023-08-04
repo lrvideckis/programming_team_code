@@ -68,13 +68,13 @@ int main() {
         }
         auto [le, ri] = find_substrs_concated(arr, lq, {});
         assert(le == 0 && ri == ssize(arr));
-        assert(substr_cmp(arr, lq, 0, 0, 100, 100) == 0);
-        assert(substr_cmp(arr, lq, 5, 5, 47, 47) == 0);
-        assert(substr_cmp(arr, lq, 50, 50, 99, 100) < 0);
-        assert(substr_cmp(arr, lq, 50, 51, 20, 20) > 0);
-        assert(substr_cmp(arr, lq, 0, 100, 0, 100) == 0);
-        assert(substr_cmp(arr, lq, 1, 100, 0, 100) > 0);
-        assert(substr_cmp(arr, lq, 0, 100, 1, 100) < 0);
+        assert(substr_cmp(lq, 0, 0, 100, 100) == 0);
+        assert(substr_cmp(lq, 5, 5, 47, 47) == 0);
+        assert(substr_cmp(lq, 50, 50, 99, 100) < 0);
+        assert(substr_cmp(lq, 50, 51, 20, 20) > 0);
+        assert(substr_cmp(lq, 0, 100, 0, 100) == 0);
+        assert(substr_cmp(lq, 1, 100, 0, 100) > 0);
+        assert(substr_cmp(lq, 0, 100, 1, 100) < 0);
     }
     {
         lcp_tree lt(arr, SHIFT + 100);

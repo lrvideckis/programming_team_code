@@ -13,13 +13,13 @@
  * @time O(1)
  * @space O(1)
  */
-template <class T> inline int substr_cmp(const T& s, const lcp_query<T>& lq,
+template <class T> inline int substr_cmp(const lcp_query<T>& lq,
         int s_le1, int s_ri1, int s_le2, int s_ri2) {
-    int n = ssize(s);
-    assert(0 <= s_le1 && s_le1 <= s_ri1 && s_ri1 <= n);
-    assert(0 <= s_le2 && s_le2 <= s_ri2 && s_ri2 <= n);
+    const auto& sa_inv = lq.sf.sa_inv;
+    assert(0 <= s_le1 && s_le1 <= s_ri1 && s_ri1 <= ssize(sa_inv));
+    assert(0 <= s_le2 && s_le2 <= s_ri2 && s_ri2 <= ssize(sa_inv));
     int len1 = s_ri1 - s_le1;
     int len2 = s_ri2 - s_le2;
-    int lcp = lq.get_lcp(s_le1, s_le2);
-    return lcp >= min(len1, len2) ? len1 - len2 : s[s_le1 + lcp] - s[s_le2 + lcp];
+    return lq.get_lcp(s_le1, s_le2) >= min(len1, len2) ?
+           len1 - len2 : sa_inv[s_le1] - sa_inv[s_le2];
 }
