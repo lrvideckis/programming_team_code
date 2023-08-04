@@ -22,8 +22,9 @@ template <class T> struct lcp_query {
         sf(get_sa(s, max_val)), lcp(get_lcp_array(sf, s)),
         rmq(lcp, [](int x, int y) -> int {return min(x, y);}) {}
     /**
-     * @param i1,i2 defines substrings [i1, n), [i2, n); note passing i1,i2 = n is okay
-     * @returns max integer k such that [i1, k) == [i2, k)
+     * @param i1,i2 defines substrings [i1, n), [i2, n)
+     *     - note passing i1,i2 = n is okay, and calling s.substr(ssize(s)) is also okay
+     * @returns max integer k such that s.substr(i1, k) == s.substr(i2, k)
      * @time O(1)
      * @space O(1)
      */

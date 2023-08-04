@@ -13,11 +13,12 @@
  * @endcode
  *
  * @param sa_inv inverse permutation of suffix array
- * @param i1,i2 defines suffixes [i1, n), [i2, n), note passing i1,i2 = n is okay
+ * @param i1,i2 defines suffixes [i1, n), [i2, n)
+ *     - note passing i1,i2 = n is okay, and calling s.substr(ssize(s)) is also okay
  * @returns a value `cmp` where:
- *     - cmp < 0 iff [i1, n) < [i2, n)
- *     - cmp = 0 iff [i1, n) = [i2, n)
- *     - cmp > 0 iff [i1, n) > [i2, n)
+ *     - cmp < 0 iff s.substr(i1) < s.substr(i2)
+ *     - cmp = 0 iff s.substr(i1) = s.substr(i2)
+ *     - cmp > 0 iff s.substr(i1) > s.substr(i2)
  * @time O(1)
  * @space O(1)
  */
