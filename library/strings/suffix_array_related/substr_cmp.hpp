@@ -1,6 +1,18 @@
 /** @file */
 #pragma once
 #include "lcp_query.hpp"
+/**
+ * @param s string/array
+ * @param lq lcp query struct
+ * @param s_le1,s_ri1 first substring [s_le1, s_ri1)
+ * @param s_le2,s_ri2 second substring [s_le2, s_ri2)
+ * @returns a value `cmp` where:
+ *     - cmp < 0 iff s.substr(s_le1, s_ri1 - s_le1) < s.substr(s_le2, s_ri2 - s_le2)
+ *     - cmp = 0 iff s.substr(s_le1, s_ri1 - s_le1) = s.substr(s_le2, s_ri2 - s_le2)
+ *     - cmp > 0 iff s.substr(s_le1, s_ri1 - s_le1) > s.substr(s_le2, s_ri2 - s_le2)
+ * @time O(1)
+ * @space O(1)
+ */
 template <class T> inline int substr_cmp(const T& s, const lcp_query<T>& lq,
         int s_le1, int s_ri1, int s_le2, int s_ri2) {
     int n = ssize(s);

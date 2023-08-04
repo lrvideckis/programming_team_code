@@ -60,6 +60,7 @@ int main() {
             assert(le == i && ri == i + 1);
         }
         assert(substr_cmp(arr, lq, 0, 0, 100, 100) == 0);
+        assert(substr_cmp(arr, lq, 5, 5, 47, 47) == 0);
         assert(substr_cmp(arr, lq, 50, 50, 99, 100) < 0);
         assert(substr_cmp(arr, lq, 50, 51, 20, 20) > 0);
         assert(substr_cmp(arr, lq, 0, 100, 0, 100) == 0);
