@@ -59,6 +59,8 @@ int main() {
             auto [le, ri] = find_substrs_concated(arr, lq, {{i, i + 1}});
             assert(le == i && ri == i + 1);
         }
+        auto [le, ri] = find_substrs_concated(arr, lq, {});
+        assert(le == 0 && ri == ssize(arr));
         assert(substr_cmp(arr, lq, 0, 0, 100, 100) == 0);
         assert(substr_cmp(arr, lq, 5, 5, 47, 47) == 0);
         assert(substr_cmp(arr, lq, 50, 50, 99, 100) < 0);
