@@ -16,8 +16,8 @@ int main() {
         for (int num_tests = 50; num_tests--;) {
             auto le = get_rand<int>(0, ssize(s));
             auto ri = get_rand<int>(0, ssize(s));
-            if(get_rand(0, 30) == 0) le = ssize(s);
-            if(get_rand(0, 30) == 0) ri = ssize(s);
+            if (get_rand(0, 30) == 0) le = ssize(s);
+            if (get_rand(0, 30) == 0) ri = ssize(s);
             string le_s = (le == ssize(s) ? "" : s.substr(le));
             string ri_s = (ri == ssize(s) ? "" : s.substr(ri));
             int cmp_val = suf_cmp(lq.sf.sa_inv, le, ri);
