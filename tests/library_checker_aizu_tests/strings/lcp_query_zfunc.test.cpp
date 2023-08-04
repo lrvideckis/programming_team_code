@@ -14,11 +14,13 @@ int main() {
     //test `*_cmp` functions
     {
         for (int num_tests = 50; num_tests--;) {
-            auto le = get_rand<int>(0, ssize(s) - 1);
-            auto ri = get_rand<int>(0, ssize(s) - 1);
-            if (le > ri)
-                swap(le, ri);
-            assert(suf_cmp(lq.sf.sa_inv, le, ri) == (s.substr(le) < s.substr(ri)));
+            auto le = get_rand<int>(0, ssize(s));
+            auto ri = get_rand<int>(0, ssize(s));
+            if(get_rand(0, 30) == 0) le = ssize(s);
+            if(get_rand(0, 30) == 0) ri = ssize(s);
+            string le_s = (le == ssize(s) ? "" : s.substr(le));
+            string ri_s = (ri == ssize(s) ? "" : s.substr(ri));
+            assert(suf_cmp(lq.sf.sa_inv, le, ri) == (le_s < ri_s));
         }
         for (int num_tests = 50; num_tests--;) {
             auto le1 = get_rand<int>(0, ssize(s));

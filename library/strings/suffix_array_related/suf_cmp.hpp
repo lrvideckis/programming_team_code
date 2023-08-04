@@ -13,11 +13,13 @@
  * @endcode
  *
  * @param sa_inv inverse permutation of suffix array
- * @param i1,i2 starting 0-based-indexes of suffixes
- * @returns 1 iff suffix s.substr(i1) < s.substr(i2)
+ * @param i1,i2 defines suffixes [i1, n), [i2, n), note passing i1,i2 = n is okay
+ * @returns 1 iff suffix [i1, n) < [i2, n)
  * @time O(1)
  * @space O(1)
  */
 inline bool suf_cmp(const vector<int>& sa_inv, int i1, int i2) {
+    assert(0 <= min(i1, i2) && max(i1, i2) <= ssize(sa_inv));
+    if (max(i1, i2) == ssize(sa_inv)) return i1 > i2;
     return sa_inv[i1] < sa_inv[i2];
 }

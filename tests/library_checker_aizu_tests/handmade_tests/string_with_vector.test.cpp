@@ -35,6 +35,12 @@ int main() {
     {
         for (int i = 1; i < 100; i++)
             assert(suf_cmp(sa_inv, i - 1, i));
+        for (int i = 0; i < 100; i++) {
+            assert(suf_cmp(sa_inv, 100, i));
+            assert(!suf_cmp(sa_inv, i, 100));
+            assert(!suf_cmp(sa_inv, i, i));
+        }
+        assert(!suf_cmp(sa_inv, 100, 100));
     }
     vector<int> t;
     t.reserve(10);
