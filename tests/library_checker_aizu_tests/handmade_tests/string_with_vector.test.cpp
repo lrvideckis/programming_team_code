@@ -55,6 +55,7 @@ int main() {
     {
         lcp_query lq(arr, SHIFT + 100);
         assert(lq.get_lcp(0, 99) == 0);
+        assert(lq.get_lcp(0, 100) == 0);
         for (int i = 0; i < 100; i++) {
             auto [le, ri] = find_substrs_concated(arr, lq, {{i, i + 1}});
             assert(le == i && ri == i + 1);
