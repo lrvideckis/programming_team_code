@@ -3,9 +3,10 @@
 //causing TLE.
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
+#include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/suffix_array_related/find_first.hpp"
-#include "../../../library/strings/suffix_array_related/find_substr.hpp"
+#include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
 int main() {
@@ -38,14 +39,20 @@ int main() {
         }
     }
     {
-        //test find_substr
+        //test find_substrs_concated
         string both = s + '$' + t;
+        int t_start = ssize(s) + 1;
         lcp_query lq_both(both, 256);
-        for (int i = 0; i <= ssize(both); i++) {
-            auto [le3, ri3] = find_substr(lq_both, i, i);
-            assert(le3 == 0 && ri3 == ssize(both));
+        vector<int> splits = {0, ssize(t)};
+        for(int num_splits = get_rand(0, 4); num_splits--;) {
+            splits.push_back(get_rand(0, ssize(t)));
         }
-        auto [le3, ri3] = find_substr(lq_both, ssize(s) + 1, ssize(both));
+        sort(begin(splits), end(splits));
+        vector<pair<int, int>> subs;
+        for(int i = 1; i < ssize(splits); i++)
+            subs.emplace_back(splits[i - 1] + t_start, splits[i] + t_start);
+        assert(!subs.empty());
+        auto [le3, ri3] = find_substrs_concated(both, lq_both, subs);
         assert(ri3 - le3 == 1 + ri - le);
         vector<int> matches_other(begin(lq_both.sf.sa) + le3, begin(lq_both.sf.sa) + ri3);
         matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
