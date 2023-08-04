@@ -20,7 +20,10 @@ int main() {
             if(get_rand(0, 30) == 0) ri = ssize(s);
             string le_s = (le == ssize(s) ? "" : s.substr(le));
             string ri_s = (ri == ssize(s) ? "" : s.substr(ri));
-            assert(suf_cmp(lq.sf.sa_inv, le, ri) == (le_s < ri_s));
+            int cmp_val = suf_cmp(lq.sf.sa_inv, le, ri);
+            if (cmp_val < 0) assert(le_s < ri_s);
+            if (cmp_val == 0) assert(le_s == ri_s);
+            if (cmp_val > 0) assert(le_s > ri_s);
         }
         for (int num_tests = 50; num_tests--;) {
             auto le1 = get_rand<int>(0, ssize(s));

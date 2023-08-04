@@ -34,13 +34,13 @@ int main() {
     auto [sa, sa_inv] = get_sa(arr, SHIFT + 100);
     {
         for (int i = 1; i < 100; i++)
-            assert(suf_cmp(sa_inv, i - 1, i));
+            assert(suf_cmp(sa_inv, i - 1, i) < 0);
         for (int i = 0; i < 100; i++) {
-            assert(suf_cmp(sa_inv, 100, i));
-            assert(!suf_cmp(sa_inv, i, 100));
-            assert(!suf_cmp(sa_inv, i, i));
+            assert(suf_cmp(sa_inv, 100, i) < 0);
+            assert(suf_cmp(sa_inv, i, 100) > 0);
+            assert(suf_cmp(sa_inv, i, i) == 0);
         }
-        assert(!suf_cmp(sa_inv, 100, 100));
+        assert(suf_cmp(sa_inv, 100, 100) == 0);
     }
     vector<int> t;
     t.reserve(10);
