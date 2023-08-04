@@ -17,8 +17,8 @@
  * @param lt lcp interval tree
  * @param t needle
  * @returns range [le, ri) such that:
- * - for all i in [le, ri): t == s.substr(sf.sa[i], ssize(t))
- * - `ri - le` is the # of matches of t in s.
+ *     - for all i in [le, ri): t == s.substr(sf.sa[i], ssize(t))
+ *     - `ri - le` is the # of matches of t in s.
  * @time O(|t| * log(|alphabet|)); |alphabet| = 26 if only lowercase letters
  * @space O(1)
  */

@@ -2,7 +2,7 @@
 #include "../template.hpp"
 
 #include "../../../library/strings/suffix_array_related/find_str.hpp"
-#include "../../../library/strings/suffix_array_related/find_substr.hpp"
+#include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -33,8 +33,16 @@ int main() {
         assert(ssize(lq.sf.sa_inv) == n);
         assert(ssize(lq.lcp) == n - 1);
     }
-    for (int i : {0, ssize(s), ssize(s) / 2}) {
-        auto [le, ri] = find_substr(lq, i, i);
+    {
+        auto [le, ri] = find_substrs_concated(s, lq, {{0, 0}});
+        assert(le == 0 && ri == n);
+    }
+    {
+        auto [le, ri] = find_substrs_concated(s, lq, {{0, 0}, {n, n}});
+        assert(le == 0 && ri == n);
+    }
+    {
+        auto [le, ri] = find_substrs_concated(s, lq, {{0, 0}, {n / 2, n / 2}, {n, n}});
         assert(le == 0 && ri == n);
     }
     for (int i = 0; i < n; i++) {

@@ -4,6 +4,7 @@
 #include "../../../library/strings/suffix_array_related/suffix_array.hpp"
 
 #include "../../../library/strings/suffix_array_related/suf_cmp.hpp"
+#include "../../../library/strings/suffix_array_related/substr_cmp.hpp"
 
 #include "../../../library/strings/suffix_array_related/find_str.hpp"
 #include "../../../library/strings/suffix_array_related/find_first.hpp"
@@ -11,7 +12,7 @@
 #include "../../../library/strings/suffix_array_related/lcp_array.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_query.hpp"
-#include "../../../library/strings/suffix_array_related/find_substr.hpp"
+#include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
@@ -55,9 +56,16 @@ int main() {
         lcp_query lq(arr, SHIFT + 100);
         assert(lq.get_lcp(0, 99) == 0);
         for (int i = 0; i < 100; i++) {
-            auto [le, ri] = find_substr(lq, i, i + 1);
+            auto [le, ri] = find_substrs_concated(arr, lq, {{i, i + 1}});
             assert(le == i && ri == i + 1);
         }
+        assert(substr_cmp(arr, lq, 0, 0, 100, 100) == 0);
+        assert(substr_cmp(arr, lq, 5, 5, 47, 47) == 0);
+        assert(substr_cmp(arr, lq, 50, 50, 99, 100) < 0);
+        assert(substr_cmp(arr, lq, 50, 51, 20, 20) > 0);
+        assert(substr_cmp(arr, lq, 0, 100, 0, 100) == 0);
+        assert(substr_cmp(arr, lq, 1, 100, 0, 100) > 0);
+        assert(substr_cmp(arr, lq, 0, 100, 1, 100) < 0);
     }
     {
         lcp_tree lt(arr, SHIFT + 100);
