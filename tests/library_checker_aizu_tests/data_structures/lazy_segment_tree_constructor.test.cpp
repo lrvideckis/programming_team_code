@@ -7,7 +7,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     {
         //test empty seg tree
-        iter_seg_tree ist(vector<long long>(0));
+        iter_seg_tree ist(vector<int>(0));
         ist.update_iter(0, 0, 1);
         long long res = ist.query_iter(0, 0);
         assert(res == 0);
@@ -17,15 +17,10 @@ int main() {
     }
     int n, q;
     cin >> n >> q;
-    vector<long long> arr(n);
+    vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
     iter_seg_tree ist(arr);
-    {
-        //to test the comment in lazy_segment_tree.hpp
-        int k = __lg(2 * n - 1);
-        assert(n <= (1 << k) && (1 << k) < 2 * n);
-        assert(arr[0] == ist.st.tree[1 << k]);
-    }
+    assert(n <= ist.st.pw2 && ist.st.pw2 < 2 * n);
     while (q--) {
         int type;
         cin >> type;

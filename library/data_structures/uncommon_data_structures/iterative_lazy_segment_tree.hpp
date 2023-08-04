@@ -8,16 +8,14 @@
  * their recursive counterparts.
  */
 struct iter_seg_tree {
-    int s; /**< smallest power of 2 >= n */
     seg_tree st;
-    iter_seg_tree(int n) : s(1 << __lg(2 * n - 1)), st(n) {}
-    iter_seg_tree(const vector<long long>& arr) : s(1 << __lg(2 * ssize(arr) - 1)), st(arr) {}
+    iter_seg_tree(const seg_tree& a_st) : st(a_st) {}
     inline void pull(int v) {st.tree[v] = op(st.tree[2 * v], st.tree[2 * v + 1]);}
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
     inline int to_leaf(int i) const {
-        i += s;
+        i += st.pw2;
         return i < 2 * st.n ? i : 2 * (i - st.n);
     }
     /**
@@ -27,8 +25,8 @@ struct iter_seg_tree {
         assert(1 <= a && a < 2 * st.n);
         int l = __builtin_clz(a) - __builtin_clz(2 * st.n - 1);
         int x = a << l, y = (a + 1) << l;
-        assert(s <= x && x < y && y <= 2 * s);
-        return {(x >= 2 * st.n ? (x >> 1) + st.n : x) - s, (y >= 2 * st.n ? (y >> 1) + st.n : y) - s};
+        assert(st.pw2 <= x && x < y && y <= 2 * st.pw2);
+        return {(x >= 2 * st.n ? (x >> 1) + st.n : x) - st.pw2, (y >= 2 * st.n ? (y >> 1) + st.n : y) - st.pw2};
     }
     void push_parents(int le, int ri) {
         int lca_l_r = __lg((le - 1) ^ ri);
