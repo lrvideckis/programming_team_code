@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/find_substr.hpp"
+#include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
 #include "../../../library/strings/suffix_array_related/substr_cmp.hpp"
 
 int main() {
@@ -15,7 +15,7 @@ int main() {
             lcp_query lq(s, 256);
             for (int str_le = 0; str_le <= n; str_le++) {
                 for (int str_ri = str_le; str_ri <= n; str_ri++) {
-                    auto [le, ri] = find_substr(lq, str_le, str_ri);
+                    auto [le, ri] = find_substrs_concated(s, lq, {{str_le, str_ri}});
                     if (str_le == str_ri)
                         assert(le == 0 && ri == n);
                     if (str_le < n)
