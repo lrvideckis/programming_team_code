@@ -14,6 +14,9 @@ struct match {
      * [str_le, str_ri) defines a substring of s such that:
      *     - s.substr(str_le, str_ri - str_le) == t.substr(0, str_ri - str_le)
      *     - (str_ri - str_le) is maximized, if there are multiple answers, str_le is arbitrary
+     *
+     * - note if sa_le < sa_ri, i.e. at least one match, then str_ri - str_le == ssize(t)
+     * - note if sa_le == sa_ri, i.e. no matches, then str_ri - str_le < ssize(t)
      * @{
      */
     int sa_le, sa_ri, str_le, str_ri;
