@@ -18,7 +18,7 @@ int main() {
         auto [le, ri] = find_str(lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = find_str(s, lt.sf.sa, t);
+    auto [le, ri, a, b] = find_str(s, lt.sf.sa, t);
     auto [le2, ri2] = find_str(lt, t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
