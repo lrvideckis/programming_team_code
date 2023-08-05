@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "lcp_query.hpp"
+#include "../lcp_query.hpp"
 /**
  * @param lq lcp query struct
  * @param s_le1,s_ri1 first substring [s_le1, s_ri1)
@@ -14,7 +14,7 @@
  */
 template <class T> inline int substr_cmp(const lcp_query<T>& lq,
         int s_le1, int s_ri1, int s_le2, int s_ri2) {
-    const auto& sa_inv = lq.sf.sa_inv;
+    const auto& sa_inv = lq.sa_inv;
     assert(0 <= s_le1 && s_le1 <= s_ri1 && s_ri1 <= ssize(sa_inv));
     assert(0 <= s_le2 && s_le2 <= s_ri2 && s_ri2 <= ssize(sa_inv));
     int len1 = s_ri1 - s_le1;

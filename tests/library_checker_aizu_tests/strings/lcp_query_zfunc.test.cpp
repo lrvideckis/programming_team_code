@@ -2,8 +2,8 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/suf_cmp.hpp"
-#include "../../../library/strings/suffix_array_related/substr_cmp.hpp"
+#include "../../../library/strings/suffix_array_related/compare/compare_suffixes.hpp"
+#include "../../../library/strings/suffix_array_related/compare/compare_substrings.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_query.hpp"
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
             auto ri = get_rand<int>(0, ssize(s));
             if (get_rand(0, 30) == 0) le = ssize(s);
             if (get_rand(0, 30) == 0) ri = ssize(s);
-            int cmp_val = suf_cmp(lq.sf.sa_inv, le, ri);
+            int cmp_val = suf_cmp(lq.sa_inv, le, ri);
             if (cmp_val < 0) assert(s.substr(le) < s.substr(ri));
             if (cmp_val == 0) assert(s.substr(le) == s.substr(ri));
             if (cmp_val > 0) assert(s.substr(le) > s.substr(ri));
