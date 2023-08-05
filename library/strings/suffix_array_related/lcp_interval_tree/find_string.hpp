@@ -22,7 +22,6 @@
  * @time O(|t| * log(|alphabet|)); |alphabet| = 26 if only lowercase letters
  * @space O(1)
  */
-//TODO: should return match to be consistent ?
 template <class T> pair<int, int> find_str(const lcp_tree<T>& lt, const T& t) {
     int u = max(lt.root, 0);
     for (int i = 0; i < ssize(t); i++) {
