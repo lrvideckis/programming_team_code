@@ -54,6 +54,7 @@
 "tests/library_checker_aizu_tests/handmade_tests/mobius_inversion.test.cpp": "2023-06-19 22:33:57 -0500",
 "tests/library_checker_aizu_tests/handmade_tests/n_choose_k.test.cpp": "2023-07-20 00:15:01 -0700",
 "tests/library_checker_aizu_tests/handmade_tests/rmq_small_n.test.cpp": "2023-07-30 14:16:10 -0600",
+"tests/library_checker_aizu_tests/handmade_tests/sa_find_subarray.test.cpp": "2023-08-05 02:24:23 -0600",
 "tests/library_checker_aizu_tests/handmade_tests/wavelet_merge_updates.test.cpp": "2023-07-30 14:16:10 -0600",
 "tests/library_checker_aizu_tests/handmade_tests/wavelet_tree.test.cpp": "2023-07-20 12:03:47 -0700",
 "tests/library_checker_aizu_tests/iterate_subsets/iterate_chooses.test.cpp": "2023-07-20 12:03:47 -0700",
