@@ -4,7 +4,7 @@
 #include "match.hpp"
 /**
  * @param lq lcp query struct
- * @param substrs this defines t as:
+ * @param substrs this defines query string t as:
  *     s.substr(substrs[0].first, substrs[0].second - substrs[0].first) +
  *     s.substr(substrs[1].first, substrs[1].second - substrs[1].first) +
  *     ...
