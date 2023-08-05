@@ -28,8 +28,10 @@ int main() {
         string t;
         cin >> t;
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, sa, t);
-        assert(s.substr(str_le, str_ri - str_le) == t.substr(0, str_ri - str_le));
-        assert((sa_le < sa_ri) == (str_ri - str_le == ssize(t)));
+        int str_len = str_ri - str_le;
+        assert(s.substr(str_le, str_len) == t.substr(0, str_len));
+        assert(str_len == ssize(t) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
+        assert((sa_le < sa_ri) == (str_len == ssize(t)));
         auto [le, ri] = find_str(lt, t);
         assert(sa_ri - sa_le == ri - le);
         if (sa_ri - sa_le > 0) assert(sa_le == le);

@@ -18,11 +18,15 @@ int main() {
         auto [le, ri] = find_str(lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri, a, b] = find_str(s, lt.sf.sa, t);
-    auto [le2, ri2] = find_str(lt, t);
-    assert(ri - le == ri2 - le2);
-    if (ri - le > 0) assert(le == le2);
-    vector<int> matches(begin(lt.sf.sa) + le, begin(lt.sf.sa) + ri);
+    auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, lt.sa, t);
+    int str_len = str_ri - str_le;
+    assert(s.substr(str_le, str_len) == t.substr(0, str_len));
+    assert(str_len == ssize(t) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
+    assert((sa_le < sa_ri) == (str_len == ssize(t)));
+    auto [le, ri] = find_str(lt, t);
+    assert(sa_ri - sa_le == ri - le);
+    if (sa_ri - sa_le > 0) assert(sa_le == le);
+    vector<int> matches(begin(lt.sa) + sa_le, begin(lt.sa) + sa_ri);
     sort(begin(matches), end(matches));
     {
         //test find_substrs_concated
@@ -37,9 +41,10 @@ int main() {
         for (int i = 1; i < ssize(splits); i++)
             subs.emplace_back(splits[i - 1] + t_start, splits[i] + t_start);
         assert(!subs.empty());
-        auto [le3, ri3] = find_substrs_concated(lq_both, subs);
-        assert(ri3 - le3 == 1 + ri - le);
-        vector<int> matches_other(begin(lq_both.sf.sa) + le3, begin(lq_both.sf.sa) + ri3);
+        auto [sa_le2, sa_ri2, str_le2, str_ri2] = find_substrs_concated(lq_both, subs);
+        assert(both.substr(str_le2, str_ri2 - str_le2) == t);
+        assert(sa_ri2 - sa_le2 == 1 + sa_ri - sa_le);
+        vector<int> matches_other(begin(lq_both.sa) + sa_le2, begin(lq_both.sa) + sa_ri2);
         matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
         sort(begin(matches_other), end(matches_other));
         assert(matches == matches_other);
