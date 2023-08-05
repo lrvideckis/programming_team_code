@@ -63,10 +63,10 @@ int main() {
         assert(lq.get_lcp(0, 99) == 0);
         assert(lq.get_lcp(0, 100) == 0);
         for (int i = 0; i < 100; i++) {
-            auto [le, ri] = find_substrs_concated(arr, lq, {{i, i + 1}});
+            auto [le, ri] = find_substrs_concated(lq, {{i, i + 1}});
             assert(le == i && ri == i + 1);
         }
-        auto [le, ri] = find_substrs_concated(arr, lq, {});
+        auto [le, ri] = find_substrs_concated(lq, {});
         assert(le == 0 && ri == ssize(arr));
         assert(substr_cmp(lq, 0, 0, 100, 100) == 0);
         assert(substr_cmp(lq, 5, 5, 47, 47) == 0);

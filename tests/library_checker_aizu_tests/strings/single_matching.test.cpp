@@ -51,7 +51,7 @@ int main() {
         for (int i = 1; i < ssize(splits); i++)
             subs.emplace_back(splits[i - 1] + t_start, splits[i] + t_start);
         assert(!subs.empty());
-        auto [le3, ri3] = find_substrs_concated(both, lq_both, subs);
+        auto [le3, ri3] = find_substrs_concated(lq_both, subs);
         assert(ri3 - le3 == 1 + ri - le);
         vector<int> matches_other(begin(lq_both.sf.sa) + le3, begin(lq_both.sf.sa) + ri3);
         matches_other.erase(remove_if(begin(matches_other), end(matches_other), [&](int val) {return val >= ssize(s) + 1;}), end(matches_other));
