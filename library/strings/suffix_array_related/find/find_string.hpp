@@ -9,30 +9,30 @@
  *     string s;
  *     auto [sa, sa_inv] = get_sa(s, 256);
  *     string t;
- *     auto [le, ri] = find_str(s, sa, t);
+ *     match m = find_str(s, sa, t);
  *     // or
  *     vector<int> arr;
  *     auto [sa, sa_inv] = get_sa(arr, 100'005);
  *     vector<int> t;
- *     auto [le, ri] = find_str(arr, sa, t);
+ *     match m = find_str(arr, sa, t);
  * @endcode
  *
  * @param s,sa string/array and its suffix array
  * @param t needle
- * @returns range [le, ri) such that:
- *     - for all i in [le, ri): t == s.substr(sa[i], ssize(t))
- *     - `ri - le` is the # of matches of t in s.
- * note find_str(s, sa, string("")) returns [0, ssize(s))
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
 template <class T> inline match find_str(const T& s, const vector<int>& sa, const T& t) {
-    auto sa_le = lower_bound(begin(sa), end(sa), 0, [&](int i, int) -> bool {
-        //auto [it_s, it_t] = mismatch(begin(s) + i, end(s), begin(t), end(t));
+    int str_le = 0, str_ri = 0;
+    auto cmp = [&](int i, int cmp_val) -> bool {
+        auto [it_s, it_t] = mismatch(begin(s) + i, end(s), begin(t), end(t));
+        if (it_s - begin(s) - i > str_ri - str_le)
+            str_le = i, str_ri = it_s - begin(s);
+        //TODO golf
+        if (cmp_val == 1) return it_t == end(t);
         return lexicographical_compare(begin(s) + i, end(s), begin(t), end(t));
-    });
-    auto sa_ri = lower_bound(sa_le, end(sa), 0, [&](int i, int) -> bool {
-        return mismatch(begin(s) + i, end(s), begin(t), end(t)).second == end(t);
-    });
-    return {sa_le - begin(sa), sa_ri - begin(sa), -1, -1};
+    };
+    int sa_le = int(lower_bound(begin(sa), end(sa), 0, cmp) - begin(sa));
+    int sa_ri = int(lower_bound(begin(sa) + sa_le, end(sa), 1, cmp) - begin(sa));
+    return {sa_le, sa_ri, str_le, str_ri};
 }
