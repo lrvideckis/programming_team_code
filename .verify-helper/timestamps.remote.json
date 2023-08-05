@@ -78,5 +78,6 @@
 "tests/library_checker_aizu_tests/strings/lcp_query_zfunc.test.cpp": "2023-08-05 00:54:00 -0600",
 "tests/library_checker_aizu_tests/strings/manacher.test.cpp": "2023-07-28 01:14:49 -0400",
 "tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-07-20 12:03:47 -0700",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-08-05 01:38:41 -0600",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-07-17 13:43:14 -0700"
 }
