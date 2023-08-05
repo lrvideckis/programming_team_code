@@ -5,8 +5,8 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/find_str.hpp"
-#include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_str.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_substrs_concatenated.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
 int main() {

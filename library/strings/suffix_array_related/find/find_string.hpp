@@ -1,6 +1,7 @@
 /** @file */
 #pragma once
-#include "suffix_array.hpp"
+#include "../suffix_array.hpp"
+#include "match.hpp"
 /**
  * @see https://github.com/yosupo06/Algorithm/blob /master/src/string/suffixarray.hpp
  *
@@ -25,12 +26,13 @@
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
-template <class T> inline pair<int, int> find_str(const T& s, const vector<int>& sa, const T& t) {
-    auto le = lower_bound(begin(sa), end(sa), 0, [&](int i, int) -> bool {
+template <class T> inline match find_str(const T& s, const vector<int>& sa, const T& t) {
+    auto sa_le = lower_bound(begin(sa), end(sa), 0, [&](int i, int) -> bool {
+        //auto [it_s, it_t] = mismatch(begin(s) + i, end(s), begin(t), end(t));
         return lexicographical_compare(begin(s) + i, end(s), begin(t), end(t));
     });
-    auto ri = lower_bound(le, end(sa), 0, [&](int i, int) -> bool {
+    auto sa_ri = lower_bound(sa_le, end(sa), 0, [&](int i, int) -> bool {
         return mismatch(begin(s) + i, end(s), begin(t), end(t)).second == end(t);
     });
-    return {le - begin(sa), ri - begin(sa)};
+    return {sa_le - begin(sa), sa_ri - begin(sa), -1, -1};
 }
