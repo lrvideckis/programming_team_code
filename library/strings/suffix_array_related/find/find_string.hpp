@@ -19,6 +19,7 @@
  *
  * @param s,sa string/array and its suffix array
  * @param t needle
+ * @returns see match
  * @time O(|t| * log(|s|))
  * @space O(1)
  */
