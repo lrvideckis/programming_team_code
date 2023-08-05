@@ -29,8 +29,7 @@
  */
 template <class T> struct lcp_tree {
     T s;
-    suf sf;
-    vector<int> lcp, le, ri;
+    vector<int> sa, sa_inv, lcp, le, ri;
     int root;
     vector<map<int, int>> child;
     /**
@@ -39,7 +38,9 @@ template <class T> struct lcp_tree {
      * O(n) as constructing a map from a sorted array is linear
      * @space all member variables are O(n)
      */
-    lcp_tree(const T& a_s, int max_val) : s(a_s), sf(get_sa(s, max_val)), lcp(get_lcp_array(sf, s)) {
+    lcp_tree(const T& a_s, int max_val) : s(a_s) {
+        tie(sa, sa_inv) = get_sa(s, max_val);
+        lcp = get_lcp_array(sa, sa_inv, s);
         tie(le, ri) = min_range(lcp);
         vector<vector<int>> adj;
         tie(root, adj) = min_cartesian_tree(le, ri, lcp);
@@ -54,24 +55,24 @@ template <class T> struct lcp_tree {
             if (adj[u].empty() || le[u] < le[adj[u][0]]) {
                 num_leaves++;
                 int i = le[u] + 1;
-                assert(sf.sa[i] + lcp[u] <= ssize(s));
-                if (sf.sa[i] + lcp[u] < ssize(s))
-                    childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(lcp) + i);
+                assert(sa[i] + lcp[u] <= ssize(s));
+                if (sa[i] + lcp[u] < ssize(s))
+                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(lcp) + i);
             }
             int prev = le[u] + 2;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
-                    assert(sf.sa[i] + lcp[u] < ssize(s));
-                    childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(lcp) + i);
+                    assert(sa[i] + lcp[u] < ssize(s));
+                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(lcp) + i);
                     num_leaves++;
                 }
-                childs.emplace_back(s[sf.sa[v] + lcp[u]], v);
+                childs.emplace_back(s[sa[v] + lcp[u]], v);
                 prev = ri[v] + 1;
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++) {
-                assert(sf.sa[i] + lcp[u] < ssize(s));
-                childs.emplace_back(s[sf.sa[i] + lcp[u]], ssize(lcp) + i);
+                assert(sa[i] + lcp[u] < ssize(s));
+                childs.emplace_back(s[sa[i] + lcp[u]], ssize(lcp) + i);
                 num_leaves++;
             }
             for (int i = 1; i < ssize(childs); i++) assert(childs[i - 1].first < childs[i].first);
@@ -98,6 +99,6 @@ template <class T> struct lcp_tree {
      * @space O(1)
      */
     int lcp_len(int u) const {
-        return u < ssize(lcp) ? lcp[u] : ssize(s) - sf.sa[u - ssize(lcp)];
+        return u < ssize(lcp) ? lcp[u] : ssize(s) - sa[u - ssize(lcp)];
     }
 };
