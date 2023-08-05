@@ -29,6 +29,7 @@ int main() {
         cin >> t;
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, sa, t);
         int str_len = str_ri - str_le;
+        assert(str_len <= ssize(t));
         assert(s.substr(str_le, str_len) == t.substr(0, str_len));
         assert(str_len == ssize(t) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
         assert((sa_le < sa_ri) == (str_len == ssize(t)));
