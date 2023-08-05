@@ -5,7 +5,7 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/find_first.hpp"
+#include "../../../library/strings/suffix_array_related/find_str.hpp"
 #include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
 
@@ -13,31 +13,17 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    find_first ff(s, 256);
     lcp_tree lt(s, 256);
-    {
-        auto [le, ri] = find_str(s, ff.sf.sa, string(""));
-        assert(le == 0 && ri == ssize(s));
-    }
     {
         auto [le, ri] = find_str(lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
-    auto [le, ri] = find_str(s, ff.sf.sa, t);
+    auto [le, ri] = find_str(s, lt.sf.sa, t);
     auto [le2, ri2] = find_str(lt, t);
     assert(ri - le == ri2 - le2);
     if (ri - le > 0) assert(le == le2);
-    vector<int> matches(begin(ff.sf.sa) + le, begin(ff.sf.sa) + ri);
+    vector<int> matches(begin(lt.sf.sa) + le, begin(lt.sf.sa) + ri);
     sort(begin(matches), end(matches));
-    {
-        int first_match = ff.first_match(t);
-        if (matches.empty())
-            assert(first_match == -1);
-        else {
-            assert(first_match == matches[0]);
-            assert(t == s.substr(first_match, ssize(t)));
-        }
-    }
     {
         //test find_substrs_concated
         string both = s + '$' + t;

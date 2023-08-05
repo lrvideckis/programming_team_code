@@ -7,7 +7,6 @@
 #include "../../../library/strings/suffix_array_related/substr_cmp.hpp"
 
 #include "../../../library/strings/suffix_array_related/find_str.hpp"
-#include "../../../library/strings/suffix_array_related/find_first.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_array.hpp"
 
@@ -49,10 +48,6 @@ int main() {
     {
         auto [le, ri] = find_str(arr, sa, t);
         assert(le == 50 && ri == 51);
-    }
-    {
-        find_first ff(arr, SHIFT + 100);
-        assert(ff.first_match(t) == 50);
     }
     {
         vector<int> lcp = get_lcp_array({sa, sa_inv}, arr);
