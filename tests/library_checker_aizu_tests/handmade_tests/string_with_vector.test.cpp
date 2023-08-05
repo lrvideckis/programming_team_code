@@ -34,7 +34,13 @@ int main() {
     auto [sa, sa_inv] = get_sa(arr, SHIFT + 100);
     {
         for (int i = 1; i < 100; i++)
-            assert(suf_cmp(sa_inv, i - 1, i));
+            assert(suf_cmp(sa_inv, i - 1, i) < 0);
+        for (int i = 0; i < 100; i++) {
+            assert(suf_cmp(sa_inv, 100, i) < 0);
+            assert(suf_cmp(sa_inv, i, 100) > 0);
+            assert(suf_cmp(sa_inv, i, i) == 0);
+        }
+        assert(suf_cmp(sa_inv, 100, 100) == 0);
     }
     vector<int> t;
     t.reserve(10);
@@ -55,19 +61,20 @@ int main() {
     {
         lcp_query lq(arr, SHIFT + 100);
         assert(lq.get_lcp(0, 99) == 0);
+        assert(lq.get_lcp(0, 100) == 0);
         for (int i = 0; i < 100; i++) {
-            auto [le, ri] = find_substrs_concated(arr, lq, {{i, i + 1}});
+            auto [le, ri] = find_substrs_concated(lq, {{i, i + 1}});
             assert(le == i && ri == i + 1);
         }
-        auto [le, ri] = find_substrs_concated(arr, lq, {});
+        auto [le, ri] = find_substrs_concated(lq, {});
         assert(le == 0 && ri == ssize(arr));
-        assert(substr_cmp(arr, lq, 0, 0, 100, 100) == 0);
-        assert(substr_cmp(arr, lq, 5, 5, 47, 47) == 0);
-        assert(substr_cmp(arr, lq, 50, 50, 99, 100) < 0);
-        assert(substr_cmp(arr, lq, 50, 51, 20, 20) > 0);
-        assert(substr_cmp(arr, lq, 0, 100, 0, 100) == 0);
-        assert(substr_cmp(arr, lq, 1, 100, 0, 100) > 0);
-        assert(substr_cmp(arr, lq, 0, 100, 1, 100) < 0);
+        assert(substr_cmp(lq, 0, 0, 100, 100) == 0);
+        assert(substr_cmp(lq, 5, 5, 47, 47) == 0);
+        assert(substr_cmp(lq, 50, 50, 99, 100) < 0);
+        assert(substr_cmp(lq, 50, 51, 20, 20) > 0);
+        assert(substr_cmp(lq, 0, 100, 0, 100) == 0);
+        assert(substr_cmp(lq, 1, 100, 0, 100) > 0);
+        assert(substr_cmp(lq, 0, 100, 1, 100) < 0);
     }
     {
         lcp_tree lt(arr, SHIFT + 100);
