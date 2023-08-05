@@ -2,7 +2,6 @@
 #pragma once
 #include "substr_cmp.hpp"
 /**
- * @param s string/array
  * @param lq lcp query struct
  * @param substrs array of substrings [substrs[i].first, substrs[i].second)
  * @returns range [le, ri) such that:
