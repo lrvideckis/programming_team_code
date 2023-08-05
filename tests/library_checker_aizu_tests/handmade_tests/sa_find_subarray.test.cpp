@@ -30,7 +30,7 @@ int main() {
                 for (int j = i; j <= n; j++) {
                     for (int k = 0; k <= n; k++) {
                         for (int l = k; l <= n; l++) {
-                            int cmp_val = substr_cmp(s, lq, i, j, k, l);
+                            int cmp_val = substr_cmp(lq, i, j, k, l);
                             string sub1 = s.substr(i, j - i);
                             string sub2 = s.substr(k, l - k);
                             if (cmp_val < 0) assert(sub1 < sub2);
