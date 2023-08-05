@@ -18,7 +18,7 @@
 template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
         const vector<pair<int, int>>& substrs) {
     using dt = array<int, 3>;
-    const auto& sa = lq.sf.sa;
+    const auto& sa = lq.sa;
     int n = ssize(sa), le = 0, ri = n, sum_len = 0;
     auto cmp = [&](int i, const dt & x) -> bool {
         i += sum_len;
