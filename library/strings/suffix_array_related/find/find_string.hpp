@@ -29,8 +29,7 @@ template <class T> inline match find_str(const T& s, const vector<int>& sa, cons
         if (it_s - begin(s) - i > str_ri - str_le)
             str_le = i, str_ri = int(it_s - begin(s));
         if (it_s != end(s) && it_t != end(t)) return (*it_s) - (*it_t) < cmp_val;
-        if (cmp_val == 0) return it_s == end(s) && it_t != end(t);
-        return it_t == end(t);
+        return cmp_val ^ (ssize(s) - i < ssize(t));
     };
     int sa_le = int(lower_bound(begin(sa), end(sa), 0, cmp) - begin(sa));
     int sa_ri = int(lower_bound(begin(sa) + sa_le, end(sa), 1, cmp) - begin(sa));
