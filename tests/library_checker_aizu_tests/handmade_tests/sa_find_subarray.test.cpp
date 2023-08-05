@@ -2,8 +2,9 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/strings/suffix_array_related/find_substrs_concatenated.hpp"
-#include "../../../library/strings/suffix_array_related/substr_cmp.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_substrings_concatenated.hpp"
+#include "../../../library/strings/suffix_array_related/compare/compare_substrings.hpp"
+#include "../../../library/strings/suffix_array_related/compare/compare_suffixes.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -13,22 +14,25 @@ int main() {
             int mx_char = get_rand<int>(0, 5);
             generate(begin(s), end(s), [&]() {return char('a' + get_rand<int>(0, mx_char));});
             lcp_query lq(s, 256);
-            for (int str_le = 0; str_le <= n; str_le++) {
-                for (int str_ri = str_le; str_ri <= n; str_ri++) {
-                    auto [le, ri] = find_substrs_concated(lq, {{str_le, str_ri}});
-                    if (str_le == str_ri)
-                        assert(le == 0 && ri == n);
-                    if (str_le < n)
-                        assert(0 <= le && le <= lq.sf.sa_inv[str_le] && lq.sf.sa_inv[str_le] < ri && ri <= n);
-                    for (int i = le; i < ri; i++)
-                        assert(s.substr(lq.sf.sa[i], str_ri - str_le) == s.substr(str_le, str_ri - str_le));
-                    assert(le == 0 || s.substr(lq.sf.sa[le - 1], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
-                    assert(ri == n || s.substr(lq.sf.sa[ri], str_ri - str_le) != s.substr(str_le, str_ri - str_le));
+            for (int i = 0; i <= n; i++) {
+                for (int j = i; j <= n; j++) {
+                    auto [sa_le, sa_ri, str_le, str_ri] = find_substrs_concated(lq, {{i, j}});
+                    assert(s.substr(i, j - i) == s.substr(str_le, str_ri - str_le));
+                    if (i == j) {
+                        assert(sa_le == 0 && sa_ri == n);
+                        assert(str_le == str_ri);
+                    }
+                    if (i < n)
+                        assert(0 <= sa_le && sa_le <= lq.sa_inv[i] && lq.sa_inv[i] < sa_ri && sa_ri <= n);
+                    for (int idx = sa_le; idx < sa_ri; idx++)
+                        assert(s.substr(lq.sa[idx], j - i) == s.substr(i, j - i));
+                    assert(sa_le == 0 || s.substr(lq.sa[sa_le - 1], j - i) != s.substr(i, j - i));
+                    assert(sa_ri == n || s.substr(lq.sa[sa_ri], j - i) != s.substr(i, j - i));
                 }
             }
             for (int i = 0; i <= n; i++) {
-                for (int j = i; j <= n; j++) {
-                    for (int k = 0; k <= n; k++) {
+                for (int k = 0; k <= n; k++) {
+                    for (int j = i; j <= n; j++) {
                         for (int l = k; l <= n; l++) {
                             int cmp_val = substr_cmp(lq, i, j, k, l);
                             string sub1 = s.substr(i, j - i);
@@ -38,6 +42,12 @@ int main() {
                             if (cmp_val > 0) assert(sub1 > sub2);
                         }
                     }
+                    string suf1 = s.substr(i);
+                    string suf2 = s.substr(k);
+                    int cmp_val = suf_cmp(lq.sa_inv, i, k);
+                    if (cmp_val < 0) assert(suf1 < suf2);
+                    if (cmp_val == 0) assert(suf1 == suf2);
+                    if (cmp_val > 0) assert(suf1 > suf2);
                 }
             }
         }

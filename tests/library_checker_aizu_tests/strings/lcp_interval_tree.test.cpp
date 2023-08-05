@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_str.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -12,11 +12,11 @@ int main() {
     {
         auto [le, ri] = find_str(lt, string(""));
         assert(le == 0 && ri == n);
-        assert(ssize(lt.sf.sa) == n);
-        assert(ssize(lt.sf.sa_inv) == n);
+        assert(ssize(lt.sa) == n);
+        assert(ssize(lt.sa_inv) == n);
         assert(ssize(lt.lcp) == n - 1);
     }
-    for (auto val : lt.sf.sa)
+    for (auto val : lt.sa)
         cout << val << " ";
     cout << '\n';
 }

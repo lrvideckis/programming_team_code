@@ -32,7 +32,7 @@ template <class T> pair<int, int> find_str(const lcp_tree<T>& lt, const T& t) {
             u = it->second;
         }
         auto [le, ri] = lt.sa_range(u);
-        if (lt.s[lt.sf.sa[le] + i] != t[i]) return {0, 0};
+        if (lt.s[lt.sa[le] + i] != t[i]) return {0, 0};
     }
     return lt.sa_range(u);
 }

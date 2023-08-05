@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "suffix_array.hpp"
+#include "../suffix_array.hpp"
 /**
  * @code{.cpp}
  *     string s;
