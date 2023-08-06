@@ -1,25 +1,43 @@
 /** @file */
 #pragma once
 #include "../suffix_array.hpp"
-#include "match.hpp"
-/**
- * @see https://github.com/yosupo06/Algorithm/blob /master/src/string/suffixarray.hpp
- * @param s,sa string/array and its suffix array
- * @param t query string
- * @returns see match
- * @time O(|t| * log(|s|))
- * @space O(1)
- */
-template <class T> inline match find_str(const T& s, const vector<int>& sa, const T& t) {
-    int str_le = 0, str_ri = 0;
-    auto cmp = [&](int i, int cmp_val) -> bool {
-        auto [it_s, it_t] = mismatch(begin(s) + i, end(s), begin(t), end(t));
-        if (it_s - begin(s) - i > str_ri - str_le)
-            str_le = i, str_ri = int(it_s - begin(s));
-        if (it_s != end(s) && it_t != end(t)) return (*it_s) - (*it_t) < cmp_val;
-        return cmp_val ^ (ssize(s) - i < ssize(t));
-    };
-    int sa_le = int(lower_bound(begin(sa), end(sa), 0, cmp) - begin(sa));
-    int sa_ri = int(lower_bound(begin(sa) + sa_le, end(sa), 1, cmp) - begin(sa));
-    return {sa_le, sa_ri, str_le, str_ri};
-}
+const int K = 75, MN = '0'; // lower case letters and digits
+struct find_bwt {
+    int n;
+    vector<array<int, K>> occ;
+    array<int, K + 1> cnt;
+    find_bwt(const string& s, const vector<int>& sa) : n(ssize(s)), occ(n + 1) {
+        for (int i = 0; i <= n; i++) {
+            for(int j = 0; j < K; j++) {
+                assert(occ[i][j] == 0);
+                //occ[i][j] = 0;
+            }
+        }
+        fill(begin(cnt), end(cnt), 0);
+        for (int i = 0; i < n; i++) {
+            char c = s[sa[i] == 0 ? n - 1 : sa[i] - 1] - MN;
+            assert(c >= 0 && c < K);
+            occ[i + 1] = occ[i];
+            occ[i + 1][c]++;
+            cnt[c + 1]++;
+        }
+        partial_sum(begin(cnt), end(cnt), begin(cnt));
+    }
+    pair<int, int> find_str(const string& t) const {
+        int sa_le = 0, sa_ri = n;
+        for (int i = ssize(t) - 1; sa_le < sa_ri && i >= 0; i--) {
+            char c = t[i] - MN;
+            assert(c >= 0 && c < K);
+            //we have range [sa_le, sa_ri) in suffix array,
+            //we want
+            int nbegin = cnt[c] + occ[sa_le][c];
+            int nend = cnt[c] + occ[sa_ri][c];
+            sa_le = nbegin;
+            sa_ri = nend;
+            assert(0 <= sa_le);
+            assert(sa_le <= sa_ri);
+            assert(sa_ri <= n);
+        }
+        return {sa_le, sa_ri};
+    }
+};

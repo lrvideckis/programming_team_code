@@ -3,8 +3,7 @@
 /**
  * @see https://cp-algorithms.com/string /aho_corasick.html#construction-of-the-trie
  */
-const int K = 26; /**< alphabet size */
-const char MIN_CH = 'A'; /**< 'a' for lowercase, '0' for digits */
+const int K = 26, MN = 'A';
 struct trie {
     struct node {
         int next[K], cnt_words = 0, par = -1;
@@ -18,7 +17,7 @@ struct trie {
     void insert(const string& s) {
         int v = 0;
         for (auto ch : s) {
-            int let = ch - MIN_CH;
+            int let = ch - MN;
             if (t[v].next[let] == -1) {
                 t[v].next[let] = ssize(t);
                 t.emplace_back(v, ch);
@@ -30,7 +29,7 @@ struct trie {
     int find(const string& s) const {
         int v = 0;
         for (auto ch : s) {
-            int let = ch - MIN_CH;
+            int let = ch - MN;
             if (t[v].next[let] == -1) return 0;
             v = t[v].next[let];
         }

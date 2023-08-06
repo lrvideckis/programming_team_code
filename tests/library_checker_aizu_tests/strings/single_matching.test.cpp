@@ -7,7 +7,7 @@
 
 #include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_substrings_concatenated.hpp"
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string.hpp"
+#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string_lcpt.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
