@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_related/find/find_string.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_substrings_concatenated.hpp"
 
 int main() {

@@ -6,7 +6,7 @@
 #include "../../../library/strings/suffix_array_related/compare/compare_suffixes.hpp"
 #include "../../../library/strings/suffix_array_related/compare/compare_substrings.hpp"
 
-#include "../../../library/strings/suffix_array_related/find/find_string.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_array.hpp"
 

@@ -4,7 +4,7 @@
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
-#include "../../../library/strings/suffix_array_related/find/find_string.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string.hpp"
 
 int main() {
