@@ -38,8 +38,6 @@ int main() {
         {
             auto [sa_le2, sa_ri2] = fb.find_str(t);
             assert(sa_ri2 - sa_le2 == sa_ri - sa_le);
-            //if(sa_le2 < sa_ri2)
-                //assert(sa_le == sa_le2 && sa_ri == sa_ri2);
         }
         int str_len = str_ri - str_le;
         assert(str_len <= ssize(t));
