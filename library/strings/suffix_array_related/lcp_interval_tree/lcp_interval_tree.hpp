@@ -5,7 +5,9 @@
 #include "../lcp_array.hpp"
 const int K = 75, MN = '0'; // lower case letters and digits
 /**
- * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
+ * @see Replacing suffix trees with enhanced suffix arrays by Mohamed Ibrahim
+ * Abouelhoda, Stefan Kurtz, Enno Ohlebusch
+ *
  * offline version of suffix tree
  * @code{.cpp}
  *     string s;
