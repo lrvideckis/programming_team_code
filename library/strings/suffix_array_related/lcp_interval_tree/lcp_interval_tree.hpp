@@ -28,55 +28,37 @@ const int mn = '0', len = 75; // lower case letters and digits
  * leaf nodes are [n - 1, 2 * n - 1), each leaf represents a single suffix
  */
 struct lcp_tree {
+    int n, root;
     string s;
     vector<int> sa, sa_inv, lcp, le, ri;
-    int root;
     vector<array<int, len>> child;
     /**
      * @param a_s,max_val string/array with 0 <= s[i] < max_val
      * @time O((n log n) + (n * len) + max_val)
      * @space child is O(n * len)
      */
-    lcp_tree(const string& a_s, int max_val) : s(a_s) {
+    lcp_tree(const string& a_s, int max_val) : n(ssize(a_s)), s(a_s) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
         tie(le, ri) = min_range(lcp);
         vector<vector<int>> adj;
-        tie(root, adj) = min_cartesian_tree(le, ri, lcp);
+        vector<int> to_min;
+        tie(root, adj, to_min) = min_cartesian_tree(le, ri, lcp);
         if (root == -1) return;
         array<int, len> init;
         fill(begin(init), end(init), -1);
         child.resize(ssize(adj), init);
-        queue<int> q({root});
-        int num_leaves = 0;
-        while (!q.empty()) {
-            int u = q.front();
-            q.pop();
-            if (adj[u].empty() || le[u] < le[adj[u][0]]) {
-                num_leaves++;
-                int i = le[u] + 1;
-                assert(sa[i] + lcp[u] <= ssize(s));
-                if (sa[i] + lcp[u] < ssize(s))
-                    child[u][s[sa[i] + lcp[u]] - mn] = ssize(lcp) + i;
-            }
-            int prev = le[u] + 2;
-            for (int v : adj[u]) {
-                for (int i = prev; i <= le[v]; i++) {
-                    assert(sa[i] + lcp[u] < ssize(s));
-                    child[u][s[sa[i] + lcp[u]] - mn] = ssize(lcp) + i;
-                    num_leaves++;
-                }
+        for (int u = 0; u < ssize(adj); u++)
+            for (int v : adj[u])
                 child[u][s[sa[v] + lcp[u]] - mn] = v;
-                prev = ri[v] + 1;
-                q.push(v);
-            }
-            for (int i = prev; i <= ri[u]; i++) {
-                assert(sa[i] + lcp[u] < ssize(s));
-                child[u][s[sa[i] + lcp[u]] - mn] = ssize(lcp) + i;
-                num_leaves++;
-            }
+        for (int i = 0; i < n; i++) {
+            int prev_lcp = (i ? lcp[i - 1] : 0);
+            int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
+            int u = prev_lcp < next_lcp ? i : to_min[i - 1];
+            int idx = sa[i] + max(prev_lcp, next_lcp);
+            if (idx == n) continue;
+            child[u][s[idx] - mn] = ssize(lcp) + i;
         }
-        assert(num_leaves == ssize(s));
     }
     /**
      * @param u node

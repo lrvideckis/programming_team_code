@@ -19,7 +19,7 @@
  *       to_min[8] = 4
  * @code{.cpp}
  *     auto [le, ri] = min_range(arr);
- *     auto [root, adj] = min_cartesian_tree(le, ri, arr);
+ *     auto [root, adj, to_min] = min_cartesian_tree(le, ri, arr);
  *     queue<int> q;
  *     if (root != -1) q.push(root);
  *     while (!q.empty()) {
@@ -32,11 +32,11 @@
  * @endcode
  * @param arr array of integers (there can be duplicates)
  * @param le,ri arr[i] is the min of range (le[i], ri[i])
- * @returns root of tree, and adjacency list (only childs)
+ * @returns root of tree, adjacency list (only childs), and to_min
  * @time O(n)
  * @space this function allocates/returns an adj list which is O(n)
  */
-pair<int, vector<vector<int>>> min_cartesian_tree(const vector<int>& le, const vector<int>& ri, const vector<int>& arr) {
+tuple<int, vector<vector<int>>, vector<int>> min_cartesian_tree(const vector<int>& le, const vector<int>& ri, const vector<int>& arr) {
     int n = ssize(arr);
     assert(ssize(le) == n && ssize(ri) == n);
     auto leftmost_min = [&](int i) -> bool {return le[i] == -1 || arr[le[i]] < arr[i];};
@@ -56,5 +56,5 @@ pair<int, vector<vector<int>>> min_cartesian_tree(const vector<int>& le, const v
             adj[to_min[le_par ? le[i] : ri[i]]].push_back(i);
         }
     }
-    return {root, adj};
+    return {root, adj, to_min};
 }
