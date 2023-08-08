@@ -20,8 +20,7 @@ template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
     int n = ssize(sa), sa_le = 0, sa_ri = n, str_le = 0, str_ri = 0, sum_len = 0;
     auto cmp = [&](int i, const dt & x) -> bool {
         int j = i + sum_len, lcp = min(lq.get_lcp(j, x[0]), x[1]);
-        if (lcp + sum_len > str_ri - str_le)
-            str_le = i, str_ri = j + lcp;
+        if (lcp + sum_len > str_ri - str_le) str_le = i, str_ri = j + lcp;
         if (lcp < min(n - j, x[1])) return lq.sa_inv[j] - lq.sa_inv[x[0]] < x[2];
         return x[2] ^ (n - j < x[1]);
     };
