@@ -9,8 +9,7 @@ int main() {
     cin >> n;
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
-    auto [le, ri] = min_range(arr);
-    auto [root, adj, to_min] = min_cartesian_tree(le, ri, arr);
+    auto [root, adj, le, ri, to_min] = min_cartesian_tree(arr);
     vector<int> par(n, -1);
     par[root] = root;
     for (int i = 0; i < n; i++) {
