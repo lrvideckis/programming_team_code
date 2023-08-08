@@ -81,4 +81,14 @@ struct lcp_tree {
     int lcp_len(int u) const {
         return u < ssize(lcp) ? lcp[u] : ssize(s) - sa[u - ssize(lcp)];
     }
+    /**
+     * @param u node
+     * @param c letter (don't subtract mn)
+     * @returns child of u following edge with label c, -1 means child doesn't exist
+     * @time O(1)
+     * @space O(1)
+     */
+    int get_child(int u, char c) const {
+        return u < ssize(child) ? child[u][c - mn] : -1;
+    }
 };
