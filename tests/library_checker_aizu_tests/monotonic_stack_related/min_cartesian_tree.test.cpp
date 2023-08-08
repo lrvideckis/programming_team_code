@@ -10,10 +10,11 @@ int main() {
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
     auto [le, ri] = min_range(arr);
-    auto [root, adj] = min_cartesian_tree(le, ri, arr);
+    auto [root, adj, to_min] = min_cartesian_tree(le, ri, arr);
     vector<int> par(n, -1);
     par[root] = root;
     for (int i = 0; i < n; i++) {
+        assert(to_min[i] == i);//because distinct numbers
         assert(-1 <= le[i] && le[i] < i && i < ri[i] && ri[i] <= n);
         assert(le[i] == -1 || arr[le[i]] < arr[i]);//because distinct numbers, if dups, then arr[le[i]] <= arr[i]
         assert(ri[i] == n || arr[i] > arr[ri[i]]);
