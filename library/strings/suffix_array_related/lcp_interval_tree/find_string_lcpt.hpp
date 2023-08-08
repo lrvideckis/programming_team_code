@@ -19,7 +19,7 @@
  * @space O(1)
  */
 pair<int, int> find_str(const string& s, const lcp_tree& lt, const string& t) {
-    int u = max(lt.root, 0);
+    int u = lt.root;
     for (int i = 0; i < ssize(t); i++) {
         if (i == lt.lcp_len(u)) {
             u = lt.get_child(u, t[i]);
