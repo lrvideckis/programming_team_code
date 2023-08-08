@@ -34,9 +34,8 @@ struct lcp_tree {
     vector<array<int, K>> child;
     /**
      * @param a_s,max_val string/array with 0 <= s[i] < max_val
-     * @time O((n log n) + max_val); besides suffix array construction, this is
-     * O(n) as constructing a map from a sorted array is linear
-     * @space all member variables are O(n)
+     * @time O((n log n) + (n * K) + max_val)
+     * @space child is O(n * K)
      */
     lcp_tree(const string& a_s, int max_val) : s(a_s) {
         tie(sa, sa_inv) = get_sa(s, max_val);
