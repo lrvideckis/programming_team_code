@@ -6,7 +6,7 @@ struct find_bwt {
     int n;
     char last;
     vector<array<int, K>> occ;
-    array<int, K + 1> cnt;
+    array < int, K + 1 > cnt;
     find_bwt(const string& s, const vector<int>& sa) : n(ssize(s)), last(s.empty() ? -1 : s.back() - MN), occ(n + 1) {
         fill(begin(cnt), end(cnt), 0);
         for (int i = 0; i < n; i++) {
