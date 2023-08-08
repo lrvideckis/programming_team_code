@@ -15,7 +15,7 @@
  * @returns range [le, ri) such that:
  *     - for all i in [le, ri): t == s.substr(sf.sa[i], ssize(t))
  *     - `ri - le` is the # of matches of t in s.
- * @time O(|t| * log(|alphabet|)); |alphabet| = 26 if only lowercase letters
+ * @time O(|t|)
  * @space O(1)
  */
 pair<int, int> find_str(const lcp_tree& lt, const string& t) {
