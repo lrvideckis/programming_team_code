@@ -50,48 +50,48 @@ int main() {
     }
     //max test for overflow
     {
-        const int N = 100'000, LARGE = 1'000'000'000, VAL_RANGE = 20;
-        vector<int> arr(N), count_val(VAL_RANGE);
+        const int mx_n = 100'000, large = 1'000'000'000, val_range = 20;
+        vector<int> arr(mx_n), count_val(val_range);
         for (int& val : arr) {
-            val = get_rand<int>(LARGE, LARGE + VAL_RANGE - 1);
-            count_val[val - LARGE]++;
+            val = get_rand<int>(large, large + val_range - 1);
+            count_val[val - large]++;
         }
-        wavelet_tree wt(arr, LARGE, LARGE + VAL_RANGE);
-        for (int x = LARGE; x <= LARGE + VAL_RANGE; x++) {
+        wavelet_tree wt(arr, large, large + val_range);
+        for (int x = large; x <= large + val_range; x++) {
             int cnt = 0;
             long long sum = 0;
-            for (int y = x; y <= LARGE + VAL_RANGE; y++) {
-                assert(wt.rect_count(0, N, x, y) == cnt);
-                assert(wt.rect_sum(0, N, x, y) == sum);
-                if (y < LARGE + VAL_RANGE) {
-                    cnt += count_val[y - LARGE];
-                    sum += 1LL * y * count_val[y - LARGE];
+            for (int y = x; y <= large + val_range; y++) {
+                assert(wt.rect_count(0, mx_n, x, y) == cnt);
+                assert(wt.rect_sum(0, mx_n, x, y) == sum);
+                if (y < large + val_range) {
+                    cnt += count_val[y - large];
+                    sum += 1LL * y * count_val[y - large];
                 }
             }
         }
         for (int tests_kth_sum = 100; tests_kth_sum--;) {
-            int k = get_rand<int>(0, N);
+            int k = get_rand<int>(0, mx_n);
             if (tests_kth_sum == 50) k = 0;
-            if (tests_kth_sum == 49) k = N;
+            if (tests_kth_sum == 49) k = mx_n;
             if (k == 0) {
-                assert(wt.kth_sum(0, N, k) == 0);
+                assert(wt.kth_sum(0, mx_n, k) == 0);
                 continue;
             }
             int curr_cnt = 0;
             long long curr_sum = 0;
             int kth_smallest_naive = -1;
-            for (int i = 0; i < VAL_RANGE; i++) {
+            for (int i = 0; i < val_range; i++) {
                 if (curr_cnt + count_val[i] >= k) {
-                    kth_smallest_naive = i + LARGE;
-                    curr_sum += 1LL * (i + LARGE) * (k - curr_cnt);
+                    kth_smallest_naive = i + large;
+                    curr_sum += 1LL * (i + large) * (k - curr_cnt);
                     break;
                 }
                 curr_cnt += count_val[i];
-                curr_sum += 1LL * (i + LARGE) * count_val[i];
+                curr_sum += 1LL * (i + large) * count_val[i];
             }
             assert(kth_smallest_naive != -1);
-            assert(wt.kth_smallest(0, N, k) == kth_smallest_naive);
-            assert(wt.kth_sum(0, N, k) == curr_sum);
+            assert(wt.kth_smallest(0, mx_n, k) == kth_smallest_naive);
+            assert(wt.kth_sum(0, mx_n, k) == curr_sum);
         }
     }
     cout << "Hello World\n";
