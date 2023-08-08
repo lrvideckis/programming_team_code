@@ -2,14 +2,13 @@
 #include "../template.hpp"
 
 #include "../../../library/math/n_choose_k/choose_lucas.hpp"
-#include "../../../library/math/tetration_mod.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     calc_facts();
     for (int i = 0; i < mx_n; i++) {
-        if (i) assert(bin_exp(i, mx_n - 2, mx_n) == inv[i]);
-        assert(bin_exp(fact[i], mx_n - 2, mx_n) == inv_fact[i]);
+        if (i) assert(i * inv[i] % mod == 1LL);
+        assert(fact[i] * inv_fact[i] % mod == 1LL);
     }
     vector<vector<long long>> naive_choose(mx_n, vector<long long>(mx_n, 0));
     for (int i = 0; i < mx_n; i++) {
