@@ -3,6 +3,8 @@
 #include "../../../library/contest/random.hpp"
 #include "../../../library/math/fibonacci.hpp"
 
+const int MOD = 998'244'353;
+
 #include "../../../kactl/content/data-structures/Matrix.h"
 #include "../../../hackpack-cpp/content/number-theory/ModInt.h"
 
