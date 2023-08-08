@@ -8,6 +8,7 @@
 #include "../template.hpp"
 #include "../../../library/math/matrix_related/matrix_mult.hpp"
 
+//NOLINTNEXTLINE(readability-identifier-naming)
 const int MOD = 998'244'353;
 #include "../../../hackpack-cpp/content/number-theory/ModInt.h"
 
