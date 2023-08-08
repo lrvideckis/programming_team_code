@@ -8,6 +8,6 @@
  * @space O(1)
  */
 inline bool is_prime(int val) {
-    assert(val < N && sieve[1] == 1);
+    assert(val < n && sieve[1] == 1);
     return val >= 2 && sieve[val] == val;
 }
