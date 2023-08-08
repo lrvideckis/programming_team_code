@@ -20,14 +20,14 @@ int main() {
     sort(begin(edges), end(edges), [&](const vertical_edge & a, const vertical_edge & b) -> bool {
         return a.x < b.x;
     });
-    const int MN = 0, MX = 1'000'000'001;
-    implicit_seg_tree < 500'000 * 31 * 2 * 2 + 100 > ist(MN, MX);
+    const int mn = 0, mx = 1'000'000'001;
+    implicit_seg_tree < 500'000 * 31 * 2 * 2 + 100 > ist(mn, mx);
     long long area = 0;
     //sweepline
     for (int i = 0; i < ssize(edges);) {
         if (i) {
-            auto [curr_mn, cnt_mn] = ist.query(MN, MX);
-            long long num_pos = MX - MN;
+            auto [curr_mn, cnt_mn] = ist.query(mn, mx);
+            long long num_pos = mx - mn;
             if (curr_mn == 0)
                 num_pos -= cnt_mn;
             area += (edges[i].x - edges[i - 1].x) * num_pos;

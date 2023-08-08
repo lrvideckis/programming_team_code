@@ -5,7 +5,7 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    const ll MOD = 998'244'353;
+    const ll mod = 998'244'353;
     int q;
     cin >> q;
     struct query {
@@ -27,7 +27,7 @@ int main() {
         //f2(x) = b.first * x + b.second
         //f2(f1(x)) = b.first * (a.first * x + a.second) + b.second
         //          = (a.first * b.first) * x + (b.first * a.second + b.second)
-        return pair(a.first * b.first % MOD, (b.first * a.second + b.second) % MOD);
+        return pair(a.first * b.first % mod, (b.first * a.second + b.second) % mod);
     });
     int le = 0, ri = 0;//range [le, ri)
     for (const auto& curr : queries) {
@@ -40,7 +40,7 @@ int main() {
                 cout << curr.x << '\n';
             else {
                 auto [slope, y_int] = rmq.query(le, ri);
-                cout << (slope * curr.x + y_int) % MOD << '\n';
+                cout << (slope * curr.x + y_int) % mod << '\n';
             }
         }
     }

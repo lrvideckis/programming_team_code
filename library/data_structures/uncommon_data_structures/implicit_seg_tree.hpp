@@ -12,7 +12,7 @@ template <int N> struct implicit_seg_tree {
         if (le[0] == ri[0]) return {le[0], le[1] + ri[1]};
         return min(le, ri);
     }
-    static constexpr dt UNIT{LLONG_MAX, 0LL};
+    static constexpr dt unit{LLONG_MAX, 0LL};
     struct node {
         dt val;
         long long lazy = 0;
@@ -62,7 +62,7 @@ template <int N> struct implicit_seg_tree {
     dt query(int le, int ri) {return query(le, ri, root_l, root_r, 0);}
     dt query(int le, int ri, int tl, int tr, int v) {
         if (ri <= tl || tr <= le)
-            return UNIT;
+            return unit;
         if (le <= tl && tr <= ri)
             return tree[v].val;
         int tm = tl + (tr - tl) / 2;

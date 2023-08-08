@@ -23,7 +23,7 @@ pair<int, int> find_str(const lcp_tree& lt, const string& t) {
     for (int i = 0; i < ssize(t); i++) {
         if (i == lt.lcp_len(u)) {
             if (u >= ssize(lt.child)) return {0, 0};
-            u = lt.child[u][t[i] - MN];
+            u = lt.child[u][t[i] - mn];
             if (u == -1) return {0, 0};
         }
         auto [le, ri] = lt.sa_range(u);

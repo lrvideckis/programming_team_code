@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-const int MOD = 998'244'353;
+const int mod = 998'244'353;
 /**
  * @param a,b arrays of the same length, where the length is a power of 2
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
@@ -14,17 +14,17 @@ vector<int> and_convolution(vector<int> a, vector<int> b) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < (1 << n); j++) {
             if (!((j >> i) & 1)) {
-                a[j] = (a[j] + a[j ^ (1 << i)]) % MOD;
-                b[j] = (b[j] + b[j ^ (1 << i)]) % MOD;
+                a[j] = (a[j] + a[j ^ (1 << i)]) % mod;
+                b[j] = (b[j] + b[j ^ (1 << i)]) % mod;
             }
         }
     }
     vector<int> c(1 << n);
     for (int i = 0; i < (1 << n); i++)
-        c[i] = int(1LL * a[i] * b[i] % MOD);
+        c[i] = int(1LL * a[i] * b[i] % mod);
     for (int i = 0; i < n; i++)
         for (int j = 0; j < (1 << n); j++)
             if (!((j >> i) & 1))
-                c[j] = (c[j] - c[j ^ (1 << i)] + MOD) % MOD;
+                c[j] = (c[j] - c[j ^ (1 << i)] + mod) % mod;
     return c;
 }

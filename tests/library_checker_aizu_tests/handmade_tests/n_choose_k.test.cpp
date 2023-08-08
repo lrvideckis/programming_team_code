@@ -2,27 +2,26 @@
 #include "../template.hpp"
 
 #include "../../../library/math/n_choose_k/choose_lucas.hpp"
-#include "../../../library/math/tetration_mod.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     calc_facts();
-    for (int i = 0; i < N; i++) {
-        if (i) assert(bin_exp(i, N - 2, N) == inv[i]);
-        assert(bin_exp(fact[i], N - 2, N) == inv_fact[i]);
+    for (int i = 0; i < mx_n; i++) {
+        if (i) assert(i * inv[i] % mod == 1LL);
+        assert(fact[i] * inv_fact[i] % mod == 1LL);
     }
-    vector<vector<long long>> naive_choose(N, vector<long long>(N, 0));
-    for (int i = 0; i < N; i++) {
+    vector<vector<long long>> naive_choose(mx_n, vector<long long>(mx_n, 0));
+    for (int i = 0; i < mx_n; i++) {
         naive_choose[i][0] = 1;
         for (int j = 1; j <= i; j++)
-            naive_choose[i][j] = (naive_choose[i - 1][j] + naive_choose[i - 1][j - 1]) % MOD;
+            naive_choose[i][j] = (naive_choose[i - 1][j] + naive_choose[i - 1][j - 1]) % mod;
     }
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < mx_n; i++) {
         assert(C(1LL * i, -1LL) == 0);
         assert(C(1LL * i, 1LL * i + 1) == 0);
         assert(C(-1LL, 1LL * i) == 0);
-        assert(C(1LL * i, 1LL * i - 1) == i % MOD);
-        for (int j = 0; j < N; j++)
+        assert(C(1LL * i, 1LL * i - 1) == i % mod);
+        for (int j = 0; j < mx_n; j++)
             assert(C(1LL * i, 1LL * j) == naive_choose[i][j]);
     }
     assert(C(371283LL, 32981LL) == 0);

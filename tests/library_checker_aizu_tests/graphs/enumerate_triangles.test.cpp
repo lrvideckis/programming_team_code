@@ -13,10 +13,10 @@ int main() {
     vector<pair<int, int>> edges(m);
     for (auto & [u, v] : edges)
         cin >> u >> v;
-    const int MOD = 998'244'353;
+    const int mod = 998'244'353;
     long long sum = 0;
     auto enumerate = [&](int u, int v, int w) {
-        sum = (sum + 1LL * vals[u] * vals[v] % MOD * vals[w] % MOD) % MOD;
+        sum = (sum + 1LL * vals[u] * vals[v] % mod * vals[w] % mod) % mod;
     };
     enumerate_triangles(edges, n, enumerate);
     cout << sum << '\n';

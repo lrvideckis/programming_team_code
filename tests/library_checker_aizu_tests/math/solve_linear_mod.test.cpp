@@ -33,7 +33,7 @@ int main() {
     for (int j = 0; j < m; j++)
         if (pivot[j] == -1) {
             vector<long long> x(m, 0);
-            x[j] = MOD - 1;
+            x[j] = mod - 1;
             for (int k = 0; k < j; k++)
                 if (pivot[k] != -1)
                     x[k] = mat[pivot[k]][j];

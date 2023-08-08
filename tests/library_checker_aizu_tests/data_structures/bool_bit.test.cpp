@@ -3,14 +3,14 @@
 
 #include "../../../library/data_structures/wavelet_merge/bool_bit.hpp"
 
-const int MAX_BIT = 51;
+const int max_bit = 51;
 
 vector<bool_bit> init_prebools(const vector<long long>& arr) {
-    const int N = ssize(arr);
+    const int mx_n = ssize(arr);
     vector<bool_bit> prebools;
-    for (int bit = 0; bit < MAX_BIT; bit++) {
-        vector<bool> curr(N);
-        for (int i = 0; i < N; i++)
+    for (int bit = 0; bit < max_bit; bit++) {
+        vector<bool> curr(mx_n);
+        for (int i = 0; i < mx_n; i++)
             curr[i] = (arr[i] >> bit) & 1;
         prebools.emplace_back(curr);
     }
@@ -31,7 +31,7 @@ int main() {
     for (int i = 0; i < n; i++)
         cin >> arr[i];
     vector<bool_bit> prebools = init_prebools(arr);
-    assert(ssize(prebools) == MAX_BIT);
+    assert(ssize(prebools) == max_bit);
     while (q--) {
         int type;
         cin >> type;
@@ -40,14 +40,14 @@ int main() {
             int delta;
             cin >> i >> delta;
             arr[i] += delta;
-            for (int bit = 0; bit < MAX_BIT; bit++)
+            for (int bit = 0; bit < max_bit; bit++)
                 prebools[bit].set(i, (arr[i] >> bit) & 1);
         } else {
             assert(type == 1);
             int le, ri;
             cin >> le >> ri;
             long long sum = 0;
-            for (int bit = 0; bit < MAX_BIT; bit++) {
+            for (int bit = 0; bit < max_bit; bit++) {
                 if (ri - le == 1)
                     sum += (1LL << bit) * prebools[bit].on(le);
                 else

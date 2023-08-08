@@ -3,7 +3,7 @@
 #include "../../../monotonic_stack_related/min_cartesian_tree.hpp"
 #include "../suffix_array.hpp"
 #include "../lcp_array.hpp"
-const int K = 75, MN = '0'; // lower case letters and digits
+const int mn = '0', len = 75; // lower case letters and digits
 /**
  * @see Replacing suffix trees with enhanced suffix arrays by Mohamed Ibrahim
  * Abouelhoda, Stefan Kurtz, Enno Ohlebusch
@@ -31,11 +31,11 @@ struct lcp_tree {
     string s;
     vector<int> sa, sa_inv, lcp, le, ri;
     int root;
-    vector<array<int, K>> child;
+    vector<array<int, len>> child;
     /**
      * @param a_s,max_val string/array with 0 <= s[i] < max_val
-     * @time O((n log n) + (n * K) + max_val)
-     * @space child is O(n * K)
+     * @time O((n log n) + (n * len) + max_val)
+     * @space child is O(n * len)
      */
     lcp_tree(const string& a_s, int max_val) : s(a_s) {
         tie(sa, sa_inv) = get_sa(s, max_val);
@@ -44,7 +44,7 @@ struct lcp_tree {
         vector<vector<int>> adj;
         tie(root, adj) = min_cartesian_tree(le, ri, lcp);
         if (root == -1) return;
-        array<int, K> init;
+        array<int, len> init;
         fill(begin(init), end(init), -1);
         child.resize(ssize(adj), init);
         queue<int> q({root});
@@ -57,22 +57,22 @@ struct lcp_tree {
                 int i = le[u] + 1;
                 assert(sa[i] + lcp[u] <= ssize(s));
                 if (sa[i] + lcp[u] < ssize(s))
-                    child[u][s[sa[i] + lcp[u]] - MN] = ssize(lcp) + i;
+                    child[u][s[sa[i] + lcp[u]] - mn] = ssize(lcp) + i;
             }
             int prev = le[u] + 2;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
                     assert(sa[i] + lcp[u] < ssize(s));
-                    child[u][s[sa[i] + lcp[u]] - MN] = ssize(lcp) + i;
+                    child[u][s[sa[i] + lcp[u]] - mn] = ssize(lcp) + i;
                     num_leaves++;
                 }
-                child[u][s[sa[v] + lcp[u]] - MN] = v;
+                child[u][s[sa[v] + lcp[u]] - mn] = v;
                 prev = ri[v] + 1;
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++) {
                 assert(sa[i] + lcp[u] < ssize(s));
-                child[u][s[sa[i] + lcp[u]] - MN] = ssize(lcp) + i;
+                child[u][s[sa[i] + lcp[u]] - mn] = ssize(lcp) + i;
                 num_leaves++;
             }
         }

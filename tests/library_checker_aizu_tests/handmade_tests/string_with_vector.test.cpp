@@ -23,12 +23,12 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     //mainly to test all strings algs compile when passing in vectors
     //I had a bug where `compare` is only for strings, making `find_str` useless when using vectors
-    const int SHIFT = 100'000;
+    const int shift = 100'000;
     vector<int> arr;
     arr.reserve(100);
     for (int i = 0; i < 100; i++)
-        arr.push_back(SHIFT + i);
-    auto [sa, sa_inv] = get_sa(arr, SHIFT + 100);
+        arr.push_back(shift + i);
+    auto [sa, sa_inv] = get_sa(arr, shift + 100);
     {
         for (int i = 1; i < 100; i++)
             assert(suf_cmp(sa_inv, i - 1, i) < 0);
@@ -42,7 +42,7 @@ int main() {
     vector<int> t;
     t.reserve(10);
     for (int i = 50; i < 60; i++)
-        t.push_back(SHIFT + i);
+        t.push_back(shift + i);
     {
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(arr, sa, t);
         assert(sa_le == 50 && sa_ri == 51);
@@ -53,7 +53,7 @@ int main() {
         for (int val : lcp) assert(val == 0);
     }
     {
-        lcp_query lq(arr, SHIFT + 100);
+        lcp_query lq(arr, shift + 100);
         assert(lq.get_lcp(0, 99) == 0);
         assert(lq.get_lcp(0, 100) == 0);
         for (int i = 0; i < 100; i++) {

@@ -6,7 +6,7 @@
 
 int main() {
     calc_mobius();
-    for (int i = 1; i < N; i++) {
+    for (int i = 1; i < mx_n; i++) {
         int val = i;
         map<ull, int> factors;
         for (auto prime_factor : factor(val))

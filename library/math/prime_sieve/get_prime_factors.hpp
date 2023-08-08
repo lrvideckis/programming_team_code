@@ -8,7 +8,7 @@
  * @space this function allocates/returns a O(log(val)) vector
  */
 vector<int> get_prime_factors(int val) {
-    assert(val < N && sieve[1] == 1);
+    assert(val < mx_n && sieve[1] == 1);
     vector<int> factors;
     while (val > 1) {
         int p = sieve[val];

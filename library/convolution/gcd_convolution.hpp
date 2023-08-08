@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-const int MOD = 998'244'353;
+const int mod = 998'244'353;
 /**
  * @param a,b arrays of the same length
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
@@ -16,10 +16,10 @@ vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
         long long sum_a = 0, sum_b = 0;
         for (int i = g; i < n; i += g) {
             sum_a += a[i], sum_b += b[i];
-            if ((c[g] -= c[i]) < 0) c[g] += MOD;
+            if ((c[g] -= c[i]) < 0) c[g] += mod;
         }
-        sum_a %= MOD, sum_b %= MOD;
-        c[g] = int((c[g] + sum_a * sum_b) % MOD);
+        sum_a %= mod, sum_b %= mod;
+        c[g] = int((c[g] + sum_a * sum_b) % mod);
     }
     return c;
 }
