@@ -50,15 +50,14 @@ struct min_tree {
 min_tree min_cartesian_tree(const vector<int>& arr) {
     int n = ssize(arr);
     auto [le, ri] = min_range(arr);
-    auto leftmost_min = [&](int i) -> bool {return le[i] == -1 || arr[le[i]] < arr[i];};
     vector<int> to_min(n);
     for (int i = 0; i < n; i++)
-        to_min[i] = leftmost_min(i) ? i : to_min[le[i]];
+        to_min[i] = (le[i] == -1 || arr[le[i]] < arr[i]) ? i : to_min[le[i]];
     vector<vector<int>> adj(n);
     int root = -1;
     for (int i = 0; i < n; i++) {
         if (le[i] == -1 && ri[i] == n) root = i;
-        else if (leftmost_min(i)) {
+        else if (to_min[i] == i) {
             bool le_par = (le[i] >= 0 && (ri[i] == n || arr[le[i]] > arr[ri[i]]));
             adj[to_min[le_par ? le[i] : ri[i]]].push_back(i);
         }
