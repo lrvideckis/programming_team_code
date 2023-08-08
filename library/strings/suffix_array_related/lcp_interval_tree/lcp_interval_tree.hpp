@@ -39,19 +39,18 @@ struct lcp_tree {
     lcp_tree(const string& s, int max_val) : n(ssize(s)) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
-        tie(le, ri) = min_range(lcp);
-        auto [rt, adj, to_min] = min_cartesian_tree(le, ri, lcp);
-        root = max(rt, 0);
+        min_tree ct = min_cartesian_tree(lcp);
+        root = max(ct.root, 0), le = ct.le, ri = ct.ri;
         array<int, len> init;
         fill(begin(init), end(init), -1);
-        child.resize(ssize(adj), init);
-        for (int u = 0; u < ssize(adj); u++)
-            for (int v : adj[u])
+        child.resize(ssize(ct.adj), init);
+        for (int u = 0; u < ssize(ct.adj); u++)
+            for (int v : ct.adj[u])
                 child[u][s[sa[v] + lcp[u]] - mn] = v;
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : -1);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
-            int u = (prev_lcp < next_lcp) ? i : to_min[i - 1];
+            int u = (prev_lcp < next_lcp) ? i : ct.to_min[i - 1];
             int idx = sa[i] + max(prev_lcp, next_lcp);
             if (u == ssize(child) || idx == n) continue;
             child[u][s[idx] - mn] = ssize(lcp) + i;
