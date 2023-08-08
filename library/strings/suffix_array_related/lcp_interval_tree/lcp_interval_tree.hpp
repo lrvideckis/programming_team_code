@@ -54,9 +54,9 @@ struct lcp_tree {
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : 0);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
-            int u = prev_lcp < next_lcp ? i : to_min[i - 1];
             int idx = sa[i] + max(prev_lcp, next_lcp);
             if (idx == n) continue;
+            int u = prev_lcp < next_lcp ? i : to_min[i - 1];
             child[u][s[idx] - mn] = ssize(lcp) + i;
         }
     }
