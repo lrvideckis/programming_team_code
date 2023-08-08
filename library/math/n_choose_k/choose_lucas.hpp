@@ -2,7 +2,7 @@
 #pragma once
 #include "n_choose_k.hpp"
 /**
- * requires O(MOD) precalc
+ * requires O(mod) precalc
  * @param n,k arbitrarily large integers
  * @returns number of ways to choose k objects out of n
  * @time O(log(k))
@@ -10,10 +10,10 @@
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 long long C(long long n, long long k) {
-    static_assert(MOD <= N);
+    static_assert(mod <= mx_n);
     if (k < 0 || n < k) return 0;
     long long res = 1;
-    for (; k && k < n && res; n /= MOD, k /= MOD)
-        res = res * C(int(n % MOD), int(k % MOD)) % MOD;
+    for (; k && k < n && res; n /= mod, k /= mod)
+        res = res * C(int(n % mod), int(k % mod)) % mod;
     return res;
 }
