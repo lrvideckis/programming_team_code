@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-const int MOD = 998'244'353;
+const int mod = 998'244'353;
 /**
  * @param a,b arrays of the same length
  * @returns array `c` where `c[k]` = the sum of (a[i] * b[j]) for all pairs
@@ -16,10 +16,10 @@ vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
     for (int i = 1; i < n; i++) {
         for (int j = i; j < n; j += i)
             sum_a[j] += a[i], sum_b[j] += b[i];
-        sum_a[i] %= MOD, sum_b[i] %= MOD;
-        c[i] = int((c[i] + sum_a[i] * sum_b[i]) % MOD);
+        sum_a[i] %= mod, sum_b[i] %= mod;
+        c[i] = int((c[i] + sum_a[i] * sum_b[i]) % mod);
         for (int j = i + i; j < n; j += i)
-            if ((c[j] -= c[i]) < 0) c[j] += MOD;
+            if ((c[j] -= c[i]) < 0) c[j] += mod;
     }
     return c;
 }
