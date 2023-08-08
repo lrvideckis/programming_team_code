@@ -44,7 +44,6 @@ struct lcp_tree {
         vector<vector<int>> adj;
         vector<int> to_min;
         tie(root, adj, to_min) = min_cartesian_tree(le, ri, lcp);
-        if (root == -1) return;
         array<int, len> init;
         fill(begin(init), end(init), -1);
         child.resize(ssize(adj), init);
@@ -52,11 +51,11 @@ struct lcp_tree {
             for (int v : adj[u])
                 child[u][s[sa[v] + lcp[u]] - mn] = v;
         for (int i = 0; i < n; i++) {
-            int prev_lcp = (i ? lcp[i - 1] : 0);
+            int prev_lcp = (i ? lcp[i - 1] : -1);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
+            int u = (prev_lcp < next_lcp) ? i : to_min[i - 1];
             int idx = sa[i] + max(prev_lcp, next_lcp);
-            if (idx == n) continue;
-            int u = prev_lcp < next_lcp ? i : to_min[i - 1];
+            if (u == ssize(child) || idx == n) continue;
             child[u][s[idx] - mn] = ssize(lcp) + i;
         }
     }
