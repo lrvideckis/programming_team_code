@@ -6,8 +6,8 @@
 
 #include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_string_bwt.hpp"
-#define K K_OTHER
-#define MN MN_OTHER
+#define mn mn_other
+#define len len_other
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string_lcpt.hpp"
 
 int main() {
