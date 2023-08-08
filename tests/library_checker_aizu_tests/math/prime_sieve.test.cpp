@@ -8,7 +8,7 @@
 
 int main() {
     calc_sieve();
-    for (int i = 1; i < N; i++)
+    for (int i = 1; i < mx_n; i++)
         assert(isPrime(i) == is_prime(i));
     int n;
     cin >> n;
