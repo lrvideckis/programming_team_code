@@ -3,6 +3,7 @@
 #include "../../../library/contest/random.hpp"
 #include "../../../library/math/fibonacci.hpp"
 
+//NOLINTNEXTLINE(readability-identifier-naming)
 const int MOD = 998'244'353;
 
 #include "../../../kactl/content/data-structures/Matrix.h"
