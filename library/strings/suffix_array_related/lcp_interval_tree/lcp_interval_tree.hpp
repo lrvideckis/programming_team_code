@@ -18,7 +18,7 @@ const int mn = '0', len = 75; // lower case letters and digits
  *         auto [le, ri] = lt.sa_range(u);
  *         int len = lt.lcp_len(u);
  *         if (u < ssize(lt.lcp))
- *             for(auto [c, v] : lt.child[u])
+ *             for(auto [c, v] : lt.adj[u])
  *                 self(self, v);
  *     };
  *     dfs(dfs, max(lt.root, 0));
@@ -29,34 +29,31 @@ const int mn = '0', len = 75; // lower case letters and digits
  */
 struct lcp_tree {
     int n, root;
-    string s;
     vector<int> sa, sa_inv, lcp, le, ri;
-    vector<array<int, len>> child;
+    vector<array<int, len>> adj;
     /**
-     * @param a_s,max_val string/array with 0 <= s[i] < max_val
+     * @param s,max_val string/array with 0 <= s[i] < max_val
      * @time O((n log n) + (n * len) + max_val)
-     * @space child is O(n * len)
+     * @space adj is O(n * len)
      */
-    lcp_tree(const string& a_s, int max_val) : n(ssize(a_s)), s(a_s) {
+    lcp_tree(const string& s, int max_val) : n(ssize(s)) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
-        tie(le, ri) = min_range(lcp);
-        vector<vector<int>> adj;
-        vector<int> to_min;
-        tie(root, adj, to_min) = min_cartesian_tree(le, ri, lcp);
+        auto [a_root, a_adj, a_le, a_ri, to_min] = min_cartesian_tree(lcp);
+        root = max(a_root, 0), le = a_le, ri = a_ri;
         array<int, len> init;
         fill(begin(init), end(init), -1);
-        child.resize(ssize(adj), init);
+        adj.resize(ssize(a_adj), init);
         for (int u = 0; u < ssize(adj); u++)
-            for (int v : adj[u])
-                child[u][s[sa[v] + lcp[u]] - mn] = v;
+            for (int v : a_adj[u])
+                adj[u][s[sa[v] + lcp[u]] - mn] = v;
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : -1);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
             int u = (prev_lcp < next_lcp) ? i : to_min[i - 1];
             int idx = sa[i] + max(prev_lcp, next_lcp);
-            if (u == ssize(child) || idx == n) continue;
-            child[u][s[idx] - mn] = ssize(lcp) + i;
+            if (u == ssize(adj) || idx == n) continue;
+            adj[u][s[idx] - mn] = ssize(lcp) + i;
         }
     }
     /**
@@ -88,6 +85,6 @@ struct lcp_tree {
      * @space O(1)
      */
     int get_child(int u, char c) const {
-        return u < ssize(child) ? child[u][c - mn] : -1;
+        return u < ssize(adj) ? adj[u][c - mn] : -1;
     }
 };

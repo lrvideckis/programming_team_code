@@ -18,7 +18,7 @@ int main() {
     cin >> s >> t;
     lcp_tree lt(s, 256);
     {
-        auto [le, ri] = find_str(lt, string(""));
+        auto [le, ri] = find_str(s, lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, lt.sa, t);
@@ -27,7 +27,7 @@ int main() {
     assert(str_len <= ssize(t));
     assert(str_len == ssize(t) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
     assert((sa_le < sa_ri) == (str_len == ssize(t)));
-    auto [le, ri] = find_str(lt, t);
+    auto [le, ri] = find_str(s, lt, t);
     assert(sa_ri - sa_le == ri - le);
     if (sa_ri - sa_le > 0) assert(sa_le == le);
     vector<int> matches(begin(lt.sa) + sa_le, begin(lt.sa) + sa_ri);

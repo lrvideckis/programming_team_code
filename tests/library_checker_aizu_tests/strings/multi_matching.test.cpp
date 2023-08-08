@@ -26,7 +26,7 @@ int main() {
         assert(sa_le == 0 && sa_ri == ssize(s));
     }
     {
-        auto [le, ri] = find_str(lt, string(""));
+        auto [le, ri] = find_str(s, lt, string(""));
         assert(le == 0 && ri == ssize(s));
     }
     int q;
@@ -46,7 +46,7 @@ int main() {
         assert(s.substr(str_le, str_len) == t.substr(0, str_len));
         assert(str_len == ssize(t) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
         assert((sa_le < sa_ri) == (str_len == ssize(t)));
-        auto [le, ri] = find_str(lt, t);
+        auto [le, ri] = find_str(s, lt, t);
         assert(sa_ri - sa_le == ri - le);
         if (sa_ri - sa_le > 0) assert(sa_le == le);
         cout << (!!(sa_ri - sa_le > 0)) << '\n';

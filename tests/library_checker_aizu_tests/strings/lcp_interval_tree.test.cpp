@@ -10,7 +10,7 @@ int main() {
     int n = ssize(s);
     lcp_tree lt(s, 256);
     {
-        auto [le, ri] = find_str(lt, string(""));
+        auto [le, ri] = find_str(s, lt, string(""));
         assert(le == 0 && ri == n);
         assert(ssize(lt.sa) == n);
         assert(ssize(lt.sa_inv) == n);

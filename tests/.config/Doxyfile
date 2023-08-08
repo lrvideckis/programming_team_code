@@ -1034,6 +1034,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          rebuild \
                          le \
                          ri \
+                         to_min \
                          root \
                          child \
                          sa \
