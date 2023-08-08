@@ -956,9 +956,9 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          distinct_query::node \
                          PST::node \
                          mcmf::edge \
-                         N \
-                         K \
-                         MN \
+                         mx_n \
+                         len \
+                         mn \
                          dfs \
                          dfs1 \
                          dfs2 \
@@ -972,7 +972,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          bit1 \
                          bit2 \
                          trie \
-                         MOD \
+                         mod \
                          inv \
                          fact \
                          inv_fact \
