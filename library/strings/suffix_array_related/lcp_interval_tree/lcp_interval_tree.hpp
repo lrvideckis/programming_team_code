@@ -79,7 +79,7 @@ struct lcp_tree {
      * @space O(1)
      */
     int lcp_len(int u) const {
-        return u < ssize(lcp) ? lcp[u] : ssize(s) - sa[u - ssize(lcp)];
+        return u < ssize(lcp) ? lcp[u] : n - sa[u - ssize(lcp)];
     }
     /**
      * @param u node
