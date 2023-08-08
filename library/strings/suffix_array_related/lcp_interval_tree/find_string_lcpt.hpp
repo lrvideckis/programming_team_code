@@ -10,7 +10,7 @@
  *     auto [le, ri] = find_str(s, lt, t);
  * @endcode
  *
- * @param lt lcp interval tree
+ * @param s,lt string and its lcp interval tree
  * @param t needle
  * @returns range [le, ri) such that:
  *     - for all i in [le, ri): t == s.substr(sf.sa[i], ssize(t))
