@@ -8,10 +8,6 @@
  *     string s, t;
  *     lcp_tree lt(s, 256);
  *     auto [le, ri] = find_str(lt, t);
- *     // or
- *     vector<int> arr, t;
- *     lcp_tree lt(arr, 100'005);
- *     auto [le, ri] = find_str(arr, t);
  * @endcode
  *
  * @param lt lcp interval tree
@@ -19,17 +15,16 @@
  * @returns range [le, ri) such that:
  *     - for all i in [le, ri): t == s.substr(sf.sa[i], ssize(t))
  *     - `ri - le` is the # of matches of t in s.
- * @time O(|t| * log(|alphabet|)); |alphabet| = 26 if only lowercase letters
+ * @time O(|t|)
  * @space O(1)
  */
-template <class T> pair<int, int> find_str(const lcp_tree<T>& lt, const T& t) {
+pair<int, int> find_str(const lcp_tree& lt, const string& t) {
     int u = max(lt.root, 0);
     for (int i = 0; i < ssize(t); i++) {
         if (i == lt.lcp_len(u)) {
             if (u >= ssize(lt.child)) return {0, 0};
-            auto it = lt.child[u].find(t[i]);
-            if (it == end(lt.child[u])) return {0, 0};
-            u = it->second;
+            u = lt.child[u][t[i] - MN];
+            if (u == -1) return {0, 0};
         }
         auto [le, ri] = lt.sa_range(u);
         if (lt.s[lt.sa[le] + i] != t[i]) return {0, 0};

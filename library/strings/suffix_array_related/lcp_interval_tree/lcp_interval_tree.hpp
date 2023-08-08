@@ -3,15 +3,15 @@
 #include "../../../monotonic_stack_related/min_cartesian_tree.hpp"
 #include "../suffix_array.hpp"
 #include "../lcp_array.hpp"
+const int K = 75, MN = '0'; // lower case letters and digits
 /**
- * @see https://citeseerx.ist.psu.edu /viewdoc/download?doi=10.1.1.88.1129
+ * @see Replacing suffix trees with enhanced suffix arrays by Mohamed Ibrahim
+ * Abouelhoda, Stefan Kurtz, Enno Ohlebusch
+ *
  * offline version of suffix tree
  * @code{.cpp}
  *     string s;
  *     lcp_tree lt(s, 256);
- *     // or
- *     vector<int> arr;
- *     lcp_tree lt(arr, 100'005);
  *
  *     // same as DFS over suffix tree
  *     auto dfs = [&](auto&& self, int u) -> void {
@@ -27,56 +27,54 @@
  * internal nodes are a subset of [1, n - 1)
  * leaf nodes are [n - 1, 2 * n - 1), each leaf represents a single suffix
  */
-template <class T> struct lcp_tree {
-    T s;
+struct lcp_tree {
+    string s;
     vector<int> sa, sa_inv, lcp, le, ri;
     int root;
-    vector<map<int, int>> child;
+    vector<array<int, K>> child;
     /**
      * @param a_s,max_val string/array with 0 <= s[i] < max_val
-     * @time O((n log n) + max_val); besides suffix array construction, this is
-     * O(n) as constructing a map from a sorted array is linear
-     * @space all member variables are O(n)
+     * @time O((n log n) + (n * K) + max_val)
+     * @space child is O(n * K)
      */
-    lcp_tree(const T& a_s, int max_val) : s(a_s) {
+    lcp_tree(const string& a_s, int max_val) : s(a_s) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
         tie(le, ri) = min_range(lcp);
         vector<vector<int>> adj;
         tie(root, adj) = min_cartesian_tree(le, ri, lcp);
         if (root == -1) return;
-        child.resize(ssize(adj));
+        array<int, K> init;
+        fill(begin(init), end(init), -1);
+        child.resize(ssize(adj), init);
         queue<int> q({root});
         int num_leaves = 0;
         while (!q.empty()) {
             int u = q.front();
             q.pop();
-            vector<pair<int, int>> childs;
             if (adj[u].empty() || le[u] < le[adj[u][0]]) {
                 num_leaves++;
                 int i = le[u] + 1;
                 assert(sa[i] + lcp[u] <= ssize(s));
                 if (sa[i] + lcp[u] < ssize(s))
-                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(lcp) + i);
+                    child[u][s[sa[i] + lcp[u]] - MN] = ssize(lcp) + i;
             }
             int prev = le[u] + 2;
             for (int v : adj[u]) {
                 for (int i = prev; i <= le[v]; i++) {
                     assert(sa[i] + lcp[u] < ssize(s));
-                    childs.emplace_back(s[sa[i] + lcp[u]], ssize(lcp) + i);
+                    child[u][s[sa[i] + lcp[u]] - MN] = ssize(lcp) + i;
                     num_leaves++;
                 }
-                childs.emplace_back(s[sa[v] + lcp[u]], v);
+                child[u][s[sa[v] + lcp[u]] - MN] = v;
                 prev = ri[v] + 1;
                 q.push(v);
             }
             for (int i = prev; i <= ri[u]; i++) {
                 assert(sa[i] + lcp[u] < ssize(s));
-                childs.emplace_back(s[sa[i] + lcp[u]], ssize(lcp) + i);
+                child[u][s[sa[i] + lcp[u]] - MN] = ssize(lcp) + i;
                 num_leaves++;
             }
-            for (int i = 1; i < ssize(childs); i++) assert(childs[i - 1].first < childs[i].first);
-            child[u] = map(begin(childs), end(childs));
         }
         assert(num_leaves == ssize(s));
     }

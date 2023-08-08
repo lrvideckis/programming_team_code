@@ -6,14 +6,12 @@
 #include "../../../library/strings/suffix_array_related/compare/compare_suffixes.hpp"
 #include "../../../library/strings/suffix_array_related/compare/compare_substrings.hpp"
 
-#include "../../../library/strings/suffix_array_related/find/find_string.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_array.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_query.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_substrings_concatenated.hpp"
-
-#include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string.hpp"
 
 #include "../../../library/strings/knuth_morris_pratt.hpp"
 
@@ -73,11 +71,6 @@ int main() {
         assert(substr_cmp(lq, 0, 100, 0, 100) == 0);
         assert(substr_cmp(lq, 1, 100, 0, 100) > 0);
         assert(substr_cmp(lq, 0, 100, 1, 100) < 0);
-    }
-    {
-        lcp_tree lt(arr, SHIFT + 100);
-        auto [le, ri] = find_str(lt, t);
-        assert(le == 50 && ri == 51);
     }
     {
         KMP kmp(t);

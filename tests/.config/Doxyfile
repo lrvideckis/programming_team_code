@@ -957,6 +957,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          PST::node \
                          mcmf::edge \
                          N \
+                         K \
+                         MN \
                          dfs \
                          dfs1 \
                          dfs2 \
@@ -1043,6 +1045,9 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          wt_le \
                          wt_ri \
                          init \
+                         last \
+                         occ \
+                         cnt \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
