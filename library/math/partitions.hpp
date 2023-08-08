@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-const int MOD = 998'244'353;
+const int mod = 998'244'353;
 /**
  * @see https://oeis.org/A000041
  * @param n an integer
@@ -13,10 +13,10 @@ vector<long long> partitions(int n) {
     for (int i = 1; i < n; i++) {
         long long sum = 0;
         for (int j = 1, pent = 1, sign = 1; pent <= i; j++, pent += 3 * j - 2, sign = -sign) {
-            if (pent + j <= i) sum += dp[i - pent - j] * sign + MOD;
-            sum += dp[i - pent] * sign + MOD;
+            if (pent + j <= i) sum += dp[i - pent - j] * sign + mod;
+            sum += dp[i - pent] * sign + mod;
         }
-        dp[i] = sum % MOD;
+        dp[i] = sum % mod;
     }
     return dp;
 }
