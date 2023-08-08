@@ -29,21 +29,19 @@ const int mn = '0', len = 75; // lower case letters and digits
  */
 struct lcp_tree {
     int n, root;
-    string s;
     vector<int> sa, sa_inv, lcp, le, ri;
     vector<array<int, len>> child;
     /**
-     * @param a_s,max_val string/array with 0 <= s[i] < max_val
+     * @param s,max_val string/array with 0 <= s[i] < max_val
      * @time O((n log n) + (n * len) + max_val)
      * @space child is O(n * len)
      */
-    lcp_tree(const string& a_s, int max_val) : n(ssize(a_s)), s(a_s) {
+    lcp_tree(const string& s, int max_val) : n(ssize(s)) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
         tie(le, ri) = min_range(lcp);
-        vector<vector<int>> adj;
-        vector<int> to_min;
-        tie(root, adj, to_min) = min_cartesian_tree(le, ri, lcp);
+        auto [rt, adj, to_min] = min_cartesian_tree(le, ri, lcp);
+        root = max(rt, 0);
         array<int, len> init;
         fill(begin(init), end(init), -1);
         child.resize(ssize(adj), init);
