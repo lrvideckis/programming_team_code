@@ -6,7 +6,10 @@
 #include "../../../library/contest/random.hpp"
 
 #include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
+#include "../../../library/strings/suffix_array_related/find/find_string_bwt.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_substrings_concatenated.hpp"
+#define K K_OTHER
+#define MN MN_OTHER
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string_lcpt.hpp"
 
 int main() {
@@ -29,6 +32,13 @@ int main() {
     if (sa_ri - sa_le > 0) assert(sa_le == le);
     vector<int> matches(begin(lt.sa) + sa_le, begin(lt.sa) + sa_ri);
     sort(begin(matches), end(matches));
+    {
+        //test find via BWT
+        find_bwt fb(s, lt.sa);
+        auto [le2, ri2] = fb.find_str(t);
+        assert(sa_ri - sa_le == ri2 - le2);
+        if (sa_le < sa_ri) assert(le == le2);
+    }
     {
         //test find_substrs_concated
         string both = s + '$' + t;
