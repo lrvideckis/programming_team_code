@@ -16,7 +16,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s, t;
     cin >> s >> t;
-    lcp_tree lt(s, 256);
+    lcp_tree lt(s);
     {
         auto [le, ri] = find_str(s, lt, string(""));
         assert(le == 0 && ri == ssize(s));

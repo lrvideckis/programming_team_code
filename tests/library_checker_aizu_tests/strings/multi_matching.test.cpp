@@ -14,7 +14,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    lcp_tree lt(s, 256);
+    lcp_tree lt(s);
     find_bwt fb(s, lt.sa);
     {
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, lt.sa, string(""));
