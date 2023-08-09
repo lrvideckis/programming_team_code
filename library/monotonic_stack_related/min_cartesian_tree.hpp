@@ -52,13 +52,13 @@ min_tree min_cartesian_tree(const vector<int>& arr) {
     auto [le, ri] = min_range(arr);
     vector<int> to_min(n);
     for (int i = 0; i < n; i++)
-        to_min[i] = (le[i] == -1 || arr[le[i]] < arr[i]) ? i : to_min[le[i]];
+        to_min[i] = (0 <= le[i] && arr[le[i]] == arr[i]) ? to_min[le[i]] : i;
     vector<vector<int>> adj(n);
     int root = -1;
     for (int i = 0; i < n; i++) {
         if (le[i] == -1 && ri[i] == n) root = i;
         else if (to_min[i] == i) {
-            bool le_par = (le[i] >= 0 && (ri[i] == n || arr[le[i]] > arr[ri[i]]));
+            bool le_par = (0 <= le[i] && (ri[i] == n || arr[le[i]] > arr[ri[i]]));
             adj[to_min[le_par ? le[i] : ri[i]]].push_back(i);
         }
     }
