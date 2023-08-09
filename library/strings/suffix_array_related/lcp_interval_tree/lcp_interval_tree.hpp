@@ -12,16 +12,6 @@ const int mn = '0', len = 75; // lower case letters and digits
  * @code{.cpp}
  *     string s;
  *     lcp_tree lt(s, 256);
- *
- *     // same as DFS over suffix tree
- *     auto dfs = [&](auto&& self, int u) -> void {
- *         auto [le, ri] = lt.sa_range(u);
- *         int len = lt.lcp_len(u);
- *         if (u < ssize(lt.lcp))
- *             for(auto [c, v] : lt.adj[u])
- *                 self(self, v);
- *     };
- *     dfs(dfs, max(lt.root, 0));
  * @endcode
  *
  * internal nodes are a subset of [1, n - 1)
