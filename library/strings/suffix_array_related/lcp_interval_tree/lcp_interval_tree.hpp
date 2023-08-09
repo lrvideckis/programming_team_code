@@ -61,8 +61,7 @@ struct lcp_tree {
      * @space O(1)
      */
     pair<int, int> sa_range(int u) const {
-        return u < n - 1 ? {le[u] + 1, ri[u] + 1} :
-               {u - n + 1, u - n + 2};
+        return (u < n - 1 ? {le[u] + 1, ri[u] + 1} : {u - n + 1, u - n + 2});
     }
     /**
      * @param u node
