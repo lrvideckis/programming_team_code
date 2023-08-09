@@ -22,7 +22,7 @@ struct lcp_tree {
     vector<int> sa, sa_inv, lcp, le, ri;
     vector<vector<int>> adj;
     /**
-     * @param s,max_val string/array with 0 <= s[i] < max_val
+     * @param s string/array
      * @time O((n log n) + (n * len) + max_val)
      * @space adj is O(n * len)
      */
