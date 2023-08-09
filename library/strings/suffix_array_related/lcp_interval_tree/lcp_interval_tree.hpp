@@ -30,30 +30,27 @@ const int mn = '0', len = 75; // lower case letters and digits
 struct lcp_tree {
     int n, root;
     vector<int> sa, sa_inv, lcp, le, ri;
-    vector<array<int, len>> adj;
+    vector<vector<int>> adj;
     /**
      * @param s,max_val string/array with 0 <= s[i] < max_val
      * @time O((n log n) + (n * len) + max_val)
      * @space adj is O(n * len)
      */
-    lcp_tree(const string& s, int max_val) : n(ssize(s)) {
+    lcp_tree(const string& s, int max_val) : n(ssize(s)), adj(max(n - 1, 0), vector<int>(len, -1)) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
         auto [a_root, a_adj, a_le, a_ri, to_min] = min_cartesian_tree(lcp);
         root = max(a_root, 0), le = a_le, ri = a_ri;
-        array<int, len> init;
-        fill(begin(init), end(init), -1);
-        adj.resize(ssize(a_adj), init);
-        for (int u = 0; u < ssize(adj); u++)
+        for (int u = 0; u < n - 1; u++)
             for (int v : a_adj[u])
                 adj[u][s[sa[v] + lcp[u]] - mn] = v;
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : -1);
-            int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
+            int next_lcp = (i < n - 1 ? lcp[i] : 0);
             int u = (prev_lcp < next_lcp) ? i : to_min[i - 1];
             int idx = sa[i] + max(prev_lcp, next_lcp);
-            if (u == ssize(adj) || idx == n) continue;
-            adj[u][s[idx] - mn] = ssize(lcp) + i;
+            if (u == n - 1 || idx == n) continue;
+            adj[u][s[idx] - mn] = n - 1 + i;
         }
     }
     /**
@@ -64,9 +61,7 @@ struct lcp_tree {
      * @space O(1)
      */
     pair<int, int> sa_range(int u) const {
-        if (u < ssize(lcp)) return {le[u] + 1, ri[u] + 1};
-        int idx = u - ssize(lcp);
-        return {idx, idx + 1};
+        return u < n - 1 ? {le[u] + 1, ri[u] + 1} : {u - n + 1, u - n + 2};
     }
     /**
      * @param u node
@@ -75,7 +70,7 @@ struct lcp_tree {
      * @space O(1)
      */
     int lcp_len(int u) const {
-        return u < ssize(lcp) ? lcp[u] : n - sa[u - ssize(lcp)];
+        return u < n - 1 ? lcp[u] : n - sa[u - n + 1];
     }
     /**
      * @param u node
@@ -85,6 +80,6 @@ struct lcp_tree {
      * @space O(1)
      */
     int get_child(int u, char c) const {
-        return u < ssize(adj) ? adj[u][c - mn] : -1;
+        return u < n - 1 ? adj[u][c - mn] : -1;
     }
 };
