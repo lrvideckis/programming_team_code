@@ -16,7 +16,7 @@ log(k) - j | k/(2^j) * $\lceil (n/(k/(2^j))) / 64 \rceil$ |k/(2^j) + n / 64 |
 ...
 log(k) - 2 | k/4 * $\lceil (n/(k/4)) / 64 \rceil$ | k/4 + n / 64 |
 log(k) - 1 | k/2 * $\lceil (n/(k/2)) / 64 \rceil$ | k/2 + n / 64 |
-log(k) | k * $\lceil (n/k) / 64 \rceil$ | k + n / 64 | <ul><li>if (n/k)>=64 then we can effectively drop the ceil, cancel the k's, leaving n/64 </li><li>if (n/k)<64 then we have k * ceil(something < 1) = k * 1</li></ul>
+log(k) | k * $\lceil (n/k) / 64 \rceil$ | k + n / 64 | <ul><li>if (n/k)>=64 then we can effectively drop the ceil, cancel the k's, leaving n/64 </li><li>if (n/k)<64 then we have k * ceil(something < 1) = k * 1</li><li>O(max(f(x), g(x))) = O(f(x) + g(x))</li></ul>
 
 Sum of big-O = total number of `uint64_t`'s used:
 - first part: 1 + 2 + 4 + ... + 2^i + ... + k <= 2*k
