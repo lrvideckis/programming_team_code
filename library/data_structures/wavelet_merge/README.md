@@ -24,4 +24,4 @@ Sum of big-O = total number of `uint64_t`'s used:
 
 = O(k + n * log(k) / 64)
 
-My understanding of wavelet matrix is it has memory = O(n * log(k) / 64), and dropping the `k` can a big deal, cuz it allows trees with 1e9 leaves
+My understanding of wavelet matrix is it has memory = O(n * log(k) / 64), and dropping the `k` can be a big deal, cuz it allows trees with 1e9 leaves
