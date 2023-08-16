@@ -18,6 +18,6 @@ log(k) - 2 | k/4 * $\lceil (n/(k/4)) / 64 \rceil$ | k/4 + n / 64 |
 log(k) - 1 | k/2 * $\lceil (n/(k/2)) / 64 \rceil$ | k/2 + n / 64 |
 log(k) | k * $\lceil (n/k) / 64 \rceil$ | k + n / 64 | memory = (n/k)>=64 ? n/64 : k
 
-Sum of big-O:
+Sum of big-O = total number of `uint64_t`'s used:
 - first part: 1 + 2 + 4 + ... + 2^i + ... + k <= 2*k
 - second part: log(k) * n / 64
