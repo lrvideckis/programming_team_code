@@ -962,7 +962,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          dfs \
                          dfs1 \
                          dfs2 \
-                         calc_subtree_sizes \
+                         calc_sz \
                          INF \
                          seg_tree \
                          iter_seg_tree \

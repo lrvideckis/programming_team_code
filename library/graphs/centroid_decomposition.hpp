@@ -16,7 +16,7 @@ template <class F> struct centroid_decomp {
      * @param a_func called on centroid of each decomposition
      * @time O(n log n)
      * @space `adj` and `sub_sz` arrays take O(n); recursion stack for `dfs` is
-     * O(log n); recursion stack for `calc_subtree_sizes` is O(n)
+     * O(log n); recursion stack for `calc_sz` is O(n)
      */
     centroid_decomp(const vector<vector<int>>& a_adj, F a_func)
         : adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
@@ -24,16 +24,16 @@ template <class F> struct centroid_decomp {
             if (sub_sz[i] == -1)
                 dfs(i);
     }
-    void calc_subtree_sizes(int u, int p = -1) {
+    void calc_sz(int u, int p) {
         sub_sz[u] = 1;
         for (auto v : adj[u]) {
             if (v == p) continue;
-            calc_subtree_sizes(v, u);
+            calc_sz(v, u);
             sub_sz[u] += sub_sz[v];
         }
     }
     void dfs(int u) {
-        calc_subtree_sizes(u);
+        calc_sz(u, -1);
         for (int p = -1, sz_root = sub_sz[u];;) {
             auto big_ch = find_if(begin(adj[u]), end(adj[u]), [&](int v) -> bool {
                 return v != p && 2 * sub_sz[v] > sz_root;
@@ -43,7 +43,8 @@ template <class F> struct centroid_decomp {
         }
         func(adj, u);
         for (auto v : adj[u]) {
-            adj[v].erase(find(begin(adj[v]), end(adj[v]), u));
+            iter_swap(find(begin(adj[v]), end(adj[v]), u), rbegin(adj[v]));
+            adj[v].pop_back();
             dfs(v);
         }
     }
