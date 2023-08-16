@@ -21,3 +21,7 @@ log(k) | k * $\lceil (n/k) / 64 \rceil$ | k + n / 64 | <ul><li>if (n/k)>=64 then
 Sum of big-O = total number of `uint64_t`'s used:
 - first part: 1 + 2 + 4 + ... + 2^i + ... + k <= 2*k
 - second part: log(k) * n / 64
+
+= O(k + n * log(k) / 64)
+
+My understanding of wavelet matrix is it has memory = O(n * log(k) / 64), and dropping the `k` can a big deal, cuz it allows trees with 1e9 leaves
