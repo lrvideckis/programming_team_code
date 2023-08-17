@@ -20,7 +20,7 @@ log(k) | k * $\lceil (n/k) / 64 \rceil$ | k + n/64 | <ul><li>if (n/k)>=64 then w
 
 Sum of big-O = total number of `uint64_t`'s used:
 - first part: 1 + 2 + 4 + ... + 2^i + ... + k <= 2*k: at least one `uint64_t` for each node in wavelet tree
-- second part: log(k) * n / 64: excluding the <=63 wasted bits in each node's `bool_presum`, each of the n values in the input array appear in log(k) `bool_presum`'s as a single bit
+- second part: log(k) * n / 64: each of the n values in the input array appear in log(k) `bool_presum`'s as a single bit
 
 = O(k + n * log(k) / 64)
 
