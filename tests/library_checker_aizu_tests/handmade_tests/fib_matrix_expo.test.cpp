@@ -14,7 +14,7 @@ void check(long long n) {
     mat_2_by_2 mat;
     mat.d = {{{{1, 1}}, {{1, 0}}}};
     vector<mi> vec = {1, 0};
-    long long res = fib(n).first;
+    long long res = fib(n)[0];
     assert(res == int(((mat ^ n) * vec)[1]));
 }
 
@@ -25,12 +25,12 @@ int main() {
     //n=3 -> val=2
     //n=4 -> val=3
     //n=5 -> val=5
-    assert(fib(0).first == 0);
-    assert(fib(1).first == 1);
-    assert(fib(2).first == 1);
-    assert(fib(3).first == 2);
-    assert(fib(4).first == 3);
-    assert(fib(5).first == 5);
+    assert(fib(0)[0] == 0);
+    assert(fib(1)[0] == 1);
+    assert(fib(2)[0] == 1);
+    assert(fib(3)[0] == 2);
+    assert(fib(4)[0] == 3);
+    assert(fib(5)[0] == 5);
     for (int i = 0; i < 500; i++)
         check(i);
     for (int tests = 1000; tests--;)

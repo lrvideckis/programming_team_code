@@ -5,16 +5,16 @@
 /**
  * @param lq lcp query struct
  * @param substrs this defines query string t as:
- *     s.substr(substrs[0].first, substrs[0].second - substrs[0].first) +
- *     s.substr(substrs[1].first, substrs[1].second - substrs[1].first) +
+ *     s.substr(substrs[0][0], substrs[0][1] - substrs[0][0]) +
+ *     s.substr(substrs[1][0], substrs[1][1] - substrs[1][0]) +
  *     ...
- *     s.substr(substrs.back().first, substrs.back().second - substrs.back().first)
+ *     s.substr(substrs.back()[0], substrs.back()[1] - substrs.back()[0])
  * @returns see match
  * @time O(ssize(substrs) * log(|s|))
  * @space O(1)
  */
 template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
-        const vector<pair<int, int>>& substrs) {
+        const vector<array<int, 2>>& substrs) {
     using dt = array<int, 3>;
     const auto& sa = lq.sa;
     int n = ssize(sa), sa_le = 0, sa_ri = n, str_le = 0, str_ri = 0, sum_len = 0;

@@ -17,7 +17,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
             if (d > k) return 0;
             if (ssize(cur_d) <= d) cur_d.push_back(0);
             cur_d[d]++;
-            auto long cnt = 0LL;
+            auto cnt = 0LL;
             if (k - d < ssize(pre_d)) cnt += pre_d[k - d];
             for (auto v : adj_removed_edges[u])
                 if (v != p)

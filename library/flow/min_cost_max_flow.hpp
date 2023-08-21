@@ -29,7 +29,7 @@ struct mcmf {
      * @param s source, 0 <= s < n
      * @param t sink, 0 <= t < n
      * @param total_flow we try to send this amount of flow through the graph
-     * @returns pair(flow, cost)
+     * @returns array of {flow, cost}
      * - flow: (<=total_flow) is the max amount of flow we are able to send.
      * - cost: minimum sum of: (edge.flow * edge.cost) over each edge (over all
      *   ways to send `flow` flow)

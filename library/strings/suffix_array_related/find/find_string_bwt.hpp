@@ -39,7 +39,7 @@ struct find_bwt {
      * @time O(|t|)
      * @space O(1)
      */
-    pair<int, int> find_str(const string& t) const {
+    array<int, 2> find_str(const string& t) const {
         int le = 0, ri = n;
         for (int i = ssize(t) - 1, x = 0; le < ri && i >= 0; i--) {
             char c = t[i] - mn;
