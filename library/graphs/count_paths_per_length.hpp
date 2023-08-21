@@ -10,20 +10,20 @@
  * @space this function allocates/returns various vectors which are each O(n)
  */
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
-    vector<long long> num_paths(ssize(adj));
+    vector num_paths(ssize(adj), 0LL);
     centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
         vector<vector<double>> child_depths;
         for (auto u : adj_removed_edges[cent]) {
             child_depths.emplace_back(1, 0.0);
-            for (queue<pair<int, int>> q({{u, cent}}); !q.empty();) {
+            for (queue<array<int, 2>> q({{u, cent}}); !q.empty();) {
                 child_depths.back().push_back(ssize(q));
-                queue<pair<int, int>> new_q;
+                queue<array<int, 2>> new_q;
                 while (!q.empty()) {
                     auto [v, p] = q.front();
                     q.pop();
                     for (auto w : adj_removed_edges[v]) {
                         if (w == p) continue;
-                        new_q.emplace(w, v);
+                        new_q.push({w, v});
                     }
                 }
                 swap(q, new_q);
@@ -32,7 +32,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
         sort(begin(child_depths), end(child_depths), [&](const auto & x, const auto & y) {
             return ssize(x) < ssize(y);
         });
-        vector<double> total_depth(1, 1.0);
+        vector total_depth(1, 1.0);
         for (const auto& cnt_depth : child_depths) {
             auto prod = conv(total_depth, cnt_depth);
             for (int i = 1; i < ssize(prod); i++)

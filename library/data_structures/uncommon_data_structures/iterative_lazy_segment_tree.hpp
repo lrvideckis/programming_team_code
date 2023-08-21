@@ -21,7 +21,7 @@ struct iter_seg_tree {
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
-    inline pair<int, int> get_node_bounds(int a) const {
+    inline array<int, 2> get_node_bounds(int a) const {
         assert(1 <= a && a < 2 * st.n);
         int l = __builtin_clz(a) - __builtin_clz(2 * st.n - 1);
         int x = a << l, y = (a + 1) << l;
@@ -69,7 +69,7 @@ struct iter_seg_tree {
         if (le == ri) return 0;
         le = to_leaf(le), ri = to_leaf(ri);
         push_parents(le, ri);
-        long long resl = 0, resr = 0;
+        auto resl = 0LL, resr = 0LL;
         for (; le < ri; le >>= 1, ri >>= 1) {
             if (le & 1) resl = op(resl, st.tree[le++]);
             if (ri & 1) resr = op(st.tree[--ri], resr);

@@ -12,7 +12,7 @@
 long long C(long long n, long long k) {
     static_assert(mod <= mx_n);
     if (k < 0 || n < k) return 0;
-    long long res = 1;
+    auto res = 1LL;
     for (; k && k < n && res; n /= mod, k /= mod)
         res = res * C(int(n % mod), int(k % mod)) % mod;
     return res;

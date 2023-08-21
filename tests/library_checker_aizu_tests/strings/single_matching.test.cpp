@@ -48,9 +48,9 @@ int main() {
         for (int num_splits = get_rand(0, 4); num_splits--;)
             splits.push_back(get_rand(0, ssize(t)));
         sort(begin(splits), end(splits));
-        vector<pair<int, int>> subs;
+        vector<array<int, 2>> subs;
         for (int i = 1; i < ssize(splits); i++)
-            subs.emplace_back(splits[i - 1] + t_start, splits[i] + t_start);
+            subs.push_back({splits[i - 1] + t_start, splits[i] + t_start});
         assert(!subs.empty());
         auto [sa_le2, sa_ri2, str_le2, str_ri2] = find_substrs_concated(lq_both, subs);
         assert(both.substr(str_le2, str_ri2 - str_le2) == t);

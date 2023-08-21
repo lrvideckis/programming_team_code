@@ -29,15 +29,15 @@ struct mcmf {
      * @param s source, 0 <= s < n
      * @param t sink, 0 <= t < n
      * @param total_flow we try to send this amount of flow through the graph
-     * @returns pair(flow, cost)
+     * @returns array of {flow, cost}
      * - flow: (<=total_flow) is the max amount of flow we are able to send.
      * - cost: minimum sum of: (edge.flow * edge.cost) over each edge (over all
      *   ways to send `flow` flow)
      */
-    pair<ll, ll> get_flow(int s, int t, ll total_flow) {
+    array<ll, 2> get_flow(int s, int t, ll total_flow) {
         ll flow = 0, cost = 0;
         while (flow < total_flow) {
-            vector<ll> d(n, LLONG_MAX);
+            vector d(n, LLONG_MAX);
             vector<int> p_edge(n), id(n), q(n), p(n);
             int qh = 0, qt = 0;
             q[qt++] = s;

@@ -23,7 +23,7 @@ struct bool_bit {
             mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
             init[i >> 6] += arr[i];
         }
-        presum = BIT<int>(init);
+        presum = {init};
     }
     /**
      * @param i defines range [0, i)

@@ -38,10 +38,10 @@ struct match_info {
  */
 match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
     int size_of_matching = 0, lsz = ssize(adj);
-    vector<int> l_to_r(lsz, -1), r_to_l(rsz, -1);
+    vector l_to_r(lsz, -1), r_to_l(rsz, -1);
     while (1) {
         queue<int> q;
-        vector<int> level(lsz, -1);
+        vector level(lsz, -1);
         for (int i = 0; i < lsz; i++)
             if (l_to_r[i] == -1)
                 level[i] = 0, q.push(i);

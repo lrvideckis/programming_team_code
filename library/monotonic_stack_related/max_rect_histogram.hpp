@@ -10,7 +10,7 @@
  */
 long long max_rect_histogram(const vector<int>& arr) {
     auto [le, ri] = min_range(arr);
-    long long max_area = 0;
+    auto max_area = 0LL;
     for (int i = 0; i < ssize(arr); i++)
         max_area = max(max_area, 1LL * arr[i] * (ri[i] - le[i] - 1));
     return max_area;

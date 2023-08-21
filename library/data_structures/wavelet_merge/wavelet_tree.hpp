@@ -123,7 +123,7 @@ struct wavelet_tree {
         if (tr - tl == 1) return 1LL * k * tl;
         int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
         if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * v);
-        long long sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : presums[2 * v][pr] - presums[2 * v][pl]);
+        auto sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : presums[2 * v][pr] - presums[2 * v][pl]);
         return sum_left + kth_sum_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
     }
 };

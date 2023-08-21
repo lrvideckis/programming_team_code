@@ -27,19 +27,19 @@ weighted_match hungarian(const vector<vector<long long>>& cost) {
     int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;
     assert(n <= m);
     vector<int> p(m + 1), way(m + 1);
-    vector<long long> u(n + 1), v(m + 1);
+    vector u(n + 1, 0LL), v(m + 1, 0LL);
     for (int i = 1; i <= n; i++) {
         p[0] = i;
         int j0 = 0;
-        vector<long long> minv(m + 1, LLONG_MAX);
+        vector minv(m + 1, LLONG_MAX);
         vector<bool> used(m + 1);
         do {
             used[j0] = 1;
             int i0 = p[j0], j1 = 0;
-            long long delta = LLONG_MAX;
+            auto delta = LLONG_MAX;
             for (int j = 1; j <= m; j++)
                 if (!used[j]) {
-                    long long cur = cost[i0][j] - u[i0] - v[j];
+                    auto cur = cost[i0][j] - u[i0] - v[j];
                     if (cur < minv[j])
                         minv[j] = cur, way[j] = j0;
                     if (minv[j] < delta)

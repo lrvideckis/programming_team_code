@@ -15,9 +15,9 @@
  * @time O(n)
  * @space two O(n) vectors are allocated and returned
  */
-pair<vector<int>, vector<int>> min_range(const vector<int>& arr) {
-    vector<int> le = monotonic_stack(arr, less_equal());
-    vector<int> ri = monotonic_stack(vector<int>(rbegin(arr), rend(arr)), less());
+array<vector<int>, 2> min_range(const vector<int>& arr) {
+    vector le = monotonic_stack(arr, less_equal());
+    vector ri = monotonic_stack({rbegin(arr), rend(arr)}, less());
     reverse(begin(ri), end(ri));
     transform(begin(ri), end(ri), begin(ri), [&](int val) {return ssize(arr) - val - 1;});
     return {le, ri};

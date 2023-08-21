@@ -24,7 +24,7 @@ struct LCA {
         order.reserve(n);
         for (int i = 0; i < n; i++)
             if (p[i] == -1) dfs(adj, i);
-        rmq = RMQ<int>(order, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;});
+        rmq = {order, [&](int u, int v) {return pair(d[u], -in[u]) < pair(d[v], -in[v]) ? u : v;}};
     }
     void dfs(const vector<vector<int>>& adj, int u) {
         in[u] = ssize(order), order.push_back(u);

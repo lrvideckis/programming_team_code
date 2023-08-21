@@ -10,14 +10,14 @@
  * @space this function allocates/returns various vectors which are all O(n)
  */
 vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
-    vector<long long> num_paths(ssize(adj));
+    vector num_paths(ssize(adj), 0LL);
     centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
-        vector<int> pre_d(1, 1), cur_d(1);
+        vector pre_d{1}, cur_d{0};
         auto dfs = [&](auto&& self, int u, int p, int d) -> long long {
             if (d > k) return 0;
             if (ssize(cur_d) <= d) cur_d.push_back(0);
             cur_d[d]++;
-            long long cnt = 0;
+            auto cnt = 0LL;
             if (k - d < ssize(pre_d)) cnt += pre_d[k - d];
             for (auto v : adj_removed_edges[u])
                 if (v != p)
@@ -26,7 +26,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
             return cnt;
         };
         auto dfs_child = [&](int child) -> long long {
-            long long cnt = dfs(dfs, child, cent, 1);
+            auto cnt = dfs(dfs, child, cent, 1);
             pre_d.resize(ssize(cur_d));
             for (int i = 1; i < ssize(cur_d) && cur_d[i]; i++)
                 pre_d[i] += cur_d[i], cur_d[i] = 0;
@@ -34,8 +34,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
         };
         for (auto child : adj_removed_edges[cent])
             num_paths[cent] += dfs_child(child);
-        pre_d = vector<int>(1);
-        cur_d = vector<int>(1);
+        pre_d = cur_d = {0};
         for_each(rbegin(adj_removed_edges[cent]), rend(adj_removed_edges[cent]), dfs_child);
     });
     return num_paths;
