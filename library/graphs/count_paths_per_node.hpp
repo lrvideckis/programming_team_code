@@ -34,8 +34,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
         };
         for (auto child : adj_removed_edges[cent])
             num_paths[cent] += dfs_child(child);
-        pre_d = {0};
-        cur_d = {0};
+        pre_d = cur_d = {0};
         for_each(rbegin(adj_removed_edges[cent]), rend(adj_removed_edges[cent]), dfs_child);
     });
     return num_paths;

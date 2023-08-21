@@ -8,7 +8,7 @@
  * @space this function allocates/returns a O(n) vector
  */
 template <class T> vector<int> prefix_function(const T& s) {
-    vector pi(ssize(s), 0);
+    vector<int> pi(ssize(s));
     for (int i = 1; i < ssize(s); i++) {
         int j = pi[i - 1];
         while (j > 0 && s[i] != s[j]) j = pi[j - 1];

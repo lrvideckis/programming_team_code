@@ -42,7 +42,7 @@ template <class T> pair<vector<int>, vector<int>> get_sa(const T& s, int max_val
     for (int ln = 0; ln < n; ln = max(1, 2 * ln)) {
         iota(begin(tmp), begin(tmp) + ln, n - ln);
         copy_if(begin(sa), end(sa), begin(tmp) + ln, [&](int& val) {return (val -= ln) >= 0;});
-        vector freq(max_val, 0);
+        vector<int> freq(max_val);
         for (auto val : sa_inv) freq[val]++;
         partial_sum(begin(freq), end(freq), begin(freq));
         for_each(rbegin(tmp), rend(tmp), [&](int t) {sa[--freq[sa_inv[t]]] = t;});

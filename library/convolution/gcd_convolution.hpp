@@ -11,7 +11,7 @@ const int mod = 998'244'353;
 vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
     assert(ssize(a) == ssize(b));
     int n = ssize(a);
-    vector c(n, 0);
+    vector<int> c(n);
     for (int g = n - 1; g >= 1; g--) {
         long long sum_a = 0, sum_b = 0;
         for (int i = g; i < n; i += g) {

@@ -25,7 +25,7 @@ template <class T> struct count_pal_query {
      */
     count_pal_query(const T& s) : n(ssize(s)), man(manacher(s)), wt_le(man, 0, n), wt_ri(init()) {}
     wavelet_tree init() {
-        vector right(ssize(man), 0);
+        vector<int> right(ssize(man));
         for (int i = 0; i < ssize(man); i++)
             right[i] = i - man[i] + 1;
         return {right, 1, n + 1};

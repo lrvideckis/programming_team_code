@@ -12,7 +12,7 @@ vector<int> lcm_convolution(const vector<int>& a, const vector<int>& b) {
     assert(ssize(a) == ssize(b));
     int n = ssize(a);
     vector sum_a(n, 0LL), sum_b(n, 0LL);
-    vector c(n, 0);
+    vector<int> c(n);
     for (int i = 1; i < n; i++) {
         for (int j = i; j < n; j += i)
             sum_a[j] += a[i], sum_b[j] += b[i];
