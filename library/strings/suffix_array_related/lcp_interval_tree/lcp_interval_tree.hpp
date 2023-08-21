@@ -26,7 +26,7 @@ struct lcp_tree {
      * @time O((n log n) + (n * len) + max_val)
      * @space adj is O(n * len)
      */
-    lcp_tree(const string& s) : n(ssize(s)), adj(max(n - 1, 0), vector<int>(len, -1)) {
+    lcp_tree(const string& s) : n(ssize(s)), adj(max(n - 1, 0), vector(len, -1)) {
         tie(sa, sa_inv) = get_sa(s, mn + len);
         lcp = get_lcp_array(sa, sa_inv, s);
         auto [a_root, a_adj, a_le, a_ri, to_min] = min_cartesian_tree(lcp);

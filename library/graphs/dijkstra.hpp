@@ -12,7 +12,7 @@
  */
 vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj, int s) {
     using node = pair<long long, int>;
-    vector<long long> d(ssize(adj), LLONG_MAX);
+    vector d(ssize(adj), LLONG_MAX);
     d[s] = 0;
     priority_queue<node, vector<node>, greater<node>> pq;
     pq.emplace(0, s);

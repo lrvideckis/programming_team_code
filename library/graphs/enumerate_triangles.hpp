@@ -13,7 +13,7 @@
  * @space besides the O(m) `edges` param, this function allocates a O(n + m) vector temporarily
  */
 template <class F> void enumerate_triangles(const vector<pair<int, int>>& edges, int n, F f) {
-    vector<int> deg(n);
+    vector deg(n, 0);
     for (auto [u, v] : edges)
         deg[u]++, deg[v]++;
     vector<vector<int>> adj(n);

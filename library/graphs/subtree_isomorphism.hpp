@@ -22,7 +22,7 @@ struct iso_info {
  * @space `iso_id` and `hashes` both are O(n)
  */
 iso_info subtree_iso(const vector<vector<int>>& adj) {
-    vector<int> iso_id(ssize(adj), -1);
+    vector iso_id(ssize(adj), -1);
     map<vector<int>, int> hashes;
     auto dfs = [&](auto&& self, int u, int p) -> int {
         vector<int> ch_ids;

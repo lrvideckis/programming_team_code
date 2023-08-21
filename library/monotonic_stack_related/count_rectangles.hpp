@@ -11,8 +11,8 @@
  */
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
     int n = ssize(grid), m = ssize(grid[0]);
-    vector<vector<int>> cnt(n + 1, vector<int>(m + 1));
-    vector<int> arr(m);
+    vector cnt(n + 1, vector(m + 1, 0));
+    vector arr(m, 0);
     for (const auto& row : grid) {
         transform(begin(arr), end(arr), begin(row), begin(arr), [](int a, bool g) {
             return g * (a + 1);

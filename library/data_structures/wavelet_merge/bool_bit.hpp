@@ -18,12 +18,12 @@ struct bool_bit {
      * @space O(n / 64)
      */
     bool_bit(const vector<bool>& arr) : n(ssize(arr)), mask(n / 64 + 1) {
-        vector<int> init((n + 63) / 64);
+        vector init((n + 63) / 64, 0);
         for (int i = 0; i < n; i++) {
             mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
             init[i >> 6] += arr[i];
         }
-        presum = BIT<int>(init);
+        presum = {init};
     }
     /**
      * @param i defines range [0, i)

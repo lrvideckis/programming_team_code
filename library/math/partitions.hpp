@@ -9,7 +9,7 @@ const int mod = 998'244'353;
  * @space O(n) for `dp` vector
  */
 vector<long long> partitions(int n) {
-    vector<long long> dp(n, 1);
+    vector dp(n, 1LL);
     for (int i = 1; i < n; i++) {
         long long sum = 0;
         for (int j = 1, pent = 1, sign = 1; pent <= i; j++, pent += 3 * j - 2, sign = -sign) {

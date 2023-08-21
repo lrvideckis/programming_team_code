@@ -26,12 +26,12 @@ struct weighted_match {
 weighted_match hungarian(const vector<vector<long long>>& cost) {
     int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;
     assert(n <= m);
-    vector<int> p(m + 1), way(m + 1);
-    vector<long long> u(n + 1), v(m + 1);
+    vector p(m + 1, 0), way(m + 1, 0);
+    vector u(n + 1, 0LL), v(m + 1, 0LL);
     for (int i = 1; i <= n; i++) {
         p[0] = i;
         int j0 = 0;
-        vector<long long> minv(m + 1, LLONG_MAX);
+        vector minv(m + 1, LLONG_MAX);
         vector<bool> used(m + 1);
         do {
             used[j0] = 1;
@@ -58,7 +58,7 @@ weighted_match hungarian(const vector<vector<long long>>& cost) {
             j0 = j1;
         } while (j0);
     }
-    vector<int> l_to_r(n + 1);
+    vector l_to_r(n + 1, 0);
     for (int j = 1; j <= m; j++) l_to_r[p[j]] = j;
     return {-v[0], l_to_r};
 }

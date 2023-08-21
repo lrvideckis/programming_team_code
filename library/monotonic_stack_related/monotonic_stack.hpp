@@ -13,7 +13,7 @@
  * @space a O(n) vector is allocated and returned
  */
 template <class F> vector<int> monotonic_stack(const vector<int>& arr, F less) {
-    vector<int> le(ssize(arr));
+    vector le(ssize(arr), 0);
     iota(begin(le), end(le), -1);
     for (int i = 0; i < ssize(arr); i++)
         while (le[i] >= 0 && !less(arr[le[i]], arr[i])) le[i] = le[le[i]];

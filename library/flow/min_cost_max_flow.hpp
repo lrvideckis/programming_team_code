@@ -37,7 +37,7 @@ struct mcmf {
     pair<ll, ll> get_flow(int s, int t, ll total_flow) {
         ll flow = 0, cost = 0;
         while (flow < total_flow) {
-            vector<ll> d(n, LLONG_MAX);
+            vector d(n, LLONG_MAX);
             vector<int> p_edge(n), id(n), q(n), p(n);
             int qh = 0, qt = 0;
             q[qt++] = s;
