@@ -13,7 +13,7 @@ vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
     int n = ssize(a);
     vector<int> c(n);
     for (int g = n - 1; g >= 1; g--) {
-        long long sum_a = 0, sum_b = 0;
+        auto sum_a = 0LL, sum_b = 0LL;
         for (int i = g; i < n; i += g) {
             sum_a += a[i], sum_b += b[i];
             if ((c[g] -= c[i]) < 0) c[g] += mod;

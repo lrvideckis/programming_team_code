@@ -21,7 +21,7 @@ template <class T> struct bit_rupq {
     bit_rupq(const vector<T>& a) : n(ssize(a)) {
         vector<T> init(n);
         adjacent_difference(begin(a), end(a), begin(init));
-        bit = BIT<T>(init);
+        bit = {init};
     }
     /**
      * does a[le] += d, a[le + 1] += d, ..., a[ri - 1] += d

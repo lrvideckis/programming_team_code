@@ -36,10 +36,10 @@ weighted_match hungarian(const vector<vector<long long>>& cost) {
         do {
             used[j0] = 1;
             int i0 = p[j0], j1 = 0;
-            long long delta = LLONG_MAX;
+            auto delta = LLONG_MAX;
             for (int j = 1; j <= m; j++)
                 if (!used[j]) {
-                    long long cur = cost[i0][j] - u[i0] - v[j];
+                    auto cur = cost[i0][j] - u[i0] - v[j];
                     if (cur < minv[j])
                         minv[j] = cur, way[j] = j0;
                     if (minv[j] < delta)

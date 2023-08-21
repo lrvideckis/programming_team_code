@@ -20,7 +20,7 @@ template <class T> struct lcp_query {
     lcp_query(const T& s, int max_val) {
         tie(sa, sa_inv) = get_sa(s, max_val);
         lcp = get_lcp_array(sa, sa_inv, s);
-        rmq = RMQ<int>(lcp, [](int x, int y) -> int {return min(x, y);});
+        rmq = {lcp, [](int x, int y) -> int {return min(x, y);}};
     }
     /**
      * @param i1,i2 defines substrings [i1, n), [i2, n), note passing i1,i2 = n is okay

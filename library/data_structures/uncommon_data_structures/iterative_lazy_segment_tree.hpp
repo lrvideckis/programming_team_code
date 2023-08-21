@@ -69,7 +69,7 @@ struct iter_seg_tree {
         if (le == ri) return 0;
         le = to_leaf(le), ri = to_leaf(ri);
         push_parents(le, ri);
-        long long resl = 0, resr = 0;
+        auto resl = 0LL, resr = 0LL;
         for (; le < ri; le >>= 1, ri >>= 1) {
             if (le & 1) resl = op(resl, st.tree[le++]);
             if (ri & 1) resr = op(st.tree[--ri], resr);

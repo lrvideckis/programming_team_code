@@ -41,7 +41,7 @@ template <class T> struct count_pal_query {
         int man_le = 2 * le, man_ri = 2 * ri - 1, man_mi = (man_le + man_ri) / 2;
         //sum over range [man_le, man_mi) of:
         //    i / 2 - max(man[i], le) + 1
-        long long cnt = -1LL * wt_le.rect_count(man_le, man_mi, 0, le) * le;
+        auto cnt = -1LL * wt_le.rect_count(man_le, man_mi, 0, le) * le;
         cnt -= wt_le.rect_sum(man_le, man_mi, le, n);
         cnt += sum_consecutive(le, man_mi / 2) + sum_consecutive(le, (man_mi + 1) / 2);
         cnt += man_mi - man_le;

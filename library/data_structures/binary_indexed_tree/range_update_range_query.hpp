@@ -23,9 +23,9 @@ template <class T> struct bit_rurq {
     bit_rurq(const vector<T>& a) : n(ssize(a)) {
         vector<T> init(n);
         adjacent_difference(begin(a), end(a), begin(init));
-        bit1 = BIT<T>(init);
+        bit1 = {init};
         for (int i = 0; i < n; i++) init[i] *= i;
-        bit2 = BIT<T>(init);
+        bit2 = {init};
     }
     /**
      * does a[le] += d, a[le + 1] += d, ..., a[ri - 1] += d
