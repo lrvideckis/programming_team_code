@@ -10,7 +10,7 @@ int main() {
     vector<int> vals(n);
     for (int i = 0; i < n; i++)
         cin >> vals[i];
-    vector<pair<int, int>> edges(m);
+    vector<array<int, 2>> edges(m);
     for (auto & [u, v] : edges)
         cin >> u >> v;
     const int mod = 998'244'353;
