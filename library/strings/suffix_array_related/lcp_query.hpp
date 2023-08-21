@@ -18,7 +18,8 @@ template <class T> struct lcp_query {
      * @space O(n log n) for RMQ's; a O(max_val) vector `freq` is used temporarily during get_sa
      */
     lcp_query(const T& s, int max_val) {
-        tie(sa, sa_inv) = get_sa(s, max_val);
+        auto ret = get_sa(s, max_val);
+        sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
         rmq = {lcp, [](int x, int y) -> int {return min(x, y);}};
     }
