@@ -7,13 +7,13 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, m;
     cin >> n >> m;
-    vector<vector<pair<int, int>>> adj(n);
+    vector<vector<array<int, 2>>> adj(n);
     vector<pair<int, int>> edges(m);
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        adj[u].emplace_back(v, i);
-        adj[v].emplace_back(u, i);
+        adj[u].push_back({v, i});
+        adj[v].push_back({u, i});
         edges[i] = {u, v};
     }
     bridge_info cc = bridges(adj, m);

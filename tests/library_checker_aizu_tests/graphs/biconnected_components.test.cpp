@@ -7,13 +7,13 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, m;
     cin >> n >> m;
-    vector<vector<pair<int, int>>> adj(n);
+    vector<vector<array<int, 2>>> adj(n);
     vector<pair<int, int>> edges(m);
     for (int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        adj[u].emplace_back(v, i);
-        adj[v].emplace_back(u, i);
+        adj[u].push_back({v, i});
+        adj[v].push_back({u, i});
         edges[i] = make_pair(u, v);
     }
     cut_info cc = cuts(adj, m);
@@ -22,7 +22,7 @@ int main() {
         //cut node if there exists a pair of adjacent edges belonging to different BCCs
         bool is_cut = 0;
         for (int j = 0; j < ssize(adj[i]); j++) {
-            if (cc.bcc_id[adj[i][0].second] != cc.bcc_id[adj[i][j].second])
+            if (cc.bcc_id[adj[i][0][1]] != cc.bcc_id[adj[i][j][1]])
                 is_cut = 1;
         }
         assert(is_cut == cc.is_cut[i]);

@@ -34,7 +34,7 @@ struct mcmf {
      * - cost: minimum sum of: (edge.flow * edge.cost) over each edge (over all
      *   ways to send `flow` flow)
      */
-    pair<ll, ll> get_flow(int s, int t, ll total_flow) {
+    array<ll, 2> get_flow(int s, int t, ll total_flow) {
         ll flow = 0, cost = 0;
         while (flow < total_flow) {
             vector d(n, LLONG_MAX);

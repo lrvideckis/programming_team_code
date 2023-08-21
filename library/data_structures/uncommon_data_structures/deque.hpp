@@ -13,6 +13,7 @@
  * @endcode
  */
 template <class T, class F = function<T(T, T)>> struct deq {
+    using dt = array<T, 2>;
     F op;
     /**
      * @see https://github.com/suisen-cp/cp-library-cpp /blob/main/library/datastructure/deque_aggregation.hpp
@@ -23,7 +24,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      *   (     le     ][  ri    )
      * @{
      */
-    vector<pair<T, T>> le, ri;
+    vector<dt> le, ri;
     /** @} */
     /**
      * @param arr initial array: arr[0] is front, arr.back() is back
@@ -39,9 +40,9 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T query() const {
         assert(size());
-        if (le.empty()) return ri.back().second;
-        if (ri.empty()) return le.back().second;
-        return op(le.back().second, ri.back().second);
+        if (le.empty()) return ri.back()[1];
+        if (ri.empty()) return le.back()[1];
+        return op(le.back()[1], ri.back()[1]);
     }
     /**
      * @returns size
@@ -56,7 +57,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T front() const {
         assert(size());
-        return (le.empty() ? ri[0] : le.back()).first;
+        return (le.empty() ? ri[0] : le.back())[0];
     }
     /**
      * @returns deq.back()
@@ -65,7 +66,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T back() const {
         assert(size());
-        return (ri.empty() ? le[0] : ri.back()).first;
+        return (ri.empty() ? le[0] : ri.back())[0];
     }
     /**
      * @param i index
@@ -75,7 +76,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T operator[](int i) const {
         assert(0 <= i && i < size());
-        return (i < ssize(le) ? le[ssize(le) - i - 1] : ri[i - ssize(le)]).first;
+        return (i < ssize(le) ? le[ssize(le) - i - 1] : ri[i - ssize(le)])[0];
     }
     /**
      * @param elem element to insert at beginning
@@ -83,7 +84,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      * @space O(1)
      */
     inline void push_front(T elem) {
-        le.emplace_back(elem, le.empty() ? elem : op(elem, le.back().second));
+        le.push_back({elem, le.empty() ? elem : op(elem, le.back()[1])});
     }
     /**
      * @param elem element to insert at end
@@ -91,7 +92,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      * @space O(1)
      */
     inline void push_back(T elem) {
-        ri.emplace_back(elem, ri.empty() ? elem : op(ri.back().second, elem));
+        ri.push_back({elem, ri.empty() ? elem : op(ri.back()[1], elem)});
     }
     /**
      * remove deq[0]
@@ -102,7 +103,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
         assert(size());
         if (le.empty()) {
             vector<T> arr(ssize(ri));
-            transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x.first;});
+            transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x[0];});
             rebuild(arr, (ssize(arr) + 1) / 2);
         }
         assert(!le.empty());
@@ -117,7 +118,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
         assert(size());
         if (ri.empty()) {
             vector<T> arr(ssize(le));
-            transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x.first;});
+            transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x[0];});
             rebuild(arr, ssize(arr) / 2);
         }
         assert(!ri.empty());
@@ -129,7 +130,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
         partial_sum(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, op);
         le.resize(sz_le);
         ri.resize(ssize(arr) - sz_le);
-        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) {return pair(x, y);});
-        transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](T x, T y) {return pair(x, y);});
+        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) -> dt {return {x, y};});
+        transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](T x, T y) -> dt {return {x, y};});
     }
 };

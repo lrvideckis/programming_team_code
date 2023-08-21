@@ -12,13 +12,14 @@ struct cut_info {
  * @see https://cp-algorithms.com/graph/cutpoints.html
  *
  * @code{.cpp}
- *     vector<vector<pair<int, int>>> adj;
+ *
+ *     vector<vector<array<int, 2>>> adj;
  *     for (int i = 0; i < m; i++) {
  *         int u, v;
  *         cin >> u >> v;
  *         u--, v--;
- *         adj[u].emplace_back(v, i);
- *         adj[v].emplace_back(u, i);
+ *         adj[u].push_back({v, i});
+ *         adj[v].push_back({u, i});
  *     }
  *     auto [num_bccs, is_cut, bcc_id] = cuts(adj, m);
  * @endcode
@@ -28,7 +29,7 @@ struct cut_info {
  * @time O(n + m)
  * @space this function allocates and returns a `cut_info` struct, which is O(n + m)
  */
-cut_info cuts(const vector<vector<pair<int, int>>>& adj, int m) {
+cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_bccs = 0;
     vector<int> tin(n), bcc_id(m), st;
     vector<bool> is_cut(n);

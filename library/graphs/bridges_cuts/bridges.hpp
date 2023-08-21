@@ -12,13 +12,13 @@ struct bridge_info {
  * @see https://cp-algorithms.com/graph/bridge-searching.html
  *
  * @code{.cpp}
- *     vector<vector<pair<int, int>>> adj;
+ *     vector<vector<array<int, 2>>> adj;
  *     for (int i = 0; i < m; i++) {
  *         int u, v;
  *         cin >> u >> v;
  *         u--, v--;
- *         adj[u].emplace_back(v, i);
- *         adj[v].emplace_back(u, i);
+ *         adj[u].push_back({v, i});
+ *         adj[v].push_back({u, i});
  *     }
  *     auto [num_2_edge_ccs, is_bridge, two_edge_ccid] = bridges(adj, m);
  * @endcode
@@ -28,7 +28,7 @@ struct bridge_info {
  * @time O(n + m)
  * @space this function allocates and returns a `bridge_info` struct, which is O(n + m)
  */
-bridge_info bridges(const vector<vector<pair<int, int>>>& adj, int m) {
+bridge_info bridges(const vector<vector<array<int, 2>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_2_edge_ccs = 0;
     vector<int> tin(n), two_edge_ccid(n), st;
     vector<bool> is_bridge(m);
