@@ -4,7 +4,7 @@
 - [template.cpp](library/contest/template.cpp)
 
 ## Testing and Linting
-[![Actions Status](https://github.com/lrvideckis/programming_team_code/workflows/verify/badge.svg)](https://github.com/lrvideckis/programming_team_code/actions)
+[Actions Status](https://github.com/lrvideckis/programming_team_code/actions)
 
 see [tests/README.md](tests/README.md)
 
