@@ -76,7 +76,26 @@ int main() {
         } else {
             assert(1 <= v && v < q);
             if (((tr - tl) & (tr - tl - 1)) == 0) assert(split(tl, tr) == (tl + tr) / 2);
+            {
+                int pow_2 = 1 << __lg(tr - tl);
+                if (tl + pow_2 < tr - pow_2 / 2) {
+                    assert(pow_2 != tr - tl);
+                    assert(pow_2 / 2 < tr - tl - pow_2 && tr - tl - pow_2 < pow_2);
+                    assert(pow_2 <= 2 * (tr - tl - pow_2) - 1 && 2 * (tr - tl - pow_2) - 1 < 2 * pow_2 - 1);
+                    assert(__lg(pow_2) == __lg(2 * ((tr - tl) - pow_2) - 1) && __lg(pow_2) == __lg(2 * pow_2 - 1));
+                } else if (pow_2 < tr - tl) {
+                    assert(pow_2 / 2 < tr - tl - pow_2 / 2 && tr - tl - pow_2 / 2 <= pow_2);
+                    assert(pow_2 <= 2 * ((tr - tl) - pow_2 / 2) - 1 && 2 * ((tr - tl) - pow_2 / 2) - 1 <= 2 * pow_2 - 1);
+                    assert(__lg(2 * (tr - tl - pow_2 / 2) - 1) == __lg(2 * pow_2 - 1));
+                    assert(__lg(2 * ((tr - tl) - pow_2 / 2) - 1) == __lg(pow_2));
+                    assert(__lg(pow_2) == 1 + __lg(2 * (pow_2 / 2) - 1));
+                }
+            }
             int tm = split(tl, tr);
+            //in particular, this tests that split works with negatives
+            assert(split(tl - 1234, tr - 1234) == tm - 1234);
+            assert(split(tl - 1, tr - 1) == tm - 1);
+            assert(split(tl + 50, tr + 50) == tm + 50);
             self(self, tl, tm, 2 * v);
             self(self, tm, tr, 2 * v + 1);
         }
