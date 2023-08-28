@@ -16,24 +16,24 @@ struct trie {
     vector<node> t;
     trie() : t(1) {}
     void insert(const string& s) {
-        int v = 0;
+        int u = 0;
         for (auto ch : s) {
-            int let = ch - mn;
-            if (t[v].next[let] == -1) {
-                t[v].next[let] = ssize(t);
-                t.emplace_back(v, ch);
+            int v = ch - mn;
+            if (t[u].next[v] == -1) {
+                t[u].next[v] = ssize(t);
+                t.emplace_back(u, ch);
             }
-            v = t[v].next[let];
+            u = t[u].next[v];
         }
-        t[v].cnt_words++;
+        t[u].cnt_words++;
     }
     int find(const string& s) const {
-        int v = 0;
+        int u = 0;
         for (auto ch : s) {
-            int let = ch - mn;
-            if (t[v].next[let] == -1) return 0;
-            v = t[v].next[let];
+            int v = ch - mn;
+            if (t[u].next[v] == -1) return 0;
+            u = t[u].next[v];
         }
-        return t[v].cnt_words;
+        return t[u].cnt_words;
     }
 };

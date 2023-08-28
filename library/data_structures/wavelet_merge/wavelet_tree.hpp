@@ -37,18 +37,18 @@ struct wavelet_tree {
     wavelet_tree(vector<int> arr, int a_minv, int a_maxv) : n(ssize(arr)), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), presums(maxv - minv) {
         build(arr, 0, n, minv, maxv, 1);
     }
-    void build(vector<int>& arr, int le, int ri, int tl, int tr, int v) {
+    void build(vector<int>& arr, int le, int ri, int tl, int tr, int u) {
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         auto low = [&](int val) -> bool {return val < tm;};
         vector<bool> bools(ri - le);
         transform(begin(arr) + le, begin(arr) + ri, begin(bools), low);
-        bool_presums[v] = bool_presum(bools);
-        presums[v].resize(ri - le + 1);
-        inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(presums[v]) + 1, plus<long long>(), 0LL);
+        bool_presums[u] = bool_presum(bools);
+        presums[u].resize(ri - le + 1);
+        inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(presums[u]) + 1, plus<long long>(), 0LL);
         int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
-        build(arr, le, mi, tl, tm, 2 * v);
-        build(arr, mi, ri, tm, tr, 2 * v + 1);
+        build(arr, le, mi, tl, tm, 2 * u);
+        build(arr, mi, ri, tm, tr, 2 * u + 1);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
@@ -60,12 +60,12 @@ struct wavelet_tree {
         assert(0 <= le && le <= ri && ri <= n && x <= y);
         return rect_count_impl(le, ri, x, y, minv, maxv, 1);
     }
-    int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
+    int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int u) const {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
-        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
-        return rect_count_impl(pl, pr, x, y, tl, tm, 2 * v) +
-               rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
+        int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
+        return rect_count_impl(pl, pr, x, y, tl, tm, 2 * u) +
+               rect_count_impl(le - pl, ri - pr, x, y, tm, tr, 2 * u + 1);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
@@ -77,12 +77,12 @@ struct wavelet_tree {
         assert(0 <= le && le <= ri && ri <= n && x <= y);
         return rect_sum_impl(le, ri, x, y, minv, maxv, 1);
     }
-    long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int v) const {
+    long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int u) const {
         if (y <= tl || tr <= x) return 0;
-        if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : presums[v][ri] - presums[v][le]);
-        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
-        return rect_sum_impl(pl, pr, x, y, tl, tm, 2 * v) +
-               rect_sum_impl(le - pl, ri - pr, x, y, tm, tr, 2 * v + 1);
+        if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : presums[u][ri] - presums[u][le]);
+        int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
+        return rect_sum_impl(pl, pr, x, y, tl, tm, 2 * u) +
+               rect_sum_impl(le - pl, ri - pr, x, y, tm, tr, 2 * u + 1);
     }
     /**
      * @param le,ri defines range [le, ri)
@@ -98,11 +98,11 @@ struct wavelet_tree {
         assert(1 <= k && k <= ri - le);
         return kth_smallest_impl(le, ri, k, minv, maxv, 1);
     }
-    int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int v) const {
+    int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int u) const {
         if (tr - tl == 1) return tl;
-        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
-        if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * v);
-        return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+        int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
+        if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * u);
+        return kth_smallest_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * u + 1);
     }
     /**
      * @param le,ri defines range [le, ri)
@@ -119,11 +119,11 @@ struct wavelet_tree {
         assert(0 <= k && k <= ri - le);
         return kth_sum_impl(le, ri, k, minv, maxv, 1);
     }
-    long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int v) const {
+    long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int u) const {
         if (tr - tl == 1) return 1LL * k * tl;
-        int tm = split(tl, tr), pl = bool_presums[v].popcount(le), pr = bool_presums[v].popcount(ri);
-        if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * v);
-        auto sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : presums[2 * v][pr] - presums[2 * v][pl]);
-        return sum_left + kth_sum_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * v + 1);
+        int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
+        if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * u);
+        auto sum_left = (tm - tl == 1 ? 1LL * tl * (pr - pl) : presums[2 * u][pr] - presums[2 * u][pl]);
+        return sum_left + kth_sum_impl(le - pl, ri - pr, k - (pr - pl), tm, tr, 2 * u + 1);
     }
 };
