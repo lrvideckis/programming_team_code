@@ -38,7 +38,8 @@ int main() {
             }
             int order = bit.sum(k);
             int res = lower_bound(bit, order + 1);
-            assert(res == lower_bound(st, order + 1));
+            auto res_st = lower_bound(st, order + 1);
+            assert(res == res_st);
             if (res == n + 1)
                 res = 0;
             cout << res - 1 << '\n';
@@ -49,7 +50,8 @@ int main() {
             }
             int order = bit.sum(k);
             int res = lower_bound(bit, order);
-            assert(res == lower_bound(st, order));
+            auto res_st = lower_bound(st, order);
+            assert(res == res_st);
             cout << res - 1 << '\n';
         }
     }
