@@ -29,40 +29,40 @@ struct seg_tree {
         for (int i = 0; i < n; i++) tree[(i + pw2) % n + n] = arr[i];
         for (int i = n - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
     }
-    inline void apply(long long change, int tl, int tr, int v) {
-        tree[v] += (tr - tl) * change;
-        if (v < n) lazy[v] += change;
+    inline void apply(long long change, int tl, int tr, int u) {
+        tree[u] += (tr - tl) * change;
+        if (u < n) lazy[u] += change;
     }
-    inline void push(int tl, int tm, int tr, int v) {
-        if (lazy[v]) {
-            apply(lazy[v], tl, tm, 2 * v);
-            apply(lazy[v], tm, tr, 2 * v + 1);
-            lazy[v] = 0;
+    inline void push(int tl, int tm, int tr, int u) {
+        if (lazy[u]) {
+            apply(lazy[u], tl, tm, 2 * u);
+            apply(lazy[u], tm, tr, 2 * u + 1);
+            lazy[u] = 0;
         }
     }
     /**
      * @param le,ri defines range [le, ri)
      */
     void update(int le, int ri, long long change) {update(le, ri, change, 0, n, 1);}
-    void update(int le, int ri, long long change, int tl, int tr, int v) {
+    void update(int le, int ri, long long change, int tl, int tr, int u) {
         if (ri <= tl || tr <= le) return;
-        if (le <= tl && tr <= ri) return apply(change, tl, tr, v);
+        if (le <= tl && tr <= ri) return apply(change, tl, tr, u);
         int tm = split(tl, tr);
-        push(tl, tm, tr, v);
-        update(le, ri, change, tl, tm, 2 * v);
-        update(le, ri, change, tm, tr, 2 * v + 1);
-        tree[v] = op(tree[2 * v], tree[2 * v + 1]);
+        push(tl, tm, tr, u);
+        update(le, ri, change, tl, tm, 2 * u);
+        update(le, ri, change, tm, tr, 2 * u + 1);
+        tree[u] = op(tree[2 * u], tree[2 * u + 1]);
     }
     /**
      * @param le,ri defines range [le, ri)
      */
     long long query(int le, int ri) {return query(le, ri, 0, n, 1);}
-    long long query(int le, int ri, int tl, int tr, int v) {
+    long long query(int le, int ri, int tl, int tr, int u) {
         if (ri <= tl || tr <= le) return 0;
-        if (le <= tl && tr <= ri) return tree[v];
+        if (le <= tl && tr <= ri) return tree[u];
         int tm = split(tl, tr);
-        push(tl, tm, tr, v);
-        return op(query(le, ri, tl, tm, 2 * v),
-                  query(le, ri, tm, tr, 2 * v + 1));
+        push(tl, tm, tr, u);
+        return op(query(le, ri, tl, tm, 2 * u),
+                  query(le, ri, tm, tr, 2 * u + 1));
     }
 };
