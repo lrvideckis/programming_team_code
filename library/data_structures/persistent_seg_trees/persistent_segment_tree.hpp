@@ -33,14 +33,14 @@ struct PST {
         assert(0 <= version && version < ssize(roots));
         roots.push_back(update_impl(idx, change, root_l, root_r, roots[version]));
     }
-    int update_impl(int idx, long long change, int tl, int tr, int v) {
+    int update_impl(int idx, long long change, int tl, int tr, int u) {
         if (tr - tl == 1) {
-            tree.emplace_back(tree[v].sum + change, 0, 0);
+            tree.emplace_back(tree[u].sum + change, 0, 0);
             return ssize(tree) - 1;
         }
         int tm = tl + (tr - tl) / 2;
-        int lch = tree[v].lch;
-        int rch = tree[v].rch;
+        int lch = tree[u].lch;
+        int rch = tree[u].rch;
         if (idx < tm)
             lch = update_impl(idx, change, tl, tm, lch);
         else
@@ -60,11 +60,11 @@ struct PST {
         assert(0 <= version && version < ssize(roots));
         return query_impl(le, ri, root_l, root_r, roots[version]);
     }
-    long long query_impl(int le, int ri, int tl, int tr, int v) const {
-        if (v == 0 || ri <= tl || tr <= le) return 0;
-        if (le <= tl && tr <= ri) return tree[v].sum;
+    long long query_impl(int le, int ri, int tl, int tr, int u) const {
+        if (u == 0 || ri <= tl || tr <= le) return 0;
+        if (le <= tl && tr <= ri) return tree[u].sum;
         int tm = tl + (tr - tl) / 2;
-        return query_impl(le, ri, tl, tm, tree[v].lch) +
-               query_impl(le, ri, tm, tr, tree[v].rch);
+        return query_impl(le, ri, tl, tm, tree[u].lch) +
+               query_impl(le, ri, tm, tr, tree[u].rch);
     }
 };
