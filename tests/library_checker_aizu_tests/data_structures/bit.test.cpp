@@ -15,7 +15,7 @@ int main() {
     vector<int> arr_int(n);
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
-        arr_int[i] = arr[i];
+        arr_int[i] = int(arr[i]);
     }
     BIT<long long> bit(arr);
     seg_tree st(arr_int);
