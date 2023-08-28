@@ -29,7 +29,8 @@ int main() {
             }
         } else if (type == 2) {
             int res = bit.sum(k, k + 1);
-            assert(res == st.query(k, k + 1));
+            auto res_st = st.query(k, k + 1);
+            assert(res == res_st);
             cout << res << '\n';
         } else if (type == 3) {
             if (bit.sum(k, k + 1) == 1) {
