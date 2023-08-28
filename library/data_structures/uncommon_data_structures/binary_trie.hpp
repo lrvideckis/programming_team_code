@@ -27,19 +27,19 @@ template <class T> struct binary_trie {
      * @space O(mx_bit) new nodes are pushed back onto `t`
      */
     int update(T val, int delta) {
-        int c = 0;
+        int u = 0;
         t[0].sub_sz += delta;
         for (int bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
-            if (t[c].next[v] == -1) {
-                t[c].next[v] = ssize(t);
+            if (t[u].next[v] == -1) {
+                t[u].next[v] = ssize(t);
                 t.emplace_back();
             }
-            c = t[c].next[v];
-            t[c].sub_sz += delta;
+            u = t[u].next[v];
+            t[u].sub_sz += delta;
         }
-        t[c].val = val;
-        return t[c].sub_sz;
+        t[u].val = val;
+        return t[u].sub_sz;
     }
     /**
      * @returns number of integers in this multiset.
@@ -56,15 +56,15 @@ template <class T> struct binary_trie {
      */
     T min_xor(T val) const {
         assert(size() > 0);
-        int c = 0;
+        int u = 0;
         for (int bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
-            int ch = t[c].next[v];
+            int ch = t[u].next[v];
             if (ch != -1 && t[ch].sub_sz > 0)
-                c = ch;
+                u = ch;
             else
-                c = t[c].next[!v];
+                u = t[u].next[!v];
         }
-        return t[c].val;
+        return t[u].val;
     }
 };

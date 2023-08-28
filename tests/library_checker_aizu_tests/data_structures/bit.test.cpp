@@ -1,17 +1,24 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 #include "../template.hpp"
+#include "../../../library/contest/random.hpp"
 
 #include "../../../library/data_structures/binary_indexed_tree/range_update_point_query.hpp"
 #include "../../../library/data_structures/binary_indexed_tree/range_update_range_query.hpp"
+#include "../../../library/data_structures/binary_indexed_tree/lower_bound.hpp"
+#include "../../../library/data_structures/lazy_segment_tree/lower_bound.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, q;
     cin >> n >> q;
     vector<long long> arr(n);
-    for (int i = 0; i < n; i++)
+    vector<int> arr_int(n);
+    for (int i = 0; i < n; i++) {
         cin >> arr[i];
+        arr_int[i] = int(arr[i]);
+    }
     BIT<long long> bit(arr);
+    seg_tree st(arr_int);
     bit_rurq<long long> bit_rr(arr);
     vector<long long> suf_sum(n);
     partial_sum(rbegin(arr), rend(arr), rbegin(suf_sum));
@@ -28,6 +35,7 @@ int main() {
             int p, x;
             cin >> p >> x;
             bit.update(p, x);
+            st.update(p, p + 1, x);
             bit_rr.update(p, p + 1, x);
             bit_i.update(0, p + 1, x);
         } else {
@@ -42,6 +50,10 @@ int main() {
             assert(res == bit_rr.sum(l, r));
             cout << res << '\n';
         }
+        auto sum = get_rand<long long>(0LL, (long long)(1e12));
+        int pos_bit = lower_bound(bit, sum);
+        int pos_st = lower_bound(st, sum);
+        assert(pos_bit == pos_st);
     }
     return 0;
 }

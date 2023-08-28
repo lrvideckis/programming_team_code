@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../lazy_segment_tree.hpp"
+#include "lazy.hpp"
 /**
  * @see https://codeforces.com/blog/entry/18051
  *
@@ -10,7 +10,7 @@
 struct iter_seg_tree {
     seg_tree st;
     iter_seg_tree(const seg_tree& a_st) : st(a_st) {}
-    inline void pull(int v) {st.tree[v] = op(st.tree[2 * v], st.tree[2 * v + 1]);}
+    inline void pull(int u) {st.tree[u] = op(st.tree[2 * u], st.tree[2 * u + 1]);}
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
