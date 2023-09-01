@@ -4,12 +4,19 @@
 #include "../../../library/math/prime_sieve/is_prime.hpp"
 #include "../../../library/math/prime_sieve/get_prime_factors.hpp"
 
+#define mx_n mx_n_linear
+#define sieve linear_sieve
+#define calc_sieve calc_linear_sieve
+#include "../../../library/math/prime_sieve/calc_linear_sieve.hpp"
+
 #include "../../../kactl/content/number-theory/MillerRabin.h"
 
 int main() {
     calc_sieve();
-    for (int i = 1; i < mx_n; i++)
+    for (int i = 1; i < mx_n; i++) {
         assert(isPrime(i) == is_prime(i));
+        assert(sieve[i] == linear_sieve[i]);
+    }
     int n;
     cin >> n;
     map<int, int> prime_to_max_exponent;
