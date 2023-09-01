@@ -15,6 +15,7 @@ vector<int> get_prime_factors(int val) {
     assert(val < mx_n && sieve[1] == 1);
     vector<int> factors;
     while (val > 1) {
+        assert(val < mx_n);
         int p = sieve[val];
         factors.push_back(p);
         val /= p;
