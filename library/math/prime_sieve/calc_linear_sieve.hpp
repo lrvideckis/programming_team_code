@@ -17,7 +17,7 @@ vector<int> calc_sieve() {
             int prod = prime * i;
             if (prod >= mx_n)
                 break;
-            sieve[prod] = min(sieve[prod], prime);
+            sieve[prod] = prime;
             if (i % prime == 0)
                 break;
         }
