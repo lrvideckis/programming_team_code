@@ -4,22 +4,23 @@ const int mx_n = 1001;
 int sieve[mx_n];
 /**
  * @returns a list of all of the primes < mx_n
- * @time O(mx_n * log(log mx_n))
- * @space O(mx_n) for `sieve` vector
+ * @time O(mx_n)
+ * @space O(mx_n)
  */
 vector<int> calc_sieve() {
-    iota(begin(sieve), end(sieve), 0);
-    vector<int> primes;
-    for (int i = 2; i < mx_n; i++) {
-        if (sieve[i] == i) {
-            for (int prime : primes) {
-                int prod = prime * i;
-                if (prod >= mx_n || prime % i == 0)
-                    break;
-                sieve[prod] = i;
-            }
-            primes.push_back(i);
+        iota(begin(sieve), end(sieve), 0);
+        vector<int> primes;
+        for (int i = 2; i < mx_n; i++) {
+                if (sieve[i] == i)
+                        primes.push_back(i);
+                for (int prime : primes) {
+                        int prod = prime * i;
+                        if (prod >= mx_n)
+                                break;
+                        sieve[prod] = min(sieve[prod], prime);
+                        if (i % prime == 0)
+                                break;
+                }
         }
-    }
-    return primes;
+        return primes;
 }
