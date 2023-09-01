@@ -976,7 +976,6 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          inv \
                          fact \
                          inv_fact \
-                         sieve \
                          custom_hash \
                          query_impl \
                          update_impl \

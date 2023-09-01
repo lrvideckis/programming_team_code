@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 const int mx_n = 1001;
-int sieve[mx_n];
+int sieve[mx_n]; /**< for val >= 2, sieve[val] = smallest prime p such that val % p == 0 */
 /**
  * @returns a list of all of the primes < mx_n
  * @time O(mx_n)
