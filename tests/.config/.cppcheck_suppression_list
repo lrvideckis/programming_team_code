@@ -24,4 +24,6 @@ unusedScopedObject:library_checker_aizu_tests/graphs/count_paths_per_length.test
 unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14
 knownConditionTrueFalse:../library/math/n_choose_k/choose_lucas.hpp:13
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
+arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:10
+arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:17
 variableScope:../kactl/content/number-theory/Factor.h:47
