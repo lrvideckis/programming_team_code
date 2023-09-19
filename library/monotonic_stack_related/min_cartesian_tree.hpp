@@ -47,7 +47,7 @@ struct min_tree {
  * @time O(n)
  * @space this function allocates/returns min_tree struct which is O(n)
  */
-template<class T> min_tree min_cartesian_tree(const vector<T>& arr) {
+template <class T> min_tree min_cartesian_tree(const vector<T>& arr) {
     int n = ssize(arr);
     auto [le, ri] = min_range(arr);
     vector<int> to_min(n);
