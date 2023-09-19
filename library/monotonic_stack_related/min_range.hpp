@@ -15,7 +15,7 @@
  * @time O(n)
  * @space two O(n) vectors are allocated and returned
  */
-array<vector<int>, 2> min_range(const vector<int>& arr) {
+template<class T> array<vector<int>, 2> min_range(const vector<T>& arr) {
     vector le = monotonic_stack(arr, less_equal());
     vector ri = monotonic_stack({rbegin(arr), rend(arr)}, less());
     reverse(begin(ri), end(ri));
