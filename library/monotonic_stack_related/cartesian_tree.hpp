@@ -6,6 +6,22 @@
  */
 struct cart_tree {
     /**
+     * arr = {2, 1, 3, 1, 0, 1, 2, 2, 0, 2}
+     *       (------------------------x---)
+     *       (---------x)   (x------) | (x)
+     *       (x)   (x) |     | (---x) |  |
+     *        |     |  |     |     |  |  |
+     * index: 0  1  2  3  4  5  6  7  8  9
+     * root = 8; (note root can = -1 iff arr is empty)
+     * u | adj[u]
+     * 8 | 3, 5, 9
+     * 3 | 0, 2
+     * 5 | 7
+     * indexes 1, 4, 6 are not nodes as they are not the right-most extrema of their subarrays
+     * to_extrema[1] = 3
+     * to_extrema[4] = 8
+     * to_extrema[6] = 7
+     * else to_extrema[i] = i
      * @{
      */
     int root;
