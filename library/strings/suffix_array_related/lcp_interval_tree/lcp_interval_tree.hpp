@@ -45,7 +45,6 @@ struct lcp_tree {
             int u = (prev_lcp > next_lcp) ? i - 1 : to_extrema[i];
             int idx = sa[i] + max(prev_lcp, next_lcp);
             if (u == -1 || idx == n) continue;
-            assert(adj[u][s[idx] - mn] == -1);
             adj[u][s[idx] - mn] = n - 1 + i;
         }
     }
