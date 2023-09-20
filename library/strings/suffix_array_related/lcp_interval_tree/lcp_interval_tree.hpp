@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../../monotonic_stack_related/min_cartesian_tree.hpp"
+#include "../../../monotonic_stack_related/cartesian_tree.hpp"
 #include "../suffix_array.hpp"
 #include "../lcp_array.hpp"
 const int mn = '0', len = 75; // lower case letters and digits
@@ -30,17 +30,18 @@ struct lcp_tree {
         auto ret = get_sa(s, mn + len);
         sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
-        auto [a_root, a_adj, a_le, a_ri, to_min] = min_cartesian_tree(lcp);
+        auto [a_root, a_adj, a_le, a_ri, to_extrema] = get_cart_tree(lcp, less());
         root = max(a_root, 0), le = a_le, ri = a_ri;
         for (int u = 0; u < n - 1; u++)
             for (int v : a_adj[u])
                 adj[u][s[sa[v] + lcp[u]] - mn] = v;
         for (int i = 0; i < n; i++) {
-            int prev_lcp = (i ? lcp[i - 1] : -1);
-            int next_lcp = (i < n - 1 ? lcp[i] : 0);
-            int u = (prev_lcp < next_lcp) ? i : to_min[i - 1];
+            int prev_lcp = (i ? lcp[i - 1] : 0);
+            int next_lcp = (i < n - 1 ? lcp[i] : -1);
+            int u = (prev_lcp > next_lcp) ? i - 1 : to_extrema[i];
             int idx = sa[i] + max(prev_lcp, next_lcp);
-            if (u == n - 1 || idx == n) continue;
+            if (u == -1 || idx == n) continue;
+            assert(adj[u][s[idx] - mn] == -1);
             adj[u][s[idx] - mn] = n - 1 + i;
         }
     }
