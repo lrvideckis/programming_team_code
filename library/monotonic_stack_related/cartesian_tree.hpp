@@ -21,6 +21,7 @@ struct cart_tree {
  *     auto [root, adj, le, ri, to_extrema] = get_cart_tree(arr, greater());
  * @endcode
  * @param arr array of integers (there can be duplicates)
+ * @param less comparator
  * @returns see cart_tree
  * @time O(n)
  * @space this function allocates/returns cart_tree struct which is O(n)
