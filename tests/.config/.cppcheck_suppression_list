@@ -10,7 +10,7 @@ unusedStructMember:../library/graphs/bridges_cuts/bridges.hpp:7
 unusedStructMember:../library/graphs/bridges_cuts/cuts.hpp:7
 unusedStructMember:../library/flow/hungarian.hpp:9
 unusedStructMember:../library/strings/suffix_array_related/find/match.hpp:22
-unusedStructMember:../library/monotonic_stack_related/min_cartesian_tree.hpp:27
+unusedStructMember:../library/monotonic_stack_related/cartesian_tree.hpp:28
 functionConst:../kactl/content/data-structures/SubMatrix.h:24
 useStlAlgorithm:../kactl/content/numerical/FastFourierTransform.h:53
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
