@@ -4,7 +4,7 @@
 /**
  * @code{.cpp}
  *     vector<int> arr;
- *     auto [le, ri] = mono_range(arr, less()); //less, less_equal, greater, greater_equal
+ *     auto [le, ri] = mono_range(arr, less()); //less(), less_equal(), greater(), greater_equal()
  *     // or
  *     vector<long long> arr;
  *     auto [le, ri] = mono_range<long long>(arr, less<long long>());

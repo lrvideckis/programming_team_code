@@ -3,7 +3,7 @@
 /**
  * @code{.cpp}
  *     vector<T> arr;
- *     vector<int> le = mono_st(arr, less()); //less, less_equal, greater, greater_equal
+ *     vector<int> le = mono_st(arr, less()); //less(), less_equal(), greater(), greater_equal()
  * @endcode
  * @param arr array
  * @param less any transitive compare operator
