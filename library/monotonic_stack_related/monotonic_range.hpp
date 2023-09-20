@@ -10,6 +10,7 @@
  *     auto [le, ri] = mono_range<long long>(arr, less<long long>());
  * @endcode
  * @param arr array
+ * @param less comparator
  * @returns (if you pass in less()) vectors le, ri such that:
  *     - le[i] < i < ri[i]
  *     - arr[i] is the min of exclusive-exclusive range (le[i], ri[i])
