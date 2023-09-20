@@ -14,8 +14,12 @@ const int mn = '0', len = 75; // lower case letters and digits
  *     lcp_tree lt(s, 256);
  * @endcode
  *
- * internal nodes are a subset of [1, n - 1)
- * leaf nodes are [n - 1, 2 * n - 1), each leaf represents a single suffix
+ * internal nodes are a subset of [1, n - 1), each internal node represents:
+ *     - a prefix of some suffix; in the suffix tree, each edge has some substring. This prefix of suffix corresponds to this substring
+ *     - a range in the suffix array
+ *     - a lcp value of this range of suffixes representing length of prefix of these suffixes
+ * leaf nodes are [n - 1, 2 * n - 1), each leaf represents:
+ *     - a single suffix
  */
 struct lcp_tree {
     int n, root;
