@@ -10,7 +10,6 @@ int main() {
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
     auto [root, adj, le, ri, to_extrema] = get_cart_tree(arr, less());
-
     vector<int> arr_neg(n);
     transform(begin(arr), end(arr), begin(arr_neg), [](int x) {return -x;});
     auto [root_neg, adj_neg, le_neg, ri_neg, to_extrema_neg] = get_cart_tree(arr_neg, greater());
@@ -19,7 +18,6 @@ int main() {
     assert(le == le_neg);
     assert(ri == ri_neg);
     assert(to_extrema == to_extrema_neg);
-
     vector<int> par(n, -1);
     par[root] = root;
     for (int i = 0; i < n; i++) {
