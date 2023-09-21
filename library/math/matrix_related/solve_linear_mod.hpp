@@ -12,7 +12,7 @@ struct matrix_info {
 /**
  * Solves mat * x = b under prime mod. Number of unique solutions = (size of
  * domain) ^ (# of free variables). (# of free variables) is generally
- * equivalent to n - rank.
+ * equivalent to m - rank.
  *
  * @param mat n (rows) by m (cols) matrix; left in reduced row echelon form
  * @param b length n column vector
