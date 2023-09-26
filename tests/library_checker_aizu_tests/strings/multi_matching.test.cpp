@@ -12,6 +12,16 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    {
+        lcp_tree lt(string(""));
+        auto [sa_le, sa_ri, str_le, str_ri] = find_str(string(""), lt.sa, string(""));
+        assert(sa_le == 0 && sa_ri == 0 && str_le == 0 && str_ri == 0);
+    }
+    {
+        find_bwt fb(string(""), vector<int>());
+        auto [sa_le, sa_ri] = fb.find_str(string(""));
+        assert(sa_le == 0 && sa_ri == 0);
+    }
     string s;
     cin >> s;
     lcp_tree lt(s);
