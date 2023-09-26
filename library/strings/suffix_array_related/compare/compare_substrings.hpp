@@ -3,20 +3,20 @@
 #include "../lcp_query.hpp"
 /**
  * @param lq lcp query struct
- * @param s_le1,s_ri1 first substring [s_le1, s_ri1)
- * @param s_le2,s_ri2 second substring [s_le2, s_ri2)
+ * @param le1,ri1 first substring [le1, ri1)
+ * @param le2,ri2 second substring [le2, ri2)
  * @returns a value `cmp` where:
- *     - cmp < 0 iff s.substr(s_le1, s_ri1 - s_le1) < s.substr(s_le2, s_ri2 - s_le2)
- *     - cmp = 0 iff s.substr(s_le1, s_ri1 - s_le1) = s.substr(s_le2, s_ri2 - s_le2)
- *     - cmp > 0 iff s.substr(s_le1, s_ri1 - s_le1) > s.substr(s_le2, s_ri2 - s_le2)
+ *     - cmp < 0 iff s.substr(le1, ri1 - le1) < s.substr(le2, ri2 - le2)
+ *     - cmp = 0 iff s.substr(le1, ri1 - le1) = s.substr(le2, ri2 - le2)
+ *     - cmp > 0 iff s.substr(le1, ri1 - le1) > s.substr(le2, ri2 - le2)
  * @time O(1)
  * @space O(1)
  */
 template <class T> inline int substr_cmp(const lcp_query<T>& lq,
-        int s_le1, int s_ri1, int s_le2, int s_ri2) {
-    assert(0 <= s_le1 && s_le1 <= s_ri1 && s_ri1 <= ssize(lq.sa));
-    assert(0 <= s_le2 && s_le2 <= s_ri2 && s_ri2 <= ssize(lq.sa));
-    int len1 = s_ri1 - s_le1;
-    int len2 = s_ri2 - s_le2;
-    return lq.get_lcp(s_le1, s_le2) >= min(len1, len2) ? len1 - len2 : lq.sa_inv[s_le1] - lq.sa_inv[s_le2];
+        int le1, int ri1, int le2, int ri2) {
+    assert(0 <= le1 && le1 <= ri1 && ri1 <= ssize(lq.sa));
+    assert(0 <= le2 && le2 <= ri2 && ri2 <= ssize(lq.sa));
+    int len1 = ri1 - le1;
+    int len2 = ri2 - le2;
+    return lq.get_lcp(le1, le2) >= min(len1, len2) ? len1 - len2 : lq.sa_inv[le1] - lq.sa_inv[le2];
 }
