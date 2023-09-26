@@ -19,8 +19,9 @@ int main() {
     }
     {
         find_bwt fb(string(""), vector<int>());
-        auto [sa_le, sa_ri] = fb.find_str(string(""));
-        assert(sa_le == 0 && sa_ri == 0);
+        vector<array<int, 2>> ret = fb.find_str(string(""));
+        assert(ssize(ret) == 1);
+        assert(ret[0][0] == 0 && ret[0][1] == 0);
     }
     string s;
     cin >> s;
@@ -32,8 +33,9 @@ int main() {
         assert(str_ri - str_le == 0);
     }
     {
-        auto [sa_le, sa_ri] = fb.find_str("");
-        assert(sa_le == 0 && sa_ri == ssize(s));
+        auto ret = fb.find_str("");
+        assert(ssize(ret) == 1);
+        assert(ret[0][0] == 0 && ret[0][1] == ssize(s));
     }
     {
         auto [le, ri] = find_str(s, lt, string(""));
@@ -46,7 +48,9 @@ int main() {
         cin >> t;
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, lt.sa, t);
         {
-            auto [sa_le2, sa_ri2] = fb.find_str(t);
+            auto ret = fb.find_str("a" + t);
+            assert(ssize(ret) == 2 + ssize(t) && ret.back()[0] == 0 && ret.back()[1] == ssize(s));
+            auto [sa_le2, sa_ri2] = ret[1];
             assert(sa_ri2 - sa_le2 == sa_ri - sa_le);
             if (sa_le < sa_ri)
                 assert(sa_le == sa_le2 && sa_ri == sa_ri2);
