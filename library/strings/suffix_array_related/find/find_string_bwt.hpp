@@ -36,6 +36,7 @@ struct find_bwt {
      * @returns a vector `match` where given `le` (0 <= le <= |t|) defines a suffix [le, |t|) of t:
      *     - for all i in [match[le][0], match[le][1]): t.substr(le) == s.substr(sa[i], ssize(t) - le)
      *     - `match[le][1] - match[le][0]` is the # of matches of t.substr(le) in s.
+     *     note: match[le][1] - match[le][0] <= match[le + 1][1] - match[le + 1][0]
      * @time O(|t|)
      * @space an O(|t|) array is allocated and returned
      */
