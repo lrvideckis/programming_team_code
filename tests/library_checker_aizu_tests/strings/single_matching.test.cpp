@@ -35,9 +35,9 @@ int main() {
     {
         //test find via BWT
         find_bwt fb(s, lt.sa);
-        auto [le2, ri2] = fb.find_str(t);
-        assert(sa_ri - sa_le == ri2 - le2);
-        if (sa_le < sa_ri) assert(le == le2);
+        auto ret = fb.find_str(t);
+        assert(sa_ri - sa_le == ret[0][1] - ret[0][0]);
+        if (sa_le < sa_ri) assert(ret[0][0] == sa_le);
     }
     {
         //test find_substrs_concated

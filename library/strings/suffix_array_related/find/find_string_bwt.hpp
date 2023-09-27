@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 #include "../suffix_array.hpp"
-const int mn = '0', len = 75; // lower case letters and digits
+const int mn = '0', len = 75; // mn <= s[i] < mn + len; for lowercase letters: mn = 'a', len = 26
 /**
  * Burrows Wheeler transform
  */
@@ -33,20 +33,20 @@ struct find_bwt {
     }
     /**
      * @param t query string
-     * @returns range [le, ri) such that:
-     *     - for all i in [le, ri): t == s.substr(sa[i], ssize(t))
-     *     - `ri - le` is the # of matches of t in s.
+     * @returns a vector `match` where given `le` (0 <= le <= |t|) defines a suffix [le, |t|) of t:
+     *     - for all i in [match[le][0], match[le][1]): t.substr(le) == s.substr(sa[i], ssize(t) - le)
+     *     - `match[le][1] - match[le][0]` is the # of matches of t.substr(le) in s.
+     *     note: match[le][1] - match[le][0] <= match[le + 1][1] - match[le + 1][0]
      * @time O(|t|)
-     * @space O(1)
+     * @space an O(|t|) array is allocated and returned
      */
-    array<int, 2> find_str(const string& t) const {
-        int le = 0, ri = n;
-        for (int i = ssize(t) - 1, x = 0; le < ri && i >= 0; i--) {
+    vector<array<int, 2>> find_str(const string& t) const {
+        vector<array<int, 2>> match(ssize(t) + 1, {0, n});
+        for (int i = ssize(t) - 1; i >= 0; i--) {
             char c = t[i] - mn;
-            le = cnt[c] + occ[le][c] + (c == last && x);
-            ri = cnt[c] + occ[ri][c] + (c == last);
-            x = 1;
+            match[i][0] = cnt[c] + occ[match[i + 1][0]][c] + (c == last && i < ssize(t) - 1);
+            match[i][1] = cnt[c] + occ[match[i + 1][1]][c] + (c == last);
         }
-        return {le, ri};
+        return match;
     }
 };
