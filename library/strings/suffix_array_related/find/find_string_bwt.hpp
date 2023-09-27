@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 #include "../suffix_array.hpp"
-const int mn = '0', len = 75; // lower case letters and digits
+const int mn = '0', len = 75; // mn <= s[i] < mn + len; for lowercase letters: mn = 'a', len = 26
 /**
  * Burrows Wheeler transform
  */

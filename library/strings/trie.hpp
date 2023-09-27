@@ -3,7 +3,7 @@
 /**
  * @see https://cp-algorithms.com/string /aho_corasick.html#construction-of-the-trie
  */
-const int mn = 'A', len = 26;
+const int mn = 'A', len = 26; // mn <= s[i] < mn + len
 struct trie {
     struct node {
         array<int, len> next;
