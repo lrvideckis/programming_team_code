@@ -32,21 +32,25 @@ struct find_bwt {
         partial_sum(begin(cnt), end(cnt), begin(cnt));
     }
     /**
+     * @code{.cpp}
+     *     string t;
+     *     auto [le, ri] = fb.find_str(t);
+     * @endcode
      * @param t query string
-     * @returns a vector `match` where given `le` (0 <= le <= |t|) defines a suffix [le, |t|) of t:
-     *     - for all i in [match[le][0], match[le][1]): t.substr(le) == s.substr(sa[i], ssize(t) - le)
-     *     - `match[le][1] - match[le][0]` is the # of matches of t.substr(le) in s.
-     *     note: match[le][1] - match[le][0] <= match[le + 1][1] - match[le + 1][0]
+     * @returns a vectors `le`, `ri` where given `t_le` (0 <= t_le <= |t|) defines a suffix [t_le, |t|) of t:
+     *     - for all i in [le[t_le], ri[t_le]): t.substr(t_le) == s.substr(sa[i], ssize(t) - t_le)
+     *     - `ri[t_le] - le[t_le]` is the # of matches of t.substr(t_le) in s.
+     *     note: ri[t_le] - le[t_le] <= ri[t_le + 1] - le[t_le + 1]
      * @time O(|t|)
-     * @space an O(|t|) array is allocated and returned
+     * @space 2 O(|t|) vectors are allocated and returned
      */
-    vector<array<int, 2>> find_str(const string& t) const {
-        vector<array<int, 2>> match(ssize(t) + 1, {0, n});
+    array<vector<int>, 2> find_str(const string& t) const {
+        vector<int> le(ssize(t) + 1, 0), ri(ssize(t) + 1, n);
         for (int i = ssize(t) - 1; i >= 0; i--) {
             char c = t[i] - mn;
-            match[i][0] = cnt[c] + occ[match[i + 1][0]][c] + (c == last && i < ssize(t) - 1);
-            match[i][1] = cnt[c] + occ[match[i + 1][1]][c] + (c == last);
+            le[i] = cnt[c] + occ[le[i + 1]][c] + (c == last && i < ssize(t) - 1);
+            ri[i] = cnt[c] + occ[ri[i + 1]][c] + (c == last);
         }
-        return match;
+        return {le, ri};
     }
 };

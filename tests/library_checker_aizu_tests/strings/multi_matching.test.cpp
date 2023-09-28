@@ -19,9 +19,9 @@ int main() {
     }
     {
         find_bwt fb(string(""), vector<int>());
-        vector<array<int, 2>> ret = fb.find_str(string(""));
-        assert(ssize(ret) == 1);
-        assert(ret[0][0] == 0 && ret[0][1] == 0);
+        auto [le, ri] = fb.find_str(string(""));
+        assert(ssize(le) == 1 && ssize(ri) == 1);
+        assert(le[0] == 0 && ri[0] == 0);
     }
     string s;
     cin >> s;
@@ -33,9 +33,9 @@ int main() {
         assert(str_ri - str_le == 0);
     }
     {
-        auto ret = fb.find_str("");
-        assert(ssize(ret) == 1);
-        assert(ret[0][0] == 0 && ret[0][1] == ssize(s));
+        auto [le, ri] = fb.find_str("");
+        assert(ssize(le) == 1 && ssize(ri) == 1);
+        assert(le[0] == 0 && ri[0] == ssize(s));
     }
     {
         auto [le, ri] = find_str(s, lt, string(""));
@@ -48,12 +48,13 @@ int main() {
         cin >> t;
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, lt.sa, t);
         {
-            auto ret = fb.find_str("a" + t);
-            assert(ssize(ret) == 2 + ssize(t) && ret.back()[0] == 0 && ret.back()[1] == ssize(s));
-            auto [sa_le2, sa_ri2] = ret[1];
-            assert(sa_ri2 - sa_le2 == sa_ri - sa_le);
+            auto [le, ri] = fb.find_str("a" + t);
+            assert(ssize(le) == 2 + ssize(t) && ssize(ri) == 2 + ssize(t) && le.back() == 0 && ri.back() == ssize(s));
+            for (int i = ssize(le) - 2; i >= 0; i--)
+                assert(ri[i] - le[i] <= ri[i + 1] - le[i + 1]);
+            assert(ri[1] - le[1] == sa_ri - sa_le);
             if (sa_le < sa_ri)
-                assert(sa_le == sa_le2 && sa_ri == sa_ri2);
+                assert(sa_le == le[1] && sa_ri == ri[1]);
         }
         int str_len = str_ri - str_le;
         assert(str_len <= ssize(t));
