@@ -37,7 +37,7 @@ struct find_bwt {
      *     auto [le, ri] = fb.find_str(t);
      * @endcode
      * @param t query string
-     * @returns a vectors `le`, `ri` where given `t_le` (0 <= t_le <= |t|) defines a suffix [t_le, |t|) of t:
+     * @returns vectors `le`, `ri` where given `t_le` (0 <= t_le <= |t|) defines a suffix [t_le, |t|) of t:
      *     - for all i in [le[t_le], ri[t_le]): t.substr(t_le) == s.substr(sa[i], ssize(t) - t_le)
      *     - `ri[t_le] - le[t_le]` is the # of matches of t.substr(t_le) in s.
      *     note: ri[t_le] - le[t_le] <= ri[t_le + 1] - le[t_le + 1]
