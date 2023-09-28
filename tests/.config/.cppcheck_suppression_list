@@ -26,4 +26,4 @@ knownConditionTrueFalse:../library/math/n_choose_k/choose_lucas.hpp:13
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
 arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:17
 variableScope:../kactl/content/number-theory/Factor.h:47
-negativeContainerIndex:../library/strings/suffix_array_related/find/find_string_bwt.hpp:47
+negativeContainerIndex:../library/strings/suffix_array_related/find/find_string_bwt.hpp:51
