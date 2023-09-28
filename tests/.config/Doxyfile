@@ -957,7 +957,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          PST::node \
                          mcmf::edge \
                          mx_n \
-                         len \
+                         max_val \
                          mn \
                          dfs \
                          dfs1 \
