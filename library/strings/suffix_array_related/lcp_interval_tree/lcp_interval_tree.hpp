@@ -26,11 +26,12 @@ struct lcp_tree {
     vector<int> sa, sa_inv, lcp, le, ri;
     vector<vector<int>> adj;
     /**
-     * @param s string/array
+     * @param s non-empty string/array
      * @time O((n log n) + (n * len) + max_val)
      * @space adj is O(n * len)
      */
     lcp_tree(const string& s) : n(ssize(s)), adj(max(n - 1, 0), vector(len, -1)) {
+        assert(n > 0);
         auto ret = get_sa(s, mn + len);
         sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
