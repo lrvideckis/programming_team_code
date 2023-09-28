@@ -81,9 +81,9 @@
 "tests/library_checker_aizu_tests/strings/lcp_query_palindrome.test.cpp": "2023-08-21 15:03:03 -0600",
 "tests/library_checker_aizu_tests/strings/lcp_query_zfunc.test.cpp": "2023-09-26 21:08:38 -0500",
 "tests/library_checker_aizu_tests/strings/manacher.test.cpp": "2023-08-21 15:03:03 -0600",
-"tests/library_checker_aizu_tests/strings/multi_matching.test.cpp": "2023-09-26 21:08:38 -0500",
+"tests/library_checker_aizu_tests/strings/multi_matching.test.cpp": "2023-09-28 11:48:14 -0700",
 "tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-07-20 12:03:47 -0700",
-"tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2023-09-26 21:08:38 -0500",
+"tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2023-09-28 11:50:14 -0700",
 "tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-08-21 15:03:03 -0600",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-09-26 21:08:38 -0500"
 }
