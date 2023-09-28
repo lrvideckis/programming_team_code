@@ -3,18 +3,21 @@
 #include "../../../monotonic_stack_related/cartesian_tree.hpp"
 #include "../suffix_array.hpp"
 #include "../lcp_array.hpp"
-const int mn = '0', len = 75; // mn <= s[i] < mn + len; for lowercase letters: mn = 'a', len = 26
+const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase letters: mn = 'a', max_val = 26
 /**
  * @see Replacing suffix trees with enhanced suffix arrays by Mohamed Ibrahim
  * Abouelhoda, Stefan Kurtz, Enno Ohlebusch
  *
- * offline version of suffix tree
+ * offline version of suffix tree, idea: min cartesian tree of LCP array
+ * corresponds exactly to the internal nodes of the suffix tree. Then add in n
+ * nodes, one for each suffix, and it corresponds to the suffix tree.
+ *
  * @code{.cpp}
  *     string s;
  *     lcp_tree lt(s, 256);
  * @endcode
  *
- * internal nodes are a subset of [1, n - 1), each internal node represents:
+ * internal nodes are a subset of [0, n - 1), each internal node represents:
  *     - a prefix of some suffix; in the suffix tree, each edge has some substring. This prefix of suffix corresponds to this substring
  *     - a range in the suffix array
  *     - a lcp value of this range of suffixes representing length of prefix of these suffixes
@@ -27,12 +30,12 @@ struct lcp_tree {
     vector<vector<int>> adj;
     /**
      * @param s non-empty string/array
-     * @time O((n log n) + (n * len) + max_val)
-     * @space adj is O(n * len)
+     * @time O((n log n) + (n * max_val))
+     * @space adj is O(n * max_val)
      */
-    lcp_tree(const string& s) : n(ssize(s)), adj(max(n - 1, 0), vector(len, -1)) {
+    lcp_tree(const string& s) : n(ssize(s)), adj(max(n - 1, 0), vector(max_val, -1)) {
         assert(n > 0);
-        auto ret = get_sa(s, mn + len);
+        auto ret = get_sa(s, mn + max_val);
         sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
         auto [a_root, a_adj, a_le, a_ri, to_extrema] = get_cart_tree(lcp, less());

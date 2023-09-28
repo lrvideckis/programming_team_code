@@ -1,15 +1,15 @@
 /** @file */
 #pragma once
 #include "../suffix_array.hpp"
-const int mn = '0', len = 75; // mn <= s[i] < mn + len; for lowercase letters: mn = 'a', len = 26
+const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase letters: mn = 'a', max_val = 26
 /**
  * Burrows Wheeler transform
  */
 struct find_bwt {
     int n;
     char last;
-    vector<array<int, len>> occ;
-    array < int, len + 1 > cnt;
+    vector<array<int, max_val>> occ;
+    array < int, max_val + 1 > cnt;
     /**
      * @code{.cpp}
      *     string s;
@@ -17,9 +17,9 @@ struct find_bwt {
      *     find_bwt fb(s, sa);
      * @endcode
      * @param s,sa a string and its suffix array
-     * @time O(n * len)
-     * @space O(n * len) for `occ` vector; it's possible to improve this
-     *     to O(n * len / 64) https://codeforces.com/contest/963/submission/217802614
+     * @time O(n * max_val)
+     * @space O(n * max_val) for `occ` vector; it's possible to improve this
+     *     to O(n * max_val / 64) https://codeforces.com/contest/963/submission/217802614
      */
     find_bwt(const string& s, const vector<int>& sa) : n(ssize(s)), last(s.empty() ? -1 : s.back() - mn), occ(n + 1) {
         fill(begin(cnt), end(cnt), 0);
