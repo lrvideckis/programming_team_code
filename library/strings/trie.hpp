@@ -3,10 +3,10 @@
 /**
  * @see https://cp-algorithms.com/string /aho_corasick.html#construction-of-the-trie
  */
-const int mn = 'A', len = 26; // mn <= s[i] < mn + len
+const int mn = 'A', max_val = 26; // mn <= s[i] < mn + max_val
 struct trie {
     struct node {
-        array<int, len> next;
+        array<int, max_val> next;
         int cnt_words = 0, par = -1;
         char ch;
         node(int a_par = -1, char a_ch = '#') : par(a_par), ch(a_ch) {
