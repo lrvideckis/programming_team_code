@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_string_bwt.hpp"
 #define mn mn_other
-#define len len_other
+#define max_val max_val_other
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string_lcpt.hpp"
 
 int main() {
