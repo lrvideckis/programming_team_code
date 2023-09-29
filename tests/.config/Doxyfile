@@ -1001,7 +1001,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          e \
                          t \
                          adj \
-                         func \
+                         f \
                          sub_sz \
                          s \
                          info \
