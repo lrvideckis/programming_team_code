@@ -19,8 +19,7 @@
  * @time O(n)
  * @space two O(n) vectors are allocated and returned
  */
-template <class T, class F = function<bool(T, T)>>
-array<vector<int>, 2> mono_range(const vector<T>& arr, F less) {
+template <class T, class F = function<bool(T, T)>> array<vector<int>, 2> mono_range(const vector<T>& arr, F less) {
     vector le = mono_st(arr, less);
     vector ri = mono_st<T>({rbegin(arr), rend(arr)}, [&](T x, T y) {return !less(y, x);});
     reverse(begin(ri), end(ri));

@@ -9,17 +9,17 @@
  */
 template <class F> struct centroid_decomp {
     vector<vector<int>> adj;
-    F func;
+    F f;
     vector<int> sub_sz;
     /**
      * @param a_adj unweighted undirected forest
-     * @param a_func called on centroid of each decomposition
+     * @param a_f called on centroid of each decomposition
      * @time O(n log n)
      * @space `adj` and `sub_sz` arrays take O(n); recursion stack for `dfs` is
      * O(log n); recursion stack for `calc_sz` is O(n)
      */
-    centroid_decomp(const vector<vector<int>>& a_adj, F a_func)
-        : adj(a_adj), func(a_func), sub_sz(ssize(adj), -1) {
+    centroid_decomp(const vector<vector<int>>& a_adj, F a_f)
+        : adj(a_adj), f(a_f), sub_sz(ssize(adj), -1) {
         for (int i = 0; i < ssize(adj); i++)
             if (sub_sz[i] == -1)
                 dfs(i);
@@ -41,7 +41,7 @@ template <class F> struct centroid_decomp {
             if (big_ch == end(adj[u])) break;
             p = u, u = *big_ch;
         }
-        func(adj, u);
+        f(adj, u);
         for (auto v : adj[u]) {
             iter_swap(find(begin(adj[v]), end(adj[v]), u), rbegin(adj[v]));
             adj[v].pop_back();

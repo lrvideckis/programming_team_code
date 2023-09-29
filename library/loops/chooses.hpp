@@ -15,11 +15,11 @@ inline int next_subset(int mask) {
 }
 /**
  * @param n,k defines which bitmasks
- * @param func called on all bitmasks of size n with k bits set
+ * @param f called on all bitmasks of size n with k bits set
  * @time O(n choose k)
  * @space O(1)
  */
-template <class F> void iterate_chooses(int n, int k, F func) {
+template <class F> void chooses(int n, int k, F f) {
     for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
-        func(mask);
+        f(mask);
 }
