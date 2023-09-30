@@ -32,9 +32,6 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     }
     int random_zero_in = -1, random_zero_out = -1;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && scc_adj[i].empty()) {
-            continue;
-        }
         if (in[i] == 0)
             random_zero_in = i;
         if (scc_adj[i].empty())
