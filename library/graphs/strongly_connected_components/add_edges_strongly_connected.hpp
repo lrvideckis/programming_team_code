@@ -36,10 +36,10 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
         for (int v : scc_adj[u])
             if (!vis[v]) {
                 vis[v] = 1;
-                int zero_out_node = self(self, v);
+                int zero_out = self(self, v);
                 //important: break out the moment we find the first zero out degree
                 //WA if this isn't here, reason: complicated
-                if (zero_out_node != -1) return zero_out_node;
+                if (zero_out != -1) return zero_out;
             }
         return -1;
     };
@@ -49,43 +49,39 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
         if (zero_in[i]) {
             if (!vis[i]) {
                 vis[i] = 1;
-                int zero_out_node = dfs(dfs, i);
-                if (zero_out_node != -1) {
-                    blocking_matching.emplace_back(i, zero_out_node);
+                int zero_out = dfs(dfs, i);
+                if (zero_out != -1) {
+                    blocking_matching.emplace_back(i, zero_out);
                     node_used[i] = 1;
-                    node_used[zero_out_node] = 1;
+                    node_used[zero_out] = 1;
                 }
             }
         }
     }
-    vector<pair<int, int>> res_edges;
+    vector<pair<int, int>> edges;
     for (int i = 1; i < ssize(blocking_matching); i++)
-        res_edges.emplace_back(blocking_matching[i].second, blocking_matching[i - 1].first);
-    res_edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
+        edges.emplace_back(blocking_matching[i].second, blocking_matching[i - 1].first);
+    edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
         if (zero_in[i] && !node_used[i]) in_unused.push(i);
         if (scc_adj[i].empty() && !node_used[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
-        res_edges.emplace_back(out_unused.front(), in_unused.front());
+        edges.emplace_back(out_unused.front(), in_unused.front());
         in_unused.pop();
         out_unused.pop();
     }
     while (!in_unused.empty()) {
-        res_edges.emplace_back(0, in_unused.front());
+        edges.emplace_back(0, in_unused.front());
         in_unused.pop();
     }
     while (!out_unused.empty()) {
-        res_edges.emplace_back(out_unused.front(), num_sccs - 1);
+        edges.emplace_back(out_unused.front(), num_sccs - 1);
         out_unused.pop();
     }
     vector<int> to_a_node(num_sccs);
-    for (int i = 0; i < n; i++)
-        to_a_node[scc_id[i]] = i;
-    for (auto& [u, v] : res_edges) {
-        u = to_a_node[u];
-        v = to_a_node[v];
-    }
-    return res_edges;
+    for (int i = 0; i < n; i++) to_a_node[scc_id[i]] = i;
+    for (auto& [u, v] : edges) u = to_a_node[u], v = to_a_node[v];
+    return edges;
 }
