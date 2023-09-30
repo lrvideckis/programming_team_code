@@ -32,21 +32,11 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     }
     int random_zero_in = -1, random_zero_out = -1;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0)
-            random_zero_in = i;
-        if (scc_adj[i].empty())
-            random_zero_out = i;
+        if (in[i] == 0) random_zero_in = i;
+        if (scc_adj[i].empty()) random_zero_out = i;
     }
     assert((random_zero_in == -1) == (random_zero_out == -1));
     vector<pair<int, int>> res_edges;
-    if (random_zero_in == -1 && random_zero_out == -1) {
-        //one big cycle
-        assert(n >= 2);
-        for (int i = 0; i < n - 1; i++)
-            res_edges.emplace_back(i, i + 1);
-        res_edges.emplace_back(n - 1, 0);
-        return res_edges;
-    }
     vector<bool> vis(num_sccs);
     auto dfs = [&](auto&& self, int u) -> int {
         if (scc_adj[u].empty()) return u;
