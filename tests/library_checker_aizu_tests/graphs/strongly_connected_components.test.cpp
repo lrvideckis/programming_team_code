@@ -23,8 +23,8 @@ int main() {
                 is_zero_out[scc_id[i]] = 0;
             }
         }
-        int num_zero_in = count(begin(is_zero_in), end(is_zero_in), 1);
-        int num_zero_out = count(begin(is_zero_out), end(is_zero_out), 1);
+        int num_zero_in = int(count(begin(is_zero_in), end(is_zero_in), 1));
+        int num_zero_out = int(count(begin(is_zero_out), end(is_zero_out), 1));
         vector<pair<int, int>> extra_edge_list = extra_edges(adj, num_sccs, scc_id);
         if (num_sccs == 1) assert(ssize(extra_edge_list) == 0);
         else assert(ssize(extra_edge_list) == max(num_zero_in, num_zero_out));
