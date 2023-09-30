@@ -4,9 +4,6 @@
 vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
     if (num_sccs == 1) return {};
     int n = ssize(adj);
-    vector<int> to_a_node(num_sccs);
-    for (int i = 0; i < n; i++)
-        to_a_node[scc_id[i]] = i;
     vector<vector<int>> scc_adj(num_sccs);
     vector<int> in(num_sccs);
     for (int i = 0; i < n; i++) {
@@ -102,6 +99,9 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
             res_edges.emplace_back(lone_nodes[i - 1], lone_nodes[i]);
         res_edges.emplace_back(lone_nodes.back(), last_v);
     }
+    vector<int> to_a_node(num_sccs);
+    for (int i = 0; i < n; i++)
+        to_a_node[scc_id[i]] = i;
     for (auto& [u, v] : res_edges) {
         u = to_a_node[u];
         v = to_a_node[v];
