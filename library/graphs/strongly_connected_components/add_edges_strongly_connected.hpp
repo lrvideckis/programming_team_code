@@ -1,6 +1,23 @@
 /** @file */
 #pragma once
 #include "scc.hpp"
+/**
+ * @see https://codeforces.com/blog/entry/15102
+ *
+ * Minimum extra edges to add to directed graph to make it strongly connected.
+ * If the directed graph is not initially strongly connected, then the edge
+ * list's size is max(# zero indegree SCCs, # zero outdegree SCCs)
+ *
+ * @code{.cpp}
+ *     vector<vector<int>> adj;
+ *     auto [num_sccs, scc_id] = get_sccs(adj);
+ *     vector<pair<int, int>> edges = extra_edges(adj, num_sccs, scc_id);
+ * @endcode
+ * @param adj,num_sccs,scc_id directed graph and its SCCs
+ * @returns directed edge list: edges[i].first -> edges[i].second
+ * @time O(n + m)
+ * @space O(n + m) TODO
+ */
 vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
     if (num_sccs == 1) return {};
     int n = ssize(adj);
