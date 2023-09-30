@@ -52,11 +52,12 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
         }
     for (int i = 1; i < ssize(edges); i++) swap(edges[i][0], edges[i - 1][0]);
     for (int i = 0; i < num_sccs; i++)
-        if (scc_adj[i].empty() && !vis[i])
+        if (scc_adj[i].empty() && !vis[i]) {
             if (!in_unused.empty()) {
                 edges.push_back({i, in_unused.back()});
                 in_unused.pop_back();
             } else edges.push_back({i, num_sccs - 1});
+        }
     transform(begin(in_unused), end(in_unused), back_inserter(edges), [](int u) {
         return array<int, 2> {0, u};
     });
