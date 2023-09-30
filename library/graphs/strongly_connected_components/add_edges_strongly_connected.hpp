@@ -22,17 +22,17 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     if (num_sccs == 1) return {};
     int n = ssize(adj);
     vector<vector<int>> scc_adj(num_sccs);
-    vector<int> in(num_sccs);
+    vector<int> in_deg(num_sccs);
     for (int i = 0; i < n; i++) {
         for (int v : adj[i]) {
             if (scc_id[i] == scc_id[v]) continue;
             scc_adj[scc_id[i]].push_back(scc_id[v]);
-            in[scc_id[v]]++;
+            in_deg[scc_id[v]]++;
         }
     }
     int random_zero_in = -1, random_zero_out = -1;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0) random_zero_in = i;
+        if (!in_deg[i]) random_zero_in = i;
         if (scc_adj[i].empty()) random_zero_out = i;
     }
     assert((random_zero_in == -1) == (random_zero_out == -1));
@@ -54,7 +54,7 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     vector<pair<int, int>> blocking_matching;
     vector<bool> node_used(num_sccs);
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0) {
+        if (!in_deg[i]) {
             if (!vis[i]) {
                 vis[i] = 1;
                 int zero_out_node = dfs(dfs, i);
@@ -71,7 +71,7 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     res_edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && !node_used[i]) in_unused.push(i);
+        if (!in_deg[i] && !node_used[i]) in_unused.push(i);
         if (scc_adj[i].empty() && !node_used[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
