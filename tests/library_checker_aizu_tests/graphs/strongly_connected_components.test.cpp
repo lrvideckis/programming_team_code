@@ -27,11 +27,11 @@ int main() {
         assert(is_zero_in[num_sccs - 1] && is_zero_out[0]);
         int num_zero_in = int(count(begin(is_zero_in), end(is_zero_in), 1));
         int num_zero_out = int(count(begin(is_zero_out), end(is_zero_out), 1));
-        vector<pair<int, int>> extra_edge_list = extra_edges(adj, num_sccs, scc_id);
-        if (num_sccs == 1) assert(ssize(extra_edge_list) == 0);
-        else assert(ssize(extra_edge_list) == max(num_zero_in, num_zero_out));
+        vector<array<int, 2>> edges = extra_edges(adj, num_sccs, scc_id);
+        if (num_sccs == 1) assert(ssize(edges) == 0);
+        else assert(ssize(edges) == max(num_zero_in, num_zero_out));
         vector<vector<int>> adj_copy(adj);
-        for (auto [u, v] : extra_edge_list) {
+        for (auto [u, v] : edges) {
             assert(u != v);
             adj_copy[u].push_back(v);
         }

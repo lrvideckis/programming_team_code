@@ -11,14 +11,14 @@
  * @code{.cpp}
  *     vector<vector<int>> adj;
  *     auto [num_sccs, scc_id] = get_sccs(adj);
- *     vector<pair<int, int>> edges = extra_edges(adj, num_sccs, scc_id);
+ *     vector<array<int, 2>> edges = extra_edges(adj, num_sccs, scc_id);
  * @endcode
  * @param adj,num_sccs,scc_id directed graph and its SCCs
- * @returns directed edge list: edges[i].first -> edges[i].second
+ * @returns directed edge list: edges[i][0] -> edges[i][1]
  * @time O(n + m)
  * @space O(n + m) TODO
  */
-vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
+vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
     if (num_sccs == 1) return {};
     int n = ssize(adj);
     vector<vector<int>> scc_adj(num_sccs);
@@ -43,7 +43,7 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
             }
         return -1;
     };
-    vector<pair<int, int>> blocking_matching;
+    vector<array<int, 2>> blocking_matching;
     vector<bool> node_used(num_sccs);
     for (int i = 0; i < num_sccs; i++) {
         if (zero_in[i]) {
@@ -51,33 +51,33 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
                 vis[i] = 1;
                 int zero_out = dfs(dfs, i);
                 if (zero_out != -1) {
-                    blocking_matching.emplace_back(i, zero_out);
+                    blocking_matching.push_back({i, zero_out});
                     node_used[i] = 1;
                     node_used[zero_out] = 1;
                 }
             }
         }
     }
-    vector<pair<int, int>> edges;
+    vector<array<int, 2>> edges;
     for (int i = 1; i < ssize(blocking_matching); i++)
-        edges.emplace_back(blocking_matching[i].second, blocking_matching[i - 1].first);
-    edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
+        edges.push_back({blocking_matching[i][1], blocking_matching[i - 1][0]});
+    edges.push_back({blocking_matching[0][1], blocking_matching.back()[0]});
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
         if (zero_in[i] && !node_used[i]) in_unused.push(i);
         if (scc_adj[i].empty() && !node_used[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
-        edges.emplace_back(out_unused.front(), in_unused.front());
+        edges.push_back({out_unused.front(), in_unused.front()});
         in_unused.pop();
         out_unused.pop();
     }
     while (!in_unused.empty()) {
-        edges.emplace_back(0, in_unused.front());
+        edges.push_back({0, in_unused.front()});
         in_unused.pop();
     }
     while (!out_unused.empty()) {
-        edges.emplace_back(out_unused.front(), num_sccs - 1);
+        edges.push_back({out_unused.front(), num_sccs - 1});
         out_unused.pop();
     }
     vector<int> to_a_node(num_sccs);
