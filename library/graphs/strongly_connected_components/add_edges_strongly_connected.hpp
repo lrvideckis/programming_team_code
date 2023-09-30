@@ -33,13 +33,13 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     vector<int> lone_nodes;
     int random_zero_in = -1, random_zero_out = -1;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && ssize(scc_adj[i]) == 0) {
+        if (in[i] == 0 && scc_adj[i].empty()) {
             lone_nodes.push_back(i);
             continue;
         }
         if (in[i] == 0)
             random_zero_in = i;
-        if (ssize(scc_adj[i]) == 0)
+        if (scc_adj[i].empty())
             random_zero_out = i;
     }
     assert((random_zero_in == -1) == (random_zero_out == -1));
@@ -54,7 +54,7 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     }
     vector<bool> vis(num_sccs);
     auto dfs = [&](auto&& self, int u) -> int {
-        if (ssize(scc_adj[u]) == 0) return u;
+        if (scc_adj[u].empty()) return u;
         for (int v : scc_adj[u]) {
             if (!vis[v]) {
                 vis[v] = 1;
@@ -69,7 +69,7 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     vector<pair<int, int>> blocking_matching;
     vector<bool> node_used(num_sccs);
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && ssize(scc_adj[i]) == 0) continue;
+        if (in[i] == 0 && scc_adj[i].empty()) continue;
         if (in[i] == 0) {
             if (!vis[i]) {
                 vis[i] = 1;
@@ -91,8 +91,8 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     }
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && ssize(scc_adj[i]) != 0 && !node_used[i]) in_unused.push(i);
-        if (ssize(scc_adj[i]) == 0 && in[i] != 0 && !node_used[i]) out_unused.push(i);
+        if (in[i] == 0 && !scc_adj[i].empty() && !node_used[i]) in_unused.push(i);
+        if (scc_adj[i].empty() && in[i] != 0 && !node_used[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
         res_edges.emplace_back(out_unused.front(), in_unused.front());
