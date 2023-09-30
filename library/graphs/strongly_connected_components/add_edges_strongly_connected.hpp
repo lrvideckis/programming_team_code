@@ -44,20 +44,17 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
             }
         return -1;
     };
-    vector<array<int, 2>> blocking_matching;
+    vector<array<int, 2>> edges;
     queue<int> in_unused;
     for (int i = 0; i < num_sccs; i++) {
         if (zero_in[i]) {
             vis[i] = 1;
             int zero_out = dfs(dfs, i);
-            if (zero_out != -1) blocking_matching.push_back({i, zero_out});
+            if (zero_out != -1) edges.push_back({zero_out, i});
             else in_unused.push(i);
         }
     }
-    vector<array<int, 2>> edges;
-    for (int i = 1; i < ssize(blocking_matching); i++)
-        edges.push_back({blocking_matching[i][1], blocking_matching[i - 1][0]});
-    edges.push_back({blocking_matching[0][1], blocking_matching.back()[0]});
+    for (int i = 1; i < ssize(edges); i++) swap(edges[i][0], edges[i - 1][0]);
     queue<int> out_unused;
     for (int i = 0; i < num_sccs; i++)
         if (scc_adj[i].empty() && !vis[i]) out_unused.push(i);
