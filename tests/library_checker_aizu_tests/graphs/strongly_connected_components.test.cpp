@@ -23,6 +23,8 @@ int main() {
                 is_zero_out[scc_id[i]] = 0;
             }
         }
+        // since {num_sccs-1, ..., 2, 1, 0} is a topo order
+        assert(is_zero_in[num_sccs - 1] && is_zero_out[0]);
         int num_zero_in = int(count(begin(is_zero_in), end(is_zero_in), 1));
         int num_zero_out = int(count(begin(is_zero_out), end(is_zero_out), 1));
         vector<pair<int, int>> extra_edge_list = extra_edges(adj, num_sccs, scc_id);

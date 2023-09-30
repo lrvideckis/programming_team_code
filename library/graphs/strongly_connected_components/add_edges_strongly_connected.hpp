@@ -30,8 +30,6 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
             in_deg[scc_id[v]]++;
         }
     }
-    //since {num_sccs-1, ..., 2, 1, 0} is a topo order
-    assert(scc_adj[0].empty() && in_deg[num_sccs-1] == 0);
     vector<pair<int, int>> res_edges;
     vector<bool> vis(num_sccs);
     auto dfs = [&](auto&& self, int u) -> int {
