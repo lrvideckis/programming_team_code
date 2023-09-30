@@ -29,8 +29,10 @@ int main() {
         if (num_sccs == 1) assert(ssize(extra_edge_list) == 0);
         else assert(ssize(extra_edge_list) == max(num_zero_in, num_zero_out));
         vector<vector<int>> adj_copy(adj);
-        for (auto [u, v] : extra_edge_list)
+        for (auto [u, v] : extra_edge_list) {
+            assert(u != v);
             adj_copy[u].push_back(v);
+        }
         assert(get_sccs(adj_copy).num_sccs == 1);
     }
     //sanity check for reverse topo order of SCCs

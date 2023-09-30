@@ -30,12 +30,8 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
             in_deg[scc_id[v]]++;
         }
     }
-    int random_zero_in = -1, random_zero_out = -1;
-    for (int i = 0; i < num_sccs; i++) {
-        if (!in_deg[i]) random_zero_in = i;
-        if (scc_adj[i].empty()) random_zero_out = i;
-    }
-    assert((random_zero_in == -1) == (random_zero_out == -1));
+    //since {num_sccs-1, ..., 2, 1, 0} is a topo order
+    assert(scc_adj[0].empty() && in_deg[num_sccs-1] == 0);
     vector<pair<int, int>> res_edges;
     vector<bool> vis(num_sccs);
     auto dfs = [&](auto&& self, int u) -> int {
@@ -80,11 +76,11 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
         out_unused.pop();
     }
     while (!in_unused.empty()) {
-        res_edges.emplace_back(random_zero_out, in_unused.front());
+        res_edges.emplace_back(0, in_unused.front());
         in_unused.pop();
     }
     while (!out_unused.empty()) {
-        res_edges.emplace_back(out_unused.front(), random_zero_in);
+        res_edges.emplace_back(out_unused.front(), num_sccs - 1);
         out_unused.pop();
     }
     vector<int> to_a_node(num_sccs);
