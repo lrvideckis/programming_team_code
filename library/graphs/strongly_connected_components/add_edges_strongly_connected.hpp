@@ -82,13 +82,9 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
             }
         }
     }
-    if (ssize(blocking_matching) == 1)
-        res_edges.emplace_back(blocking_matching[0].second, blocking_matching[0].first);
-    else if (ssize(blocking_matching) >= 2) {
-        for (int i = 1; i < ssize(blocking_matching); i++)
-            res_edges.emplace_back(blocking_matching[i].second, blocking_matching[i - 1].first);
-        res_edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
-    }
+    for (int i = 1; i < ssize(blocking_matching); i++)
+        res_edges.emplace_back(blocking_matching[i].second, blocking_matching[i - 1].first);
+    res_edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
         if (in[i] == 0 && !scc_adj[i].empty() && !node_used[i]) in_unused.push(i);
