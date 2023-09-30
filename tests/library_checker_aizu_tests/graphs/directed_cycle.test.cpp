@@ -65,7 +65,6 @@ int main() {
                 cout << ssize(res) << '\n';
                 for(int i = ssize(res) - 1; i >= 0; i--)
                     cout << res[i] << '\n';
-                cout << '\n';
                 exit(0);
             }
         }
