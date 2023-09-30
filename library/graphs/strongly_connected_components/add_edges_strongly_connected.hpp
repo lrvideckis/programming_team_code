@@ -16,7 +16,8 @@
  * @param adj,num_sccs,scc_id directed graph and its SCCs
  * @returns directed edge list: edges[i][0] -> edges[i][1]
  * @time O(n + m)
- * @space O(n + m) TODO
+ * @space An O(n) edge list is allocated and returned, but multiple O(n + m)
+ * vectors are allocated temporarily
  */
 vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
     if (num_sccs == 1) return {};
