@@ -4,7 +4,7 @@
 /**
  * @see https://codeforces.com/blog/entry/15102
  *
- * Minimum extra edges to add to directed graph to make it strongly connected.
+ * Minimum extra directed edges to add to directed graph to make it strongly connected.
  * If the directed graph is not initially strongly connected, then the edge
  * list's size is max(# zero indegree SCCs, # zero outdegree SCCs)
  *
