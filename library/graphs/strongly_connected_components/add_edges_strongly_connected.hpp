@@ -45,28 +45,23 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
         return -1;
     };
     vector<array<int, 2>> blocking_matching;
-    vector<bool> node_used(num_sccs);
+    queue<int> in_unused;
     for (int i = 0; i < num_sccs; i++) {
         if (zero_in[i]) {
-            if (!vis[i]) {
-                vis[i] = 1;
-                int zero_out = dfs(dfs, i);
-                if (zero_out != -1) {
-                    blocking_matching.push_back({i, zero_out});
-                    node_used[i] = 1;
-                    node_used[zero_out] = 1;
-                }
-            }
+            assert(!vis[i]);
+            vis[i] = 1;
+            int zero_out = dfs(dfs, i);
+            if (zero_out != -1) blocking_matching.push_back({i, zero_out});
+            else in_unused.push(i);
         }
     }
     vector<array<int, 2>> edges;
     for (int i = 1; i < ssize(blocking_matching); i++)
         edges.push_back({blocking_matching[i][1], blocking_matching[i - 1][0]});
     edges.push_back({blocking_matching[0][1], blocking_matching.back()[0]});
-    queue<int> in_unused, out_unused;
+    queue<int> out_unused;
     for (int i = 0; i < num_sccs; i++) {
-        if (zero_in[i] && !node_used[i]) in_unused.push(i);
-        if (scc_adj[i].empty() && !node_used[i]) out_unused.push(i);
+        if (scc_adj[i].empty() && !vis[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
         edges.push_back({out_unused.front(), in_unused.front()});
