@@ -2,36 +2,34 @@
 #pragma once
 #include "scc.hpp"
 vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
+    if (num_sccs == 1) return {};
     int n = ssize(adj);
     vector<int> to_a_node(num_sccs);
     for (int i = 0; i < n; i++)
         to_a_node[scc_id[i]] = i;
-    vector<pair<int, int>> res_edges;
-    if (num_sccs == 1)
-        return res_edges;
     vector<vector<int>> scc_adj(num_sccs);
-    vector<int> in(num_sccs), out(num_sccs);
+    vector<int> in(num_sccs);
     for (int i = 0; i < n; i++) {
         for (int v : adj[i]) {
             if (scc_id[i] == scc_id[v]) continue;
             scc_adj[scc_id[i]].push_back(scc_id[v]);
-            out[scc_id[i]]++;
             in[scc_id[v]]++;
         }
     }
     vector<int> lone_nodes;
     int random_zero_in = -1, random_zero_out = -1;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && out[i] == 0) {
+        if (in[i] == 0 && ssize(scc_adj[i]) == 0) {
             lone_nodes.push_back(i);
             continue;
         }
         if (in[i] == 0)
             random_zero_in = i;
-        if (out[i] == 0)
+        if (ssize(scc_adj[i]) == 0)
             random_zero_out = i;
     }
     assert((random_zero_in == -1) == (random_zero_out == -1));
+    vector<pair<int, int>> res_edges;
     if (random_zero_in == -1 && random_zero_out == -1) {
         //one big cycle
         assert(n >= 2);
@@ -40,34 +38,32 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
         res_edges.emplace_back(n - 1, 0);
         return res_edges;
     }
-    int first_zero_out;
     vector<bool> vis(num_sccs);
-    auto dfs = [&](auto&& self, int u) -> void {
-        if (out[u] == 0)
-            first_zero_out = u;
+    auto dfs = [&](auto&& self, int u) -> int {
+        if (ssize(scc_adj[u]) == 0) return u;
         for (int v : scc_adj[u]) {
             if (!vis[v]) {
                 vis[v] = 1;
-                self(self, v);
+                int zero_out_node = self(self, v);
                 //important: break out the moment we find the first zero out degree
                 //WA if this isn't here, reason: complicated
-                if (first_zero_out != -1) return;
+                if (zero_out_node != -1) return zero_out_node;
             }
         }
+        return -1;
     };
-    vector<pair<int/*source*/, int/*sink*/>> blocking_matching;
+    vector<pair<int, int>> blocking_matching;
     vector<bool> node_used(num_sccs);
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && out[i] == 0) continue;
+        if (in[i] == 0 && ssize(scc_adj[i]) == 0) continue;
         if (in[i] == 0) {
             if (!vis[i]) {
                 vis[i] = 1;
-                first_zero_out = -1;
-                dfs(dfs, i);
-                if (first_zero_out != -1) {
-                    blocking_matching.emplace_back(i, first_zero_out);
+                int zero_out_node = dfs(dfs, i);
+                if (zero_out_node != -1) {
+                    blocking_matching.emplace_back(i, zero_out_node);
                     node_used[i] = 1;
-                    node_used[first_zero_out] = 1;
+                    node_used[zero_out_node] = 1;
                 }
             }
         }
@@ -81,8 +77,8 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     }
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && out[i] != 0 && !node_used[i]) in_unused.push(i);
-        if (out[i] == 0 && in[i] != 0 && !node_used[i]) out_unused.push(i);
+        if (in[i] == 0 && ssize(scc_adj[i]) != 0 && !node_used[i]) in_unused.push(i);
+        if (ssize(scc_adj[i]) == 0 && in[i] != 0 && !node_used[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
         res_edges.emplace_back(out_unused.front(), in_unused.front());
