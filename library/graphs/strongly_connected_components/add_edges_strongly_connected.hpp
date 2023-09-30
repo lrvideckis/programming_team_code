@@ -1,3 +1,6 @@
+/** @file */
+#pragma once
+#include "scc.hpp"
 vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
     int n = ssize(adj);
     vector<int> to_a_node(num_sccs);
