@@ -30,11 +30,9 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
             in[scc_id[v]]++;
         }
     }
-    vector<int> lone_nodes;
     int random_zero_in = -1, random_zero_out = -1;
     for (int i = 0; i < num_sccs; i++) {
         if (in[i] == 0 && scc_adj[i].empty()) {
-            lone_nodes.push_back(i);
             continue;
         }
         if (in[i] == 0)
@@ -69,7 +67,6 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     vector<pair<int, int>> blocking_matching;
     vector<bool> node_used(num_sccs);
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && scc_adj[i].empty()) continue;
         if (in[i] == 0) {
             if (!vis[i]) {
                 vis[i] = 1;
@@ -102,15 +99,6 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     while (!out_unused.empty()) {
         res_edges.emplace_back(out_unused.front(), random_zero_in);
         out_unused.pop();
-    }
-    if (!lone_nodes.empty()) {
-        assert(!res_edges.empty());
-        auto [last_u, last_v] = res_edges.back();
-        res_edges.pop_back();
-        res_edges.emplace_back(last_u, lone_nodes[0]);
-        for (int i = 1; i < ssize(lone_nodes); i++)
-            res_edges.emplace_back(lone_nodes[i - 1], lone_nodes[i]);
-        res_edges.emplace_back(lone_nodes.back(), last_v);
     }
     vector<int> to_a_node(num_sccs);
     for (int i = 0; i < n; i++)
