@@ -2,7 +2,7 @@ noExplicitConstructor
 missingIncludeSystem
 unusedStructMember:../library/math/matrix_related/solve_linear_mod.hpp:8
 unusedStructMember:../library/math/matrix_related/solve_linear_mod.hpp:9
-unusedStructMember:../library/graphs/strongly_connected_components.hpp:7
+unusedStructMember:../library/graphs/strongly_connected_components/scc.hpp:7
 unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
 unusedStructMember:../library/graphs/hopcroft_karp.hpp:8
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
