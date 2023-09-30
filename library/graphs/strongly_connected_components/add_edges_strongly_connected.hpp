@@ -38,8 +38,6 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
             if (!vis[v]) {
                 vis[v] = 1;
                 int zero_out = self(self, v);
-                //important: break out the moment we find the first zero out degree
-                //WA if this isn't here, reason: complicated
                 if (zero_out != -1) return zero_out;
             }
         return -1;
