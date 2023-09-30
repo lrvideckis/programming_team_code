@@ -43,32 +43,24 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
         return -1;
     };
     vector<array<int, 2>> edges;
-    queue<int> in_left;
-    for (int i = 0; i < num_sccs; i++) {
+    vector<int> in_unused;
+    for (int i = 0; i < num_sccs; i++)
         if (zero_in[i]) {
             vis[i] = 1;
             int zero_out = dfs(dfs, i);
             if (zero_out != -1) edges.push_back({zero_out, i});
-            else in_left.push(i);
+            else in_unused.push_back(i);
         }
-    }
     for (int i = 1; i < ssize(edges); i++) swap(edges[i][0], edges[i - 1][0]);
-    queue<int> out_left;
     for (int i = 0; i < num_sccs; i++)
-        if (scc_adj[i].empty() && !vis[i]) out_left.push(i);
-    while (!in_left.empty() && !out_left.empty()) {
-        edges.push_back({out_left.front(), in_left.front()});
-        in_left.pop();
-        out_left.pop();
-    }
-    while (!in_left.empty()) {
-        edges.push_back({0, in_left.front()});
-        in_left.pop();
-    }
-    while (!out_left.empty()) {
-        edges.push_back({out_left.front(), num_sccs - 1});
-        out_left.pop();
-    }
+        if (scc_adj[i].empty() && !vis[i]) {
+            if (!in_unused.empty()) {
+                edges.push_back({i, in_unused.back()});
+                in_unused.pop_back();
+            } else
+                edges.push_back({i, num_sccs - 1});
+        }
+    for (int u : in_unused) edges.push_back({0, u});
     vector<int> to_a_node(num_sccs);
     for (int i = 0; i < n; i++) to_a_node[scc_id[i]] = i;
     for (auto& [u, v] : edges) u = to_a_node[u], v = to_a_node[v];
