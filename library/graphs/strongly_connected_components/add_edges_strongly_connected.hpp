@@ -71,8 +71,8 @@ vector<pair<int, int>> extra_edges(const vector<vector<int>>& adj, int num_sccs,
     res_edges.emplace_back(blocking_matching[0].second, blocking_matching.back().first);
     queue<int> in_unused, out_unused;
     for (int i = 0; i < num_sccs; i++) {
-        if (in[i] == 0 && !scc_adj[i].empty() && !node_used[i]) in_unused.push(i);
-        if (scc_adj[i].empty() && in[i] != 0 && !node_used[i]) out_unused.push(i);
+        if (in[i] == 0 && !node_used[i]) in_unused.push(i);
+        if (scc_adj[i].empty() && !node_used[i]) out_unused.push(i);
     }
     while (!in_unused.empty() && !out_unused.empty()) {
         res_edges.emplace_back(out_unused.front(), in_unused.front());
