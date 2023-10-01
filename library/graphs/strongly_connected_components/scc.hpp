@@ -17,7 +17,7 @@ struct scc_info {
  *
  * @code{.cpp}
  *     //example usage
- *     auto [num_sccs, scc_id] = scc(adj);
+ *     auto [num_sccs, scc_id] = get_sccs(adj);
  * @endcode
  * @param adj directed, unweighted graph
  * @returns the SCCs
@@ -25,7 +25,7 @@ struct scc_info {
  * @space besides the O(n + m) `adj` param, this function allocates/returns
  * various vectors which are each O(n)
  */
-scc_info scc(const vector<vector<int>>& adj) {
+scc_info get_sccs(const vector<vector<int>>& adj) {
     int n = ssize(adj), timer = 1, num_sccs = 0;
     vector<int> tin(n), scc_id(n, -1), node_stack;
     node_stack.reserve(n);
