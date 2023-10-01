@@ -47,35 +47,36 @@ int main() {
     vector<int> color(n);
     vector<pair<int/*edge id*/, int/*node closer to root*/>> edge_stack;
     auto dfs = [&](auto&& self, int u) -> void {
-        for(auto [v, e_id] : adj_edge_id[u]) {
+        for (auto [v, e_id] : adj_edge_id[u]) {
             if (color[v] == 0) {
                 color[v] = 1;
                 edge_stack.emplace_back(e_id, u);
                 self(self, v);
                 edge_stack.pop_back();
                 color[v] = 2;
-            } else if(color[v] == 1) {
+            } else if (color[v] == 1) {
                 vector<int> res(1, e_id);
-                while(1) {
+                while (1) {
                     auto [curr_edge_id, curr_node] = edge_stack.back();
                     edge_stack.pop_back();
                     res.push_back(curr_edge_id);
-                    if(curr_node == v) break;
+                    if (curr_node == v) break;
                 }
                 cout << ssize(res) << '\n';
-                for(int i = ssize(res) - 1; i >= 0; i--)
+                for (int i = ssize(res) - 1; i >= 0; i--)
                     cout << res[i] << '\n';
                 exit(0);
             }
         }
     };
     for (int i = 0; i < n; i++) {
-        if(color[i] == 0) {
+        if (color[i] == 0) {
             color[i] = 1;
             dfs(dfs, i);
             color[i] = 2;
         }
     }
+    assert(num_sccs == n);
     cout << -1 << '\n';
     return 0;
 }
