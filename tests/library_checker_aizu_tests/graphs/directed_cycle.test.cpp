@@ -15,7 +15,9 @@ int main() {
         adj[u].push_back(v);
         adj_edge_id[u].emplace_back(v, i);
     }
-    auto [num_sccs, scc_id] = get_sccs(adj);
+    scc_info si = get_sccs(adj);
+    int num_sccs = si.num_sccs;
+    vector<int> scc_id = si.scc_id;
     {
         vector<bool> is_zero_in(num_sccs, 1), is_zero_out(num_sccs, 1);
         for (int i = 0; i < n; i++) {
