@@ -59,6 +59,7 @@ int main() {
                 while (1) {
                     auto [curr_edge_id, curr_node] = edge_stack.back();
                     edge_stack.pop_back();
+                    assert(scc_id[curr_node] == scc_id[u]);
                     res.push_back(curr_edge_id);
                     if (curr_node == v) break;
                 }
