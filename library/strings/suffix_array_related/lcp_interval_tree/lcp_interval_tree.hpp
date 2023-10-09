@@ -25,7 +25,7 @@ const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase le
  *  b   a   c | c   a   c       a       a   b | b
  *  a   b | b | b   c   a   c | c       a | a | a
  *  a | a | a | a | a   b | b | b   c | c | c | c
- *    1   2   3   1   0   1   2   0   1   2   3   <- LCP array
+ *    1   2   3   1   0   1   2   0   1   2   3   <- LCP
  * (------------------------------R--------------)
  * (--------------a--) (--b------) (--c----------)
  * (a) (--b------) (c) (a) (--c--)     (--a------)
@@ -43,7 +43,7 @@ const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase le
  *     - a prefix of some suffix; in the suffix tree, each edge has some substring. This prefix of suffix corresponds to this substring
  *     - a range in the suffix array
  *     - a lcp value of this range of suffixes representing length of prefix of these suffixes
- * leaf nodes are [n - 1, 2 * n - 1), each leaf represents:
+ * leaf nodes are a subset of [n - 1, 2 * n - 1), each leaf represents:
  *     - a single suffix
  */
 struct lcp_tree {
