@@ -16,7 +16,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
         for (auto u : adj_removed_edges[cent]) {
             child_depths.emplace_back(1, 0.0);
             for (queue<array<int, 2>> q({{u, cent}}); !q.empty();) {
-                child_depths.back().push_back(ssize(q));
+                child_depths.back().push_back(int(ssize(q)));
                 queue<array<int, 2>> new_q;
                 while (!q.empty()) {
                     auto [v, p] = q.front();

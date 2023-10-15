@@ -1,7 +1,9 @@
 help:
 	@echo "command                              | explanation"
 	@echo "------------------------------------ | -----------"
-	@echo "make compile_all_tests               | compile all tests with g++ for warnings"
+	@echo "make compile_all_tests_cpp17         | compile all tests with g++17 for warnings"
+	@echo
+	@echo "make compile_all_tests_cpp20         | compile all tests with g++20 for warnings"
 	@echo
 	@echo "make astyle_cppcheck                 | runs astyle, cppcheck"
 	@echo
@@ -26,8 +28,11 @@ help:
 	@echo "                                     | corresponding to randomly generated tests. This will cause"
 	@echo "                                     | these tests to eventually be re-run."
 
-compile_all_tests:
-	./scripts/compile_all_tests.sh
+compile_all_tests_cpp17:
+	./scripts/compile_all_tests_cpp17.sh
+
+compile_all_tests_cpp20:
+	./scripts/compile_all_tests_cpp20.sh
 
 astyle_cppcheck:
 	./scripts/astyle_cppcheck.sh

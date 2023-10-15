@@ -14,26 +14,26 @@ int main() {
     //test `*_cmp` functions
     {
         for (int num_tests = 50; num_tests--;) {
-            auto le = get_rand<int>(0, ssize(s));
-            auto ri = get_rand<int>(0, ssize(s));
-            if (get_rand(0, 30) == 0) le = ssize(s);
-            if (get_rand(0, 30) == 0) ri = ssize(s);
+            auto le = get_rand<int>(0, int(ssize(s)));
+            auto ri = get_rand<int>(0, int(ssize(s)));
+            if (get_rand(0, 30) == 0) le = int(ssize(s));
+            if (get_rand(0, 30) == 0) ri = int(ssize(s));
             int cmp_val = suf_cmp(lq.sa_inv, le, ri);
             if (cmp_val < 0) assert(s.substr(le) < s.substr(ri));
             if (cmp_val == 0) assert(s.substr(le) == s.substr(ri));
             if (cmp_val > 0) assert(s.substr(le) > s.substr(ri));
         }
         for (int num_tests = 50; num_tests--;) {
-            auto le1 = get_rand<int>(0, ssize(s));
-            auto ri1 = get_rand<int>(0, ssize(s));
+            auto le1 = get_rand<int>(0, int(ssize(s)));
+            auto ri1 = get_rand<int>(0, int(ssize(s)));
             if (le1 > ri1) swap(le1, ri1);
             int le2, ri2;
             if (get_rand(0, 20) == 0) {
                 le2 = le1;
                 ri2 = ri1;
             } else {
-                le2 = get_rand<int>(0, ssize(s));
-                ri2 = get_rand<int>(0, ssize(s));
+                le2 = get_rand<int>(0, int(ssize(s)));
+                ri2 = get_rand<int>(0, int(ssize(s)));
                 if (le2 > ri2) swap(le2, ri2);
             }
             int cmp_result = substr_cmp(lq, le1, ri1, le2, ri2);
@@ -44,7 +44,7 @@ int main() {
             else assert(sub1 > sub2);
         }
     }
-    for (int i = 0; i < ssize(s); i++)
+    for (auto i = 0; i < ssize(s); i++)
         cout << lq.get_lcp(i, 0) << " ";
     cout << '\n';
     return 0;
