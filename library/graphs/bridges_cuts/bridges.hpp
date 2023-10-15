@@ -29,7 +29,7 @@ struct bridge_info {
  * @space this function allocates and returns a `bridge_info` struct, which is O(n + m)
  */
 bridge_info bridges(const vector<vector<array<int, 2>>>& adj, int m) {
-    int n = ssize(adj), timer = 1, num_2_edge_ccs = 0;
+    int n = int(ssize(adj)), timer = 1, num_2_edge_ccs = 0;
     vector<int> tin(n), two_edge_ccid(n), st;
     vector<bool> is_bridge(m);
     st.reserve(n);

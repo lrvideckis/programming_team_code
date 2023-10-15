@@ -34,7 +34,7 @@ struct wavelet_tree {
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums`
      *        O((maxv - minv) + n * log(maxv - minv))      for `presums`
      */
-    wavelet_tree(vector<int> arr, int a_minv, int a_maxv) : n(ssize(arr)), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), presums(maxv - minv) {
+    wavelet_tree(vector<int> arr, int a_minv, int a_maxv) : n(int(ssize(arr))), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), presums(maxv - minv) {
         build(arr, 0, n, minv, maxv, 1);
     }
     void build(vector<int>& arr, int le, int ri, int tl, int tr, int u) {

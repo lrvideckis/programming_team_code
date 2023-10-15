@@ -7,7 +7,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    int n = ssize(s);
+    auto n = ssize(s);
     lcp_tree lt(s);
     {
         auto [le, ri] = find_str(s, lt, string(""));

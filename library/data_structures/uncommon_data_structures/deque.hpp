@@ -32,7 +32,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    deq(const vector<T>& arr, F a_op) : op(a_op) {rebuild(arr, ssize(arr) / 2);}
+    deq(const vector<T>& arr, F a_op) : op(a_op) {rebuild(arr, int(ssize(arr)) / 2);}
     /**
      * @returns deq[0] op deq[1] op ... op deq.back()
      * @time O(1)
@@ -49,7 +49,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline int size() const {return ssize(le) + ssize(ri);}
+    inline int size() const {return int(ssize(le) + ssize(ri));}
     /**
      * @returns deq[0]
      * @time O(1)
@@ -104,7 +104,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
         if (le.empty()) {
             vector<T> arr(ssize(ri));
             transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x[0];});
-            rebuild(arr, (ssize(arr) + 1) / 2);
+            rebuild(arr, (int(ssize(arr)) + 1) / 2);
         }
         assert(!le.empty());
         le.pop_back();
@@ -119,7 +119,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
         if (ri.empty()) {
             vector<T> arr(ssize(le));
             transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x[0];});
-            rebuild(arr, ssize(arr) / 2);
+            rebuild(arr, int(ssize(arr)) / 2);
         }
         assert(!ri.empty());
         ri.pop_back();

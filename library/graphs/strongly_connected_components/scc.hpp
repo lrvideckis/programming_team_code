@@ -26,7 +26,7 @@ struct scc_info {
  * various vectors which are each O(n)
  */
 scc_info get_sccs(const vector<vector<int>>& adj) {
-    int n = ssize(adj), timer = 1, num_sccs = 0;
+    int n = int(ssize(adj)), timer = 1, num_sccs = 0;
     vector<int> tin(n), scc_id(n, -1), node_stack;
     node_stack.reserve(n);
     auto dfs = [&](auto&& self, int u) -> int {

@@ -27,7 +27,7 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active) : n(ssize(arr)), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
+    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active) : n(int(ssize(arr))), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
         assert(ssize(active) == n);
         if (!n) return;
         vector<pair<int, bool>> cpy(n);

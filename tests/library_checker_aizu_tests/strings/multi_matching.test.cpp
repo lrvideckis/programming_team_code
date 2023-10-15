@@ -35,7 +35,7 @@ int main() {
         {
             auto [bwt_le, bwt_ri] = fb.find_str("a" + t);
             assert(ssize(bwt_le) == 2 + ssize(t) && ssize(bwt_ri) == 2 + ssize(t) && bwt_le.back() == 0 && bwt_ri.back() == ssize(s));
-            for (int i = ssize(bwt_le) - 2; i >= 0; i--)
+            for (auto i = ssize(bwt_le) - 2; i >= 0; i--)
                 assert(bwt_ri[i] - bwt_le[i] <= bwt_ri[i + 1] - bwt_le[i + 1]);
             assert(bwt_ri[1] - bwt_le[1] == lcpt_ri - lcpt_le);
             if (lcpt_le < lcpt_ri)

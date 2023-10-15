@@ -55,7 +55,7 @@ struct lcp_tree {
      * @time O((n log n) + (n * max_val))
      * @space adj is O(n * max_val)
      */
-    lcp_tree(const string& s) : n(ssize(s)), adj(max(n - 1, 0), vector(max_val, -1)) {
+    lcp_tree(const string& s) : n(int(ssize(s))), adj(max(n - 1, 0), vector(max_val, -1)) {
         assert(n > 0);
         auto ret = get_sa(s, mn + max_val);
         sa = ret[0], sa_inv = ret[1];

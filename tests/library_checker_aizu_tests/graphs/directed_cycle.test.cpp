@@ -66,7 +66,7 @@ int main() {
                     if (curr_node == v) break;
                 }
                 cout << ssize(res) << '\n';
-                for (int i = ssize(res) - 1; i >= 0; i--)
+                for (auto i = ssize(res) - 1; i >= 0; i--)
                     cout << res[i] << '\n';
                 exit(0);
             }

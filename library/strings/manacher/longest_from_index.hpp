@@ -20,7 +20,7 @@
  * @space an O(n) vector is allocated and returned
  */
 vector<int> longest_from_index(const vector<int>& man) {
-    int n = (ssize(man) + 1) / 2;
+    int n = (int(ssize(man)) + 1) / 2;
     vector longest(n, 1);
     for (int i = n - 2; i >= 0; i--) {
         longest[i] = min(longest[i + 1] + 2, n - i);

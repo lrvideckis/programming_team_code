@@ -17,7 +17,7 @@ struct tree_lift {
      * @time O(n)
      * @space O(n) for d, p, j vectors
      */
-    tree_lift(const vector<vector<int>>& adj): n(ssize(adj)), d(n), p(n, -1), j(n, -1) {
+    tree_lift(const vector<vector<int>>& adj): n(int(ssize(adj))), d(n), p(n, -1), j(n, -1) {
         for (int i = 0; i < n; i++)
             if (j[i] == -1)
                 j[i] = i, dfs(adj, i);

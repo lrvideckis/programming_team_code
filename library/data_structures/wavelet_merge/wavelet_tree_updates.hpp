@@ -35,7 +35,7 @@ struct wavelet_tree_updates {
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(const vector<int>& arr, int a_minv, int a_maxv, const vector<bool>& active) : n(ssize(arr)), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), bool_bits(2 * (maxv - minv), vector<bool>()) {
+    wavelet_tree_updates(const vector<int>& arr, int a_minv, int a_maxv, const vector<bool>& active) : n(int(ssize(arr))), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), bool_bits(2 * (maxv - minv), vector<bool>()) {
         assert(minv < maxv && ssize(active) == n);
         vector<pair<int, bool>> cpy(n);
         transform(begin(arr), end(arr), begin(active), begin(cpy), [](int x, bool y) {return pair(x, y);});

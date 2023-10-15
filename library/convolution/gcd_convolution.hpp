@@ -10,11 +10,11 @@ const int mod = 998'244'353;
  */
 vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
     assert(ssize(a) == ssize(b));
-    int n = ssize(a);
+    auto n = ssize(a);
     vector<int> c(n);
-    for (int g = n - 1; g >= 1; g--) {
+    for (auto g = n - 1; g >= 1; g--) {
         auto sum_a = 0LL, sum_b = 0LL;
-        for (int i = g; i < n; i += g) {
+        for (auto i = g; i < n; i += g) {
             sum_a += a[i], sum_b += b[i];
             if ((c[g] -= c[i]) < 0) c[g] += mod;
         }

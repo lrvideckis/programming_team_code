@@ -18,11 +18,11 @@ struct mcmf {
      */
     mcmf(int a_n) : n(a_n), adj(n) {}
     void add_edge(int u, int v, ll cap, ll cost) {
-        edge e1 = {u, v, cap, cost, 0, ssize(adj[v])};
-        edge e2 = {v, u, 0, -cost, 0, ssize(adj[u])};
-        adj[u].push_back(ssize(e));
+        edge e1 = {u, v, cap, cost, 0, int(ssize(adj[v]))};
+        edge e2 = {v, u, 0, -cost, 0, int(ssize(adj[u]))};
+        adj[u].push_back(int(ssize(e)));
         e.push_back(e1);
-        adj[v].push_back(ssize(e));
+        adj[v].push_back(int(ssize(e)));
         e.push_back(e2);
     }
     /**

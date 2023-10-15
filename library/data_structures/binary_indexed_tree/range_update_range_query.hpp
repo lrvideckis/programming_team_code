@@ -20,7 +20,7 @@ template <class T> struct bit_rurq {
      * @time O(n)
      * @space O(n) for both bits
      */
-    bit_rurq(const vector<T>& a) : n(ssize(a)) {
+    bit_rurq(const vector<T>& a) : n(int(ssize(a))) {
         vector<T> init(n);
         adjacent_difference(begin(a), end(a), begin(init));
         bit1 = {init};

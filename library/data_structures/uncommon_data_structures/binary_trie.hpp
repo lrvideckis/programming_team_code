@@ -32,7 +32,7 @@ template <class T> struct binary_trie {
         for (int bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
             if (t[u].next[v] == -1) {
-                t[u].next[v] = ssize(t);
+                t[u].next[v] = int(ssize(t));
                 t.emplace_back();
             }
             u = t[u].next[v];

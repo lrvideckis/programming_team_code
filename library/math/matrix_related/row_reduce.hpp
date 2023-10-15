@@ -12,7 +12,8 @@
  * @space besides the O(n * m) `mat` param, this function uses O(1) space
  */
 pair<int, long long> row_reduce(vector<vector<long long>>& mat, int cols) {
-    int n = ssize(mat), m = ssize(mat[0]), rank = 0;
+    auto n = ssize(mat), m = ssize(mat[0]);
+    int rank = 0;
     auto det = 1LL;
     assert(cols <= m);
     for (int col = 0; col < cols && rank < n; col++) {

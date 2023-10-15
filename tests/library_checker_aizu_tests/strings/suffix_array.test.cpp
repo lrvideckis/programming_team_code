@@ -18,7 +18,7 @@ int main() {
     }
     string s;
     cin >> s;
-    int n = ssize(s);
+    int n = int(ssize(s));
     lcp_query lq(s, 256);
     assert(ssize(lq.sa) == n);
     assert(ssize(lq.sa_inv) == n);

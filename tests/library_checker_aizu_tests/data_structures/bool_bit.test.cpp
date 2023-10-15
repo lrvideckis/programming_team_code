@@ -6,7 +6,7 @@
 const int max_bit = 51;
 
 vector<bool_bit> init_prebools(const vector<long long>& arr) {
-    const int mx_n = ssize(arr);
+    const auto mx_n = ssize(arr);
     vector<bool_bit> prebools;
     for (int bit = 0; bit < max_bit; bit++) {
         vector<bool> curr(mx_n);

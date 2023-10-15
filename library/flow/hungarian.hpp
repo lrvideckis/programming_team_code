@@ -24,7 +24,7 @@ struct weighted_match {
  * temporarily
  */
 weighted_match hungarian(const vector<vector<long long>>& cost) {
-    int n = ssize(cost) - 1, m = ssize(cost[0]) - 1;
+    auto n = ssize(cost) - 1, m = ssize(cost[0]) - 1;
     assert(n <= m);
     vector<int> p(m + 1), way(m + 1);
     vector u(n + 1, 0LL), v(m + 1, 0LL);

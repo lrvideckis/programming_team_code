@@ -21,7 +21,7 @@ struct find_bwt {
      * @space O(n * max_val) for `occ` vector; it's possible to improve this
      *     to O(n * max_val / 64) https://codeforces.com/contest/963/submission/217802614
      */
-    find_bwt(const string& s, const vector<int>& sa) : n(ssize(s)), last(s.empty() ? -1 : s.back() - mn), occ(n + 1) {
+    find_bwt(const string& s, const vector<int>& sa) : n(int(ssize(s))), last(s.empty() ? -1 : s.back() - mn), occ(n + 1) {
         fill(begin(cnt), end(cnt), 0);
         for (int i = 0; i < n; i++) {
             cnt[s[i] + 1 - mn]++;
@@ -46,7 +46,7 @@ struct find_bwt {
      */
     array<vector<int>, 2> find_str(const string& t) const {
         vector<int> le(ssize(t) + 1, 0), ri(ssize(t) + 1, n);
-        for (int i = ssize(t) - 1; i >= 0; i--) {
+        for (auto i = ssize(t) - 1; i >= 0; i--) {
             char c = t[i] - mn;
             le[i] = cnt[c] + occ[le[i + 1]][c] + (c == last && i < ssize(t) - 1);
             ri[i] = cnt[c] + occ[ri[i + 1]][c] + (c == last);

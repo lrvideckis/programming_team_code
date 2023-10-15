@@ -31,9 +31,9 @@ template <class T, class F = function<bool(T, T)>> struct linear_rmq {
      * @time O(n)
      * @space `arr`, `mask`, and `idx` vectors are all O(n)
      */
-    linear_rmq(const vector<T>& a_arr, F a_less) : n(ssize(a_arr)), arr(a_arr), less(a_less) {
+    linear_rmq(const vector<T>& a_arr, F a_less) : n(int(ssize(a_arr))), arr(a_arr), less(a_less) {
         for (int sz = n; sz >= 2; sz = ((sz + 63) >> 6)) {
-            int level = ssize(idx);
+            int level = int(ssize(idx));
             mask.emplace_back(sz + 1);
             idx.emplace_back(sz);
             calc(level, 0, sz);

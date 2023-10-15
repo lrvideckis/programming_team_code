@@ -7,7 +7,7 @@
 #include "../../../library/data_structures/uncommon_data_structures/linear_rmq.hpp"
 
 void test_all_subarrays(const vector<int>& arr) {
-    int n = ssize(arr);
+    auto n = ssize(arr);
     RMQ<int> rmq(arr, [](auto x, auto y) {return min(x, y);});
     disjoint_rmq<int> dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
     linear_rmq<int> lin_rmq(arr, less<int>());

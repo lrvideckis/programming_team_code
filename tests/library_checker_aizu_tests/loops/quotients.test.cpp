@@ -22,7 +22,7 @@ int main() {
         assert(prev_ri == n);
     }
     cout << ssize(quots) << '\n';
-    for (int i = ssize(quots) - 1; i >= 0; i--)
+    for (auto i = ssize(quots) - 1; i >= 0; i--)
         cout << quots[i] << ' ';
     cout << '\n';
     return 0;
