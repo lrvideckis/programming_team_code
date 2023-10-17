@@ -17,7 +17,9 @@ int main() {
             lcs.push_onto_s(c);
             {
                 vector<bool> seen(ssize(t));
-                for (int val : lcs.dp) {
+                for (int i = 0; i < ssize(t); i++) {
+                    int val = lcs.dp[i];
+                    assert(val <= i);
                     if (val == -1) continue;
                     assert(!seen[val]);
                     seen[val] = 1;
