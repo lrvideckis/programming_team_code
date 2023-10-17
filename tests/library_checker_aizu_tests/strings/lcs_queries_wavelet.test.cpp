@@ -15,6 +15,14 @@ int main() {
         wts.emplace_back(lcs.dp, -1, ssize(t));
         for(char c : s) {
             lcs.push_onto_s(c);
+            {
+                vector<bool> seen(ssize(t));
+                for(int val : lcs.dp) {
+                    if(val == -1) continue;
+                    assert(!seen[val]);
+                    seen[val] = 1;
+                }
+            }
             wts.emplace_back(lcs.dp, -1, ssize(t));
         }
     }
