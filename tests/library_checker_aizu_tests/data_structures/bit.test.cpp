@@ -2,8 +2,8 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/data_structures/binary_indexed_tree/range_update_point_query.hpp"
-#include "../../../library/data_structures/binary_indexed_tree/range_update_range_query.hpp"
+#include "../../../library/data_structures/binary_indexed_tree/rupq.hpp"
+#include "../../../library/data_structures/binary_indexed_tree/rurq.hpp"
 #include "../../../library/data_structures/binary_indexed_tree/lower_bound.hpp"
 #include "../../../library/data_structures/lazy_segment_tree/lower_bound.hpp"
 
