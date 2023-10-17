@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/binary_indexed_tree/range_update_point_query.hpp"
+#include "../../../library/data_structures/binary_indexed_tree/rupq.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
