@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "binary_indexed_tree.hpp"
+#include "bit.hpp"
 /**
  * range update, point query
  */
