@@ -58,9 +58,7 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
                 in_unused.pop_back();
             } else edges.push_back({i, num_sccs - 1});
         }
-    transform(begin(in_unused), end(in_unused), back_inserter(edges), [](int u) {
-        return array<int, 2> {0, u};
-    });
+    for (int u : in_unused) edges.push_back({0, u});
     vector<int> to_node(num_sccs);
     for (int i = 0; i < n; i++) to_node[scc_id[i]] = i;
     for (auto& [u, v] : edges) u = to_node[u], v = to_node[v];
