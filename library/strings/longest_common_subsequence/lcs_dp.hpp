@@ -8,6 +8,8 @@
  *   - given range [le, ri), calculate LCS(s, t.substr(le, ri - le))
  *       = number of indexes i such that le <= i < ri && dp[i] < le
  *
+ * note -1 <= dp[i] < |t|
+ *
  * @time O(|t|)
  * @space O(|t|)
  */
