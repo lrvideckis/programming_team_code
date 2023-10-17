@@ -37,8 +37,10 @@ template <class T> struct bit_rurq {
      */
     inline void update(int le, int ri, T d) {
         assert(0 <= le && le <= ri && ri <= n);
-        bit1.update(le, d);
-        bit2.update(le, d * le);
+        if (le < n) {
+            bit1.update(le, d);
+            bit2.update(le, d * le);
+        }
         if (ri < n) {
             bit1.update(ri, -d);
             bit2.update(ri, -d * ri);

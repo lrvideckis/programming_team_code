@@ -16,6 +16,9 @@ int main() {
             cin >> le >> ri >> x;
             le--;
             bit.update(le, ri, x);
+            //test degenerate update
+            bit.update(le, le, x);
+            bit.update(ri, ri, x);
         } else {
             int le, ri;
             cin >> le >> ri;

@@ -18,6 +18,11 @@ int main() {
             le--;
             bit_i_1.update(le, ri, x);
             bit_i_2.update(le, ri, x);
+            //test degenerate updates
+            bit_i_1.update(le, le, x);
+            bit_i_1.update(ri, ri, x);
+            bit_i_2.update(le, le, x);
+            bit_i_2.update(ri, ri, x);
         } else {
             int idx;
             cin >> idx;

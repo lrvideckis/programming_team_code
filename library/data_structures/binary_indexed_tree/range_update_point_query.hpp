@@ -33,7 +33,7 @@ template <class T> struct bit_rupq {
      */
     inline void update(int le, int ri, T d) {
         assert(0 <= le && le <= ri && ri <= n);
-        bit.update(le, d);
+        if (le < n) bit.update(le, d);
         if (ri < n) bit.update(ri, -d);
     }
     /**
