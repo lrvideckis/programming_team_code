@@ -8,7 +8,7 @@
  *
  * @param s,t strings/arrays
  * @param queries queries[i] = {s_ri, t_le, t_ri}
- * @returns res[i] = LCS(s.substr(queries[i][0]), t.substr(queries[i][0], queries[i][1] - queries[i][0]))
+ * @returns res[i] = LCS(s.substr(0, queries[i][0]), t.substr(queries[i][0], queries[i][1] - queries[i][0]))
  * @time O((n * m + q) * log(m))
  * @space a single O(n * m + q) vector `qs` stores the queries. Besides this only O(m + q) is allocated
  */
