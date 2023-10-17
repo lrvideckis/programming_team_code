@@ -14,7 +14,7 @@
  *     size(LCS(s, t)) = number of indexes i such that dp[i] = -1
  *     for all index pairs i, j: if i != j && dp[i] != -1 && dp[j] != -1 then dp[i] != dp[j]
  *
- * @time O(|t|)
+ * @time O(|s| * |t|)
  * @space O(|t|)
  */
 template <class T> struct lcs_dp {
