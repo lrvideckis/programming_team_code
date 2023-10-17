@@ -13,7 +13,7 @@ vector<int> lcs_queries(const vector<vector<int>>& h, const vector<array<int, 3>
     }
     vector<int> res(q);
     for (int i = 0; i <= n; i++) {
-        bit_rupq<int> bit(int(m));
+        bit_rupq<int> bit{int(m)};
         for (int j = 0; j <= m; j++) {
             bit.update(h[i][j], j, 1);
             for (auto [le, idx] : qs[i][j])
