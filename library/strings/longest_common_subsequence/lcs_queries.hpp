@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../data_structures/binary_indexed_tree/range_update_point_query.hpp"
+#include "../../data_structures/binary_indexed_tree/rupq.hpp"
 #include "lcs_dp.hpp"
 vector<int> lcs_queries(const vector<vector<int>>& h, const vector<array<int, 3>>& queries) {
     auto n = ssize(h) - 1, m = ssize(h[0]) - 1, q = ssize(queries);
