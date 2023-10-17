@@ -17,6 +17,11 @@ template <class T> vector<int> lcs_queries(const T& s, const T& t, const vector<
         lcs.push_onto_s(s[i]);
         // queries of given [t_le, t_ri): find number of indexes i such that t_le <= i < t_ri && lcs.dp[i] < t_le
         BIT<int> bit{int(m)};
+        for(int t_le = m - 1; t_le >= 0; t_le--) {
+            for(auto [t_ri, idx] : qs[i][t_le]) {
+
+            }
+        }
 
     }
     return res;

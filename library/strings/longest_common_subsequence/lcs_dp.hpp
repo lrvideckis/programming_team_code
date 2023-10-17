@@ -1,5 +1,16 @@
 /** @file */
 #pragma once
+/**
+ * @see https://codeforces.com/blog/entry/111625
+ *
+ * Given strings s, t (s initially empty):
+ *   - append character onto s
+ *   - given range [le, ri), calculate LCS(s, t.substr(le, ri - le))
+ *       = number of indexes i such that le <= i < ri && dp[i] < le
+ *
+ * @time O(|t|)
+ * @space O(|t|)
+ */
 template <class T> struct lcs_dp {
     T t;
     vector<int> dp;
