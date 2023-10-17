@@ -28,15 +28,14 @@ pair<int, long long> row_reduce(vector<vector<long long>>& mat, int cols) {
         }
         det = det * mat[rank][col] % mod;
         auto a_inv = bin_exp(mat[rank][col], mod - 2);
-        transform(begin(mat[rank]), end(mat[rank]), begin(mat[rank]), [&](auto val) {
-            return val * a_inv % mod;
-        });
+        for (auto& val : mat[rank]) val = val * a_inv % mod;
         for (int i = 0; i < n; i++)
             if (i != rank && mat[i][col] != 0) {
                 auto val = mat[i][col];
-                transform(begin(mat[i]), end(mat[i]), begin(mat[rank]), begin(mat[i]), [&](auto x, auto y) {
-                    return (x + (mod - y) * val) % mod;
-                });
+                for (int j = 0; j < m; j++) {
+                    mat[i][j] -= mat[rank][j] * val % mod;
+                    if (mat[i][j] < 0) mat[i][j] += mod;
+                }
             }
         rank++;
     }

@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "binary_indexed_tree.hpp"
+#include "bit.hpp"
 /**
  * @see https://stackoverflow.com/a/27877427/18306912
  *
