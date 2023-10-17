@@ -15,18 +15,9 @@ vector<int> lcs_queries(const vector<vector<int>>& h, const vector<array<int, 3>
     for (int i = 0; i <= n; i++) {
         bit_rupq<int> bit(m);
         for (int j = 0; j <= m; j++) {
-            //if (j) {
-                assert(h[i][j] <= j);
-                assert(j <= m);
-                assert(h[i][j] >= 0);
-                bit.update(h[i][j], j, 1);
-                //bit.update(h[i][j], 1); //TODO: switch to range update, point query BIT
-                //bit.update(j, -1);
-            //}
-            for (auto [le, idx] : qs[i][j]) {
-                assert(0 <= le && le <= m);
+            bit.update(h[i][j], j, 1);
+            for (auto [le, idx] : qs[i][j])
                 res[idx] = (le == m ? 0 : bit.get_index(le));
-            }
         }
     }
     return res;
