@@ -9,7 +9,7 @@
  *       = number of indexes i such that le <= i < ri && dp[i] < le
  *
  * notes:
- *     -1 <= dp[i] < |t|
+ *     -1 <= dp[i] <= i < |t|
  *     there can be multiple indexes i such that dp[i] = -1
  *     LCS(s, t) = number of indexes i such that dp[i] = -1
  *     for all index pairs i, j: if i != j && dp[i] != -1 && dp[j] != -1 then dp[i] != dp[j]
