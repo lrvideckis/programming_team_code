@@ -88,5 +88,6 @@
 "tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-10-15 13:18:33 -0700",
 "tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2023-10-15 13:18:33 -0700",
 "tests/library_checker_aizu_tests/strings/single_matching_bs.test.cpp": "2023-10-15 13:18:33 -0700",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-10-15 13:18:33 -0700",
 "tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-10-15 13:18:33 -0700"
 }
