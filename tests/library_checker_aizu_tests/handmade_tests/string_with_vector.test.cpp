@@ -19,6 +19,8 @@
 #include "../../../library/strings/manacher/count_palindromes_query.hpp"
 #include "../../../library/strings/manacher/longest_palindrome_query.hpp"
 
+#include "../../../library/strings/longest_common_subsequence/lcs_queries.hpp"
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     //mainly to test all strings algs compile when passing in vectors
@@ -102,6 +104,12 @@ int main() {
                 assert(len == 1);
             }
         }
+    }
+    {
+        vector<array<int, 3>> queries;
+        queries.push_back({100, 0, 100});
+        vector<int> res = lcs_queries(arr, arr, queries);
+        assert(res[0] == 100);
     }
     cout << "Hello World\n";
     return 0;
