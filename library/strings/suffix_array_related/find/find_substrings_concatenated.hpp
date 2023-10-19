@@ -14,7 +14,7 @@
  * @space O(1)
  */
 template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
-        const vector<array<int, 2>>& substrs) {
+    const vector<array<int, 2>>& substrs) {
     using dt = array<int, 3>;
     const auto& sa = lq.sa;
     int n = int(ssize(sa)), sa_le = 0, sa_ri = n, str_le = 0, str_ri = 0, sum_len = 0;
