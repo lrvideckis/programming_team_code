@@ -13,7 +13,7 @@ cat ../library/**/*.hpp |
 	exit 1
 
 #adds hash code comments
-for header in ../library/**/*.hpp; do
+for header in ../library/**/*.hpp ../library/**/*.cpp; do
 	hash=$(../library/contest/hash.sh <"$header")
 	comment="cat $(basename "$header") | ./hash.sh"
 	sed --in-place "1s;^;//$comment\n//$hash\n;" "$header"
@@ -39,4 +39,4 @@ find ../library/ -depth -execdir rename 'y/_/ /' {} +
 find ../library/ -depth -execdir rename 'y/ /_/' {} +
 
 #remove hash code comments
-sed --in-place '1,2d' ../library/**/*.hpp
+sed --in-place '1,2d' ../library/**/*.hpp ../library/**/*.cpp
