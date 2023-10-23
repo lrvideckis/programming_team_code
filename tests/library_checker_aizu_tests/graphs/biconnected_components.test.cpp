@@ -29,7 +29,7 @@ int main() {
     }
     //check correctness of block vertex tree
     for (int i = 0; i < n; i++) {
-        assert(ssize(adj[i]) >= ssize(bvt[i]));//in particular, if adj[i].empty(), then bct[i].empty()
+        assert(ssize(adj[i]) >= ssize(bvt[i]));//in particular, if empty(adj[i]), then empty(bct[i])
         assert(cc.is_cut[i] == (ssize(bvt[i]) > 1));//is cut means non-leaf in block vertex tree
     }
     {
@@ -60,7 +60,7 @@ int main() {
     }
     vector<int> lone_nodes;
     for (int u = 0; u < n; u++)
-        if (bvt[u].empty())
+        if (empty(bvt[u]))
             lone_nodes.push_back(u);
     cout << cc.num_bccs + ssize(lone_nodes) << '\n';
     for (int bccid = 0; bccid < cc.num_bccs; bccid++) {

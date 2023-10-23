@@ -19,7 +19,7 @@ int main() {
     {
         vector<int> cnt_small_iterated(n), cnt_big_iterated(n);
         for (int i = 0; i < n; i++) {
-            if (adj[i].empty()) continue;
+            if (empty(adj[i])) continue;
             int big_ch_idx = int(max_element(begin(adj[i]), end(adj[i]), [&](int x, int y) {return lca.sub_sz[x] < lca.sub_sz[y];}) - begin(adj[i]));
             for (int j = 0; j < ssize(adj[i]); j++) {
                 int u = adj[i][j];
