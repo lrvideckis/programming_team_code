@@ -40,7 +40,7 @@ int main() {
                 for (auto& cc : comps)
                     for (auto node : cc)
                         assert(dsu.size(node) == ssize(cc));
-            } else if (!edge_st.empty()) {
+            } else if (!empty(edge_st)) {
                 auto [u, v] = edge_st.back();
                 edge_st.pop_back();
                 assert(adj[u].back() == v && adj[v].back() == u);

@@ -33,7 +33,7 @@ int main() {
         vector<array<int, 2>> subs;
         for (int i = 1; i < ssize(splits); i++)
             subs.push_back({splits[i - 1] + t_start, splits[i] + t_start});
-        assert(!subs.empty());
+        assert(!empty(subs));
         auto [sa_le2, sa_ri2, str_le2, str_ri2] = find_substrs_concated(lq_both, subs);
         assert(both.substr(str_le2, str_ri2 - str_le2) == t);
         assert(sa_ri2 - sa_le2 == 1 + sa_ri - sa_le);

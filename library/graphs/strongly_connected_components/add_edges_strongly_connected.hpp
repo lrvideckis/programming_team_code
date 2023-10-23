@@ -32,7 +32,7 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
         }
     vector<bool> vis(num_sccs);
     auto dfs = [&](auto&& self, int u) -> int {
-        if (scc_adj[u].empty()) return u;
+        if (empty(scc_adj[u])) return u;
         for (int v : scc_adj[u])
             if (!vis[v]) {
                 vis[v] = 1;
@@ -52,8 +52,8 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
         }
     for (int i = 1; i < ssize(edges); i++) swap(edges[i][0], edges[i - 1][0]);
     for (int i = 0; i < num_sccs; i++)
-        if (scc_adj[i].empty() && !vis[i]) {
-            if (!in_unused.empty()) {
+        if (empty(scc_adj[i]) && !vis[i]) {
+            if (!empty(in_unused)) {
                 edges.push_back({i, in_unused.back()});
                 in_unused.pop_back();
             } else edges.push_back({i, num_sccs - 1});

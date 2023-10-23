@@ -9,12 +9,12 @@ int main() {
     {
         string s;
         auto [sa, sa_inv] = get_sa(s, 256);
-        assert(get_lcp_array(sa, sa_inv, s).empty());
+        assert(empty(get_lcp_array(sa, sa_inv, s)));
     }
     {
         string s = "a";
         auto [sa, sa_inv] = get_sa(s, 256);
-        assert(get_lcp_array(sa, sa_inv, s).empty());
+        assert(empty(get_lcp_array(sa, sa_inv, s)));
     }
     string s;
     cin >> s;

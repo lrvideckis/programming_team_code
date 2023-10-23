@@ -47,7 +47,7 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
                 level[i] = 0, q.push(i);
         bool found = 0;
         vector<bool> mvc_l(lsz, 1), mvc_r(rsz);
-        while (!q.empty()) {
+        while (!empty(q)) {
             int u = q.front();
             q.pop();
             mvc_l[u] = 0;
