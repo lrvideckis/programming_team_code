@@ -16,7 +16,7 @@ vector<long long> dijkstra(const vector<vector<pair<int, long long>>>& adj, int 
     d[s] = 0;
     priority_queue<node, vector<node>, greater<node>> pq;
     pq.emplace(0, s);
-    while (!pq.empty()) {
+    while (!empty(pq)) {
         auto [d_u, u] = pq.top();
         pq.pop();
         if (d[u] < d_u) continue;//important check: O(n*m) without it

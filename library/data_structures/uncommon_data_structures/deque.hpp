@@ -40,8 +40,8 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T query() const {
         assert(size());
-        if (le.empty()) return ri.back()[1];
-        if (ri.empty()) return le.back()[1];
+        if (empty(le)) return ri.back()[1];
+        if (empty(ri)) return le.back()[1];
         return op(le.back()[1], ri.back()[1]);
     }
     /**
@@ -57,7 +57,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T front() const {
         assert(size());
-        return (le.empty() ? ri[0] : le.back())[0];
+        return (empty(le) ? ri[0] : le.back())[0];
     }
     /**
      * @returns deq.back()
@@ -66,7 +66,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline T back() const {
         assert(size());
-        return (ri.empty() ? le[0] : ri.back())[0];
+        return (empty(ri) ? le[0] : ri.back())[0];
     }
     /**
      * @param i index
@@ -84,7 +84,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      * @space O(1)
      */
     inline void push_front(T elem) {
-        le.push_back({elem, le.empty() ? elem : op(elem, le.back()[1])});
+        le.push_back({elem, empty(le) ? elem : op(elem, le.back()[1])});
     }
     /**
      * @param elem element to insert at end
@@ -92,7 +92,7 @@ template <class T, class F = function<T(T, T)>> struct deq {
      * @space O(1)
      */
     inline void push_back(T elem) {
-        ri.push_back({elem, ri.empty() ? elem : op(ri.back()[1], elem)});
+        ri.push_back({elem, empty(ri) ? elem : op(ri.back()[1], elem)});
     }
     /**
      * remove deq[0]
@@ -101,12 +101,12 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline void pop_front() {
         assert(size());
-        if (le.empty()) {
+        if (empty(le)) {
             vector<T> arr(ssize(ri));
             transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x[0];});
             rebuild(arr, (int(ssize(arr)) + 1) / 2);
         }
-        assert(!le.empty());
+        assert(!empty(le));
         le.pop_back();
     }
     /**
@@ -116,12 +116,12 @@ template <class T, class F = function<T(T, T)>> struct deq {
      */
     inline void pop_back() {
         assert(size());
-        if (ri.empty()) {
+        if (empty(ri)) {
             vector<T> arr(ssize(le));
             transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x[0];});
             rebuild(arr, int(ssize(arr)) / 2);
         }
-        assert(!ri.empty());
+        assert(!empty(ri));
         ri.pop_back();
     }
     inline void rebuild(const vector<T>& arr, int sz_le) {

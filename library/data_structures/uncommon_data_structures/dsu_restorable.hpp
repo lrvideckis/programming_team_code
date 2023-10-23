@@ -24,7 +24,7 @@ struct dsu_restorable {
         return 1;
     }
     void undo() {
-        assert(!st.empty());
+        assert(!empty(st));
         if (st.back()) {
             auto [u, v, sz_v] = st.back().value();
             num_sets++, subtree[u] -= subtree[v], p[v] = sz_v, p[u] -= p[v];
