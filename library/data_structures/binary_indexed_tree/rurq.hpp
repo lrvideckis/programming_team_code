@@ -2,7 +2,7 @@
 #pragma once
 #include "bit.hpp"
 /**
- * @see https://stackoverflow.com/a/27877427/18306912
+ * @see https://blog.mitrichev.ch/2013 /05/fenwick-tree-range-updates.html
  *
  * range update, range query
  */
