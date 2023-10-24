@@ -10,7 +10,7 @@
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 template <class T, class F = function<T(T, T)>> struct RMQ {
-    vector<vector<T>> dp; /**< dp[i][j] = arr[j] op arr[j + 1] op ... op arr[j + 2^i - 1] */
+    vector<vector<T>> dp;
     F op;
     RMQ() {}
     /**
