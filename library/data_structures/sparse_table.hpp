@@ -27,7 +27,7 @@ template <class T, class F = function<T(T, T)>> struct RMQ {
      * @time O(n log n)
      * @space O(n log n) for `dp` vector
      */
-    RMQ(const vector<T>& arr, F a_op) : dp(1, arr), op(a_op) {
+    RMQ(const vector<T>& arr, F a_op = [](T x, T y) {return min(x, y);}) : dp(1, arr), op(a_op) {
         for (int i = 0; (2 << i) <= ssize(arr); i++) {
             dp.emplace_back(ssize(arr) - (2 << i) + 1);
             transform(begin(dp[i]) + (1 << i), end(dp[i]), begin(dp[i]), begin(dp[i + 1]), op);
