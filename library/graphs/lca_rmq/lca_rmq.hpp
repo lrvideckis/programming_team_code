@@ -14,7 +14,7 @@ struct LCA {
      */
     vector<int> in, sub_sz, d, p, order;
     /** @} */
-    RMQ<int> rmq;
+    RMQ<int, function<int(int, int)>> rmq;
     /**
      * @param adj forest (rooted or unrooted)
      * @time O(n log n)
