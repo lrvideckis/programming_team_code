@@ -7,7 +7,7 @@
  */
 template <class T> struct longest_pal_query {
     vector<int> man, idx;
-    RMQ<int> rmq;
+    RMQ<int, function<int(int, int)>> rmq;
     /**
      * @param s string/vector
      * @time O(n log n)
