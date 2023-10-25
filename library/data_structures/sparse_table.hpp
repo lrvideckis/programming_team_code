@@ -5,11 +5,11 @@
  *     vector<long long> arr;
  *     RMQ rmq(arr, ranges::min); //c++20
  *     //or
- *     RMQ<long long> rmq(arr, [&](auto x, auto y) { return min(x, y); });
+ *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-template <class T, class F = function<T(T, T)>> struct RMQ {
+template <class T, class F> struct RMQ {
     vector<vector<T>> dp;
     F op;
     RMQ() {}

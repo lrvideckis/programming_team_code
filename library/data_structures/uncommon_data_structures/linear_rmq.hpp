@@ -4,11 +4,11 @@
  * @see https://codeforces.com/blog/entry/78931 https://codeforces.com/blog/entry/92310
  * @code{.cpp}
  *     vector<long long> arr;
- *     linear_rmq<long long> rmq(arr, less<long long>());//minimum query
- *     linear_rmq<long long> rmq(arr, greater<long long>());//maximum query
+ *     linear_rmq rmq(arr, less());//minimum query
+ *     linear_rmq rmq(arr, greater());//maximum query
  * @endcode
  */
-template <class T, class F = function<bool(T, T)>> struct linear_rmq {
+template <class T, class F> struct linear_rmq {
     int n;
     vector<T> arr;
     F less;

@@ -43,7 +43,7 @@ struct cart_tree {
  * @time O(n)
  * @space this function allocates/returns cart_tree struct which is O(n)
  */
-template <class T, class F = function<bool(T, T)>> cart_tree get_cart_tree(const vector<T>& arr, F less) {
+template <class T, class F> cart_tree get_cart_tree(const vector<T>& arr, F less) {
     auto n = ssize(arr);
     auto [le, ri] = mono_range(arr, less);
     vector<int> to_extrema(n);
