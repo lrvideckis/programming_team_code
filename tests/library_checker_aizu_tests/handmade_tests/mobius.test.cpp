@@ -5,6 +5,8 @@
 #include "../../../kactl/content/number-theory/Factor.h"
 
 int main() {
+    cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     calc_mobius();
     for (int i = 1; i < mx_n; i++) {
         int val = i;

@@ -23,6 +23,7 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     //mainly to test all strings algs compile when passing in vectors
     //I had a bug where `compare` is only for strings, making `find_str` useless when using vectors
     const int shift = 100'000;

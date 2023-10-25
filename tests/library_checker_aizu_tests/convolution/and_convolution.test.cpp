@@ -11,6 +11,7 @@ istream& operator >> (istream& is, vector<int>& v) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     int n;
     cin >> n;
     vector<int> a(1 << n), b(1 << n);

@@ -5,6 +5,7 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     calc_facts();
     for (int i = 0; i < mx_n; i++) {
         if (i) assert(i * inv[i] % mod == 1LL);

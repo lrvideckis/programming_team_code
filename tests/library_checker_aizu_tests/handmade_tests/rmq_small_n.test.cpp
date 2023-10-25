@@ -23,6 +23,7 @@ void test_all_subarrays(const vector<int>& arr) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     for (int n = 1; n <= 8; n++) {
         vector<int> perm(n);
         iota(begin(perm), end(perm), 0);

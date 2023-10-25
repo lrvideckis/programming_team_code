@@ -5,6 +5,7 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     const ll mod = 998'244'353;
     int q;
     cin >> q;
