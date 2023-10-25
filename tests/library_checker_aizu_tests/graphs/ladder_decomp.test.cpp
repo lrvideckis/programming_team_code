@@ -20,11 +20,11 @@ int main() {
     while (q--) {
         int u, v, k;
         cin >> u >> v >> k;
-        int lca_d = ld.depth[lca(ld.tbl, ld.depth, u, v)];
-        int u_lca = ld.depth[u] - lca_d;
-        int v_lca = ld.depth[v] - lca_d;
+        int lca_d = ld.d[lca(ld.tbl, ld.d, u, v)];
+        int u_lca = ld.d[u] - lca_d;
+        int v_lca = ld.d[v] - lca_d;
         if (k > u_lca + v_lca) cout << -1 << '\n';
-        else if(k <= u_lca) {
+        else if (k <= u_lca) {
             int res = ld.kth_par(u, k);
             assert(res == jmp(ld.tbl, u, k));//TODO maybe assert with side effects
             cout << res << '\n';

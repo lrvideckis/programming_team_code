@@ -4,45 +4,36 @@
 struct ladder_decomp {
     int n;
     vector<vector<int>> ladder, tbl;
-    vector<int> deapest_leaf, depth, par;
-    ladder_decomp(const vector<vector<int>>& adj) : n(int(ssize(adj))), ladder(n), deapest_leaf(n), depth(n), par(n, -1) {
-        iota(begin(deapest_leaf), end(deapest_leaf), 0);
+    vector<int> deap/*deapest leaf*/, d, p;
+    ladder_decomp(const vector<vector<int>>& adj) : n(int(ssize(adj))), ladder(n), deap(n), d(n), p(n, -1) {
+        iota(begin(deap), end(deap), 0);
         for (int i = 0; i < n; i++)
-            if (par[i] == -1) {
-                par[i] = i;
-                dfs(adj, i);
-                ladder[deapest_leaf[i]].resize(2 * depth[deapest_leaf[i]]);
+            if (p[i] == -1)
+                p[i] = i, dfs(adj, i);
+        for (int i = 0; i < n; i++)
+            if (p[i] == i || deap[p[i]] != deap[i]) {
+                int leaf = deap[i], len = min(2 * (d[leaf] - d[i]), d[leaf]) + 1;
+                ladder[leaf].resize(len, leaf);
+                for (int j = 1; j < len; j++)
+                    ladder[leaf][j] = p[ladder[leaf][j - 1]];
             }
-        for (int i = 0; i < n; i++) {
-            for(int j = 0, u = i; j < ssize(ladder[i]); j++, u = par[u]) {//TODO: see if I can remove `u` variable
-                ladder[i][j] = u;
-            }
-        }
-        tbl = treeJump(par);
+        tbl = treeJump(p);
     }
     void dfs(const vector<vector<int>>& adj, int u) {
         for (auto v : adj[u])
-            if (v != par[u]) {
-                par[v] = u;
-                depth[v] = 1 + depth[u];//TODO tree lift style
+            if (v != p[u]) {
+                d[v] = d[p[v] = u] + 1;
                 dfs(adj, v);
-                if(depth[deapest_leaf[v]] > depth[deapest_leaf[u]]) {
-                    deapest_leaf[u] = deapest_leaf[v];
-                }
-            }
-        for (auto v : adj[u])//TODO see if we can do this in a single loop above
-            if (v != par[u]) {
-                if (deapest_leaf[u] != deapest_leaf[v]) {
-                    ladder[deapest_leaf[v]].resize(2 * (depth[deapest_leaf[v]] - depth[v]));//TODO: don't allocate more memory if the ladder goes past the root
-                }
+                if (d[deap[v]] > d[deap[u]])
+                    deap[u] = deap[v];
             }
     }
     inline int kth_par(int u, int k) const {
-        assert(0 <= k && k <= depth[u]);//TODO: not allow k=0?
-        if (k == 0) return u;//TODO not have this special case?
+        assert(0 <= k && k <= d[u]);
+        if (k == 0) return u;
         int bit = __lg(k);
         u = tbl[bit][u], k -= (1 << bit);
-        int leaf = deapest_leaf[u];
-        return ladder[leaf][k + depth[leaf] - depth[u]];
+        int leaf = deap[u];
+        return ladder[leaf][k + d[leaf] - d[u]];
     }
 };
