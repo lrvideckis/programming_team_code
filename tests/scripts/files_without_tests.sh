@@ -18,4 +18,6 @@ comm -23 --check-order <(
 		grep "\.hpp$" |
 		sort |
 		uniq
-)
+) |
+	grep . &&
+	exit 1
