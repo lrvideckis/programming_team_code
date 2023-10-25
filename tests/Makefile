@@ -1,9 +1,9 @@
 help:
 	@echo "command                              | Run in CI? | explanation"
 	@echo "------------------------------------ | ---------- | -----------"
-	@echo "make compile_all_tests_cpp17         | yes        | compile all tests with -std=c++17 for warnings"
+	@echo "make compile_gcc17                   | yes        | compile all tests with -std=c++17 for warnings"
 	@echo "                                     |            |"
-	@echo "make compile_all_tests_cpp20         | yes        | compile all tests with -std=c++20 without ssize macro for warnings"
+	@echo "make compile_gcc20                   | yes        | compile all tests with -std=c++20 without ssize macro for warnings"
 	@echo "                                     |            |"
 	@echo "make astyle_cppcheck                 | yes        | runs astyle, cppcheck"
 	@echo "                                     |            |"
@@ -13,7 +13,7 @@ help:
 	@echo "                                     |            |"
 	@echo "make hackpack                        | yes        | build hackpack.pdf from .tex file"
 	@echo "                                     |            |"
-	@echo "make format_and_check_bash_scripts   | yes        | runs shfmt and shellcheck"
+	@echo "make shellcheck_shfmt                | yes        | runs shellcheck and shfmt"
 	@echo "                                     |            |"
 	@echo "make online_contest_no_comments      | yes        | 1) removes all comments"
 	@echo "                                     |            | 2) copies included files into file"
@@ -31,11 +31,11 @@ help:
 	@echo "                                     |            |"
 	@echo "make print_which_tests_havent_run    | no         | mainly to check if all tests have run"
 
-compile_all_tests_cpp17:
-	./scripts/compile_all_tests_cpp17.sh
+compile_gcc17:
+	./scripts/compile_gcc17.sh
 
-compile_all_tests_cpp20:
-	./scripts/compile_all_tests_cpp20.sh
+compile_gcc20:
+	./scripts/compile_gcc20.sh
 
 astyle_cppcheck:
 	./scripts/astyle_cppcheck.sh
@@ -52,8 +52,8 @@ doxygen:
 hackpack:
 	./scripts/hackpack.sh
 
-format_and_check_bash_scripts:
-	./scripts/format_and_check_bash_scripts.sh
+shellcheck_shfmt:
+	./scripts/shellcheck_shfmt.sh
 
 online_contest_no_comments:
 	./scripts/online_contest_no_comments.sh
