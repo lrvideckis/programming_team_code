@@ -4,7 +4,7 @@
 /**
  * @code{.cpp}
  *     vector<long long> arr;
- *     auto [le, ri] = mono_range(arr, less<long long>());
+ *     auto [le, ri] = mono_range(arr, less());
  * @endcode
  * @param arr array
  * @param less comparator
