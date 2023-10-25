@@ -13,13 +13,13 @@ cat ../library/**/*.hpp |
 	exit 1
 
 # remove #pragma once
-sed --in-place '/#pragma once/d' ../library/**/*.hpp
+sed --in-place '/^#pragma once$/d' ../library/**/*.hpp
 # remove /** @file */
-sed --in-place '/\/\*\* @file \*\//d' ../library/**/*.hpp
+sed --in-place '/^\/\*\* @file \*\/$/d' ../library/**/*.hpp
 
 #adds hash code comments
 for header in ../library/**/*.hpp; do
-	hash=$(sed '/#include/d' "$header" | cpp -dD -P -fpreprocessed | ./../library/contest/hash.sh)
+	hash=$(sed '/^#include/d' "$header" | cpp -dD -P -fpreprocessed | ./../library/contest/hash.sh)
 	sed --in-place "1i //hash: $hash" "$header"
 done
 
