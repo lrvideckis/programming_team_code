@@ -17,7 +17,7 @@ template <class T> struct longest_pal_query {
         iota(begin(idx), end(idx), 1);
         vector<int> init(ssize(man));
         iota(begin(init), end(init), 0);
-        rmq = {init, [&](int i1, int i2) -> int {return len(i1) < len(i2) ? i2 : i1;}};
+        rmq = {init, [&](int i1, int i2) {return len(i1) < len(i2) ? i2 : i1;}};
     }
     /**
      * @param i center
