@@ -14,6 +14,7 @@ cat ../library/**/*.hpp |
 
 # remove #pragma once
 sed --in-place '/#pragma once/d' ../library/**/*.hpp
+# remove /** @file */
 sed --in-place '/\/\*\* @file \*\//d' ../library/**/*.hpp
 
 #adds hash code comments
