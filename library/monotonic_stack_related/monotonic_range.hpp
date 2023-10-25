@@ -3,11 +3,8 @@
 #include "monotonic_stack.hpp"
 /**
  * @code{.cpp}
- *     vector<int> arr;
- *     auto [le, ri] = mono_range(arr, less()); //less(), less_equal(), greater(), greater_equal()
- *     // or
  *     vector<long long> arr;
- *     auto [le, ri] = mono_range<long long>(arr, less<long long>());
+ *     auto [le, ri] = mono_range(arr, less<long long>());
  * @endcode
  * @param arr array
  * @param less comparator
@@ -19,9 +16,10 @@
  * @time O(n)
  * @space two O(n) vectors are allocated and returned
  */
-template <class T, class F = function<bool(T, T)>> array<vector<int>, 2> mono_range(const vector<T>& arr, F less) {
+template <class T, class F> array<vector<int>, 2> mono_range(const vector<T>& arr, F less) {
     vector le = mono_st(arr, less);
     vector ri = mono_st<T>({rbegin(arr), rend(arr)}, [&](T x, T y) {return !less(y, x);});
+    //vector ri = mono_st(vector<T>{rbegin(arr), rend(arr)}, [&](T x, T y) {return !less(y, x);});TODO
     reverse(begin(ri), end(ri));
     transform(begin(ri), end(ri), begin(ri), [&](int val) {return ssize(arr) - val - 1;});
     return {le, ri};

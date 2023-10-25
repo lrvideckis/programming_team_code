@@ -2,8 +2,8 @@
 #pragma once
 /**
  * @code{.cpp}
- *     vector<T> arr;
- *     vector<int> le = mono_st(arr, less()); //less(), less_equal(), greater(), greater_equal()
+ *     vector<long long> arr;
+ *     vector<int> le = mono_st(arr, less<long long>()); //less(), less_equal(), greater(), greater_equal()
  * @endcode
  * @param arr array
  * @param less any transitive compare operator
@@ -12,7 +12,7 @@
  * @time O(n)
  * @space a O(n) vector is allocated and returned
  */
-template <class T, class F = function<bool(T, T)>> vector<int> mono_st(const vector<T>& arr, F less) {
+template <class T, class F> vector<int> mono_st(const vector<T>& arr, F less) {
     vector<int> le(ssize(arr));
     iota(begin(le), end(le), -1);
     for (int i = 0; i < ssize(arr); i++)
