@@ -1,32 +1,35 @@
 help:
-	@echo "command                              | explanation"
-	@echo "------------------------------------ | -----------"
-	@echo "make compile_all_tests_cpp17         | compile all tests with g++17 for warnings"
-	@echo
-	@echo "make compile_all_tests_cpp20         | compile all tests with g++20 for warnings"
-	@echo
-	@echo "make astyle_cppcheck                 | runs astyle, cppcheck"
-	@echo
-	@echo "make clangtidy                       | runs clang-tidy (mainly to verify snake case)"
-	@echo
-	@echo "make find_files_without_tests        | print list of all .hpp files included by *no* .test.cpp files"
-	@echo "                                     |   - these files are not compiled nor linted as part of ci"
-	@echo
-	@echo "make doxygen                         | check correctness, completeness of doxygen comments"
-	@echo
-	@echo "make hackpack                        | build hackpack.pdf from .tex file"
-	@echo
-	@echo "make format_and_check_bash_scripts   | runs shfmt and shellcheck"
-	@echo
-	@echo "make online_contest_no_comments      | mainly to reduce code length"
-	@echo
-	@echo "make online_contest_comments         | for use in online contests"
-	@echo
-	@echo "make print_which_tests_havent_run    | to check if all tests have run"
-	@echo
-	@echo "make remove_randomly_generated_tests | removes lines from .verify-helper/timestamps.remote.json"
-	@echo "                                     | corresponding to randomly generated tests. This will cause"
-	@echo "                                     | these tests to eventually be re-run."
+	@echo "command                              | Run in CI? | explanation"
+	@echo "------------------------------------ | ---------- | -----------"
+	@echo "make compile_all_tests_cpp17         | yes        | compile all tests with -std=c++17 for warnings"
+	@echo "                                     |            |"
+	@echo "make compile_all_tests_cpp20         | yes        | compile all tests with -std=c++20 without ssize macro for warnings"
+	@echo "                                     |            |"
+	@echo "make astyle_cppcheck                 | yes        | runs astyle, cppcheck"
+	@echo "                                     |            |"
+	@echo "make clangtidy                       | yes        | runs clang-tidy (mainly to verify snake_case)"
+	@echo "                                     |            |"
+	@echo "make doxygen                         | yes        | runs doxygen"
+	@echo "                                     |            |"
+	@echo "make hackpack                        | yes        | build hackpack.pdf from .tex file"
+	@echo "                                     |            |"
+	@echo "make format_and_check_bash_scripts   | yes        | runs shfmt and shellcheck"
+	@echo "                                     |            |"
+	@echo "make online_contest_no_comments      | yes        | 1) removes all comments"
+	@echo "                                     |            | 2) copies included files into file"
+	@echo "                                     |            | 3) pushes to online_contest_no_comments branch"
+	@echo "                                     |            |"
+	@echo "make online_contest_comments         | yes        | 1) copies included files into file"
+	@echo "                                     |            | 2) pushes to online_contest_comments branch"
+	@echo "                                     |            |"
+	@echo "make remove_randomly_generated_tests | yes        | removes lines from .verify-helper/timestamps.remote.json"
+	@echo "                                     |            | corresponding to randomly generated tests"
+	@echo "                                     |            |   - used in daily cron job to re-run these tests daily"
+	@echo "                                     |            |"
+	@echo "make find_files_without_tests        | no         | print list of all .hpp files included by *no* .test.cpp files"
+	@echo "                                     |            |   - these files are not compiled nor linted as part of ci"
+	@echo "                                     |            |"
+	@echo "make print_which_tests_havent_run    | no         | mainly to check if all tests have run"
 
 compile_all_tests_cpp17:
 	./scripts/compile_all_tests_cpp17.sh
