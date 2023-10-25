@@ -12,11 +12,13 @@ cat ../library/**/*.hpp |
 	grep . &&
 	exit 1
 
+# remove #pragma once
+sed --in-place '/#pragma once/d' ../library/**/*.hpp
+
 #adds hash code comments
-for header in ../library/**/*.hpp ../library/**/*.cpp; do
-	hash=$(../library/contest/hash.sh <"$header")
-	comment="cat $(basename "$header") | ./hash.sh"
-	sed --in-place "1s;^;//$comment\n//$hash\n;" "$header"
+for header in ../library/**/*.hpp; do
+	hash=$(cat "$header" | sed '/#include/d' | cpp -dD -P -fpreprocessed | ../library/contest/hash.sh)
+	sed --in-place "1i \/\/hash: $hash" "$header"
 done
 
 git submodule init
@@ -29,14 +31,9 @@ npm run test --prefix ../notebook-generator/
 # underscores in file names look bad in hackpack, so this
 # replaces all underscores with spaces
 # note, this is the perl `rename` command, not the linux util
-find ../library/ -depth -execdir rename 'y/_/ /' {} +
+#find ../library/ -depth -execdir rename 'y/_/ /' {} +
 
 # regarding school branding: https://brand.sdsmt.edu/identity/our-name/
 # in particular, no initials
 # logo taken from https://brand.sdsmt.edu/identity/official-logos/
 ./../notebook-generator/bin/notebookgen ../library/ --author "South Dakota Mines" --output ./hackpack.pdf --size 8 --columns 3 --image .config/SouthDakotaMinesLogo.png
-
-find ../library/ -depth -execdir rename 'y/ /_/' {} +
-
-#remove hash code comments
-sed --in-place '1,2d' ../library/**/*.hpp ../library/**/*.cpp
