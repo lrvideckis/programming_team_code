@@ -1050,6 +1050,12 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          cnt \
                          dt \
                          lcs_dp \
+                         b_tbl \
+                         l_tbl \
+                         dl \
+                         d \
+                         p \
+                         j \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

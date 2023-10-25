@@ -1,10 +1,25 @@
 /** @file */
 #pragma once
 #include "../../kactl/content/graph/BinaryLifting.h"
+/**
+ * @see https://codeforces.com/blog/entry/71567#comment-559299 https://youtu.be/0rCFkuQS968
+ * @code{.cpp}
+ *     vector<vector<int>> adj;
+ *     ladder ld(adj);
+ *     // KACTL functions
+ *     int kth_par = jmp(ld.b_tbl, u, k);
+ *     int curr_lca = lca(ld.b_tbl, ld.d, u, v);
+ * @endcode
+ */
 struct ladder {
     int n;
     vector<vector<int>> b_tbl, l_tbl;
     vector<int> dl/*deapest leaf*/, d, p;
+    /**
+     * @param adj forest (rooted or unrooted)
+     * @time O(n log n)
+     * @space O(n log n) for b_tbl. Everything else is O(n)
+     */
     ladder(const vector<vector<int>>& adj) : n(int(ssize(adj))), l_tbl(n), dl(n), d(n), p(n, -1) {
         iota(begin(dl), end(dl), 0);
         for (int i = 0; i < n; i++)
@@ -28,6 +43,13 @@ struct ladder {
                 if (d[dl[v]] > d[dl[u]]) dl[u] = dl[v];
             }
     }
+    /**
+     * @param u query node
+     * @param k number of edges
+     * @returns a node k edges up from u. With k=1, this returns u's parent.
+     * @time O(1)
+     * @space O(1)
+     */
     inline int kth_par(int u, int k) const {
         assert(0 <= k && k <= d[u]);
         if (k == 0) return u;
