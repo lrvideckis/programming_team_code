@@ -15,6 +15,7 @@ echo ".hpp files included by no .test.cpp file:"
 ) <(
 	g++ -MM library_checker_aizu_tests/**/*.test.cpp |
 		xargs basename --multiple |
+		grep "\.hpp$" |
 		sort |
 		uniq
 ) |
