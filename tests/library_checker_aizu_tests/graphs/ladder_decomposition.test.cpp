@@ -3,8 +3,6 @@
 
 #include "../../../library/graphs/ladder_decomposition.hpp"
 
-//TODO test forest
-//TODO test directed tree (edges point to children)
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, q;
