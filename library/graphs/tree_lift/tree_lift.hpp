@@ -6,12 +6,7 @@
  */
 struct tree_lift {
     int n;
-    /**
-     * d = depth, p = parent, j = jump
-     * @{
-     */
     vector<int> d, p, j;
-    /** @} */
     /**
      * @param adj forest (rooted or unrooted)
      * @time O(n)

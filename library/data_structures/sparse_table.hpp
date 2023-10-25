@@ -28,7 +28,7 @@ template <class T, class F> struct RMQ {
     /**
      * @param le,ri defines range [le, ri)
      * @returns arr[le] op arr[le + 1] op ... op arr[ri - 1]
-     * @time O(1) usually, or O(log MAX) if op is gcd
+     * @time O(1)
      * @space O(1)
      */
     inline T query(int le, int ri) const {

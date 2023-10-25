@@ -7,13 +7,7 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 struct LCA {
     int n;
-    /**
-     * time in, subtree size, depth, parent, pre order traversal
-     * note: in[order[i]] = i, order[in[i]] = i
-     * @{
-     */
     vector<int> in, sub_sz, d, p, order;
-    /** @} */
     RMQ<int, function<int(int, int)>> rmq;
     /**
      * @param adj forest (rooted or unrooted)
