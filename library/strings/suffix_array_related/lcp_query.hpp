@@ -11,7 +11,7 @@
  */
 template <class T> struct lcp_query {
     vector<int> sa, sa_inv, lcp;
-    RMQ<int> rmq;
+    RMQ<int, function<int(int, int)>> rmq;
     /**
      * @param s,max_val string/array with 0 <= s[i] < max_val
      * @time O((n log n) + max_val)
@@ -21,7 +21,7 @@ template <class T> struct lcp_query {
         auto ret = get_sa(s, max_val);
         sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
-        rmq = {lcp, [](int x, int y) -> int {return min(x, y);}};
+        rmq = {lcp, [](int x, int y) {return min(x, y);}};
     }
     /**
      * @param i1,i2 defines substrings [i1, n), [i2, n), note passing i1,i2 = n is okay

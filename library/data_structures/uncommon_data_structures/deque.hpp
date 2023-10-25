@@ -6,13 +6,13 @@
  *     //deque with query for: get min and # of mins in deque
  *     vector<pair<long long, int>> arr;//initialize arr[i].second = 1
  *     ...
- *     deq<pair<long long, int>> dq(arr, [](const auto& x, const auto& y) {
+ *     deq dq(arr, [](const auto& x, const auto& y) {
  *         if (x.first == y.first) return pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
  * @endcode
  */
-template <class T, class F = function<T(T, T)>> struct deq {
+template <class T, class F> struct deq {
     using dt = array<T, 2>;
     F op;
     /**
