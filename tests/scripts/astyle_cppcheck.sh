@@ -46,6 +46,19 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
+echo ".test.cpp files missing either sync_with_stdio or cin.failbit:"
+comm -23 --check-order <(
+	find library_checker_aizu_tests/ -type f -name "*.test.cpp" |
+		sort |
+		uniq
+) <(
+	grep --fixed-strings --regexp="cin.tie(0)->sync_with_stdio(0);" --regexp="cin.exceptions(cin.failbit);" --recursive library_checker_aizu_tests/ --files-with-matches |
+		sort |
+		uniq
+) |
+	grep . &&
+	exit 1
+
 astyle --options=.config/.astylerc --recursive "library_checker_aizu_tests/*.test.cpp" "../library/*.hpp" |
 	grep "Formatted" && exit 1
 
