@@ -27,7 +27,7 @@ int main() {
     for (int i = 0; i < n; i++) cin >> arr[i];
     RMQ rmq(arr, [](auto x, auto y) {return min(x, y);});
     disjoint_rmq dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
-    linear_rmq lin_rmq(arr, less<int>());
+    linear_rmq lin_rmq(arr, less());
     auto [le_mono, ri_mono] = mono_range(arr, less_equal());
     for (int i = 0; i < n; i++) {
         assert(le_mono[i] == -1 || arr[le_mono[i]] <= arr[i]);
