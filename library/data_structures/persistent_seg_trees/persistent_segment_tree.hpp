@@ -7,7 +7,7 @@
 struct PST {
     struct node {
         long long sum;
-        int lch, rch; /**< children, indexes into `tree` */
+        int lch, rch;
         node(long long a_sum, int a_lch, int a_rch) : sum(a_sum), lch(a_lch), rch(a_rch) {}
     };
     int root_l, root_r;
