@@ -142,11 +142,11 @@ jobs:
         git commit --message "online contest comments"
         git push origin online_contest_comments --force
 
-  format_and_check_bash_scripts:
+  shellcheck_shfmt:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: sudo apt install shfmt shellcheck
-    - name: format and check scripts
-      run: make --directory=tests/ format_and_check_bash_scripts
+    - name: shellcheck and shfmt
+      run: make --directory=tests/ shellcheck_shfmt

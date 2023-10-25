@@ -13,7 +13,7 @@ help:
 	@echo "                                     |            |"
 	@echo "make hackpack                        | yes        | build hackpack.pdf from .tex file"
 	@echo "                                     |            |"
-	@echo "make format_and_check_bash_scripts   | yes        | runs shfmt and shellcheck"
+	@echo "make shellcheck_shfmt                | yes        | runs shellcheck and shfmt"
 	@echo "                                     |            |"
 	@echo "make online_contest_no_comments      | yes        | 1) removes all comments"
 	@echo "                                     |            | 2) copies included files into file"
@@ -52,8 +52,8 @@ doxygen:
 hackpack:
 	./scripts/hackpack.sh
 
-format_and_check_bash_scripts:
-	./scripts/format_and_check_bash_scripts.sh
+shellcheck_shfmt:
+	./scripts/shellcheck_shfmt.sh
 
 online_contest_no_comments:
 	./scripts/online_contest_no_comments.sh
