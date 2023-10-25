@@ -1,6 +1,4 @@
-#!/bin/bash
-#runs 2 programs against each other on random inputs until they output different results
-#source: https://github.com/Errichto/youtube/blob/master/testing/s.sh
+#see: https://github.com/Errichto/youtube/blob/master/testing/s.sh
 #usage:
 #	chmod +x test.sh
 #	./test.sh
@@ -12,5 +10,5 @@ g++ -std=c++17 gen_test.cpp -o gen_test.out
 while :; do
 	echo "hi"
 	./gen_test.out >in
-	diff --ignore-all-space <(./a.out <in) <(./b.out <in) || break
+	diff -w <(./a.out <in) <(./b.out <in) || break
 done
