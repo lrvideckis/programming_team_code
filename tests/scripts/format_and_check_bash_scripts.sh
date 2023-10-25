@@ -4,7 +4,8 @@ set -euo pipefail
 # ** glob now searches any number of levels
 shopt -s globstar
 
-cd ../
+# avoid warnings in scripts in submodules
+git submodule deinit --all
 
 echo "bash scripts missing the bash shebang:"
 comm -23 --check-order <(
@@ -32,6 +33,6 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
-shellcheck --shell=bash --check-sourced --enable=check-set-e-suppressed,quote-safe-variables ./library/**/*.sh ./tests/**/*.sh || exit 1
+shellcheck --shell=bash --check-sourced --enable=check-set-e-suppressed,quote-safe-variables ./**/*.sh || exit 1
 
-shfmt -ln=bash -s -d -w ./library/**/*.sh ./tests/**/*.sh || exit 1
+shfmt -ln=bash -s -d -w ./**/*.sh || exit 1
