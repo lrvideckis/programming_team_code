@@ -14,11 +14,12 @@ cat ../library/**/*.hpp |
 
 # remove #pragma once
 sed --in-place '/#pragma once/d' ../library/**/*.hpp
+sed --in-place ';/** @file */;d' ../library/**/*.hpp
 
 #adds hash code comments
 for header in ../library/**/*.hpp; do
 	hash=$(cat "$header" | sed '/#include/d' | cpp -dD -P -fpreprocessed | ../library/contest/hash.sh)
-	sed --in-place "1i \/\/hash: $hash" "$header"
+	sed --in-place "1i //hash: $hash" "$header"
 done
 
 git submodule init
