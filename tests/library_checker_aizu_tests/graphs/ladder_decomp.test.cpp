@@ -1,7 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/jump_on_tree"
 #include "../template.hpp"
 
-#include "../../../library/graphs/lca_rmq/lca_rmq.hpp"
 #include "../../../library/graphs/ladder_decomposition.hpp"
 
 //TODO test forest
@@ -17,15 +16,22 @@ int main() {
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-    LCA lca(adj);
     ladder_decomp ld(adj);
     while (q--) {
         int u, v, k;
         cin >> u >> v >> k;
-        int lca_d = lca.d[lca.get_lca(u, v)];
-        int u_lca = lca.d[u] - lca_d;
-        int v_lca = lca.d[v] - lca_d;
-        if(k > u_lca + v_lca) cout << -1 << '\n';
-        else cout << (k <= u_lca ? ld.kth_par(u, k) : ld.kth_par(v, u_lca + v_lca - k)) << '\n';
+        int lca_d = ld.depth[lca(ld.tbl, ld.depth, u, v)];
+        int u_lca = ld.depth[u] - lca_d;
+        int v_lca = ld.depth[v] - lca_d;
+        if (k > u_lca + v_lca) cout << -1 << '\n';
+        else if(k <= u_lca) {
+            int res = ld.kth_par(u, k);
+            assert(res == jmp(ld.tbl, u, k));//TODO maybe assert with side effects
+            cout << res << '\n';
+        } else {
+            int res = ld.kth_par(v, u_lca + v_lca - k);
+            assert(res == jmp(ld.tbl, v, u_lca + v_lca - k));
+            cout << res << '\n';
+        }
     }
 }
