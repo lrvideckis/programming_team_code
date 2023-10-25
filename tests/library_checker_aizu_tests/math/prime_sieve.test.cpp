@@ -7,6 +7,8 @@
 #include "../../../kactl/content/number-theory/MillerRabin.h"
 
 int main() {
+    cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     calc_sieve();
     for (int i = 1; i < mx_n; i++)
         assert(isPrime(i) == is_prime(i));
