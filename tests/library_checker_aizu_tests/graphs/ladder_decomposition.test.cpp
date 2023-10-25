@@ -17,7 +17,7 @@ int main() {
     ladder ld(adj);
     vector<vector<int>> adj_rooted(n + n);
     for (int i = 0; i < n; i++)
-        if(ld.p[i] != i) {
+        if (ld.p[i] != i) {
             adj_rooted[ld.p[i]].push_back(i);
             adj_rooted[ld.p[i] + n].push_back(i + n);
         }
