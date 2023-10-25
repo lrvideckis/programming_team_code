@@ -19,6 +19,7 @@ vector<int> convert_max(const string& s) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     int n, q;
     string s;
     cin >> n >> q >> s;

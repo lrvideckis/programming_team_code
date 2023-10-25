@@ -14,6 +14,7 @@ const int MOD = 998'244'353;
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     int n, m, k;
     cin >> n >> m >> k;
     vector<vector<mi>> m1(n, vector<mi>(m));

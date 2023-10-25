@@ -8,6 +8,7 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     for (int n = 0; n <= 30; n++) {
         for (int tests = 10; tests--;) {
             string s(n, 'a');

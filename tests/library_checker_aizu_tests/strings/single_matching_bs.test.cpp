@@ -10,6 +10,7 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     string s, t;
     cin >> s >> t;
     auto [sa, sa_inv] = get_sa(s, 256);

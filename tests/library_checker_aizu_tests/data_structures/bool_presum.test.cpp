@@ -17,6 +17,7 @@ vector<bool_presum> init_presums(const vector<int>& arr) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
     for (int n = 0; n <= 500; n++) {
         vector<bool> init(n);
         bool_presum bp(init);
