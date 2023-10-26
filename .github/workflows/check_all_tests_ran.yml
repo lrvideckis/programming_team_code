@@ -1,0 +1,15 @@
+name: check all tests ran
+
+on:
+  schedule:
+    # check all tests have run after the last run after last scheduled run
+    #- cron:  '0 13 * * *'
+    - cron:  '30 4 * * *'
+
+jobs:
+  print_which_tests_havent_run:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: print which tests havent run
+      run: make --directory=tests/ print_which_tests_havent_run
