@@ -28,10 +28,10 @@ struct ladder {
         b_tbl = treeJump(p);
         for (int i = 0; i < n; i++)
             if (p[i] == i || dl[p[i]] != dl[i]) {
-                int leaf = dl[i], len = min(2 * (d[leaf] - d[i]), d[leaf]) + 1;
+                int leaf = dl[i];
                 auto& lad = l_tbl[leaf];
-                lad.resize(len, leaf);
-                for (int j = 1; j < len; j++)
+                lad.resize(min(2 * (d[leaf] - d[i]), d[leaf]) + 1, leaf);
+                for (int j = 1; j < ssize(lad); j++)
                     lad[j] = p[lad[j - 1]];
             }
     }
