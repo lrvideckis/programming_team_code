@@ -12,7 +12,6 @@ struct cut_info {
  * @see https://cp-algorithms.com/graph/cutpoints.html
  *
  * @code{.cpp}
- *
  *     vector<vector<array<int, 2>>> adj;
  *     for (int i = 0; i < m; i++) {
  *         int u, v;
