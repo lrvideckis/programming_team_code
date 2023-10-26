@@ -1,5 +1,3 @@
-Checks: >
-    misc-confusable-identifiers
 WarningsAsErrors: "*"
 HeaderFilterRegex: "/library/[^.]+\\.hpp$"
 UseColor: true
