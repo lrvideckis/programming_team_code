@@ -3,8 +3,7 @@
 /**
  * @code{.cpp}
  *     vector<long long> arr;
- *     RMQ rmq(arr, ranges::min); //c++20
- *     //or
+ *     RMQ rmq(arr, ranges::min); // -std=c++20
  *     RMQ rmq(arr, [&](auto x, auto y) { return min(x, y); });
  * @endcode
  */
