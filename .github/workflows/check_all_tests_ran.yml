@@ -3,8 +3,7 @@ name: check all tests ran
 on:
   schedule:
     # check all tests have run after the last run after last scheduled run
-    #- cron:  '0 13 * * *'
-    - cron:  '30 4 * * *'
+    - cron:  '55 12 * * *'
 
 jobs:
   print_which_tests_havent_run:

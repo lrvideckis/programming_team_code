@@ -2,6 +2,7 @@
 # ** glob now searches any number of levels
 shopt -s globstar
 
+# so that paths match up for comm command (otherwise you need basename)
 cd ..
 
 echo "total number of tests:"
