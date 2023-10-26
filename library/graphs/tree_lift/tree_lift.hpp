@@ -31,7 +31,7 @@ struct tree_lift {
      * @space O(1)
      */
     inline int kth_par(int u, int k) const {
-        if (k > d[u]) return -1;
+        assert(0 <= k && k <= d[u]);
         int anc_d = d[u] - k;
         while (d[u] > anc_d) u = d[j[u]] >= anc_d ? j[u] : p[u];
         return u;
