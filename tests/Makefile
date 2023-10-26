@@ -26,7 +26,7 @@ help:
 	@echo "                                     |            | corresponding to randomly generated tests"
 	@echo "                                     |            |   - used in daily cron job to re-run these tests daily"
 	@echo "                                     |            |"
-	@echo "make find_files_without_tests        | no         | print list of all .hpp files included by *no* .test.cpp files"
+	@echo "make files_without_tests             | yes        | print list of all .hpp files included by *no* .test.cpp files"
 	@echo "                                     |            |   - these files are not compiled nor linted as part of ci"
 	@echo "                                     |            |"
 	@echo "make print_which_tests_havent_run    | no         | mainly to check if all tests have run"
@@ -43,8 +43,8 @@ astyle_cppcheck:
 clangtidy:
 	./scripts/clangtidy.sh
 
-find_files_without_tests:
-	./scripts/find_files_without_tests.sh
+files_without_tests:
+	./scripts/files_without_tests.sh
 
 doxygen:
 	./scripts/doxygen.sh
