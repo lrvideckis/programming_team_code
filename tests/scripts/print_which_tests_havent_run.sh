@@ -9,7 +9,7 @@ echo "number of tests which have run:"
 grep --count "test.cpp" .verify-helper/timestamps.remote.json
 
 echo "tests which have *not* run:"
-comm -23 --check-order <(
+! comm -23 --check-order <(
 	find tests/library_checker_aizu_tests/ -type f -name "*.test.cpp" |
 		sort |
 		uniq
@@ -19,5 +19,4 @@ comm -23 --check-order <(
 		sort |
 		uniq
 ) |
-	grep . &&
-    exit 1
+	grep .
