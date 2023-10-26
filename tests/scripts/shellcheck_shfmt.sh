@@ -2,9 +2,6 @@
 # ** glob now searches any number of levels
 shopt -s globstar
 
-# avoid warnings in scripts in submodules
-git submodule deinit --all
-
 echo "bash scripts missing the bash shebang:"
 comm -23 --check-order <(
 	find scripts/ -type f -name "*.sh" |
