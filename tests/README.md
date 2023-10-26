@@ -1,9 +1,3 @@
-All commands (except doxygen, notebook-generator) run *only* on `*.test.cpp` files in [library_checker_aizu_tests/](library_checker_aizu_tests/) (thus also *included* `*.hpp` files in [library/](../library/)).
-  - Reason: `*.hpp` files don't have includes (because CP) which some of these tools need. Also this way incentivizes adding tests.
-    - BTW kactl addresses this problem by [manually adding includes](https://github.com/kth-competitive-programming/kactl/blob/main/doc/scripts/test-compiles.sh) to header files, then [compiling](https://github.com/kth-competitive-programming/kactl/blob/main/doc/scripts/compile-all.sh) the modified headers.
-  - see `make find_files_without_tests` for `*.hpp` files which are not included by any `*.test.cpp` file
-
-
 command | settings | notes | see
 --- | --- | --- | ---
 oj-verify | [config.toml](../.verify-helper/config.toml) | <ul><li>Run from `programming_team_code/` to enable `config.toml` settings, else disabled.</li><li>[Check/Delete] [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to [see which tests ran/re-run all tests].</li></ul> | <ul><li>https://online-judge-tools.github.io/verification-helper/document.html</li><li>https://online-judge-tools.github.io/verification-helper/installer.html</li><li>[Library Checker](https://judge.yosupo.jp/)</li><li>[Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list)</li></ul>
