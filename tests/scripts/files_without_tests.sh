@@ -17,4 +17,5 @@ echo ".hpp files included by no .test.cpp file:"
 		sort |
 		uniq
 ) |
-	grep .
+	grep . &&
+    exit 1
