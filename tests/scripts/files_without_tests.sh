@@ -6,7 +6,7 @@ git submodule init
 git submodule update
 
 echo ".hpp files included by no .test.cpp file:"
-! comm -23 --check-order <(
+comm -23 --check-order <(
 	basename --multiple ../library/**/*.hpp |
 		sort |
 		uniq
