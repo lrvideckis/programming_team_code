@@ -20,7 +20,6 @@ struct stack_with_get_max {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
     int n, l;
     cin >> n >> l;
     vector<int> arr(n);
