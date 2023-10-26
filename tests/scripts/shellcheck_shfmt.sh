@@ -1,6 +1,4 @@
 #!/bin/bash
-# http://redsymbol.net/articles/unofficial-bash-strict-mode/
-set -euo pipefail
 # ** glob now searches any number of levels
 shopt -s globstar
 
@@ -20,13 +18,13 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
-echo "bash scripts in tests/scripts/ missing set -euo pipefail:"
+echo "bash scripts in tests/scripts/ missing shopt -s globstar:"
 comm -23 --check-order <(
 	find tests/scripts/ -type f -name "*.sh" |
 		sort |
 		uniq
 ) <(
-	grep --recursive --fixed-strings --files-with-matches "set -euo pipefail" tests/scripts/ |
+	grep --recursive --fixed-strings --files-with-matches "shopt -s globstar" tests/scripts/ |
 		sort |
 		uniq
 ) |

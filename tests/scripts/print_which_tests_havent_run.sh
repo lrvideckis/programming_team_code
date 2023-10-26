@@ -1,6 +1,4 @@
 #!/bin/bash
-# http://redsymbol.net/articles/unofficial-bash-strict-mode/
-set -euo pipefail
 
 cd ..
 
@@ -11,7 +9,7 @@ echo "number of tests which have run:"
 grep --count "test.cpp" .verify-helper/timestamps.remote.json
 
 echo "tests which have *not* run:"
-! comm -23 --check-order <(
+comm -23 --check-order <(
 	find tests/library_checker_aizu_tests/ -type f -name "*.test.cpp" |
 		sort |
 		uniq
@@ -21,4 +19,5 @@ echo "tests which have *not* run:"
 		sort |
 		uniq
 ) |
-	grep .
+	grep . &&
+    exit 1
