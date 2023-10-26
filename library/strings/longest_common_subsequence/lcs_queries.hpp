@@ -27,10 +27,9 @@ template <class T> vector<int> lcs_queries(const T& s, const T& t, const vector<
     for (int i = 0; i < n; i++) {
         lcs.push_onto_s(s[i]);
         vector<int> init(m), dp_inv(m, -1);
-        for (int j = 0; j < m; j++) {
+        for (int j = 0; j < m; j++)
             if (lcs.dp[j] == -1) init[j] = 1;
             else dp_inv[lcs.dp[j]] = j;
-        }
         BIT<int> bit(init);
         for (int t_le = 0; t_le < m; t_le++) {
             for (auto [t_ri, idx] : qs[i][t_le])

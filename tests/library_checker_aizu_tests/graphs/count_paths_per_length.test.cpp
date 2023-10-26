@@ -19,7 +19,7 @@ int main() {
     {
         //check each node is the centroid of exactly one decomposition
         vector<bool> seen_cent(n);
-        centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+        centroid(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
             assert(ssize(adj_removed_edges[cent]) >= 0); //to avoid -Werror=unused-parameter
             assert(!seen_cent[cent]);
             seen_cent[cent] = 1;

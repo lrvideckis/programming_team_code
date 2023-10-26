@@ -3,11 +3,11 @@
 /**
  * @code{.cpp}
  *     //example usage
- *     centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+ *     centroid(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
  *     });
  * @endcode
  */
-template <class F> struct centroid_decomp {
+template <class F> struct centroid {
     vector<vector<int>> adj;
     F f;
     vector<int> sub_sz;
@@ -18,7 +18,7 @@ template <class F> struct centroid_decomp {
      * @space `adj` and `sub_sz` arrays take O(n); recursion stack for `dfs` is
      * O(log n); recursion stack for `calc_sz` is O(n)
      */
-    centroid_decomp(const vector<vector<int>>& a_adj, F a_f)
+    centroid(const vector<vector<int>>& a_adj, F a_f)
         : adj(a_adj), f(a_f), sub_sz(ssize(adj), -1) {
         for (int i = 0; i < ssize(adj); i++)
             if (sub_sz[i] == -1)
