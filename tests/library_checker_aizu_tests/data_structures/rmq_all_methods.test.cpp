@@ -16,7 +16,6 @@ bool cmp(int x, int y) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
     {
         RMQ rmq_without_template(vector<int>(), mn);
         disjoint_rmq disjoint_rmq_without_template(vector<int>(), mn);

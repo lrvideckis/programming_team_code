@@ -5,7 +5,6 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
     {
         //test empty seg tree
         iter_seg_tree ist(vector<int>(0));

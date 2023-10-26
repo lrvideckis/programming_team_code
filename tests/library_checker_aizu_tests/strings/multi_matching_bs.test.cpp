@@ -8,7 +8,6 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
     {
         auto [sa, sa_inv] = get_sa(string(""), 256);
         auto [sa_le, sa_ri, str_le, str_ri] = find_str(string(""), sa, string(""));

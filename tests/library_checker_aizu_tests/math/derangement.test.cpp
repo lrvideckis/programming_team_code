@@ -5,7 +5,6 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
     int n, mod;
     cin >> n >> mod;
     vector<long long> der = derangements(n + 1, mod);

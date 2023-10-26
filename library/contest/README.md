@@ -1,6 +1,3 @@
-## the hash-codes include asserts
-so you'll have to type them
-
 ## Tips and Tricks
 - [C++ tips and tricks](https://codeforces.com/blog/entry/74684)
 - invokes RTE (Run Time Error) upon integer overflow

@@ -20,7 +20,6 @@ void check(long long n) {
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin.exceptions(cin.failbit);
     //n=0 -> val=0
     //n=1 -> val=1
     //n=2 -> val=1
