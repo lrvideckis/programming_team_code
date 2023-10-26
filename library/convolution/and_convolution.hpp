@@ -11,14 +11,12 @@ const int mod = 998'244'353;
 vector<int> and_convolution(vector<int> a, vector<int> b) {
     auto n = __lg(ssize(a));
     assert(ssize(a) == ssize(b) && (1 << n) == ssize(a));
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < (1 << n); j++) {
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < (1 << n); j++)
             if (!((j >> i) & 1)) {
                 a[j] = (a[j] + a[j ^ (1 << i)]) % mod;
                 b[j] = (b[j] + b[j ^ (1 << i)]) % mod;
             }
-        }
-    }
     vector<int> c(1 << n);
     for (int i = 0; i < (1 << n); i++)
         c[i] = int(1LL * a[i] * b[i] % mod);

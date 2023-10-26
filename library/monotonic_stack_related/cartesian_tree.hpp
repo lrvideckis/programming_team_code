@@ -51,12 +51,11 @@ template <class T, class F> cart_tree get_cart_tree(const vector<T>& arr, F less
         to_extrema[i] = (ri[i] < n && arr[i] == arr[ri[i]]) ? to_extrema[ri[i]] : int(i);
     vector<vector<int>> adj(n);
     int root = -1;
-    for (auto i = 0; i < n; i++) {
+    for (auto i = 0; i < n; i++)
         if (le[i] == -1 && ri[i] == n) root = i;
         else if (to_extrema[i] == i) {
             bool le_par = (le[i] != -1 && (ri[i] == n || less(arr[ri[i]], arr[le[i]])));
             adj[to_extrema[le_par ? le[i] : ri[i]]].push_back(i);
         }
-    }
     return {root, adj, le, ri, to_extrema};
 }

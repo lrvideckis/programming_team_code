@@ -11,7 +11,7 @@
  */
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
     vector num_paths(ssize(adj), 0LL);
-    centroid_decomp(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+    centroid(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
         vector<vector<double>> child_depths;
         for (auto u : adj_removed_edges[cent]) {
             child_depths.emplace_back(1, 0.0);
