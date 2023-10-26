@@ -7,11 +7,11 @@ git submodule deinit --all
 
 echo "bash scripts missing the bash shebang:"
 comm -23 --check-order <(
-	find . -type f -name "*.sh" |
+	find scripts/ -type f -name "*.sh" |
 		sort |
 		uniq
 ) <(
-	grep --recursive --fixed-strings --files-with-matches "#!/bin/bash" . |
+	grep --recursive --fixed-strings --files-with-matches "#!/bin/bash" scripts/ |
 		sort |
 		uniq
 ) |
@@ -20,11 +20,11 @@ comm -23 --check-order <(
 
 echo "bash scripts in tests/scripts/ missing shopt -s globstar:"
 comm -23 --check-order <(
-	find tests/scripts/ -type f -name "*.sh" |
+	find scripts/ -type f -name "*.sh" |
 		sort |
 		uniq
 ) <(
-	grep --recursive --fixed-strings --files-with-matches "shopt -s globstar" tests/scripts/ |
+	grep --recursive --fixed-strings --files-with-matches "shopt -s globstar" scripts/ |
 		sort |
 		uniq
 ) |
