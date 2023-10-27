@@ -1,3 +1,4 @@
+## Run on each commit:
 command | settings | notes | see
 --- | --- | --- | ---
 oj-verify | [config.toml](../.verify-helper/config.toml) | <ul><li>Run from `programming_team_code/` to enable `config.toml` settings, else disabled.</li><li>[Check/Delete] [timestamps.remote.json](../.verify-helper/timestamps.remote.json) to [see which tests ran/re-run all tests].</li></ul> | <ul><li>https://online-judge-tools.github.io/verification-helper/document.html</li><li>https://online-judge-tools.github.io/verification-helper/installer.html</li><li>[Library Checker](https://judge.yosupo.jp/)</li><li>[Aizu Online Judge](https://onlinejudge.u-aizu.ac.jp/courses/list)</li></ul>
@@ -15,8 +16,9 @@ shfmt | see flags in [scripts/shellcheck_shfmt.sh](scripts/shellcheck_shfmt.sh) 
 2) [run_tests_scheduled.yml](../.github/workflows/run_tests_scheduled.yml) runs `oj-verify all` every 30 minutes between midnight and 5am.
 3) [check_all_tests_ran.yml](../.github/workflows/check_all_tests_ran.yml) runs at 5am and checks that all tests have run.
 
-Main reason: occasionally Library Checker [adds new tests](https://github.com/yosupo06/library-checker-problems/issues?q=label%3Atestcase). So now that the lib is re-tested daily, it will be tested on any newly-added tests.
-Side reason: Library Checker generates tests randomly, so more testing means the code is tested on more random data.
+- Main reason 1: occasionally Library Checker [adds new tests](https://github.com/yosupo06/library-checker-problems/issues?q=label%3Atestcase). So now the lib will be tested on all newly added tests.
+- Main reason 2: sometimes I do a code-mod style change which affects many files, and thus many tests have to be re-run. But `oj-verify all` only runs about 10-20 tests at a time, potentially leaving some un-run tests. Before, I used to make timely-commits which changed effectively nothing, but caused more tests to rerun (but this also muddied the git history). Now I don't have to do this.
+- Side reason: Library Checker generates tests randomly, so more testing means the code is tested on more random data.
 
 ## Makefile
 to see commands:
