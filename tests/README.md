@@ -17,7 +17,7 @@ shfmt | see flags in [scripts/shellcheck_shfmt.sh](scripts/shellcheck_shfmt.sh) 
 3) [check_all_tests_ran.yml](../.github/workflows/check_all_tests_ran.yml) runs at 5am and checks that all tests have run.
 
 - Main reason 1: occasionally Library Checker [adds new tests](https://github.com/yosupo06/library-checker-problems/issues?q=label%3Atestcase). So now the lib will be tested on all newly added tests.
-- Main reason 2: sometimes I do a code-mod style change which affects many files, and thus many tests have to be re-run. But `oj-verify all` only tests about 10-20 tests at a time, potentially leaving some un-run tests. So these cron jobs mean I don't have to worry about manually making timely commits to rerun all tests.
+- Main reason 2: sometimes I do a code-mod style change which affects many files, and thus many tests have to be re-run. But `oj-verify all` only runs about 10-20 tests at a time, potentially leaving some un-run tests. So these cron jobs mean I don't have to worry about manually making timely commits to rerun all tests.
 - Side reason: Library Checker generates tests randomly, so more testing means the code is tested on more random data.
 
 ## Makefile
