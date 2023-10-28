@@ -21,5 +21,15 @@
 "tests/library_checker_aizu_tests/data_structures/kth_smallest_wavelet_updates.test.cpp": "2023-10-26 06:56:49 -0700",
 "tests/library_checker_aizu_tests/data_structures/lazy_segment_tree.test.cpp": "2023-10-26 06:56:49 -0700",
 "tests/library_checker_aizu_tests/data_structures/lazy_segment_tree_constructor.test.cpp": "2023-10-26 06:56:49 -0700",
-"tests/library_checker_aizu_tests/data_structures/linear_rmq_update.test.cpp": "2023-10-26 06:56:49 -0700"
+"tests/library_checker_aizu_tests/data_structures/linear_rmq_update.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/merge_sort_trees.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/merge_sort_trees_kth_smallest.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/persistent_queue_tree.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/persistent_seg_tree.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/pq_ds_undo_sliding_window.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/pq_ds_undo_with_dsu.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/rmq_all_methods.test.cpp": "2023-10-26 07:14:12 -0700",
+"tests/library_checker_aizu_tests/data_structures/wavelet_rect.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/data_structures/wavelet_update_rect.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/flow/hungarian.test.cpp": "2023-10-26 06:56:49 -0700"
 }
