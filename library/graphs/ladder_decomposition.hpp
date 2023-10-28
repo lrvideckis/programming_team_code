@@ -14,7 +14,7 @@
 struct ladder {
     int n;
     vector<vector<int>> b_tbl, l_tbl;
-    vector<int> dl/*deapest leaf*/, d, p;
+    vector<int> dl/*deepest leaf*/, d, p;
     /**
      * @param adj forest (rooted or unrooted)
      * @time O(n log n)
