@@ -12,17 +12,17 @@
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
     auto n = ssize(grid), m = ssize(grid[0]);
     vector cnt(n + 1, vector(m + 1, 0));
-    vector<int> arr(m);
+    vector<int> h(m);
     for (const auto& row : grid) {
-        transform(begin(arr), end(arr), begin(row), begin(arr), [](int a, bool g) {
+        transform(begin(h), end(h), begin(row), begin(h), [](int a, bool g) {
             return g * (a + 1);
         });
-        auto [le, ri] = mono_range(arr, less());
+        auto [le, ri] = mono_range(h, less());
         for (int j = 0; j < m; j++) {
             int cnt_l = j - le[j] - 1, cnt_r = ri[j] - j - 1;
-            cnt[arr[j]][cnt_l + cnt_r + 1]++;
-            cnt[arr[j]][cnt_l]--;
-            cnt[arr[j]][cnt_r]--;
+            cnt[h[j]][cnt_l + cnt_r + 1]++;
+            cnt[h[j]][cnt_l]--;
+            cnt[h[j]][cnt_r]--;
         }
     }
     for (int i = 1; i <= n; i++)
