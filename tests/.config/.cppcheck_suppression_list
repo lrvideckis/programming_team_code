@@ -29,9 +29,9 @@ useStlAlgorithm:../library/graphs/strongly_connected_components/add_edges_strong
 useStlAlgorithm:../library/math/matrix_related/row_reduce.hpp:31
 shadowFunction:../kactl/content/graph/BinaryLifting.h:17
 unknownMacro:../kactl/content/graph/BinaryLifting.h:18
-assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:42
-assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:59
-assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:78
-assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:103
-assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:118
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:42
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:59
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:78
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:103
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:118
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/binary_trie.hpp:58
