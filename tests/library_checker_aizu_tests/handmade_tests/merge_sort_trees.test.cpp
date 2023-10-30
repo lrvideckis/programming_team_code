@@ -43,11 +43,15 @@ int main() {
                 for (int i = 0; i < n; i++)
                     if (x <= arr[i] && arr[i] < y)
                         vals.push_back(i);
-                assert(ssize(vals) == mst.rect_count(0, n, x, y));
-                assert(ssize(vals) == mstu.rect_count(0, n, x, y));
+                auto curr_1 = mst.rect_count(0, n, x, y);
+                assert(ssize(vals) == curr_1);
+                auto curr_2 = mstu.rect_count(0, n, x, y);
+                assert(ssize(vals) == curr_2);
                 for (int k = 1; k <= ssize(vals); k++) {
-                    assert(mst.kth_smallest(x, y, k) == vals[k - 1]);
-                    assert(mstu.kth_smallest(x, y, k) == vals[k - 1]);
+                    auto curr_3 = mst.kth_smallest(x, y, k);
+                    assert(curr_3 == vals[k - 1]);
+                    auto curr_4 = mstu.kth_smallest(x, y, k);
+                    assert(curr_4 == vals[k - 1]);
                 }
             }
         }
