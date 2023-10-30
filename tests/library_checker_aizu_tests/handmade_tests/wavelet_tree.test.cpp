@@ -22,8 +22,10 @@ int main() {
                 for (int le = 0; le <= n; le++) {
                     int cnt = 0, sum = 0;
                     for (int ri = le; ri <= n; ri++) {
-                        assert(wt.rect_count(le, ri, x, y) == cnt);
-                        assert(wt.rect_sum(le, ri, x, y) == sum);
+                        auto curr_1 = wt.rect_count(le, ri, x, y);
+                        assert(curr_1 == cnt);
+                        auto curr_2 = wt.rect_sum(le, ri, x, y);
+                        assert(curr_2 == sum);
                         if (ri < n && x <= arr[ri] && arr[ri] < y) {
                             cnt++;
                             sum += arr[ri];
@@ -39,7 +41,8 @@ int main() {
                         int sum = 0;
                         for (int k = 0; k <= ssize(subarray); k++) {
                             if (k) {
-                                assert(wt.kth_smallest(le, ri, k) == subarray[k - 1]);
+                                auto curr_res = wt.kth_smallest(le, ri, k);
+                                assert(curr_res == subarray[k - 1]);
                                 sum += subarray[k - 1];
                             }
                             auto curr_res = wt.kth_sum(le, ri, k);
@@ -63,8 +66,10 @@ int main() {
             int cnt = 0;
             long long sum = 0;
             for (int y = x; y <= large + val_range; y++) {
-                assert(wt.rect_count(0, mx_n, x, y) == cnt);
-                assert(wt.rect_sum(0, mx_n, x, y) == sum);
+                auto curr_1 = wt.rect_count(0, mx_n, x, y);
+                assert(curr_1 == cnt);
+                auto curr_2 = wt.rect_sum(0, mx_n, x, y);
+                assert(curr_2 == sum);
                 if (y < large + val_range) {
                     cnt += count_val[y - large];
                     sum += 1LL * y * count_val[y - large];
