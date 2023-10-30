@@ -34,3 +34,4 @@ assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/d
 assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:78
 assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:103
 assertWithSideEffect:../library/data_structures/uncommon_range_data_structures/deque.hpp:118
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/binary_trie.hpp:58
