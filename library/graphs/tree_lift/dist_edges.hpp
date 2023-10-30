@@ -8,6 +8,6 @@
  * @time O(log(path length(u, v)))
  * @space O(1)
  */
-inline int dist_edges(const tree_lift& tl, int u, int v) {
+inline int dist_edges(tree_lift& tl, int u, int v) {
     return tl.d[u] + tl.d[v] - 2 * tl.d[tl.get_lca(u, v)];
 }
