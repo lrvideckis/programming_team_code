@@ -42,7 +42,8 @@ int main() {
                                 assert(wt.kth_smallest(le, ri, k) == subarray[k - 1]);
                                 sum += subarray[k - 1];
                             }
-                            assert(wt.kth_sum(le, ri, k) == sum);
+                            auto curr_res = wt.kth_sum(le, ri, k);
+                            assert(curr_res == sum);
                         }
                     }
                 }
@@ -75,7 +76,8 @@ int main() {
             if (tests_kth_sum == 50) k = 0;
             if (tests_kth_sum == 49) k = mx_n;
             if (k == 0) {
-                assert(wt.kth_sum(0, mx_n, k) == 0);
+                auto curr_res = wt.kth_sum(0, mx_n, k);
+                assert(curr_res == 0);
                 continue;
             }
             int curr_cnt = 0;
@@ -91,8 +93,10 @@ int main() {
                 curr_sum += 1LL * (i + large) * count_val[i];
             }
             assert(kth_smallest_naive != -1);
-            assert(wt.kth_smallest(0, mx_n, k) == kth_smallest_naive);
-            assert(wt.kth_sum(0, mx_n, k) == curr_sum);
+            auto curr_1 = wt.kth_smallest(0, mx_n, k);
+            assert(curr_1 == kth_smallest_naive);
+            auto curr_2 = wt.kth_sum(0, mx_n, k);
+            assert(curr_2 == curr_sum);
         }
     }
     cout << "Hello World\n";
