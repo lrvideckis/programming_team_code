@@ -9,7 +9,7 @@
  * @time O(log(path length(u, v)))
  * @space O(1)
  */
-inline int kth_path(const tree_lift& tl, int u, int v, int k) {
+inline int kth_path(tree_lift& tl, int u, int v, int k) {
     int lca_d = tl.d[tl.get_lca(u, v)];
     int u_lca = tl.d[u] - lca_d;
     int v_lca = tl.d[v] - lca_d;
