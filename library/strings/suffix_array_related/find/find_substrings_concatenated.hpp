@@ -13,7 +13,7 @@
  * @time O(ssize(substrs) * log(|s|))
  * @space O(1)
  */
-template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
+template <class T> inline match find_substrs_concated(lcp_query<T>& lq,
         const vector<array<int, 2>>& substrs) {
     using dt = array<int, 3>;
     const auto& sa = lq.sa;
