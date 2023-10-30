@@ -32,14 +32,18 @@ int main() {
         else if (k <= u_lca) {
             int res = ld.kth_par(u, k);
             assert(res == jmp(ld.b_tbl, u, k));
-            assert(res == ld_rooted.kth_par(u, k));
-            assert(res == ld_rooted.kth_par(u + n, k) - n);
+            auto curr_1 = ld_rooted.kth_par(u, k);
+            assert(res == curr_1);
+            auto curr_2 = ld_rooted.kth_par(u + n, k);
+            assert(res == curr_2 - n);
             cout << res << '\n';
         } else {
             int res = ld.kth_par(v, u_lca + v_lca - k);
             assert(res == jmp(ld.b_tbl, v, u_lca + v_lca - k));
-            assert(res == ld_rooted.kth_par(v, u_lca + v_lca - k));
-            assert(res == ld_rooted.kth_par(v + n, u_lca + v_lca - k) - n);
+            auto curr_1 = ld_rooted.kth_par(v, u_lca + v_lca - k);
+            assert(res == curr_1);
+            auto curr_2 = ld_rooted.kth_par(v + n, u_lca + v_lca - k);
+            assert(res == curr_2 - n);
             cout << res << '\n';
         }
     }
