@@ -81,7 +81,7 @@ struct lcp_tree {
      * @time O(1)
      * @space O(1)
      */
-    array<int, 2> sa_range(int u) const {
+    array<int, 2> sa_range(int u) {
         if (u < n - 1) return {le[u] + 1, ri[u] + 1};
         return {u - n + 1, u - n + 2};
     }
@@ -91,7 +91,7 @@ struct lcp_tree {
      * @time O(1)
      * @space O(1)
      */
-    int lcp_len(int u) const {
+    int lcp_len(int u) {
         return u < n - 1 ? lcp[u] : n - sa[u - n + 1];
     }
     /**
@@ -101,7 +101,7 @@ struct lcp_tree {
      * @time O(1)
      * @space O(1)
      */
-    int get_child(int u, char c) const {
+    int get_child(int u, char c) {
         return u < n - 1 ? adj[u][c - mn] : -1;
     }
 };

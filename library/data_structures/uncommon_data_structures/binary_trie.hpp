@@ -44,7 +44,7 @@ template <class T> struct binary_trie {
     /**
      * @returns number of integers in this multiset.
      */
-    inline int size() const {
+    inline int size() {
         return t[0].sub_sz;
     }
     /**
@@ -54,7 +54,7 @@ template <class T> struct binary_trie {
      * @time O(mx_bit)
      * @space O(1)
      */
-    T min_xor(T val) const {
+    T min_xor(T val) {
         assert(size() > 0);
         int u = 0;
         for (int bit = mx_bit; bit >= 0; bit--) {

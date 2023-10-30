@@ -27,7 +27,7 @@ struct trie {
         }
         t[u].cnt_words++;
     }
-    int find(const string& s) const {
+    int find(const string& s) {
         int u = 0;
         for (auto ch : s) {
             int v = ch - mn;

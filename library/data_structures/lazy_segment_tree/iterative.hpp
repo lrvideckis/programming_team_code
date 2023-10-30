@@ -14,14 +14,14 @@ struct iter_seg_tree {
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
-    inline int to_leaf(int i) const {
+    inline int to_leaf(int i) {
         i += st.pw2;
         return i < 2 * st.n ? i : 2 * (i - st.n);
     }
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp
      */
-    inline array<int, 2> get_node_bounds(int a) const {
+    inline array<int, 2> get_node_bounds(int a) {
         assert(1 <= a && a < 2 * st.n);
         int l = __builtin_clz(a) - __builtin_clz(2 * st.n - 1);
         int x = a << l, y = (a + 1) << l;

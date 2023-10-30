@@ -42,7 +42,7 @@ template <class T> struct bit_rupq {
      * @time O(log n)
      * @space O(1)
      */
-    inline T get_index(int i) const {
+    inline T get_index(int i) {
         assert(0 <= i && i < n);
         return bit.sum(i + 1);
     }

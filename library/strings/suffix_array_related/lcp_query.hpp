@@ -29,7 +29,7 @@ template <class T> struct lcp_query {
      * @time O(1)
      * @space O(1)
      */
-    inline int get_lcp(int i1, int i2) const {
+    inline int get_lcp(int i1, int i2) {
         auto n = ssize(sa);
         if (i1 > i2) swap(i1, i2);
         assert(0 <= i1 && i2 <= n);

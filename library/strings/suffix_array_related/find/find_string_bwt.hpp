@@ -44,7 +44,7 @@ struct find_bwt {
      * @time O(|t|)
      * @space 2 O(|t|) vectors are allocated and returned
      */
-    array<vector<int>, 2> find_str(const string& t) const {
+    array<vector<int>, 2> find_str(const string& t) {
         vector<int> le(ssize(t) + 1, 0), ri(ssize(t) + 1, n);
         for (auto i = ssize(t) - 1; i >= 0; i--) {
             char c = t[i] - mn;

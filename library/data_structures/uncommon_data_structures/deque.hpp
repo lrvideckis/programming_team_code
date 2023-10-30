@@ -38,7 +38,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T query() const {
+    inline T query() {
         assert(size());
         if (empty(le)) return ri.back()[1];
         if (empty(ri)) return le.back()[1];
@@ -49,13 +49,13 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline int size() const {return int(ssize(le) + ssize(ri));}
+    inline int size() {return int(ssize(le) + ssize(ri));}
     /**
      * @returns deq[0]
      * @time O(1)
      * @space O(1)
      */
-    inline T front() const {
+    inline T front() {
         assert(size());
         return (empty(le) ? ri[0] : le.back())[0];
     }
@@ -64,7 +64,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T back() const {
+    inline T back() {
         assert(size());
         return (empty(ri) ? le[0] : ri.back())[0];
     }
@@ -74,7 +74,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T operator[](int i) const {
+    inline T operator[](int i) {
         assert(0 <= i && i < size());
         return (i < ssize(le) ? le[ssize(le) - i - 1] : ri[i - ssize(le)])[0];
     }

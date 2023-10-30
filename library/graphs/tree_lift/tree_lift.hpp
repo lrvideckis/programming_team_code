@@ -30,7 +30,7 @@ struct tree_lift {
      * @time O(log k)
      * @space O(1)
      */
-    inline int kth_par(int u, int k) const {
+    inline int kth_par(int u, int k) {
         assert(0 <= k && k <= d[u]);
         int anc_d = d[u] - k;
         while (d[u] > anc_d) u = d[j[u]] >= anc_d ? j[u] : p[u];
@@ -42,7 +42,7 @@ struct tree_lift {
      * @time O(log(path length(u, v)))
      * @space O(1)
      */
-    inline int get_lca(int u, int v) const {
+    inline int get_lca(int u, int v) {
         if (d[u] < d[v]) swap(u, v);
         u = kth_par(u, d[u] - d[v]);
         while (u != v)

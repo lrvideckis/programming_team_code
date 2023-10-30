@@ -36,7 +36,7 @@ template <class T> struct count_pal_query {
      * @time O(log n)
      * @space O(1)
      */
-    inline long long count_pals(int le, int ri) const {
+    inline long long count_pals(int le, int ri) {
         assert(0 <= le && le < ri && ri <= n);
         int man_le = 2 * le, man_ri = 2 * ri - 1, man_mi = (man_le + man_ri) / 2;
         //sum over range [man_le, man_mi) of:
