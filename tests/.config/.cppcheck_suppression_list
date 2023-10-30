@@ -31,7 +31,10 @@ shadowFunction:../kactl/content/graph/BinaryLifting.h:17
 unknownMacro:../kactl/content/graph/BinaryLifting.h:18
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:42
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:59
+assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:68
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:78
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:103
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/deque.hpp:118
 assertWithSideEffect:../library/data_structures/uncommon_data_structures/binary_trie.hpp:58
+assertWithSideEffect:../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp:103
+assertWithSideEffect:../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp:106
