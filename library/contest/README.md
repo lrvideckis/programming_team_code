@@ -33,3 +33,4 @@ Author: Benq
 
 - [[Tutorial] GCC Optimization Pragmas](https://codeforces.com/blog/entry/96344)
 - [Don't use rand(): a guide to random number generators in C++](https://codeforces.com/blog/entry/61587)
+- [faster adjacency list](https://codeforces.com/blog/entry/110222)
