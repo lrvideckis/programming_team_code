@@ -56,8 +56,10 @@ int main() {
     }
     {
         lcp_query lq(arr, shift + 100);
-        assert(lq.get_lcp(0, 99) == 0);
-        assert(lq.get_lcp(0, 100) == 0);
+        auto curr_1 = lq.get_lcp(0, 99);
+        assert(curr_1 == 0);
+        auto curr_2 = lq.get_lcp(0, 100);
+        assert(curr_2 == 0);
         for (int i = 0; i < 100; i++) {
             auto [sa_le, sa_ri, str_le, str_ri] = find_substrs_concated(lq, {{i, i + 1}});
             assert(sa_le == i && sa_ri == i + 1);
@@ -98,7 +100,8 @@ int main() {
         longest_pal_query lpq(arr);
         for (int le = 0; le < 100; le++) {
             for (int ri = le + 1; ri <= 100; ri++) {
-                assert(cpq.count_pals(le, ri) == ri - le);
+                auto curr_res = cpq.count_pals(le, ri);
+                assert(curr_res == ri - le);
                 auto [idx, len] = lpq.longest_pal(le, ri);
                 assert(le <= idx && idx < ri);
                 assert(len == 1);
