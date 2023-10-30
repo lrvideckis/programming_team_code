@@ -9,7 +9,7 @@
 
 #include "../../../library/graphs/count_paths_per_length.hpp"
 
-vector<vector<long long>> naive(const vector<vector<int>>& adj, const dsu_restorable& dsu) {
+vector<vector<long long>> naive(const vector<vector<int>>& adj, dsu_restorable& dsu) {
     tree_lift tl(adj);
     auto n = ssize(adj);
     vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
