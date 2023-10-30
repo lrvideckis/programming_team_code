@@ -38,7 +38,8 @@ int main() {
         cin >> le >> ri;
         int idx_min = lin_rmq.query_idx(le, ri);
         assert(le_mono[idx_min] < le && le <= idx_min && idx_min < ri && ri <= ri_mono[idx_min]);
-        assert(rmq.query(le_mono[idx_min] + 1, ri_mono[idx_min]) == arr[idx_min]);
+        auto curr_0 = rmq.query(le_mono[idx_min] + 1, ri_mono[idx_min]);
+        assert(curr_0 == arr[idx_min]);
         auto curr_1 = rmq.query(le, ri);
         assert(arr[idx_min] == curr_1);
         auto curr_2 = dis_rmq.query(le, ri);
