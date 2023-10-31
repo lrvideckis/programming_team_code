@@ -3,7 +3,8 @@
 /**
  * @see https://codeforces.com/blog/entry/111117
  * @code{.cpp}
- *     pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
+ *     dsu_restorable dsu_r(n);
+ *     pq_updates<dsu_restorable, int, int> pq(dsu_r);
  *     for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
  *     //or
  *     pq.ds.subtree = initial_values;
