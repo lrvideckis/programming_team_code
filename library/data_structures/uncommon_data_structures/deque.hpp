@@ -6,7 +6,7 @@
  *     //deque with query for: get min and # of mins in deque
  *     vector<pair<long long, int>> arr;//initialize arr[i].second = 1
  *     ...
- *     deq dq(arr, [](const auto& x, const auto& y) {
+ *     deq dq(arr, [](auto& x, auto& y) {
  *         if (x.first == y.first) return pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
@@ -103,7 +103,7 @@ template <class T, class F> struct deq {
         assert(size());
         if (empty(le)) {
             vector<T> arr(ssize(ri));
-            transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x[0];});
+            transform(begin(ri), end(ri), begin(arr), [](auto& x) {return x[0];});
             rebuild(arr, (int(ssize(arr)) + 1) / 2);
         }
         assert(!empty(le));
@@ -118,7 +118,7 @@ template <class T, class F> struct deq {
         assert(size());
         if (empty(ri)) {
             vector<T> arr(ssize(le));
-            transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x[0];});
+            transform(begin(le), end(le), rbegin(arr), [](auto& x) {return x[0];});
             rebuild(arr, int(ssize(arr)) / 2);
         }
         assert(!empty(ri));
