@@ -7,7 +7,7 @@
  * @code{.cpp}
  *     //usage for min and # of mins:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = 1
- *     disjoint_rmq rmq(arr, [&](auto x, auto y) {
+ *     disjoint_rmq rmq(arr, [&](auto& x, auto& y) {
  *         if (x.first == y.first) return make_pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
