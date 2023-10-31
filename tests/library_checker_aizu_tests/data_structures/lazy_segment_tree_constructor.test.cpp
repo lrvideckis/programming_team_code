@@ -7,7 +7,8 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     {
         //test empty seg tree
-        iter_seg_tree ist(vector<int>(0));
+        seg_tree st_empty{vector<int>()};
+        iter_seg_tree ist(st_empty);
         ist.update_iter(0, 0, 1);
         long long res = ist.query_iter(0, 0);
         assert(res == 0);
@@ -19,7 +20,8 @@ int main() {
     cin >> n >> q;
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
-    iter_seg_tree ist(arr);
+    seg_tree st_curr(arr);
+    iter_seg_tree ist(st_curr);
     assert(n <= ist.st.pw2 && ist.st.pw2 < 2 * n);
     while (q--) {
         int type;
