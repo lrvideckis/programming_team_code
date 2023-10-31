@@ -15,7 +15,7 @@
  * @space besides the O(n + m) sized params, this function allocates and
  * returns `tree` vector, which is O(n)
  */
-vector<vector<int>> bridge_tree(const vector<vector<array<int, 2>>>& adj, bridge_info& cc) {
+vector<vector<int>> bridge_tree(const vector<vector<array<int, 2>>>& adj, const bridge_info& cc) {
     vector<vector<int>> tree(cc.num_2_edge_ccs);
     for (int i = 0; i < ssize(adj); i++)
         for (auto [u, e_id] : adj[i])
