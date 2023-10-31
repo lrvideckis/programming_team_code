@@ -29,7 +29,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
                 swap(q, new_q);
             }
         }
-        sort(begin(child_depths), end(child_depths), [&](auto& x, auto& y) {
+        sort(begin(child_depths), end(child_depths), [&](auto & x, auto & y) {
             return ssize(x) < ssize(y);
         });
         vector total_depth(1, 1.0);
