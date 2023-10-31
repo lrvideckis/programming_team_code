@@ -7,7 +7,7 @@
  *     auto [le, ri] = mono_range(arr, less()); //or greater(), less_equal(), greater_equal()
  * @endcode
  * @param arr array
- * @param less comparator
+ * @param cmp comparator
  * @returns (if you pass in less()) vectors le, ri such that:
  *     - le[i] < i < ri[i]
  *     - arr[i] is the min of exclusive-exclusive range (le[i], ri[i])
@@ -16,9 +16,9 @@
  * @time O(n)
  * @space two O(n) vectors are allocated and returned
  */
-template <class T, class F> array<vector<int>, 2> mono_range(const vector<T>& arr, F less) {
-    vector le = mono_st(arr, less);
-    vector ri = mono_st<T>({rbegin(arr), rend(arr)}, [&](T x, T y) {return !less(y, x);});
+template <class T, class F> array<vector<int>, 2> mono_range(const vector<T>& arr, F cmp) {
+    vector le = mono_st(arr, cmp);
+    vector ri = mono_st<T>({rbegin(arr), rend(arr)}, [&](T x, T y) {return !cmp(y, x);});
     reverse(begin(ri), end(ri));
     transform(begin(ri), end(ri), begin(ri), [&](int val) {return ssize(arr) - val - 1;});
     return {le, ri};

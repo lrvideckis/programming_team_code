@@ -11,7 +11,7 @@
 template <class T, class F> struct linear_rmq {
     int n;
     vector<T> arr;
-    F less;
+    F cmp;
     /**
      * on the level'th level, blocks are:
      * 0-th block: [0*64^level, 1*64^level)
@@ -27,11 +27,11 @@ template <class T, class F> struct linear_rmq {
     /** @} */
     /**
      * @param a_arr an array
-     * @param a_less transitive compare operator
+     * @param a_cmp transitive compare operator
      * @time O(n)
      * @space `arr`, `mask`, and `idx` vectors are all O(n)
      */
-    linear_rmq(const vector<T>& a_arr, F a_less) : n(int(ssize(a_arr))), arr(a_arr), less(a_less) {
+    linear_rmq(const vector<T>& a_arr, F a_cmp) : n(int(ssize(a_arr))), arr(a_arr), cmp(a_cmp) {
         for (int sz = n; sz >= 2; sz = ((sz + 63) >> 6)) {
             int level = int(ssize(idx));
             mask.emplace_back(sz + 1);
@@ -43,7 +43,7 @@ template <class T, class F> struct linear_rmq {
         for (int i = ri - 1; i >= le; i--) {
             uint64_t st = mask[level][i + 1];
             T curr = arr[blk(level, i)];
-            while (st && less(curr, arr[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
+            while (st && cmp(curr, arr[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
             mask[level][i] = st = ((st << 1) | 1);
             idx[level][i] = blk(level, i + int(__lg(st)));
         }
@@ -56,7 +56,7 @@ template <class T, class F> struct linear_rmq {
         return level ? idx[level - 1][i << 6] : i;
     }
     inline int mn(int le, int ri) {
-        return less(arr[le], arr[ri]) ? le : ri;
+        return cmp(arr[le], arr[ri]) ? le : ri;
     }
     /**
      * @param le,ri defines range [le, ri)
