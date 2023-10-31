@@ -28,7 +28,8 @@ int main() {
             cin >> idx;
             idx--;
             long long res = bit_i_1.get_index(idx);
-            assert(res == bit_i_2.get_index(idx) - 50);
+            auto curr = bit_i_2.get_index(idx);
+            assert(res == curr - 50);
             cout << res << '\n';
         }
     }

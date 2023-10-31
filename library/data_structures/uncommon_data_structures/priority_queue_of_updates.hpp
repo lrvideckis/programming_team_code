@@ -3,7 +3,8 @@
 /**
  * @see https://codeforces.com/blog/entry/111117
  * @code{.cpp}
- *     pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
+ *     dsu_restorable dsu_r(n);
+ *     pq_updates<dsu_restorable, int, int> pq(dsu_r);
  *     for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
  *     //or
  *     pq.ds.subtree = initial_values;
@@ -22,7 +23,7 @@ template <class DS, class... ARGS> struct pq_updates {
     /**
      * @param a_ds any data structure with member functions `join` and `undo`
      */
-    pq_updates(const DS& a_ds) : ds(a_ds) {}
+    pq_updates(DS& a_ds) : ds(a_ds) {}
     /**
      * Remove update with max priority
      * @time O(log(n) + k*T(n)) where k = # of pops off the update stack
@@ -38,7 +39,7 @@ template <class DS, class... ARGS> struct pq_updates {
             extra.push_back(upd_st[idx_sk]);
             idx = min(idx, idx_sk), lowest_pri = pri;
         }
-        auto it = remove_if(begin(upd_st) + idx, end(upd_st), [&](const auto & curr) {
+        auto it = remove_if(begin(upd_st) + idx, end(upd_st), [&](auto & curr) {
             return curr.second->first >= lowest_pri;
         });
         reverse_copy(begin(extra), end(extra), it);

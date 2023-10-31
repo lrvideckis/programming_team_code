@@ -56,11 +56,11 @@ struct wavelet_tree {
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */
-    int rect_count(int le, int ri, int x, int y) const {
+    int rect_count(int le, int ri, int x, int y) {
         assert(0 <= le && le <= ri && ri <= n && x <= y);
         return rect_count_impl(le, ri, x, y, minv, maxv, 1);
     }
-    int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int u) const {
+    int rect_count_impl(int le, int ri, int x, int y, int tl, int tr, int u) {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return ri - le;
         int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
@@ -73,11 +73,11 @@ struct wavelet_tree {
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */
-    long long rect_sum(int le, int ri, int x, int y) const {
+    long long rect_sum(int le, int ri, int x, int y) {
         assert(0 <= le && le <= ri && ri <= n && x <= y);
         return rect_sum_impl(le, ri, x, y, minv, maxv, 1);
     }
-    long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int u) const {
+    long long rect_sum_impl(int le, int ri, int x, int y, int tl, int tr, int u) {
         if (y <= tl || tr <= x) return 0;
         if (x <= tl && tr <= y) return (tr - tl == 1 ? 1LL * tl * (ri - le) : presums[u][ri] - presums[u][le]);
         int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
@@ -93,12 +93,12 @@ struct wavelet_tree {
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */
-    int kth_smallest(int le, int ri, int k) const {
+    int kth_smallest(int le, int ri, int k) {
         assert(0 <= le && ri <= n);
         assert(1 <= k && k <= ri - le);
         return kth_smallest_impl(le, ri, k, minv, maxv, 1);
     }
-    int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int u) const {
+    int kth_smallest_impl(int le, int ri, int k, int tl, int tr, int u) {
         if (tr - tl == 1) return tl;
         int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
         if (k <= pr - pl) return kth_smallest_impl(pl, pr, k, tl, tm, 2 * u);
@@ -114,12 +114,12 @@ struct wavelet_tree {
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */
-    long long kth_sum(int le, int ri, int k) const {
+    long long kth_sum(int le, int ri, int k) {
         assert(0 <= le && ri <= n);
         assert(0 <= k && k <= ri - le);
         return kth_sum_impl(le, ri, k, minv, maxv, 1);
     }
-    long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int u) const {
+    long long kth_sum_impl(int le, int ri, int k, int tl, int tr, int u) {
         if (tr - tl == 1) return 1LL * k * tl;
         int tm = split(tl, tr), pl = bool_presums[u].popcount(le), pr = bool_presums[u].popcount(ri);
         if (k <= pr - pl) return kth_sum_impl(pl, pr, k, tl, tm, 2 * u);

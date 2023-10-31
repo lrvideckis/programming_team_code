@@ -47,10 +47,15 @@ int main() {
                 cout << (1LL * curr.first * x + curr.second) % mod << '\n';
             }
         }
-        assert(ssize(stl_dq) == dq.size());
+        auto curr_1 = dq.size();
+        assert(ssize(stl_dq) == curr_1);
         if (dq.size()) {
-            assert(stl_dq.front() == dq.front());
-            assert(stl_dq.back() == dq.back());
+            auto curr_2 = stl_dq.front();
+            auto curr_res_1 = dq.front();
+            assert(curr_2 == curr_res_1);
+            auto curr_3 = stl_dq.back();
+            auto curr_res_2 = dq.back();
+            assert(curr_3 == curr_res_2);
             for (int index_tests = 10; index_tests--;) {
                 int idx = get_rand<int>(0, dq.size() - 1);
                 assert(stl_dq[idx] == dq[idx]);

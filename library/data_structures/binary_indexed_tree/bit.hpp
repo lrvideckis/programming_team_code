@@ -40,7 +40,7 @@ template <class T> struct BIT {
      * @time O(log n)
      * @space O(1)
      */
-    inline T sum(int ri) const {
+    inline T sum(int ri) {
         assert(0 <= ri && ri <= ssize(s));
         T ret = 0;
         for (; ri > 0; ri &= ri - 1) ret += s[ri - 1];
@@ -52,7 +52,7 @@ template <class T> struct BIT {
      * @time O(log n)
      * @space O(1)
      */
-    inline T sum(int le, int ri) const {
+    inline T sum(int le, int ri) {
         assert(le <= ri);
         return sum(ri) - sum(le);
     }

@@ -22,8 +22,10 @@ int main() {
                 for (int le = 0; le <= n; le++) {
                     int cnt = 0, sum = 0;
                     for (int ri = le; ri <= n; ri++) {
-                        assert(wt.rect_count(le, ri, x, y) == cnt);
-                        assert(wt.rect_sum(le, ri, x, y) == sum);
+                        auto curr_1 = wt.rect_count(le, ri, x, y);
+                        assert(curr_1 == cnt);
+                        auto curr_2 = wt.rect_sum(le, ri, x, y);
+                        assert(curr_2 == sum);
                         if (ri < n && x <= arr[ri] && arr[ri] < y) {
                             cnt++;
                             sum += arr[ri];
@@ -39,10 +41,12 @@ int main() {
                         int sum = 0;
                         for (int k = 0; k <= ssize(subarray); k++) {
                             if (k) {
-                                assert(wt.kth_smallest(le, ri, k) == subarray[k - 1]);
+                                auto curr_res = wt.kth_smallest(le, ri, k);
+                                assert(curr_res == subarray[k - 1]);
                                 sum += subarray[k - 1];
                             }
-                            assert(wt.kth_sum(le, ri, k) == sum);
+                            auto curr_res = wt.kth_sum(le, ri, k);
+                            assert(curr_res == sum);
                         }
                     }
                 }
@@ -62,8 +66,10 @@ int main() {
             int cnt = 0;
             long long sum = 0;
             for (int y = x; y <= large + val_range; y++) {
-                assert(wt.rect_count(0, mx_n, x, y) == cnt);
-                assert(wt.rect_sum(0, mx_n, x, y) == sum);
+                auto curr_1 = wt.rect_count(0, mx_n, x, y);
+                assert(curr_1 == cnt);
+                auto curr_2 = wt.rect_sum(0, mx_n, x, y);
+                assert(curr_2 == sum);
                 if (y < large + val_range) {
                     cnt += count_val[y - large];
                     sum += 1LL * y * count_val[y - large];
@@ -75,7 +81,8 @@ int main() {
             if (tests_kth_sum == 50) k = 0;
             if (tests_kth_sum == 49) k = mx_n;
             if (k == 0) {
-                assert(wt.kth_sum(0, mx_n, k) == 0);
+                auto curr_res = wt.kth_sum(0, mx_n, k);
+                assert(curr_res == 0);
                 continue;
             }
             int curr_cnt = 0;
@@ -91,8 +98,10 @@ int main() {
                 curr_sum += 1LL * (i + large) * count_val[i];
             }
             assert(kth_smallest_naive != -1);
-            assert(wt.kth_smallest(0, mx_n, k) == kth_smallest_naive);
-            assert(wt.kth_sum(0, mx_n, k) == curr_sum);
+            auto curr_1 = wt.kth_smallest(0, mx_n, k);
+            assert(curr_1 == kth_smallest_naive);
+            auto curr_2 = wt.kth_sum(0, mx_n, k);
+            assert(curr_2 == curr_sum);
         }
     }
     cout << "Hello World\n";

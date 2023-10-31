@@ -55,12 +55,12 @@ struct PST {
      * @time O(log(root_r - root_l))
      * @space O(log(root_r - root_l)) for recursion stack, no new nodes are allocated
      */
-    long long query(int le, int ri, int version) const {
+    inline long long query(int le, int ri, int version) {
         assert(root_l <= le && ri <= root_r);
         assert(0 <= version && version < ssize(roots));
         return query_impl(le, ri, root_l, root_r, roots[version]);
     }
-    long long query_impl(int le, int ri, int tl, int tr, int u) const {
+    long long query_impl(int le, int ri, int tl, int tr, int u) {
         if (u == 0 || ri <= tl || tr <= le) return 0;
         if (le <= tl && tr <= ri) return tree[u].sum;
         int tm = tl + (tr - tl) / 2;

@@ -29,11 +29,11 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
                 swap(q, new_q);
             }
         }
-        sort(begin(child_depths), end(child_depths), [&](const auto & x, const auto & y) {
+        sort(begin(child_depths), end(child_depths), [&](auto & x, auto & y) {
             return ssize(x) < ssize(y);
         });
         vector total_depth(1, 1.0);
-        for (const auto& cnt_depth : child_depths) {
+        for (auto& cnt_depth : child_depths) {
             auto prod = conv(total_depth, cnt_depth);
             for (int i = 1; i < ssize(prod); i++)
                 num_paths[i] += llround(prod[i]);

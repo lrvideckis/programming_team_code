@@ -23,7 +23,7 @@ inline bool in_subtree(const LCA& lca, int u, int v) {
  * @time O(1)
  * @space O(1)
  */
-inline int next_on_path(const LCA& lca, int u, int v) {
+inline int next_on_path(LCA& lca, int u, int v) {
     assert(u != v);
     return in_subtree(lca, u, v) ? lca.rmq.query(lca.in[u] + 1, lca.in[v] + 1) : lca.p[u];
 }

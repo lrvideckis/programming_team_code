@@ -7,7 +7,8 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     {
         //test empty seg tree
-        iter_seg_tree lst(0);
+        seg_tree st_empty(0);
+        iter_seg_tree lst(st_empty);
         lst.update_iter(0, 0, 1);
         long long res = lst.query_iter(0, 0);
         assert(res == 0);
@@ -17,7 +18,8 @@ int main() {
     }
     int n, q;
     cin >> n >> q;
-    iter_seg_tree lst(n);
+    seg_tree st_init(n);
+    iter_seg_tree lst(st_init);
     while (q--) {
         int type, l, r;
         cin >> type >> l >> r;

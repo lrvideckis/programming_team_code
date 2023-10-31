@@ -84,7 +84,6 @@ Checks: >
     cppcoreguidelines-interfaces-global-init,
     performance-*,
     readability-identifier-naming,
-    readability-make-member-function-const,
     readability-container-size-empty,
     readability-convert-member-functions-to-static,
     readability-else-after-return,

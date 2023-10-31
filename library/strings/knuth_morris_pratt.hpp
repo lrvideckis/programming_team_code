@@ -31,7 +31,7 @@ template <class T> struct KMP {
      * @space besides O(|haystack|) param, this function allocates/returns an
      * array of size (# matches), at worst O(|haystack|)
      */
-    vector<int> find_str(const T& haystack) const {
+    vector<int> find_str(const T& haystack) {
         vector<int> matches;
         for (int i = 0, j = 0; i < ssize(haystack); i++) {
             while (j > 0 && needle[j] != haystack[i]) j = pi[j - 1];

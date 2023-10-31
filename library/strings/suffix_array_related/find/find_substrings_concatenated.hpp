@@ -13,11 +13,10 @@
  * @time O(ssize(substrs) * log(|s|))
  * @space O(1)
  */
-template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
+template <class T> inline match find_substrs_concated(lcp_query<T>& lq,
         const vector<array<int, 2>>& substrs) {
     using dt = array<int, 3>;
-    const auto& sa = lq.sa;
-    int n = int(ssize(sa)), sa_le = 0, sa_ri = n, str_le = 0, str_ri = 0, sum_len = 0;
+    int n = int(ssize(lq.sa)), sa_le = 0, sa_ri = n, str_le = 0, str_ri = 0, sum_len = 0;
     auto cmp = [&](int i, const dt & x) -> bool {
         int j = i + sum_len, lcp = min(lq.get_lcp(j, x[0]), x[1]);
         if (lcp + sum_len > str_ri - str_le) str_le = i, str_ri = j + lcp;
@@ -26,8 +25,8 @@ template <class T> inline match find_substrs_concated(const lcp_query<T>& lq,
     };
     for (auto [le, ri] : substrs) {
         assert(0 <= le && le <= ri && ri <= n);
-        sa_le = int(lower_bound(begin(sa) + sa_le, begin(sa) + sa_ri, dt{le, ri - le, 0}, cmp) - begin(sa));
-        sa_ri = int(lower_bound(begin(sa) + sa_le, begin(sa) + sa_ri, dt{le, ri - le, 1}, cmp) - begin(sa));
+        sa_le = int(lower_bound(begin(lq.sa) + sa_le, begin(lq.sa) + sa_ri, dt{le, ri - le, 0}, cmp) - begin(lq.sa));
+        sa_ri = int(lower_bound(begin(lq.sa) + sa_le, begin(lq.sa) + sa_ri, dt{le, ri - le, 1}, cmp) - begin(lq.sa));
         sum_len += ri - le;
     }
     return {sa_le, sa_ri, str_le, str_ri};

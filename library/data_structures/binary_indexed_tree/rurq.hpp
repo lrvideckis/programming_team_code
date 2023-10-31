@@ -52,7 +52,7 @@ template <class T> struct bit_rurq {
      * @time O(log n)
      * @space O(1)
      */
-    inline T sum(int ri) const {
+    inline T sum(int ri) {
         assert(0 <= ri && ri <= n);
         return bit1.sum(ri) * ri - bit2.sum(ri);
     }
@@ -62,7 +62,7 @@ template <class T> struct bit_rurq {
      * @time O(log n)
      * @space O(1)
      */
-    inline T sum(int le, int ri) const {
+    inline T sum(int le, int ri) {
         assert(le <= ri);
         return sum(ri) - sum(le);
     }

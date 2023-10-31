@@ -24,7 +24,8 @@ int main() {
     cin >> n >> l;
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
-    pq_updates<stack_with_get_max, int> pq{stack_with_get_max()};
+    stack_with_get_max stm;
+    pq_updates<stack_with_get_max, int> pq(stm);
     int priority = (n - l) / 2;
     for (int i = 0; i < l; i++)
         pq.push_update(arr[i], priority--);

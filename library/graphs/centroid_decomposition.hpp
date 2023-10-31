@@ -21,8 +21,7 @@ template <class F> struct centroid {
     centroid(const vector<vector<int>>& a_adj, F a_f)
         : adj(a_adj), f(a_f), sub_sz(ssize(adj), -1) {
         for (int i = 0; i < ssize(adj); i++)
-            if (sub_sz[i] == -1)
-                dfs(i);
+            if (sub_sz[i] == -1) dfs(i);
     }
     void calc_sz(int u, int p) {
         sub_sz[u] = 1;

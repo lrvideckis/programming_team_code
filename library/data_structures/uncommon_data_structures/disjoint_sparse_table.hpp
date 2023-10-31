@@ -7,7 +7,7 @@
  * @code{.cpp}
  *     //usage for min and # of mins:
  *     vector<pair<long long, int>> arr; //initialize arr[i].second = 1
- *     disjoint_rmq rmq(arr, [&](auto x, auto y) {
+ *     disjoint_rmq rmq(arr, [&](auto& x, auto& y) {
  *         if (x.first == y.first) return make_pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
@@ -46,7 +46,7 @@ template <class T, class F> struct disjoint_rmq {
      * @time O(1)
      * @space O(1)
      */
-    inline T query(int le, int ri) const {
+    inline T query(int le, int ri) {
         assert(0 <= le && le < ri && ri <= n);
         if (ri - le == 1) return dp[0][le];
         int lg = __lg(le ^ (ri - 1));

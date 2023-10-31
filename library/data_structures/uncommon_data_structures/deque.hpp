@@ -6,7 +6,7 @@
  *     //deque with query for: get min and # of mins in deque
  *     vector<pair<long long, int>> arr;//initialize arr[i].second = 1
  *     ...
- *     deq dq(arr, [](const auto& x, const auto& y) {
+ *     deq dq(arr, [](auto& x, auto& y) {
  *         if (x.first == y.first) return pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
@@ -38,7 +38,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T query() const {
+    inline T query() {
         assert(size());
         if (empty(le)) return ri.back()[1];
         if (empty(ri)) return le.back()[1];
@@ -49,13 +49,13 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline int size() const {return int(ssize(le) + ssize(ri));}
+    inline int size() {return int(ssize(le) + ssize(ri));}
     /**
      * @returns deq[0]
      * @time O(1)
      * @space O(1)
      */
-    inline T front() const {
+    inline T front() {
         assert(size());
         return (empty(le) ? ri[0] : le.back())[0];
     }
@@ -64,7 +64,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T back() const {
+    inline T back() {
         assert(size());
         return (empty(ri) ? le[0] : ri.back())[0];
     }
@@ -74,7 +74,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline T operator[](int i) const {
+    inline T operator[](int i) {
         assert(0 <= i && i < size());
         return (i < ssize(le) ? le[ssize(le) - i - 1] : ri[i - ssize(le)])[0];
     }
@@ -103,7 +103,7 @@ template <class T, class F> struct deq {
         assert(size());
         if (empty(le)) {
             vector<T> arr(ssize(ri));
-            transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x[0];});
+            transform(begin(ri), end(ri), begin(arr), [](auto & x) {return x[0];});
             rebuild(arr, (int(ssize(arr)) + 1) / 2);
         }
         assert(!empty(le));
@@ -118,7 +118,7 @@ template <class T, class F> struct deq {
         assert(size());
         if (empty(ri)) {
             vector<T> arr(ssize(le));
-            transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x[0];});
+            transform(begin(le), end(le), rbegin(arr), [](auto & x) {return x[0];});
             rebuild(arr, int(ssize(arr)) / 2);
         }
         assert(!empty(ri));

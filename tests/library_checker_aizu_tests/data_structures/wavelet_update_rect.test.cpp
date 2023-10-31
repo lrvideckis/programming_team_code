@@ -26,7 +26,8 @@ int main() {
             cout << 0 << '\n';
         else {
             int idx = int(it - begin(sorted)) - 30;
-            assert(wtu.rect_count(le, ri, idx, idx) == 0);
+            auto curr = wtu.rect_count(le, ri, idx, idx);
+            assert(curr == 0);
             cout << wtu.rect_count(le, ri, idx, idx + 1) << '\n';
         }
     }

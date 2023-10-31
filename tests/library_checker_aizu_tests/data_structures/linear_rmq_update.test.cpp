@@ -44,20 +44,24 @@ int main() {
         else if (type == 3) {
             int idx = rmq_min_idx.query_idx(k, n);
             if (s[idx] == '0') {
-                assert(rmq_min_idx.query(k, n) == INT_MAX);
+                auto curr = rmq_min_idx.query(k, n);
+                assert(curr == INT_MAX);
                 cout << -1 << '\n';
             } else {
-                assert(rmq_min_idx.query(k, n) == idx);
+                auto curr = rmq_min_idx.query(k, n);
+                assert(curr == idx);
                 cout << idx << '\n';
             }
         } else {
             assert(type == 4);
             int idx = rmq_max_idx.query_idx(0, k + 1);
             if (s[idx] == '0') {
-                assert(rmq_max_idx.query(0, k + 1) == -1);
+                auto curr = rmq_max_idx.query(0, k + 1);
+                assert(curr == -1);
                 cout << -1 << '\n';
             } else {
-                assert(rmq_max_idx.query(0, k + 1) == idx);
+                auto curr = rmq_max_idx.query(0, k + 1);
+                assert(curr == idx);
                 cout << idx << '\n';
             }
         }

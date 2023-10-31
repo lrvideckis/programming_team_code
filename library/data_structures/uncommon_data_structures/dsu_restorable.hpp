@@ -11,7 +11,7 @@ struct dsu_restorable {
     vector<long long> subtree;
     vector<optional<array<int, 3>>> st;
     dsu_restorable(int n): num_sets(n), p(n, -1), subtree(n) {}
-    inline int find(int u) const {
+    inline int find(int u) {
         while (p[u] >= 0) u = p[u];
         return u;
     }
@@ -31,8 +31,8 @@ struct dsu_restorable {
         }
         st.pop_back();
     }
-    inline int size(int u) const {return -p[find(u)];}
-    inline bool same_set(int u, int v) const {return find(u) == find(v);}
-    inline long long sum(int u) const {return subtree[find(u)];}
+    inline int size(int u) {return -p[find(u)];}
+    inline bool same_set(int u, int v) {return find(u) == find(v);}
+    inline long long sum(int u) {return subtree[find(u)];}
     inline void add(int u, int d) {while (u >= 0) subtree[u] += d, u = p[u];}
 };

@@ -49,7 +49,8 @@ int main() {
             }
         }
     }
-    pq_updates<dsu_restorable, int, int> pq{dsu_restorable(n)};
+    dsu_restorable dsu_r(n);
+    pq_updates<dsu_restorable, int, int> pq(dsu_r);
     for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
     int curr_priority_counter = -q;
     for (int i = 0; i < q; i++) {

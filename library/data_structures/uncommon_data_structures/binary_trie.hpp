@@ -26,7 +26,7 @@ template <class T> struct binary_trie {
      * @time O(mx_bit)
      * @space O(mx_bit) new nodes are pushed back onto `t`
      */
-    int update(T val, int delta) {
+    inline int update(T val, int delta) {
         int u = 0;
         t[0].sub_sz += delta;
         for (int bit = mx_bit; bit >= 0; bit--) {
@@ -44,7 +44,7 @@ template <class T> struct binary_trie {
     /**
      * @returns number of integers in this multiset.
      */
-    inline int size() const {
+    inline int size() {
         return t[0].sub_sz;
     }
     /**
@@ -54,7 +54,7 @@ template <class T> struct binary_trie {
      * @time O(mx_bit)
      * @space O(1)
      */
-    T min_xor(T val) const {
+    inline T min_xor(T val) {
         assert(size() > 0);
         int u = 0;
         for (int bit = mx_bit; bit >= 0; bit--) {

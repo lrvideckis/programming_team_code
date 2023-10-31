@@ -52,10 +52,10 @@ template <class T, class F> struct linear_rmq {
      * @param level,i defines a block, corresponding to arr[i*64^level, (i+1)*64^level)
      * @returns array index of minimum in block
      */
-    int blk(int level, int i) const {
+    inline int blk(int level, int i) {
         return level ? idx[level - 1][i << 6] : i;
     }
-    int mn(int le, int ri) const {
+    inline int mn(int le, int ri) {
         return less(arr[le], arr[ri]) ? le : ri;
     }
     /**
@@ -64,7 +64,7 @@ template <class T, class F> struct linear_rmq {
      * @time O(log(n) / log(log(n))), practically if n <= 2^24 then ssize(mask) <= 4
      * @space O(1)
      */
-    int query_idx(int le, int ri) const {
+    inline int query_idx(int le, int ri) {
         assert(0 <= le && le < ri && ri <= n);
         int res = le;
         for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
@@ -82,7 +82,7 @@ template <class T, class F> struct linear_rmq {
      * @time O(log(n) / log(log(n)))
      * @space O(1)
      */
-    int query(int le, int ri) const {
+    inline int query(int le, int ri) {
         return arr[query_idx(le, ri)];
     }
     /**
@@ -91,7 +91,7 @@ template <class T, class F> struct linear_rmq {
      * @time O((log(n)^2) / log(log(n)))
      * @space O(1)
      */
-    void update(int pos, T val) {
+    inline void update(int pos, T val) {
         assert(0 <= pos && pos < n);
         arr[pos] = val;
         for (int level = 0; level < ssize(mask); level++, pos >>= 6)

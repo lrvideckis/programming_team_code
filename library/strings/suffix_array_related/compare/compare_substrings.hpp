@@ -12,7 +12,7 @@
  * @time O(1)
  * @space O(1)
  */
-template <class T> inline int substr_cmp(const lcp_query<T>& lq,
+template <class T> inline int substr_cmp(lcp_query<T>& lq,
         int le1, int ri1, int le2, int ri2) {
     assert(0 <= le1 && le1 <= ri1 && ri1 <= ssize(lq.sa));
     assert(0 <= le2 && le2 <= ri2 && ri2 <= ssize(lq.sa));

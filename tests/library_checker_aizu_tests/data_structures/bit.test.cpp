@@ -24,9 +24,13 @@ int main() {
     partial_sum(rbegin(arr), rend(arr), rbegin(suf_sum));
     bit_rupq<long long> bit_i(suf_sum);
     for (int i = 0; i < n; i++) {
-        assert(arr[i] == bit.sum(i, i + 1));
-        assert(bit_i.get_index(i) == bit.sum(i, n));
-        assert(bit_i.get_index(i) == suf_sum[i]);
+        auto curr_1 = bit.sum(i, i + 1);
+        assert(arr[i] == curr_1);
+        auto curr_2 = bit_i.get_index(i);
+        auto curr_3 = bit.sum(i, n);
+        assert(curr_2 == curr_3);
+        auto curr_4 = bit_i.get_index(i);
+        assert(curr_4 == suf_sum[i]);
     }
     while (q--) {
         int type;
@@ -47,7 +51,8 @@ int main() {
                 if (r < n) bit_i_result -= bit_i.get_index(r);
                 assert(res == bit_i_result);
             }
-            assert(res == bit_rr.sum(l, r));
+            auto curr_res = bit_rr.sum(l, r);
+            assert(res == curr_res);
             cout << res << '\n';
         }
         auto sum = get_rand<long long>(0LL, (long long)(1e12));

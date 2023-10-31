@@ -28,7 +28,8 @@ int main() {
         int mx = arr[i];
         for (int j = i + 1; j <= min(i + 5, n); j++) {
             mx = max(mx, arr[j - 1]);
-            assert(st.query(i, j, j - i) == mx);
+            auto curr = st.query(i, j, j - i);
+            assert(curr == mx);
         }
     }
     while (q--) {
