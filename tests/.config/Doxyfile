@@ -984,7 +984,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          mn \
                          mx \
                          arr \
-                         less \
+                         cmp \
                          add_edge \
                          dsu_restorable \
                          upd \
