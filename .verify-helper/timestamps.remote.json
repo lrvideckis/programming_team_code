@@ -87,5 +87,12 @@
 "tests/library_checker_aizu_tests/strings/lcs_dp.test.cpp": "2023-10-26 06:56:49 -0700",
 "tests/library_checker_aizu_tests/strings/lcs_queries.test.cpp": "2023-10-31 12:30:19 -0700",
 "tests/library_checker_aizu_tests/strings/lcs_queries_wavelet.test.cpp": "2023-10-31 12:30:19 -0700",
-"tests/library_checker_aizu_tests/strings/manacher.test.cpp": "2023-10-26 06:56:49 -0700"
+"tests/library_checker_aizu_tests/strings/manacher.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/strings/multi_matching.test.cpp": "2023-10-31 16:34:22 -0700",
+"tests/library_checker_aizu_tests/strings/multi_matching_bs.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/strings/prefix_function.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2023-10-31 16:34:22 -0700",
+"tests/library_checker_aizu_tests/strings/single_matching_bs.test.cpp": "2023-10-31 12:30:19 -0700",
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2023-10-31 12:30:19 -0700",
+"tests/library_checker_aizu_tests/strings/trie.test.cpp": "2023-10-31 12:30:19 -0700"
 }
