@@ -29,6 +29,7 @@ struct match_info {
  *     //0 <= node_right < rsz
  *     //for every edge node_left <=> node_right
  *     adj[node_left].push_back(node_right);
+ *     auto [size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r] = hopcroft_karp(adj, rsz);
  * @endcode
  * @param adj bipartite graph
  * @param rsz number of nodes on right side
