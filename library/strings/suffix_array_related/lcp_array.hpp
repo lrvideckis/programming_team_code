@@ -24,9 +24,9 @@
  *     auto [sa, sa_inv] = get_sa(s, 256);
  *     vector<int> lcp = get_lcp_array(sa, sa_inv, s);
  *     // or
- *     vector<int> arr;
- *     auto [sa, sa_inv] = get_sa(arr, 100'005);
- *     vector<int> lcp = get_lcp_array(sa, sa_inv, arr);
+ *     vector<int> a;
+ *     auto [sa, sa_inv] = get_sa(a, 100'005);
+ *     vector<int> lcp = get_lcp_array(sa, sa_inv, a);
  * @endcode
  *
  * @param sa,sa_inv,s string/array and its suffix array

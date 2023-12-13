@@ -22,23 +22,23 @@ struct wavelet_tree_updates {
     vector<bool_bit> bool_bits;
     /**
      * @code{.cpp}
-     *     vector<int> arr;
+     *     vector<int> a;
      *     ...
-     *     vector<int> sorted(arr);
+     *     vector<int> sorted(a);
      *     sort(begin(sorted), end(sorted));
      *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-     *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree_updates wtu(arr, 0, ssize(sorted), vector<bool>(ssize(arr), 1));
+     *     for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+     *     wavelet_tree_updates wtu(a, 0, ssize(sorted), vector<bool>(ssize(a), 1));
      * @endcode
-     * @param arr,a_minv,a_maxv must satisfy minv <= arr[i] < maxv
+     * @param a,a_minv,a_maxv must satisfy minv <= a[i] < maxv
      * @param active active[i] == 1 iff index i is initially active
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums` and for `bool_bits`
      */
-    wavelet_tree_updates(const vector<int>& arr, int a_minv, int a_maxv, const vector<bool>& active) : n(int(ssize(arr))), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), bool_bits(2 * (maxv - minv), vector<bool>()) {
+    wavelet_tree_updates(const vector<int>& a, int a_minv, int a_maxv, const vector<bool>& active) : n(int(ssize(a))), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), bool_bits(2 * (maxv - minv), vector<bool>()) {
         assert(minv < maxv && ssize(active) == n);
         vector<pair<int, bool>> cpy(n);
-        transform(begin(arr), end(arr), begin(active), begin(cpy), [](int x, bool y) {return pair(x, y);});
+        transform(begin(a), end(a), begin(active), begin(cpy), [](int x, bool y) {return pair(x, y);});
         build(cpy, 0, n, minv, maxv, 1);
     }
     void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int u) {
@@ -74,7 +74,7 @@ struct wavelet_tree_updates {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of active indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of active indexes i such that le <= i < ri and x <= a[i] < y
      * @time O(log(maxv - minv) * log(n / 64))
      * @space O(log(maxv - minv)) for recursive stack
      */

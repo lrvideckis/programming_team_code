@@ -7,8 +7,8 @@
  *     auto [sa, sa_inv] = get_sa(s, 256);
  *     suf_cmp(sa_inv, le1, le2);
  *     // or
- *     vector<int> arr;
- *     auto [sa, sa_inv] = get_sa(arr, 100'005);
+ *     vector<int> a;
+ *     auto [sa, sa_inv] = get_sa(a, 100'005);
  *     suf_cmp(sa_inv, le1, le2);
  * @endcode
  *

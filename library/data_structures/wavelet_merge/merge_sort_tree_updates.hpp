@@ -21,33 +21,33 @@ struct merge_sort_tree_updates {
     vector<bool_presum> bool_presums;
     vector<bool_bit> bool_bits;
     /**
-     * @param arr array
+     * @param a array
      * @param active active[i] == 1 iff index i is initially active
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& arr, const vector<bool>& active) : n(int(ssize(arr))), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
+    merge_sort_tree_updates(const vector<int>& a, const vector<bool>& active) : n(int(ssize(a))), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
         assert(ssize(active) == n);
         if (!n) return;
         vector<pair<int, bool>> cpy(n);
         for (int i = 0; i < n; i++) cpy[i].first = i;
-        build(arr, active, cpy, 0, n, 1);
+        build(a, active, cpy, 0, n, 1);
         for (int i = 0; i < n; i++) {
             perm[cpy[i].first] = i;
-            sorted[i] = arr[cpy[i].first];
+            sorted[i] = a[cpy[i].first];
         }
     }
-    void build(const vector<int>& arr, const vector<bool>& active, vector<pair<int, bool>>& cpy, int tl, int tr, int u) {
+    void build(const vector<int>& a, const vector<bool>& active, vector<pair<int, bool>>& cpy, int tl, int tr, int u) {
         if (tr - tl == 1) {
             bool_bits[u] = bool_bit(vector<bool>(1, active[tl]));
             return;
         }
         int tm = split(tl, tr);
-        build(arr, active, cpy, tl, tm, 2 * u);
-        build(arr, active, cpy, tm, tr, 2 * u + 1);
+        build(a, active, cpy, tl, tm, 2 * u);
+        build(a, active, cpy, tm, tr, 2 * u + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
-        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return arr[i.first] < arr[j.first];});
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return a[i.first] < a[j.first];});
         vector<bool> bools(tr - tl);
         transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
         bool_presums[u] = bool_presum(bools);
@@ -74,7 +74,7 @@ struct merge_sort_tree_updates {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of active indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of active indexes i such that le <= i < ri and x <= a[i] < y
      * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */
@@ -93,10 +93,10 @@ struct merge_sort_tree_updates {
     }
     /**
      * @param x,y defines range of values [x, y)
-     * @param k must satisfy 1 <= k <= number of active indexes i such that x <= arr[i] < y
-     * @returns the kth smallest active index i such that x <= arr[i] < y
-     *     - kth_smallest(x,y,1) returns the smallest active index i such that x <= arr[i] < y
-     *     - kth_smallest(x,y,rect_count(0,n,x,y)) returns the largest active index i such that x <= arr[i] < y
+     * @param k must satisfy 1 <= k <= number of active indexes i such that x <= a[i] < y
+     * @returns the kth smallest active index i such that x <= a[i] < y
+     *     - kth_smallest(x,y,1) returns the smallest active index i such that x <= a[i] < y
+     *     - kth_smallest(x,y,rect_count(0,n,x,y)) returns the largest active index i such that x <= a[i] < y
      * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */

@@ -8,14 +8,14 @@ struct distinct_query {
     int n;
     PST pst;
     /**
-     * @param arr static array; can't handle updates
+     * @param a static array; can't handle updates
      * @time O(n log n)
      * @space O(n log n) for PST::tree vector
      */
-    distinct_query(const vector<int>& arr) : n(int(ssize(arr))), pst(0, n + 1) {
+    distinct_query(const vector<int>& a) : n(int(ssize(a))), pst(0, n + 1) {
         map<int, int> last_idx;
         for (int i = 0; i < n; i++) {
-            int& idx = last_idx[arr[i]];
+            int& idx = last_idx[a[i]];
             pst.update(idx, 1, i);
             idx = i + 1;
         }

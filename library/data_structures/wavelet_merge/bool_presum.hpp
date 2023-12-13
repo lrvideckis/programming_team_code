@@ -12,19 +12,19 @@ struct bool_presum {
     vector<uint64_t> mask;
     vector<int> presum;
     /**
-     * @param arr boolean array
+     * @param a boolean array
      * @time O(n)
      * @space O(n / 64)
      */
-    bool_presum(const vector<bool>& arr) : n(int(ssize(arr))), mask(n / 64 + 1), presum(ssize(mask)) {
+    bool_presum(const vector<bool>& a) : n(int(ssize(a))), mask(n / 64 + 1), presum(ssize(mask)) {
         for (int i = 0; i < n; i++)
-            mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
+            mask[i >> 6] |= (uint64_t(a[i]) << (i & 63));
         for (auto i = 0; i < ssize(mask) - 1; i++)
             presum[i + 1] = __builtin_popcountll(mask[i]) + presum[i];
     }
     /**
      * @param i defines range [0, i)
-     * @returns arr[0] + arr[1] + ... + arr[i - 1]
+     * @returns a[0] + a[1] + ... + a[i - 1]
      * @time O(1)
      * @space O(1)
      */
@@ -34,7 +34,7 @@ struct bool_presum {
     }
     /**
      * @param i index
-     * @returns 1 iff arr[i] was on
+     * @returns 1 iff a[i] was on
      * @time O(1)
      * @space O(1)
      */

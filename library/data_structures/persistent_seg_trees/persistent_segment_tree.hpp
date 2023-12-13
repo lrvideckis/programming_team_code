@@ -22,7 +22,7 @@ struct PST {
     PST(int a_root_l, int a_root_r) :
         root_l(a_root_l), root_r(a_root_r), roots(1), tree(1, {0LL, 0, 0}) {}
     /**
-     * @param idx,change does arr[idx] += change
+     * @param idx,change does a[idx] += change
      * @param version which version to update. Each call to update creates a
      * new version. Initially there is a dummy version.
      * @time O(log(root_r - root_l))
@@ -51,7 +51,7 @@ struct PST {
     /**
      * @param le, ri defines range [le, ri)
      * @param version which version to query
-     * @returns arr[le] + arr[le + 1] + ... + arr[ri - 1] during the `version`-th version
+     * @returns a[le] + a[le + 1] + ... + a[ri - 1] during the `version`-th version
      * @time O(log(root_r - root_l))
      * @space O(log(root_r - root_l)) for recursion stack, no new nodes are allocated
      */

@@ -21,38 +21,38 @@ struct wavelet_tree {
     vector<vector<long long>> presums;
     /**
      * @code{.cpp}
-     *     vector<int> arr;
+     *     vector<int> a;
      *     ...
-     *     vector<int> sorted(arr);
+     *     vector<int> sorted(a);
      *     sort(begin(sorted), end(sorted));
      *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-     *     for (int& val : arr) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree wt(arr, 0, ssize(sorted));
+     *     for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+     *     wavelet_tree wt(a, 0, ssize(sorted));
      * @endcode
-     * @param arr,a_minv,a_maxv must satisfy minv <= arr[i] < maxv
+     * @param a,a_minv,a_maxv must satisfy minv <= a[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))
      * @space O((maxv - minv) + n * log(maxv - minv) / 64) for `bool_presums`
      *        O((maxv - minv) + n * log(maxv - minv))      for `presums`
      */
-    wavelet_tree(vector<int> arr, int a_minv, int a_maxv) : n(int(ssize(arr))), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), presums(maxv - minv) {
-        build(arr, 0, n, minv, maxv, 1);
+    wavelet_tree(vector<int> a, int a_minv, int a_maxv) : n(int(ssize(a))), minv(a_minv), maxv(a_maxv), bool_presums(maxv - minv, vector<bool>()), presums(maxv - minv) {
+        build(a, 0, n, minv, maxv, 1);
     }
-    void build(vector<int>& arr, int le, int ri, int tl, int tr, int u) {
+    void build(vector<int>& a, int le, int ri, int tl, int tr, int u) {
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
         auto low = [&](int val) -> bool {return val < tm;};
         vector<bool> bools(ri - le);
-        transform(begin(arr) + le, begin(arr) + ri, begin(bools), low);
+        transform(begin(a) + le, begin(a) + ri, begin(bools), low);
         bool_presums[u] = bool_presum(bools);
         presums[u].resize(ri - le + 1);
-        inclusive_scan(begin(arr) + le, begin(arr) + ri, begin(presums[u]) + 1, plus<long long>(), 0LL);
-        int mi = int(stable_partition(begin(arr) + le, begin(arr) + ri, low) - begin(arr));
-        build(arr, le, mi, tl, tm, 2 * u);
-        build(arr, mi, ri, tm, tr, 2 * u + 1);
+        inclusive_scan(begin(a) + le, begin(a) + ri, begin(presums[u]) + 1, plus<long long>(), 0LL);
+        int mi = int(stable_partition(begin(a) + le, begin(a) + ri, low) - begin(a));
+        build(a, le, mi, tl, tm, 2 * u);
+        build(a, mi, ri, tm, tr, 2 * u + 1);
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of indexes i such that le <= i < ri and x <= a[i] < y
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */
@@ -69,7 +69,7 @@ struct wavelet_tree {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns sum of values arr[i] such that le <= i < ri and x <= arr[i] < y
+     * @returns sum of values a[i] such that le <= i < ri and x <= a[i] < y
      * @time O(log(maxv - minv))
      * @space O(log(maxv - minv)) for recursive stack
      */

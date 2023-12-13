@@ -13,21 +13,21 @@ struct bool_bit {
     vector<uint64_t> mask;
     BIT<int> presum;
     /**
-     * @param arr boolean array
+     * @param a boolean array
      * @time O(n)
      * @space O(n / 64)
      */
-    bool_bit(const vector<bool>& arr) : n(int(ssize(arr))), mask(n / 64 + 1) {
+    bool_bit(const vector<bool>& a) : n(int(ssize(a))), mask(n / 64 + 1) {
         vector<int> init((n + 63) / 64);
         for (int i = 0; i < n; i++) {
-            mask[i >> 6] |= (uint64_t(arr[i]) << (i & 63));
-            init[i >> 6] += arr[i];
+            mask[i >> 6] |= (uint64_t(a[i]) << (i & 63));
+            init[i >> 6] += a[i];
         }
         presum = {init};
     }
     /**
      * @param i defines range [0, i)
-     * @returns arr[0] + arr[1] + ... + arr[i - 1]
+     * @returns a[0] + a[1] + ... + a[i - 1]
      * @time O(log(n / 64))
      * @space O(1)
      */
@@ -37,7 +37,7 @@ struct bool_bit {
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns arr[le] + arr[le + 1] + ... + arr[ri - 1]
+     * @returns a[le] + a[le + 1] + ... + a[ri - 1]
      * @time O(log(n / 64))
      * @space O(1)
      */
@@ -57,7 +57,7 @@ struct bool_bit {
     }
     /**
      * @param i index
-     * @param new_val we want to set arr[i] = new_val
+     * @param new_val we want to set a[i] = new_val
      * @time O(log(n / 64))
      * @space O(1)
      */

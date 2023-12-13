@@ -19,13 +19,13 @@ struct merge_sort_tree {
     vector<int> sorted;
     vector<bool_presum> bool_presums;
     /**
-     * @param arr array
+     * @param a array
      * @time O(n log n)
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      */
-    merge_sort_tree(const vector<int>& arr) : n(int(ssize(arr))), sorted(n), bool_presums(n, vector<bool>()) {
+    merge_sort_tree(const vector<int>& a) : n(int(ssize(a))), sorted(n), bool_presums(n, vector<bool>()) {
         vector<pair<int, bool>> cpy(n);
-        transform(begin(arr), end(arr), begin(cpy), [](int val) {return pair(val, 0);});
+        transform(begin(a), end(a), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, n, 1);
         transform(begin(cpy), end(cpy), begin(sorted), [](auto val) {return val.first;});
     }
@@ -42,7 +42,7 @@ struct merge_sort_tree {
     }
     /**
      * @param le,ri,x,y defines rectangle: indexes in [le, ri), values in [x, y)
-     * @returns number of indexes i such that le <= i < ri and x <= arr[i] < y
+     * @returns number of indexes i such that le <= i < ri and x <= a[i] < y
      * @time O(log(n))
      * @space O(log(n)) for recursive stack
      */
@@ -61,10 +61,10 @@ struct merge_sort_tree {
     }
     /**
      * @param x,y defines range of values [x, y)
-     * @param k must satisfy 1 <= k <= number of indexes i such that x <= arr[i] < y
-     * @returns the kth smallest index i such that x <= arr[i] < y
-     *     - kth_smallest(x,y,1) returns the smallest index i such that x <= arr[i] < y
-     *     - kth_smallest(x,y,rect_count(0,n,x,y)) returns the largest index i such that x <= arr[i] < y
+     * @param k must satisfy 1 <= k <= number of indexes i such that x <= a[i] < y
+     * @returns the kth smallest index i such that x <= a[i] < y
+     *     - kth_smallest(x,y,1) returns the smallest index i such that x <= a[i] < y
+     *     - kth_smallest(x,y,rect_count(0,n,x,y)) returns the largest index i such that x <= a[i] < y
      *     - kth_smallest(-INF,INF,k) returns (k - 1)
      * @time O(log(n))
      * @space O(log(n)) for recursive stack

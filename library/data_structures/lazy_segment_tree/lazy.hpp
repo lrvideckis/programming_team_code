@@ -18,15 +18,15 @@ inline long long op(long long vl, long long vr) {
  *
  * root is at tree[1]
  * internal nodes are [1, n)
- * leaf nodes are [n, 2 * n), but rotated such that arr[0] is at tree[pw2] where pw2 = 1 << __lg(2 * n - 1)
+ * leaf nodes are [n, 2 * n), but rotated such that a[0] is at tree[pw2] where pw2 = 1 << __lg(2 * n - 1)
  *     note pw2 is the only power of 2 such that n <= pw2 < 2 * n
  */
 struct seg_tree {
     int n, pw2;
     vector<long long> tree, lazy;
     seg_tree(int a_n) : n(a_n), pw2(n ? 1 << __lg(2 * n - 1) : 0), tree(2 * n), lazy(n) {}
-    seg_tree(const vector<int>& arr) : seg_tree(int(ssize(arr))) {
-        for (int i = 0; i < n; i++) tree[(i + pw2) % n + n] = arr[i];
+    seg_tree(const vector<int>& a) : seg_tree(int(ssize(a))) {
+        for (int i = 0; i < n; i++) tree[(i + pw2) % n + n] = a[i];
         for (int i = n - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
     }
     inline void apply(long long change, int tl, int tr, int u) {

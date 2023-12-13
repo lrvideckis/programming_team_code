@@ -8,8 +8,8 @@
  *     string s;
  *     vector<int> man(manacher(s)), longest(longest_from_index(man));
  *     // or
- *     vector<int> arr;
- *     vector<int> man(manacher(arr)), longest(longest_from_index(man));
+ *     vector<int> a;
+ *     vector<int> man(manacher(a)), longest(longest_from_index(man));
  * @endcode
  *
  * @param man manacher array

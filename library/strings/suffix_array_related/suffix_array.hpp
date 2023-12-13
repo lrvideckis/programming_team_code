@@ -25,8 +25,8 @@
  *     string s;
  *     auto [sa, sa_inv] = get_sa(s, 256);
  *     // or
- *     vector<int> arr;
- *     auto [sa, sa_inv] = get_sa(arr, 100'005);
+ *     vector<int> a;
+ *     auto [sa, sa_inv] = get_sa(a, 100'005);
  * @endcode
  *
  * @param s,max_val string/array with 0 <= s[i] < max_val

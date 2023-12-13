@@ -7,13 +7,13 @@
 struct kth_smallest {
     PST pst;
     /**
-     * @param arr,minv,maxv must satisfy: minv <= arr[i] < maxv
+     * @param a,minv,maxv must satisfy: minv <= a[i] < maxv
      * @time O(n log(maxv - minv))
      * @space O(n log(maxv - minv)) nodes are pushed back onto PST::tree
      */
-    kth_smallest(const vector<int>& arr, int minv, int maxv) : pst(minv, maxv) {
-        for (int i = 0; i < ssize(arr); i++)
-            pst.update(arr[i], 1, i);
+    kth_smallest(const vector<int>& a, int minv, int maxv) : pst(minv, maxv) {
+        for (int i = 0; i < ssize(a); i++)
+            pst.update(a[i], 1, i);
     }
     /**
      * @param le,ri defines range [le, ri)

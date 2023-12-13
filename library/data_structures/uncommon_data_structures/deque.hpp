@@ -4,9 +4,9 @@
  * deque with query for operation of the deque
  * @code{.cpp}
  *     //deque with query for: get min and # of mins in deque
- *     vector<pair<long long, int>> arr;//initialize arr[i].second = 1
+ *     vector<pair<long long, int>> a;//initialize a[i].second = 1
  *     ...
- *     deq dq(arr, [](auto& x, auto& y) {
+ *     deq dq(a, [](auto& x, auto& y) {
  *         if (x.first == y.first) return pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
@@ -27,12 +27,12 @@ template <class T, class F> struct deq {
     vector<dt> le, ri;
     /** @} */
     /**
-     * @param arr initial array: arr[0] is front, arr.back() is back
+     * @param a initial array: a[0] is front, a.back() is back
      * @param a_op associative operation
      * @time O(1)
      * @space O(1)
      */
-    deq(const vector<T>& arr, F a_op) : op(a_op) {rebuild(arr, int(ssize(arr)) / 2);}
+    deq(const vector<T>& a, F a_op) : op(a_op) {rebuild(a, int(ssize(a)) / 2);}
     /**
      * @returns deq[0] op deq[1] op ... op deq.back()
      * @time O(1)
@@ -102,9 +102,9 @@ template <class T, class F> struct deq {
     inline void pop_front() {
         assert(size());
         if (empty(le)) {
-            vector<T> arr(ssize(ri));
-            transform(begin(ri), end(ri), begin(arr), [](auto & x) {return x[0];});
-            rebuild(arr, (int(ssize(arr)) + 1) / 2);
+            vector<T> a(ssize(ri));
+            transform(begin(ri), end(ri), begin(a), [](auto & x) {return x[0];});
+            rebuild(a, (int(ssize(a)) + 1) / 2);
         }
         assert(!empty(le));
         le.pop_back();
@@ -117,20 +117,20 @@ template <class T, class F> struct deq {
     inline void pop_back() {
         assert(size());
         if (empty(ri)) {
-            vector<T> arr(ssize(le));
-            transform(begin(le), end(le), rbegin(arr), [](auto & x) {return x[0];});
-            rebuild(arr, int(ssize(arr)) / 2);
+            vector<T> a(ssize(le));
+            transform(begin(le), end(le), rbegin(a), [](auto & x) {return x[0];});
+            rebuild(a, int(ssize(a)) / 2);
         }
         assert(!empty(ri));
         ri.pop_back();
     }
-    inline void rebuild(const vector<T>& arr, int sz_le) {
-        vector<T> presum(ssize(arr));
-        partial_sum(rend(arr) - sz_le, rend(arr), rend(presum) - sz_le, [&](T x, T y) {return op(y, x);});
-        partial_sum(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, op);
+    inline void rebuild(const vector<T>& a, int sz_le) {
+        vector<T> presum(ssize(a));
+        partial_sum(rend(a) - sz_le, rend(a), rend(presum) - sz_le, [&](T x, T y) {return op(y, x);});
+        partial_sum(begin(a) + sz_le, end(a), begin(presum) + sz_le, op);
         le.resize(sz_le);
-        ri.resize(ssize(arr) - sz_le);
-        transform(begin(arr), begin(arr) + sz_le, begin(presum), rbegin(le), [](T x, T y) -> dt {return {x, y};});
-        transform(begin(arr) + sz_le, end(arr), begin(presum) + sz_le, begin(ri), [](T x, T y) -> dt {return {x, y};});
+        ri.resize(ssize(a) - sz_le);
+        transform(begin(a), begin(a) + sz_le, begin(presum), rbegin(le), [](T x, T y) -> dt {return {x, y};});
+        transform(begin(a) + sz_le, end(a), begin(presum) + sz_le, begin(ri), [](T x, T y) -> dt {return {x, y};});
     }
 };

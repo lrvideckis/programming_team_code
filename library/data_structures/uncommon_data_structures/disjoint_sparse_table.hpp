@@ -6,8 +6,8 @@
  * Disjoint RMQ is like normal RMQ except the 2 query ranges never overlap.
  * @code{.cpp}
  *     //usage for min and # of mins:
- *     vector<pair<long long, int>> arr; //initialize arr[i].second = 1
- *     disjoint_rmq rmq(arr, [&](auto& x, auto& y) {
+ *     vector<pair<long long, int>> a; //initialize a[i].second = 1
+ *     disjoint_rmq rmq(a, [&](auto& x, auto& y) {
  *         if (x.first == y.first) return make_pair(x.first, x.second + y.second);
  *         return min(x, y);
  *     });
@@ -25,24 +25,24 @@ template <class T, class F> struct disjoint_rmq {
      */
     F op;
     /**
-     * @param arr static array
+     * @param a static array
      * @param a_op any associative operation
      * @time O(n log n)
      * @space O(n log n) for `dp` vector
      */
-    disjoint_rmq(const vector<T>& arr, F a_op) : n(int(ssize(arr))), op(a_op) {
+    disjoint_rmq(const vector<T>& a, F a_op) : n(int(ssize(a))), op(a_op) {
         for (int len = 1; len <= n; len *= 2) {
             dp.emplace_back(n);
             for (int le = 0; le < n; le += 2 * len) {
                 int mi = min(n, le + len), ri = min(n, le + 2 * len);
-                partial_sum(rend(arr) - mi, rend(arr) - le, rend(dp.back()) - mi, [&](T x, T y) {return op(y, x);});
-                partial_sum(begin(arr) + mi, begin(arr) + ri, begin(dp.back()) + mi, op);
+                partial_sum(rend(a) - mi, rend(a) - le, rend(dp.back()) - mi, [&](T x, T y) {return op(y, x);});
+                partial_sum(begin(a) + mi, begin(a) + ri, begin(dp.back()) + mi, op);
             }
         }
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns arr[le] op arr[le + 1] op ... op arr[ri - 1]
+     * @returns a[le] op a[le + 1] op ... op a[ri - 1]
      * @time O(1)
      * @space O(1)
      */

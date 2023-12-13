@@ -36,7 +36,7 @@ template <class T> struct BIT {
     }
     /**
      * @param ri defines range [0, ri)
-     * @returns arr[0] + arr[1] + ... + arr[ri - 1]
+     * @returns a[0] + a[1] + ... + a[ri - 1]
      * @time O(log n)
      * @space O(1)
      */
@@ -48,7 +48,7 @@ template <class T> struct BIT {
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns arr[le] + arr[le + 1] + ... + arr[ri - 1]
+     * @returns a[le] + a[le + 1] + ... + a[ri - 1]
      * @time O(log n)
      * @space O(1)
      */
