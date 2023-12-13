@@ -2,9 +2,9 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/data_structures/sparse_table.hpp"
-#include "../../../library/data_structures/uncommon_data_structures/disjoint_sparse_table.hpp"
-#include "../../../library/data_structures/uncommon_data_structures/linear_rmq.hpp"
+#include "../../../library/data_structures/rmq.hpp"
+#include "../../../library/data_structures/uncommon/disjoint_rmq.hpp"
+#include "../../../library/data_structures/uncommon/linear_rmq.hpp"
 
 void test_all_subarrays(const vector<int>& arr) {
     auto n = ssize(arr);

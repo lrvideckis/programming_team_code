@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../data_structures/binary_indexed_tree/bit.hpp"
+#include "../../data_structures/bit.hpp"
 #include "lcs_dp.hpp"
 /**
  * Given strings s, t handle queries for:

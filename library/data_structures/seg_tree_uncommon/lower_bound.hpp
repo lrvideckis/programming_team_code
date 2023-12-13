@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "lazy.hpp"
+#include "../seg_tree.hpp"
 /**
  * Requires st.query(i, i + 1) >= 0
  * @param st seg tree

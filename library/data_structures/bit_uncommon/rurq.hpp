@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "bit.hpp"
+#include "../bit.hpp"
 /**
  * @see https://blog.mitrichev.ch/2013 /05/fenwick-tree-range-updates.html
  *

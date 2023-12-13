@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "lazy.hpp"
+#include "../seg_tree.hpp"
 /**
  * @see https://codeforces.com/blog/entry/18051
  *

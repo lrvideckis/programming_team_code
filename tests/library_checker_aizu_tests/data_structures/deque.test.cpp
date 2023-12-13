@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_1_B"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/deque.hpp"
+#include "../../../library/data_structures/uncommon/deque_with_op.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

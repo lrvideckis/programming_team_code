@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/linear_rmq.hpp"
+#include "../../../library/data_structures/uncommon/linear_rmq.hpp"
 
 vector<int> convert_min(const string& s) {
     vector<int> arr(ssize(s), INT_MAX);

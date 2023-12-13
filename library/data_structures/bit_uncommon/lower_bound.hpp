@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "bit.hpp"
+#include "../bit.hpp"
 /**
  * Requires bit.sum(i, i + 1) >= 0
  * @param bit binary indexed tree

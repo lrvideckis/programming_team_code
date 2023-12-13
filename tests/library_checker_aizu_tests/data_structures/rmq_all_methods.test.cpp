@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/sparse_table.hpp"
-#include "../../../library/data_structures/uncommon_data_structures/disjoint_sparse_table.hpp"
-#include "../../../library/data_structures/uncommon_data_structures/linear_rmq.hpp"
+#include "../../../library/data_structures/rmq.hpp"
+#include "../../../library/data_structures/uncommon/disjoint_rmq.hpp"
+#include "../../../library/data_structures/uncommon/linear_rmq.hpp"
 #include "../../../library/monotonic_stack_related/monotonic_range.hpp"
 
 int mn(int x, int y) {

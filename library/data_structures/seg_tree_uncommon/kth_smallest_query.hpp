@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "persistent_segment_tree.hpp"
+#include "persistent.hpp"
 /**
  * @see https://cp-algorithms.com/data_structures/segment_tree.html# preserving-the-history-of-its-values-persistent-segment-tree
  */

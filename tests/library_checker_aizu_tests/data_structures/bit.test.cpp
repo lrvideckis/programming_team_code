@@ -2,10 +2,10 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/data_structures/binary_indexed_tree/rupq.hpp"
-#include "../../../library/data_structures/binary_indexed_tree/rurq.hpp"
-#include "../../../library/data_structures/binary_indexed_tree/lower_bound.hpp"
-#include "../../../library/data_structures/lazy_segment_tree/lower_bound.hpp"
+#include "../../../library/data_structures/bit_uncommon/rupq.hpp"
+#include "../../../library/data_structures/bit_uncommon/rurq.hpp"
+#include "../../../library/data_structures/bit_uncommon/lower_bound.hpp"
+#include "../../../library/data_structures/seg_tree_uncommon/lower_bound.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

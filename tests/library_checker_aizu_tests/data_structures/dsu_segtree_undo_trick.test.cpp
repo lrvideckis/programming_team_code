@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/uncommon_data_structures/dsu_restorable.hpp"
-#include "../../../library/data_structures/lazy_segment_tree/lazy.hpp"
+#include "../../../library/data_structures/uncommon/dsu_restorable.hpp"
+#include "../../../library/data_structures/seg_tree.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

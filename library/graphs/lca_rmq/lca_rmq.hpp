@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../data_structures/sparse_table.hpp"
+#include "../../data_structures/rmq.hpp"
 /**
  * @see https://github.com/kth-competitive-programming /kactl/blob/main/content/graph/LCA.h
  */

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 #include "../template.hpp"
 
-#include "../../../library/data_structures/binary_indexed_tree/lower_bound.hpp"
-#include "../../../library/data_structures/lazy_segment_tree/lower_bound.hpp"
+#include "../../../library/data_structures/bit_uncommon/lower_bound.hpp"
+#include "../../../library/data_structures/seg_tree_uncommon/lower_bound.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

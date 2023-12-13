@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/contest/random.hpp"
 
-#include "../../../library/data_structures/persistent_seg_trees/distinct_query.hpp"
+#include "../../../library/data_structures/seg_tree_uncommon/distinct_query.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "bit.hpp"
+#include "../bit.hpp"
 /**
  * range update, point query
  */
