@@ -16,14 +16,14 @@ on:
     - cron:  '0 7 * * *'
 
 jobs:
-  astyle_cppcheck:
+  remove_all_tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: remove randomly generated tests
+    - name: remove all tests
       run: |
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         git rm .verify-helper/timestamps.remote.json
-        git commit --message "removing randomly generated tests to rerun them"
+        git commit --message "removing .verify-helper/timestamps.remote.json file to rerun all tests"
         git push
