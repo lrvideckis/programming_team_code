@@ -19,7 +19,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
             cur_d[d]++;
             auto cnt = 0LL;
             if (k - d < ssize(pre_d)) cnt += pre_d[k - d];
-            for (auto v : adj_removed_edges[u])
+            for (int v : adj_removed_edges[u])
                 if (v != p)
                     cnt += self(self, v, u, d + 1);
             num_paths[u] += cnt;
@@ -32,7 +32,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
                 pre_d[i] += cur_d[i], cur_d[i] = 0;
             return cnt;
         };
-        for (auto child : adj_removed_edges[cent])
+        for (int child : adj_removed_edges[cent])
             num_paths[cent] += dfs_child(child);
         pre_d = cur_d = {0};
         for_each(rbegin(adj_removed_edges[cent]), rend(adj_removed_edges[cent]), dfs_child);

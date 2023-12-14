@@ -10,7 +10,7 @@
  * @space this function allocates/returns a O(n * m) vector
  */
 vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
-    auto n = ssize(grid), m = ssize(grid[0]);
+    int n = int(ssize(grid)), m = int(ssize(grid[0]));
     vector cnt(n + 1, vector(m + 1, 0));
     vector<int> h(m);
     for (const auto& row : grid) {
@@ -27,9 +27,9 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
     }
     for (int i = 1; i <= n; i++)
         for (int k = 0; k < 2; k++)
-            for (auto j = m - 1; j >= 1; j--)
+            for (int j = m - 1; j >= 1; j--)
                 cnt[i][j] += cnt[i][j + 1];
-    for (auto i = n - 1; i >= 1; i--)
+    for (int i = n - 1; i >= 1; i--)
         for (int j = 1; j <= m; j++)
             cnt[i][j] += cnt[i + 1][j];
     return cnt;

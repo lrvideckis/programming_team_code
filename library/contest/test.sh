@@ -1,5 +1,5 @@
-#see: https://github.com/Errichto/youtube/blob/master/testing/s.sh
-#usage:
+# see: https://github.com/Errichto/youtube/blob/master/testing/s.sh
+# usage:
 #	chmod +x test.sh
 #	./test.sh
 

@@ -7,12 +7,12 @@
  *     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
  *
  *     //to loop over each *unique* bcc containing a node u:
- *     for (auto bccid : bvt[u]) {
+ *     for (int bccid : bvt[u]) {
  *         bccid -= n;
  *     }
  *
  *     //to loop over each *unique* node inside a bcc:
- *     for (auto u : bvt[bccid + n]) {}
+ *     for (int u : bvt[bccid + n]) {}
  * @endcode
  *
  * [0, n) are original nodes
@@ -26,7 +26,7 @@
  * returns `bvt` vector which is O(n)
  */
 vector<vector<int>> block_vertex_tree(const vector<vector<array<int, 2>>>& adj, const cut_info& cc) {
-    auto n = ssize(adj);
+    int n = int(ssize(adj));
     vector<vector<int>> bvt(n + cc.num_bccs);
     vector<bool> vis(cc.num_bccs);
     for (int i = 0; i < n; i++) {
@@ -34,11 +34,11 @@ vector<vector<int>> block_vertex_tree(const vector<vector<array<int, 2>>>& adj, 
             int bccid = cc.bcc_id[e_id];
             if (!vis[bccid]) {
                 vis[bccid] = 1;
-                bvt[i].push_back(bccid + int(n));
+                bvt[i].push_back(bccid + n);
                 bvt[bccid + n].push_back(i);
             }
         }
-        for (auto bccid : bvt[i]) vis[bccid - n] = 0;
+        for (int bccid : bvt[i]) vis[bccid - n] = 0;
     }
     return bvt;
 }

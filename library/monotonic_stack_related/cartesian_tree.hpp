@@ -44,14 +44,14 @@ struct cart_tree {
  * @space this function allocates/returns cart_tree struct which is O(n)
  */
 template <class T, class F> cart_tree get_cart_tree(const vector<T>& a, F cmp) {
-    auto n = ssize(a);
+    int n = int(ssize(a));
     auto [le, ri] = mono_range(a, cmp);
     vector<int> to_extrema(n);
-    for (auto i = n - 1; i >= 0; i--)
-        to_extrema[i] = (ri[i] < n && a[i] == a[ri[i]]) ? to_extrema[ri[i]] : int(i);
+    for (int i = n - 1; i >= 0; i--)
+        to_extrema[i] = (ri[i] < n && a[i] == a[ri[i]]) ? to_extrema[ri[i]] : i;
     vector<vector<int>> adj(n);
     int root = -1;
-    for (auto i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
         if (le[i] == -1 && ri[i] == n) root = i;
         else if (to_extrema[i] == i) {
             bool le_par = (le[i] != -1 && (ri[i] == n || cmp(a[ri[i]], a[le[i]])));

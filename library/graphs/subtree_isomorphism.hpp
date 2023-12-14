@@ -27,7 +27,7 @@ iso_info subtree_iso(const vector<vector<int>>& adj) {
     auto dfs = [&](auto&& self, int u, int p) -> int {
         vector<int> ch_ids;
         ch_ids.reserve(ssize(adj[u]));
-        for (auto v : adj[u])
+        for (int v : adj[u])
             if (v != p)
                 ch_ids.push_back(self(self, v, u));
         sort(begin(ch_ids), end(ch_ids));

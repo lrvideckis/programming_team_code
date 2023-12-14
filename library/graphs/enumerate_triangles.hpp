@@ -24,12 +24,12 @@ template <class F> void enumerate_triangles(const vector<array<int, 2>>& edges, 
     }
     vector<bool> seen(n);
     for (auto [u, v] : edges) {
-        for (auto w : adj[u])
+        for (int w : adj[u])
             seen[w] = 1;
-        for (auto w : adj[v])
+        for (int w : adj[v])
             if (seen[w])
                 f(u, v, w);
-        for (auto w : adj[u])
+        for (int w : adj[u])
             seen[w] = 0;
     }
 }

@@ -17,7 +17,7 @@ struct trie {
     trie() : t(1) {}
     void insert(const string& s) {
         int u = 0;
-        for (auto ch : s) {
+        for (char ch : s) {
             int v = ch - mn;
             if (t[u].next[v] == -1) {
                 t[u].next[v] = int(ssize(t));
@@ -29,7 +29,7 @@ struct trie {
     }
     int find(const string& s) {
         int u = 0;
-        for (auto ch : s) {
+        for (char ch : s) {
             int v = ch - mn;
             if (t[u].next[v] == -1) return 0;
             u = t[u].next[v];

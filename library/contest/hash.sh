@@ -1,7 +1,7 @@
 # Don't type comments nor #include "..."
 # Do type asserts
 
-#usage:
+# usage:
 #	chmod +x hash.sh
 #	cat a.cpp | ./hash.sh
 # or just copy this command:

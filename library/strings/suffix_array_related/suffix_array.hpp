@@ -39,17 +39,17 @@ template <class T> array<vector<int>, 2> get_sa(const T& s, int max_val) {
     auto n = ssize(s);
     vector<int> sa(n), sa_inv(begin(s), end(s)), tmp(n);
     iota(begin(sa), end(sa), 0);
-    for (auto ln = 0; ln < n; ln = max(1, 2 * ln)) {
+    for (int ln = 0; ln < n; ln = max(1, 2 * ln)) {
         iota(begin(tmp), begin(tmp) + ln, n - ln);
         copy_if(begin(sa), end(sa), begin(tmp) + ln, [&](int& val) {return (val -= ln) >= 0;});
         vector<int> freq(max_val);
-        for (auto val : sa_inv) freq[val]++;
+        for (int val : sa_inv) freq[val]++;
         partial_sum(begin(freq), end(freq), begin(freq));
         for_each(rbegin(tmp), rend(tmp), [&](int t) {sa[--freq[sa_inv[t]]] = t;});
         swap(sa_inv, tmp);
         max_val = 1, sa_inv[sa[0]] = 0;
         auto prev_inv = [&](int i) {return pair(tmp[i], i + ln < n ? tmp[i + ln] : -1);};
-        for (auto i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             max_val += prev_inv(sa[i - 1]) != prev_inv(sa[i]);
             sa_inv[sa[i]] = max_val - 1;
         }

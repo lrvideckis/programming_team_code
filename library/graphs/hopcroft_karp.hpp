@@ -52,7 +52,7 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
             int u = q.front();
             q.pop();
             mvc_l[u] = 0;
-            for (auto v : adj[u]) {
+            for (int v : adj[u]) {
                 mvc_r[v] = 1;
                 int w = r_to_l[v];
                 if (w == -1) found = 1;
@@ -64,7 +64,7 @@ match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
         }
         if (!found) return {size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r};
         auto dfs = [&](auto&& self, int u) -> bool {
-            for (auto v : adj[u]) {
+            for (int v : adj[u]) {
                 int w = r_to_l[v];
                 if (w == -1 || (level[u] + 1 == level[w] && self(self, w))) {
                     l_to_r[u] = v;

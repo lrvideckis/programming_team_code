@@ -30,10 +30,10 @@ template <class T> struct lcp_query {
      * @space O(1)
      */
     inline int get_lcp(int i1, int i2) {
-        auto n = ssize(sa);
+        int n = int(ssize(sa));
         if (i1 > i2) swap(i1, i2);
         assert(0 <= i1 && i2 <= n);
-        if (i1 == i2 || i2 == n) return int(n) - i2;
+        if (i1 == i2 || i2 == n) return n - i2;
         auto [le, ri] = minmax(sa_inv[i1], sa_inv[i2]);
         return rmq.query(le, ri);
     }

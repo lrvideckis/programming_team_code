@@ -32,7 +32,7 @@ scc_info get_sccs(const vector<vector<int>>& adj) {
     auto dfs = [&](auto&& self, int u) -> int {
         int low = tin[u] = timer++;
         node_stack.push_back(u);
-        for (auto v : adj[u])
+        for (int v : adj[u])
             if (scc_id[v] < 0)
                 low = min(low, tin[v] ? tin[v] : self(self, v));
         if (tin[u] == low) {

@@ -25,7 +25,7 @@ template <class F> struct centroid {
     }
     void calc_sz(int u, int p) {
         sub_sz[u] = 1;
-        for (auto v : adj[u]) {
+        for (int v : adj[u]) {
             if (v == p) continue;
             calc_sz(v, u);
             sub_sz[u] += sub_sz[v];
@@ -41,7 +41,7 @@ template <class F> struct centroid {
             p = u, u = *big_ch;
         }
         f(adj, u);
-        for (auto v : adj[u]) {
+        for (int v : adj[u]) {
             iter_swap(find(begin(adj[v]), end(adj[v]), u), rbegin(adj[v]));
             adj[v].pop_back();
             dfs(v);

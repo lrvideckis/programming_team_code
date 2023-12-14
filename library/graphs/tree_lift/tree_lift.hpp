@@ -19,7 +19,7 @@ struct tree_lift {
     }
     void dfs(const vector<vector<int>>& adj, int u) {
         int jmp = (d[u] + d[j[j[u]]] == 2 * d[j[u]]) ? j[j[u]] : u;
-        for (auto v : adj[u])
+        for (int v : adj[u])
             if (v != p[u])
                 d[v] = d[p[v] = u] + 1, j[v] = jmp, dfs(adj, v);
     }
