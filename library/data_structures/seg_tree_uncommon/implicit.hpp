@@ -2,7 +2,6 @@
 #pragma once
 /**
  * @code{.cpp}
- *     //example initialization:
  *     implicit_seg_tree<10'000'000> ist(le, ri);
  * @endcode
  */

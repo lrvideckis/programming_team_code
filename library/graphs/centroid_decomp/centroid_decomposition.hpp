@@ -2,7 +2,6 @@
 #pragma once
 /**
  * @code{.cpp}
- *     //example usage
  *     centroid(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
  *     });
  * @endcode
@@ -25,11 +24,9 @@ template <class F> struct centroid {
     }
     void calc_sz(int u, int p) {
         sub_sz[u] = 1;
-        for (int v : adj[u]) {
-            if (v == p) continue;
-            calc_sz(v, u);
-            sub_sz[u] += sub_sz[v];
-        }
+        for (int v : adj[u])
+            if (v != p)
+                calc_sz(v, u), sub_sz[u] += sub_sz[v];
     }
     void dfs(int u) {
         calc_sz(u, -1);

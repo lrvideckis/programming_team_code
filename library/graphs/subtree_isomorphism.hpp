@@ -13,7 +13,6 @@ struct iso_info {
 };
 /**
  * @code{.cpp}
- *     //example usage
  *     auto [num_distinct_subtrees, iso_id] = subtree_iso(adj);
  * @endcode
  * @param adj rooted forest (rooted or unrooted)

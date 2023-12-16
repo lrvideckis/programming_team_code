@@ -14,9 +14,7 @@ struct scc_info {
 };
 /**
  * @see https://github.com/kth-competitive-programming /kactl/blob/main/content/graph/SCC.h
- *
  * @code{.cpp}
- *     //example usage
  *     auto [num_sccs, scc_id] = get_sccs(adj);
  * @endcode
  * @param adj directed, unweighted graph

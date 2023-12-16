@@ -20,9 +20,9 @@ constParameter:../library/data_structures/uncommon/deque_with_op.hpp:106
 constParameter:../library/data_structures/uncommon/deque_with_op.hpp:121
 constParameter:../library/data_structures/uncommon/priority_queue_of_updates.hpp:42
 constParameter:../library/math/matrix_related/row_reduce.hpp:20
-unusedScopedObject:../library/graphs/count_paths_per_length.hpp:14
+unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_length.hpp:14
 unusedScopedObject:library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp:22
-unusedScopedObject:../library/graphs/count_paths_per_node.hpp:14
+unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_node.hpp:14
 knownConditionTrueFalse:../library/math/n_choose_k/choose_lucas.hpp:13
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
 arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:17
