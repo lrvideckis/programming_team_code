@@ -1,13 +1,13 @@
 /** @file */
 #pragma once
-mt19937 rng((unsigned int)chrono::steady_clock::now().time_since_epoch().count());
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 /**
  * @see https://codeforces.com/blog/entry/61675
  * @code{.cpp}
  *     unsigned int x = rng();
  *
  *     // 64-bit rng
- *     mt19937_64 rng((unsigned int)chrono::steady_clock::now().time_since_epoch().count());
+ *     mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
  *     unsigned long long x = rng();
  *
  *     // fixed seed for debugging
