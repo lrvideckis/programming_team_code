@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 #include "../../../kactl/content/numerical/FastFourierTransform.h"
-#include "centroid_decomposition.hpp"
+#include "centroid_decomp.hpp"
 /**
  * @param adj unrooted, connected forest
  * @returns array `num_paths` where `num_paths[i]` = # of paths in tree with `i`

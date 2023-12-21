@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "centroid_decomposition.hpp"
+#include "centroid_decomp.hpp"
 /**
  * @param adj unrooted, connected forest
  * @param k number of edges
