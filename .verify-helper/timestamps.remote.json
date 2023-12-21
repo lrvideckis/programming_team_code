@@ -35,6 +35,7 @@
 "tests/library_checker_aizu_tests/flow/hungarian.test.cpp": "2023-10-26 06:56:49 -0700",
 "tests/library_checker_aizu_tests/flow/min_cost_max_flow.test.cpp": "2023-10-31 12:30:19 -0700",
 "tests/library_checker_aizu_tests/graphs/biconnected_components.test.cpp": "2023-12-13 22:45:54 -0800",
+"tests/library_checker_aizu_tests/graphs/centroid_path_dist.test.cpp": "2023-12-21 05:54:57 -0800",
 "tests/library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp": "2023-12-21 03:31:55 -0800",
 "tests/library_checker_aizu_tests/graphs/dijkstra.test.cpp": "2023-10-26 06:56:49 -0700",
 "tests/library_checker_aizu_tests/graphs/directed_cycle.test.cpp": "2023-12-16 05:20:49 -0800",
