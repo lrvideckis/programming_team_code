@@ -24,6 +24,7 @@ unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_length.hpp:
 unusedScopedObject:library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp:22
 unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_node.hpp:14
 unusedScopedObject:library_checker_aizu_tests/graphs/centroid_path_dist.test.cpp:28
+unusedScopedObject:../library/graphs/edge_centroid_decomp/count_paths_per_length.hpp:15
 knownConditionTrueFalse:../library/math/n_choose_k/choose_lucas.hpp:13
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
 arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:17
