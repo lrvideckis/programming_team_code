@@ -26,6 +26,23 @@ int main() {
     vector<vector<array<int, 2>>> decomp_info(n + n);
     vector<bool> seen_cent(n + n);
     centroid(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+        {
+            auto dfs = [&](auto&& self, int u, int p) -> int {
+                int sub_size = 1;
+                for (int v : adj_removed_edges[u])
+                    if (v != p)
+                        sub_size += self(self, v, u);
+                return sub_size;
+            };
+            int sz_decomp = dfs(dfs, cent, -1);
+            int sum = 1;
+            for (int u : adj_removed_edges[cent]) {
+                int sz_subtree = dfs(dfs, u, cent);
+                sum += sz_subtree;
+                assert(1 <= sz_subtree && 2 * sz_subtree <= sz_decomp);
+            }
+            assert(sum == sz_decomp);
+        }
         assert(!seen_cent[cent]);
         seen_cent[cent] = 1;
         auto dfs = [&](auto&& self, int u, int p, int dist) -> void {
