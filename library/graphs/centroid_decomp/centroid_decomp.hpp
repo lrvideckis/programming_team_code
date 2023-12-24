@@ -11,8 +11,7 @@ template <class F> struct centroid {
     F f;
     vector<int> sub_sz;
     /**
-     * @param a_adj unweighted undirected forest
-     * @param a_f called on centroid of each decomposition
+     * @param a_adj,a_f undirected forest and callback
      * @time O(n log n)
      * @space `adj` and `sub_sz` arrays take O(n); recursion stack for `dfs` is
      * O(log n); recursion stack for `calc_sz` is O(n)
