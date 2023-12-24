@@ -43,11 +43,11 @@ struct wavelet_tree_updates {
     }
     void build(vector<pair<int, bool>>& cpy, int le, int ri, int tl, int tr, int u) {
         vector<bool> bools(ri - le);
-        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), [](auto p) {return p.second;});
+        transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), [](auto & p) {return p.second;});
         bool_bits[u] = bool_bit(bools);
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        auto low = [&](auto p) -> bool {return p.first < tm;};
+        auto low = [&](auto & p) -> bool {return p.first < tm;};
         transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), low);
         bool_presums[u] = bool_presum(bools);
         int mi = int(stable_partition(begin(cpy) + le, begin(cpy) + ri, low) - begin(cpy));
