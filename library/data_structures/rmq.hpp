@@ -4,7 +4,7 @@
  * @code{.cpp}
  *     vector<long long> a;
  *     RMQ rmq(a, ranges::min); // -std=c++20
- *     RMQ rmq(a, [&](auto x, auto y) { return min(x, y); });
+ *     RMQ rmq(a, [&](auto& x, auto& y) { return min(x, y); });
  * @endcode
  */
 //NOLINTNEXTLINE(readability-identifier-naming)

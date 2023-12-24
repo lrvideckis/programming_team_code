@@ -27,7 +27,7 @@ struct merge_sort_tree_updates {
      * @space O(n + (n log n) / 64) for `bool_presums` vector
      *        O(n + (n log n) / 64) for `bool_bits` vector
      */
-    merge_sort_tree_updates(const vector<int>& a, const vector<bool>& active) : n(int(ssize(a))), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
+    merge_sort_tree_updates(const vector<int>& a, const vector<bool>& active) : n(ssize(a)), sorted(n), perm(n), bool_presums(n, vector<bool>()), bool_bits(2 * n, vector<bool>()) {
         assert(ssize(active) == n);
         if (!n) return;
         vector<pair<int, bool>> cpy(n);
@@ -47,11 +47,11 @@ struct merge_sort_tree_updates {
         build(a, active, cpy, tl, tm, 2 * u);
         build(a, active, cpy, tm, tr, 2 * u + 1);
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
-        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto i, auto j) {return a[i.first] < a[j.first];});
+        inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr, [&](auto & i, auto & j) {return a[i.first] < a[j.first];});
         vector<bool> bools(tr - tl);
-        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto & val) {return val.second;});
         bool_presums[u] = bool_presum(bools);
-        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [&](auto val) {return active[val.first];});
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [&](auto & val) {return active[val.first];});
         bool_bits[u] = bool_bit(bools);
     }
     /**

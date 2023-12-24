@@ -31,9 +31,9 @@ template <class T, class F> struct linear_rmq {
      * @time O(n)
      * @space `a`, `mask`, and `idx` vectors are all O(n)
      */
-    linear_rmq(const vector<T>& a_a, F a_cmp) : n(int(ssize(a_a))), a(a_a), cmp(a_cmp) {
+    linear_rmq(const vector<T>& a_a, F a_cmp) : n(ssize(a_a)), a(a_a), cmp(a_cmp) {
         for (int sz = n; sz >= 2; sz = ((sz + 63) >> 6)) {
-            int level = int(ssize(idx));
+            int level = ssize(idx);
             mask.emplace_back(sz + 1);
             idx.emplace_back(sz);
             calc(level, 0, sz);

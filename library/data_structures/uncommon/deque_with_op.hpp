@@ -32,7 +32,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    deq(const vector<T>& a, F a_op) : op(a_op) {rebuild(a, int(ssize(a)) / 2);}
+    deq(const vector<T>& a, F a_op) : op(a_op) {rebuild(a, ssize(a) / 2);}
     /**
      * @returns deq[0] op deq[1] op ... op deq.back()
      * @time O(1)
@@ -49,7 +49,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-    inline int size() {return int(ssize(le) + ssize(ri));}
+    inline int size() {return ssize(le) + ssize(ri);}
     /**
      * @returns deq[0]
      * @time O(1)
@@ -104,7 +104,7 @@ template <class T, class F> struct deq {
         if (empty(le)) {
             vector<T> a(ssize(ri));
             transform(begin(ri), end(ri), begin(a), [](auto & x) {return x[0];});
-            rebuild(a, (int(ssize(a)) + 1) / 2);
+            rebuild(a, (ssize(a) + 1) / 2);
         }
         assert(!empty(le));
         le.pop_back();
@@ -119,7 +119,7 @@ template <class T, class F> struct deq {
         if (empty(ri)) {
             vector<T> a(ssize(le));
             transform(begin(le), end(le), rbegin(a), [](auto & x) {return x[0];});
-            rebuild(a, int(ssize(a)) / 2);
+            rebuild(a, ssize(a) / 2);
         }
         assert(!empty(ri));
         ri.pop_back();

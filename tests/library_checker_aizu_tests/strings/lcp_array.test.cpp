@@ -17,7 +17,7 @@ int main() {
     }
     string s;
     cin >> s;
-    auto n = ssize(s);
+    int n = ssize(s);
     auto [sa, sa_inv] = get_sa(s, 256);
     vector<int> lcp = get_lcp_array(sa, sa_inv, s);
     assert(ssize(lcp) == n - 1);

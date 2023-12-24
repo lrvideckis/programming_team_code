@@ -8,7 +8,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    int n = int(ssize(s));
+    int n = ssize(s);
     vector<int> man(manacher(s)), longest(longest_from_index(man));
     {
         vector<pair<int, int>> tests;

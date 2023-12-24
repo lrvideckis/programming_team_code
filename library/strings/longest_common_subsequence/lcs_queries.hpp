@@ -13,7 +13,7 @@
  * @space a single O(n * m + q) vector `qs` stores the queries. Besides this only O(m + q) is allocated
  */
 template <class T> vector<int> lcs_queries(const T& s, const T& t, const vector<array<int, 3>>& queries) {
-    auto n = ssize(s), m = ssize(t), q = ssize(queries);
+    int n = ssize(s), m = ssize(t), q = ssize(queries);
     vector qs(n, vector(m, vector<array<int, 2>>()));
     for (int i = 0; i < q; i++) {
         auto [s_ri, t_le, t_ri] = queries[i];

@@ -21,7 +21,7 @@
  */
 vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, const vector<int>& scc_id) {
     if (num_sccs == 1) return {};
-    auto n = ssize(adj);
+    int n = ssize(adj);
     vector<vector<int>> scc_adj(num_sccs);
     vector<bool> zero_in(num_sccs, 1);
     for (int i = 0; i < n; i++)

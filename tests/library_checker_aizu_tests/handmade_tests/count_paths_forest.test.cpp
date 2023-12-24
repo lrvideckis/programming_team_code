@@ -11,7 +11,7 @@
 
 vector<vector<long long>> naive(const vector<vector<int>>& adj, dsu_restorable& dsu) {
     tree_lift tl(adj);
-    auto n = ssize(adj);
+    int n = ssize(adj);
     vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
     for (int u = 0; u < n; u++) {
         for (int v = u; v < n; v++) {

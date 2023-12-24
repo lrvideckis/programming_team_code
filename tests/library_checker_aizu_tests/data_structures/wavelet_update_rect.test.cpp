@@ -1,6 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_frequency"
-//TODO: figure out why debug mode causes TLE
-#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp"
@@ -15,8 +13,16 @@ int main() {
     vector<int> sorted(arr);
     stable_sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-    for (int& val : arr)
-        val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted)) - 30;
+    for (int& val : arr) {
+        int le = 0, ri = ssize(sorted);
+        while (ri - le > 1) {
+            int mi = le + (ri - le) / 2;
+            if (sorted[mi] <= val) le = mi;
+            else ri = mi;
+        }
+        assert(le < ssize(arr) && sorted[le] == val);
+        val = le - 30;
+    }
     wavelet_tree_updates wtu(arr, -30, max(1, int(ssize(sorted))) - 30, vector<bool>(n, 1));
     while (q--) {
         int le, ri, x;

@@ -9,4 +9,4 @@ git submodule update
 sed --in-place '/ssize/d' library_checker_aizu_tests/template.hpp
 
 find library_checker_aizu_tests/ -type f -name "*.test.cpp" |
-	parallel g++ {} "$(tr '\n' ' ' <.config/.gcc_compile_flags)" -std=c++20
+	parallel g++ {} "$(tr '\n' ' ' <.config/.gcc_compile_flags)" -std=c++20 -Wno-conversion -Wno-narrowing

@@ -16,7 +16,7 @@ struct bool_presum {
      * @time O(n)
      * @space O(n / 64)
      */
-    bool_presum(const vector<bool>& a) : n(int(ssize(a))), mask(n / 64 + 1), presum(ssize(mask)) {
+    bool_presum(const vector<bool>& a) : n(ssize(a)), mask(n / 64 + 1), presum(ssize(mask)) {
         for (int i = 0; i < n; i++)
             mask[i >> 6] |= (uint64_t(a[i]) << (i & 63));
         for (int i = 0; i < ssize(mask) - 1; i++)

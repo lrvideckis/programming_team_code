@@ -21,7 +21,7 @@ template <class F> struct edge_cd {
      * O(log1.5 n); recursion stack for `find_cent` is O(n)
      */
     edge_cd(const vector<vector<int>>& a_adj, F a_f) : adj(a_adj), f(a_f), sub_sz(ssize(adj)) {
-        dfs(0, int(ssize(adj)));
+        dfs(0, ssize(adj));
     }
     int find_cent(int u, int p, int siz) {
         sub_sz[u] = 1;

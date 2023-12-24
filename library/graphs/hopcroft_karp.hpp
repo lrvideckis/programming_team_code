@@ -38,7 +38,7 @@ struct match_info {
  * @space this function allocates/returns `match_info` which is O(n) n = lsz + rsz
  */
 match_info hopcroft_karp(const vector<vector<int>>& adj, int rsz) {
-    int size_of_matching = 0, lsz = int(ssize(adj));
+    int size_of_matching = 0, lsz = ssize(adj);
     vector l_to_r(lsz, -1), r_to_l(rsz, -1);
     while (1) {
         queue<int> q;

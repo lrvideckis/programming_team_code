@@ -23,10 +23,10 @@ struct matrix_info {
  */
 matrix_info solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b) {
     assert(ssize(mat) == ssize(b));
-    auto n = ssize(mat), m = ssize(mat[0]);
+    int n = ssize(mat), m = ssize(mat[0]);
     for (int i = 0; i < n; i++)
         mat[i].push_back(b[i]);
-    auto [rank, det] = row_reduce(mat, int(m));
+    auto [rank, det] = row_reduce(mat, m);
     if (any_of(begin(mat) + rank, end(mat), [](auto & v) {return v.back();})) {
         return {rank, det, {}}; //no solution exists
     }

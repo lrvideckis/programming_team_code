@@ -35,5 +35,5 @@ iso_info subtree_iso(const vector<vector<int>>& adj) {
     for (int i = 0; i < ssize(adj); i++)
         if (iso_id[i] == -1)
             dfs(dfs, i, i);
-    return {int(ssize(hashes)), iso_id};
+    return {ssize(hashes), iso_id};
 }

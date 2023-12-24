@@ -37,7 +37,7 @@ template <class T> struct KMP {
             while (j > 0 && needle[j] != haystack[i]) j = pi[j - 1];
             j += (needle[j] == haystack[i]);
             if (j == ssize(needle)) {
-                matches.push_back(i - int(ssize(needle)) + 1);
+                matches.push_back(i - ssize(needle) + 1);
                 j = pi[j - 1];
             }
         }

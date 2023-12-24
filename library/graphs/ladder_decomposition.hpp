@@ -20,7 +20,7 @@ struct ladder {
      * @time O(n log n)
      * @space O(n log n) for b_tbl. Everything else is O(n)
      */
-    ladder(const vector<vector<int>>& adj) : n(int(ssize(adj))), l_tbl(n), dl(n), d(n), p(n, -1) {
+    ladder(const vector<vector<int>>& adj) : n(ssize(adj)), l_tbl(n), dl(n), d(n), p(n, -1) {
         iota(begin(dl), end(dl), 0);
         for (int i = 0; i < n; i++)
             if (p[i] == -1)
