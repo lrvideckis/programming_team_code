@@ -49,11 +49,7 @@ template <class T, class F> struct deq {
      * @time O(1)
      * @space O(1)
      */
-<<<<<<< HEAD:library/data_structures/uncommon/deque_with_op.hpp
-    inline int size() {return int(ssize(le) + ssize(ri));}
-=======
-    inline int size() const {return ssize(le) + ssize(ri);}
->>>>>>> parent of 89255fa (Gcc20 without ssize macro (#510)):library/data_structures/uncommon_data_structures/deque.hpp
+    inline int size() {return ssize(le) + ssize(ri);}
     /**
      * @returns deq[0]
      * @time O(1)
@@ -105,17 +101,10 @@ template <class T, class F> struct deq {
      */
     inline void pop_front() {
         assert(size());
-<<<<<<< HEAD:library/data_structures/uncommon/deque_with_op.hpp
         if (empty(le)) {
             vector<T> a(ssize(ri));
             transform(begin(ri), end(ri), begin(a), [](auto & x) {return x[0];});
-            rebuild(a, (int(ssize(a)) + 1) / 2);
-=======
-        if (le.empty()) {
-            vector<T> arr(ssize(ri));
-            transform(begin(ri), end(ri), begin(arr), [](const auto & x) {return x[0];});
-            rebuild(arr, (ssize(arr) + 1) / 2);
->>>>>>> parent of 89255fa (Gcc20 without ssize macro (#510)):library/data_structures/uncommon_data_structures/deque.hpp
+            rebuild(a, (ssize(a) + 1) / 2);
         }
         assert(!empty(le));
         le.pop_back();
@@ -127,17 +116,10 @@ template <class T, class F> struct deq {
      */
     inline void pop_back() {
         assert(size());
-<<<<<<< HEAD:library/data_structures/uncommon/deque_with_op.hpp
         if (empty(ri)) {
             vector<T> a(ssize(le));
             transform(begin(le), end(le), rbegin(a), [](auto & x) {return x[0];});
-            rebuild(a, int(ssize(a)) / 2);
-=======
-        if (ri.empty()) {
-            vector<T> arr(ssize(le));
-            transform(begin(le), end(le), rbegin(arr), [](const auto & x) {return x[0];});
-            rebuild(arr, ssize(arr) / 2);
->>>>>>> parent of 89255fa (Gcc20 without ssize macro (#510)):library/data_structures/uncommon_data_structures/deque.hpp
+            rebuild(a, ssize(a) / 2);
         }
         assert(!empty(ri));
         ri.pop_back();
