@@ -53,7 +53,7 @@ template <class T> struct contour_sum {
         }
         for (auto [decomp, d, side] : info[u]) {
             auto& bit = bits[decomp][!side];
-            int my_l = clamp(le - d, 0, ssize(bit.s)), my_r = clamp(ri - d, 0, ssize(bit.s));
+            int my_l = clamp(le - d, 1, ssize(bit.s)), my_r = clamp(ri - d, 1, ssize(bit.s));
             sum += bit.sum(my_l, my_r);
         }
         return sum;
