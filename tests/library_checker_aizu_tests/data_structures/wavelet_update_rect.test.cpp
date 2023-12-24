@@ -27,11 +27,16 @@ int main() {
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
-        auto it = lower_bound(begin(sorted), end(sorted), x);
-        if (it == end(sorted) || (*it) != x)
+        int start = 0, end = ssize(sorted);
+        while (end - start > 1) {
+            int mi = start + (end - start) / 2;
+            if (sorted[mi] <= x) start = mi;
+            else end = mi;
+        }
+        if (start == ssize(sorted) || sorted[start] != x)
             cout << 0 << '\n';
         else {
-            int idx = int(it - begin(sorted)) - 30;
+            int idx = start - 30;
             auto curr = wtu.rect_count(le, ri, idx, idx);
             assert(curr == 0);
             cout << wtu.rect_count(le, ri, idx, idx + 1) << '\n';
