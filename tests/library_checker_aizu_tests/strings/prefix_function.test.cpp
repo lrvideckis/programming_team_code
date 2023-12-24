@@ -7,7 +7,7 @@ int main() {
     cin.tie(0)->sync_with_stdio(0);
     string s;
     cin >> s;
-    auto n = ssize(s);
+    int n = ssize(s);
     vector<int> pi = prefix_function(s);
     //prefix -> z func conversion
     //source: https://codeforces.com/blog/entry/9612#comment-217621
@@ -22,7 +22,7 @@ int main() {
             z[i + j] = v;
         i += j;
     }
-    z[0] = int(n);
+    z[0] = n;
     for (int i = 0; i < n; i++)
         cout << z[i] << " ";
     cout << '\n';

@@ -36,7 +36,7 @@ struct PST {
     int update_impl(int idx, long long change, int tl, int tr, int u) {
         if (tr - tl == 1) {
             tree.emplace_back(tree[u].sum + change, 0, 0);
-            return int(ssize(tree)) - 1;
+            return ssize(tree) - 1;
         }
         int tm = tl + (tr - tl) / 2;
         int lch = tree[u].lch;
@@ -46,7 +46,7 @@ struct PST {
         else
             rch = update_impl(idx, change, tm, tr, rch);
         tree.emplace_back(tree[lch].sum + tree[rch].sum, lch, rch);
-        return int(ssize(tree)) - 1;
+        return ssize(tree) - 1;
     }
     /**
      * @param le, ri defines range [le, ri)

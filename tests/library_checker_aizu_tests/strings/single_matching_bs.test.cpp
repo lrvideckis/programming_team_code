@@ -16,19 +16,19 @@ int main() {
     auto [sa_le, sa_ri, str_le, str_ri] = find_str(s, sa, t);
     int str_len = str_ri - str_le;
     assert(s.substr(str_le, str_len) == t.substr(0, str_len));
-    assert(str_len <= int(ssize(t)));
-    assert(str_len == int(ssize(t)) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
+    assert(str_len <= ssize(t));
+    assert(str_len == ssize(t) || str_ri == ssize(s) || t[str_len] != s[str_ri]);
     assert((sa_le < sa_ri) == (str_len == ssize(t)));
     vector<int> matches(begin(sa) + sa_le, begin(sa) + sa_ri);
     sort(begin(matches), end(matches));
     {
         //test find_substrs_concated
         string both = s + '$' + t;
-        int t_start = int(ssize(s)) + 1;
+        int t_start = ssize(s) + 1;
         lcp_query lq_both(both, 256);
-        vector<int> splits = {0, int(ssize(t))};
+        vector<int> splits = {0, ssize(t)};
         for (int num_splits = get_rand(0, 4); num_splits--;)
-            splits.push_back(get_rand(0, int(ssize(t))));
+            splits.push_back(get_rand(0, ssize(t)));
         sort(begin(splits), end(splits));
         vector<array<int, 2>> subs;
         for (int i = 1; i < ssize(splits); i++)

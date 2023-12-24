@@ -25,7 +25,7 @@ struct seg_tree {
     int n, pw2;
     vector<long long> tree, lazy;
     seg_tree(int a_n) : n(a_n), pw2(n ? 1 << __lg(2 * n - 1) : 0), tree(2 * n), lazy(n) {}
-    seg_tree(const vector<int>& a) : seg_tree(int(ssize(a))) {
+    seg_tree(const vector<int>& a) : seg_tree(ssize(a)) {
         for (int i = 0; i < n; i++) tree[(i + pw2) % n + n] = a[i];
         for (int i = n - 1; i >= 1; i--) tree[i] = op(tree[2 * i], tree[2 * i + 1]);
     }

@@ -36,7 +36,7 @@
  * vectors, but also allocates a O(max_val) vector `freq` temporarily
  */
 template <class T> array<vector<int>, 2> get_sa(const T& s, int max_val) {
-    auto n = ssize(s);
+    int n = ssize(s);
     vector<int> sa(n), sa_inv(begin(s), end(s)), tmp(n);
     iota(begin(sa), end(sa), 0);
     for (int ln = 0; ln < n; ln = max(1, 2 * ln)) {

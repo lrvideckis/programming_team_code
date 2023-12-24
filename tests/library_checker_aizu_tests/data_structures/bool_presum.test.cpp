@@ -4,7 +4,7 @@
 #include "../../../library/data_structures/wavelet_merge/bool_presum.hpp"
 
 vector<bool_presum> init_presums(const vector<int>& arr) {
-    const auto mx_n = ssize(arr);
+    const int mx_n = ssize(arr);
     vector<bool_presum> presums;
     for (int bit = 0; bit < 30; bit++) {
         vector<bool> the_bools(mx_n);

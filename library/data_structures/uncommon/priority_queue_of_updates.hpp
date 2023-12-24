@@ -33,7 +33,7 @@ template <class DS, class... ARGS> struct pq_updates {
     void pop_update() {
         assert(!empty(upd_st));
         vector<upd> extra;
-        int idx = int(ssize(upd_st)) - 1, lowest_pri = INT_MAX;
+        int idx = ssize(upd_st) - 1, lowest_pri = INT_MAX;
         for (auto it = rbegin(mp); 2 * ssize(extra) < ssize(upd_st) - idx; it++) {
             auto [pri, idx_sk] = *it;
             extra.push_back(upd_st[idx_sk]);
