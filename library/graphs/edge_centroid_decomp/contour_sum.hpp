@@ -2,6 +2,12 @@
 #pragma once
 #include "../../data_structures/bit.hpp"
 #include "edge_cd.hpp"
+/**
+ * @see https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree
+ *
+ * Note for edge centroid decomp you need to special case single-edge paths.
+ * I do this by BIT over pre order BFS traversal
+ */
 template <class T> struct contour_sum {
     vector<vector<int>> adj;
     int n;
@@ -10,6 +16,12 @@ template <class T> struct contour_sum {
     vector<array<BIT<T>, 2>> bits;
     vector<int> in, in_ch, par;
     BIT<T> order;
+    /**
+     * @param a_adj unrooted, undirected tree
+     * @param a_a a_a[u] = initial value for node u
+     * @time O(n log1.5 n)
+     * @space O(n log1.5 n) for `info` and `bits`
+     */
     contour_sum(const vector<vector<int>>& a_adj, const vector<T>& a_a) : adj(a_adj), n(ssize(a_a)), a(a_a), info(n), in(n), in_ch(n, -1), par(n) {
         edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
             vector<vector<T>> sum_val(2, vector<T>(1));
@@ -38,12 +50,25 @@ template <class T> struct contour_sum {
         }
         order = {init};
     }
+    /**
+     * @param u node
+     * @param delta value to add to node u's value
+     * @time O(log1.5(n) * log2(n))
+     * @space O(1)
+     */
     void update(int u, T delta) {
         a[u] += delta;
         order.update(in[u], delta);
         for (auto [decomp, d, side] : info[u])
             bits[decomp][side].update(d, delta);
     }
+    /**
+     * @param u node
+     * @param le,ri defines range [le, ri)
+     * @returns sum of node v's value over all v such that le <= dist_edges(u, v) < ri
+     * @time O(log1.5(n) * log2(n))
+     * @space O(1)
+     */
     T query(int u, int le, int ri) {
         T sum = 0;
         if (le == 0) sum += a[u];
