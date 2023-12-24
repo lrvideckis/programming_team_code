@@ -2,7 +2,7 @@
 #pragma once
 /**
  * @code{.cpp}
- *     centroid(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent) -> void {
+ *     centroid(adj, [&](const vector<vector<int>>& adj_cd, int cent) -> void {
  *     });
  * @endcode
  */

@@ -15,17 +15,17 @@ int main() {
         adj[v].push_back(u);
     }
     {
-        edge_cd(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent, int split) -> void {
+        edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
             auto dfs = [&](auto&& self, int u, int p) -> int {
                 int siz = 1;
-                for (int v : adj_removed_edges[u])
+                for (int v : adj_cd[u])
                     if (v != p) siz += self(self, v, u);
                 return siz;
             };
             int sz_all = dfs(dfs, cent, -1);
             array<int, 2> cnts = {0, 0};
-            for (int i = 0; i < ssize(adj_removed_edges[cent]); i++) {
-                int sz_subtree = dfs(dfs, adj_removed_edges[cent][i], cent);
+            for (int i = 0; i < ssize(adj_cd[cent]); i++) {
+                int sz_subtree = dfs(dfs, adj_cd[cent][i], cent);
                 assert(2 * sz_subtree <= sz_all);
                 cnts[i < split] += sz_subtree;
             }

@@ -3,9 +3,10 @@
 /**
  * @see https://codeforces.com/blog/entry/104997 https://codeforces.com/blog/entry/120446
  * @code{.cpp}
- *     edge_cd(adj, [&](const vector<vector<int>>& adj_removed_edges, int cent, int split) -> void {
- *         // subtrees of prefix [0, split) of adj_removed_edges[cent] is the first edge set
- *         // subtrees of suffix [split, ssize(..)) of adj_removed_edges[cent] is the second edge set
+ *     // handle single-edge paths separately
+ *     edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
+ *         // subtrees of prefix [0, split) of adj_cd[cent] are the first edge set
+ *         // subtrees of suffix [split, ssize(..)) of adj_cd[cent] are the second edge set
  *     });
  * @endcode
  */
