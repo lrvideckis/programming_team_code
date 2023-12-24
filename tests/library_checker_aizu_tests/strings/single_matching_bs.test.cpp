@@ -28,7 +28,7 @@ int main() {
         lcp_query lq_both(both, 256);
         vector<int> splits = {0, ssize(t)};
         for (int num_splits = get_rand(0, 4); num_splits--;)
-            splits.push_back(get_rand(0, ssize(t)));
+            splits.push_back(get_rand<int>(0, ssize(t)));
         sort(begin(splits), end(splits));
         vector<array<int, 2>> subs;
         for (int i = 1; i < ssize(splits); i++)

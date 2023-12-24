@@ -23,7 +23,7 @@ int main() {
         assert(le < ssize(arr) && sorted[le] == val);
         val = le - 30;
     }
-    wavelet_tree_updates wtu(arr, -30, max(1, ssize(sorted)) - 30, vector<bool>(n, 1));
+    wavelet_tree_updates wtu(arr, -30, max(1, int(ssize(sorted))) - 30, vector<bool>(n, 1));
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
