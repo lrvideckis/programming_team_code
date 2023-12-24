@@ -26,7 +26,7 @@ int main() {
         string both = s + '$' + t;
         int t_start = ssize(s) + 1;
         lcp_query lq_both(both, 256);
-        vector<int> splits = {0, ssize(t)};
+        vector<int> splits = {0, int(ssize(t))};
         for (int num_splits = get_rand(0, 4); num_splits--;)
             splits.push_back(get_rand<int>(0, ssize(t)));
         sort(begin(splits), end(splits));
