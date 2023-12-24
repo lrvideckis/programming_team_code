@@ -45,7 +45,7 @@ template <class T, class F> struct linear_rmq {
             T curr = a[blk(level, i)];
             while (st && cmp(curr, a[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
             mask[level][i] = st = ((st << 1) | 1);
-            idx[level][i] = blk(level, i + __lg(st));
+            idx[level][i] = blk(level, i + int(__lg(st)));
         }
     }
     /**
@@ -70,7 +70,7 @@ template <class T, class F> struct linear_rmq {
         for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
             if (ri - le < 64) {
                 int x = 64 - (ri - le);
-                return mn(res, blk(level, le + __lg(mask[level][le] << x) - x));
+                return mn(res, blk(level, le + int(__lg(mask[level][le] << x)) - x));
             }
             res = mn(res, mn(idx[level][le], idx[level][ri - 64]));
         }
