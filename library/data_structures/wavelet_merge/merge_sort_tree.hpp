@@ -27,7 +27,7 @@ struct merge_sort_tree {
         vector<pair<int, bool>> cpy(n);
         transform(begin(a), end(a), begin(cpy), [](int val) {return pair(val, 0);});
         build(cpy, 0, n, 1);
-        transform(begin(cpy), end(cpy), begin(sorted), [](auto val) {return val.first;});
+        transform(begin(cpy), end(cpy), begin(sorted), [](auto & val) {return val.first;});
     }
     void build(vector<pair<int, bool>>& cpy, int tl, int tr, int u) {
         if (tr - tl <= 1) return;
@@ -37,7 +37,7 @@ struct merge_sort_tree {
         for (int i = tl; i < tr; i++) cpy[i].second = i < tm;
         inplace_merge(begin(cpy) + tl, begin(cpy) + tm, begin(cpy) + tr);
         vector<bool> bools(tr - tl);
-        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto val) {return val.second;});
+        transform(begin(cpy) + tl, begin(cpy) + tr, begin(bools), [](auto & val) {return val.second;});
         bool_presums[u] = bool_presum(bools);
     }
     /**
