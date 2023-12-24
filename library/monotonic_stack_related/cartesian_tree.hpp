@@ -43,7 +43,6 @@ struct cart_tree {
  * @time O(n)
  * @space this function allocates/returns cart_tree struct which is O(n)
  */
-<<<<<<< HEAD
 template <class T, class F> cart_tree get_cart_tree(const vector<T>& a, F cmp) {
     int n = ssize(a);
     auto [le, ri] = mono_range(a, cmp);
