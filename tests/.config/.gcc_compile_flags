@@ -1,6 +1,7 @@
 -Wall
 -Wextra
 -Wunused
+-Wconversion
 -Wpedantic
 -Wshadow
 -Wlogical-op
