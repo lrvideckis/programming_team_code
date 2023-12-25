@@ -63,7 +63,8 @@ template <class T> struct contour_sum {
         if (le <= 1 && 1 < ri) sum += sum_ch[u] + (par[u] != -1 ? a[par[u]] : 0);
         for (auto [decomp, d, side] : info[u]) {
             auto& bit = bits[decomp][!side];
-            int my_l = clamp<int>(le - d, 1, ssize(bit.s)), my_r = clamp<int>(ri - d, 1, ssize(bit.s));
+            int my_l = clamp<int>(le - d, 1, ssize(bit.s));
+            int my_r = clamp<int>(ri - d, 1, ssize(bit.s));
             sum += bit.sum(my_l, my_r);
         }
         return sum;
