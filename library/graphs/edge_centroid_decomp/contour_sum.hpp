@@ -12,7 +12,7 @@ template <class T> struct contour_sum {
     vector<vector<array<int, 3>>> info;
     vector<array<BIT<T>, 2>> bits;
     /**
-     * @param a_adj unrooted, undirected tree
+     * @param adj unrooted, undirected tree
      * @param a_a a_a[u] = initial value for node u
      * @time O(n log1.5 n)
      * @space O(n log1.5 n) for `info` and `bits`
