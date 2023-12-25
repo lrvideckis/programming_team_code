@@ -6,7 +6,6 @@
  * @see https://judge.yosupo.jp/problem /vertex_add_range_contour_sum_on_tree
  */
 template <class T> struct contour_sum {
-    vector<vector<int>> adj;
     int n;
     vector<T> a, sum_ch;
     vector<int> par;
@@ -18,7 +17,7 @@ template <class T> struct contour_sum {
      * @time O(n log1.5 n)
      * @space O(n log1.5 n) for `info` and `bits`
      */
-    contour_sum(const vector<vector<int>>& a_adj, const vector<T>& a_a) : adj(a_adj), n(ssize(a_a)), a(a_a), sum_ch(n), par(n, -1), info(n) {
+    contour_sum(const vector<vector<int>>& adj, const vector<T>& a_a) : n(ssize(a_a)), a(a_a), sum_ch(n), par(n, -1), info(n) {
         edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
             vector<vector<T>> sum_val(2, vector<T>(1));
             auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
