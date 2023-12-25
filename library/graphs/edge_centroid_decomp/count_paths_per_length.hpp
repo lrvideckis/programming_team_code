@@ -12,16 +12,16 @@
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
     vector num_paths(ssize(adj), 0LL);
     num_paths[1] = ssize(adj) - 1;
-    edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
+    edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
         vector<vector<double>> cnt(2, vector<double>(1));
         auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
             if (ssize(cnt[side]) == d) cnt[side].push_back(0.0);
             cnt[side][d]++;
-            for (int v : adj_cd[u])
+            for (int v : cd_adj[u])
                 if (v != p) self(self, v, u, 1 + d, side);
         };
-        for (int i = 0; i < ssize(adj_cd[cent]); i++)
-            dfs(dfs, adj_cd[cent][i], cent, 1, i < split);
+        for (int i = 0; i < ssize(cd_adj[cent]); i++)
+            dfs(dfs, cd_adj[cent][i], cent, 1, i < split);
         vector<double> prod = conv(cnt[0], cnt[1]);
         for (int i = 0; i < ssize(prod); i++)
             num_paths[i] += llround(prod[i]);

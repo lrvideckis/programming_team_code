@@ -11,9 +11,9 @@
  */
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
     vector num_paths(ssize(adj), 0LL);
-    centroid(adj, [&](const vector<vector<int>>& adj_cd, int cent) -> void {
+    centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) -> void {
         vector<vector<double>> child_depths;
-        for (int u : adj_cd[cent]) {
+        for (int u : cd_adj[cent]) {
             child_depths.emplace_back(1, 0.0);
             for (queue<array<int, 2>> q({{u, cent}}); !empty(q);) {
                 child_depths.back().push_back(ssize(q));
@@ -21,7 +21,7 @@ vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
                 while (!empty(q)) {
                     auto [v, p] = q.front();
                     q.pop();
-                    for (int w : adj_cd[v]) {
+                    for (int w : cd_adj[v]) {
                         if (w == p) continue;
                         new_q.push({w, v});
                     }

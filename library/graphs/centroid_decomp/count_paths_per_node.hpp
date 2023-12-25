@@ -11,7 +11,7 @@
  */
 vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
     vector num_paths(ssize(adj), 0LL);
-    centroid(adj, [&](const vector<vector<int>>& adj_cd, int cent) -> void {
+    centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) -> void {
         vector pre_d{1}, cur_d{0};
         auto dfs = [&](auto&& self, int u, int p, int d) -> long long {
             if (d > k) return 0;
@@ -19,7 +19,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
             cur_d[d]++;
             auto cnt = 0LL;
             if (k - d < ssize(pre_d)) cnt += pre_d[k - d];
-            for (int v : adj_cd[u])
+            for (int v : cd_adj[u])
                 if (v != p)
                     cnt += self(self, v, u, d + 1);
             num_paths[u] += cnt;
@@ -32,10 +32,10 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
                 pre_d[i] += cur_d[i], cur_d[i] = 0;
             return cnt;
         };
-        for (int child : adj_cd[cent])
+        for (int child : cd_adj[cent])
             num_paths[cent] += dfs_child(child);
         pre_d = cur_d = {0};
-        for_each(rbegin(adj_cd[cent]), rend(adj_cd[cent]), dfs_child);
+        for_each(rbegin(cd_adj[cent]), rend(cd_adj[cent]), dfs_child);
     });
     return num_paths;
 }

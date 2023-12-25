@@ -5,9 +5,9 @@
  * @code{.cpp}
  *     // only handle paths with >=1 edge in each set
  *     // i.e. handle single-edge paths separately
- *     edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
- *         // subtrees of prefix [0, split) of adj_cd[cent] are the first edge set
- *         // subtrees of suffix [split, ssize(adj_cd[cent])) of adj_cd[cent] are the second edge set
+ *     edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
+ *         // subtrees of prefix [0, split) of cd_adj[cent] are the first edge set
+ *         // subtrees of suffix [split, ssize(cd_adj[cent])) of cd_adj[cent] are the second edge set
  *     });
  * @endcode
  */
@@ -33,7 +33,7 @@ template <class F> struct edge_cd {
                 sub_sz[u] += sub_sz[v];
             }
         if (p == -1) return u;
-        return 2 * (siz - sub_sz[u]) <= siz ? sub_sz[p] = siz - sub_sz[u], u : -1;
+        return 2 * sub_sz[u] >= siz ? sub_sz[p] = siz - sub_sz[u], u : -1;
     }
     void dfs(int u, int siz) {
         if (siz <= 2) return;
