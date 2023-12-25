@@ -1061,7 +1061,7 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          order \
                          rng \
                          bits \
-                         in_ch \
+                         sum_ch \
                          par \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories

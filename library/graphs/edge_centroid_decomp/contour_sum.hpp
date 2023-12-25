@@ -4,25 +4,21 @@
 #include "edge_cd.hpp"
 /**
  * @see https://judge.yosupo.jp/problem /vertex_add_range_contour_sum_on_tree
- *
- * Note for edge centroid decomp you need to special case single-edge paths.
- * I do this by BIT over pre order BFS traversal
  */
 template <class T> struct contour_sum {
     vector<vector<int>> adj;
     int n;
-    vector<T> a;
+    vector<T> a, sum_ch;
+    vector<int> par;
     vector<vector<array<int, 3>>> info;
     vector<array<BIT<T>, 2>> bits;
-    vector<int> in, in_ch, par;
-    BIT<T> order;
     /**
      * @param a_adj unrooted, undirected tree
      * @param a_a a_a[u] = initial value for node u
      * @time O(n log1.5 n)
      * @space O(n log1.5 n) for `info` and `bits`
      */
-    contour_sum(const vector<vector<int>>& a_adj, const vector<T>& a_a) : adj(a_adj), n(ssize(a_a)), a(a_a), info(n), in(n), in_ch(n, -1), par(n) {
+    contour_sum(const vector<vector<int>>& a_adj, const vector<T>& a_a) : adj(a_adj), n(ssize(a_a)), a(a_a), sum_ch(n), par(n, -1), info(n) {
         edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
             vector<vector<T>> sum_val(2, vector<T>(1));
             auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
@@ -36,19 +32,12 @@ template <class T> struct contour_sum {
                 dfs(dfs, adj_cd[cent][i], cent, 1, i < split);
             bits.push_back({BIT<T>(sum_val[0]), BIT<T>(sum_val[1])});
         });
-        queue<array<int, 2>> q({{0, -1}});
-        vector<T> init;
-        while (!empty(q)) {
-            auto [u, p] = q.front();
-            q.pop();
-            par[u] = p;
-            if (p != -1 && in_ch[p] == -1) in_ch[p] = ssize(init);
-            in[u] = ssize(init);
-            init.push_back(a[u]);
+        auto dfs = [&](auto&& self, int u) -> void {
             for (int v : adj[u])
-                if (v != p) q.push({v, u});
-        }
-        order = {init};
+                if (v != par[u])
+                    par[v] = u, sum_ch[u] += a[v], self(self, v);
+        };
+        dfs(dfs, 0);
     }
     /**
      * @param u node
@@ -58,7 +47,7 @@ template <class T> struct contour_sum {
      */
     void update(int u, T delta) {
         a[u] += delta;
-        order.update(in[u], delta);
+        if (par[u] != -1) sum_ch[par[u]] += delta;
         for (auto [decomp, d, side] : info[u])
             bits[decomp][side].update(d, delta);
     }
@@ -71,11 +60,8 @@ template <class T> struct contour_sum {
      */
     T query(int u, int le, int ri) {
         T sum = 0;
-        if (le == 0) sum += a[u];
-        if (le <= 1 && 1 < ri) {
-            if (par[u] != -1) sum += a[par[u]];
-            if (in_ch[u] != -1) sum += order.sum(in_ch[u], in_ch[u] + ssize(adj[u]) - (par[u] != -1));
-        }
+        if (le <= 0 && 0 < ri) sum += a[u];
+        if (le <= 1 && 1 < ri) sum += sum_ch[u] + (par[u] != -1 ? a[par[u]] : 0);
         for (auto [decomp, d, side] : info[u]) {
             auto& bit = bits[decomp][!side];
             int my_l = clamp<int>(le - d, 1, ssize(bit.s)), my_r = clamp<int>(ri - d, 1, ssize(bit.s));
