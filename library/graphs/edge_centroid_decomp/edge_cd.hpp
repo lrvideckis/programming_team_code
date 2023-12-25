@@ -3,7 +3,8 @@
 /**
  * @see https://codeforces.com/blog/entry/104997 https://codeforces.com/blog/entry/120446
  * @code{.cpp}
- *     // handle single-edge paths separately
+ *     // only handle paths with >=1 edge in each set
+ *     // i.e. handle single-edge paths separately
  *     edge_cd(adj, [&](const vector<vector<int>>& adj_cd, int cent, int split) -> void {
  *         // subtrees of prefix [0, split) of adj_cd[cent] are the first edge set
  *         // subtrees of suffix [split, ssize(adj_cd[cent])) of adj_cd[cent] are the second edge set
