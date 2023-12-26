@@ -34,6 +34,10 @@ int main() {
             assert(type == 1);
             int u, le, ri;
             cin >> u >> le >> ri;
+            long long res = cs.query(u, le, le);
+            assert(res == 0);
+            res = cs.query(u, ri, ri);
+            assert(res == 0);
             cout << cs.query(u, le, ri) << '\n';
         }
     }

@@ -58,6 +58,7 @@ template <class T> struct contour_sum {
      * @space O(1)
      */
     T query(int u, int le, int ri) {
+        assert(0 <= le && le <= ri && ri <= n);
         T sum = 0;
         if (le <= 0 && 0 < ri) sum += a[u];
         if (le <= 1 && 1 < ri) sum += sum_ch[u] + (par[u] != -1 ? a[par[u]] : 0);
