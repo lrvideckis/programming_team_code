@@ -1,31 +1,22 @@
 /** @file */
 #pragma once
-const int mx_n = 17, mod = 17;
-long long inv[mx_n], fact[mx_n], inv_fact[mx_n];
+const int mod = 17; /**< must be prime */
+vector<long long> inv(2, 1), fact(2, 1), inv_fact(2, 1);
 /**
- * @time O(mx_n + sqrt(mod))
- * @space O(mx_n)
- */
-void calc_facts() {
-    static_assert(max(2, mx_n) <= mod);
-    for (int i = 2; i * i <= mod; i++) assert(mod % i);
-    for (int i = 0; i < 2; i++)
-        inv[i] = fact[i] = inv_fact[i] = 1;
-    for (int i = 2; i < mx_n; i++) {
-        inv[i] = mod - (mod / i) * inv[mod % i] % mod;
-        fact[i] = fact[i - 1] * i % mod;
-        inv_fact[i] = inv_fact[i - 1] * inv[i] % mod;
-    }
-}
-/**
- * @param n,k requires n < mx_n
+ * @param n,k integers with n < mod
  * @returns number of ways to choose k objects out of n
- * @time O(1)
- * @space O(1)
+ * @time O(1) amortized
+ * @space O(1) amortized
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
 inline long long C(int n, int k) {
-    assert(fact[n]);
+    assert(n < mod);
     if (k < 0 || n < k) return 0;
+    while (ssize(inv) <= n) {
+        int i = ssize(inv);
+        inv.push_back(mod - (mod / i) * inv[mod % i] % mod);
+        fact.push_back(i * fact[i - 1] % mod);
+        inv_fact.push_back(inv[i] * inv_fact[i - 1] % mod);
+    }
     return fact[n] * inv_fact[k] % mod * inv_fact[n - k] % mod;
 }

@@ -5,23 +5,23 @@
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    calc_facts();
-    for (int i = 0; i < mx_n; i++) {
+    assert(C(mod - 1, mod - 1) == 1); //to initialize arrays
+    for (int i = 0; i < mod; i++) {
         if (i) assert(i * inv[i] % mod == 1LL);
         assert(fact[i] * inv_fact[i] % mod == 1LL);
     }
-    vector<vector<long long>> naive_choose(mx_n, vector<long long>(mx_n, 0));
-    for (int i = 0; i < mx_n; i++) {
+    vector<vector<long long>> naive_choose(mod, vector<long long>(mod, 0));
+    for (int i = 0; i < mod; i++) {
         naive_choose[i][0] = 1;
         for (int j = 1; j <= i; j++)
             naive_choose[i][j] = (naive_choose[i - 1][j] + naive_choose[i - 1][j - 1]) % mod;
     }
-    for (int i = 0; i < mx_n; i++) {
+    for (int i = 0; i < mod; i++) {
         assert(C(1LL * i, -1LL) == 0);
         assert(C(1LL * i, 1LL * i + 1) == 0);
         assert(C(-1LL, 1LL * i) == 0);
         assert(C(1LL * i, 1LL * i - 1) == i % mod);
-        for (int j = 0; j < mx_n; j++)
+        for (int j = 0; j < mod; j++)
             assert(C(1LL * i, 1LL * j) == naive_choose[i][j]);
     }
     assert(C(371283LL, 32981LL) == 0);
