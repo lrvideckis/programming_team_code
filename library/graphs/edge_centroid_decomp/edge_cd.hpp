@@ -5,7 +5,7 @@
  * @code{.cpp}
  *     // only handle paths with >=1 edge in each edge-set
  *     //     (it is guaranteed the edge-sets are non-empty i.e. 0 < split < ssize(cd_adj[cent]))
- *     // don't handle cent<->u paths as these will be handled in smaller decomposition
+ *     // don't handle cent<->u paths as these will be handled in some smaller decomposition
  *     //     (except for single-edge paths, so handle these separately)
  *     edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
  *         // subtrees of prefix [0, split) of cd_adj[cent] are the first edge-set
