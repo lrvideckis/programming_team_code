@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "../template.hpp"
+#include "../cd_asserts.hpp"
 
 #include "../../../library/graphs/centroid_decomp/lca.hpp"
 
@@ -14,6 +15,7 @@ int main() {
         adj[par].push_back(i);
         adj[i].push_back(par);
     }
+    cd_asserts(adj);
     cd_lca lca(adj);
     for (int i = 0; i < n; i++) {
         int curr_1 = lca.get_lca(i, i);
