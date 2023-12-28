@@ -32,7 +32,6 @@ cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_bccs = 0;
     vector<int> tin(n), bcc_id(m), st;
     vector<bool> is_cut(n);
-    st.reserve(m);
     auto dfs = [&](auto&& self, int u, int p_id) -> int {
         int low = tin[u] = timer++, deg = 0;
         for (auto [v, e_id] : adj[u]) {
