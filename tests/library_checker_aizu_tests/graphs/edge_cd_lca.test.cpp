@@ -14,7 +14,7 @@ int main() {
         adj[par].push_back(i);
         adj[i].push_back(par);
     }
-    LCA lca(adj);
+    edgecd_lca lca(adj);
     for (int i = 0; i < n; i++) {
         int curr_1 = lca.get_lca(i, i);
         assert(curr_1 == i);

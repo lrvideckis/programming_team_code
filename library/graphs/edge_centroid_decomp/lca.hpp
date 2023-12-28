@@ -1,12 +1,12 @@
 /** @file */
 #pragma once
 #include "edge_cd.hpp"
-struct LCA {
+struct edgecd_lca {
     vector<int> d;
     vector<vector<int>> mn_d, to_cent;
     int cmp(int u, int v) {return d[u] < d[v] ? u : v;}
     //TODO: document it only works on un-rooted trees
-    LCA(const vector<vector<int>>& adj) : d(ssize(adj)), mn_d(ssize(adj)), to_cent(ssize(adj)) {
+    edgecd_lca(const vector<vector<int>>& adj) : d(ssize(adj)), mn_d(ssize(adj)), to_cent(ssize(adj)) {
         auto dfs_d = [&](auto&& self, int u, int p) -> void {
             for (int v : adj[u])
                 if (v != p)
