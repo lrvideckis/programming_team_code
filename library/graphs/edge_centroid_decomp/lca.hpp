@@ -2,7 +2,7 @@
 #pragma once
 #include "edge_cd.hpp"
 /**
- * LCA queries via edge CD
+ * @see https://codeforces.com/blog/entry/81661#comment-686024
  */
 struct edgecd_lca {
     vector<int> d;
