@@ -33,14 +33,14 @@ cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
     vector<int> tin(n), bcc_id(m), st;
     vector<bool> is_cut(n);
     st.reserve(m);
-    auto dfs = [&](auto&& self, int u, int p) -> int {
+    auto dfs = [&](auto&& self, int u, int p_id) -> int {
         int low = tin[u] = timer++, deg = 0;
         for (auto [v, e_id] : adj[u]) {
             assert(u != v);
-            if (v == p) continue;
+            if (e_id == p_id) continue;
             if (!tin[v]) {
                 st.push_back(e_id);
-                int low_ch = self(self, v, u);
+                int low_ch = self(self, v, e_id);
                 if (low_ch >= tin[u]) {
                     is_cut[u] = 1;
                     while (1) {
@@ -58,7 +58,7 @@ cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
                 low = min(low, tin[v]);
             }
         }
-        if (p == -1) is_cut[u] = (deg > 1);
+        if (p_id == -1) is_cut[u] = (deg > 1);
         return low;
     };
     for (int i = 0; i < n; i++)

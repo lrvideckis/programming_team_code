@@ -40,8 +40,7 @@ bridge_info bridges(const vector<vector<array<int, 2>>>& adj, int m) {
             if (e_id == p_id) continue;
             if (!tin[v])
                 low = min(low, self(self, v, e_id));
-            else if (tin[v] < tin[u])
-                low = min(low, tin[v]);
+            low = min(low, tin[v]);
         }
         if (tin[u] == low) {
             if (p_id != -1) is_bridge[p_id] = 1;
