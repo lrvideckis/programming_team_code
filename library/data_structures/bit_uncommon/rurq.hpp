@@ -20,12 +20,11 @@ template <class T> struct bit_rurq {
      * @time O(n)
      * @space O(n) for both bits
      */
-    bit_rurq(const vector<T>& a) : n(ssize(a)) {
-        vector<T> init(n);
-        adjacent_difference(begin(a), end(a), begin(init));
-        bit1 = {init};
-        for (int i = 0; i < n; i++) init[i] *= i;
-        bit2 = {init};
+    bit_rurq(vector<T> a) : n(ssize(a)) {
+        adjacent_difference(begin(a), end(a), begin(a));
+        bit1 = {a};
+        for (int i = 0; i < n; i++) a[i] *= i;
+        bit2 = {a};
     }
     /**
      * does a[le] += d, a[le + 1] += d, ..., a[ri - 1] += d
