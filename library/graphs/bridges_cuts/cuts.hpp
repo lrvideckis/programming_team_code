@@ -59,7 +59,6 @@ cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
         return low;
     };
     for (int i = 0; i < n; i++)
-        if (!tin[i])
-            dfs(dfs, i, -1);
+        if (!tin[i]) dfs(dfs, i, -1);
     return {num_bccs, is_cut, bcc_id};
 }
