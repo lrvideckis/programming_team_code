@@ -21,9 +21,8 @@ constParameter:../library/data_structures/uncommon/deque_with_op.hpp:121
 constParameter:../library/data_structures/uncommon/priority_queue_of_updates.hpp:42
 constParameter:../library/math/matrix_related/row_reduce.hpp:19
 unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_length.hpp:14
-unusedScopedObject:library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp:22
+unusedScopedObject:library_checker_aizu_tests/cd_asserts.hpp:5
 unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_node.hpp:14
-unusedScopedObject:library_checker_aizu_tests/graphs/centroid_path_dist.test.cpp:28
 unusedScopedObject:../library/graphs/edge_centroid_decomp/count_paths_per_length.hpp:15
 unusedScopedObject:../library/graphs/edge_centroid_decomp/contour_sum.hpp:21
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
