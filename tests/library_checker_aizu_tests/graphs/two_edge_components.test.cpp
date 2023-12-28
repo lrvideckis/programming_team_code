@@ -18,7 +18,7 @@ int main() {
     }
     bridge_info cc = bridges(adj, m);
     vector<vector<int>> bt = bridge_tree(adj, cc);
-    for (int i = 0; i < n; i++) assert(cc.two_edge_ccid[i] != -1);
+    assert(find(begin(cc.two_edge_ccid), end(cc.two_edge_ccid), -1) == end(cc.two_edge_ccid));
     //check correctness of bridge tree
     {
         assert(ssize(bt) == cc.num_2_edge_ccs);
