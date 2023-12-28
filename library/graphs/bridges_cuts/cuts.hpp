@@ -30,7 +30,7 @@ struct cut_info {
  */
 cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_bccs = 0;
-    vector<int> tin(n), bcc_id(m), st;
+    vector<int> tin(n), bcc_id(m, -1), st;
     vector<bool> is_cut(n);
     auto dfs = [&](auto&& self, int u, int p_id) -> int {
         int low = tin[u] = timer++, deg = 0;

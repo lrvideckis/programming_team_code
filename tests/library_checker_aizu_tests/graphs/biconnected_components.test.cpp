@@ -18,6 +18,7 @@ int main() {
     }
     cut_info cc = cuts(adj, m);
     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
+    for (int i = 0; i < m; i++) assert(cc.bcc_id[i] != -1);
     for (int i = 0; i < n; i++) {
         //cut node if there exists a pair of adjacent edges belonging to different BCCs
         bool is_cut = 0;

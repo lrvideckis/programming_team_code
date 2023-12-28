@@ -30,7 +30,7 @@ struct bridge_info {
  */
 bridge_info bridges(const vector<vector<array<int, 2>>>& adj, int m) {
     int n = ssize(adj), timer = 1, num_2_edge_ccs = 0;
-    vector<int> tin(n), two_edge_ccid(n), st;
+    vector<int> tin(n), two_edge_ccid(n, -1), st;
     vector<bool> is_bridge(m);
     auto dfs = [&](auto&& self, int u, int p_id) -> int {
         int low = tin[u] = timer++, siz = ssize(st);
