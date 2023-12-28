@@ -1,11 +1,18 @@
 /** @file */
 #pragma once
 #include "edge_cd.hpp"
+/**
+ * LCA queries via edge CD
+ */
 struct edgecd_lca {
     vector<int> d;
     vector<vector<int>> mn_d, to_cent;
     int cmp(int u, int v) {return d[u] < d[v] ? u : v;}
-    //TODO: document it only works on un-rooted trees
+    /**
+     * @param adj unrooted, undirected tree
+     * @time O(n log1.5 n)
+     * @space O(n log1.5 n) for `mn_d` and `to_cent` vectors
+     */
     edgecd_lca(const vector<vector<int>>& adj) : d(ssize(adj)), mn_d(ssize(adj)), to_cent(ssize(adj)) {
         auto dfs_d = [&](auto&& self, int u, int p) -> void {
             for (int v : adj[u])
@@ -26,6 +33,12 @@ struct edgecd_lca {
                 dfs(dfs, cd_adj[cent][i], cent, i < split);
         });
     }
+    /**
+     * @param u,v 2 nodes
+     * @returns lca of u, v; where the root is 0
+     * @time O(log1.5 n)
+     * @space O(1)
+     */
     int get_lca(int u, int v) {
         if (u == v) return u;
         for (int i = min(ssize(mn_d[u]), ssize(mn_d[v])) - 1;; i--)

@@ -1063,6 +1063,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          bits \
                          sum_ch \
                          par \
+                         mn_d \
+                         to_cent \
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include
