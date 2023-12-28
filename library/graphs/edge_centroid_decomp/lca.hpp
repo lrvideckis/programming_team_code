@@ -21,16 +21,13 @@ struct edgecd_lca {
         };
         dfs_d(dfs_d, 0, -1);
         edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
-            auto dfs = [&](auto&& self, int u, int p, int side) -> void {
-                mn_d[u].push_back(cmp(mn_d[p].back(), u));
+            auto dfs = [&](auto&& self, int u, int p) -> void {
+                mn_d[u].push_back(p == -1 ? u : cmp(mn_d[p].back(), u));
                 to_cent[u].push_back(cent);
                 for (int v : cd_adj[u])
-                    if (v != p) self(self, v, u, side);
+                    if (v != p) self(self, v, u);
             };
-            mn_d[cent].push_back(cent);
-            to_cent[cent].push_back(cent);
-            for (int i = 0; i < ssize(cd_adj[cent]); i++)
-                dfs(dfs, cd_adj[cent][i], cent, i < split);
+            dfs(dfs, cent, -1);
         });
     }
     /**
