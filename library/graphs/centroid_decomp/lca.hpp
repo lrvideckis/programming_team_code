@@ -8,6 +8,11 @@ struct cd_lca {
     vector<int> d;
     vector<vector<int>> mn_d, to_cent;
     int cmp(int u, int v) {return d[u] < d[v] ? u : v;}
+    /**
+     * @param adj unrooted, undirected tree
+     * @time O(n log n)
+     * @space O(n log n) for `mn_d` and `to_cent` vectors
+     */
     cd_lca(const vector<vector<int>>& adj) : d(ssize(adj)), mn_d(ssize(adj)), to_cent(ssize(adj)) {
         auto dfs_d = [&](auto&& self, int u, int p) -> void {
             for (int v : adj[u])
@@ -25,8 +30,14 @@ struct cd_lca {
             dfs(dfs, cent, -1);
         });
     }
+    /**
+     * @param u,v nodes
+     * @returns lca of u, v; where the root is 0
+     * @time O(log(n))
+     * @space O(1)
+     */
     int get_lca(int u, int v) {
-        if (u == v) return u;
+        //if (u == v) return u;
         for (int i = min(ssize(mn_d[u]), ssize(mn_d[v])) - 1;; i--)
             if (to_cent[u][i] == to_cent[v][i])
                 return cmp(mn_d[u][i], mn_d[v][i]);
