@@ -38,16 +38,14 @@ cut_info cuts(const vector<vector<array<int, 2>>>& adj, int m) {
             assert(u != v);
             if (e_id == p_id) continue;
             if (!tin[v]) {
+                int siz = ssize(st);
                 st.push_back(e_id);
                 int low_ch = self(self, v, e_id);
                 if (low_ch >= tin[u]) {
                     is_cut[u] = 1;
-                    while (1) {
-                        int edge = st.back();
-                        st.pop_back();
-                        bcc_id[edge] = num_bccs;
-                        if (edge == e_id) break;
-                    }
+                    for (int i = siz; i < ssize(st); i++)
+                        bcc_id[st[i]] = num_bccs;
+                    st.resize(siz);
                     num_bccs++;
                 }
                 low = min(low, low_ch);
