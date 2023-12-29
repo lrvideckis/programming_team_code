@@ -26,6 +26,7 @@ unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_node.hpp:14
 unusedScopedObject:library_checker_aizu_tests/graphs/centroid_path_dist.test.cpp:29
 unusedScopedObject:../library/graphs/edge_centroid_decomp/count_paths_per_length.hpp:15
 unusedScopedObject:../library/graphs/edge_centroid_decomp/contour_sum.hpp:21
+unusedScopedObject:library_checker_aizu_tests/graphs/edge_cd_lca.test.cpp:18
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
 arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:17
 variableScope:../kactl/content/number-theory/Factor.h:47
