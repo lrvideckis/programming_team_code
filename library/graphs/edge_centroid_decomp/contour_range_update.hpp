@@ -46,8 +46,7 @@ template <class T> struct contour_range_update {
         dfs(dfs, 0);
     }
     /**
-     * @param u node
-     * @param le,ri,delta add delta to all nodes v such that le <= dist_edges(u, v) < ri
+     * @param u,le,ri,delta add delta to all nodes v such that le <= dist_edges(u, v) < ri
      * @time O(log1.5(n) * log2(n))
      * @space O(1)
      */
