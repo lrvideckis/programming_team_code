@@ -9,7 +9,14 @@
 see [tests/README.md](tests/README.md)
 
 ## Contributing
-We appreciate all feedback. It can be anything from suggestions (please include your reason for the change), or importantly bugs! You can submit an issue or email us at:
+Ways to help:
+- suggest better/shorter variable name
+- you have a better way to golf it
+- say if some interface is unintuitive/docs are unclear
+- you found a bug/some code TLE's (please tell us)
+- you disagree with any of our coding-style choices
+
+You can submit an issue or email us at:
 ```
 lrvideckis@gmail.com
 ```
