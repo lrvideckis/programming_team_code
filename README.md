@@ -15,6 +15,7 @@ Ways to help:
 - say if some interface is unintuitive/docs are unclear
 - you found a bug/some code TLE's (please tell us)
 - you disagree with any of our coding-style choices
+- suggest a new alg to add
 
 You can submit an issue or email us at:
 ```
