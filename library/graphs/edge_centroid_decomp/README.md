@@ -22,4 +22,4 @@ rewrite as `sum + sub_sz[v] <= siz - 1 - sum`, now:
 - `sum + sub_sz[v]` = size of my edge set after adding v
 - `siz - 1 - sum` = size of the other edge set before adding v
 
-so we only add `sub_sz[v]` when my edge set afterwards stays smaller then the other edge set before.
+so we only add `sub_sz[v]` to my edge set when my edge set afterwards stays smaller then the other edge set before.
