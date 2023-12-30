@@ -23,3 +23,12 @@ rewrite as `sum + sub_sz[v] <= siz - 1 - sum`, now:
 - `siz - 1 - sum` = size of the other edge set before adding v
 
 so we only add `sub_sz[v]` to my edge set when my edge set afterwards stays smaller then the other edge set before.
+
+---
+
+## Is it still correct?
+
+It is clear `3*sum <= 2*(siz-1)` so we just have to show `3*sum >= siz-1` (at the end):
+
+- if size of my edge set so far `<1/3(siz-1)` then the behavior of this greedy is the same as the one in the blog
+- if size of my edge set so far `>=1/3(siz-1)` then we switch the behavior to "only add if the balance decreases"
