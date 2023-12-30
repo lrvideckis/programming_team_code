@@ -1,8 +1,8 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_range_contour_sum_on_tree"
+#define PROBLEM "https://judge.yosupo.jp/problem/vertex_get_range_contour_add_on_tree"
 #include "../template.hpp"
 #include "../edge_cd_asserts.hpp"
 
-#include "../../../library/graphs/edge_centroid_decomp/contour_sum.hpp"
+#include "../../../library/graphs/edge_centroid_decomp/contour_range_update.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
@@ -21,24 +21,21 @@ int main() {
     {
         edge_cd(adj, edge_cd_asserts);
     }
-    contour_sum<long long> cs(adj, a);
+    contour_range_update<long long> cu(adj, a);
     while (q--) {
         int type;
         cin >> type;
         if (type == 0) {
-            int u;
-            long long delta;
-            cin >> u >> delta;
-            cs.update(u, delta);
+            int u, le, ri, delta;
+            cin >> u >> le >> ri >> delta;
+            cu.update(u, le, le, delta);
+            cu.update(u, le, ri, delta);
+            cu.update(u, ri, ri, delta);
         } else {
             assert(type == 1);
-            int u, le, ri;
-            cin >> u >> le >> ri;
-            long long res = cs.query(u, le, le);
-            assert(res == 0);
-            res = cs.query(u, ri, ri);
-            assert(res == 0);
-            cout << cs.query(u, le, ri) << '\n';
+            int u;
+            cin >> u;
+            cout << cu.query(u) << '\n';
         }
     }
     return 0;
