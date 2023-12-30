@@ -1,5 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_frequency"
-//TODO: figure out why debug mode causes TLE
+// to speed up test
 #undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
@@ -15,17 +15,30 @@ int main() {
     vector<int> sorted(arr);
     stable_sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-    for (int& val : arr)
-        val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted)) - 30;
+    for (int& val : arr) {
+        int le = 0, ri = ssize(sorted);
+        while (ri - le > 1) {
+            int mi = le + (ri - le) / 2;
+            if (sorted[mi] <= val) le = mi;
+            else ri = mi;
+        }
+        assert(le < ssize(arr) && sorted[le] == val);
+        val = le - 30;
+    }
     wavelet_tree wt(arr, -30, ssize(sorted) - 30);
     while (q--) {
         int le, ri, x;
         cin >> le >> ri >> x;
-        auto it = lower_bound(begin(sorted), end(sorted), x);
-        if (it == end(sorted) || (*it) != x)
+        int start = 0, end = ssize(sorted);
+        while (end - start > 1) {
+            int mi = start + (end - start) / 2;
+            if (sorted[mi] <= x) start = mi;
+            else end = mi;
+        }
+        if (start == ssize(sorted) || sorted[start] != x)
             cout << 0 << '\n';
         else {
-            int idx = int(it - begin(sorted)) - 30;
+            int idx = start - 30;
             auto curr = wt.rect_count(le, ri, idx, idx);
             assert(curr == 0);
             cout << wt.rect_count(le, ri, idx, idx + 1) << '\n';
