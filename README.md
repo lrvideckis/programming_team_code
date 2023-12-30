@@ -11,7 +11,7 @@ see [tests/README.md](tests/README.md)
 ## Contributing
 Ways to help:
 - suggest better/shorter variable name
-- you have a better way to golf it
+- you have a better way to golf it (tell us)
 - say if some interface is unintuitive/docs are unclear
 - you found a bug/some code TLE's (tell us)
 - you disagree with any of our coding-style choices (tell us)
