@@ -1,4 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
+// to speed up test
+#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 #include "../edge_cd_asserts.hpp"
 
