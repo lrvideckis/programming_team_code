@@ -24,6 +24,7 @@ sed --in-place '/^\/\*\* @file \*\/$/d' ../library/**/*.hpp
 sed --in-place '/^\/\/NOLINTNEXTLINE(readability-identifier-naming)$/d' ../library/**/*.hpp
 
 #adds hash code comments
+chmod +x ../library/contest/hash.sh
 for header in ../library/**/*.hpp; do
 	hash=$(sed '/^#include/d' "$header" | cpp -dD -P -fpreprocessed | ./../library/contest/hash.sh)
 	sed --in-place "1i //hash: $hash" "$header"
