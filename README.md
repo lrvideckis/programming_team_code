@@ -30,7 +30,7 @@ Ways to help:
 - you disagree with any of our coding-style choices (tell us)
 - suggest a new alg to add
 
-You can submit an issue or email us at
+You can submit an issue or email us at:
 ```
 lrvideckis@gmail.com
 ```
