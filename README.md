@@ -3,23 +3,6 @@
 - PDF download: [hackpack.pdf](https://github.com/lrvideckis/programming_team_code/releases/download/hackpack/hackpack.pdf)
 - [template.cpp](library/contest/template.cpp)
 
-## Contributing
-Ways to help:
-- suggest better/shorter variable name
-- suggest a better way to golf it
-- say if some interface is unintuitive/docs are unclear
-- you found a bug/some code TLE's (tell us)
-- you disagree with any of our coding-style choices (tell us)
-- suggest a new alg to add
-
-You can submit an issue or email us at:
-```
-lrvideckis@gmail.com
-```
-```
-custer.cameron@gmail.com
-```
-
 ## License and Attribution
 
 I've added links to sources when applicable. Everything is under the [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/); please use/take anything with no strings attached.
@@ -37,3 +20,20 @@ clean | <ul><li>https://github.com/demidenko/olymp-cpp-lib</li><li>https://githu
 lgm | <ul><li>https://github.com/ecnerwala/cp-book</li><li>https://github.com/the-tourist/algo</li><li>https://github.com/nealwu/competitive-programming</li><li>https://github.com/bqi343/cp-notebook</li><li>https://github.com/suisen-cp/cp-library-cpp</li></ul>
 python | <ul><li>https://github.com/cheran-senthil/PyRival</li></ul>
 rust | <ul><li>https://github.com/EgorKulikov/rust_algo</li><li>https://github.com/bminaiev/rust-contests</li><li>https://github.com/EbTech/rust-algorithms</li></ul>
+
+## Contributing
+Ways to help:
+- suggest better/shorter variable name
+- suggest a better way to golf it
+- say if some interface is unintuitive/docs are unclear
+- you found a bug/some code TLE's (tell us)
+- you disagree with any of our coding-style choices (tell us)
+- suggest a new alg to add
+
+You can submit an issue or email us at:
+```
+lrvideckis@gmail.com
+```
+```
+custer.cameron@gmail.com
+```
