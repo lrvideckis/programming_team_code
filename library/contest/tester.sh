@@ -1,6 +1,5 @@
 # see: https://github.com/Errichto/youtube/blob/master/testing/s.sh
-# usage:
-#	bash tester.sh
+# bash tester.sh
 
 g++ -std=c++17 a.cpp -o a.out
 g++ -std=c++17 b.cpp -o b.out
