@@ -11,7 +11,7 @@ int main() {
     for (int i = 0; i < n; i++)
         cin >> arr[i];
     vector<int> sorted(arr);
-    stable_sort(begin(sorted), end(sorted));
+    sort(begin(sorted), end(sorted));
     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
     for (int& val : arr) {
         int le = 0, ri = ssize(sorted);
