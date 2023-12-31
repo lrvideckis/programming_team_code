@@ -42,5 +42,6 @@
 "tests/library_checker_aizu_tests/graphs/edge_cd_contour_range_query.test.cpp": "2023-12-30 14:30:23 -0600",
 "tests/library_checker_aizu_tests/graphs/edge_cd_contour_range_update.test.cpp": "2023-12-30 14:30:23 -0600",
 "tests/library_checker_aizu_tests/graphs/edge_cd_count_paths_per_length.test.cpp": "2023-12-30 14:30:23 -0600",
-"tests/library_checker_aizu_tests/graphs/edge_cd_lca.test.cpp": "2023-12-30 15:04:54 -0600"
+"tests/library_checker_aizu_tests/graphs/edge_cd_lca.test.cpp": "2023-12-30 15:04:54 -0600",
+"tests/library_checker_aizu_tests/graphs/enumerate_triangles.test.cpp": "2023-12-13 22:45:54 -0800"
 }
