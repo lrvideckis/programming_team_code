@@ -21,13 +21,13 @@ struct wavelet_tree {
     vector<vector<long long>> presums;
     /**
      * @code{.cpp}
-     *     vector<int> a;
-     *     ...
-     *     vector<int> sorted(a);
-     *     sort(begin(sorted), end(sorted));
-     *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-     *     for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree wt(a, 0, ssize(sorted));
+           vector<int> a;
+           ...
+           vector<int> sorted(a);
+           sort(begin(sorted), end(sorted));
+           sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
+           for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+           wavelet_tree wt(a, 0, ssize(sorted));
      * @endcode
      * @param a,a_minv,a_maxv must satisfy minv <= a[i] < maxv
      * @time O((maxv - minv) + n * log(maxv - minv))

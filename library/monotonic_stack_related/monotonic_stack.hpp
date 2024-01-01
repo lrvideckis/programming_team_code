@@ -2,8 +2,8 @@
 #pragma once
 /**
  * @code{.cpp}
- *     vector<long long> a;
- *     vector<int> le = mono_st(a, less()); // greater(), less_equal(), greater_equal()
+       vector<long long> a;
+       vector<int> le = mono_st(a, less()); // greater(), less_equal(), greater_equal()
  * @endcode
  * @param a array
  * @param cmp any transitive compare operator

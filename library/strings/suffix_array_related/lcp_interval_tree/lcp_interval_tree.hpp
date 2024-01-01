@@ -35,8 +35,8 @@ const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase le
  * note leaf nodes don't exist when that suffix is a prefix of a longer suffix
  *
  * @code{.cpp}
- *     string s;
- *     lcp_tree lt(s, 256);
+       string s;
+       lcp_tree lt(s, 256);
  * @endcode
  *
  * internal nodes are a subset of [0, n - 1), each internal node represents:

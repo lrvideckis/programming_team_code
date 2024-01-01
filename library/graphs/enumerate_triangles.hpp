@@ -2,9 +2,9 @@
 #pragma once
 /**
  * @code{.cpp}
- *     enumerate_triangles(edges, n, [&](int u, int v, int w) {
- *         //u, v, w form a triangle
- *     });
+       enumerate_triangles(edges, n, [&](int u, int v, int w) {
+           //u, v, w form a triangle
+       });
  * @endcode
  * @param edges simple undirected graph
  * @param n number of nodes

@@ -32,10 +32,10 @@ struct cart_tree {
 };
 /**
  * @code{.cpp}
- *     //min cartesian tree
- *     auto [root, adj, le, ri, to_extrema] = get_cart_tree(a, less());
- *     //max cartesian tree
- *     auto [root, adj, le, ri, to_extrema] = get_cart_tree(a, greater());
+       //min cartesian tree
+       auto [root, adj, le, ri, to_extrema] = get_cart_tree(a, less());
+       //max cartesian tree
+       auto [root, adj, le, ri, to_extrema] = get_cart_tree(a, greater());
  * @endcode
  * @param a array of integers (there can be duplicates)
  * @param cmp comparator

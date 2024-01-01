@@ -25,11 +25,11 @@ struct match_info {
  * @see https://github.com/foreverbell/acm-icpc-cheat-sheet /blob/master/src/graph-algorithm/hopcroft-karp.cpp
  *
  * @code{.cpp}
- *     //0 <= node_left < lsz
- *     //0 <= node_right < rsz
- *     //for every edge node_left <=> node_right
- *     adj[node_left].push_back(node_right);
- *     auto [size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r] = hopcroft_karp(adj, rsz);
+       //0 <= node_left < lsz
+       //0 <= node_right < rsz
+       //for every edge node_left <=> node_right
+       adj[node_left].push_back(node_right);
+       auto [size_of_matching, l_to_r, r_to_l, mvc_l, mvc_r] = hopcroft_karp(adj, rsz);
  * @endcode
  * @param adj bipartite graph
  * @param rsz number of nodes on right side

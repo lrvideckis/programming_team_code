@@ -12,15 +12,15 @@ struct bridge_info {
  * @see https://cp-algorithms.com/graph/bridge-searching.html
  *
  * @code{.cpp}
- *     vector<vector<array<int, 2>>> adj(n);
- *     for (int i = 0; i < m; i++) {
- *         int u, v;
- *         cin >> u >> v;
- *         u--, v--;
- *         adj[u].push_back({v, i});
- *         adj[v].push_back({u, i});
- *     }
- *     auto [num_2_edge_ccs, is_bridge, two_edge_ccid] = bridges(adj, m);
+       vector<vector<array<int, 2>>> adj(n);
+       for (int i = 0; i < m; i++) {
+           int u, v;
+           cin >> u >> v;
+           u--, v--;
+           adj[u].push_back({v, i});
+           adj[v].push_back({u, i});
+       }
+       auto [num_2_edge_ccs, is_bridge, two_edge_ccid] = bridges(adj, m);
  * @endcode
  * @param adj undirected graph; possibly with multiple edges
  * @param m number of edges

@@ -4,10 +4,10 @@
 /**
  * @see https://codeforces.com/blog/entry/44351
  * @code{.cpp}
- *     LCA lca(adj);
- *     iterate_subtree(lca, u, [&](int v) {
- *         //v is in u's subtree
- *     });
+       LCA lca(adj);
+       iterate_subtree(lca, u, [&](int v) {
+           //v is in u's subtree
+       });
  * @endcode
  * @param lca lca via rmq
  * @param u some node

@@ -2,8 +2,8 @@
 #pragma once
 /**
  * @code{.cpp}
- *     centroid(adj, [&](const vector<vector<int>>& adj, int cent) -> void {
- *     });
+       centroid(adj, [&](const vector<vector<int>>& adj, int cent) -> void {
+       });
  * @endcode
  */
 template <class F> struct centroid {

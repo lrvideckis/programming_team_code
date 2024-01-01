@@ -3,13 +3,13 @@
 #include "../suffix_array.hpp"
 /**
  * @code{.cpp}
- *     string s;
- *     auto [sa, sa_inv] = get_sa(s, 256);
- *     suf_cmp(sa_inv, le1, le2);
- *     // or
- *     vector<int> a;
- *     auto [sa, sa_inv] = get_sa(a, 100'005);
- *     suf_cmp(sa_inv, le1, le2);
+       string s;
+       auto [sa, sa_inv] = get_sa(s, 256);
+       suf_cmp(sa_inv, le1, le2);
+       // or
+       vector<int> a;
+       auto [sa, sa_inv] = get_sa(a, 100'005);
+       suf_cmp(sa_inv, le1, le2);
  * @endcode
  *
  * @param sa_inv inverse permutation of suffix array

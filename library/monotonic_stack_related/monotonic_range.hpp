@@ -3,8 +3,8 @@
 #include "monotonic_stack.hpp"
 /**
  * @code{.cpp}
- *     vector<long long> a;
- *     auto [le, ri] = mono_range(a, less()); //or greater(), less_equal(), greater_equal()
+       vector<long long> a;
+       auto [le, ri] = mono_range(a, less()); //or greater(), less_equal(), greater_equal()
  * @endcode
  * @param a array
  * @param cmp comparator

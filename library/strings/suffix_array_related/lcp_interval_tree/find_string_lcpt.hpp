@@ -5,9 +5,9 @@
  * performs trie-style downwards tree walk
  *
  * @code{.cpp}
- *     string s, t;
- *     lcp_tree lt(s, 256);
- *     auto [le, ri] = find_str(s, lt, t);
+       string s, t;
+       lcp_tree lt(s, 256);
+       auto [le, ri] = find_str(s, lt, t);
  * @endcode
  *
  * @param s,lt string and its lcp interval tree

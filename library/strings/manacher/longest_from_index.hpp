@@ -5,11 +5,11 @@
  * @see https://github.com/brunomaletta/Biblioteca /blob/master/Codigo/Strings/manacher.cpp
  *
  * @code{.cpp}
- *     string s;
- *     vector<int> man(manacher(s)), longest(longest_from_index(man));
- *     // or
- *     vector<int> a;
- *     vector<int> man(manacher(a)), longest(longest_from_index(man));
+       string s;
+       vector<int> man(manacher(s)), longest(longest_from_index(man));
+       // or
+       vector<int> a;
+       vector<int> man(manacher(a)), longest(longest_from_index(man));
  * @endcode
  *
  * @param man manacher array

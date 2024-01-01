@@ -12,15 +12,15 @@ struct cut_info {
  * @see https://cp-algorithms.com/graph/cutpoints.html
  *
  * @code{.cpp}
- *     vector<vector<array<int, 2>>> adj(n);
- *     for (int i = 0; i < m; i++) {
- *         int u, v;
- *         cin >> u >> v;
- *         u--, v--;
- *         adj[u].push_back({v, i});
- *         adj[v].push_back({u, i});
- *     }
- *     auto [num_bccs, is_cut, bcc_id] = cuts(adj, m);
+       vector<vector<array<int, 2>>> adj(n);
+       for (int i = 0; i < m; i++) {
+           int u, v;
+           cin >> u >> v;
+           u--, v--;
+           adj[u].push_back({v, i});
+           adj[v].push_back({u, i});
+       }
+       auto [num_bccs, is_cut, bcc_id] = cuts(adj, m);
  * @endcode
  * @param adj undirected graph; possibly with multiple edges; self edges not allowed
  * @param m number of edges

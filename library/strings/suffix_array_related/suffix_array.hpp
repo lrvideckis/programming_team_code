@@ -22,11 +22,11 @@
  * sa_inv = {3, 2, 5, 1, 4, 0} (sa[sa_inv[i]] == i, sa_inv[sa[i]] == i)
  *
  * @code{.cpp}
- *     string s;
- *     auto [sa, sa_inv] = get_sa(s, 256);
- *     // or
- *     vector<int> a;
- *     auto [sa, sa_inv] = get_sa(a, 100'005);
+       string s;
+       auto [sa, sa_inv] = get_sa(s, 256);
+       // or
+       vector<int> a;
+       auto [sa, sa_inv] = get_sa(a, 100'005);
  * @endcode
  *
  * @param s,max_val string/array with 0 <= s[i] < max_val

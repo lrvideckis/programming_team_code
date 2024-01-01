@@ -12,9 +12,9 @@ struct find_bwt {
     array < int, max_val + 1 > cnt;
     /**
      * @code{.cpp}
-     *     string s;
-     *     auto [sa, sa_inv] = get_sa(s, 256);
-     *     find_bwt fb(s, sa);
+           string s;
+           auto [sa, sa_inv] = get_sa(s, 256);
+           find_bwt fb(s, sa);
      * @endcode
      * @param s,sa a string and its suffix array
      * @time O(n * max_val)
@@ -33,8 +33,8 @@ struct find_bwt {
     }
     /**
      * @code{.cpp}
-     *     string t;
-     *     auto [le, ri] = fb.find_str(t);
+           string t;
+           auto [le, ri] = fb.find_str(t);
      * @endcode
      * @param t query string
      * @returns vectors `le`, `ri` where given `t_le` (0 <= t_le <= |t|) defines a suffix [t_le, |t|) of t:

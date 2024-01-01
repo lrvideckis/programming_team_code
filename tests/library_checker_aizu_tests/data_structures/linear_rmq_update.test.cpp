@@ -1,4 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
+//this test takes >20 seconds with debug mode
+#undef _GLIBCXX_DEBUG
 #include "../template.hpp"
 
 #include "../../../library/data_structures/uncommon/linear_rmq.hpp"

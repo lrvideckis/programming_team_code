@@ -5,8 +5,8 @@
  * Never adds multiple edges as bridges.hpp correctly marks them as
  * non-bridges.
  * @code{.cpp}
- *     bridge_info cc = bridges(adj, m);
- *     vector<vector<int>> bt = bridge_tree(adj, cc);
+       bridge_info cc = bridges(adj, m);
+       vector<vector<int>> bt = bridge_tree(adj, cc);
  * @endcode
  * @param adj undirected graph
  * @param cc what's calculated by bridges

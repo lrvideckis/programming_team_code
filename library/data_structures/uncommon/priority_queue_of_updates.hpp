@@ -3,13 +3,13 @@
 /**
  * @see https://codeforces.com/blog/entry/111117
  * @code{.cpp}
- *     dsu_restorable dsu_r(n);
- *     pq_updates<dsu_restorable, int, int> pq(dsu_r);
- *     for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
- *     //or
- *     pq.ds.subtree = initial_values;
- *     pq.push_update(u, v, curr_pri);
- *     cout << pq.ds.sum(v) << '\n';
+       dsu_restorable dsu_r(n);
+       pq_updates<dsu_restorable, int, int> pq(dsu_r);
+       for (int i = 0; i < n; i++) pq.ds.add(i, initial_values[i]);
+       //or
+       pq.ds.subtree = initial_values;
+       pq.push_update(u, v, curr_pri);
+       cout << pq.ds.sum(v) << '\n';
  * @endcode
  * @time n interweaved calls to pop_update, push_update take O(T(n)*nlogn)
  * where O(T(n)) = time complexity of DS::join and DS::undo

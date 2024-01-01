@@ -3,16 +3,14 @@
 #include "cuts.hpp"
 /**
  * @code{.cpp}
- *     cut_info cc = cuts(adj, m);
- *     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
- *
- *     //to loop over each *unique* bcc containing a node u:
- *     for (int bccid : bvt[u]) {
- *         bccid -= n;
- *     }
- *
- *     //to loop over each *unique* node inside a bcc:
- *     for (int u : bvt[bccid + n]) {}
+       cut_info cc = cuts(adj, m);
+       vector<vector<int>> bvt = block_vertex_tree(adj, cc);
+       //to loop over each unique bcc containing a node u:
+       for (int bccid : bvt[u]) {
+           bccid -= n;
+       }
+       //to loop over each unique node inside a bcc:
+       for (int u : bvt[bccid + n]) {}
  * @endcode
  *
  * [0, n) are original nodes

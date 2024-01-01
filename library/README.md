@@ -20,15 +20,14 @@ Place this directly before a struct or function.
  * Name, description, and/or any notes/tricks. It's okay if this is multiple
  * lines; wrap like this.
  * @code{.cpp}
- *     //example usage or initialization
- *     vector<int> arr;
+       //example usage or initialization
+       vector<int> arr;
  * @endcode
  * @param le,ri defines range [le, ri)
  * @returns Sum of range.
  * @time O(n * sqrt(n log n)) I don't care about formatting as long as it's
  * clear. Ex: O(log n * k) could either mean O(log(n) * k) or O(log(nk)) - bad.
  * @space O(n ^ (3/2)) note space complexity is always <= time complexity
- * (unless you can travel back in time)
  */
 ```
 for member vars:

@@ -20,13 +20,13 @@
  * lcp = {1, 3, 0, 0, 2}
  *
  * @code{.cpp}
- *     string s;
- *     auto [sa, sa_inv] = get_sa(s, 256);
- *     vector<int> lcp = get_lcp_array(sa, sa_inv, s);
- *     // or
- *     vector<int> a;
- *     auto [sa, sa_inv] = get_sa(a, 100'005);
- *     vector<int> lcp = get_lcp_array(sa, sa_inv, a);
+       string s;
+       auto [sa, sa_inv] = get_sa(s, 256);
+       vector<int> lcp = get_lcp_array(sa, sa_inv, s);
+       // or
+       vector<int> a;
+       auto [sa, sa_inv] = get_sa(a, 100'005);
+       vector<int> lcp = get_lcp_array(sa, sa_inv, a);
  * @endcode
  *
  * @param sa,sa_inv,s string/array and its suffix array

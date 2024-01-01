@@ -22,13 +22,13 @@ struct wavelet_tree_updates {
     vector<bool_bit> bool_bits;
     /**
      * @code{.cpp}
-     *     vector<int> a;
-     *     ...
-     *     vector<int> sorted(a);
-     *     sort(begin(sorted), end(sorted));
-     *     sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-     *     for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
-     *     wavelet_tree_updates wtu(a, 0, ssize(sorted), vector<bool>(ssize(a), 1));
+           vector<int> a;
+           ...
+           vector<int> sorted(a);
+           sort(begin(sorted), end(sorted));
+           sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
+           for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+           wavelet_tree_updates wtu(a, 0, ssize(sorted), vector<bool>(ssize(a), 1));
      * @endcode
      * @param a,a_minv,a_maxv must satisfy minv <= a[i] < maxv
      * @param active active[i] == 1 iff index i is initially active

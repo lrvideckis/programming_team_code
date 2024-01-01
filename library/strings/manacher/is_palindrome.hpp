@@ -3,13 +3,13 @@
 #include "manacher.hpp"
 /**
  * @code{.cpp}
- *     string s;
- *     vector<int> man(manacher(s));
- *     bool pal = is_pal(man, le, ri);
- *     // or
- *     vector<int> a;
- *     vector<int> man(manacher(a));
- *     bool pal = is_pal(man, le, ri);
+       string s;
+       vector<int> man(manacher(s));
+       bool pal = is_pal(man, le, ri);
+       // or
+       vector<int> a;
+       vector<int> man(manacher(a));
+       bool pal = is_pal(man, le, ri);
  * @endcode
  *
  * @param man manacher array

@@ -9,10 +9,10 @@
  *     (except for single-edge paths, so handle these separately)
  *
  * @code{.cpp}
- *     edge_cd(adj, [&](const vector<vector<int>>& adj, int cent, int split) -> void {
- *         // subtrees of prefix [0, split) of adj[cent] are the first edge-set
- *         // subtrees of suffix [split, ssize(adj[cent])) of adj[cent] are the second edge-set
- *     });
+       edge_cd(adj, [&](const vector<vector<int>>& adj, int cent, int split) -> void {
+           // subtrees of prefix [0, split) of adj[cent] are the first edge-set
+           // subtrees of suffix [split, ssize(adj[cent])) of adj[cent] are the second edge-set
+       });
  * @endcode
  */
 template <class F> struct edge_cd {

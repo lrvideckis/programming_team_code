@@ -3,9 +3,9 @@
 /**
  * @see https://codeforces.com/blog/entry/78931 https://codeforces.com/blog/entry/92310
  * @code{.cpp}
- *     vector<long long> a;
- *     linear_rmq rmq(a, less());//minimum query
- *     linear_rmq rmq(a, greater());//maximum query
+       vector<long long> a;
+       linear_rmq rmq(a, less());//minimum query
+       linear_rmq rmq(a, greater());//maximum query
  * @endcode
  */
 template <class T, class F> struct linear_rmq {
