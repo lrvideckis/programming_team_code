@@ -29,6 +29,7 @@ Ways to help:
 - you found a bug/some code TLE's (tell us)
 - you disagree with any of our coding-style choices (tell us)
 - suggest a new alg to add
+- suggest some existing alg to remove (because you use some other implementation)
 
 You can submit an issue or email us at:
 ```
