@@ -45,7 +45,7 @@ template <class T> struct longest_pal_query {
      */
     inline array<int, 2> longest_pal(int le, int ri) {
         assert(0 <= le && le < ri && ri <= ssize(idx));
-        int pal_len = int(lower_bound(begin(idx), begin(idx) + (ri - le), 0, [&](int mid, int) -> bool {
+        int pal_len = int(lower_bound(begin(idx), begin(idx) + (ri - le), 0, [&](int mid, int) {
             return len(rmq.query(2 * le + mid - 1, 2 * ri - mid)) >= mid;
         }) - begin(idx));
         int best_center = rmq.query(2 * le + pal_len - 1, 2 * ri - pal_len);

@@ -2,7 +2,7 @@
 #pragma once
 /**
  * @code{.cpp}
-       centroid(adj, [&](const vector<vector<int>>& adj, int cent) -> void {
+       centroid(adj, [&](const vector<vector<int>>& adj, int cent) {
        });
  * @endcode
  */
@@ -30,7 +30,7 @@ template <class F> struct centroid {
     void dfs(int u) {
         calc_sz(u, -1);
         for (int p = -1, sz_root = sub_sz[u];;) {
-            auto big_ch = find_if(begin(adj[u]), end(adj[u]), [&](int v) -> bool {
+            auto big_ch = find_if(begin(adj[u]), end(adj[u]), [&](int v) {
                 return v != p && 2 * sub_sz[v] > sz_root;
             });
             if (big_ch == end(adj[u])) break;

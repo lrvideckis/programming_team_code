@@ -30,7 +30,7 @@ vector<array<int, 2>> extra_edges(const vector<vector<int>>& adj, int num_sccs, 
             zero_in[scc_id[v]] = 0;
         }
     vector<bool> vis(num_sccs);
-    auto dfs = [&](auto&& self, int u) -> int {
+    auto dfs = [&](auto&& self, int u) {
         if (empty(scc_adj[u])) return u;
         for (int v : scc_adj[u])
             if (!vis[v]) {

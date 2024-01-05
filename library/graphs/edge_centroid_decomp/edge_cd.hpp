@@ -9,7 +9,7 @@
  *     (except for single-edge paths, so handle these separately)
  *
  * @code{.cpp}
-       edge_cd(adj, [&](const vector<vector<int>>& adj, int cent, int split) -> void {
+       edge_cd(adj, [&](const vector<vector<int>>& adj, int cent, int split) {
            // subtrees of prefix [0, split) of adj[cent] are the first edge-set
            // subtrees of suffix [split, ssize(adj[cent])) of adj[cent] are the second edge-set
        });
@@ -43,7 +43,7 @@ template <class F> struct edge_cd {
         if (siz <= 2) return;
         u = find_cent(u, -1, siz);
         int sum = 0;
-        auto it = partition(begin(adj[u]), end(adj[u]), [&](int v) -> bool {
+        auto it = partition(begin(adj[u]), end(adj[u]), [&](int v) {
             bool ret = 2 * sum + sub_sz[v] < siz - 1 && 3 * (sum + sub_sz[v]) <= 2 * (siz - 1);
             if (ret) sum += sub_sz[v];
             return ret;

@@ -130,7 +130,7 @@ template <class T, class F> struct deq {
         partial_sum(begin(a) + sz_le, end(a), begin(presum) + sz_le, op);
         le.resize(sz_le);
         ri.resize(ssize(a) - sz_le);
-        transform(begin(a), begin(a) + sz_le, begin(presum), rbegin(le), [](T x, T y) -> dt {return {x, y};});
-        transform(begin(a) + sz_le, end(a), begin(presum) + sz_le, begin(ri), [](T x, T y) -> dt {return {x, y};});
+        transform(begin(a), begin(a) + sz_le, begin(presum), rbegin(le), [](T x, T y) {return dt{x, y};});
+        transform(begin(a) + sz_le, end(a), begin(presum) + sz_le, begin(ri), [](T x, T y) {return dt{x, y};});
     }
 };

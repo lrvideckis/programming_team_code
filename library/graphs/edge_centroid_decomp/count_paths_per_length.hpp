@@ -12,7 +12,7 @@
 vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
     vector num_paths(ssize(adj), 0LL);
     num_paths[1] = ssize(adj) - 1;
-    edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
+    edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) {
         vector<vector<double>> cnt(2, vector<double>(1));
         auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
             if (ssize(cnt[side]) == d) cnt[side].push_back(0.0);

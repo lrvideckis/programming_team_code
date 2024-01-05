@@ -18,7 +18,7 @@ template <class T> struct contour_range_update {
      * @space O(n log1.5 n) for `info` and `bits`
      */
     contour_range_update(const vector<vector<int>>& adj, const vector<T>& a_a) : n(ssize(a_a)), a(a_a), sum_par(n), sum_ch(n), par(n, -1), info(n) {
-        edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
+        edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) {
             queue<array<int, 4>> q;
             for (int i = 0; i < ssize(cd_adj[cent]); i++)
                 q.push({cd_adj[cent][i], cent, 1, i < split});

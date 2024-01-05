@@ -40,7 +40,7 @@ struct wavelet_tree {
     void build(vector<int>& a, int le, int ri, int tl, int tr, int u) {
         if (tr - tl <= 1) return;
         int tm = split(tl, tr);
-        auto low = [&](int val) -> bool {return val < tm;};
+        auto low = [&](int val) {return val < tm;};
         vector<bool> bools(ri - le);
         transform(begin(a) + le, begin(a) + ri, begin(bools), low);
         bool_presums[u] = bool_presum(bools);

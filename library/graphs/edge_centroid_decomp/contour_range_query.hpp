@@ -18,7 +18,7 @@ template <class T> struct contour_range_query {
      * @space O(n log1.5 n) for `info` and `bits`
      */
     contour_range_query(const vector<vector<int>>& adj, const vector<T>& a_a) : n(ssize(a_a)), a(a_a), sum_ch(n), par(n, -1), info(n) {
-        edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) -> void {
+        edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) {
             vector<vector<T>> sum_val(2, vector<T>(1));
             auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
                 info[u].push_back({ssize(bits), d, side});

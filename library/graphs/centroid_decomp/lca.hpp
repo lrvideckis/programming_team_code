@@ -20,7 +20,7 @@ struct cd_lca {
                     d[v] = 1 + d[u], self(self, v, u);
         };
         dfs_d(dfs_d, 0, -1);
-        centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) -> void {
+        centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) {
             auto dfs = [&](auto&& self, int u, int p) -> void {
                 mn_d[u].push_back(p == -1 ? u : cmp(mn_d[p].back(), u));
                 to_cent[u].push_back(cent);

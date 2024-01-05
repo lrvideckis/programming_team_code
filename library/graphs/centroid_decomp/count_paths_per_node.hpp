@@ -11,10 +11,10 @@
  */
 vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
     vector num_paths(ssize(adj), 0LL);
-    centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) -> void {
+    centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) {
         vector pre_d{1}, cur_d{0};
-        auto dfs = [&](auto&& self, int u, int p, int d) -> long long {
-            if (d > k) return 0;
+        auto dfs = [&](auto&& self, int u, int p, int d) {
+            if (d > k) return 0LL;
             if (ssize(cur_d) <= d) cur_d.push_back(0);
             cur_d[d]++;
             auto cnt = 0LL;
@@ -25,7 +25,7 @@ vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
             num_paths[u] += cnt;
             return cnt;
         };
-        auto dfs_child = [&](int child) -> long long {
+        auto dfs_child = [&](int child) {
             auto cnt = dfs(dfs, child, cent, 1);
             pre_d.resize(ssize(cur_d));
             for (int i = 1; i < ssize(cur_d) && cur_d[i]; i++)
