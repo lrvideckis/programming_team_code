@@ -9,8 +9,8 @@ template <class T> struct contour_range_update {
     int n;
     vector<T> a, sum_par, sum_ch;
     vector<int> par;
-    vector<vector<array<int, 4>>> info;
-    vector<array<pair<bit_rupq<T>, vector<int>>, 2>> bits;
+    vector<vector<array<int, 3>>> info;
+    vector<array<bit_rupq<T>, 2>> bits;
     /**
      * @param adj unrooted, undirected tree
      * @param a_a a_a[u] = initial value for node u
@@ -19,24 +19,16 @@ template <class T> struct contour_range_update {
      */
     contour_range_update(const vector<vector<int>>& adj, const vector<T>& a_a) : n(ssize(a_a)), a(a_a), sum_par(n), sum_ch(n), par(n, -1), info(n) {
         edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) {
-            queue<array<int, 4>> q;
-            for (int i = 0; i < ssize(cd_adj[cent]); i++)
-                q.push({cd_adj[cent][i], cent, 1, i < split});
-            vector<vector<int>> d_to_in(2, vector<int>(1, -1));
-            array<int, 2> siz = {0, 0};
-            while (!empty(q)) {
-                auto [u, p, d, side] = q.front();
-                q.pop();
-                if (ssize(d_to_in[side]) == d)
-                    d_to_in[side].push_back(siz[side]);
-                info[u].push_back({ssize(bits), d, siz[side]++, side});
+            array<int, 2> mx_d = {0, 0};
+            auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
+                mx_d[side] = max(mx_d[side], d);
+                info[u].push_back({ssize(bits), d, side});
                 for (int v : cd_adj[u])
-                    if (v != p) q.push({v, u, 1 + d, side});
-            }
-            for (int side = 0; side < 2; side++)
-                d_to_in[side].push_back(siz[side]);
-            bits.push_back({pair(bit_rupq<T>(siz[0]), d_to_in[0]),
-                            pair(bit_rupq<T>(siz[1]), d_to_in[1])});
+                    if (v != p) self(self, v, u, 1 + d, side);
+            };
+            for (int i = 0; i < ssize(cd_adj[cent]); i++)
+                dfs(dfs, cd_adj[cent][i], cent, 1, i < split);
+            bits.push_back({bit_rupq<T>(mx_d[0] + 1), bit_rupq<T>(mx_d[1] + 1)});
         });
         auto dfs = [&](auto&& self, int u) -> void {
             for (int v : adj[u])
@@ -57,10 +49,10 @@ template <class T> struct contour_range_update {
             sum_par[u] += delta;
             if (par[u] != -1) sum_ch[par[u]] += delta;
         }
-        for (auto [decomp_id, d, _, side] : info[u]) {
-            auto& [bit, to_in] = bits[decomp_id][!side];
-            int my_l = to_in[clamp<int>(le - d, 1, ssize(to_in) - 1)];
-            int my_r = to_in[clamp<int>(ri - d, 1, ssize(to_in) - 1)];
+        for (auto [decomp_id, d, side] : info[u]) {
+            auto& bit = bits[decomp_id][!side];
+            int my_l = clamp<int>(le - d, 1, bit.n);
+            int my_r = clamp<int>(ri - d, 1, bit.n);
             bit.update(my_l, my_r, delta);
         }
     }
@@ -72,8 +64,8 @@ template <class T> struct contour_range_update {
      */
     T query(int u) {
         T sum = a[u] + sum_ch[u] + (par[u] != -1 ? sum_par[par[u]] : 0);
-        for (auto [decomp_id, _, time_in, side] : info[u])
-            sum += bits[decomp_id][side].first.get_index(time_in);
+        for (auto [decomp_id, d, side] : info[u])
+            sum += bits[decomp_id][side].get_index(d);
         return sum;
     }
 };
