@@ -4,8 +4,7 @@
  * deque with query for operation of the deque
  * @code{.cpp}
        //deque with query for: get min and # of mins in deque
-       vector<pair<long long, int>> a;//initialize a[i].second = 1
-       ...
+       vector<pair<long long, int>> a; //initialize a[i].second = 1
        deq dq(a, [](auto& x, auto& y) {
            if (x.first == y.first) return pair(x.first, x.second + y.second);
            return min(x, y);
@@ -51,24 +50,6 @@ template <class T, class F> struct deq {
      */
     inline int size() {return ssize(le) + ssize(ri);}
     /**
-     * @returns deq[0]
-     * @time O(1)
-     * @space O(1)
-     */
-    inline T front() {
-        assert(size());
-        return (empty(le) ? ri[0] : le.back())[0];
-    }
-    /**
-     * @returns deq.back()
-     * @time O(1)
-     * @space O(1)
-     */
-    inline T back() {
-        assert(size());
-        return (empty(ri) ? le[0] : ri.back())[0];
-    }
-    /**
      * @param i index
      * @returns deq[i]
      * @time O(1)
@@ -106,7 +87,6 @@ template <class T, class F> struct deq {
             transform(begin(ri), end(ri), begin(a), [](auto & x) {return x[0];});
             rebuild(a, (ssize(a) + 1) / 2);
         }
-        assert(!empty(le));
         le.pop_back();
     }
     /**
@@ -121,10 +101,9 @@ template <class T, class F> struct deq {
             transform(begin(le), end(le), rbegin(a), [](auto & x) {return x[0];});
             rebuild(a, ssize(a) / 2);
         }
-        assert(!empty(ri));
         ri.pop_back();
     }
-    inline void rebuild(const vector<T>& a, int sz_le) {
+    void rebuild(const vector<T>& a, int sz_le) {
         vector<T> presum(ssize(a));
         partial_sum(rend(a) - sz_le, rend(a), rend(presum) - sz_le, [&](T x, T y) {return op(y, x);});
         partial_sum(begin(a) + sz_le, end(a), begin(presum) + sz_le, op);
