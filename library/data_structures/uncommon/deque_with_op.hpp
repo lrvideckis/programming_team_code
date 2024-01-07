@@ -84,7 +84,7 @@ template <class T, class F> struct deq {
         assert(size());
         if (empty(le)) {
             vector<T> a(ssize(ri));
-            transform(begin(ri), end(ri), begin(a), [](auto & x) {return x[0];});
+            transform(begin(ri), end(ri), begin(a), [](dt& x) {return x[0];});
             rebuild(a, (ssize(a) + 1) / 2);
         }
         le.pop_back();
@@ -98,7 +98,7 @@ template <class T, class F> struct deq {
         assert(size());
         if (empty(ri)) {
             vector<T> a(ssize(le));
-            transform(begin(le), end(le), rbegin(a), [](auto & x) {return x[0];});
+            transform(begin(le), end(le), rbegin(a), [](dt& x) {return x[0];});
             rebuild(a, ssize(a) / 2);
         }
         ri.pop_back();
