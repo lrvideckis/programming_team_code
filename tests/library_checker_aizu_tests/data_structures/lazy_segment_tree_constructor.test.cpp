@@ -22,7 +22,7 @@ int main() {
     for (int i = 0; i < n; i++) cin >> arr[i];
     seg_tree st_curr(arr);
     iter_seg_tree ist(st_curr);
-    assert(n <= ist.st.pw2 && ist.st.pw2 < 2 * n);
+    assert(n <= ist.pw2 && ist.pw2 < 2 * n);
     while (q--) {
         int type;
         cin >> type;
