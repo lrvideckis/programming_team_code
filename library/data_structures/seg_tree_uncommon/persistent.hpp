@@ -8,19 +8,19 @@ struct PST {
     struct node {
         long long sum;
         int lch, rch;
-        node(long long _sum, int _lch, int _rch) : sum(_sum), lch(_lch), rch(_rch) {}
+        node(long long a_sum, int a_lch, int a_rch) : sum(a_sum), lch(a_lch), rch(a_rch) {}
     };
     int root_l, root_r;
     vector<int> roots; /**< tree[roots[i]] = root node at version i */
     deque<node> tree;
     /**
-     * @param _root_l,_root_r defines range [root_l, root_l) of root node, can be
+     * @param a_root_l,a_root_r defines range [root_l, root_l) of root node, can be
      * negative
      * @time O(1)
      * @space O(1)
      */
-    PST(int _root_l, int _root_r) :
-        root_l(_root_l), root_r(_root_r), roots(1), tree(1, {0LL, 0, 0}) {}
+    PST(int a_root_l, int a_root_r) :
+        root_l(a_root_l), root_r(a_root_r), roots(1), tree(1, {0LL, 0, 0}) {}
     /**
      * @param idx,change does a[idx] += change
      * @param version which version to update. Each call to update creates a

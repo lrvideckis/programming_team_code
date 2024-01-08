@@ -26,8 +26,8 @@ pair<int, long long> row_reduce(vector<vector<long long>>& mat, int cols) {
             iter_swap(begin(mat) + rank, it);
         }
         det = det * mat[rank][col] % mod;
-        auto _inv = bin_exp(mat[rank][col], mod - 2);
-        for (auto& val : mat[rank]) val = val * _inv % mod;
+        auto a_inv = bin_exp(mat[rank][col], mod - 2);
+        for (auto& val : mat[rank]) val = val * a_inv % mod;
         for (int i = 0; i < n; i++)
             if (i != rank && mat[i][col] != 0) {
                 auto val = mat[i][col];

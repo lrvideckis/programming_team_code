@@ -10,11 +10,11 @@ template <class T> struct bit_rurq {
     int n;
     BIT<T> bit1, bit2;
     /**
-     * @param _n size
+     * @param a_n size
      * @time O(n)
      * @space O(n) for both bits
      */
-    bit_rurq(int _n) : n(_n), bit1(n), bit2(n) {}
+    bit_rurq(int a_n) : n(a_n), bit1(n), bit2(n) {}
     /**
      * @param a initial array
      * @time O(n)

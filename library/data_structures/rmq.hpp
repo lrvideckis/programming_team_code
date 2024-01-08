@@ -14,11 +14,11 @@ template <class T, class F> struct RMQ {
     RMQ() {}
     /**
      * @param a static array
-     * @param _op any associative, communative, idempotent operation
+     * @param a_op any associative, communative, idempotent operation
      * @time O(n log n)
      * @space O(n log n) for `dp` vector
      */
-    RMQ(const vector<T>& a, F _op) : dp(1, a), op(_op) {
+    RMQ(const vector<T>& a, F a_op) : dp(1, a), op(a_op) {
         for (int i = 0; (2 << i) <= ssize(a); i++) {
             dp.emplace_back(ssize(a) - (2 << i) + 1);
             transform(begin(dp[i]) + (1 << i), end(dp[i]), begin(dp[i]), begin(dp[i + 1]), op);

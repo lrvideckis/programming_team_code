@@ -27,11 +27,11 @@ template <class T, class F> struct deq {
     /** @} */
     /**
      * @param a initial array: a[0] is front, a.back() is back
-     * @param _op associative operation
+     * @param a_op associative operation
      * @time O(1)
      * @space O(1)
      */
-    deq(const vector<T>& a, F _op) : op(_op) {rebuild(a, ssize(a) / 2);}
+    deq(const vector<T>& a, F a_op) : op(a_op) {rebuild(a, ssize(a) / 2);}
     /**
      * @returns deq[0] op deq[1] op ... op deq.back()
      * @time O(1)

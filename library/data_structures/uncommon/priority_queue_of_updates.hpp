@@ -21,9 +21,9 @@ template <class DS, class... ARGS> struct pq_updates {
     vector<upd> upd_st;
     map<int, int> mp; /**< priority -> index into update stack */
     /**
-     * @param _ds any data structure with member functions `join` and `undo`
+     * @param a_ds any data structure with member functions `join` and `undo`
      */
-    pq_updates(DS& _ds) : ds(_ds) {}
+    pq_updates(DS& a_ds) : ds(a_ds) {}
     /**
      * Remove update with max priority
      * @time O(log(n) + k*T(n)) where k = # of pops off the update stack

@@ -24,7 +24,7 @@ inline long long op(long long vl, long long vr) {
 struct seg_tree {
     int n;
     vector<long long> tree, lazy;
-    seg_tree(int _n) : n(_n), tree(2 * n), lazy(n) {}
+    seg_tree(int a_n) : n(a_n), tree(2 * n), lazy(n) {}
     seg_tree(const vector<int>& a) : seg_tree(ssize(a)) {
         int pw2 = 1;
         while (pw2 < n) pw2 *= 2;

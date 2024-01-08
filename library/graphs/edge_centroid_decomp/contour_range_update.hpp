@@ -13,11 +13,11 @@ template <class T> struct contour_range_update {
     vector<array<bit_rupq<T>, 2>> bits;
     /**
      * @param adj unrooted, undirected tree
-     * @param _a _a[u] = initial value for node u
+     * @param a_a a_a[u] = initial value for node u
      * @time O(n log1.5 n)
      * @space O(n log1.5 n) for `info` and `bits`
      */
-    contour_range_update(const vector<vector<int>>& adj, const vector<T>& _a) : n(ssize(_a)), a(_a), sum_par(n), sum_ch(n), par(n, -1), info(n) {
+    contour_range_update(const vector<vector<int>>& adj, const vector<T>& a_a) : n(ssize(a_a)), a(a_a), sum_par(n), sum_ch(n), par(n, -1), info(n) {
         edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) {
             array<int, 2> mx_d = {0, 0};
             auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
