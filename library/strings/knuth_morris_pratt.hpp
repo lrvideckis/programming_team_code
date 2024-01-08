@@ -18,11 +18,11 @@ template <class T> struct KMP {
     T needle;
     vector<int> pi;
     /**
-     * @param a_needle string to be searched for inside haystack
+     * @param _needle string to be searched for inside haystack
      * @time O(|needle|)
      * @space O(|needle|) for `needle` and `pi` arrays
      */
-    KMP(const T& a_needle) : needle(a_needle), pi(prefix_function(needle)) {}
+    KMP(const T& _needle) : needle(_needle), pi(prefix_function(needle)) {}
     /**
      * @param haystack usually |needle| <= |haystack|
      * @returns array `matches` where:

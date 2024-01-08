@@ -8,11 +8,11 @@ template <class T> struct bit_rupq {
     int n;
     BIT<T> bit;
     /**
-     * @param a_n size
+     * @param _n size
      * @time O(n)
      * @space O(n)
      */
-    bit_rupq(int a_n) : n(a_n), bit(n) {}
+    bit_rupq(int _n) : n(_n), bit(n) {}
     /**
      * @param a initial array
      * @time O(n)

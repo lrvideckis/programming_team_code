@@ -26,12 +26,12 @@ template <class T, class F> struct linear_rmq {
     vector<vector<int>> idx;
     /** @} */
     /**
-     * @param a_a an array
-     * @param a_cmp transitive compare operator
+     * @param _a an array
+     * @param _cmp transitive compare operator
      * @time O(n)
      * @space `a`, `mask`, and `idx` vectors are all O(n)
      */
-    linear_rmq(const vector<T>& a_a, F a_cmp) : n(ssize(a_a)), a(a_a), cmp(a_cmp) {
+    linear_rmq(const vector<T>& _a, F _cmp) : n(ssize(_a)), a(_a), cmp(_cmp) {
         for (int sz = n; sz >= 2; sz = ((sz + 63) >> 6)) {
             int level = ssize(idx);
             mask.emplace_back(sz + 1);

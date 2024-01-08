@@ -20,12 +20,12 @@ template <class F> struct edge_cd {
     F f;
     vector<int> sub_sz;
     /**
-     * @param a_adj,a_f unrooted tree and callback
+     * @param _adj,_f unrooted tree and callback
      * @time O(n * log1.5(n))
      * @space `adj` and `sub_sz` arrays take O(n); recursion stack for `dfs` is
      * O(log1.5 n); recursion stack for `find_cent` is O(n)
      */
-    edge_cd(const vector<vector<int>>& a_adj, F a_f) : adj(a_adj), f(a_f), sub_sz(ssize(adj)) {
+    edge_cd(const vector<vector<int>>& _adj, F _f) : adj(_adj), f(_f), sub_sz(ssize(adj)) {
         dfs(0, ssize(adj));
     }
     int find_cent(int u, int p, int siz) {

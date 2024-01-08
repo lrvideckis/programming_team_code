@@ -10,7 +10,7 @@
 struct iter_seg_tree {
     seg_tree st;
     int pw2;
-    iter_seg_tree(seg_tree& a_st) : st(a_st), pw2(st.n ? 1 << __lg(2 * st.n - 1) : 0) {}
+    iter_seg_tree(seg_tree& _st) : st(_st), pw2(st.n ? 1 << __lg(2 * st.n - 1) : 0) {}
     inline void pull(int u) {st.tree[u] = op(st.tree[2 * u], st.tree[2 * u + 1]);}
     /**
      * @see https://github.com/ecnerwala/cp-book /blob/master/src/seg_tree.hpp

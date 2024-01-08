@@ -26,11 +26,11 @@ template <class T, class F> struct disjoint_rmq {
     F op;
     /**
      * @param a static array
-     * @param a_op any associative operation
+     * @param _op any associative operation
      * @time O(n log n)
      * @space O(n log n) for `dp` vector
      */
-    disjoint_rmq(const vector<T>& a, F a_op) : n(ssize(a)), op(a_op) {
+    disjoint_rmq(const vector<T>& a, F _op) : n(ssize(a)), op(_op) {
         for (int len = 1; len <= n; len *= 2) {
             dp.emplace_back(n);
             for (int le = 0; le < n; le += 2 * len) {
