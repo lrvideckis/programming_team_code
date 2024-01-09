@@ -60,7 +60,7 @@ struct lcp_tree {
         auto ret = get_sa(s, mn + max_val);
         sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
-        auto [a_root, a_adj, a_le, a_ri, to_extrema] = get_cart_tree(lcp, less());
+        auto [a_root, a_adj, a_le, a_ri, node] = get_cart_tree(lcp, less());
         root = max(a_root, 0), le = a_le, ri = a_ri;
         for (int u = 0; u < n - 1; u++)
             for (int v : a_adj[u])
@@ -68,7 +68,7 @@ struct lcp_tree {
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : 0);
             int next_lcp = (i < n - 1 ? lcp[i] : -1);
-            int u = (prev_lcp > next_lcp) ? i - 1 : to_extrema[i];
+            int u = (prev_lcp > next_lcp) ? i - 1 : node[i];
             int idx = sa[i] + max(prev_lcp, next_lcp);
             if (u == -1 || idx == n) continue;
             adj[u][s[idx] - mn] = n - 1 + i;
