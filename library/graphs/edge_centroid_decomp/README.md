@@ -1,3 +1,5 @@
+![](../../../tests/images/edge_cd.png)
+
 ## explanation of the greedy
 
 think "my edge set", and "the other edge set"
