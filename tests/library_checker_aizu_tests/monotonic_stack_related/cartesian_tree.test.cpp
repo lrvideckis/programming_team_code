@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 #include "../template.hpp"
+#include "../mono_st_asserts.hpp"
 
 #include "../../../library/monotonic_stack_related/cartesian_tree.hpp"
 
@@ -9,6 +10,7 @@ int main() {
     cin >> n;
     vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
+    mono_st_asserts(arr);
     auto [root, adj, le, ri, to_extrema] = get_cart_tree(arr, less());
     vector<int> arr_neg(n);
     transform(begin(arr), end(arr), begin(arr_neg), [](int x) {return -x;});

@@ -17,9 +17,8 @@
  * @space two O(n) vectors are allocated and returned
  */
 template <class T, class F> array<vector<int>, 2> mono_range(const vector<T>& a, F cmp) {
-    vector le = mono_st(a, cmp);
-    vector ri = mono_st<T>({rbegin(a), rend(a)}, [&](T x, T y) {return !cmp(y, x);});
-    reverse(begin(ri), end(ri));
-    transform(begin(ri), end(ri), begin(ri), [&](int val) {return ssize(a) - val - 1;});
-    return {le, ri};
+    vector le = mono_st<T>({rbegin(a), rend(a)}, [&](T x, T y) {return !cmp(y, x);});
+    reverse(begin(le), end(le));
+    transform(begin(le), end(le), begin(le), [&](int i) {return ssize(a) - i - 1;});
+    return {le, mono_st(a, cmp)};
 }

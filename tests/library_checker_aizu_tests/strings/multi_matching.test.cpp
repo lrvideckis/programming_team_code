@@ -1,5 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D"
 #include "../template.hpp"
+#include "../mono_st_asserts.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_string_bwt.hpp"
 #define mn mn_other
 #define max_val max_val_other
@@ -17,6 +18,7 @@ int main() {
     cin >> s;
     lcp_tree lt(s);
     find_bwt fb(s, lt.sa);
+    mono_st_asserts(lt.lcp);
     {
         auto [le, ri] = fb.find_str("");
         assert(ssize(le) == 1 && ssize(ri) == 1);
