@@ -20,7 +20,6 @@ template <class T, class F> vector<int> mono_st(const vector<T>& a, F cmp) {
     int n = ssize(a);
     vector<int> ri(n);
     for (int i = n - 1; i >= 0; i--)
-        for (ri[i] = i + 1; ri[i] < n && cmp(a[i], a[ri[i]]);)
-            ri[i] = ri[ri[i]];
+        for (ri[i] = i + 1; ri[i] < n && cmp(a[i], a[ri[i]]);) ri[i] = ri[ri[i]];
     return ri;
 }
