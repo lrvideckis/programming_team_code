@@ -12,9 +12,11 @@ int main() {
     for (int i = 0; i < n; i++) cin >> arr[i];
     mono_st_asserts(arr);
     auto [root, adj, le, ri, node] = get_cart_tree(arr, less());
+    assert(node[root] == root);
     vector<int> arr_neg(n);
     transform(begin(arr), end(arr), begin(arr_neg), [](int x) {return -x;});
     auto [root_neg, adj_neg, le_neg, ri_neg, node_neg] = get_cart_tree(arr_neg, greater());
+    assert(node_neg[root_neg] == root_neg);
     assert(root == root_neg);
     assert(adj == adj_neg);
     assert(le == le_neg);

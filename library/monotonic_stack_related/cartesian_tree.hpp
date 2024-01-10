@@ -54,8 +54,8 @@ template <class T, class F> cart_tree get_cart_tree(const vector<T>& a, F cmp) {
     for (int i = 0; i < n; i++)
         if (le[i] == -1 && ri[i] == n) root = i;
         else if (node[i] == i) {
-            bool le_par = (le[i] != -1 && (ri[i] == n || cmp(a[ri[i]], a[le[i]])));
-            adj[node[le_par ? le[i] : ri[i]]].push_back(i);
+            bool ri_par = (ri[i] != n && (le[i] == -1 || cmp(a[le[i]], a[ri[i]])));
+            adj[node[ri_par ? ri[i] : le[i]]].push_back(i);
         }
     return {root, adj, le, ri, node};
 }
