@@ -45,7 +45,7 @@ struct cart_tree {
  */
 template <class T, class F> cart_tree get_cart_tree(const vector<T>& a, F cmp) {
     int n = ssize(a);
-    auto [le, ri] = mono_range(a, cmp);
+    auto ri = mono_st(a, cmp), le = mono_range(ri);
     vector<int> node(n);
     for (int i = n - 1; i >= 0; i--)
         node[i] = (ri[i] < n && a[i] == a[ri[i]]) ? node[ri[i]] : i;

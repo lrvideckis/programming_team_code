@@ -3,7 +3,7 @@
 /**
  * @code{.cpp}
        vector<long long> a;
-       vector<int> ri = mono_st(a, less()); // greater(), less_equal(), greater_equal()
+       auto ri = mono_st(a, less()); // greater(), less_equal(), greater_equal()
        for (int i = n - 1; i >= 0; i--)
            for (int j = i + 1; j != ri[i]; j = ri[j])
                // for all k in [j, ri[j]): cmp(a[i], a[k])

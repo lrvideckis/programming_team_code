@@ -11,7 +11,7 @@ void mono_st_asserts(const vector<int>& a) {
     for (auto cmp : compares) {
         RMQ rmq(a, [&](int x, int y) -> int { return cmp(x, y) ? x : y; });
         int iterations = 0;
-        auto [le, ri] = mono_range(a, cmp);
+        auto ri = mono_st(a, cmp), le = mono_range(ri);
         {
             vector old_way_le = mono_st<int>({rbegin(a), rend(a)}, [&](int x, int y) {return !cmp(y, x);});
             reverse(begin(old_way_le), end(old_way_le));
