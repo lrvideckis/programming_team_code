@@ -86,7 +86,6 @@
 "tests/library_checker_aizu_tests/math/totient.test.cpp": "2023-10-26 11:24:43 -0700",
 "tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_tree.test.cpp": "2024-01-11 15:48:26 -0600",
 "tests/library_checker_aizu_tests/monotonic_stack_related/count_rectangles.test.cpp": "2024-01-11 15:48:26 -0600",
-"tests/library_checker_aizu_tests/monotonic_stack_related/max_rect_histogram.test.cpp": "2024-01-11 15:48:26 -0600",
 "tests/library_checker_aizu_tests/strings/kmp.test.cpp": "2024-01-08 10:53:33 -0600",
 "tests/library_checker_aizu_tests/strings/lcp_array.test.cpp": "2023-12-31 18:54:53 -0600",
 "tests/library_checker_aizu_tests/strings/lcp_interval_tree.test.cpp": "2024-01-11 15:48:26 -0600",
