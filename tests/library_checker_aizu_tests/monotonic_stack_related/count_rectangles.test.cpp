@@ -19,14 +19,11 @@ int main() {
         }
     }
     {
-        vector<int> h_true(m), h_false(m);
+        vector<int> h(m);
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                h_true[j] = grid[i][j] * (h_true[j] + 1);
-                h_false[j] = (!grid[i][j]) * (h_false[j] + 1);
-            }
-            mono_st_asserts(h_true);
-            mono_st_asserts(h_false);
+            for (int j = 0; j < m; j++)
+                h[j] = (!grid[i][j]) * (h[j] + 1);
+            mono_st_asserts(h);
         }
     }
     vector<vector<int>> size_counts = count_rectangles(grid);

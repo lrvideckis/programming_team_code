@@ -13,7 +13,25 @@ const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase le
  * corresponds exactly to the internal nodes of the suffix tree. Then add in
  * <= n nodes, one for each suffix, and it corresponds to the suffix tree.
  *
- * TODO
+ * string = "cabcabacaabc"
+ *                                              c
+ *              c                               b
+ *              b               c               a
+ *              a               b           c   a
+ *      c       a               a           b   c
+ *      b       c       c       a           a   a
+ *      a       a   c   b       c           a   b
+ *      a       b   b   a       a       c   c   a
+ *  c   c       a   a   a       b       b   a   c
+ *  b   a   c | c   a   c       a       a   b | b
+ *  a   b | b | b   c   a   c | c       a | a | a
+ *  a | a | a | a | a   b | b | b   c | c | c | c
+ *    1   2   3   1   0   1   2   0   1   2   3   <- LCP array
+ * (------------------R--------------------------)
+ * (--a--------------) (--b------) (--c----------)
+ * (a) (--b------) (c) (a) (--c--)     (--a------)
+ *     (a) (--c--)             (a)     (a) (--b--)
+ *             (a)                         (a) (c)
  *
  * note leaf nodes don't exist when that suffix is a prefix of a longer suffix
  *
@@ -50,10 +68,13 @@ struct lcp_tree {
         for (int i = 0; i < ssize(p); i++)
             if (i != root && lcp[i] != lcp[p[i]])
                 adj[p[i]][s[sa[i] + lcp[p[i]]] - mn] = i;
+        auto node = [&](int i) -> int {
+            return p[i] > i || lcp[i] != lcp[p[i]] ? i : p[i];
+        };
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : -1);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
-            int u = (prev_lcp < next_lcp ? i : (p[i - 1] < ssize(p) && lcp[i - 1] == lcp[p[i - 1]] ? p[i - 1] : i - 1));
+            int u = (prev_lcp < next_lcp ? i : node(i - 1));
             int idx = sa[i] + max(prev_lcp, next_lcp);
             if (u == ssize(adj) || idx == n) continue;
             adj[u][s[idx] - mn] = ssize(lcp) + i;
