@@ -1,6 +1,29 @@
 #pragma once
 #include "../../library/monotonic_stack_related/monotonic_range.hpp"
+#include "../../library/monotonic_stack_related/cartesian_tree.hpp"
 #include "../../library/data_structures/rmq.hpp"
+tuple<int, vector<vector<int>>, vector<int>> min_cartesian_tree(const vector<int>& a, const vector<int>& le, const vector<int>& ri) {
+    int n = ssize(a);
+    assert(ssize(le) == n && ssize(ri) == n);
+    auto leftmost_min = [&](int i) -> bool {return le[i] == -1 || a[le[i]] < a[i];};
+    vector<int> to_min(n);
+    iota(begin(to_min), end(to_min), 0);
+    for (int i = 0; i < n; i++)
+        if (!leftmost_min(i))
+            to_min[i] = to_min[le[i]];
+    vector<vector<int>> adj(n);
+    int root = -1;
+    for (int i = 0; i < n; i++) {
+        if (le[i] == -1 && ri[i] == n) {
+            assert(root == -1);
+            root = i;
+        } else if (leftmost_min(i)) {
+            bool le_par = (le[i] >= 0 && (ri[i] == n || a[le[i]] > a[ri[i]]));
+            adj[to_min[le_par ? le[i] : ri[i]]].push_back(i);
+        }
+    }
+    return {root, adj, to_min};
+}
 void mono_st_asserts(const vector<int>& a) {
     vector<function<bool(int, int)>> compares;
     compares.push_back(less());
@@ -37,4 +60,22 @@ void mono_st_asserts(const vector<int>& a) {
         for (int j = 0; j != n; j = ri[j]) iterations++;
         assert(iterations == n);
     }
+    // test cartesian tree against old method
+    auto ri = mono_st(a, less_equal()), le = mono_range(ri), p = get_cart_tree(a, ri);
+    assert(count(begin(p), end(p), n) == !empty(a));
+    for(int i = 0; i < n; i++)
+        assert(0 <= p[i] && p[i] <= n && p[i] != i);
+    auto [root, adj, to_min] = min_cartesian_tree(a, le, ri);
+    vector<int> p_old_method(n, -1);
+    auto set_val = [&](int i, int val) -> void {
+        assert(p_old_method[i] == -1);
+        p_old_method[i] = val;
+    };
+    assert((root == -1) == empty(a));
+    if (root != -1) set_val(root, n);
+    for(int i = 0; i < n; i++)
+        for(int j : adj[i]) set_val(j, i);
+    for(int i = 0; i < n; i++)
+        if(to_min[i] < i) set_val(i, to_min[i]);
+    assert(p == p_old_method);
 }

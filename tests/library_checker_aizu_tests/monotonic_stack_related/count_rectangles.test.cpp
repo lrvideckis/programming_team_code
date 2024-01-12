@@ -1,5 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/all/DPL_3_B"
 #include "../template.hpp"
+#include "../mono_st_asserts.hpp"
 #include "../../../library/contest/random.hpp"
 #include "../../../library/monotonic_stack_related/count_rectangles.hpp"
 
@@ -15,6 +16,28 @@ int main() {
             bool val;
             cin >> val;
             grid[i][j] = !val;
+        }
+    }
+    {
+        vector<int> h_true(n), h_false(n);
+        for (int j = 0; j < m; j++) {
+            for (int i = 0; i < n; i++) {
+                h_true[i] = grid[i][j] * (h_true[i] + 1);
+                h_false[i] = (!grid[i][j]) * (h_false[i] + 1);
+            }
+            mono_st_asserts(h_true);
+            mono_st_asserts(h_false);
+        }
+    }
+    {
+        vector<int> h_true(m), h_false(m);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                h_true[j] = grid[i][j] * (h_true[j] + 1);
+                h_false[j] = (!grid[i][j]) * (h_false[j] + 1);
+            }
+            mono_st_asserts(h_true);
+            mono_st_asserts(h_false);
         }
     }
     vector<vector<int>> size_counts = count_rectangles(grid);

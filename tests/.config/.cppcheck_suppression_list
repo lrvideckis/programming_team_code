@@ -11,7 +11,6 @@ unusedStructMember:../library/graphs/bridges_cuts/bridges.hpp:7
 unusedStructMember:../library/graphs/bridges_cuts/cuts.hpp:7
 unusedStructMember:../library/flow/hungarian.hpp:9
 unusedStructMember:../library/strings/suffix_array_related/find/match.hpp:22
-unusedStructMember:../library/monotonic_stack_related/cartesian_tree.hpp:28
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
 unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_length.hpp:14
 unusedScopedObject:library_checker_aizu_tests/cd_asserts.hpp:5
