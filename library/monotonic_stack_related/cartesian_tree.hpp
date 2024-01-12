@@ -13,7 +13,7 @@
  * p[0] = p[2] = 1
  * p[6] = 8
  * p[1] = p[8] = p[10] = 5
- * p[5] == 11 == n (root)
+ * p[5] = 11 = n (root)
  *
  * indexes 3, 4, 7, 9 are not nodes; here p maps i to left-most min in their subarray:
  * p[3] = p[4] = 1
@@ -21,8 +21,8 @@
  * p[9] = 5
  *
  * @code{.cpp}
-       auto ri = mono_st(a, less_equal()), p = get_cart_tree(a, ri); // min cart tree
-       auto ri = mono_st(a, greater_equal()), p = get_cart_tree(a, ri); // max cart tree
+       auto ri = mono_st(a, less_equal()), p = cart_tree(a, ri); // min cart tree
+       auto ri = mono_st(a, greater_equal()), p = cart_tree(a, ri); // max cart tree
        bool is_node = (p[i] > i || a[i] != a[p[i]]);
  * @endcode
  *
@@ -31,7 +31,7 @@
  * @time O(n)
  * @space a O(n) vector is allocated and returned
  */
-template <class T> vector<int> get_cart_tree(const vector<T>& a, const vector<int>& ri) {
+template <class T> vector<int> cart_tree(const vector<T>& a, const vector<int>& ri) {
     vector<int> p(ri);
     for (int i = 0; i < ssize(a); i++)
         for (int j = i + 1; j != ri[i]; j = ri[j])

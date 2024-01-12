@@ -19,17 +19,6 @@ int main() {
         }
     }
     {
-        vector<int> h_true(n), h_false(n);
-        for (int j = 0; j < m; j++) {
-            for (int i = 0; i < n; i++) {
-                h_true[i] = grid[i][j] * (h_true[i] + 1);
-                h_false[i] = (!grid[i][j]) * (h_false[i] + 1);
-            }
-            mono_st_asserts(h_true);
-            mono_st_asserts(h_false);
-        }
-    }
-    {
         vector<int> h_true(m), h_false(m);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {

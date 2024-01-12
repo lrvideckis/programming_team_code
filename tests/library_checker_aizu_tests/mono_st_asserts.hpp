@@ -61,7 +61,7 @@ void mono_st_asserts(const vector<int>& a) {
         assert(iterations == n);
     }
     // test cartesian tree against old method
-    auto ri = mono_st(a, less_equal()), le = mono_range(ri), p = get_cart_tree(a, ri);
+    auto ri = mono_st(a, less_equal()), le = mono_range(ri), p = cart_tree(a, ri);
     assert(count(begin(p), end(p), n) == !empty(a));
     for(int i = 0; i < n; i++)
         assert(0 <= p[i] && p[i] <= n && p[i] != i);

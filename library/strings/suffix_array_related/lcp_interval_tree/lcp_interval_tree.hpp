@@ -45,7 +45,7 @@ struct lcp_tree {
         lcp = get_lcp_array(sa, sa_inv, s);
         ri = mono_st(lcp, less_equal());
         le = mono_range(ri);
-        auto p = get_cart_tree(lcp, ri);
+        auto p = cart_tree(lcp, ri);
         root = int(find(begin(p), end(p), ssize(p)) - begin(p));
         for (int i = 0; i < ssize(p); i++)
             if (i != root && lcp[i] != lcp[p[i]])
