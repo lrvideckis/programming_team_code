@@ -19,7 +19,7 @@ vector<int> gcd_convolution(const vector<int>& a, const vector<int>& b) {
             if ((c[g] -= c[i]) < 0) c[g] += mod;
         }
         sum_a %= mod, sum_b %= mod;
-        c[g] = int((c[g] + sum_a * sum_b) % mod);
+        c[g] = (c[g] + sum_a * sum_b) % mod;
     }
     return c;
 }

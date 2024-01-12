@@ -32,7 +32,7 @@ struct kth_smallest {
     int query_impl(int k, int tl, int tr, int vl, int vr) {
         if (tr - tl == 1) return tl;
         int tm = tl + (tr - tl) / 2;
-        int left_count = int(pst.tree[pst.tree[vr].lch].sum - pst.tree[pst.tree[vl].lch].sum);
+        int left_count = pst.tree[pst.tree[vr].lch].sum - pst.tree[pst.tree[vl].lch].sum;
         if (left_count >= k) return query_impl(k, tl, tm, pst.tree[vl].lch, pst.tree[vr].lch);
         return query_impl(k - left_count, tm, tr, pst.tree[vl].rch, pst.tree[vr].rch);
     }

@@ -25,8 +25,8 @@ template <class T> inline match find_substrs_concated(lcp_query<T>& lq,
     };
     for (auto [le, ri] : substrs) {
         assert(0 <= le && le <= ri && ri <= n);
-        sa_le = int(lower_bound(begin(lq.sa) + sa_le, begin(lq.sa) + sa_ri, dt{le, ri - le, 0}, cmp) - begin(lq.sa));
-        sa_ri = int(lower_bound(begin(lq.sa) + sa_le, begin(lq.sa) + sa_ri, dt{le, ri - le, 1}, cmp) - begin(lq.sa));
+        sa_le = lower_bound(begin(lq.sa) + sa_le, begin(lq.sa) + sa_ri, dt{le, ri - le, 0}, cmp) - begin(lq.sa);
+        sa_ri = lower_bound(begin(lq.sa) + sa_le, begin(lq.sa) + sa_ri, dt{le, ri - le, 1}, cmp) - begin(lq.sa);
         sum_len += ri - le;
     }
     return {sa_le, sa_ri, str_le, str_ri};

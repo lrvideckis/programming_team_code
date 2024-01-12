@@ -19,7 +19,7 @@ vector<int> and_convolution(vector<int> a, vector<int> b) {
             }
     vector<int> c(1 << n);
     for (int i = 0; i < (1 << n); i++)
-        c[i] = int(1LL * a[i] * b[i] % mod);
+        c[i] = 1LL * a[i] * b[i] % mod;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < (1 << n); j++)
             if (!((j >> i) & 1))

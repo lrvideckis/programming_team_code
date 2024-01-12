@@ -26,7 +26,7 @@ struct wavelet_tree {
            vector<int> sorted(a);
            sort(begin(sorted), end(sorted));
            sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-           for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+           for (int& val : a) val = lower_bound(begin(sorted), end(sorted), val) - begin(sorted);
            wavelet_tree wt(a, 0, ssize(sorted));
      * @endcode
      * @param a,a_minv,a_maxv must satisfy minv <= a[i] < maxv
@@ -46,7 +46,7 @@ struct wavelet_tree {
         bool_presums[u] = bool_presum(bools);
         presums[u].resize(ri - le + 1);
         inclusive_scan(begin(a) + le, begin(a) + ri, begin(presums[u]) + 1, plus<long long>(), 0LL);
-        int mi = int(stable_partition(begin(a) + le, begin(a) + ri, low) - begin(a));
+        int mi = stable_partition(begin(a) + le, begin(a) + ri, low) - begin(a);
         build(a, le, mi, tl, tm, 2 * u);
         build(a, mi, ri, tm, tr, 2 * u + 1);
     }

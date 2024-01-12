@@ -48,7 +48,7 @@ template <class F> struct edge_cd {
             if (ret) sum += sub_sz[v];
             return ret;
         });
-        f(adj, u, int(it - begin(adj[u])));
+        f(adj, u, it - begin(adj[u]));
         vector<int> oth(it, end(adj[u]));
         adj[u].erase(it, end(adj[u]));
         dfs(u, sum + 1);

@@ -64,7 +64,7 @@ struct lcp_tree {
         ri = mono_st(lcp, less_equal());
         le = mono_range(ri);
         auto p = cart_tree(lcp, ri);
-        root = int(find(begin(p), end(p), ssize(p)) - begin(p));
+        root = find(begin(p), end(p), ssize(p)) - begin(p);
         for (int i = 0; i < ssize(p); i++)
             if (i != root && lcp[i] != lcp[p[i]])
                 adj[p[i]][s[sa[i] + lcp[p[i]]] - mn] = i;

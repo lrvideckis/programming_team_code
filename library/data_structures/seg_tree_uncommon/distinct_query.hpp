@@ -28,6 +28,6 @@ struct distinct_query {
      */
     inline int query(int le, int ri) {
         assert(0 <= le && le <= ri && ri <= n);
-        return int(pst.query(0, le + 1, ri) - pst.query(0, le + 1, le));
+        return pst.query(0, le + 1, ri) - pst.query(0, le + 1, le);
     }
 };

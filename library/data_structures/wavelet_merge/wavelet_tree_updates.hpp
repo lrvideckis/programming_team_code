@@ -27,7 +27,7 @@ struct wavelet_tree_updates {
            vector<int> sorted(a);
            sort(begin(sorted), end(sorted));
            sorted.erase(unique(begin(sorted), end(sorted)), end(sorted));
-           for (int& val : a) val = int(lower_bound(begin(sorted), end(sorted), val) - begin(sorted));
+           for (int& val : a) val = lower_bound(begin(sorted), end(sorted), val) - begin(sorted);
            wavelet_tree_updates wtu(a, 0, ssize(sorted), vector<bool>(ssize(a), 1));
      * @endcode
      * @param a,a_minv,a_maxv must satisfy minv <= a[i] < maxv
@@ -50,7 +50,7 @@ struct wavelet_tree_updates {
         auto low = [&](auto & p) {return p.first < tm;};
         transform(begin(cpy) + le, begin(cpy) + ri, begin(bools), low);
         bool_presums[u] = bool_presum(bools);
-        int mi = int(stable_partition(begin(cpy) + le, begin(cpy) + ri, low) - begin(cpy));
+        int mi = stable_partition(begin(cpy) + le, begin(cpy) + ri, low) - begin(cpy);
         build(cpy, le, mi, tl, tm, 2 * u);
         build(cpy, mi, ri, tm, tr, 2 * u + 1);
     }
