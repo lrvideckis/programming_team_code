@@ -69,7 +69,7 @@ struct lcp_tree {
             return p[i] > i || lcp[i] != lcp[p[i]] ? i : p[i];
         };
         for (int i = 0; i < ssize(p); i++)
-            if (node(i) == i) adj[p[i]][s[sa[i] + lcp[p[i]]] - mn] = i;
+            if (node(i) == i && i != root) adj[p[i]][s[sa[i] + lcp[p[i]]] - mn] = i;
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : -1);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
