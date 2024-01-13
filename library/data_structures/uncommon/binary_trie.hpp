@@ -26,12 +26,12 @@ template <class T> struct binary_trie {
     void update(T val, int delta) {
         t[0].sub_sz += delta;
         for (int u = 0, bit = mx_bit; bit >= 0; bit--) {
-            bool v = (val >> bit) & 1;
-            if (t[u].next[v] == -1) {
-                t[u].next[v] = ssize(t);
+            bool b = (val >> bit) & 1;
+            if (t[u].next[b] == -1) {
+                t[u].next[b] = ssize(t);
                 t.emplace_back();
             }
-            u = t[u].next[v];
+            u = t[u].next[b];
             t[u].sub_sz += delta;
         }
     }
@@ -44,9 +44,9 @@ template <class T> struct binary_trie {
     int count(T val) {
         int u = 0;
         for (int bit = mx_bit; bit >= 0; bit--) {
-            bool v = (val >> bit) & 1;
-            if (t[u].next[v] == -1) return 0;
-            u = t[u].next[v];
+            bool b = (val >> bit) & 1;
+            if (t[u].next[b] == -1) return 0;
+            u = t[u].next[b];
         }
         return t[u].sub_sz;
     }
@@ -61,12 +61,12 @@ template <class T> struct binary_trie {
         assert(t[0].sub_sz > 0);
         T res = 0;
         for (int u = 0, bit = mx_bit; bit >= 0; bit--) {
-            bool v = (val >> bit) & 1;
-            int ch = t[u].next[v];
-            if (ch != -1 && t[ch].sub_sz > 0)
-                u = ch, res |= T(v) << bit;
+            bool b = (val >> bit) & 1;
+            int v = t[u].next[b];
+            if (v != -1 && t[v].sub_sz > 0)
+                u = v, res |= T(b) << bit;
             else
-                u = t[u].next[!v], res |= T(!v) << bit;
+                u = t[u].next[!b], res |= T(!b) << bit;
         }
         return res;
     }
