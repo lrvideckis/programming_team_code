@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../mono_st_asserts.hpp"
 
-#include "../../../library/monotonic_stack_related/max_rect_histogram.hpp"
+#include "../../../library/monotonic_stack/max_rect_histogram.hpp"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

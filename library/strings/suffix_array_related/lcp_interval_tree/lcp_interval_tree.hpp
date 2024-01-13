@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
-#include "../../../monotonic_stack_related/monotonic_range.hpp"
-#include "../../../monotonic_stack_related/cartesian_tree.hpp"
+#include "../../../monotonic_stack/monotonic_range.hpp"
+#include "../../../monotonic_stack/cartesian_tree_dups.hpp"
 #include "../suffix_array.hpp"
 #include "../lcp_array.hpp"
 const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase letters: mn = 'a', max_val = 26
@@ -63,7 +63,7 @@ struct lcp_tree {
         lcp = get_lcp_array(sa, sa_inv, s);
         ri = mono_st(lcp, less_equal());
         le = mono_range(ri);
-        auto p = cart_tree(lcp, ri);
+        auto p = cart_tree_dups(lcp, ri);
         root = find(begin(p), end(p), ssize(p)) - begin(p);
         auto node = [&](int i) -> int {
             return p[i] > i || lcp[i] != lcp[p[i]] ? i : p[i];

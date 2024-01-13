@@ -21,17 +21,17 @@
  * p[9] = 5
  *
  * @code{.cpp}
-       auto ri = mono_st(a, less_equal()), p = cart_tree(a, ri); // min cart tree
-       auto ri = mono_st(a, greater_equal()), p = cart_tree(a, ri); // max cart tree
+       auto ri = mono_st(a, less_equal()), p = cart_tree_dups(a, ri); // min cart tree
+       auto ri = mono_st(a, greater_equal()), p = cart_tree_dups(a, ri); // max cart tree
        bool is_node = (p[i] > i || a[i] != a[p[i]]);
  * @endcode
  *
- * @param a,ri array and it's monotonic stack
+ * @param a,ri array and its monotonic stack
  * @returns parent array
  * @time O(n)
  * @space a O(n) vector is allocated and returned
  */
-template <class T> vector<int> cart_tree(const vector<T>& a, const vector<int>& ri) {
+template <class T> vector<int> cart_tree_dups(const vector<T>& a, const vector<int>& ri) {
     vector<int> p(ri);
     for (int i = 0; i < ssize(a); i++)
         for (int j = i + 1; j != ri[i]; j = ri[j])

@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../mono_st_asserts.hpp"
 #include "../../../library/contest/random.hpp"
-#include "../../../library/monotonic_stack_related/count_rectangles.hpp"
+#include "../../../library/monotonic_stack/count_rectangles.hpp"
 
 #include "../../../kactl/content/data-structures/SubMatrix.h"
 
