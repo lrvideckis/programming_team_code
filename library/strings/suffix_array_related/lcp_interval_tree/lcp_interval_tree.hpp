@@ -65,12 +65,11 @@ struct lcp_tree {
         le = mono_range(ri);
         auto p = cart_tree(lcp, ri);
         root = find(begin(p), end(p), ssize(p)) - begin(p);
-        for (int i = 0; i < ssize(p); i++)
-            if (i != root && lcp[i] != lcp[p[i]])
-                adj[p[i]][s[sa[i] + lcp[p[i]]] - mn] = i;
         auto node = [&](int i) -> int {
             return p[i] > i || lcp[i] != lcp[p[i]] ? i : p[i];
         };
+        for (int i = 0; i < ssize(p); i++)
+            if (node(i) == i) adj[p[i]][s[sa[i] + lcp[p[i]]] - mn] = i;
         for (int i = 0; i < n; i++) {
             int prev_lcp = (i ? lcp[i - 1] : -1);
             int next_lcp = (i < ssize(lcp) ? lcp[i] : 0);
