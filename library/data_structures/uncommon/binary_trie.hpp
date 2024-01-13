@@ -6,7 +6,6 @@
 template <class T> struct binary_trie {
     int mx_bit;
     struct node {
-        T val = -1;
         int sub_sz = 0;
         array<int, 2> next = {-1, -1};
     };
@@ -14,7 +13,6 @@ template <class T> struct binary_trie {
     /**
      * @code{.cpp}
            binary_trie<int> bt; //mx_bit = 30
-           // or
            binary_trie<long long> bt; //mx_bit = 62
      * @endcode
      */
@@ -22,14 +20,12 @@ template <class T> struct binary_trie {
     /**
      * @param val integer
      * @param delta 1 to insert val, -1 to remove val
-     * @returns number of occurances of val in multiset
      * @time O(mx_bit)
      * @space O(mx_bit) new nodes are pushed back onto `t`
      */
-    inline int update(T val, int delta) {
-        int u = 0;
+    void update(T val, int delta) {
         t[0].sub_sz += delta;
-        for (int bit = mx_bit; bit >= 0; bit--) {
+        for (int u = 0, bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
             if (t[u].next[v] == -1) {
                 t[u].next[v] = ssize(t);
@@ -38,33 +34,40 @@ template <class T> struct binary_trie {
             u = t[u].next[v];
             t[u].sub_sz += delta;
         }
-        t[u].val = val;
+    }
+    /**
+     * @param val integer
+     * @returns number of occurances of val in the multiset
+     * @time O(mx_bit)
+     * @space O(1)
+     */
+    int count(T val) {
+        int u = 0;
+        for (int bit = mx_bit; bit >= 0; bit--) {
+            bool v = (val >> bit) & 1;
+            if (t[u].next[v] == -1) return 0;
+            u = t[u].next[v];
+        }
         return t[u].sub_sz;
     }
     /**
-     * @returns number of integers in this multiset.
-     */
-    inline int size() {
-        return t[0].sub_sz;
-    }
-    /**
-     * @param val query parameter
+     * @param val integer
      * @returns integer x such that x is in this multiset, and the value of
      * (x^val) is minimum.
      * @time O(mx_bit)
      * @space O(1)
      */
-    inline T min_xor(T val) {
-        assert(size() > 0);
-        int u = 0;
-        for (int bit = mx_bit; bit >= 0; bit--) {
+    T min_xor(T val) {
+        assert(t[0].sub_sz > 0);
+        T res = 0;
+        for (int u = 0, bit = mx_bit; bit >= 0; bit--) {
             bool v = (val >> bit) & 1;
             int ch = t[u].next[v];
             if (ch != -1 && t[ch].sub_sz > 0)
-                u = ch;
+                u = ch, res |= T(v) << bit;
             else
-                u = t[u].next[!v];
+                u = t[u].next[!v], res |= T(!v) << bit;
         }
-        return t[u].val;
+        return res;
     }
 };

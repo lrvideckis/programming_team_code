@@ -32,7 +32,6 @@ assertWithSideEffect:../library/data_structures/uncommon/deque_with_op.hpp:41
 assertWithSideEffect:../library/data_structures/uncommon/deque_with_op.hpp:59
 assertWithSideEffect:../library/data_structures/uncommon/deque_with_op.hpp:84
 assertWithSideEffect:../library/data_structures/uncommon/deque_with_op.hpp:98
-assertWithSideEffect:../library/data_structures/uncommon/binary_trie.hpp:58
 assertWithSideEffect:../library/data_structures/wavelet_merge/wavelet_tree_updates.hpp:103
 assertWithSideEffect:../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp:106
 constParameter:../library/data_structures/wavelet_merge/merge_sort_tree.hpp:30
