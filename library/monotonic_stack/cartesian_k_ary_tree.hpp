@@ -2,6 +2,7 @@
 #pragma once
 #include "monotonic_stack.hpp"
 /**
+ *   when cmp is less_equal():
  *   a = {2, 1, 3, 1, 1, 0, 2, 2, 1, 0, 2}
  *       (---------------x---------------)
  *       (---x---------) | (------x)   (x)
