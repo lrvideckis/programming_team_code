@@ -1,6 +1,6 @@
 #pragma once
 #include "../../library/monotonic_stack/monotonic_range.hpp"
-#include "../../library/monotonic_stack/cartesian_tree_dups.hpp"
+#include "../../library/monotonic_stack/cartesian_k_ary_tree.hpp"
 #include "../../library/data_structures/rmq.hpp"
 tuple<int, vector<vector<int>>, vector<int>> min_cartesian_tree(const vector<int>& a, const vector<int>& le, const vector<int>& ri) {
     int n = ssize(a);
@@ -61,7 +61,7 @@ void mono_st_asserts(const vector<int>& a) {
         assert(iterations == n);
     }
     // test cartesian tree against old method
-    auto ri = mono_st(a, less_equal()), le = mono_range(ri), p = cart_tree_dups(a, ri);
+    auto ri = mono_st(a, less_equal()), le = mono_range(ri), p = cart_k_ary_tree(a, ri);
     assert(count(begin(p), end(p), n) == !empty(a));
     for(int i = 0; i < n; i++)
         assert(0 <= p[i] && p[i] <= n && p[i] != i);
