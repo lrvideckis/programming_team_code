@@ -4,7 +4,7 @@
 /**
  * @code{.cpp}
        vector<long long> a;
-       auto ri = mono_st(a, less()), le = mono_range(ri);
+       auto ri = mono_st(a, less()), le = mono_range(ri); // greater(), less_equal(), greater_equal()
  * @endcode
  * @param ri monotonic stack array of a
  * @returns (if you use less()) vector le such that:

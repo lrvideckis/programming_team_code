@@ -14,10 +14,10 @@
  * index: 0  1  2  3  4  5  6  7  8  9  10
  *
  * @code{.cpp}
-       auto ri = mono_st(a, less()), p = cart_binary_tree(ri); // min cart tree; right-most min is root
-       auto ri = mono_st(a, less_equal()), p = cart_binary_tree(ri); // min cart tree; left-most min is root
-       auto ri = mono_st(a, greater()), p = cart_binary_tree(ri); // max cart tree; right-most max is root
-       auto ri = mono_st(a, greater_equal()), p = cart_binary_tree(ri); // max cart tree; left-most max is root
+       auto ri = mono_st(a, less()), p = cart_binary_tree(ri); // right-most min is root
+       auto ri = mono_st(a, less_equal()), p = cart_binary_tree(ri); // left-most min is root
+       auto ri = mono_st(a, greater()), p = cart_binary_tree(ri); // right-most max is root
+       auto ri = mono_st(a, greater_equal()), p = cart_binary_tree(ri); // left-most max is root
  * @endcode
  * @param ri monotonic stack of an array *with unique values*
  * @returns parent array
