@@ -56,8 +56,7 @@ struct perm_tree {
             array<UF, 2> uf = {UF(n), UF(n)};
             for (int i = n - 1; i >= 0; i--) {
                 for (int j = 0; j < 2; j++) {
-                    for (int k = i + 1; k != ri[j][i]; k = ri[j][k])
-                        uf[j].join(i, k);
+                    for (int k = i + 1; k != ri[j][i]; k = ri[j][k]) uf[j].join(i, k);
                     least[j][uf[j].find(i)] = i;
                 }
                 for (int idx : qi[i]) {
