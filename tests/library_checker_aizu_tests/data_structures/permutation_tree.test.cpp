@@ -37,7 +37,8 @@ int main() {
             assert(a[u] == mn_val[u]);
             assert(is_join[u]);
         } else {
-            assert(len[u] > 1);
+            if (is_join[u]) assert(len[u] >= 2);
+            else assert(len[u] >= 3);
             assert(ssize(adj[u]) >= 2);
             assert(mn_idx[u] == mn_idx[adj[u][0]]);
             assert(mn_idx[u] + len[u] == mn_idx[adj[u].back()] + len[adj[u].back()]);
