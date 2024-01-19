@@ -47,7 +47,8 @@ int main() {
             for (int i = 1; i < ssize(adj[u]); i++) {
                 int prev = adj[u][i - 1], curr = adj[u][i];
                 assert(mn_idx[prev] + len[prev] == mn_idx[curr]);
-                assert(is_join[u] == pt.touches(prev, curr));
+                bool curr_touches = pt.touches(prev, curr);
+                assert(is_join[u] == curr_touches);
             }
             int mn_val_naive = n, mx_val_naive = -1, sum_len_naive = 0;
             for (int v : adj[u]) {
