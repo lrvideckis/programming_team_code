@@ -4,10 +4,6 @@
 #include "../../../library/data_structures/rmq.hpp"
 #include "../../../library/data_structures/uncommon/permutation_tree.hpp"
 
-bool my_touches(int u, int v, const vector<int>& mn_val, const vector<int>& len) {
-    return mn_val[u] == mn_val[v] + len[v] || mn_val[v] == mn_val[u] + len[u];
-};
-
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n;
@@ -17,16 +13,24 @@ int main() {
         cin >> a[i];
     RMQ rmq_min(a, [](int x, int y) {return min(x, y);});
     RMQ rmq_max(a, [](int x, int y) {return max(x, y);});
-    auto [is_join, mn_idx, mn_val, len, root, adj] = perm_tree(a);
+    perm_tree pt(a);
+    auto is_join = pt.is_join;
+    auto mn_idx = pt.mn_idx;
+    auto mn_val = pt.mn_val;
+    auto len = pt.len;
+    auto root = pt.root;
+    auto adj = pt.adj;
     assert(mn_idx[root] == 0 && mn_val[root] == 0 && len[root] == n);
     cout << ssize(adj) << '\n';
     int curr_time = 0;
     vector<int> node_to_time(ssize(adj), -1);
     auto dfs = [&](auto&& self, int u, int p) -> void {
-        int mn_val_rmq = rmq_min.query(mn_idx[u], mn_idx[u] + len[u]);
-        assert(mn_val_rmq == mn_val[u]);
-        int mx_val_rmq = rmq_max.query(mn_idx[u], mn_idx[u] + len[u]);
-        assert(mx_val_rmq - mn_val_rmq + 1 == len[u]);
+        {
+            int mn_val_rmq = rmq_min.query(mn_idx[u], mn_idx[u] + len[u]);
+            assert(mn_val_rmq == mn_val[u]);
+            int mx_val_rmq = rmq_max.query(mn_idx[u], mn_idx[u] + len[u]);
+            assert(mx_val_rmq - mn_val_rmq + 1 == len[u]);
+        }
         if (empty(adj[u])) {
             assert(len[u] == 1);
             assert(u == mn_idx[u]);
@@ -37,10 +41,13 @@ int main() {
             assert(ssize(adj[u]) >= 2);
             assert(mn_idx[u] == mn_idx[adj[u][0]]);
             assert(mn_idx[u] + len[u] == mn_idx[adj[u].back()] + len[adj[u].back()]);
+            assert(is_join[u] == (mn_val[u] == mn_val[adj[u][0]] || mn_val[u] == mn_val[adj[u].back()]));
+            assert(is_join[u] == (mn_val[u] + len[u] == mn_val[adj[u][0]] + len[adj[u][0]] ||
+                                  mn_val[u] + len[u] == mn_val[adj[u].back()] + len[adj[u].back()]));
             for (int i = 1; i < ssize(adj[u]); i++) {
                 int prev = adj[u][i - 1], curr = adj[u][i];
                 assert(mn_idx[prev] + len[prev] == mn_idx[curr]);
-                assert(is_join[u] == my_touches(prev, curr, mn_val, len));
+                assert(is_join[u] == pt.touches(prev, curr));
             }
             int mn_val_naive = n, mx_val_naive = -1, sum_len_naive = 0;
             for (int v : adj[u]) {
