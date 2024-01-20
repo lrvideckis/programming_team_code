@@ -26,7 +26,7 @@ void perm_tree_asserts(const vector<int>& a, perm_tree& pt) {
             assert(len[u] == 1);
             assert(u == mn_idx[u]);
             assert(a[u] == mn_val[u]);
-            assert(is_join[u]);
+            assert(!is_join[u]);
         } else {
             assert(n <= u && u < ssize(adj));
             if (is_join[u]) assert(len[u] >= 2);

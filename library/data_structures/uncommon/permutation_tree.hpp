@@ -65,7 +65,7 @@ struct perm_tree {
                 }
             }
         }
-        for (int i = 0; i < n; i++) allocate(1, i, a[i], 1, {});
+        for (int i = 0; i < n; i++) allocate(0, i, a[i], 1, {});
         vector<array<int, 4>> st;
         for (int i = 0; i < n; i++) {
             int u = i;
