@@ -17,7 +17,7 @@ int main() {
         adj_edge_id[u].emplace_back(v, i);
     }
     scc_asserts(adj);
-    auto [num_sccs, scc_id] = sccs(adj);
+    sccs scc(adj);
     vector<int> color(n);
     vector<pair<int/*edge id*/, int/*node closer to root*/>> edge_stack;
     auto dfs = [&](auto&& self, int u) -> void {
@@ -33,7 +33,7 @@ int main() {
                 while (1) {
                     auto [curr_edge_id, curr_node] = edge_stack.back();
                     edge_stack.pop_back();
-                    assert(scc_id[curr_node] == scc_id[u]);
+                    assert(scc.scc_id[curr_node] == scc.scc_id[u]);
                     res.push_back(curr_edge_id);
                     if (curr_node == v) break;
                 }
@@ -51,7 +51,7 @@ int main() {
             color[i] = 2;
         }
     }
-    assert(num_sccs == n);
+    assert(scc.num_sccs == n);
     cout << -1 << '\n';
     return 0;
 }

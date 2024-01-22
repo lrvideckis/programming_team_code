@@ -11,7 +11,7 @@
  * @endcode
  */
 struct hopcroft_karp {
-    int size_of_matching; /**< # of edges in max matching (which = size of min vertex cover by König's theorem) */
+    int size_of_matching = 0; /**< # of edges in max matching (which = size of min vertex cover by König's theorem) */
     /**
      * edge node_left <=> l_to_r[node_left] in matching iff l_to_r[node_left] != -1
      * ditto r_to_l[node_right] <=> node_right
@@ -32,7 +32,7 @@ struct hopcroft_karp {
      * @time O(n + m * sqrt(n)) n = lsz + rsz
      * @space this allocates member vectors which are O(lsz + rsz)
      */
-    hopcroft_karp(const vector<vector<int>>& adj, int rsz) : size_of_matching(0), l_to_r(ssize(adj), -1), r_to_l(rsz, -1) {
+    hopcroft_karp(const vector<vector<int>>& adj, int rsz) : l_to_r(ssize(adj), -1), r_to_l(rsz, -1) {
         int lsz = ssize(adj);
         while (1) {
             queue<int> q;

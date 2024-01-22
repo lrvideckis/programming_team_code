@@ -7,7 +7,7 @@
  * @endcode
  */
 struct sccs {
-    int num_sccs; /**< number of SCCs */
+    int num_sccs = 0; /**< number of SCCs */
     /**
      * scc_id[u] = id of SCC containing node u. It satisfies:
      * - 0 <= scc_id[u] < num_sccs
@@ -19,7 +19,7 @@ struct sccs {
      * @time O(n + m)
      * @space this allocates member `scc_id` which is O(n)
      */
-    sccs(const vector<vector<int>>& adj) : num_sccs(0), scc_id(ssize(adj), -1) {
+    sccs(const vector<vector<int>>& adj) : scc_id(ssize(adj), -1) {
         int n = ssize(adj), timer = 1;
         vector<int> tin(n), node_stack;
         node_stack.reserve(n);

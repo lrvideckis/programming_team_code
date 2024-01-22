@@ -15,7 +15,7 @@
  * @endcode
  */
 struct cuts {
-    int num_bccs; /**< number of bi-connected components */
+    int num_bccs = 0; /**< number of bi-connected components */
     vector<bool> is_cut; /**< is_cut[node] = 1 iff cut node */
     vector<int> bcc_id; /**< bcc_id[edge id] = id of bcc (which are labeled 0, 1, ..., `num_bccs`-1) */
     /**
@@ -24,7 +24,7 @@ struct cuts {
      * @time O(n + m)
      * @space this allocates member vectors which are O(n + m)
      */
-    cuts(const vector<vector<array<int, 2>>>& adj, int m) : num_bccs(0), is_cut(ssize(adj)), bcc_id(m, -1) {
+    cuts(const vector<vector<array<int, 2>>>& adj, int m) : is_cut(ssize(adj)), bcc_id(m, -1) {
         int n = ssize(adj), timer = 1;
         vector<int> tin(n), st;
         auto dfs = [&](auto&& self, int u, int p_id) -> int {

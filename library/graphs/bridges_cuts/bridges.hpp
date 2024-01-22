@@ -15,7 +15,7 @@
  * @endcode
  */
 struct bridges {
-    int num_2_edge_ccs; /**< number of components in bridge tree */
+    int num_2_edge_ccs = 0; /**< number of components in bridge tree */
     vector<bool> is_bridge; /**< is_bridge[edge id] = 1 iff bridge edge */
     vector<int> two_edge_ccid; /**< two_edge_ccid[node] = id of 2 edge component (labeled 0, 1, ..., `num_2_edge_ccs`-1) */
     /**
@@ -24,7 +24,7 @@ struct bridges {
      * @time O(n + m)
      * @space this allocates member vectors which are O(n + m)
      */
-    bridges(const vector<vector<array<int, 2>>>& adj, int m) : num_2_edge_ccs(0), is_bridge(m), two_edge_ccid(ssize(adj), -1) {
+    bridges(const vector<vector<array<int, 2>>>& adj, int m) : is_bridge(m), two_edge_ccid(ssize(adj), -1) {
         int n = ssize(adj), timer = 1;
         vector<int> tin(n), st;
         auto dfs = [&](auto&& self, int u, int p_id) -> int {
