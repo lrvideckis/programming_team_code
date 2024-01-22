@@ -45,7 +45,6 @@ scc_info get_sccs(const vector<vector<int>>& adj) {
         return low;
     };
     for (int i = 0; i < n; i++)
-        if (!tin[i])
-            dfs(dfs, i);
+        if (!tin[i]) dfs(dfs, i);
     return {num_sccs, scc_id};
 }

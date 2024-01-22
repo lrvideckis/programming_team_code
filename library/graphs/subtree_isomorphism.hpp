@@ -33,7 +33,6 @@ iso_info subtree_iso(const vector<vector<int>>& adj) {
         return iso_id[u] = hashes.try_emplace(ch_ids, ssize(hashes)).first->second;
     };
     for (int i = 0; i < ssize(adj); i++)
-        if (iso_id[i] == -1)
-            dfs(dfs, i, i);
+        if (iso_id[i] == -1) dfs(dfs, i, i);
     return {ssize(hashes), iso_id};
 }

@@ -14,8 +14,7 @@ struct tree_lift {
      */
     tree_lift(const vector<vector<int>>& adj): n(ssize(adj)), d(n), p(n, -1), j(n, -1) {
         for (int i = 0; i < n; i++)
-            if (j[i] == -1)
-                j[i] = i, dfs(adj, i);
+            if (j[i] == -1) j[i] = i, dfs(adj, i);
     }
     void dfs(const vector<vector<int>>& adj, int u) {
         int jmp = (d[u] + d[j[j[u]]] == 2 * d[j[u]]) ? j[j[u]] : u;
