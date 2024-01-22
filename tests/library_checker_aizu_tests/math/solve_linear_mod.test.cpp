@@ -15,7 +15,7 @@ int main() {
     vector<long long> b(n);
     for (int i = 0; i < n; i++)
         cin >> b[i];
-    matrix_info info = solve_linear_mod(mat, b);
+    solve_linear_mod info(mat, b);
     assert(info.rank <= min(n, m));
     if (empty(info.x)) {
         cout << -1 << '\n';

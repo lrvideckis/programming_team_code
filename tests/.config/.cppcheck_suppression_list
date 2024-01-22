@@ -1,15 +1,7 @@
 noExplicitConstructor
 missingIncludeSystem
 functionConst
-unusedStructMember:../library/math/matrix_related/solve_linear_mod.hpp:8
-unusedStructMember:../library/math/matrix_related/solve_linear_mod.hpp:9
-unusedStructMember:../library/graphs/strongly_connected_components/scc.hpp:7
-unusedStructMember:../library/graphs/subtree_isomorphism.hpp:7
-unusedStructMember:../library/graphs/hopcroft_karp.hpp:8
 unusedStructMember:../library/flow/min_cost_max_flow.hpp
-unusedStructMember:../library/graphs/bridges_cuts/bridges.hpp:7
-unusedStructMember:../library/graphs/bridges_cuts/cuts.hpp:7
-unusedStructMember:../library/flow/hungarian.hpp:9
 unusedStructMember:../library/strings/suffix_array_related/find/match.hpp:22
 constVariable:../kactl/content/number-theory/MillerRabin.h:17
 unusedScopedObject:../library/graphs/centroid_decomp/count_paths_per_length.hpp:14

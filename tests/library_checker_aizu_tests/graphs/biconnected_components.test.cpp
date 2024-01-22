@@ -16,7 +16,7 @@ int main() {
         adj[v].push_back({u, i});
         edges[i] = make_pair(u, v);
     }
-    cut_info cc = cuts(adj, m);
+    cuts cc(adj, m);
     vector<vector<int>> bvt = block_vertex_tree(adj, cc);
     assert(find(begin(cc.bcc_id), end(cc.bcc_id), -1) == end(cc.bcc_id));
     for (int i = 0; i < n; i++) {

@@ -3,7 +3,7 @@
 #include "cuts.hpp"
 /**
  * @code{.cpp}
-       cut_info cc = cuts(adj, m);
+       cuts cc(adj, m);
        vector<vector<int>> bvt = block_vertex_tree(adj, cc);
        //to loop over each unique bcc containing a node u:
        for (int bccid : bvt[u]) {
@@ -23,7 +23,7 @@
  * @space besides the O(n + m) sized params, this function allocates and
  * returns `bvt` vector which is O(n)
  */
-vector<vector<int>> block_vertex_tree(const vector<vector<array<int, 2>>>& adj, const cut_info& cc) {
+vector<vector<int>> block_vertex_tree(const vector<vector<array<int, 2>>>& adj, const cuts& cc) {
     int n = ssize(adj);
     vector<vector<int>> bvt(n + cc.num_bccs);
     vector<bool> vis(cc.num_bccs);

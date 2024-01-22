@@ -16,7 +16,7 @@ int main() {
         adj[v].push_back({u, i});
         edges[i] = {u, v};
     }
-    bridge_info cc = bridges(adj, m);
+    bridges cc(adj, m);
     vector<vector<int>> bt = bridge_tree(adj, cc);
     assert(find(begin(cc.two_edge_ccid), end(cc.two_edge_ccid), -1) == end(cc.two_edge_ccid));
     //check correctness of bridge tree

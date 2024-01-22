@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 #include "../template.hpp"
+#include "../scc_asserts.hpp"
 
 #include "../../../library/graphs/strongly_connected_components/add_edges_strongly_connected.hpp"
 
@@ -15,37 +16,8 @@ int main() {
         adj[u].push_back(v);
         adj_edge_id[u].emplace_back(v, i);
     }
-    scc_info si = get_sccs(adj);
-    int num_sccs = si.num_sccs;
-    vector<int> scc_id = si.scc_id;
-    {
-        vector<bool> is_zero_in(num_sccs, 1), is_zero_out(num_sccs, 1);
-        for (int i = 0; i < n; i++) {
-            for (int v : adj[i]) {
-                if (scc_id[i] == scc_id[v]) continue;
-                is_zero_in[scc_id[v]] = 0;
-                is_zero_out[scc_id[i]] = 0;
-            }
-        }
-        // since {num_sccs-1, ..., 2, 1, 0} is a topo order
-        assert(is_zero_in[num_sccs - 1] && is_zero_out[0]);
-        int num_zero_in = int(count(begin(is_zero_in), end(is_zero_in), 1));
-        int num_zero_out = int(count(begin(is_zero_out), end(is_zero_out), 1));
-        vector<array<int, 2>> edges = extra_edges(adj, num_sccs, scc_id);
-        if (num_sccs == 1) assert(ssize(edges) == 0);
-        else assert(ssize(edges) == max(num_zero_in, num_zero_out));
-        vector<vector<int>> adj_copy(adj);
-        for (auto [u, v] : edges) {
-            assert(u != v);
-            adj_copy[u].push_back(v);
-        }
-        assert(get_sccs(adj_copy).num_sccs == 1);
-    }
-    //sanity check for reverse topo order of SCCs
-    for (int i = 0; i < n; i++) {
-        for (auto j : adj[i])
-            assert(scc_id[i] >= scc_id[j]);
-    }
+    scc_asserts(adj);
+    auto [num_sccs, scc_id] = sccs(adj);
     vector<int> color(n);
     vector<pair<int/*edge id*/, int/*node closer to root*/>> edge_stack;
     auto dfs = [&](auto&& self, int u) -> void {

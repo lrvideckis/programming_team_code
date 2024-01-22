@@ -1,9 +1,12 @@
 /** @file */
 #pragma once
 /**
- * Info about strongly connected components in the directed graph
+ * @see https://github.com/kth-competitive-programming /kactl/blob/main/content/graph/SCC.h
+ * @code{.cpp}
+       auto [num_sccs, scc_id] = sccs(adj);
+ * @endcode
  */
-struct scc_info {
+struct sccs {
     int num_sccs; /**< number of SCCs */
     /**
      * scc_id[u] = id of SCC containing node u. It satisfies:
@@ -11,40 +14,33 @@ struct scc_info {
      * - for each edge u -> v: scc_id[u] >= scc_id[v]
      */
     vector<int> scc_id;
-};
-/**
- * @see https://github.com/kth-competitive-programming /kactl/blob/main/content/graph/SCC.h
- * @code{.cpp}
-       auto [num_sccs, scc_id] = get_sccs(adj);
- * @endcode
- * @param adj directed, unweighted graph
- * @returns the SCCs
- * @time O(n + m)
- * @space besides the O(n + m) `adj` param, this function allocates/returns
- * various vectors which are each O(n)
- */
-scc_info get_sccs(const vector<vector<int>>& adj) {
-    int n = ssize(adj), timer = 1, num_sccs = 0;
-    vector<int> tin(n), scc_id(n, -1), node_stack;
-    node_stack.reserve(n);
-    auto dfs = [&](auto&& self, int u) -> int {
-        int low = tin[u] = timer++;
-        node_stack.push_back(u);
-        for (int v : adj[u])
-            if (scc_id[v] < 0)
-                low = min(low, tin[v] ? tin[v] : self(self, v));
-        if (tin[u] == low) {
-            while (1) {
-                int node = node_stack.back();
-                node_stack.pop_back();
-                scc_id[node] = num_sccs;
-                if (node == u) break;
+    /**
+     * @param adj directed, unweighted graph
+     * @time O(n + m)
+     * @space this allocates member `scc_id` which is O(n)
+     */
+    sccs(const vector<vector<int>>& adj) : num_sccs(0), scc_id(ssize(adj), -1) {
+        int n = ssize(adj), timer = 1;
+        vector<int> tin(n), node_stack;
+        node_stack.reserve(n);
+        auto dfs = [&](auto&& self, int u) -> int {
+            int low = tin[u] = timer++;
+            node_stack.push_back(u);
+            for (int v : adj[u])
+                if (scc_id[v] < 0)
+                    low = min(low, tin[v] ? tin[v] : self(self, v));
+            if (tin[u] == low) {
+                while (1) {
+                    int node = node_stack.back();
+                    node_stack.pop_back();
+                    scc_id[node] = num_sccs;
+                    if (node == u) break;
+                }
+                num_sccs++;
             }
-            num_sccs++;
-        }
-        return low;
-    };
-    for (int i = 0; i < n; i++)
-        if (!tin[i]) dfs(dfs, i);
-    return {num_sccs, scc_id};
-}
+            return low;
+        };
+        for (int i = 0; i < n; i++)
+            if (!tin[i]) dfs(dfs, i);
+    }
+};
