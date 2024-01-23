@@ -38,7 +38,7 @@ struct perm_tree {
      */
     perm_tree(const vector<int>& a) {
         int n = ssize(a);
-        vector<int> mn_i(n), mx_i(n);
+        vector<array<int, 2>> i_range(n);
         {
             vector<int> a_inv(n, -1);
             for (int i = 0; i < n; i++) {
@@ -49,17 +49,12 @@ struct perm_tree {
             vector<vector<int>> qi(n);
             for (int i = 1; i < n; i++) qi[min(a[i - 1], a[i])].push_back(i);
             array<UF, 2> uf = {UF(n), UF(n)};
-            for (int i = n - 1; i >= 0; i--) {
+            for (int i = n - 1; i >= 0; i--)
                 for (int j = 0; j < 2; j++) {
                     for (int k = i + 1; k != ri[j][i]; k = ri[j][k]) uf[j].join(i, k);
                     least[j][uf[j].find(i)] = a_inv[i];
+                    for (int idx : qi[i]) i_range[idx][j] = least[j][uf[j].find(max(a[idx - 1], a[idx]))];
                 }
-                for (int idx : qi[i]) {
-                    int ri = max(a[idx - 1], a[idx]);
-                    mn_i[idx] = least[0][uf[0].find(ri)];
-                    mx_i[idx] = least[1][uf[1].find(ri)];
-                }
-            }
         }
         for (int i = 0; i < n; i++) allocate(0, i, a[i], 1, {});
         vector<array<int, 4>> st;
@@ -80,7 +75,7 @@ struct perm_tree {
                     st.pop_back();
                     continue;
                 }
-                int le = min(mn_idx[v], mn_i[mn_idx[u]]), ri = max(i, mx_i[mn_idx[u]]), idx = ssize(st) - 1;
+                int le = min(mn_idx[v], i_range[mn_idx[u]][0]), ri = max(i, i_range[mn_idx[u]][1]), idx = ssize(st) - 1;
                 while (ri == i && le != mn_idx[st[idx][0]])
                     le = min(le, st[idx][1]), ri = max(ri, st[idx][2]), idx = st[idx][3];
                 if (ri > i) {
