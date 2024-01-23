@@ -1,3 +1,3 @@
 ![](../../tests/images/mono_stack.png)
 
-when you pass in `less()` for `cmp`
+`auto ri = mono_st(a, less());`
