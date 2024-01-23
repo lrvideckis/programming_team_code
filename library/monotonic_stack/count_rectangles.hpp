@@ -27,10 +27,10 @@ vector<vector<int>> count_rectangles(const vector<vector<bool>>& grid) {
     }
     for (int i = 1; i <= n; i++)
         for (int k = 0; k < 2; k++)
-            for (int j = m - 1; j >= 1; j--)
-                cnt[i][j] += cnt[i][j + 1];
-    for (int i = n - 1; i >= 1; i--)
+            for (int j = m; j > 1; j--)
+                cnt[i][j - 1] += cnt[i][j];
+    for (int i = n; i > 1; i--)
         for (int j = 1; j <= m; j++)
-            cnt[i][j] += cnt[i + 1][j];
+            cnt[i - 1][j] += cnt[i][j];
     return cnt;
 }
