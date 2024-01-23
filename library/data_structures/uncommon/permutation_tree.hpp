@@ -40,18 +40,14 @@ struct perm_tree {
         int n = ssize(a);
         vector<int> mn_i(n), mx_i(n);
         {
-            vector<int> a_inv(n, -1), qr(n);
+            vector<int> a_inv(n, -1);
             for (int i = 0; i < n; i++) {
                 assert(0 <= a[i] && a[i] < n && a_inv[a[i]] == -1);
                 a_inv[a[i]] = i;
             }
             vector least(2, a_inv), ri = {mono_st(a_inv, less()), mono_st(a_inv, greater())};
             vector<vector<int>> qi(n);
-            for (int i = 1; i < n; i++) {
-                auto [x, y] = minmax(a[i - 1], a[i]);
-                qr[i] = y;
-                qi[x].push_back(i);
-            }
+            for (int i = 1; i < n; i++) qi[min(a[i - 1], a[i])].push_back(i);
             array<UF, 2> uf = {UF(n), UF(n)};
             for (int i = n - 1; i >= 0; i--) {
                 for (int j = 0; j < 2; j++) {
@@ -59,8 +55,9 @@ struct perm_tree {
                     least[j][uf[j].find(i)] = a_inv[i];
                 }
                 for (int idx : qi[i]) {
-                    mn_i[idx] = least[0][uf[0].find(qr[idx])];
-                    mx_i[idx] = least[1][uf[1].find(qr[idx])];
+                    int ri = max(a[idx - 1], a[idx]);
+                    mn_i[idx] = least[0][uf[0].find(ri)];
+                    mx_i[idx] = least[1][uf[1].find(ri)];
                 }
             }
         }
