@@ -45,23 +45,22 @@ struct perm_tree {
                 assert(0 <= a[i] && a[i] < n && a_inv[a[i]] == -1);
                 a_inv[a[i]] = i;
             }
-            vector least(2, vector(n, 0)), ri = {mono_st(a_inv, less()), mono_st(a_inv, greater())};
+            vector least(2, a_inv), ri = {mono_st(a_inv, less()), mono_st(a_inv, greater())};
             vector<vector<int>> qi(n);
             for (int i = 1; i < n; i++) {
                 auto [x, y] = minmax(a[i - 1], a[i]);
                 qr[i] = y;
                 qi[x].push_back(i);
-                least[0][i] = least[1][i] = i;
             }
             array<UF, 2> uf = {UF(n), UF(n)};
             for (int i = n - 1; i >= 0; i--) {
                 for (int j = 0; j < 2; j++) {
                     for (int k = i + 1; k != ri[j][i]; k = ri[j][k]) uf[j].join(i, k);
-                    least[j][uf[j].find(i)] = i;
+                    least[j][uf[j].find(i)] = a_inv[i];
                 }
                 for (int idx : qi[i]) {
-                    mn_i[idx] = a_inv[least[0][uf[0].find(qr[idx])]];
-                    mx_i[idx] = a_inv[least[1][uf[1].find(qr[idx])]];
+                    mn_i[idx] = least[0][uf[0].find(qr[idx])];
+                    mx_i[idx] = least[1][uf[1].find(qr[idx])];
                 }
             }
         }
