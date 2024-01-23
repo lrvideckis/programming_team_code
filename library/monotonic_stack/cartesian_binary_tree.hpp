@@ -19,7 +19,7 @@
        auto ri = mono_st(a, greater()), p = cart_binary_tree(ri); // right-most max is root
        auto ri = mono_st(a, greater_equal()), p = cart_binary_tree(ri); // left-most max is root
  * @endcode
- * @param ri monotonic stack of an array *with unique values*
+ * @param ri monotonic stack of array `a`
  * @returns parent array
  * @time O(n)
  * @space a O(n) vector is allocated and returned
