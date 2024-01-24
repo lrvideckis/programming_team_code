@@ -28,7 +28,7 @@ so we only add `sub_sz[v]` to my edge set when my edge set afterwards is smaller
 
 ---
 
-## Is it still correct?
+## Will this greedy always give a 1/3-2/3 partition? 
 
 It is clear `3*sum <= 2*(siz-1)` so we just have to show `3*sum >= siz-1` (at the end):
 
