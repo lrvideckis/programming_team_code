@@ -13,7 +13,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
        vector<int> a(n);
        shuffle(begin(a), end(a), rng);
        //
-       int x = get_rand<int>(0, 1);
+       int x = get_rand(0, 1);
        long long x = get_rand<long long>(1, 1e18);
  * @endcode
  * @param le,ri defines range [le, ri]
