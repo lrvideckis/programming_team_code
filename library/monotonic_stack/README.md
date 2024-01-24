@@ -9,3 +9,5 @@ For cartesian binary tree, if you reverse the direction of the outer `i`-loop,
 ![](../../tests/images/cartesian_binary_tree_before.png)
 
 ![](../../tests/images/cartesian_binary_tree_after.png)
+
+if you read this, congrats
