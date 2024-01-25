@@ -9,9 +9,9 @@ const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase le
  * @see Replacing suffix trees with enhanced suffix arrays by Mohamed Ibrahim
  * Abouelhoda, Stefan Kurtz, Enno Ohlebusch
  *
- * offline version of suffix tree, idea: min cartesian tree of LCP array
- * corresponds exactly to the internal nodes of the suffix tree. Then add in
- * <= n nodes, one for each suffix, and it corresponds to the suffix tree.
+ * offline version of suffix tree, idea: min k-ary cartesian tree of LCP array
+ * corresponds exactly to the internal nodes of the suffix tree. Then add in <=
+ * n nodes, one for each suffix, and it corresponds to the suffix tree.
  *
  * string = "cabcabacaabc"
  *                                              c

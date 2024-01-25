@@ -23,13 +23,12 @@ struct perm_tree {
         return mn_val[u] == mn_val[v] + len[v] || mn_val[v] == mn_val[u] + len[u];
     }
     int allocate(bool join, int mn_i, int mn_v, int ln, const vector<int>& ch) {
-        int u = ssize(adj);
         is_join.push_back(join);
         mn_idx.push_back(mn_i);
         mn_val.push_back(mn_v);
         len.push_back(ln);
         adj.push_back(ch);
-        return u;
+        return ssize(adj) - 1;
     }
     /**
      * @param a permutation
