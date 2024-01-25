@@ -9,7 +9,7 @@
  * @param s,t strings/arrays
  * @param queries queries[i] = {s_ri, t_le, t_ri}
  * @returns res[i] = size(LCS(s.substr(0, queries[i][0]), t.substr(queries[i][1], queries[i][2] - queries[i][1])))
- * @time O(n * m * log(m) + q * log(m) + q * log(q))
+ * @time O(n*m*log(m) + q*log(m) + q*log(q))
  * @space this allocates/returns a O(q) vector, and various vectors are
  * allocated temporarily which are O(n + m + q)
  */
