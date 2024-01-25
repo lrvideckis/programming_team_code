@@ -24,7 +24,7 @@ int main() {
     vector<int> node_to_time(ssize(adj), -1);
     auto dfs = [&](auto&& self, int u, int p) -> void {
         node_to_time[u] = curr_time++;
-        cout << (p == -1 ? p : node_to_time[p]) << " " << mn_idx[u] << " " << mn_idx[u] + len[u] - 1 << " " << (is_join[u] ? "linear" : "prime") << '\n';
+        cout << (p == -1 ? p : node_to_time[p]) << " " << mn_idx[u] << " " << mn_idx[u] + len[u] - 1 << " " << (is_join[u] || empty(adj[u]) ? "linear" : "prime") << '\n';
         for (int v : adj[u])
             self(self, v, u);
     };
