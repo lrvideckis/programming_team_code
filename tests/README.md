@@ -1,3 +1,9 @@
+## Makefile
+to see commands:
+```
+make help
+```
+
 ## Run on each commit:
 command | settings | notes | see
 --- | --- | --- | ---
@@ -19,12 +25,6 @@ shfmt | see flags in [scripts/shellcheck_shfmt.sh](scripts/shellcheck_shfmt.sh) 
 - Main reason 1: occasionally Library Checker [adds new tests](https://github.com/yosupo06/library-checker-problems/issues?q=label%3Atestcase). So now the lib will be tested on all newly added tests.
 - Main reason 2: sometimes I do a code-mod style change which affects many files, and thus many tests have to be re-run. But `oj-verify all` only runs 10-20 tests per commit, potentially leaving some un-run tests. Before, I used to make timely-commits which changed effectively nothing, but caused more tests to rerun. Now I don't have to do this.
 - Side reason: Library Checker generates tests randomly, so rerunning tests means the code is tested on more random data.
-
-## Makefile
-to see commands:
-```
-make help
-```
 
 ## Doxygen
 Let's try to minimize the # of non-doxygen comments.
