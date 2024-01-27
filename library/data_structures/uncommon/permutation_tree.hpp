@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../../kactl/content/data-structures/UnionFind.h"
+#include "../../../tests/submodules/kactl/content/data-structures/UnionFind.h"
 #include "../../monotonic_stack/monotonic_stack.hpp"
 /**
  * @see https://codeforces.com/blog/entry/78898 https://codeforces.com/blog/entry/48994

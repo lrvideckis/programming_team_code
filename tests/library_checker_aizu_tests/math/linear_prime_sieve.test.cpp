@@ -3,7 +3,7 @@
 
 #include "../../../library/math/prime_sieve/calc_linear_sieve.hpp"
 
-#include "../../../kactl/content/number-theory/MillerRabin.h"
+#include "../../submodules/kactl/content/number-theory/MillerRabin.h"
 
 inline bool is_prime(int val) {
     assert(val < mx_n && sieve[1] == 1);

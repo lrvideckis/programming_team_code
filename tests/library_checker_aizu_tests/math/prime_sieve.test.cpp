@@ -4,7 +4,7 @@
 #include "../../../library/math/prime_sieve/is_prime.hpp"
 #include "../../../library/math/prime_sieve/get_prime_factors.hpp"
 
-#include "../../../kactl/content/number-theory/MillerRabin.h"
+#include "../../submodules/kactl/content/number-theory/MillerRabin.h"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

@@ -4,7 +4,7 @@
 #include "../../../library/contest/random.hpp"
 #include "../../../library/monotonic_stack/count_rectangles.hpp"
 
-#include "../../../kactl/content/data-structures/SubMatrix.h"
+#include "../../submodules/kactl/content/data-structures/SubMatrix.h"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
