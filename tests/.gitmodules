@@ -1,9 +1,9 @@
 [submodule "kactl"]
-	path = tests/submodules/kactl
+	path = submodules/kactl
 	url = https://github.com/kth-competitive-programming/kactl
 [submodule "hackpack-cpp"]
-	path = tests/submodules/hackpack-cpp
+	path = submodules/hackpack-cpp
 	url = https://github.com/ucf-programming-team/hackpack-cpp
 [submodule "notebook-generator"]
-	path = tests/submodules/notebook-generator
+	path = submodules/notebook-generator
 	url = https://github.com/lrvideckis/notebook-generator
