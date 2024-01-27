@@ -10,7 +10,7 @@
 
 //NOLINTNEXTLINE(readability-identifier-naming)
 const int MOD = 998'244'353;
-#include "../../submodules/hackpack-cpp/content/number-theory/ModInt.h"
+#include "../../hackpack-cpp/content/number-theory/ModInt.h"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);

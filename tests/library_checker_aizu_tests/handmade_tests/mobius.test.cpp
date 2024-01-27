@@ -2,7 +2,7 @@
 #include "../template.hpp"
 #include "../../../library/math/mobius.hpp"
 
-#include "../../submodules/kactl/content/number-theory/Factor.h"
+#include "../../kactl/content/number-theory/Factor.h"
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
