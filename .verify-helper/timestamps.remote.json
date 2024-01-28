@@ -31,5 +31,13 @@
 "tests/library_checker_aizu_tests/data_structures/dsu_segtree_undo_trick.test.cpp": "2024-01-09 14:21:10 -0600",
 "tests/library_checker_aizu_tests/data_structures/implicit_seg_tree.test.cpp": "2023-12-31 18:54:53 -0600",
 "tests/library_checker_aizu_tests/data_structures/kth_smallest_pst.test.cpp": "2024-01-12 14:07:09 -0600",
-"tests/library_checker_aizu_tests/data_structures/kth_smallest_wavelet.test.cpp": "2024-01-12 14:07:09 -0600"
+"tests/library_checker_aizu_tests/data_structures/kth_smallest_wavelet.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/data_structures/kth_smallest_wavelet_updates.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/data_structures/lazy_segment_tree.test.cpp": "2024-01-09 14:21:10 -0600",
+"tests/library_checker_aizu_tests/data_structures/lazy_segment_tree_constructor.test.cpp": "2024-01-09 14:21:10 -0600",
+"tests/library_checker_aizu_tests/data_structures/linear_rmq_aizu.test.cpp": "2024-01-23 18:18:23 -0600",
+"tests/library_checker_aizu_tests/data_structures/linear_rmq_update.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/data_structures/merge_sort_trees.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/data_structures/merge_sort_trees_kth_smallest.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/data_structures/permutation_tree.test.cpp": "2024-01-27 14:12:11 -0600"
 }
