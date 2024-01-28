@@ -91,5 +91,15 @@
 "tests/library_checker_aizu_tests/math/derangement.test.cpp": "2023-10-26 06:56:49 -0700",
 "tests/library_checker_aizu_tests/math/linear_prime_sieve.test.cpp": "2024-01-27 14:12:11 -0600",
 "tests/library_checker_aizu_tests/math/matrix_determinant.test.cpp": "2024-01-08 10:53:33 -0600",
-"tests/library_checker_aizu_tests/math/matrix_mult.test.cpp": "2024-01-27 14:12:11 -0600"
+"tests/library_checker_aizu_tests/math/matrix_mult.test.cpp": "2024-01-27 14:12:11 -0600",
+"tests/library_checker_aizu_tests/math/n_choose_k.test.cpp": "2023-12-26 17:53:20 -0600",
+"tests/library_checker_aizu_tests/math/num_subsequences.test.cpp": "2023-12-13 09:32:33 -0800",
+"tests/library_checker_aizu_tests/math/partitions.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/math/prime_sieve.test.cpp": "2024-01-27 14:12:11 -0600",
+"tests/library_checker_aizu_tests/math/solve_linear_mod.test.cpp": "2024-01-22 12:54:26 -0600",
+"tests/library_checker_aizu_tests/math/tetration.test.cpp": "2023-10-26 11:24:43 -0700",
+"tests/library_checker_aizu_tests/math/totient.test.cpp": "2023-10-26 11:24:43 -0700",
+"tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_binary_tree.test.cpp": "2024-01-23 11:25:19 -0600",
+"tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_k_ary_tree.test.cpp": "2024-01-23 18:39:32 -0600",
+"tests/library_checker_aizu_tests/monotonic_stack_related/count_rectangles.test.cpp": "2024-01-27 14:12:11 -0600"
 }
