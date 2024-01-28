@@ -51,5 +51,11 @@
 "tests/library_checker_aizu_tests/flow/min_cost_max_flow.test.cpp": "2024-01-08 10:53:33 -0600",
 "tests/library_checker_aizu_tests/graphs/biconnected_components.test.cpp": "2024-01-22 13:12:12 -0600",
 "tests/library_checker_aizu_tests/graphs/cd_lca.test.cpp": "2024-01-25 10:06:38 -0600",
-"tests/library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp": "2024-01-27 14:12:11 -0600"
+"tests/library_checker_aizu_tests/graphs/count_paths_per_length.test.cpp": "2024-01-27 14:12:11 -0600",
+"tests/library_checker_aizu_tests/graphs/dijkstra.test.cpp": "2023-10-26 06:56:49 -0700",
+"tests/library_checker_aizu_tests/graphs/directed_cycle.test.cpp": "2024-01-22 13:12:12 -0600",
+"tests/library_checker_aizu_tests/graphs/edge_cd_contour_range_query.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/graphs/edge_cd_contour_range_update.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/graphs/edge_cd_count_paths_per_length.test.cpp": "2024-01-27 14:12:11 -0600",
+"tests/library_checker_aizu_tests/graphs/edge_cd_reroot_dp.test.cpp": "2024-01-12 14:07:09 -0600"
 }
