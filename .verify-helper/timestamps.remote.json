@@ -1,16 +1,4 @@
 {
-"tests/hackpack-cpp/tests/data-structures/BIT.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/data-structures/DSU.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/data-structures/DSURestorable.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/data-structures/RMQ.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/data-structures/RMQLambda.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/graphs/Blossom.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/graphs/DominatorTree.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/graphs/LCA.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/graphs/TreeLiftingKth.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/graphs/TreeLiftingLCA.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/graphs/TwoVertexCCs.test.cpp": "1970-01-01 00:00:00 +0000",
-"tests/hackpack-cpp/tests/number-theory/MultiplicativePrefix.test.cpp": "1970-01-01 00:00:00 +0000",
 "tests/library_checker_aizu_tests/convolution/and_convolution.test.cpp": "2024-01-12 14:07:09 -0600",
 "tests/library_checker_aizu_tests/convolution/gcd_convolution.test.cpp": "2024-01-12 14:07:09 -0600",
 "tests/library_checker_aizu_tests/convolution/lcm_convolution.test.cpp": "2024-01-12 14:07:09 -0600",
@@ -120,5 +108,6 @@
 "tests/library_checker_aizu_tests/strings/sa_sort_pairs.test.cpp": "2024-01-23 18:39:32 -0600",
 "tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2024-01-25 10:36:14 -0600",
 "tests/library_checker_aizu_tests/strings/single_matching_bs.test.cpp": "2024-01-23 20:38:39 -0600",
-"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2024-01-23 18:39:32 -0600"
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2024-01-23 18:39:32 -0600",
+"tests/library_checker_aizu_tests/strings/trie.test.cpp": "2024-01-08 10:53:33 -0600"
 }
