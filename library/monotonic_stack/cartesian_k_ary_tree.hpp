@@ -22,21 +22,21 @@
  * p[9] = 5
  *
  * @code{.cpp}
-       auto ri = mono_st(a, less_equal()), p = cart_k_ary_tree(a, ri); // min cart tree
-       auto ri = mono_st(a, greater_equal()), p = cart_k_ary_tree(a, ri); // max cart tree
+       auto mr = mono_st(a, less_equal()), p = cart_k_ary_tree(a, mr); // min cart tree
+       auto mr = mono_st(a, greater_equal()), p = cart_k_ary_tree(a, mr); // max cart tree
        bool is_node = (p[i] > i || a[i] != a[p[i]]);
  * @endcode
  *
- * @param a,ri array and its monotonic stack
+ * @param a,mr array and its monotonic stack
  * @returns parent array
  * @time O(n)
  * @space a O(n) vector is allocated and returned
  */
-template <class T> vector<int> cart_k_ary_tree(const vector<T>& a, const vector<int>& ri) {
-    vector<int> p(ri);
+template <class T> vector<int> cart_k_ary_tree(const vector<T>& a, const vector<int>& mr) {
+    vector<int> p(mr);
     for (int i = 0; i < ssize(a); i++)
-        for (int j = i + 1; j != ri[i]; j = ri[j])
-            if (ri[j] == ri[i] || a[i] == a[ri[j]])
+        for (int j = i + 1; j != mr[i]; j = mr[j])
+            if (mr[j] == mr[i] || a[i] == a[mr[j]])
                 p[j] = (p[i] > i || a[i] != a[p[i]] ? i : p[i]);
     return p;
 }

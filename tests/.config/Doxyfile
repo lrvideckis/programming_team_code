@@ -1032,8 +1032,8 @@ EXCLUDE_SYMBOLS        = HLD::node \
                          sorted \
                          perm \
                          rebuild \
-                         le \
-                         ri \
+                         ml \
+                         mr \
                          node \
                          root \
                          child \

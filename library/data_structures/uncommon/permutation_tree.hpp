@@ -44,13 +44,13 @@ struct perm_tree {
                 assert(0 <= a[i] && a[i] < n && a_inv[a[i]] == -1);
                 a_inv[a[i]] = i;
             }
-            vector ans(2, a_inv), ri = {mono_st(a_inv, less()), mono_st(a_inv, greater())};
+            vector ans(2, a_inv), mr = {mono_st(a_inv, less()), mono_st(a_inv, greater())};
             vector<vector<int>> qi(n);
             for (int i = 1; i < n; i++) qi[min(a[i - 1], a[i])].push_back(i);
             array<UF, 2> uf = {UF(n), UF(n)};
             for (int i = n - 1; i >= 0; i--)
                 for (int j = 0; j < 2; j++) {
-                    for (int k = i + 1; k != ri[j][i]; k = ri[j][k]) uf[j].join(i, k);
+                    for (int k = i + 1; k != mr[j][i]; k = mr[j][k]) uf[j].join(i, k);
                     ans[j][uf[j].find(i)] = a_inv[i];
                     for (int idx : qi[i]) i_range[idx][j] = ans[j][uf[j].find(max(a[idx - 1], a[idx]))];
                 }
