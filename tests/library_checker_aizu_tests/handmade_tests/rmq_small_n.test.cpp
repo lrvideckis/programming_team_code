@@ -6,19 +6,19 @@
 #include "../../../library/data_structures/uncommon/disjoint_rmq.hpp"
 #include "../../../library/data_structures/uncommon/linear_rmq.hpp"
 
-void test_all_subarrays(const vector<int>& arr) {
-    auto n = ssize(arr);
-    RMQ rmq(arr, [](auto x, auto y) {return min(x, y);});
-    disjoint_rmq dis_rmq(arr, [](auto x, auto y) {return min(x, y);});
-    linear_rmq lin_rmq(arr, less());
+void test_all_subarrays(const vector<int>& a) {
+    auto n = ssize(a);
+    RMQ rmq(a, [](auto x, auto y) {return min(x, y);});
+    disjoint_rmq dis_rmq(a, [](auto x, auto y) {return min(x, y);});
+    linear_rmq lin_rmq(a, less());
     for (int le = 0; le < n; le++) {
         for (int ri = le + 1; ri <= n; ri++) {
             int idx_min = lin_rmq.query_idx(le, ri);
             assert(le <= idx_min && idx_min < ri);
             auto curr_1 = rmq.query(le, ri);
-            assert(arr[idx_min] == curr_1);
+            assert(a[idx_min] == curr_1);
             auto curr_2 = dis_rmq.query(le, ri);
-            assert(arr[idx_min] == curr_2);
+            assert(a[idx_min] == curr_2);
         }
     }
 }
@@ -34,9 +34,9 @@ int main() {
     }
     for (int n = 1; n <= 100; n++) {
         for (int times = 0; times < 40; times++) {
-            vector<int> arr(n);
-            for (int i = 0; i < n; i++) arr[i] = get_rand<int>(INT_MIN, INT_MAX);
-            test_all_subarrays(arr);
+            vector<int> a(n);
+            for (int i = 0; i < n; i++) a[i] = get_rand<int>(INT_MIN, INT_MAX);
+            test_all_subarrays(a);
         }
     }
     cout << "Hello World\n";

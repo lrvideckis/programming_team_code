@@ -7,6 +7,8 @@
 #include "../../../library/graphs/lca_rmq/dist_edges.hpp"
 #include "../../../library/graphs/lca_rmq/next_on_path.hpp"
 
+#include "../../../library/graphs/linear_lca/dist_edges.hpp"
+
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     int n, q;
@@ -20,6 +22,7 @@ int main() {
     }
     tree_lift tl(adj);
     LCA lca(adj);
+    linear_lca lin_lca(adj);
     while (q--) {
         int u, v, k;
         cin >> u >> v >> k;
@@ -29,6 +32,7 @@ int main() {
         else
             cout << kth_path(tl, u, v, k) << '\n';
         assert(dist_in_edges == dist_edges(lca, u, v));
+        assert(dist_in_edges == dist_edges(lin_lca, u, v));
         if (u != v) {
             assert(kth_path(tl, u, v, 0) == u);
             assert(kth_path(tl, u, v, 1) == next_on_path(lca, u, v));

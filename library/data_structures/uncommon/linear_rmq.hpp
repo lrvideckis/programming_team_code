@@ -1,100 +1,58 @@
 /** @file */
 #pragma once
+#include "../../monotonic_stack/monotonic_range.hpp"
+#include "../../monotonic_stack/cartesian_binary_tree.hpp"
+#define bit_floor(x) ((x) ? 1 << __lg(x) : 0)
 /**
- * @see https://codeforces.com/blog/entry/78931 https://codeforces.com/blog/entry/92310
- * @code{.cpp}
-       vector<long long> a;
-       linear_rmq rmq(a, less());//minimum query
-       linear_rmq rmq(a, greater());//maximum query
- * @endcode
+ * @see On Finding Lowest Common Ancestors: Simplification and Parallelization
+ * by Baruch Schieber, Uzi Vishkin, April 1987
  */
 template <class T, class F> struct linear_rmq {
     int n;
-    vector<T> a;
     F cmp;
+    vector<T> a;
+    vector<int> par_head;
+    vector<unsigned> in_label, ascendant;
     /**
-     * on the level'th level, blocks are:
-     * 0-th block: [0*64^level, 1*64^level)
-     * 1-st block: [1*64^level, 2*64^level)
-     * 2-nd block: [2*64^level, 3*64^level)
-     * ...
-     * mask[level][i] = min-monotonic stack over blocks [i, i+64)
-     * idx[level][i] = array idx of minimum over all values in blocks [i, i+64)
-     * @{
-     */
-    vector<vector<uint64_t>> mask;
-    vector<vector<int>> idx;
-    /** @} */
-    /**
-     * @param a_a an array
-     * @param a_cmp transitive compare operator
+     * @code{.cpp}
+           vector<long long> a(n);
+           linear_rmq rmq(a, less()); // right-most min
+           linear_rmq rmq(a, less_equal()); // left-most min
+           linear_rmq rmq(a, greater()); // right-most max
+           linear_rmq rmq(a, greater_equal()); // left-most max
+     * @endcode
+     * @param a_a,a_cmp array and a compare operator
      * @time O(n)
-     * @space `a`, `mask`, and `idx` vectors are all O(n)
+     * @space O(n)
      */
-    linear_rmq(const vector<T>& a_a, F a_cmp) : n(ssize(a_a)), a(a_a), cmp(a_cmp) {
-        for (int sz = n; sz >= 2; sz = ((sz + 63) >> 6)) {
-            int level = ssize(idx);
-            mask.emplace_back(sz + 1);
-            idx.emplace_back(sz);
-            calc(level, 0, sz);
-        }
-    }
-    void calc(int level, int le, int ri) {
-        for (int i = ri - 1; i >= le; i--) {
-            uint64_t st = mask[level][i + 1];
-            T curr = a[blk(level, i)];
-            while (st && cmp(curr, a[blk(level, i + 1 + __builtin_ctzll(st))])) st &= st - 1;
-            mask[level][i] = st = ((st << 1) | 1);
-            idx[level][i] = blk(level, i + __lg(st));
-        }
-    }
-    /**
-     * @param level,i defines a block, corresponding to a[i*64^level, (i+1)*64^level)
-     * @returns array index of minimum in block
-     */
-    inline int blk(int level, int i) {
-        return level ? idx[level - 1][i << 6] : i;
-    }
-    inline int mn(int le, int ri) {
-        return cmp(a[le], a[ri]) ? le : ri;
-    }
-    /**
-     * @param le,ri defines range [le, ri)
-     * @returns index of minimum in range
-     * @time O(log(n) / log(log(n))), practically if n <= 2^24 then ssize(mask) <= 4
-     * @space O(1)
-     */
-    inline int query_idx(int le, int ri) {
-        assert(0 <= le && le < ri && ri <= n);
-        int res = le;
-        for (int level = 0; le < ri && level < ssize(mask); level++, le = (le >> 6) + 1, ri = ((ri - 1) >> 6)) {
-            if (ri - le < 64) {
-                int x = 64 - (ri - le);
-                return mn(res, blk(level, le + __lg(mask[level][le] << x) - x));
+    linear_rmq(const vector<T>& a_a, F a_cmp) : n(ssize(a_a)), cmp(a_cmp), a(a_a), par_head(n + 1), in_label(n), ascendant(n) {
+        vector<int> mr(mono_st(a, cmp)), ml(mono_range(mr)), p(cart_binary_tree(mr));
+        for (int i = 0; i < n; i++)
+            in_label[i] = mr[i] & -bit_floor(unsigned((ml[i] + 1) ^ mr[i]));
+        for (int i = 0; i < n; i++)
+            if (p[i] == n || in_label[p[i]] != in_label[i]) {
+                par_head[in_label[i]] = p[i];
+                int to_add = in_label[i] & -in_label[i];
+                ascendant[ml[i] + 1] += to_add;
+                if (mr[i] < n) ascendant[mr[i]] -= to_add;
             }
-            res = mn(res, mn(idx[level][le], idx[level][ri - 64]));
-        }
-        return res;
+        partial_sum(begin(ascendant), end(ascendant), begin(ascendant));
+    }
+    int lift(int u, unsigned j) {
+        int k = bit_floor(ascendant[u] & j);
+        return k == 0 ? u : par_head[(in_label[u] & -k) | k];
     }
     /**
      * @param le,ri defines range [le, ri)
-     * @returns minimum in range
-     * @time O(log(n) / log(log(n)))
+     * @returns index of min/max of range
+     * @time O(1)
      * @space O(1)
      */
-    inline int query(int le, int ri) {
-        return a[query_idx(le, ri)];
-    }
-    /**
-     * @param pos index to update
-     * @param val new value
-     * @time O((log(n)^2) / log(log(n)))
-     * @space O(1)
-     */
-    inline void update(int pos, T val) {
-        assert(0 <= pos && pos < n);
-        a[pos] = val;
-        for (int level = 0; level < ssize(mask); level++, pos >>= 6)
-            calc(level, max(0, pos - 63), pos + 1);
+    int query_idx(int le, int ri) {
+        assert(0 <= le && le < ri && ri <= n);
+        auto [x, y] = minmax(in_label[le], in_label[--ri]);
+        auto j = ascendant[le] & ascendant[ri] & -bit_floor((x - 1) ^ y);
+        (j &= -j)--;
+        return cmp(a[le = lift(le, j)], a[ri = lift(ri, j)]) ? le : ri;
     }
 };

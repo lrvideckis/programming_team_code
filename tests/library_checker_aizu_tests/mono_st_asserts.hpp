@@ -1,8 +1,7 @@
 #pragma once
-#include "../../library/monotonic_stack/monotonic_range.hpp"
-#include "../../library/monotonic_stack/cartesian_binary_tree.hpp"
 #include "../../library/monotonic_stack/cartesian_k_ary_tree.hpp"
 #include "../../library/data_structures/rmq.hpp"
+#include "../../library/data_structures/uncommon/linear_rmq.hpp"
 tuple<int, vector<vector<int>>, vector<int>> min_cartesian_tree(const vector<int>& a, const vector<int>& ml, const vector<int>& mr) {
     int n = ssize(a);
     assert(ssize(ml) == n && ssize(mr) == n);
@@ -36,6 +35,7 @@ void mono_st_asserts(const vector<int>& a) {
         vector<int> init(n);
         iota(begin(init), end(init), 0);
         RMQ rmq(init, [&](int x, int y) -> int { return cmp(a[x], a[y]) ? x : y; });
+        linear_rmq lin_rmq(a, cmp);
         auto mr = mono_st(a, cmp), ml = mono_range(mr), p = cart_binary_tree(mr);
         {
             int iterations = 0;
@@ -47,6 +47,8 @@ void mono_st_asserts(const vector<int>& a) {
                 if (node_le == node_ri) continue;
                 iterations++;
                 int idx_root = rmq.query(node_le, node_ri);
+                int idx_root_2 = lin_rmq.query_idx(node_le, node_ri);
+                assert(idx_root == idx_root_2);
                 assert(node_le <= idx_root && idx_root < node_ri);
                 assert(ml[idx_root] == node_le - 1);
                 assert(mr[idx_root] == node_ri);
