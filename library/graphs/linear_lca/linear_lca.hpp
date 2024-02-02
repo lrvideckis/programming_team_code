@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#define bit_floor(x) ((x) ? 1 << __lg(x) : 0)
+int bit_floor(unsigned x) {return x ? 1 << __lg(x) : 0;}
 /**
  * @see On Finding Lowest Common Ancestors: Simplification and Parallelization
  * by Baruch Schieber, Uzi Vishkin, April 1987
