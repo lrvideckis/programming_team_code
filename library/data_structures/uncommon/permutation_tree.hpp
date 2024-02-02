@@ -1,7 +1,6 @@
 /** @file */
 #pragma once
-#include "../../../tests/kactl/content/data-structures/UnionFind.h"
-#include "../../monotonic_stack/monotonic_stack.hpp"
+#include "linear_rmq.hpp"
 /**
  * @see https://codeforces.com/blog/entry/78898 https://codeforces.com/blog/entry/48994
  * @code{.cpp}
@@ -32,28 +31,25 @@ struct perm_tree {
     }
     /**
      * @param a permutation
-     * @time O(n * α(n))
+     * @time O(n)
      * @space O(n)
      */
     perm_tree(const vector<int>& a) {
         int n = ssize(a);
-        vector<array<int, 2>> i_range(n);
+        vector<int> mn_i(n), mx_i(n);
         {
             vector<int> a_inv(n, -1);
             for (int i = 0; i < n; i++) {
                 assert(0 <= a[i] && a[i] < n && a_inv[a[i]] == -1);
                 a_inv[a[i]] = i;
             }
-            vector ans(2, a_inv), mr = {mono_st(a_inv, less()), mono_st(a_inv, greater())};
-            vector<vector<int>> qi(n);
-            for (int i = 1; i < n; i++) qi[min(a[i - 1], a[i])].push_back(i);
-            array<UF, 2> uf = {UF(n), UF(n)};
-            for (int i = n - 1; i >= 0; i--)
-                for (int j = 0; j < 2; j++) {
-                    for (int k = i + 1; k != mr[j][i]; k = mr[j][k]) uf[j].join(i, k);
-                    ans[j][uf[j].find(i)] = a_inv[i];
-                    for (int idx : qi[i]) i_range[idx][j] = ans[j][uf[j].find(max(a[idx - 1], a[idx]))];
-                }
+            linear_rmq rmq_min(a_inv, less());
+            linear_rmq rmq_max(a_inv, greater());
+            for (int i = 1; i < n; i++) {
+                auto [x, y] = minmax(a[i - 1], a[i]);
+                mn_i[i] = a_inv[rmq_min.query_idx(x, y + 1)];
+                mx_i[i] = a_inv[rmq_max.query_idx(x, y + 1)];
+            }
         }
         for (int i = 0; i < n; i++) allocate(0, i, a[i], 1, {});
         vector<array<int, 4>> st;
@@ -74,7 +70,7 @@ struct perm_tree {
                     st.pop_back();
                     continue;
                 }
-                int le = min(mn_idx[v], i_range[mn_idx[u]][0]), ri = max(i, i_range[mn_idx[u]][1]), idx = ssize(st) - 1;
+                int le = min(mn_idx[v], mn_i[mn_idx[u]]), ri = max(i, mx_i[mn_idx[u]]), idx = ssize(st) - 1;
                 while (ri == i && le != mn_idx[st[idx][0]])
                     le = min(le, st[idx][1]), ri = max(ri, st[idx][2]), idx = st[idx][3];
                 if (ri > i) {
