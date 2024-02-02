@@ -11,15 +11,15 @@ int main() {
     vector<int> a(n);
     for (int i = 0; i < n; i++) cin >> a[i];
     mono_st_asserts(a);
-    auto mr = mono_st(a, less_equal());
-    auto p = cart_k_ary_tree(a, mr);
+    auto ri = mono_st(a, less_equal());
+    auto p = cart_k_ary_tree(a, ri);
     assert(*min_element(begin(p), end(p)) >= 0);
     assert(*max_element(begin(p), end(p)) == n);
     vector<int> a_neg(n);
     transform(begin(a), end(a), begin(a_neg), [](int x) {return -x;});
     auto ri_neg = mono_st(a_neg, greater_equal());
     auto p_neg = cart_k_ary_tree(a_neg, ri_neg);
-    assert(mr == ri_neg);
+    assert(ri == ri_neg);
     assert(p == p_neg);
     for (int i = 0; i < n; i++) {
         if (p[i] != n) assert(a[p[i]] < a[i]); //because distinct numbers

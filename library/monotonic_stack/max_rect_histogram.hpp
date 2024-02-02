@@ -9,9 +9,9 @@
  * @space besides O(n) param `a`, O(n) extra space is allocated temporarily
  */
 long long max_rect_histogram(const vector<int>& a) {
-    auto mr = mono_st(a, less()), ml = mono_range(mr);
+    auto ri = mono_st(a, less()), le = mono_range(ri);
     auto max_area = 0LL;
     for (int i = 0; i < ssize(a); i++)
-        max_area = max(max_area, 1LL * a[i] * (mr[i] - ml[i] - 1));
+        max_area = max(max_area, 1LL * a[i] * (ri[i] - le[i] - 1));
     return max_area;
 }

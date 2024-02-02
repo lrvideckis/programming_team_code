@@ -49,7 +49,7 @@ const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase le
  */
 struct lcp_tree {
     int n, root;
-    vector<int> sa, sa_inv, lcp, ml, mr;
+    vector<int> sa, sa_inv, lcp, le, ri;
     vector<vector<int>> adj;
     /**
      * @param s non-empty string/array
@@ -61,9 +61,9 @@ struct lcp_tree {
         auto ret = get_sa(s, mn + max_val);
         sa = ret[0], sa_inv = ret[1];
         lcp = get_lcp_array(sa, sa_inv, s);
-        mr = mono_st(lcp, less_equal());
-        ml = mono_range(mr);
-        auto p = cart_k_ary_tree(lcp, mr);
+        ri = mono_st(lcp, less_equal());
+        le = mono_range(ri);
+        auto p = cart_k_ary_tree(lcp, ri);
         root = find(begin(p), end(p), ssize(p)) - begin(p);
         auto node = [&](int i) -> int {
             return p[i] > i || lcp[i] != lcp[p[i]] ? i : p[i];
@@ -87,7 +87,7 @@ struct lcp_tree {
      * @space O(1)
      */
     inline array<int, 2> sa_range(int u) {
-        if (u < n - 1) return {ml[u] + 1, mr[u] + 1};
+        if (u < n - 1) return {le[u] + 1, ri[u] + 1};
         return {u - n + 1, u - n + 2};
     }
     /**
