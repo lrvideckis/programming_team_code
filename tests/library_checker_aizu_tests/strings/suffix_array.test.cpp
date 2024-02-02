@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "../template.hpp"
+#include "../mono_st_asserts.hpp"
 
 #include "../../../library/strings/suffix_array_related/find/find_string_bs.hpp"
 #include "../../../library/strings/suffix_array_related/find/find_substrings_concatenated.hpp"
@@ -20,6 +21,7 @@ int main() {
     cin >> s;
     int n = ssize(s);
     lcp_query lq(s, 256);
+    mono_st_asserts(lq.lcp);
     assert(ssize(lq.sa) == n);
     assert(ssize(lq.sa_inv) == n);
     assert(ssize(lq.lcp) == n - 1);
