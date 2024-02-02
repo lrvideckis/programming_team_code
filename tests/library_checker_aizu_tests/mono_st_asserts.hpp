@@ -47,7 +47,7 @@ void mono_st_asserts(const vector<int>& a) {
                 if (node_le == node_ri) continue;
                 iterations++;
                 int idx_root = rmq.query(node_le, node_ri);
-                int idx_root_2 = lin_rmq.query_idx(node_le, node_ri);
+                int idx_root_2 = lin_rmq.query_idx(node_le, node_ri - 1);
                 assert(idx_root == idx_root_2);
                 assert(node_le <= idx_root && idx_root < node_ri);
                 assert(le[idx_root] == node_le - 1);

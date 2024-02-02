@@ -43,14 +43,13 @@ template <class T, class F> struct linear_rmq {
         return k == 0 ? u : par_head[(in_label[u] & -k) | k];
     }
     /**
-     * @param le,ri defines range [le, ri)
+     * @param le,ri defines range [min(le, ri), max(le, ri)]
      * @returns index of min/max of range
      * @time O(1)
      * @space O(1)
      */
     int query_idx(int le, int ri) {
-        assert(0 <= le && le < ri && ri <= n);
-        auto [x, y] = minmax(in_label[le], in_label[--ri]);
+        auto [x, y] = minmax(in_label[le], in_label[ri]);
         auto j = ascendant[le] & ascendant[ri] & -bit_floor((x - 1) ^ y);
         (j &= -j)--;
         return cmp(a[le = lift(le, j)], a[ri = lift(ri, j)]) ? le : ri;

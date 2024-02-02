@@ -28,11 +28,11 @@ int main() {
     mono_st_asserts(a);
     RMQ rmq(a, [](auto x, auto y) {return min(x, y);});
     disjoint_rmq dis_rmq(a, [](auto x, auto y) {return min(x, y);});
-    linear_rmq lin_rmq(a, my_cmp);
+    linear_rmq lin_rmq(a, less());
     while (q--) {
         int le, ri;
         cin >> le >> ri;
-        int idx_min = lin_rmq.query_idx(le, ri);
+        int idx_min = lin_rmq.query_idx(le, ri - 1);
         auto curr_1 = rmq.query(le, ri);
         assert(a[idx_min] == curr_1);
         auto curr_2 = dis_rmq.query(le, ri);
