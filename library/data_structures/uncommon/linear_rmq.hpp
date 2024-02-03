@@ -39,7 +39,7 @@ template <class T, class F> struct linear_rmq {
         partial_sum(begin(ascendant), end(ascendant), begin(ascendant));
     }
     int lift(int u, unsigned j) {
-        int k = bit_floor(ascendant[u] & j);
+        int k = bit_floor(ascendant[u] ^ j);
         return k == 0 ? u : par_head[(in_label[u] & -k) | k];
     }
     /**
@@ -51,7 +51,6 @@ template <class T, class F> struct linear_rmq {
     int query_idx(int le, int ri) {
         auto [x, y] = minmax(in_label[le], in_label[ri]);
         auto j = ascendant[le] & ascendant[ri] & -bit_floor((x - 1) ^ y);
-        (j &= -j)--;
         return cmp(a[le = lift(le, j)], a[ri = lift(ri, j)]) ? le : ri;
     }
 };
