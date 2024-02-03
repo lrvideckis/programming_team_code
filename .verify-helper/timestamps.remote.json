@@ -108,5 +108,6 @@
 "tests/library_checker_aizu_tests/strings/sa_sort_pairs.test.cpp": "2024-01-23 18:39:32 -0600",
 "tests/library_checker_aizu_tests/strings/single_matching.test.cpp": "2024-02-01 21:50:59 -0600",
 "tests/library_checker_aizu_tests/strings/single_matching_bs.test.cpp": "2024-01-23 20:38:39 -0600",
-"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2024-02-02 13:13:52 -0600"
+"tests/library_checker_aizu_tests/strings/suffix_array.test.cpp": "2024-02-02 13:13:52 -0600",
+"tests/library_checker_aizu_tests/strings/trie.test.cpp": "2024-01-08 10:53:33 -0600"
 }
