@@ -87,5 +87,16 @@
 "tests/library_checker_aizu_tests/math/tetration.test.cpp": "2023-10-26 11:24:43 -0700",
 "tests/library_checker_aizu_tests/math/totient.test.cpp": "2023-10-26 11:24:43 -0700",
 "tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_binary_tree.test.cpp": "2024-02-01 21:50:59 -0600",
-"tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_k_ary_tree.test.cpp": "2024-02-02 13:13:52 -0600"
+"tests/library_checker_aizu_tests/monotonic_stack_related/cartesian_k_ary_tree.test.cpp": "2024-02-02 13:13:52 -0600",
+"tests/library_checker_aizu_tests/monotonic_stack_related/count_rectangles.test.cpp": "2024-02-02 13:13:52 -0600",
+"tests/library_checker_aizu_tests/monotonic_stack_related/max_rect_histogram.test.cpp": "2024-02-02 13:13:52 -0600",
+"tests/library_checker_aizu_tests/strings/kmp.test.cpp": "2024-01-08 10:53:33 -0600",
+"tests/library_checker_aizu_tests/strings/lcp_array.test.cpp": "2023-12-31 18:54:53 -0600",
+"tests/library_checker_aizu_tests/strings/lcp_interval_tree.test.cpp": "2024-02-01 21:50:59 -0600",
+"tests/library_checker_aizu_tests/strings/lcp_query_palindrome.test.cpp": "2024-01-23 18:39:32 -0600",
+"tests/library_checker_aizu_tests/strings/lcp_query_zfunc.test.cpp": "2024-01-23 20:38:39 -0600",
+"tests/library_checker_aizu_tests/strings/lcs_dp.test.cpp": "2024-01-08 10:53:33 -0600",
+"tests/library_checker_aizu_tests/strings/lcs_queries.test.cpp": "2024-01-25 11:58:56 -0600",
+"tests/library_checker_aizu_tests/strings/lcs_queries_wavelet.test.cpp": "2024-01-12 14:07:09 -0600",
+"tests/library_checker_aizu_tests/strings/longest_common_substring.test.cpp": "2023-12-31 18:54:53 -0600"
 }
