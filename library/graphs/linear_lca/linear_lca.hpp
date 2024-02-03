@@ -44,7 +44,7 @@ struct linear_lca {
                 dfs2(v, u);
             }
     }
-    int lift(int u, unsigned j) {
+    inline int lift(int u, unsigned j) {
         int k = bit_floor(ascendant[u] ^ j);
         return k == 0 ? u : par_head[(in_label[u] & -k) | k];
     }
@@ -54,7 +54,7 @@ struct linear_lca {
      * @time O(1)
      * @space O(1)
      */
-    int get_lca(int u, int v) {
+    inline int get_lca(int u, int v) {
         auto [x, y] = minmax(in_label[u], in_label[v]);
         auto j = ascendant[u] & ascendant[v] & -bit_floor((x - 1) ^ y);
         return d[u = lift(u, j)] < d[v = lift(v, j)] ? u : v;
