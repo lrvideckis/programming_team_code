@@ -45,7 +45,7 @@ struct linear_lca {
             }
     }
     inline int lift(int u, unsigned j) {
-        int k = bit_floor(ascendant[u] ^ j);
+        auto k = bit_floor(ascendant[u] ^ j);
         return k == 0 ? u : par_head[(in_label[u] & -k) | k];
     }
     /**

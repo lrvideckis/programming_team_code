@@ -39,7 +39,7 @@ template <class T, class F> struct linear_rmq {
         partial_sum(begin(ascendant), end(ascendant), begin(ascendant));
     }
     inline int lift(int u, unsigned j) {
-        int k = bit_floor(ascendant[u] ^ j);
+        auto k = bit_floor(ascendant[u] ^ j);
         return k == 0 ? u : par_head[(in_label[u] & -k) | k];
     }
     /**
