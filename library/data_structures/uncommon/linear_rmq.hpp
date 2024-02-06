@@ -2,7 +2,7 @@
 #pragma once
 #include "../../monotonic_stack/monotonic_range.hpp"
 #include "../../monotonic_stack/cartesian_binary_tree.hpp"
-int bit_floor(unsigned x) {return x ? 1 << __lg(x) : 0;}
+inline int bit_floor(unsigned x) {return x ? 1 << __lg(x) : 0;}
 /**
  * @see On Finding Lowest Common Ancestors: Simplification and Parallelization
  * by Baruch Schieber, Uzi Vishkin, April 1987
