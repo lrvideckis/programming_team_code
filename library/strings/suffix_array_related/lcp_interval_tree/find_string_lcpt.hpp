@@ -19,14 +19,14 @@
  * @space O(1)
  */
 array<int, 2> find_str(const string& s, lcp_tree& lt, const string& t) {
-    int u = lt.root;
-    for (int i = 0; i < ssize(t); i++) {
-        if (i == lt.lcp_len(u)) {
-            u = lt.get_child(u, t[i]);
-            if (u == -1) return {0, 0};
-        }
-        int le = lt.sa_range(u)[0];
-        if (s[lt.sa[le] + i] != t[i]) return {0, 0};
-    }
-    return lt.sa_range(u);
+	int u = lt.root;
+	for (int i = 0; i < ssize(t); i++) {
+		if (i == lt.lcp_len(u)) {
+			u = lt.get_child(u, t[i]);
+			if (u == -1) return {0, 0};
+		}
+		int le = lt.sa_range(u)[0];
+		if (s[lt.sa[le] + i] != t[i]) return {0, 0};
+	}
+	return lt.sa_range(u);
 }

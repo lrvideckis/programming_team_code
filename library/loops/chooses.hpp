@@ -10,8 +10,8 @@
  * @space O(1)
  */
 inline int next_subset(int mask) {
-    int c = mask & -mask, r = mask + c;
-    return r | (((r ^ mask) >> 2) / c);
+	int c = mask & -mask, r = mask + c;
+	return r | (((r ^ mask) >> 2) / c);
 }
 /**
  * @param n,k defines which bitmasks
@@ -20,6 +20,6 @@ inline int next_subset(int mask) {
  * @space O(1)
  */
 template <class F> void chooses(int n, int k, F f) {
-    for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
-        f(mask);
+	for (int mask = (1 << k) - 1; mask < (1 << n); mask = next_subset(mask))
+		f(mask);
 }

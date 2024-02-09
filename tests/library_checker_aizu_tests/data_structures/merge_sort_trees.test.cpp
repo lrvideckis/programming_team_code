@@ -9,25 +9,25 @@
 #include "../../../library/data_structures/wavelet_merge/merge_sort_tree_updates.hpp"
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
-    int n, q;
-    cin >> n >> q;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    merge_sort_tree mst(arr);
-    merge_sort_tree_updates mstu(arr, vector<bool>(n, 1));
-    while (q--) {
-        int le, ri, x;
-        cin >> le >> ri >> x;
-        auto curr_1 = mst.rect_count(le, ri, x, x);
-        assert(curr_1 == 0);
-        auto curr_2 = mstu.rect_count(le, ri, x, x);
-        assert(curr_2 == 0);
-        int res = mst.rect_count(le, ri, x, x + 1);
-        auto curr_3 = mstu.rect_count(le, ri, x, x + 1);
-        assert(res == curr_3);
-        cout << res << '\n';
-    }
-    return 0;
+	cin.tie(0)->sync_with_stdio(0);
+	int n, q;
+	cin >> n >> q;
+	vector<int> arr(n);
+	for (int i = 0; i < n; i++)
+		cin >> arr[i];
+	merge_sort_tree mst(arr);
+	merge_sort_tree_updates mstu(arr, vector<bool>(n, 1));
+	while (q--) {
+		int le, ri, x;
+		cin >> le >> ri >> x;
+		auto curr_1 = mst.rect_count(le, ri, x, x);
+		assert(curr_1 == 0);
+		auto curr_2 = mstu.rect_count(le, ri, x, x);
+		assert(curr_2 == 0);
+		int res = mst.rect_count(le, ri, x, x + 1);
+		auto curr_3 = mstu.rect_count(le, ri, x, x + 1);
+		assert(res == curr_3);
+		cout << res << '\n';
+	}
+	return 0;
 }

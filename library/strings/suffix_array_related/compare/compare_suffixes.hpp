@@ -22,6 +22,6 @@
  * @space O(1)
  */
 inline int suf_cmp(const vector<int>& sa_inv, int le1, int le2) {
-    assert(0 <= min(le1, le2) && max(le1, le2) <= ssize(sa_inv));
-    return max(le1, le2) == ssize(sa_inv) ? le2 - le1 : sa_inv[le1] - sa_inv[le2];
+	assert(0 <= min(le1, le2) && max(le1, le2) <= ssize(sa_inv));
+	return max(le1, le2) == ssize(sa_inv) ? le2 - le1 : sa_inv[le1] - sa_inv[le2];
 }

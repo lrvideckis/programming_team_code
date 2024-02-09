@@ -7,6 +7,6 @@
  * @space O(1)
  */
 template <class F> void submasks(int mask, F f) {
-    for (int submask = mask; submask; submask = (submask - 1) & mask)
-        f(submask);
+	for (int submask = mask; submask; submask = (submask - 1) & mask)
+		f(submask);
 }

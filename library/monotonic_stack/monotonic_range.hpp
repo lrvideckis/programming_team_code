@@ -16,8 +16,8 @@
  * @space two O(n) vectors are allocated and returned
  */
 vector<int> mono_range(const vector<int>& ri) {
-    vector le(ssize(ri), -1);
-    for (int i = 0; i < ssize(ri); i++)
-        for (int j = i + 1; j != ri[i]; j = ri[j]) le[j] = i;
-    return le;
+	vector le(ssize(ri), -1);
+	for (int i = 0; i < ssize(ri); i++)
+		for (int j = i + 1; j != ri[i]; j = ri[j]) le[j] = i;
+	return le;
 }

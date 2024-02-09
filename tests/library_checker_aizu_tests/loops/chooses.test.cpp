@@ -4,17 +4,17 @@
 #include "../../../library/loops/chooses.hpp"
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
-    int n, k;
-    cin >> n >> k;
-    auto f = [&](int mask) {
-        cout << mask << ':';
-        for (int bit = 0; bit < n; bit++) {
-            if ((mask >> bit) & 1)
-                cout << ' ' << bit;
-        }
-        cout << '\n';
-    };
-    chooses(n, k, f);
-    return 0;
+	cin.tie(0)->sync_with_stdio(0);
+	int n, k;
+	cin >> n >> k;
+	auto f = [&](int mask) {
+		cout << mask << ':';
+		for (int bit = 0; bit < n; bit++) {
+			if ((mask >> bit) & 1)
+				cout << ' ' << bit;
+		}
+		cout << '\n';
+	};
+	chooses(n, k, f);
+	return 0;
 }

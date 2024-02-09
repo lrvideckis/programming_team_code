@@ -35,13 +35,13 @@
  * @space this function allocates O(n) space for `lcp`
  */
 template <class T> vector<int> get_lcp_array(const vector<int>& sa, const vector<int>& sa_inv, const T& s) {
-    int n = ssize(s);
-    vector<int> lcp(max(0, n - 1));
-    for (int i = 0, sz = 0; i < n; i++) {
-        if (sz > 0) sz--;
-        if (sa_inv[i] == 0) continue;
-        for (int j = sa[sa_inv[i] - 1]; max(i, j) + sz < n && s[i + sz] == s[j + sz];) sz++;
-        lcp[sa_inv[i] - 1] = sz;
-    }
-    return lcp;
+	int n = ssize(s);
+	vector<int> lcp(max(0, n - 1));
+	for (int i = 0, sz = 0; i < n; i++) {
+		if (sz > 0) sz--;
+		if (sa_inv[i] == 0) continue;
+		for (int j = sa[sa_inv[i] - 1]; max(i, j) + sz < n && s[i + sz] == s[j + sz];) sz++;
+		lcp[sa_inv[i] - 1] = sz;
+	}
+	return lcp;
 }

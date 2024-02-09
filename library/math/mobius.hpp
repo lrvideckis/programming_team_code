@@ -12,8 +12,8 @@ int mobius[mx_n];
  * @space O(mx_n)
  */
 void calc_mobius() {
-    mobius[1] = 1;
-    for (int i = 1; i < mx_n; i++)
-        for (int j = i + i; j < mx_n; j += i)
-            mobius[j] -= mobius[i];
+	mobius[1] = 1;
+	for (int i = 1; i < mx_n; i++)
+		for (int j = i + i; j < mx_n; j += i)
+			mobius[j] -= mobius[i];
 }

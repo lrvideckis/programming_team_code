@@ -9,7 +9,7 @@
  * @space O(1)
  */
 inline bool in_subtree(const LCA& lca, int u, int v) {
-    return lca.in[u] <= lca.in[v] && lca.in[v] < lca.in[u] + lca.sub_sz[u];
+	return lca.in[u] <= lca.in[v] && lca.in[v] < lca.in[u] + lca.sub_sz[u];
 }
 /**
  * @see https://codeforces.com/blog/entry/71567?#comment-559285
@@ -24,6 +24,6 @@ inline bool in_subtree(const LCA& lca, int u, int v) {
  * @space O(1)
  */
 inline int next_on_path(LCA& lca, int u, int v) {
-    assert(u != v);
-    return in_subtree(lca, u, v) ? lca.rmq.query(lca.in[u] + 1, lca.in[v] + 1) : lca.p[u];
+	assert(u != v);
+	return in_subtree(lca, u, v) ? lca.rmq.query(lca.in[u] + 1, lca.in[v] + 1) : lca.p[u];
 }

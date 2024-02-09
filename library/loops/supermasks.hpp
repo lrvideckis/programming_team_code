@@ -8,6 +8,6 @@
  * @space O(1)
  */
 template <class F> void supermasks(int mask, int n, F f) {
-    for (int supermask = mask; supermask < (1 << n); supermask = (supermask + 1) | mask)
-        f(supermask);
+	for (int supermask = mask; supermask < (1 << n); supermask = (supermask + 1) | mask)
+		f(supermask);
 }

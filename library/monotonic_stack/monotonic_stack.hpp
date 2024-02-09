@@ -17,8 +17,8 @@
  * @space a O(n) vector is allocated and returned
  */
 template <class T, class F> vector<int> mono_st(const vector<T>& a, F cmp) {
-    vector<int> ri(ssize(a));
-    for (int i = ssize(a) - 1; i >= 0; i--)
-        for (ri[i] = i + 1; ri[i] < ssize(a) && cmp(a[i], a[ri[i]]);) ri[i] = ri[ri[i]];
-    return ri;
+	vector<int> ri(ssize(a));
+	for (int i = ssize(a) - 1; i >= 0; i--)
+		for (ri[i] = i + 1; ri[i] < ssize(a) && cmp(a[i], a[ri[i]]);) ri[i] = ri[ri[i]];
+	return ri;
 }

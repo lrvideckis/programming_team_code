@@ -9,5 +9,5 @@
  * @space O(1)
  */
 inline int dist_edges(linear_lca& lca, int u, int v) {
-    return lca.d[u] + lca.d[v] - 2 * lca.d[lca.get_lca(u, v)];
+	return lca.d[u] + lca.d[v] - 2 * lca.d[lca.get_lca(u, v)];
 }

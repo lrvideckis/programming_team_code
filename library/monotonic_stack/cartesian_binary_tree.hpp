@@ -25,9 +25,9 @@
  * @space a O(n) vector is allocated and returned
  */
 vector<int> cart_binary_tree(const vector<int>& ri) {
-    vector<int> p(ri);
-    for (int i = 0; i < ssize(p); i++)
-        for (int j = i + 1; j != ri[i]; j = ri[j])
-            if (ri[j] == ri[i]) p[j] = i;
-    return p;
+	vector<int> p(ri);
+	for (int i = 0; i < ssize(p); i++)
+		for (int j = i + 1; j != ri[i]; j = ri[j])
+			if (ri[j] == ri[i]) p[j] = i;
+	return p;
 }
