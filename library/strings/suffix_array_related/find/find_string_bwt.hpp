@@ -9,7 +9,7 @@ struct find_bwt {
 	int n;
 	char last;
 	vector<array<int, max_val>> occ;
-	array < int, max_val + 1 > cnt;
+	array < int, max_val + 1 > cnt{};
 	/**
 	 * @code{.cpp}
 	       string s;
@@ -22,7 +22,6 @@ struct find_bwt {
 	 *     to O(n * max_val / 64) https://codeforces.com/contest/963/submission/217802614
 	 */
 	find_bwt(const string& s, const vector<int>& sa) : n(ssize(s)), last(empty(s) ? -1 : s.back() - mn), occ(n + 1) {
-		fill(begin(cnt), end(cnt), 0);
 		for (int i = 0; i < n; i++) {
 			cnt[s[i] + 1 - mn]++;
 			occ[i + 1] = occ[i];

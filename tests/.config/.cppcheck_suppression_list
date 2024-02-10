@@ -12,7 +12,7 @@ unusedScopedObject:library_checker_aizu_tests/graphs/edge_cd_lca.test.cpp:20
 unusedScopedObject:library_checker_aizu_tests/graphs/edge_cd_reroot_dp.test.cpp:50
 arrayIndexOutOfBoundsCond:../library/math/prime_sieve/get_prime_factors.hpp:14
 arrayIndexOutOfBoundsCond:library_checker_aizu_tests/math/linear_prime_sieve.test.cpp:17
-negativeContainerIndex:../library/strings/suffix_array_related/find/find_string_bwt.hpp:51
+negativeContainerIndex:../library/strings/suffix_array_related/find/find_string_bwt.hpp:50
 useStlAlgorithm:../tests/kactl/content/numerical/FastFourierTransform.h:53
 useStlAlgorithm:../library/graphs/strongly_connected_components/add_edges_strongly_connected.hpp:60
 useStlAlgorithm:../library/math/matrix_related/row_reduce.hpp:30

@@ -20,7 +20,7 @@ template <class T> struct contour_range_update {
 	 */
 	contour_range_update(const vector<vector<int>>& adj, const vector<T>& a_a) : n(ssize(a_a)), a(a_a), sum_a(adj, vector<T>(n)), info(n) {
 		edge_cd(adj, [&](const vector<vector<int>>& cd_adj, int cent, int split) {
-			array<int, 2> mx_d = {0, 0};
+			array<int, 2> mx_d{};
 			auto dfs = [&](auto&& self, int u, int p, int d, int side) -> void {
 				mx_d[side] = max(mx_d[side], d);
 				info[u].push_back({ssize(bits), d, side});
