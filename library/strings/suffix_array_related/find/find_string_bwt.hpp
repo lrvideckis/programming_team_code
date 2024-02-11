@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 #include "../suffix_array.hpp"
-const int mn = '0', max_val = 75; // mn <= s[i] < mn + max_val; for lowercase letters: mn = 'a', max_val = 26
+const int mn = '0', max_val = 36; // mn <= s[i] < mn + max_val; for lowercase letters: mn = 'a', max_val = 26
 /**
  * Burrows Wheeler transform
  */
