@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "../template.hpp"
+#include "compress_char.hpp"
 
 #include "../../../library/strings/suffix_array_related/lcp_interval_tree/find_string_lcpt.hpp"
 
@@ -7,6 +8,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	string s;
 	cin >> s;
+	transform(begin(s), end(s), begin(s), compress_char);
 	int n = ssize(s);
 	lcp_tree lt(s);
 	{
