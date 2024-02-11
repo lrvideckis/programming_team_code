@@ -46,7 +46,7 @@ comm -23 --check-order <(
 	grep . &&
 	exit 1
 
-astyle --options=.config/.astylerc --recursive "library_checker_aizu_tests/*.test.cpp" "../library/*.hpp" |
+astyle --options=.config/.astylerc --recursive "library_checker_aizu_tests/*.hpp" "library_checker_aizu_tests/*.test.cpp" "../library/*.hpp" "../library/*.cpp" |
 	grep "Formatted" && exit 1
 
 git submodule init
@@ -54,5 +54,5 @@ git submodule update
 
 cppcheck --enable=all --inconclusive --suppressions-list=.config/.cppcheck_suppression_list \
 	--force --language=c++ --error-exitcode=1 --std=c++17 --max-ctu-depth=50 \
-	../library/**/*.hpp library_checker_aizu_tests/**/*.test.cpp ||
+	library_checker_aizu_tests/**/*.hpp library_checker_aizu_tests/**/*.test.cpp ../library/**/*.hpp ../library/**/*.cpp ||
 	exit 1
