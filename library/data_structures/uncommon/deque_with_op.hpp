@@ -38,7 +38,7 @@ template <class T, class F> struct deq {
 	 * @space O(1)
 	 */
 	inline T query() {
-		assert(size());
+		assert(siz());
 		if (empty(le)) return ri.back()[1];
 		if (empty(ri)) return le.back()[1];
 		return op(le.back()[1], ri.back()[1]);
@@ -48,7 +48,7 @@ template <class T, class F> struct deq {
 	 * @time O(1)
 	 * @space O(1)
 	 */
-	inline int size() {return ssize(le) + ssize(ri);}
+	inline int siz() {return ssize(le) + ssize(ri);}
 	/**
 	 * @param i index
 	 * @returns deq[i]
@@ -56,7 +56,7 @@ template <class T, class F> struct deq {
 	 * @space O(1)
 	 */
 	inline T operator[](int i) {
-		assert(0 <= i && i < size());
+		assert(0 <= i && i < siz());
 		return (i < ssize(le) ? le[ssize(le) - i - 1] : ri[i - ssize(le)])[0];
 	}
 	/**
@@ -81,7 +81,7 @@ template <class T, class F> struct deq {
 	 * @space O(1) ammortized
 	 */
 	inline void pop_front() {
-		assert(size());
+		assert(siz());
 		if (empty(le)) {
 			vector<T> a(ssize(ri));
 			transform(begin(ri), end(ri), begin(a), [](dt & x) {return x[0];});
@@ -95,7 +95,7 @@ template <class T, class F> struct deq {
 	 * @space O(1) ammortized
 	 */
 	inline void pop_back() {
-		assert(size());
+		assert(siz());
 		if (empty(ri)) {
 			vector<T> a(ssize(le));
 			transform(begin(le), end(le), rbegin(a), [](dt & x) {return x[0];});

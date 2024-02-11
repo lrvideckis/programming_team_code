@@ -21,7 +21,7 @@ int main() {
 	for (int i = 0; i < n; i++)
 		each_scc[scc_id[i]].push_back(i);
 	for (int i = num_sccs - 1; i >= 0; i--) {
-		cout << each_scc[i].size() << " ";
+		cout << ssize(each_scc[i]) << " ";
 		for (auto node : each_scc[i])
 			cout << node << " ";
 		cout << '\n';

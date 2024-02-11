@@ -19,8 +19,10 @@ grep --extended-regexp "true" --recursive ../library/ && exit 1
 echo "check 0 instead of false"
 grep --extended-regexp "false" --recursive ../library/ && exit 1
 
-echo "check begin(arr) instead of arr.begin(), similarly for end, rbegin, rend, empty:"
-grep --fixed-strings --regexp=".begin()" --regexp=".rbegin()" --regexp=".end()" --regexp=".rend()" --regexp=".empty()" --recursive ../library/ library_checker_aizu_tests/ && exit 1
+echo "check begin(arr) instead of arr.begin(), similarly for end, rbegin, rend, empty, size:"
+# TODO: remove this define filter if/when we move to -std=c++20
+grep --invert-match --fixed-strings "#define" --recursive ../library/ library_checker_aizu_tests/ |
+	grep --fixed-strings --regexp=".begin()" --regexp=".rbegin()" --regexp=".end()" --regexp=".rend()" --regexp=".empty()" --regexp=".size()" && exit 1
 
 echo "check that there are no empty lines"
 grep "^$" ../library/**/*.hpp && exit 1
