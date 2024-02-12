@@ -42,7 +42,8 @@ int main() {
 	vector<basis<long long>> basises(1 << k);
 	for (int i = 0; i < k; i++) {
 		basis<long long> unordered;
-		basis_ordered ordered;
+		basis_ordered<long long> ordered_ll;
+		basis_ordered<bitset<lg>> ordered_bitset;
 		int naive_size = 0;
 		for (auto elem : grid[i]) {
 			long long val1 = unordered.shrink(elem);
@@ -51,24 +52,28 @@ int main() {
 			for (long long v : unordered.b)
 				assert(((1LL << __lg(v)) & val2) == 0);
 			bool inserted_unordered = unordered.insert(elem);
-			bitset<lg> curr_elem(elem);
-			for (int l = 0; l < lg; l++)
-				assert(((elem >> l) & 1) == curr_elem[l]);
-			bool inserted_ordered = ordered.insert(curr_elem);
-			assert(inserted_unordered == inserted_ordered);
+			bool inserted_ordered_ll = ordered_ll.insert(elem);
+			bool inserted_ordered_bitset = ordered_bitset.insert(bitset<lg>(elem));
+			assert(inserted_unordered == inserted_ordered_bitset);
+			assert(inserted_unordered == inserted_ordered_ll);
 			naive_size += inserted_unordered;
 			assert(naive_size == ssize(unordered.b));
-			assert(ssize(unordered.b) == ordered.siz);
+			assert(ssize(unordered.b) == ordered_bitset.siz);
+			assert(ssize(unordered.b) == ordered_ll.siz);
 			if (inserted_unordered) {
 				for (long long v : unordered.b) {
-					curr_elem = bitset<lg>(v);
-					int idx = ordered.shrink(curr_elem);
+					bitset<lg> curr_elem(v);
+					int idx = ordered_bitset.shrink(curr_elem);
+					assert(idx == -1);
+					idx = ordered_ll.shrink(v);
 					assert(idx == -1);
 				}
 				for (int j = 0; j < lg; j++) {
-					assert(ordered.b[j][j] == ordered.b[j].any());
-					if (ordered.b[j][j]) {
-						long long curr_shrink_val = unordered.shrink(ordered.b[j].to_ullong());
+					assert(ordered_bitset.b[j][j] == ordered_bitset.b[j].any());
+					assert(on(ordered_ll.b[j], j) == (!!ordered_ll.b[j]));
+					assert(ordered_bitset.b[j] == bitset<lg>(ordered_ll.b[j]));
+					if (ordered_bitset.b[j][j]) {
+						long long curr_shrink_val = unordered.shrink(ordered_bitset.b[j].to_ullong());
 						assert(curr_shrink_val == 0);
 					}
 				}
