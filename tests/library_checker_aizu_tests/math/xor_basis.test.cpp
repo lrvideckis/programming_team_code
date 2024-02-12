@@ -3,6 +3,7 @@
 
 #include "../../../library/math/matrix_related/xor_basis.hpp"
 
+//https://github.com/suisen-cp/cp-library-cpp/blob/main/library/linear_algebra/xor_base.hpp
 template <class T> basis<T> intersection(const basis<T>& a, const basis<T>& b) {
 	vector<array<T, 2>> c;
 	transform(begin(a.b), end(a.b), back_inserter(c), [](T e) -> array<T, 2> {
