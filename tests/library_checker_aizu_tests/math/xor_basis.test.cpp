@@ -17,7 +17,7 @@ template <class T> basis<T> intersection(const basis<T>& a, const basis<T>& b) {
 			if (w < e) e = w, s ^= t;
 		}
 		if (e) c.push_back({e, s});
-		else assert(res.add(s));
+		else assert(res.insert(s));
 	}
 	return res;
 }
@@ -45,7 +45,7 @@ int main() {
 			assert(val1 == val2);
 			for (long long v : curr.b)
 				assert(((1LL << __lg(v)) & val2) == 0);
-			naive_size += curr.add(elem);
+			naive_size += curr.insert(elem);
 			assert(naive_size == ssize(curr.b));
 		}
 		for (int i1 = 0; i1 < ssize(curr.b); i1++) {
@@ -63,10 +63,10 @@ int main() {
 			basis v = basises[mask & (mask - 1)];
 			basises[mask] = intersection(u, v);
 			basis u_v_union = u;
-			for (long long vec : v.b) u_v_union.add(vec);
+			for (long long vec : v.b) u_v_union.insert(vec);
 			assert(ssize(basises[mask].b) + ssize(u_v_union.b) == ssize(u.b) + ssize(v.b));
 			basis v_u_union = v;
-			for (long long vec : u.b) v_u_union.add(vec);
+			for (long long vec : u.b) v_u_union.insert(vec);
 			assert(ssize(u_v_union.b) == ssize(v_u_union.b));
 			for (long long vec : basises[mask].b) {
 				long long curr = u.shrink(vec);

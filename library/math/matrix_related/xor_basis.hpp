@@ -19,7 +19,7 @@ template <class T> struct basis {
 		for (T v : b) x = min(x, x ^ v);
 		return x;
 	}
-	bool add(T x) {
+	bool insert(T x) {
 		return (x = shrink(x)) ? b.push_back(x), 1 : 0;
 	}
 };
