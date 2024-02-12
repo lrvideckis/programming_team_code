@@ -1,7 +1,6 @@
 /** @file */
 #pragma once
 const int lg = 60;
-template <class T> bool on(T& v, int i) {return ((v >> i) & T(1)) != T(0);}
 /**
  * @see https://codeforces.com/blog/entry/68953 https://github.com/ssk4988/Hackpack /blob/main/content/numerical/XORBasis.h
  * @code{.cpp}
@@ -15,8 +14,8 @@ template <class T> struct basis {
 	int siz = 0;
 	int shrink(T& v) {
 		for (int i = lg - 1; i >= 0; i--)
-			if (on(v, i)) {
-				if (!on(b[i], i)) return i;
+			if (((v >> i) & T(1)) != T(0)) {
+				if (b[i] == T(0)) return i;
 				v ^= b[i];
 			}
 		return -1;

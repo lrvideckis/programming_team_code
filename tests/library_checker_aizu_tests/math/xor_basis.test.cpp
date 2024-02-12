@@ -70,7 +70,7 @@ int main() {
 				}
 				for (int j = 0; j < lg; j++) {
 					assert(ordered_bitset.b[j][j] == ordered_bitset.b[j].any());
-					assert(on(ordered_ll.b[j], j) == (!!ordered_ll.b[j]));
+					assert(((ordered_ll.b[j] >> j) & 1) == (!!ordered_ll.b[j]));
 					assert(ordered_bitset.b[j] == bitset<lg>(ordered_ll.b[j]));
 					if (ordered_bitset.b[j][j]) {
 						long long curr_shrink_val = unordered.shrink(ordered_bitset.b[j].to_ullong());
