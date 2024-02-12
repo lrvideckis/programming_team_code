@@ -1,19 +1,23 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3277"
 #include "../template.hpp"
 
-#include "../../../library/math/matrix_related/xor_basis.hpp"
+#define basis basis_ordered
+#include "../../../library/math/matrix_related/xor_basis_ordered.hpp"
+#undef basis
+
+#include "../../../library/math/matrix_related/xor_basis_unordered.hpp"
 
 //https://github.com/suisen-cp/cp-library-cpp/blob/main/library/linear_algebra/xor_base.hpp
-template <class T> basis<T> intersection(const basis<T>& a, const basis<T>& b) {
+template <class T> basis<T> intersection(const basis<T>& u, const basis<T>& v) {
 	vector<array<T, 2>> c;
-	transform(begin(a.b), end(a.b), back_inserter(c), [](T e) -> array<T, 2> {
+	transform(begin(u.b), end(u.b), back_inserter(c), [](T e) -> array<T, 2> {
 		return {e, e};
 	});
 	basis<T> res;
-	for (T e : b.b) {
+	for (T e : v.b) {
 		T s = 0;
-		for (auto [v, t] : c) {
-			T w = e ^ v;
+		for (auto [x, t] : c) {
+			T w = e ^ x;
 			if (w < e) e = w, s ^= t;
 		}
 		if (e) c.push_back({e, s});
@@ -37,24 +41,46 @@ int main() {
 			cin >> elem;
 	vector<basis<long long>> basises(1 << k);
 	for (int i = 0; i < k; i++) {
-		basis<long long> curr;
+		basis<long long> unordered;
+		basis_ordered ordered;
 		int naive_size = 0;
 		for (auto elem : grid[i]) {
-			long long val1 = curr.shrink(elem);
-			long long val2 = curr.shrink(val1);
+			long long val1 = unordered.shrink(elem);
+			long long val2 = unordered.shrink(val1);
 			assert(val1 == val2);
-			for (long long v : curr.b)
+			for (long long v : unordered.b)
 				assert(((1LL << __lg(v)) & val2) == 0);
-			naive_size += curr.insert(elem);
-			assert(naive_size == ssize(curr.b));
-		}
-		for (int i1 = 0; i1 < ssize(curr.b); i1++) {
-			for (int i2 = i1 + 1; i2 < ssize(curr.b); i2++) {
-				assert(__lg(curr.b[i1]) != __lg(curr.b[i2]));
-				assert(((1LL << __lg(curr.b[i1])) & curr.b[i2]) == 0);
+			bool inserted_unordered = unordered.insert(elem);
+			bitset<lg> curr_elem(elem);
+			for (int l = 0; l < lg; l++)
+				assert(((elem >> l) & 1) == curr_elem[l]);
+			bool inserted_ordered = ordered.insert(curr_elem);
+			assert(inserted_unordered == inserted_ordered);
+			naive_size += inserted_unordered;
+			assert(naive_size == ssize(unordered.b));
+			assert(ssize(unordered.b) == ordered.siz);
+			if (inserted_unordered) {
+				for (long long v : unordered.b) {
+					curr_elem = bitset<lg>(v);
+					int idx = ordered.shrink(curr_elem);
+					assert(idx == -1);
+				}
+				for (int j = 0; j < lg; j++) {
+					assert(ordered.b[j][j] == ordered.b[j].any());
+					if (ordered.b[j][j]) {
+						long long curr_shrink_val = unordered.shrink(ordered.b[j].to_ullong());
+						assert(curr_shrink_val == 0);
+					}
+				}
+				for (int i1 = 0; i1 < ssize(unordered.b); i1++) {
+					for (int i2 = i1 + 1; i2 < ssize(unordered.b); i2++) {
+						assert(__lg(unordered.b[i1]) != __lg(unordered.b[i2]));
+						assert(((1LL << __lg(unordered.b[i1])) & unordered.b[i2]) == 0);
+					}
+				}
 			}
 		}
-		basises[1 << i] = curr;
+		basises[1 << i] = unordered;
 	}
 	long long res = 0;
 	for (int mask = 1; mask < (1 << k); mask++) {

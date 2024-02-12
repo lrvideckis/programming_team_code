@@ -8,18 +8,18 @@
        sort(rbegin(b.b), rend(b.b)); //needed for kth smallest walk
  * @endcode
  * notes:
- *     - shrink(x) == shrink(shrink(x))
- *     - for each vector v in b: (bit_floor(v) & shrink(x)) == 0
+ *     - shrink(v) == shrink(shrink(v))
+ *     - for each vector x in b: (bit_floor(x) & shrink(v)) == 0
  *     - for 0 <= i < j < ssize(b): (bit_floor(b[i]) & b[j]) == 0
  *     - for 0 <= i < j < ssize(b): bit_floor(b[i]) != bit_floor(b[j])
  */
 template <class T> struct basis {
 	vector<T> b;
-	T shrink(T x) {
-		for (T v : b) x = min(x, x ^ v);
-		return x;
+	T shrink(T v) {
+		for (T x : b) v = min(v, v ^ x);
+		return v;
 	}
-	bool insert(T x) {
-		return (x = shrink(x)) ? b.push_back(x), 1 : 0;
+	bool insert(T v) {
+		return (v = shrink(v)) ? b.push_back(v), 1 : 0;
 	}
 };
