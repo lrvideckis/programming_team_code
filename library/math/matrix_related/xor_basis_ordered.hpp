@@ -8,6 +8,7 @@ const int lg = 60;
        basis<long long> b;
        basis<bitset<lg>> b;
  * @endcode
+ * can get tiny speed boost by repeatedly jumping to next 1-bit in v with __lg
  */
 template <class T> struct basis {
 	T b[lg] {};
