@@ -13,6 +13,16 @@ int main() {
 		int n, k;
 		cin >> n >> k;
 		cout << C(n, k) << '\n';
+		if (n > 0) {
+			assert(C(-n, k) == 0);
+			assert(C(-n, -k) == 0);
+			assert(C(k, -n) == 0);
+			assert(C(-k, -n) == 0);
+		}
+		if (k > 0) {
+			assert(C(n, -k) == 0);
+			assert(C(-k, n) == 0);
+		}
 		assert(ssize(inv) == ssize(fact) && ssize(inv_fact) == ssize(fact));
 	}
 	for (int i = 0; i < ssize(inv); i++) {
