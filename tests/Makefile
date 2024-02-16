@@ -15,12 +15,12 @@ help:
 	@echo "                                     |"
 	@echo "make shellcheck_shfmt                | runs shellcheck and shfmt"
 	@echo "                                     |"
+	@echo "make update_main                     | 1) copies included files into file"
+	@echo "                                     | 2) pushes to main branch"
+	@echo "                                     |"
 	@echo "make online_contest_no_comments      | 1) removes all comments"
 	@echo "                                     | 2) copies included files into file"
 	@echo "                                     | 3) pushes to online_contest_no_comments branch"
-	@echo "                                     |"
-	@echo "make online_contest_comments         | 1) copies included files into file"
-	@echo "                                     | 2) pushes to online_contest_comments branch"
 	@echo "                                     |"
 	@echo "make files_without_tests             | print list of all .hpp files included by *no* .test.cpp files"
 	@echo "                                     |   - these files are not compiled nor linted as part of ci"
@@ -51,11 +51,11 @@ hackpack:
 shellcheck_shfmt:
 	./scripts/shellcheck_shfmt.sh
 
+update_main:
+	./scripts/update_main.sh
+
 online_contest_no_comments:
 	./scripts/online_contest_no_comments.sh
-
-online_contest_comments:
-	./scripts/online_contest_comments.sh
 
 print_which_tests_havent_run:
 	./scripts/print_which_tests_havent_run.sh
