@@ -10,13 +10,15 @@ on:
     #
     # So only around 5-10 tests run per commit, leaving un-run tests. This cron
     # job solves this by reruning any remaining tests every 30 minutes.
-    - cron:  '5,35 7-12 * * *'
+    - cron:  '5,15,25,35,45,55 * * * *'
 
 jobs:
   library_checker_aizu_tests:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+      with:
+        ref: dev
     - name: Set up Python
       uses: actions/setup-python@v1
     - name: Install dependencies
@@ -27,6 +29,7 @@ jobs:
         toolchain: 1.42.0-x86_64-unknown-linux-gnu
         default: true
         profile: minimal
+        ref: dev
     # required by cargo-udeps
     - name: Set up Rust (nightly)
       uses: actions-rs/toolchain@v1
@@ -34,14 +37,21 @@ jobs:
         toolchain: nightly-x86_64-unknown-linux-gnu
         default: true
         profile: minimal
+        ref: dev
     - name: Set up git submodules
       run: |
+        git checkout dev
         git submodule init
         git submodule update
         rm -rf tests/hackpack-cpp/tests/
+    - uses: actions/checkout@v1
+      with:
+        ref: dev
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: oj-verify all --tle 20
+      run: |
+        git checkout dev
+        oj-verify all --tle 20
