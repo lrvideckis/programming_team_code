@@ -26,3 +26,5 @@ astyle --options=.config/.astylerc --recursive "../library/*.hpp"
 sed --in-place '/^[[:space:]]*$/d' ../library/**/*.hpp
 # remove `/** @file */` comments
 sed --in-place '/^\/\*\* @file \*\/$/d' ../library/**/*.hpp
+# remove NOLINTNEXTLINE comments
+sed --in-place '/^\/\/NOLINTNEXTLINE(readability-identifier-naming)$/d' ../library/**/*.hpp
