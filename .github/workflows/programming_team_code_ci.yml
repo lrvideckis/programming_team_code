@@ -131,7 +131,7 @@ jobs:
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
         git add library/
-        git checkout -b test_branch
+        git checkout -b main
         git commit --message "ptc"
         git push
 
