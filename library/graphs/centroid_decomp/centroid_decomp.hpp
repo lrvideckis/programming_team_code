@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @code{.cpp}
        centroid(adj, [&](const vector<vector<int>>& adj, int cent) {

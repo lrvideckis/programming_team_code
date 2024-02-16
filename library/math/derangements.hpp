@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @see https://oeis.org/A000166
  * @param n size

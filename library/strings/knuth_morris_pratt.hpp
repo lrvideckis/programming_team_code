@@ -1,6 +1,19 @@
-/** @file */
-#pragma once
-#include "prefix_function.hpp"
+/**
+ * @see https://cp-algorithms.com/string /prefix-function.html#implementation
+ * @param s string/array
+ * @returns prefix function
+ * @time O(n)
+ * @space this function allocates/returns a O(n) vector
+ */
+template <class T> vector<int> prefix_function(const T& s) {
+	vector<int> pi(ssize(s));
+	for (int i = 1; i < ssize(s); i++) {
+		int j = pi[i - 1];
+		while (j > 0 && s[i] != s[j]) j = pi[j - 1];
+		pi[i] = j + (s[i] == s[j]);
+	}
+	return pi;
+}
 /**
  * @code{.cpp}
        string s;
@@ -13,7 +26,6 @@
  * first & last characters) as the haystack or just use kactl's min rotation
  * code.
  */
-//NOLINTNEXTLINE(readability-identifier-naming)
 template <class T> struct KMP {
 	T needle;
 	vector<int> pi;

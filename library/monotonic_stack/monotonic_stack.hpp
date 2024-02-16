@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @code{.cpp}
        vector<long long> a;

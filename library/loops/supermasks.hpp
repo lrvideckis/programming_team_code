@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @param mask a submask of (2^n)-1
  * @param n total number of bits

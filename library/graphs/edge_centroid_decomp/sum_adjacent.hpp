@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * helper for edge CD: given tree, update node's value, find sum of neighbors' values
  */

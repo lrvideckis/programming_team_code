@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * Range of matches, and example of longest matching prefix of t in s
  */

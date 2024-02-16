@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @see https://github.com/tfg50/Competitive-Programming/ blob/master/Biblioteca/Math/DivisionTrick.cpp
  *

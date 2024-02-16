@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @code{.cpp}
        vector<long long> a;
@@ -7,7 +5,6 @@
        RMQ rmq(a, [&](auto& x, auto& y) { return min(x, y); });
  * @endcode
  */
-//NOLINTNEXTLINE(readability-identifier-naming)
 template <class T, class F> struct RMQ {
 	vector<vector<T>> dp;
 	F op;

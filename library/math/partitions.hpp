@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 const int mod = 998'244'353;
 /**
  * @see https://oeis.org/A000041

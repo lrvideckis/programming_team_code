@@ -1,7 +1,65 @@
-/** @file */
-#pragma once
-#include "../../data_structures/rmq.hpp"
-#include "manacher.hpp"
+/**
+ * @code{.cpp}
+       vector<long long> a;
+       RMQ rmq(a, ranges::min); // -std=c++20
+       RMQ rmq(a, [&](auto& x, auto& y) { return min(x, y); });
+ * @endcode
+ */
+template <class T, class F> struct RMQ {
+	vector<vector<T>> dp;
+	F op;
+	RMQ() {}
+	/**
+	 * @param a static array
+	 * @param a_op any associative, communative, idempotent operation
+	 * @time O(n log n)
+	 * @space O(n log n) for `dp` vector
+	 */
+	RMQ(const vector<T>& a, F a_op) : dp(1, a), op(a_op) {
+		for (int i = 0; (2 << i) <= ssize(a); i++) {
+			dp.emplace_back(ssize(a) - (2 << i) + 1);
+			transform(begin(dp[i]), end(dp[i]) - (1 << i), begin(dp[i]) + (1 << i), begin(dp[i + 1]), op);
+		}
+	}
+	/**
+	 * @param le,ri defines range [le, ri)
+	 * @returns a[le] op a[le + 1] op ... op a[ri - 1]
+	 * @time O(1)
+	 * @space O(1)
+	 */
+	inline T query(int le, int ri) {
+		assert(0 <= le && le < ri && ri <= ssize(dp[0]));
+		int lg = __lg(ri - le);
+		return op(dp[lg][le], dp[lg][ri - (1 << lg)]);
+	}
+};
+/**
+ * s = "baaba"
+ *
+ * even centers  1 3 5 7
+ * string       b a a b a
+ * odd centers  0 2 4 6 8
+ *
+ * @see https://codeforces.com/blog/entry/12143#comment-324162
+ * @param s string/vector
+ * @returns vector `man` where for center `i`:
+ *     - substring [le, ri) has center (le + ri - 1)
+ *     - substring [man[i], i - man[i] + 1) is longest palindrome around center
+ *     - center i's longest palindrome has length = i - 2 * man[i] + 1
+ * @time O(n)
+ * @space a O(n) vector is allocated and returned
+ */
+template <class T> vector<int> manacher(const T& s) {
+	int n = ssize(s);
+	vector<int> man(max(0, 2 * n - 1));
+	for (int i = 0, p = 0; i < 2 * n - 1; i++) {
+		int ri = i <= 2 * (p - man[p]) ? p - max(man[2 * p - i], man[p]) : i / 2;
+		man[i] = i - ri;
+		while (man[i] > 0 && ri + 1 < n && s[man[i] - 1] == s[ri + 1])
+			man[i]--, ri++, p = i;
+	}
+	return man;
+}
 /**
  * queries for longest palindromic substring of a given substring
  */

@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 const int mod = 998'244'353;
 /**
  * @see https://github.com/kth-competitive-programming/kactl /blob/main/content/number-theory/ModPow.h

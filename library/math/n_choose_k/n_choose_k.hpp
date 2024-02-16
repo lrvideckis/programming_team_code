@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 const int mod = 17; /**< must be prime */
 vector<long long> inv(2, 1), fact(2, 1), inv_fact(2, 1);
 /**
@@ -8,7 +6,6 @@ vector<long long> inv(2, 1), fact(2, 1), inv_fact(2, 1);
  * @time O(1) amortized
  * @space O(1) amortized
  */
-//NOLINTNEXTLINE(readability-identifier-naming)
 inline long long C(int n, int k) {
 	assert(n < mod);
 	if (k < 0 || n < k) return 0;

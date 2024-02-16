@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 /**
  * @param mask represents a bitmask
  * @param f called on all submasks of mask

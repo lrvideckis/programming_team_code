@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 const int mod = 998'244'353;
 /**
  * @param a,b arrays of the same length, where the length is a power of 2

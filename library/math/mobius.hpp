@@ -1,5 +1,3 @@
-/** @file */
-#pragma once
 const int mx_n = 1'000'005;
 /**
  * mobius[i] = 0 iff there exists a prime p s.t. i%(p^2)=0
