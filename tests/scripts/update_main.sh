@@ -5,6 +5,11 @@ shopt -s globstar
 git submodule init
 git submodule update
 
+for file in ../library/**/*.sh ../library/**/*.md ../library/**/*.cpp; do
+	new_path=${header//library/chicken}
+	mkdir --parents "$(dirname "$new_path")"
+	cp "$header" "$new_path"
+done
 for header in ../library/**/*.hpp; do
 	new_path=${header//library/chicken}
 	mkdir --parents "$(dirname "$new_path")"
