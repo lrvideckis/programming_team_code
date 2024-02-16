@@ -31,7 +31,7 @@ Ways to help:
 - suggest a new alg to add
 - suggest some existing alg to remove (because you use some other implementation)
 
-You can submit an issue or email us at
+You can submit an issue or email us at:
 ```
 lrvideckis@gmail.com
 ```
