@@ -131,9 +131,12 @@ jobs:
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
         git add library/
-        git checkout -b main
         git commit --message "ptc"
-        git push -u origin main
+        git fetch --unshallow
+        git checkout main
+        git pull
+        git merge --no-ff dev -m "Auto-merge dev back to main"
+        git push
 
   update_no_comments_branch:
     runs-on: ubuntu-latest
