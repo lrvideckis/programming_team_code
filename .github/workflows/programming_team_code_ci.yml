@@ -132,11 +132,7 @@ jobs:
         make --directory=tests/ update_main
         git add library/
         git commit --message "ptc"
-        git fetch --unshallow
-        git checkout main
-        git pull
-        git merge --no-ff dev -m "Auto-merge dev back to main"
-        git push
+        git rebase main
 
   update_no_comments_branch:
     runs-on: ubuntu-latest
