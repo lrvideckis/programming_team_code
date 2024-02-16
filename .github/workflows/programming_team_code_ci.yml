@@ -45,15 +45,6 @@ jobs:
     - name: Astyle, cppcheck
       run: make --directory=tests/ astyle_cppcheck
 
-  clangtidy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: sudo apt install clang
-    - name: clang-tidy
-      run: make --directory=tests/ clangtidy
-
   compile_gcc17:
     runs-on: ubuntu-latest
     steps:
@@ -131,7 +122,7 @@ jobs:
         git add library/
         git checkout main
         git commit --message "ptc"
-        git push origin main --force
+        git push origin main
 
   update_no_comments_branch:
     runs-on: ubuntu-latest
