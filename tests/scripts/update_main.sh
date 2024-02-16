@@ -20,8 +20,7 @@ mv ../library/ ../library_old/
 mv ../chicken/ ../library/
 
 # cpp command changes tabs to white space
-astyle --options=.config/.astylerc --recursive "../library/*.hpp" |
-	grep "Formatted" && exit 1
+astyle --options=.config/.astylerc --recursive "../library/*.hpp"
 
 # the cpp preprocessor sometimes leaves blank empty lines
 sed --in-place '/^[[:space:]]*$/d' ../library/**/*.hpp

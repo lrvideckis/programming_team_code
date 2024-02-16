@@ -121,6 +121,8 @@ jobs:
     if: github.ref == 'refs/heads/dev'
     steps:
     - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install astyle
     - name: Combine includes and force push to online_contest branch
       run: |
         git config --local user.name github-actions
