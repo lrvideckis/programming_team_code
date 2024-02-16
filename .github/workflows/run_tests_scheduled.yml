@@ -1,0 +1,54 @@
+name: run tests scheduled
+
+on:
+  schedule:
+    # So what happens is sometimes, I'll do some code mod style change which
+    # touches many files. This then requires all those tests to be re-run, but
+    # the verification-helper tool has a 10 minute timeout.
+    #
+    # https://github.com/online-judge-tools/verification-helper/blob/master/onlinejudge_verify/main.py#L75
+    #
+    # So only around 5-10 tests run per commit, leaving un-run tests. This cron
+    # job solves this by reruning any remaining tests every 30 minutes.
+    - cron:  '5,35 7-12 * * *'
+
+jobs:
+  library_checker_aizu_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: dev
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Install dependencies
+      run: pip3 install -U online-judge-verify-helper
+    - name: Set up Rust (1.42.0)
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: 1.42.0-x86_64-unknown-linux-gnu
+        default: true
+        profile: minimal
+    # required by cargo-udeps
+    - name: Set up Rust (nightly)
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly-x86_64-unknown-linux-gnu
+        default: true
+        profile: minimal
+    - name: Set up git submodules
+      run: |
+        git submodule init
+        git submodule update
+        rm -rf tests/hackpack-cpp/tests/
+    - uses: actions/checkout@v2
+      with:
+        ref: dev
+    - name: Run tests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
+        GH_PAT: ${{ secrets.GH_PAT }}
+      run: |
+        export GITHUB_REF=refs/heads/dev
+        oj-verify all --tle 20
