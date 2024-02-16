@@ -133,7 +133,7 @@ jobs:
         git add library/
         git checkout -b main
         git commit --message "ptc"
-        git push
+        git push -u origin main
 
   update_no_comments_branch:
     runs-on: ubuntu-latest
