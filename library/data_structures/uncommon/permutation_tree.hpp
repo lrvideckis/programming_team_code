@@ -86,7 +86,7 @@ struct perm_tree {
 			if (empty(st)) st.push_back({u, -1, -1, -1});
 		}
 #ifdef DEBUG
-		assert(ssize(st) == 2);
+		assert(ssize(st) == 1);
 #endif
 		root = st[0][0];
 	}
