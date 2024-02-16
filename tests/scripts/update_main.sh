@@ -5,19 +5,12 @@ shopt -s globstar
 git submodule init
 git submodule update
 
-for file in ../library/**/*.sh ../library/**/*.md ../library/**/*.cpp; do
-	new_path=${file//library/chicken}
-	mkdir --parents "$(dirname "$new_path")"
-	cp "$file" "$new_path"
-done
+mkdir ../chicken
+cp --recursive ../library/. ../chicken
 
-for header in ../library/**/*.hpp; do
-	new_path=${header//library/chicken}
-	mkdir --parents "$(dirname "$new_path")"
-	cpp -nostdinc -C -P "$header" "$new_path"
+for header in ../chicken/**/*.hpp; do
+	cpp -std=c17 -nostdinc -C -P "$header" "${header//chicken/library}"
 done
-mv ../library/ ../library_old/
-mv ../chicken/ ../library/
 
 # cpp command changes tabs to white space
 astyle --options=.config/.astylerc --recursive "../library/*.hpp"

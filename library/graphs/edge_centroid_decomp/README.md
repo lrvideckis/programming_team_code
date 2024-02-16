@@ -1,4 +1,4 @@
-![](../../../tests/images/edge_cd.png)
+![](edge_cd.png)
 
 ## explanation of the greedy
 
