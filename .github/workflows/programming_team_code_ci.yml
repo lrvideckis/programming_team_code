@@ -139,6 +139,8 @@ jobs:
     if: github.ref == 'refs/heads/dev'
     steps:
     - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: sudo apt install astyle
     - name: Remove comments and force push to no_comments branch
       run: |
         git config --local user.name github-actions
