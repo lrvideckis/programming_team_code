@@ -33,7 +33,7 @@ const int mn = '0', max_val = 36; // mn <= s[i] < mn + max_val; for lowercase le
  *     (a) (--c--)             (a)     (a) (--b--)
  *             (a)                         (a) (c)
  *
- * note leaf nodes don't exist when that suffix is a prefix of a longer suffix
+ * note leaf nodes dont exist when that suffix is a prefix of a longer suffix
  *
  * @code{.cpp}
        string s;
