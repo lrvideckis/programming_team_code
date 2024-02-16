@@ -125,7 +125,7 @@ jobs:
       run: |
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
-        make --directory=tests/ online_contest_comments
+        make --directory=tests/ update_main
         git add library/
         git checkout -b main
         git commit --message "ptc"
