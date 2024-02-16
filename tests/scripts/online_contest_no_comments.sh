@@ -12,5 +12,9 @@ for header in ../library/**/*.hpp; do
 done
 mv ../library/ ../library_old/
 mv ../chicken/ ../library/
+
+# cpp command changes tabs to white space
+astyle --options=.config/.astylerc --recursive "../library/*.hpp"
+
 # the cpp preprocessor sometimes leaves blank empty lines
 sed --in-place '/^[[:space:]]*$/d' ../library/**/*.hpp
