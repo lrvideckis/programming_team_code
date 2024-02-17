@@ -130,9 +130,9 @@ jobs:
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
+        git add library/
         git fetch origin main
         git checkout main
-        git add library/
         git commit --message "ptc"
         git push
 
