@@ -51,6 +51,6 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: |
         git checkout dev
-        git fetch origin dev
+        git pull
         export GITHUB_REF=refs/heads/dev
         oj-verify all --tle 20
