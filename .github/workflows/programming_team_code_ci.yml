@@ -131,10 +131,9 @@ jobs:
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
         git add library/
-        git fetch origin main
-        git checkout main
+        git rm --recursive --force tests/ .verify-helper/ .gitmodules
         git commit --message "ptc"
-        git push
+        git push origin main --force
 
   update_no_comments_branch:
     runs-on: ubuntu-latest
