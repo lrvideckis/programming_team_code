@@ -6,7 +6,7 @@ git submodule init
 git submodule update
 
 mkdir ../chicken
-cp --recursive ../library/. ../chicken
+cp --recursive ../library/. ../chicken/
 
 for header in ../chicken/**/*.hpp; do
 	cpp -std=c17 -nostdinc -C -P "$header" "${header//chicken/library}"
