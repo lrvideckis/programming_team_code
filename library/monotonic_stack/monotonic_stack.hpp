@@ -2,7 +2,7 @@
 #pragma once
 /**
  * @code{.cpp}
-       vector<long long> a;
+       vector<int64_t> a;
        auto ri = mono_st(a, less()); // greater(), less_equal(), greater_equal()
        for (int i = n - 1; i >= 0; i--)
            for (int j = i + 1; j != ri[i]; j = ri[j])

@@ -9,8 +9,8 @@
  * @time O(n log n)
  * @space this function allocates/returns various vectors which are all O(n)
  */
-vector<long long> count_paths_per_node(const vector<vector<int>>& adj, int k) {
-	vector num_paths(ssize(adj), 0LL);
+vector<int64_t> count_paths_per_node(const vector<vector<int>>& adj, int k) {
+	vector<int64_t> num_paths(ssize(adj));
 	centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) {
 		vector pre_d{1}, cur_d{0};
 		auto dfs = [&](auto&& self, int u, int p, int d) {

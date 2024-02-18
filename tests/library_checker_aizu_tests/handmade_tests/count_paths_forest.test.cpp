@@ -9,10 +9,10 @@
 
 #include "../../../library/graphs/centroid_decomp/count_paths_per_length.hpp"
 
-vector<vector<long long>> naive(const vector<vector<int>>& adj, dsu_restorable& dsu) {
+vector<vector<int64_t>> naive(const vector<vector<int>>& adj, dsu_restorable& dsu) {
 	tree_lift tl(adj);
 	int n = ssize(adj);
-	vector<vector<long long>> cnts_naive(n + 1, vector<long long>(n, 0));
+	vector<vector<int64_t>> cnts_naive(n + 1, vector<int64_t>(n, 0));
 	for (int u = 0; u < n; u++) {
 		for (int v = u; v < n; v++) {
 			if (dsu.same_set(u, v)) {
@@ -40,13 +40,13 @@ int main() {
 				adj[v].push_back(u);
 			}
 		}
-		vector<vector<long long>> cnts_naive = naive(adj, dsu);
+		vector<vector<int64_t>> cnts_naive = naive(adj, dsu);
 		for (int k = 1; k <= n; k++)
 			assert(count_paths_per_node(adj, k) == cnts_naive[k]);
-		vector<long long> num_paths_len = count_paths_per_length(adj);
+		vector<int64_t> num_paths_len = count_paths_per_length(adj);
 		for (int k = 1; k < n; k++) {
-			vector<long long> count_paths = count_paths_per_node(adj, k);
-			long long total_paths = accumulate(begin(count_paths), end(count_paths), 0LL);
+			vector<int64_t> count_paths = count_paths_per_node(adj, k);
+			int64_t total_paths = accumulate(begin(count_paths), end(count_paths), 0LL);
 			assert(total_paths % (k + 1) == 0);
 			total_paths /= k + 1;
 			assert(num_paths_len[k] == total_paths);

@@ -13,8 +13,8 @@
  * @time O(sqrt(n))
  * @space O(1)
  */
-template <class F> void quotients(long long n, F f) {
-	for (long long le = 1, ri; le <= n; le = ri + 1) {
+template <class F> void quotients(int64_t n, F f) {
+	for (int64_t le = 1, ri; le <= n; le = ri + 1) {
 		ri = n / (n / le);
 		f(le, ri);
 	}

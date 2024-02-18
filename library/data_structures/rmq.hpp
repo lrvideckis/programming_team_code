@@ -2,7 +2,7 @@
 #pragma once
 /**
  * @code{.cpp}
-       vector<long long> a;
+       vector<int64_t> a;
        RMQ rmq(a, ranges::min); // -std=c++20
        RMQ rmq(a, [&](auto& x, auto& y) { return min(x, y); });
  * @endcode

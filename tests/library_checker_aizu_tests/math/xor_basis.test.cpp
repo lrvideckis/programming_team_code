@@ -30,7 +30,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int k;
 	cin >> k;
-	vector<vector<long long>> grid(k);
+	vector<vector<int64_t>> grid(k);
 	for (int i = 0; i < k; i++) {
 		int siz;
 		cin >> siz;
@@ -39,17 +39,17 @@ int main() {
 	for (auto& row : grid)
 		for (auto& elem : row)
 			cin >> elem;
-	vector<basis<long long>> basises(1 << k);
+	vector<basis<int64_t>> basises(1 << k);
 	for (int i = 0; i < k; i++) {
-		basis<long long> unordered;
-		basis_ordered<long long> ordered_ll;
+		basis<int64_t> unordered;
+		basis_ordered<int64_t> ordered_ll;
 		basis_ordered<bitset<lg>> ordered_bitset;
 		int naive_size = 0;
 		for (auto elem : grid[i]) {
-			long long val1 = unordered.shrink(elem);
-			long long val2 = unordered.shrink(val1);
+			int64_t val1 = unordered.shrink(elem);
+			int64_t val2 = unordered.shrink(val1);
 			assert(val1 == val2);
-			for (long long v : unordered.b)
+			for (int64_t v : unordered.b)
 				assert(((1LL << __lg(v)) & val2) == 0);
 			bool inserted_unordered = unordered.insert(elem);
 			bool inserted_ordered_ll = ordered_ll.insert(elem);
@@ -61,7 +61,7 @@ int main() {
 			assert(ssize(unordered.b) == ordered_bitset.siz);
 			assert(ssize(unordered.b) == ordered_ll.siz);
 			if (inserted_unordered) {
-				for (long long v : unordered.b) {
+				for (int64_t v : unordered.b) {
 					bitset<lg> curr_elem(v);
 					int idx = ordered_bitset.shrink(curr_elem);
 					assert(idx == -1);
@@ -73,7 +73,7 @@ int main() {
 					assert(((ordered_ll.b[j] >> j) & 1) == (!!ordered_ll.b[j]));
 					assert(ordered_bitset.b[j] == bitset<lg>(ordered_ll.b[j]));
 					if (ordered_bitset.b[j][j]) {
-						long long curr_shrink_val = unordered.shrink(ordered_bitset.b[j].to_ullong());
+						int64_t curr_shrink_val = unordered.shrink(ordered_bitset.b[j].to_ullong());
 						assert(curr_shrink_val == 0);
 					}
 				}
@@ -87,20 +87,20 @@ int main() {
 		}
 		basises[1 << i] = unordered;
 	}
-	long long res = 0;
+	int64_t res = 0;
 	for (int mask = 1; mask < (1 << k); mask++) {
 		if (__builtin_popcount(mask) > 1) {
 			basis u = basises[mask & -mask];
 			basis v = basises[mask & (mask - 1)];
 			basises[mask] = intersection(u, v);
 			basis u_v_union = u;
-			for (long long vec : v.b) u_v_union.insert(vec);
+			for (int64_t vec : v.b) u_v_union.insert(vec);
 			assert(ssize(basises[mask].b) + ssize(u_v_union.b) == ssize(u.b) + ssize(v.b));
 			basis v_u_union = v;
-			for (long long vec : u.b) v_u_union.insert(vec);
+			for (int64_t vec : u.b) v_u_union.insert(vec);
 			assert(ssize(u_v_union.b) == ssize(v_u_union.b));
-			for (long long vec : basises[mask].b) {
-				long long curr = u.shrink(vec);
+			for (int64_t vec : basises[mask].b) {
+				int64_t curr = u.shrink(vec);
 				assert(curr == 0);
 				curr = v.shrink(vec);
 				assert(curr == 0);

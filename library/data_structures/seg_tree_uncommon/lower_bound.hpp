@@ -9,7 +9,7 @@
  * @time O(log n)
  * @space O(1)
  */
-inline int lower_bound(seg_tree& st, long long sum) {
+inline int lower_bound(seg_tree& st, int64_t sum) {
 	if (sum <= 0) return 0;
 	if (st.tree[1] < sum) return st.n + 1;
 	int tl = 0, tr = st.n, u = 1;

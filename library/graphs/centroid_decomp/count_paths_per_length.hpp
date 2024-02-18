@@ -9,8 +9,8 @@
  * @time O(n log^2 n)
  * @space this function allocates/returns various vectors which are each O(n)
  */
-vector<long long> count_paths_per_length(const vector<vector<int>>& adj) {
-	vector num_paths(ssize(adj), 0LL);
+vector<int64_t> count_paths_per_length(const vector<vector<int>>& adj) {
+	vector<int64_t> num_paths(ssize(adj));
 	centroid(adj, [&](const vector<vector<int>>& cd_adj, int cent) {
 		vector<vector<double>> child_depths;
 		for (int u : cd_adj[cent]) {

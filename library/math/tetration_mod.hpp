@@ -10,7 +10,7 @@
  * @time O(log e)
  * @space O(1)
  */
-long long bin_exp(long long b, long long e, int mod) {
+int64_t bin_exp(int64_t b, int64_t e, int mod) {
 	assert(0 <= e);
 	auto res = 1LL;
 	if ((b %= mod) < 0) b += mod;
@@ -31,7 +31,7 @@ long long bin_exp(long long b, long long e, int mod) {
  * @time O(sqrt(mod) * log(mod))
  * @space O(log(mod)) for recursion stack, since totient(totient(mod)) <= mod/2
  */
-long long tetration(long long b, long long e, int mod) {
+int64_t tetration(int64_t b, int64_t e, int mod) {
 	if (mod == 1) return 0;
 	if (b == 0) return (e + 1) % 2 % mod;
 	if (b == 1 || e == 0) return 1;

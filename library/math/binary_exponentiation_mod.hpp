@@ -9,7 +9,7 @@ const int mod = 998'244'353;
  * @time O(log e)
  * @space O(1)
  */
-long long bin_exp(long long b, long long e) {
+int64_t bin_exp(int64_t b, int64_t e) {
 	assert(0 <= e);
 	auto res = 1LL;
 	if ((b %= mod) < 0) b += mod;

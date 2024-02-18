@@ -8,7 +8,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	vector<long long> a(n);
+	vector<int64_t> a(n);
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
 	vector<vector<int>> adj(n);
@@ -21,20 +21,20 @@ int main() {
 	{
 		edge_cd(adj, edge_cd_asserts);
 	}
-	contour_range_query<long long> cq(adj, a);
+	contour_range_query<int64_t> cq(adj, a);
 	while (q--) {
 		int type;
 		cin >> type;
 		if (type == 0) {
 			int u;
-			long long delta;
+			int64_t delta;
 			cin >> u >> delta;
 			cq.update(u, delta);
 		} else {
 			assert(type == 1);
 			int u, le, ri;
 			cin >> u >> le >> ri;
-			long long res = cq.query(u, le, le);
+			int64_t res = cq.query(u, le, le);
 			assert(res == 0);
 			res = cq.query(u, ri, ri);
 			assert(res == 0);

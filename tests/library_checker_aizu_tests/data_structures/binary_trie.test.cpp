@@ -8,14 +8,14 @@ int main() {
 	int q;
 	cin >> q;
 	{
-		binary_trie<long long> bt_ll;
+		binary_trie<int64_t> bt_ll;
 		assert(bt_ll.mx_bit == 62);
 		bt_ll.update(61238612412983LL, 5);
 		int cnt = bt_ll.count(61238612412983LL);
 		assert(cnt == 5);
 		cnt = bt_ll.count(54289162783746217LL);
 		assert(cnt == 0);
-		long long res = bt_ll.min_xor(54289162783746217LL);
+		int64_t res = bt_ll.min_xor(54289162783746217LL);
 		assert(res == 61238612412983LL);
 	}
 	binary_trie<int> bt_int;

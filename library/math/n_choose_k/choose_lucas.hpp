@@ -8,10 +8,10 @@
  * @space O(1) amortized
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-long long C(long long n, long long k) {
+inline int64_t lucas(int64_t n, int64_t k) {
 	if (k < 0 || n < k) return 0;
-	auto res = 1LL;
+	int64_t res = 1;
 	for (; k && k < n && res; n /= mod, k /= mod)
-		res = res * C(int(n % mod), int(k % mod)) % mod;
+		res = res * C(n % mod, k % mod) % mod;
 	return res;
 }

@@ -6,7 +6,7 @@ don't use cin for doubles/floats, it's slow, read into string, then convert to d
 ```
 #pragma GCC optimize "trapv"
 ```
-- invoke RTE for input error (e.g. reading a long long into an int)
+- invoke RTE for input error (e.g. reading a int64_t into an int)
 ```
 cin.exceptions(cin.failbit);
 ```

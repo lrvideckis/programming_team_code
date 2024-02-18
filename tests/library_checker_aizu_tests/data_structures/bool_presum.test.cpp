@@ -35,7 +35,7 @@ int main() {
 	while (q--) {
 		int le, ri;
 		cin >> le >> ri;
-		long long sum = 0;
+		int64_t sum = 0;
 		for (int bit = 0; bit < 30; bit++)
 			if (ri - le == 1)
 				sum += (1LL << bit) * presums[bit].on(le);

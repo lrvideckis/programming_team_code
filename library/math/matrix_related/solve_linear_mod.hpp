@@ -12,8 +12,8 @@
  */
 struct solve_linear_mod {
 	int rank; /**< max number of linearly independent vectors */
-	long long det; /**< determinant */
-	vector<long long> x; /**< solution vector, empty iff no solution */
+	int64_t det; /**< determinant */
+	vector<int64_t> x; /**< solution vector, empty iff no solution */
 	/**
 	 * @param mat n (rows) by m (cols) matrix; left in reduced row echelon form
 	 * @param b length n column vector
@@ -21,7 +21,7 @@ struct solve_linear_mod {
 	 * @space besides the O(n * m) `mat` param, this allocates/returns a
 	 * O(m) solution vector
 	 */
-	solve_linear_mod(vector<vector<long long>>& mat, const vector<long long>& b) {
+	solve_linear_mod(vector<vector<int64_t>>& mat, const vector<int64_t>& b) {
 		assert(ssize(mat) == ssize(b));
 		int n = ssize(mat), m = ssize(mat[0]);
 		for (int i = 0; i < n; i++)

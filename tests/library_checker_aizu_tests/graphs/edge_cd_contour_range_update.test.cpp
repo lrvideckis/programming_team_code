@@ -8,7 +8,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	vector<long long> a(n);
+	vector<int64_t> a(n);
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
 	vector<vector<int>> adj(n);
@@ -21,7 +21,7 @@ int main() {
 	{
 		edge_cd(adj, edge_cd_asserts);
 	}
-	contour_range_update<long long> cu(adj, a);
+	contour_range_update<int64_t> cu(adj, a);
 	while (q--) {
 		int type;
 		cin >> type;

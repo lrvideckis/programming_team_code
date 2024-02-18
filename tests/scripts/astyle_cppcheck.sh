@@ -19,6 +19,9 @@ grep --extended-regexp "true" --recursive ../library/ && exit 1
 echo "check 0 instead of false"
 grep --extended-regexp "false" --recursive ../library/ && exit 1
 
+echo "check int64_t instead of long long"
+grep --extended-regexp "long long" --recursive ../library/ && exit 1
+
 echo "check begin(arr) instead of arr.begin(), similarly for end, rbegin, rend, empty, size:"
 # TODO: remove this define filter if/when we move to -std=c++20
 grep --invert-match --fixed-strings "#define" --recursive ../library/ library_checker_aizu_tests/ |

@@ -64,7 +64,7 @@ int main() {
 		wavelet_tree wt(arr, large, large + val_range);
 		for (int x = large; x <= large + val_range; x++) {
 			int cnt = 0;
-			long long sum = 0;
+			int64_t sum = 0;
 			for (int y = x; y <= large + val_range; y++) {
 				auto curr_1 = wt.rect_count(0, mx_n, x, y);
 				assert(curr_1 == cnt);
@@ -86,7 +86,7 @@ int main() {
 				continue;
 			}
 			int curr_cnt = 0;
-			long long curr_sum = 0;
+			int64_t curr_sum = 0;
 			int kth_smallest_naive = -1;
 			for (int i = 0; i < val_range; i++) {
 				if (curr_cnt + count_val[i] >= k) {

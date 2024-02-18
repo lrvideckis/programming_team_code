@@ -15,7 +15,7 @@ template <class T, class F> struct linear_rmq {
 	vector<unsigned> in_label, ascendant;
 	/**
 	 * @code{.cpp}
-	       vector<long long> a(n);
+	       vector<int64_t> a(n);
 	       linear_rmq rmq(a, less()); // right-most min
 	       linear_rmq rmq(a, less_equal()); // left-most min
 	       linear_rmq rmq(a, greater()); // right-most max

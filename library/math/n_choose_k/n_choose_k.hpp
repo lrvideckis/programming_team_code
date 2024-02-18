@@ -1,7 +1,7 @@
 /** @file */
 #pragma once
 const int mod = 17; /**< must be prime */
-vector<long long> inv(2, 1), fact(2, 1), inv_fact(2, 1);
+vector<int64_t> inv(2, 1), fact(2, 1), inv_fact(2, 1);
 /**
  * @param n,k integers with n < mod
  * @returns number of ways to choose k objects out of n
@@ -9,7 +9,7 @@ vector<long long> inv(2, 1), fact(2, 1), inv_fact(2, 1);
  * @space O(1) amortized
  */
 //NOLINTNEXTLINE(readability-identifier-naming)
-inline long long C(int n, int k) {
+inline int64_t C(int n, int k) {
 	assert(n < mod);
 	if (k < 0 || n < k) return 0;
 	while (ssize(inv) <= n) {

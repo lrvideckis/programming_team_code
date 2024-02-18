@@ -7,7 +7,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	bit_rurq<long long> bit(n);
+	bit_rurq<int64_t> bit(n);
 	while (q--) {
 		int type;
 		cin >> type;

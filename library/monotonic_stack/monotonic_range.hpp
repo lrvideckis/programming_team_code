@@ -3,7 +3,7 @@
 #include "monotonic_stack.hpp"
 /**
  * @code{.cpp}
-       vector<long long> a;
+       vector<int64_t> a;
        auto ri = mono_st(a, less()), le = mono_range(ri); // greater(), less_equal(), greater_equal()
  * @endcode
  * @param ri monotonic stack array of a

@@ -7,12 +7,12 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, m;
 	cin >> n >> m;
-	vector<vector<long long>> mat(n, vector<long long>(m));
+	vector<vector<int64_t>> mat(n, vector<int64_t>(m));
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++)
 			cin >> mat[i][j];
 	}
-	vector<long long> b(n);
+	vector<int64_t> b(n);
 	for (int i = 0; i < n; i++)
 		cin >> b[i];
 	solve_linear_mod info(mat, b);
@@ -32,7 +32,7 @@ int main() {
 	}
 	for (int j = 0; j < m; j++)
 		if (pivot[j] == -1) {
-			vector<long long> x(m, 0);
+			vector<int64_t> x(m, 0);
 			x[j] = mod - 1;
 			for (int k = 0; k < j; k++)
 				if (pivot[k] != -1)

@@ -11,18 +11,18 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	int n, q;
 	cin >> n >> q;
-	vector<long long> arr(n);
+	vector<int64_t> arr(n);
 	vector<int> arr_int(n);
 	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
 		arr_int[i] = int(arr[i]);
 	}
-	BIT<long long> bit(arr);
+	BIT<int64_t> bit(arr);
 	seg_tree st(arr_int);
-	bit_rurq<long long> bit_rr(arr);
-	vector<long long> suf_sum(n);
+	bit_rurq<int64_t> bit_rr(arr);
+	vector<int64_t> suf_sum(n);
 	partial_sum(rbegin(arr), rend(arr), rbegin(suf_sum));
-	bit_rupq<long long> bit_i(suf_sum);
+	bit_rupq<int64_t> bit_i(suf_sum);
 	for (int i = 0; i < n; i++) {
 		auto curr_1 = bit.sum(i, i + 1);
 		assert(arr[i] == curr_1);
@@ -45,9 +45,9 @@ int main() {
 		} else {
 			int l, r;
 			cin >> l >> r;
-			long long res = bit.sum(l, r);
+			int64_t res = bit.sum(l, r);
 			{
-				long long bit_i_result = bit_i.get_index(l);
+				int64_t bit_i_result = bit_i.get_index(l);
 				if (r < n) bit_i_result -= bit_i.get_index(r);
 				assert(res == bit_i_result);
 			}
@@ -55,7 +55,7 @@ int main() {
 			assert(res == curr_res);
 			cout << res << '\n';
 		}
-		auto sum = get_rand<long long>(0LL, (long long)(1e12));
+		auto sum = get_rand<int64_t>(0LL, (int64_t)(1e12));
 		int pos_bit = lower_bound(bit, sum);
 		int pos_st = lower_bound(st, sum);
 		assert(pos_bit == pos_st);

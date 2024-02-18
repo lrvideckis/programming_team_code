@@ -10,7 +10,7 @@ int main() {
 		seg_tree st_empty(0);
 		iter_seg_tree lst(st_empty);
 		lst.update_iter(0, 0, 1);
-		long long res = lst.query_iter(0, 0);
+		int64_t res = lst.query_iter(0, 0);
 		assert(res == 0);
 		lst.st.update(0, 0, 1);
 		res = lst.st.query(0, 0);
@@ -25,7 +25,7 @@ int main() {
 		cin >> type >> l >> r;
 		l--;
 		if (type == 0) {
-			long long x;
+			int64_t x;
 			cin >> x;
 			if (q % 2)
 				lst.update_iter(l, r, x);
@@ -42,19 +42,19 @@ int main() {
 			else
 				cout << lst.st.query(l, r) << '\n';
 			{
-				long long res = lst.query_iter(l, l);
+				int64_t res = lst.query_iter(l, l);
 				assert(res == 0);
 			}
 			{
-				long long res = lst.query_iter(r, r);
+				int64_t res = lst.query_iter(r, r);
 				assert(res == 0);
 			}
 			{
-				long long res = lst.st.query(l, l);
+				int64_t res = lst.st.query(l, l);
 				assert(res == 0);
 			}
 			{
-				long long res = lst.st.query(r, r);
+				int64_t res = lst.st.query(r, r);
 				assert(res == 0);
 			}
 		}

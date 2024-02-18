@@ -5,7 +5,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
  * @see https://codeforces.com/blog/entry/61675
  * @code{.cpp}
        mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
-       unsigned long long x = rng();
+       unsigned int64_t x = rng();
        // fixed seed for debugging
        mt19937 rng;
        unsigned int x = rng();
@@ -14,7 +14,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
        shuffle(begin(a), end(a), rng);
        //
        int x = get_rand(0, 1);
-       long long x = get_rand<long long>(1, 1e18);
+       int64_t x = get_rand<int64_t>(1, 1e18);
  * @endcode
  * @param le,ri defines range [le, ri]
  * @returns random number in range, chosen with probability 1/(ri - le + 1)

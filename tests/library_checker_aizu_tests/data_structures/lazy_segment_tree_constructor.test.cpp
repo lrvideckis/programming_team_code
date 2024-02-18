@@ -10,7 +10,7 @@ int main() {
 		seg_tree st_empty{vector<int>()};
 		iter_seg_tree ist(st_empty);
 		ist.update_iter(0, 0, 1);
-		long long res = ist.query_iter(0, 0);
+		int64_t res = ist.query_iter(0, 0);
 		assert(res == 0);
 		ist.st.update(0, 0, 1);
 		res = ist.st.query(0, 0);
@@ -28,7 +28,7 @@ int main() {
 		cin >> type;
 		if (type == 0) {
 			int idx;
-			long long x;
+			int64_t x;
 			cin >> idx >> x;
 			if (q % 2)
 				ist.update_iter(idx, idx + 1, x);
@@ -45,19 +45,19 @@ int main() {
 			else
 				cout << ist.st.query(l, r) << '\n';
 			{
-				long long res = ist.query_iter(l, l);
+				int64_t res = ist.query_iter(l, l);
 				assert(res == 0);
 			}
 			{
-				long long res = ist.query_iter(r, r);
+				int64_t res = ist.query_iter(r, r);
 				assert(res == 0);
 			}
 			{
-				long long res = ist.st.query(l, l);
+				int64_t res = ist.st.query(l, l);
 				assert(res == 0);
 			}
 			{
-				long long res = ist.st.query(r, r);
+				int64_t res = ist.st.query(r, r);
 				assert(res == 0);
 			}
 		}

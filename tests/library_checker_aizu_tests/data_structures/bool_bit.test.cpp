@@ -5,7 +5,7 @@
 
 const int max_bit = 51;
 
-vector<bool_bit> init_prebools(const vector<long long>& arr) {
+vector<bool_bit> init_prebools(const vector<int64_t>& arr) {
 	const int mx_n = ssize(arr);
 	vector<bool_bit> prebools;
 	for (int bit = 0; bit < max_bit; bit++) {
@@ -29,7 +29,7 @@ int main() {
 	}
 	int n, q;
 	cin >> n >> q;
-	vector<long long> arr(n);
+	vector<int64_t> arr(n);
 	for (int i = 0; i < n; i++)
 		cin >> arr[i];
 	vector<bool_bit> prebools = init_prebools(arr);
@@ -48,7 +48,7 @@ int main() {
 			assert(type == 1);
 			int le, ri;
 			cin >> le >> ri;
-			long long sum = 0;
+			int64_t sum = 0;
 			for (int bit = 0; bit < max_bit; bit++) {
 				if (ri - le == 1)
 					sum += (1LL << bit) * prebools[bit].on(le);
