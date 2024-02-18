@@ -50,5 +50,6 @@ jobs:
         YUKICODER_TOKEN: ${{ secrets.YUKICODER_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
       run: |
+        git fetch origin dev
         export GITHUB_REF=refs/heads/dev
         oj-verify all --tle 20
