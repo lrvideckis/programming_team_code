@@ -130,8 +130,8 @@ jobs:
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
-        git add library/
-        git rm -rf tests/ .verify-helper/ .gitmodules
+        git rm -rf library/ tests/ .verify-helper/ .gitmodules
+        git add --all
         git commit --message "programming_team_code"
         git checkout -b main
         git push origin main --force
