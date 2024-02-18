@@ -28,8 +28,8 @@ int main() {
 		}
 	}
 	for (int tests = 100'000; tests--;) {
-		int64_t n = get_rand<int64_t>(-1e18, 1e18);
-		int k = get_rand<int>(-mod, mod - 1);
+		auto n = get_rand<int64_t>(-1e18, 1e18);
+		auto k = get_rand<int>(-mod, mod - 1);
 		assert(lucas(n, k) == c_small_k(n, k));
 	}
 	assert(lucas(371283LL, 32981LL) == 0);
