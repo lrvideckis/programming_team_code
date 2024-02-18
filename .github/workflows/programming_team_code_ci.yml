@@ -131,7 +131,7 @@ jobs:
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
         git add library/
-        git rm --recursive --force tests/ .verify-helper/ .gitmodules
+        git rm -rf tests/ .verify-helper/ .gitmodules
         git commit --message "ptc"
         git push origin main --force
 
