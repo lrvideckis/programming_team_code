@@ -5,10 +5,10 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
  * @see https://codeforces.com/blog/entry/61675
  * @code{.cpp}
        mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
-       unsigned int64_t x = rng();
+       uint64_t x = rng();
        // fixed seed for debugging
        mt19937 rng;
-       unsigned int x = rng();
+       unsigned x = rng();
        //
        vector<int> a(n);
        shuffle(begin(a), end(a), rng);
