@@ -136,24 +136,6 @@ jobs:
         git checkout -b main
         git push origin main --force
 
-  update_no_comments_branch:
-    runs-on: ubuntu-latest
-    needs: [library_checker_aizu, astyle_cppcheck, clangtidy, compile_gcc17, compile_gcc20, files_without_tests]
-    if: github.ref == 'refs/heads/dev'
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: sudo apt install astyle
-    - name: Remove comments and force push to no_comments branch
-      run: |
-        git config --local user.name github-actions
-        git config --local user.email 33103480+lrvideckis@users.noreply.github.com
-        git checkout -b online_contest_no_comments
-        make --directory=tests/ online_contest_no_comments
-        git add library/
-        git commit --message "online contest no comments"
-        git push origin online_contest_no_comments --force
-
   shellcheck_shfmt:
     runs-on: ubuntu-latest
     steps:
