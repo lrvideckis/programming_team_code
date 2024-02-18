@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../../tests/kactl/content/numerical/FastFourierTransform.h"
+#include "../../../kactl/content/numerical/FastFourierTransform.h"
 #include "centroid_decomp.hpp"
 /**
  * @param adj unrooted, connected forest

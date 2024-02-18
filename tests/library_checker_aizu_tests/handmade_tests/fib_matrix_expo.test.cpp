@@ -6,8 +6,8 @@
 //NOLINTNEXTLINE(readability-identifier-naming)
 const int MOD = 998'244'353;
 
-#include "../../kactl/content/data-structures/Matrix.h"
-#include "../../hackpack-cpp/content/number-theory/ModInt.h"
+#include "../../../kactl/content/data-structures/Matrix.h"
+#include "../../../hackpack-cpp/content/number-theory/ModInt.h"
 
 void check(long long n) {
 	using mat_2_by_2 = Matrix<mi, 2>;

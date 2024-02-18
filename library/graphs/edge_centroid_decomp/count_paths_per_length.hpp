@@ -1,6 +1,6 @@
 /** @file */
 #pragma once
-#include "../../../tests/kactl/content/numerical/FastFourierTransform.h"
+#include "../../../kactl/content/numerical/FastFourierTransform.h"
 #include "edge_cd.hpp"
 /**
  * @param adj unrooted, connected tree
