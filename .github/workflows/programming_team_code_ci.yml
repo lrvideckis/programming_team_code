@@ -130,11 +130,12 @@ jobs:
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
+        git status
         git rm -rf library/ tests/ .verify-helper/ .gitmodules
+        git status
         git add --all
+        git status
         git commit --message "programming_team_code"
-        git checkout -b main
-        git push origin main --force
 
   update_no_comments_branch:
     runs-on: ubuntu-latest

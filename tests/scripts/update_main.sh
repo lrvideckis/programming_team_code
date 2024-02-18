@@ -5,7 +5,12 @@ shopt -s globstar
 git submodule init
 git submodule update
 
-cp -r ../library/. ../
+#cp -r ../library/. ../
+
+for header in ../library/**/*.hpp; do
+	#debug
+	echo "${header/\/library/}"
+done
 
 for header in ../library/**/*.hpp; do
 	cpp -std=c17 -nostdinc -C -P "$header" "${header/\/library/}"
