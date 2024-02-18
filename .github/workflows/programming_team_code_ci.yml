@@ -125,15 +125,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: sudo apt install astyle
-    - name: Combine includes and force push to online_contest branch
+    - name: Combine includes and force push to main branch
       run: |
         git config --local user.name github-actions
         git config --local user.email 33103480+lrvideckis@users.noreply.github.com
         make --directory=tests/ update_main
         git add library/
-        git rm -rf tests/ .verify-helper/ .gitmodules
         git commit --message "ptc"
-        git fetch
         git push origin main --force
 
   update_no_comments_branch:
