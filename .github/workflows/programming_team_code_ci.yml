@@ -133,6 +133,7 @@ jobs:
         git add library/
         git rm -rf tests/ .verify-helper/ .gitmodules
         git commit --message "ptc"
+        git fetch
         git push origin main --force
 
   update_no_comments_branch:
