@@ -1,8 +1,6 @@
 name: run tests scheduled
 
-on:
-  workflow_dispatch
-  pull_request
+on: [workflow_dispatch, pull_request]
 
 jobs:
   run_tests_scheduled:
