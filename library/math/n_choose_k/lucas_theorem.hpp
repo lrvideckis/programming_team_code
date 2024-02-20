@@ -7,7 +7,6 @@
  * @time O(log(k)) amortized
  * @space O(1) amortized
  */
-//NOLINTNEXTLINE(readability-identifier-naming)
 inline int64_t lucas(int64_t n, int64_t k) {
 	if (k < 0 || n < k) return 0;
 	int64_t res = 1;
